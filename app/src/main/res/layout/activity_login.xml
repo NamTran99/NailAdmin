@@ -22,10 +22,12 @@
             android:text="@string/label_admin_login" />
 
         <EditText
-            android:id="@+id/etUsername"
+            android:id="@+id/etPhone"
+            android:inputType="phone"
+            android:maxLength="11"
             style="@style/AppTheme.EditText"
             android:drawableStart="@drawable/ic_user_outline"
-            android:hint="@string/hint_admin" />
+            android:hint="@string/hint_phone" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -38,7 +40,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btLogin"
             style="@style/AppTheme.ButtonDefault"
-            android:layout_marginTop="@dimen/size_12"
+            android:layout_marginVertical="@dimen/size_20"
             android:background="@drawable/button_orange_corner"
             android:text="@string/btn_login" />
 

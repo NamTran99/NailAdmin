@@ -34,7 +34,7 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         super.onCreate(savedInstanceState)
         with(binding) {
             viewModel.form.run {
-                etUsername.bind(::username::set)
+                etPhone.bind(::phone::set)
                 etPassword.bind(::password::set)
             }
         }
@@ -47,8 +47,6 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
         with(viewModel) {
             viewLoading.bind(binding.btLogin::setEnabled) { !this }
-            account.bind(binding.etUsername::setText) { username }
-            account.bind(binding.etPassword::setText) { password }
             loginSuccess.bind { Route.run { redirectToMain() } }
         }
     }
@@ -56,22 +54,12 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
 class LoginViewModel(
     private val loginRepo: LoginRepo
-) : ViewModel(),
-    WindowStatusOwner by LiveDataStatusOwner(),
-    ViewModelStateSaveAble {
+) :ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     var form: LoginForm = LoginForm()
         private set
-    val account = MutableLiveData<IAccount>()
     val viewLoading: LoadingEvent = LoadingLiveData()
     val loginSuccess = SingleLiveEvent<Int>()
-
-    init {
-        launch {
-            form = LoginForm()
-            account.post(form)
-        }
-    }
 
     fun login() = launch(loading, error) {
         loginRepo(form)
@@ -79,17 +67,4 @@ class LoginViewModel(
         loginSuccess.post(R.string.msg_login_success)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-
-    }
-
-    override fun saveState(): Parcelable {
-        return form
-    }
-
-    override fun restoreState(savedState: Parcelable) {
-        form = savedState as LoginForm
-        account.post(form)
-    }
 }
