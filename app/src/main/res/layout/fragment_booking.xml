@@ -9,7 +9,7 @@
     tools:context=".views.booking.BookingFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
