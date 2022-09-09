@@ -7,4 +7,9 @@
     <string name="label_email">Email</string>
     <string name="label_address">Address</string>
     <string name="label_admin_login">Admin Login</string>
+    <string name="label_empty_data">No data available!</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="label_services">Services</string>
+    <string name="label_request">Request</string>
+    <string name="label_status">Status</string>
 </resources>

@@ -13,6 +13,9 @@
     <color name="gray05">#888888</color>
     <color name="gray06">#EAEAEA</color>
     <color name="gray07">#F4F4F4</color>
+    <color name="gray08">#B1B1B1</color>
+    <color name="gray09">#C9C9C9</color>
+    <color name="gray10">#DEDEDE</color>
 
     <!--ORANGE-->
     <color name="orange">#EFA860</color>
@@ -23,6 +26,7 @@
     <!--BLUE-->
     <color name="lightBlue">#7f8bf4</color>
     <color name="lightBlue01">#6571DA</color>
+    <color name="lightBlue02">#4768F2</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -39,5 +43,7 @@
     <color name="text_normal_color">#212121</color>
     <!--   Violet-->
     <color name="violet_blue">#6672DB</color>
+    <color name="yellow">#FFE200</color>
+    <color name="red">#F04423</color>
 
 </resources>

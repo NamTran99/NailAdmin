@@ -17,7 +17,7 @@
         android:padding="@dimen/size_12">
 
         <TextView
-            style="@style/AppTheme.TextViewTitle"
+            style="@style/AppTheme.TextView.Title"
             android:layout_marginVertical="@dimen/size_60"
             android:text="@string/label_admin_login" />
 

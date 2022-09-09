@@ -28,4 +28,7 @@
     <string name="btn_login">Login</string>
     <string name="error_blank_username">Username should not be blank</string>
     <string name="error_blank_password">Password should not be blank</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_reject">Reject</string>
+    <string name="btn_customer_check_in">Customer Check-in</string>
 </resources>

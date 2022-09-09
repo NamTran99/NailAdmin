@@ -56,4 +56,5 @@
     <dimen name="height_of_edit_text">50dp</dimen>
     <dimen name="size_60">60dp</dimen>
     <dimen name="text_size_15">15sp</dimen>
+    <dimen name="size_13">13dp</dimen>
 </resources>

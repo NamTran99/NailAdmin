@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/size_13"
+    android:layout_marginVertical="@dimen/size_6"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:padding="@dimen/size_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_full_name"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tvFullName"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/size_13"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Yen Yen" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_time_and_date"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tvTimeAndDate"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/size_13"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Aug 23 2022 - 2:58 PM" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_services"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tvServices"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/size_13"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Manicure, Pedicure, Wax" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_request"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tvRequest"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Anyone" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_status"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/size_13"
+            android:textColor="@color/yellow"
+            app:drawableStartCompat="@drawable/circle_status_waiting"
+            tools:text="Waiting" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/waitingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btAccept"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_blue_corner"
+            android:text="@string/btn_accept" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btReject"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/size_13"
+            android:layout_weight="1"
+            android:background="@drawable/button_red_corner"
+            android:text="@string/btn_reject" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/acceptLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btCheckIn"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_primary_corner"
+            android:text="@string/btn_customer_check_in" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btCancel"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/size_13"
+            android:layout_weight="1"
+            android:background="@drawable/button_gray_corner"
+            android:text="@string/btn_cancel" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cancelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1"
+            android:background="@color/gray10" />
+
+        <TextView
+            android:id="@+id/tvTypeCancel"
+            style="@style/AppTheme.TextView.Italic"
+            android:layout_marginTop="@dimen/size_16"
+            tools:text="Cancelled by Guest" />
+
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
