@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
-import com.app.inails.booking.admin.navigate.Route
+import com.app.inails.booking.admin.navigate.Router
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
@@ -22,9 +22,9 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
             delay(TimeUnit.SECONDS.toMillis(3))
             withContext(Dispatchers.Main) {
                 if (viewModel.user != null) {
-                    Route.run { redirectToMain() }
+                    Router.run { redirectToMain() }
                 } else {
-                    Route.run { redirectToLogin() }
+                    Router.run { redirectToLogin() }
                 }
             }
         }

@@ -22,10 +22,11 @@ import com.app.inails.booking.admin.extention.bind
 import com.app.inails.booking.admin.model.ui.IAccount
 import com.app.inails.booking.admin.model.ui.LoginForm
 import com.app.inails.booking.admin.helper.ApplicationScope
-import com.app.inails.booking.admin.navigate.Route
+import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.LoginRepo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.Route
 
 class LoginActivity : BaseActivity(R.layout.activity_login) {
     private val binding by viewBinding(ActivityLoginBinding::bind)
@@ -47,7 +48,7 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
         with(viewModel) {
             viewLoading.bind(binding.btLogin::setEnabled) { !this }
-            loginSuccess.bind { Route.run { redirectToMain() } }
+            loginSuccess.bind { Router.run { redirectToMain() } }
         }
     }
 }

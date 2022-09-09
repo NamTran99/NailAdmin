@@ -15,15 +15,25 @@ import kotlin.reflect.KClass
 interface Routing : BundleArgument {
     val fragmentClass: KClass<out Fragment>
     val options: NavOptions? get() = null
+
+//    @Parcelize
+//    object Profile : Routing {
+//        override val fragmentClass: KClass<out Fragment>
+//            get() = ProfileFragment::class
+//    }
+
 }
 
-interface Router :  BookingRoute {
+interface Router : SplashRoute, SettingRoute, BookingRoute {
     fun open(dispatcher: RouteDispatcher, route: Routing)
     fun navigate(dispatcher: RouteDispatcher, route: Routing)
+
     companion object : Router by ProdRoute()
 }
 
 class ProdRoute : Router,
+    SplashRoute by SplashRouteImpl(),
+    SettingRoute by SettingRouteImpl(),
     BookingRoute by BookingRouteImpl() {
     override fun open(dispatcher: RouteDispatcher, route: Routing) {
         dispatcher.open<MainNavigationActivity>(route)

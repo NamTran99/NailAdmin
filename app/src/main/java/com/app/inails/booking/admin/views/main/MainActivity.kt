@@ -10,6 +10,8 @@ import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.extention.alpha
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
@@ -36,13 +38,12 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 .onClick { drawerLayout.closeDrawer(GravityCompat.START, true) }
             navView.setNavigationItemSelectedListener(this@MainActivity)
         }
-//        Router.run { redirectToService() }
+        Router.run { redirectToBooking() }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navManageService -> {
-
             }
             R.id.navManageStaff -> {
 
