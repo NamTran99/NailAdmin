@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="offset_vertical">10dp</dimen>
+    <dimen name="offset_haft_vertical">5dp</dimen>
+    <dimen name="offset_horizontal">10dp</dimen>
+    <dimen name="offset_haft_horizontal">5dp</dimen>
+
+    <dimen name="size_0_5">0.5dp</dimen>
+    <dimen name="size_1">1dp</dimen>
+    <dimen name="size_2">2dp</dimen>
+    <dimen name="size_3">3dp</dimen>
+    <dimen name="size_4">4dp</dimen>
+    <dimen name="size_5">5dp</dimen>
+    <dimen name="size_6">6dp</dimen>
+    <dimen name="size_8">8dp</dimen>
+    <dimen name="size_7">7dp</dimen>
+    <dimen name="size_10">10dp</dimen>
+    <dimen name="size_12">12dp</dimen>
+    <dimen name="size_16">16dp</dimen>
+    <dimen name="size_18">18dp</dimen>
+    <dimen name="size_20">20dp</dimen>
+    <dimen name="size_24">24dp</dimen>
+    <dimen name="size_21">21dp</dimen>
+    <dimen name="size_25">25dp</dimen>
+    <dimen name="size_30">30dp</dimen>
+    <dimen name="size_35">35dp</dimen>
+    <dimen name="size_40">40dp</dimen>
+    <dimen name="size_50">50dp</dimen>
+    <dimen name="size_56">56dp</dimen>
+    <dimen name="size_64">64dp</dimen>
+    <dimen name="size_70">70dp</dimen>
+    <dimen name="size_80">80dp</dimen>
+    <dimen name="size_100">100dp</dimen>
+    <dimen name="size_130">130dp</dimen>
+
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_28">28sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+
+    <dimen name="icon_size_normal">32dp</dimen>
+    <dimen name="icon_size_medium">48dp</dimen>
+    <dimen name="icon_size_large">64dp</dimen>
+    <dimen name="icon_size_huge">150dp</dimen>
+
+    <dimen name="radius_default">10dp</dimen>
+    <dimen name="radius_40">40dp</dimen>
+    <dimen name="radius_50">50dp</dimen>
+
+    <dimen name="height_of_edit_text">45dp</dimen>
+</resources>

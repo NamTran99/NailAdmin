@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6672db</color>
+    <color name="colorPrimaryDark">#6672db</color>
+    <color name="colorAccent">#03a1e4</color>
+
+    <!--GRAY-->
+    <color name="gray">#CFCFCF</color>
+    <color name="gray01">#BABABA</color>
+    <color name="gray02">#ACACAC</color>
+    <color name="gray03">#F5F5F5</color>
+    <color name="gray04">#C4C4C4</color>
+    <color name="gray05">#888888</color>
+    <color name="gray06">#EAEAEA</color>
+    <color name="gray07">#F4F4F4</color>
+
+    <!--ORANGE-->
+    <color name="orange">#EDB883</color>
+
+    <!--TRANSPARENCY-->
+    <color name="transparency">#30000000</color>
+
+    <!--BLUE-->
+    <color name="lightBlue">#7f8bf4</color>
+    <color name="lightBlue01">#6571DA</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="orange_240">#3DF26623</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey_light">#ECECEC</color>
+    <color name="blue_opacity_60">#993E6BFF</color>
+    <color name="gray_disabled">#bebebe</color>
+    <color name="text_desc_color">#BEBEBE</color>
+    <color name="text_normal_color">#212121</color>
+
+</resources>

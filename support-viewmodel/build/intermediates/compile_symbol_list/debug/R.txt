@@ -1,0 +1,1 @@
+int id tag_registry_view_model 0x0

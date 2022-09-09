@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_enter_your_phone">PLEASE ENTER YOUR PHONE NUMBER</string>
+    <string name="label_what_do_you_want_get_done">What do you want to get done ?</string>
+    <string name="label_time_and_date">Time and Date</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_email">Email</string>
+    <string name="label_address">Address</string>
+</resources>

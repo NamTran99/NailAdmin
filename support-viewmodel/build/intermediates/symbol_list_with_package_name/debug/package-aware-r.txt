@@ -1,0 +1,2 @@
+android.support.viewmodel
+id tag_registry_view_model

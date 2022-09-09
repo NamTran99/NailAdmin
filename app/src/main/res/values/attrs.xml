@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoadingButton">
+        <attr name="android:text" format="string" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:background" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RotateLoadingView">
+        <attr name="loading_width" format="dimension" />
+        <attr name="loading_color" format="color" />
+        <attr name="shadow_position" format="integer" />
+        <attr name="loading_speed" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="AppImageView">
+        <attr name="imgRoundCorners" format="dimension" />
+        <attr name="imgCircle" format="boolean" />
+        <attr name="android:scaleType" />
+        <attr name="android:background" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_enter_your_phone">Enter your Phone number</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_enter_your_email">Enter your Email</string>
+    <string name="hint_enter_your_address">Enter your Address</string>
+    <string name="hint_feedback">Feedback</string>
+    <string name="hint_your_name">Your name</string>
+</resources>

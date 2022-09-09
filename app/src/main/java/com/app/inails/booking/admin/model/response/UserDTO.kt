@@ -1,0 +1,34 @@
+package com.app.inails.booking.admin.model.response
+
+import com.google.gson.annotations.SerializedName
+
+data class UserDTO(
+    @SerializedName("access_token")
+    val token: String = "",
+    val user: Data? = null
+){
+    data class Data(
+        val address: String? = "",
+        @SerializedName("checked_time")
+        val checkedTime: String? = "",
+        val city: String? = "",
+        @SerializedName("created_at")
+        val createdAt: String? = "",
+        @SerializedName("device_info")
+        val deviceInfo: String? = "",
+        @SerializedName("device_type")
+        val deviceType: String? = "",
+        val email: String? = "",
+        @SerializedName("first_name")
+        val firstName: String? = "",
+        val id: Int? = 0,
+        @SerializedName("last_name")
+        val lastName: String? = "",
+        val phone: String? = "",
+        val salon_id: Int?,
+        val state: String?,
+        @SerializedName("updated_at")
+        val updatedAt: String?,
+        val zip: String?
+    )
+}

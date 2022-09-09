@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mn_profile">Profile</string>
+    <string name="mn_appointments">Appointments</string>
+    <string name="mn_logout">Logout</string>
+    <string name="mn_send_feedback">Send Feedback</string>
+    <string name="mn_change_password">Change Password</string>
+</resources>

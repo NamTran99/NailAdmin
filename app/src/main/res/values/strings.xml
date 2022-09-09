@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Nail Booking</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="btn_new_customer">New Customer</string>
+    <string name="btn_feedback">Feedback</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="btn_sign_up">Sign up</string>
+    <string name="btn_send_feedback">Send feedback</string>
+    <string name="btn_close">Close</string>
+    <string name="msg_login_success">Login success</string>
+    <string name="msg_sign_up_success">Sign up success</string>
+    <string name="error_blank_phone">Please enter phone number</string>
+    <string name="error_blank_firstname">Firstname should not be blank</string>
+    <string name="error_blank_lastname">Lastname should not be blank</string>
+    <string name="error_not_correct_email">Please enter the correct email</string>
+    <string name="msg_sent_feedback">Feedback has been sent successfully</string>
+    <string name="error_blank_name">Name should not be blank</string>
+    <string name="error_blank_email">Email should not be blank</string>
+    <string name="error_blank_content">Content should not be blank</string>
+    <string name="message_logout_app">Are you sure you want to logout?</string>
+    <string name="title_logout">Logout App</string>
+    <string name="btn_yes_logout">Yes, logout</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+    <string name="btn_save">Save</string>
+    <string name="msg_profile_update_success">Profile update successful</string>
+</resources>

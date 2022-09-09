@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+rootProject.name = "iNailsBookingAdmin"
+include ':app'
+include ':support-di'
+include ':support-persistent'
+include ':support-navigation'
+include ':support-viewmodel'
+include ':support-core'
+include ':support-app-lifecycle'

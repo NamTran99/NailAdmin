@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.FullScreen.Dialog" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="AppTheme.DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up_show</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+
+    <!--========Line============-->
+    <style name="AppTheme.Line">
+        <item name="android:background">@color/grey_light</item>
+    </style>
+
+    <style name="AppTheme.Line.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="AppTheme.Line.Vertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="AppTheme.Line.Vertical.Title">
+        <item name="android:layout_width">5dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ClickableView">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!--============= Declare style TextAppearance =============-->
+    <style name="AppTheme.TextAppearance" parent="android:TextAppearance">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="TextAppearance.Regular" parent="AppTheme.TextAppearance" />
+
+    <style name="TextAppearance.Bold" parent="AppTheme.TextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Italic" parent="AppTheme.TextAppearance">
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="TextAppearance.BoldItalic" parent="AppTheme.TextAppearance">
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <!--============= Declare style Edit Text =============-->
+    <style name="AppTheme.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:drawablePadding">@dimen/size_10</item>
+        <item name="android:background">@drawable/edit_text_default</item>
+        <item name="android:layout_height">@dimen/height_of_edit_text</item>
+        <item name="android:inputType">text</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/text_desc_color</item>
+        <item name="android:textColor">@color/text_normal_color</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_height">@dimen/height_of_edit_text</item>
+        <item name="android:paddingStart">@dimen/size_16</item>
+        <item name="android:paddingEnd">@dimen/size_16</item>
+        <item name="android:minWidth">@dimen/size_100</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="cornerRadius">@dimen/radius_default</item>
+    </style>
+
+    <style name="AppTheme.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_height">@dimen/height_of_edit_text</item>
+        <item name="android:paddingStart">@dimen/size_16</item>
+        <item name="android:paddingEnd">@dimen/size_16</item>
+        <item name="android:minWidth">@dimen/size_100</item>
+        <item name="android:minHeight">@dimen/height_of_edit_text</item>
+        <item name="android:background">@null</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="AppTheme.Button.Outline.Circle" parent="AppTheme.Button.Outline">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.AppTheme.Button.Circle</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/gray02</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="backgroundTint">@color/gray03</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.AppTheme.Button.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="AppTheme.ImageButton">
+        <item name="android:background">@null</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+</resources>

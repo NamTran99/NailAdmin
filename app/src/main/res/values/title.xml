@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_welcome_to">Welcome to</string>
+    <string name="title_customer_sign_up">Customer Sign up</string>
+    <string name="title_feed_back">Feedback</string>
+    <string name="title_salons">List Salons</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_welcome">Welcome</string>
+    <string name="title_edit_profile">Edit Profile</string>
+</resources>
