@@ -5,6 +5,6 @@
     <string name="title_feed_back">Feedback</string>
     <string name="title_salons">List Salons</string>
     <string name="title_menu">Menu</string>
-    <string name="title_welcome">Welcome</string>
+    <string name="title_dashboard">Dashboard</string>
     <string name="title_edit_profile">Edit Profile</string>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navManageService"
+        android:title="@string/mn_manage_service" />
+    <item
+        android:id="@+id/navManageStaff"
+        android:title="@string/mn_manage_staff" />
+    <item
+        android:id="@+id/navManageCustomer"
+        android:title="@string/mn_manage_customer" />
+    <item
+        android:id="@+id/navEmailReceiveFeedback"
+        android:title="@string/mn_email_receive_feedback" />
+    <item
+        android:id="@+id/navChangePassword"
+        android:title="@string/mn_change_password" />
+    <item
+        android:id="@+id/navReport"
+        android:title="@string/mn_report" />
+    <item
+        android:id="@+id/navLogout"
+        android:title="@string/mn_logout" />
+</menu>

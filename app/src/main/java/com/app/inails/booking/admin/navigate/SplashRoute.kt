@@ -4,7 +4,7 @@ import android.support.core.route.RouteDispatcher
 import android.support.core.route.close
 import android.support.core.route.open
 import com.app.inails.booking.admin.views.auth.LoginActivity
-import com.app.inails.booking.admin.views.dashboard.DashboardActivity
+import com.app.inails.booking.admin.views.main.MainActivity
 
 interface SplashRoute {
 		fun RouteDispatcher.redirectToMain()
@@ -13,7 +13,7 @@ interface SplashRoute {
 
 open class SplashRouteImpl : SplashRoute {
 		override fun RouteDispatcher.redirectToMain() {
-				open<DashboardActivity>().close()
+				open<MainActivity>().close()
 		}
 
     override fun RouteDispatcher.redirectToLogin() {

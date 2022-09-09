@@ -140,6 +140,10 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.TextViewTitle.Small">
+        <item name="android:textSize">@dimen/text_size_15</item>
+    </style>
+
     <style name="AppTheme.ButtonDefault">
         <item name="android:layout_width">match_parent</item>
         <item name="android:textAllCaps">false</item>

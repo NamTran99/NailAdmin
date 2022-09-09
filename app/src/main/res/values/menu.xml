@@ -5,4 +5,9 @@
     <string name="mn_logout">Logout</string>
     <string name="mn_send_feedback">Send Feedback</string>
     <string name="mn_change_password">Change Password</string>
+    <string name="mn_manage_service">Manage Service</string>
+    <string name="mn_manage_staff">Manage Staff</string>
+    <string name="mn_manage_customer">Manage Customer</string>
+    <string name="mn_email_receive_feedback">Email Receive Feedback</string>
+    <string name="mn_report">Report</string>
 </resources>
