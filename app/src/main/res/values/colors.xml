@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6672db</color>
-    <color name="colorPrimaryDark">#6672db</color>
+    <color name="colorPrimary">#BC40C1</color>
+    <color name="colorPrimaryDark">#BC40C1</color>
     <color name="colorAccent">#03a1e4</color>
 
     <!--GRAY-->
@@ -15,7 +15,7 @@
     <color name="gray07">#F4F4F4</color>
 
     <!--ORANGE-->
-    <color name="orange">#EDB883</color>
+    <color name="orange">#EFA860</color>
 
     <!--TRANSPARENCY-->
     <color name="transparency">#30000000</color>
