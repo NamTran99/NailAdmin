@@ -25,4 +25,7 @@
     <string name="btn_edit_profile">Edit Profile</string>
     <string name="btn_save">Save</string>
     <string name="msg_profile_update_success">Profile update successful</string>
+    <string name="btn_login">Login</string>
+    <string name="error_blank_username">Username should not be blank</string>
+    <string name="error_blank_password">Password should not be blank</string>
 </resources>

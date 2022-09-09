@@ -37,5 +37,7 @@
     <color name="gray_disabled">#bebebe</color>
     <color name="text_desc_color">#BEBEBE</color>
     <color name="text_normal_color">#212121</color>
+    <!--   Violet-->
+    <color name="violet_blue">#6672DB</color>
 
 </resources>

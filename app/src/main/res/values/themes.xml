@@ -13,7 +13,7 @@
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="android:textViewStyle">@style/TextAppearance.Regular</item>
         <item name="android:editTextStyle">@style/AppTheme.EditText</item>
-        <item name="android:buttonStyle">@style/AppTheme.Button</item>
+<!--        <item name="android:buttonStyle">@style/AppTheme.Button</item>-->
         <item name="android:textSize">@dimen/text_size_14</item>
         <!--<item name="buttonStyle">@style/AppTheme.PrimaryButton</item>-->
     </style>

@@ -13,6 +13,7 @@ class AppCache(context: Context) : Caching(context, ParserImpl()) {
     var email: String by string("email", "")
     var password: String by string("password", "")
     var tokenPush: String by string("token", "")
+    var token: String by string("token", "")
 }
 
 class ParserImpl : Parser {

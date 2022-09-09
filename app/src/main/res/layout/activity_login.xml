@@ -3,6 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".views.auth.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/size_25"
+        android:background="@drawable/bg_white_radius_20"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/size_12">
+
+        <TextView
+            style="@style/AppTheme.TextViewTitle"
+            android:layout_marginVertical="@dimen/size_60"
+            android:text="@string/label_admin_login" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            style="@style/AppTheme.EditText"
+            android:drawableStart="@drawable/ic_user_outline"
+            android:hint="@string/hint_admin" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            style="@style/AppTheme.EditText"
+            android:layout_marginTop="@dimen/size_12"
+            android:drawableStart="@drawable/ic_lock_outline"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btLogin"
+            style="@style/AppTheme.ButtonDefault"
+            android:layout_marginTop="@dimen/size_12"
+            android:background="@drawable/button_orange_corner"
+            android:text="@string/btn_login" />
+
+    </LinearLayout>
 
 </FrameLayout>

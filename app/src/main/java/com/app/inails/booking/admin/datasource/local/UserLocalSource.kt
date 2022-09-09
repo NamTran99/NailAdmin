@@ -31,7 +31,13 @@ class UserLocalSource(
     }
 
     fun isLogin() = user != null
+    fun saveToken(token: String) {
+        appCache.token = token
+    }
 
+    fun clearToken() {
+        appCache.token = ""
+    }
     fun clearAccount() {
         appCache.email = ""
         appCache.password = ""

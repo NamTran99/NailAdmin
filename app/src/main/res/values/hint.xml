@@ -7,4 +7,6 @@
     <string name="hint_enter_your_address">Enter your Address</string>
     <string name="hint_feedback">Feedback</string>
     <string name="hint_your_name">Your name</string>
+    <string name="hint_admin">Admin</string>
+    <string name="hint_password">Password</string>
 </resources>
