@@ -66,7 +66,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 message = R.string.message_logout_app,
                 buttonConfirm = R.string.btn_yes_logout
             ) {
-
+                Router.run { redirectToLogin() }
             }
         }
         return true
