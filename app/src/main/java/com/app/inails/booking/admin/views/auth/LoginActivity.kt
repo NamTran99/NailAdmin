@@ -47,7 +47,7 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         }
 
         with(viewModel) {
-            viewLoading.bind(binding.btLogin::setEnabled) { !this }
+            loading.bind(binding.btLogin::setEnabled) { !this }
             loginSuccess.bind { Router.run { redirectToMain() } }
         }
     }
@@ -59,7 +59,6 @@ class LoginViewModel(
 
     var form: LoginForm = LoginForm()
         private set
-    val viewLoading: LoadingEvent = LoadingLiveData()
     val loginSuccess = SingleLiveEvent<Int>()
 
     fun login() = launch(loading, error) {
