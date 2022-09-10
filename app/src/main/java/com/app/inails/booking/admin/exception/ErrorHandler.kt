@@ -39,6 +39,7 @@ class ErrorHandlerImpl : ErrorHandler {
                 }
                 return
             }
+            is ResourceException -> activity.toast(error.resource)
             else -> activity.errorDialog.show(error)
         }
     }

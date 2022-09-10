@@ -5,6 +5,7 @@ import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.ServiceDTO
+import com.app.inails.booking.admin.model.response.StaffDTO
 import com.app.inails.booking.admin.model.ui.AppointmentForm
 import retrofit2.Retrofit
 import retrofit2.http.Body
@@ -22,7 +23,11 @@ interface BookingApi : Injectable {
     fun services(@Field("salon_id") salonID: String): ApiAsync<List<ServiceDTO>>
 
     @POST("appointment/admin-create-appointment")
-    fun appointment(@Body form: AppointmentForm): ApiAsync<Any>
+    fun createAppointment(@Body form: AppointmentForm): ApiAsync<Any>
+
+    @FormUrlEncoded
+    @POST("staff/list-all-staff")
+    fun getAllStaffList(@Field("salon_id") salonID: String): ApiAsync<List<StaffDTO>>
 }
 
 class BookingApiImpl(private val retrofit: Retrofit) :

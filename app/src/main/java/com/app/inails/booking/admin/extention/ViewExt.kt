@@ -27,6 +27,8 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
+import java.lang.ref.WeakReference
 import java.util.*
 
 fun View.onClick(callback: View.OnClickListener?) {
@@ -320,4 +322,13 @@ fun View.setMargins(@DimenRes sizeRes: Int) {
 
 fun CheckBox.drawableStart(idDrawable: Int = 0) {
     this.setCompoundDrawablesWithIntrinsicBounds(idDrawable, 0, 0, 0)
+}
+
+
+fun EditText.inputTypePhoneUS() {
+    val addLineNumberFormatter = UsPhoneNumberFormatter(WeakReference(this))
+    this.run {
+        addTextChangedListener(addLineNumberFormatter)
+        isFocusableInTouchMode = true
+    }
 }

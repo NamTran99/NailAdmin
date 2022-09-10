@@ -7,6 +7,7 @@ import android.support.navigation.NavOptions
 import android.support.navigation.findNavigator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment

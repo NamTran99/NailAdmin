@@ -35,7 +35,7 @@
                 android:drawableStart="@drawable/ic_phone_outline"
                 android:hint="@string/hint_enter_phone_number"
                 android:inputType="phone"
-                android:maxLength="11" />
+                android:maxLength="14" />
 
             <EditText
                 android:id="@+id/etFullName"
@@ -122,7 +122,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/size_16"
-                    android:text="@string/label_select_time"
+                    android:textColorHint="@color/black"
+                    android:hint="@string/label_select_time"
                     app:drawableStartCompat="@drawable/ic_time_outline" />
             </LinearLayout>
 
@@ -152,6 +153,21 @@
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/size_12"
                 android:hint="@string/hint_something_else" />
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/size_12"
+                android:text="@string/label_total_duration_service"
+                android:textSize="@dimen/text_size_14" />
+
+            <EditText
+                android:id="@+id/etTotalDuration"
+                style="@style/AppTheme.EditText"
+                android:drawableStart="@drawable/ic_time_outline"
+                android:hint="@string/hint_enter_minutes"
+                android:layout_marginTop="@dimen/size_12"
+                android:inputType="number"
+                android:maxLength="4" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

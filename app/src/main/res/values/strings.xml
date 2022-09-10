@@ -20,6 +20,8 @@
     <string name="error_blank_staff_id">Please select a staff</string>
     <string name="error_blank_date_time">Please select date and time</string>
     <string name="error_empty_services">Please select the service</string>
+    <string name="error_empty_service_custom">Please enter the other service</string>
+    <string name="error_empty_total_duration_services">Please enter the total duration service</string>
     <string name="error_blank_email">Email should not be blank</string>
     <string name="error_blank_content">Content should not be blank</string>
     <string name="message_logout_app">Are you sure you want to logout?</string>
@@ -37,4 +39,5 @@
     <string name="btn_add_new_appointment">Add New Appointment</string>
     <string name="btn_add_appointment">Add Appointment</string>
     <string name="btn_staff_list">Staff List</string>
+    <string name="btn_assign">Assign</string>
 </resources>

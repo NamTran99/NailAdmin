@@ -3,15 +3,16 @@ package com.app.inails.booking.admin.views.booking.create_appointment
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
+import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.core.route.BundleArgument
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
+import android.support.navigation.FragmentResultCallback
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
-import android.widget.LinearLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -19,27 +20,33 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentCreateAppointmentBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.BookingApi
+import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.BookingFactory
-import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
 import com.app.inails.booking.admin.model.response.ServiceDTO
+import com.app.inails.booking.admin.model.ui.AppointmentForm
 import com.app.inails.booking.admin.model.ui.IService
+import com.app.inails.booking.admin.model.ui.StaffForm
+import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
+import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.app.inails.booking.formatter.TextFormatter
 import kotlinx.parcelize.Parcelize
-import java.lang.ref.WeakReference
 
 @Parcelize
 data class AppointmentArg(
     val id: Int? = 0
 ) : BundleArgument
 
-class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner {
+class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner,
+    FragmentResultCallback {
     private val binding by viewBinding(FragmentCreateAppointmentBinding::bind)
     private val viewModel by viewModel<CreateAppointmentViewModel>()
     private lateinit var mServiceAdapter: SelectServiceAdapter
     private val mDatePickerDialog by lazy { DatePickerDialog(appActivity) }
+    private val mTimePickerDialog by lazy { TimePickerDialog(appActivity) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,14 +57,32 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
         mServiceAdapter = SelectServiceAdapter(binding.rvServices)
 
         with(binding) {
-            val addLineNumberFormatter = UsPhoneNumberFormatter(WeakReference(etPhone))
-            etPhone.run {
-                addTextChangedListener(addLineNumberFormatter)
-            }
+            etPhone.inputTypePhoneUS()
             swStaff.setOnCheckedChangeListener { buttonView, isChecked ->
+                viewModel.form.hasServiceCustom = isChecked
                 (!isChecked) show binding.tvChooseStaff
             }
             mDatePickerDialog.setupClickWithView(tvSelectDate)
+            mTimePickerDialog.setupClickWithView(tvSelectTime)
+            tvChooseStaff.setOnClickListener {
+                Router.run { redirectToChooseStaff() }
+            }
+
+            btAddAppointment.setOnClickListener {
+                viewModel.form.run {
+                    phone = etPhone.text.toString()
+                    name = etFullName.text.toString()
+                    serviceCustom = etSomethingElse.text.toString()
+                    workTime = etTotalDuration.text.toString()
+                    services = mServiceAdapter.selectedItems.toMutableList()
+                    dateAppointment = if (tvSelectTime.text.toString()
+                            .isEmpty()
+                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}"
+                }
+                viewModel.submit()
+            }
+
+
         }
 
         with(viewModel) {
@@ -66,18 +91,30 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                     (it) show binding.etSomethingElse
                 }
             }::submit)
+            success.bind {
+                success("Success")
+                activity?.onBackPressed()
+            }
         }
 
+    }
 
+    override fun onFragmentResult(result: Bundle) {
+        val staffForm = result.get("staff") as StaffForm
+        binding.tvChooseStaff.text = staffForm.name
+        viewModel.form.staffID = staffForm.id
     }
 
 }
 
 
 class CreateAppointmentViewModel(
-    private val serviceRepo: ServiceRepository
+    private val serviceRepo: ServiceRepository,
+    private val createAppointmentRepo: CreateAppointmentRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val services = serviceRepo.results
+    val form = AppointmentForm()
+    val success = SingleLiveEvent<Any>()
 
     init {
         onLaunch()
@@ -85,6 +122,10 @@ class CreateAppointmentViewModel(
 
     private fun onLaunch() = launch(loading, error) {
         serviceRepo()
+    }
+
+    fun submit() = launch(loading, error) {
+        success.post(createAppointmentRepo(form))
     }
 }
 
@@ -107,6 +148,19 @@ class ServiceRepository(
                     servicesList
                 )
         )
+    }
+}
+
+
+@Inject(ShareScope.Fragment)
+class CreateAppointmentRepository(
+    private val bookingApi: BookingApi,
+    private val textFormatter: TextFormatter
+) {
+    suspend operator fun invoke(form: AppointmentForm) {
+        form.validate()
+        form.phone = textFormatter.formatPhoneNumber(form.phone)
+        bookingApi.createAppointment(form).await()
     }
 }
 

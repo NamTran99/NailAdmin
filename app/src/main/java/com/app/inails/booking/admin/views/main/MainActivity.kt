@@ -28,9 +28,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
-        topBar.setState(MainTopBarState(R.string.title_dashboard) {
+        topBar.setState(MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
-        })
+        }, onStaffListClick = {
+
+        }))
         with(binding) {
             navView.alpha(230)
             val headView = navView.getHeaderView(0)

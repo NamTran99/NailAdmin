@@ -180,6 +180,7 @@
         <item name="cornerRadius">@dimen/radius_default</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:drawablePadding">@dimen/size_8</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
     <style name="AppTheme.ButtonDefault.Small">

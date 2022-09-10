@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -28,8 +29,10 @@ class AppointmentForm(
     override var services: MutableList<Int> = mutableListOf(),
     @SerializedName("service_custom")
     override var serviceCustom: String = "",
-    @SerializedName("working_time")
+    @SerializedName("work_time")
     override var workTime: String = "",
+    @Expose
+    var hasServiceCustom: Boolean = false
 ) : IAppointment, Parcelable {
 
     fun validate() {
@@ -41,5 +44,7 @@ class AppointmentForm(
         if (staffID == 0) resourceError(R.string.error_blank_staff_id)
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
         if (services.isEmpty()) resourceError(R.string.error_empty_services)
+        if (hasServiceCustom && serviceCustom.isBlank()) resourceError(R.string.error_empty_service_custom)
+        if (workTime.isBlank()) resourceError(R.string.error_empty_total_duration_services)
     }
 }

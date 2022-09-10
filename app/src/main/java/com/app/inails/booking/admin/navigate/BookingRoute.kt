@@ -6,11 +6,13 @@ import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.views.booking.BookingFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.AppointmentArg
+import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 
 interface BookingRoute {
     fun BaseActivity.redirectToBooking()
     fun BaseFragment.redirectToCreateAppointment(id: Int? = null)
+    fun BaseFragment.redirectToChooseStaff(id: Int? = null)
 }
 
 class BookingRouteImpl : BookingRoute {
@@ -30,6 +32,14 @@ class BookingRouteImpl : BookingRoute {
         findNavigator().navigate(
             CreateAppointmentFragment::class,
             args = AppointmentArg(id = id).toBundle()
+        )
+    }
+
+    override fun BaseFragment.redirectToChooseStaff(
+        id: Int?
+    ) {
+        findNavigator().navigate(
+            ChooseStaffFragment::class
         )
     }
 }

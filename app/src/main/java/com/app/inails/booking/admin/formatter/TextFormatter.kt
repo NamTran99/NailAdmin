@@ -3,6 +3,7 @@ package com.app.inails.booking.formatter
 import android.support.di.Inject
 import android.support.di.ShareScope
 import android.telephony.PhoneNumberUtils
+import com.app.inails.booking.admin.model.response.StaffDTO
 
 
 @Inject(ShareScope.Singleton)
@@ -19,6 +20,8 @@ class TextFormatter {
         return if (phone.isNullOrEmpty()) ""
         else PhoneNumberUtils.formatNumber(phone, "US")
     }
+
+    fun fullName(staffDTO: StaffDTO) = "${staffDTO.first_name} ${staffDTO.last_name}"
 //
 //    fun formatStatusForStaff(status: Int?): Int {
 //        return when (status) {

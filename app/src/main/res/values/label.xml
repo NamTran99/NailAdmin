@@ -18,4 +18,5 @@
     <string name="label_every_available">Everyone Available</string>
     <string name="label_choose_staff">Choose Staff</string>
     <string name="label_select_date">Select Date</string>
+    <string name="label_total_duration_service">Total Duration Service</string>
 </resources>

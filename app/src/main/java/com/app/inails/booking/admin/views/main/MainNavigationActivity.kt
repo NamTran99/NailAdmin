@@ -7,6 +7,7 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter

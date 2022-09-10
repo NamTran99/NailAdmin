@@ -136,7 +136,7 @@ class DatePickerDialog(private val activity: BaseActivity) :
     private fun getViewValue(): String {
         return try {
             when (mView) {
-                is MaterialButton -> (mView as MaterialButton).tag.toString()
+                is TextView -> (mView as TextView).tag.toString()
                 else -> ""
             }
         } catch (ex: NullPointerException) {
