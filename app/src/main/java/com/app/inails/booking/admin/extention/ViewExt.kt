@@ -317,3 +317,7 @@ fun View.setMargins(@DimenRes sizeRes: Int) {
         this.setMargins(size, size, size, size)
     }
 }
+
+fun CheckBox.drawableStart(idDrawable: Int = 0) {
+    this.setCompoundDrawablesWithIntrinsicBounds(idDrawable, 0, 0, 0)
+}

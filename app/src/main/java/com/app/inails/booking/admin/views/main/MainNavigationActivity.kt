@@ -7,6 +7,7 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -22,6 +23,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
 
         if (savedInstanceState == null) {
             val clazz = when (args) {
+                is Routing.ManageStaff -> ManageStaffFragment::class
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())

@@ -34,6 +34,10 @@
         <activity
             android:name="com.app.inails.booking.admin.views.main.MainActivity"
             android:exported="true"/>
+
+        <activity
+            android:name="com.app.inails.booking.admin.views.main.MainNavigationActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

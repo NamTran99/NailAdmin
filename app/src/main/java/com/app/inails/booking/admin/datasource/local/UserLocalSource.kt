@@ -29,6 +29,9 @@ class UserLocalSource(
     fun getToken(): String? {
         return user?.token
     }
+    fun getSalonID(): Int? {
+        return user?.admin?.salon_id
+    }
 
     fun isLogin() = user != null
     fun saveToken(token: String) {

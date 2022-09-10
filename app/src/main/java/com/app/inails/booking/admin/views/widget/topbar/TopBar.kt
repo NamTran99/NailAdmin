@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.widget.topbar
 
+import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
@@ -11,6 +12,7 @@ class SimpleTopBarState(
     private val title: Int,
     @DrawableRes
     private val iconBack: Int = R.drawable.ic_ab_back,
+    private val width : Int = LinearLayout.LayoutParams.WRAP_CONTENT,
     private val onBackClick: () -> Unit = {}
 ) : TopBarState() {
     override val stateBinding by bindingOf(TopBarSimpleBinding::inflate)
@@ -20,6 +22,7 @@ class SimpleTopBarState(
             tvTitle.setText(title)
             btBack.setImageResource(iconBack)
             btBack.setOnClickListener { onBackClick() }
+            tvTitle.layoutParams.width = width
         }
     }
 }

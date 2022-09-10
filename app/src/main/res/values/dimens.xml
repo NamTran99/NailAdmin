@@ -49,7 +49,7 @@
     <dimen name="icon_size_large">64dp</dimen>
     <dimen name="icon_size_huge">150dp</dimen>
 
-    <dimen name="radius_default">10dp</dimen>
+    <dimen name="radius_default">5dp</dimen>
     <dimen name="radius_40">40dp</dimen>
     <dimen name="radius_50">50dp</dimen>
 

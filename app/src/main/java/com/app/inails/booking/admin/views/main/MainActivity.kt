@@ -44,9 +44,10 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navManageService -> {
+
             }
             R.id.navManageStaff -> {
-
+                Router.open(this, Routing.ManageStaff)
             }
             R.id.navManageCustomer -> {
 

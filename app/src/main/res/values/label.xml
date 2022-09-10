@@ -12,4 +12,10 @@
     <string name="label_services">Services</string>
     <string name="label_request">Request</string>
     <string name="label_status">Status</string>
+    <string name="label_customer_information">Customer Information</string>
+    <string name="label_request_information">Request Information</string>
+    <string name="label_staff">Staff</string>
+    <string name="label_every_available">Everyone Available</string>
+    <string name="label_choose_staff">Choose Staff</string>
+    <string name="label_select_date">Select Date</string>
 </resources>
