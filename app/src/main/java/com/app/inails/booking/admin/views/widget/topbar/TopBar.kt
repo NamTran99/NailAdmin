@@ -12,7 +12,6 @@ class SimpleTopBarState(
     private val title: Int,
     @DrawableRes
     private val iconBack: Int = R.drawable.ic_ab_back,
-    private val width : Int = LinearLayout.LayoutParams.WRAP_CONTENT,
     private val onBackClick: () -> Unit = {}
 ) : TopBarState() {
     override val stateBinding by bindingOf(TopBarSimpleBinding::inflate)
@@ -22,7 +21,6 @@ class SimpleTopBarState(
             tvTitle.setText(title)
             btBack.setImageResource(iconBack)
             btBack.setOnClickListener { onBackClick() }
-            tvTitle.layoutParams.width = width
         }
     }
 }
@@ -30,7 +28,8 @@ class SimpleTopBarState(
 class MainTopBarState(
     @StringRes
     private val title: Int,
-    private val onMenuClick: () -> Unit = {}
+    private val onMenuClick: () -> Unit = {},
+    private val onStaffListClick: () -> Unit = {},
 ) : TopBarState() {
     override val stateBinding by bindingOf(TopBarMainBinding::inflate)
 
@@ -38,6 +37,9 @@ class MainTopBarState(
         with(stateBinding) {
             tvTitle.setText(title)
             btMenu.setOnClickListener { onMenuClick() }
+            btStaffList.setOnClickListener {
+                onStaffListClick()
+            }
         }
     }
 }

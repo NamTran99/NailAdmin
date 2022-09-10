@@ -6,9 +6,6 @@ import android.view.View
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentBookingBinding
-import com.app.inails.booking.admin.navigate.Router
-import com.app.inails.booking.admin.navigate.Router.Companion.redirectToBooking
-import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class ManageStaffFragment : BaseRefreshFragment(R.layout.fragment_manage_staff) , TopBarOwner {

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:background="@color/white"
-    android:gravity="center_vertical"
     android:orientation="horizontal"
     tools:context=".views.widget.topbar.SimpleTopBarState">
 
@@ -20,7 +19,8 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:gravity="center"
         style="@style/AppTheme.TextView.Title.Small"
+        android:layout_centerInParent="true"
         tools:text="Hello world" />
-</LinearLayout>
+
+</RelativeLayout>

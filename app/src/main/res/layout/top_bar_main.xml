@@ -20,5 +20,18 @@
     <TextView
         android:id="@+id/tvTitle"
         style="@style/AppTheme.TextView.Title.Small"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         tools:text="Hello world" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btStaffList"
+        style="@style/AppTheme.ButtonDefault.Wrap"
+        android:layout_height="@dimen/size_40"
+        android:layout_marginEnd="@dimen/size_16"
+        android:background="@drawable/button_primary_stroke"
+        android:drawableStart="@drawable/ic_staff_list"
+        android:text="@string/btn_staff_list"
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>

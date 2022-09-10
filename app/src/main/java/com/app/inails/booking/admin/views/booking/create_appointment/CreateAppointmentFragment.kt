@@ -45,8 +45,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_create_new_appointment,
-                width = LinearLayout.LayoutParams.MATCH_PARENT
+                R.string.title_create_new_appointment
             ) { activity?.onBackPressed() })
         mServiceAdapter = SelectServiceAdapter(binding.rvServices)
 
