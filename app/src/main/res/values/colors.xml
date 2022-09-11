@@ -47,5 +47,6 @@
     <color name="violet_blue">#6672DB</color>
     <color name="yellow">#FFE200</color>
     <color name="red">#F04423</color>
+    <color name="color_edt_hint">#C3C3C3</color>
 
 </resources>
