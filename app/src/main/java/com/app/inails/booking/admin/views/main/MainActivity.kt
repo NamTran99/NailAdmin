@@ -57,7 +57,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
             }
             R.id.navEmailReceiveFeedback -> {
-
+                Router.open(this, Routing.EmailReceiveFeedBack)
             }
             R.id.navChangePassword -> {
                 Router.open(this, Routing.ChangePassword)

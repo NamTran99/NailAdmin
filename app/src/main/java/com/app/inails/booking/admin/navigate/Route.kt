@@ -12,6 +12,7 @@ import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppoi
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
+import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
 import kotlinx.parcelize.Parcelize
 import kotlin.reflect.KClass
 
@@ -36,6 +37,12 @@ interface Routing : BundleArgument {
     object ChangePassword: Routing{
         override val fragmentClass: KClass<out Fragment>
             get() = ChangePasswordFragment::class
+    }
+
+    @Parcelize
+    object EmailReceiveFeedBack: Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = EmailReceiveFeedbackFragment::class
     }
 }
 

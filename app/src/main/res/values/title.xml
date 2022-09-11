@@ -9,4 +9,5 @@
     <string name="title_edit_profile">Edit Profile</string>
     <string name="title_create_new_appointment">Create New Appointment</string>
     <string name="title_change_password">Change Password</string>
+    <string name="title_email_receive_feedback">Email Receive Feedback</string>
 </resources>

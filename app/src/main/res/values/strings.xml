@@ -45,4 +45,7 @@
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
+    <string name="enter_your_email">Enter your Email</string>
+    <string name="email_receive_feedback_description">MANAGE THE EMAIL THAT RECEIVE FEEDBACK FROM CUSTOMER</string>
+    <string name="email">Email</string>
 </resources>
