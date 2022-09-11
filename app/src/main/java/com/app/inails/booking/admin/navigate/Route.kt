@@ -11,6 +11,7 @@ import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaff
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
+import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import kotlinx.parcelize.Parcelize
 import kotlin.reflect.KClass
 
@@ -29,6 +30,12 @@ interface Routing : BundleArgument {
     object CreateAppointment : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = CreateAppointmentFragment::class
+    }
+
+    @Parcelize
+    object ChangePassword: Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = ChangePasswordFragment::class
     }
 }
 

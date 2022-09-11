@@ -40,4 +40,9 @@
     <string name="btn_add_appointment">Add Appointment</string>
     <string name="btn_staff_list">Staff List</string>
     <string name="btn_assign">Assign</string>
+    <string name="change_password">Change Password</string>
+    <string name="update">Update</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
 </resources>

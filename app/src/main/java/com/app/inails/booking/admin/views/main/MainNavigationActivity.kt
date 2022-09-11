@@ -10,6 +10,7 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
+import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -27,6 +28,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
             val clazz = when (args) {
                 is Routing.ManageStaff -> ManageStaffFragment::class
                 is Routing.CreateAppointment -> CreateAppointmentFragment::class
+                is Routing.ChangePassword -> ChangePasswordFragment::class
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())

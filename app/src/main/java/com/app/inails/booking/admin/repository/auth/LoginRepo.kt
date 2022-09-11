@@ -14,9 +14,9 @@ class LoginRepo(
 	private val appCache: AppCache
 ) {
     suspend operator fun invoke(form: LoginForm) {
-        form.validate()
-		form.deviceToken = appCache.tokenPush
-        val user = authenticateApi.login(form).await()
-        userLocalSource.saveUser(user)
+//        form.validate()
+//		form.deviceToken = appCache.tokenPush
+//        val user = authenticateApi.login(form).await()
+//        userLocalSource.saveUser(user)
     }
 }

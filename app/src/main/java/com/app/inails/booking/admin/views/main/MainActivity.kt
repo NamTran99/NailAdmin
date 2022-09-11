@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.views.main
 
 import android.os.Bundle
+import android.support.core.route.navigateToFragment
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.view.MenuItem
@@ -12,6 +13,7 @@ import com.app.inails.booking.admin.extention.alpha
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
@@ -58,7 +60,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
             }
             R.id.navChangePassword -> {
-
+                Router.open(this, Routing.ChangePassword)
             }
             R.id.navReport -> {
 
