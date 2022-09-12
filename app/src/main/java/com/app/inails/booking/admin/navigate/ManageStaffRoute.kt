@@ -4,7 +4,7 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.views.main.StaffListFragment
-import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
+import com.app.inails.booking.admin.views.manage.staff.ManageStaffFragment
 
 interface ManageStaffRoute {
     fun BaseFragment.redirectToList()

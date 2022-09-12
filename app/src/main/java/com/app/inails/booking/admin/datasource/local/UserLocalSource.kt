@@ -57,6 +57,11 @@ class UserLocalSource(
         userLive.post(userDTO)
     }
 
+    // When log out
+    fun clearUser(){
+        user = null
+    }
+
     fun logout() {
         user = null
         appCache.tokenPush = ""

@@ -50,6 +50,7 @@
     <string name="email">Email</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
+    <string name="btn_add_new_service">Add New Service</string>
     <string name="btn_add_new_staff">Add New Staff</string>
     <string name="btn_check_in">Check in</string>
     <string name="btn_check_out">Check out</string>

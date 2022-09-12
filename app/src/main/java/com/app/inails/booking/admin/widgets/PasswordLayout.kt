@@ -16,6 +16,7 @@ class PasswordLayout(context: Context, attributeSet: AttributeSet) :
 
     val text : String
         get() = binding.edtPassword.text.toString()
+    fun getEdtView() = binding.edtPassword
 
     private val binding by lazy {
         EdtPasswordInputBinding.inflate(LayoutInflater.from(context), this, true)

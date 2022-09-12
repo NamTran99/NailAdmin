@@ -62,7 +62,6 @@ class LoginViewModel(
 
     fun login() = launch(loading, error) {
         loginRepo(form)
-        delay(1000)
         loginSuccess.post(R.string.msg_login_success)
     }
 

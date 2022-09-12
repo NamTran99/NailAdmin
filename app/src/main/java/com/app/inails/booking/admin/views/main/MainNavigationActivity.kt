@@ -7,9 +7,9 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Routing
-import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
-import com.app.inails.booking.admin.views.manage_staff.ManageStaffFragment
+import com.app.inails.booking.admin.views.manage.service.ManageServiceFragment
+import com.app.inails.booking.admin.views.manage.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
@@ -31,6 +31,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.CreateAppointment -> CreateAppointmentFragment::class
                 is Routing.ChangePassword -> ChangePasswordFragment::class
                 is Routing.EmailReceiveFeedBack -> EmailReceiveFeedbackFragment::class
+                is Routing.ManageService -> ManageServiceFragment::class
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())

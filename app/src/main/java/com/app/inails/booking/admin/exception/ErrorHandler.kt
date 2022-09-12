@@ -4,9 +4,11 @@ import android.app.Activity
 import android.support.core.extensions.block
 import android.support.core.route.RouteDispatcher
 import android.widget.EditText
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.extention.cast
+import com.app.inails.booking.admin.widgets.PasswordLayout
 
 interface ErrorHandler {
     fun handle(activity: BaseActivity, error: Throwable)
@@ -35,6 +37,18 @@ class ErrorHandlerImpl : ErrorHandler {
                 }
                 view.run {
                     this.error = activity.getString(error.res)
+                    requestFocus()
+                }
+                return
+            }
+            is ViewPassInputError ->{
+                val view = if (dispatcher is BaseFragment) {
+                    dispatcher.requireView().findViewById<PasswordLayout>(error.viewId)
+                } else {
+                    (dispatcher as Activity).findViewById(error.viewId)
+                }.getEdtView()
+                view.run {
+                    this.error = activity.getString(R.string.error_blank_password)
                     requestFocus()
                 }
                 return

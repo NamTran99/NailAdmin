@@ -3,8 +3,10 @@ package com.app.inails.booking.admin.views.main
 import android.os.Bundle
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
+import android.support.viewmodel.viewModel
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
@@ -12,6 +14,7 @@ import com.app.inails.booking.admin.extention.alpha
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.repository.auth.LogoutRepo
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
@@ -24,6 +27,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override lateinit var topBar: TopBarAdapter
 
     private val binding by viewBinding(ActivityMainBinding::bind)
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navManageService -> {
-
+                Router.open(this, Routing.ManageService)
             }
             R.id.navManageStaff -> {
                 Router.open(this, Routing.ManageStaff)
@@ -68,7 +72,10 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 message = R.string.message_logout_app,
                 buttonConfirm = R.string.btn_yes_logout
             ) {
-                Router.run { redirectToLogin() }
+                Router.run {
+                    redirectToLogin()
+                    viewModel.logout()
+                }
             }
         }
         return true
@@ -76,5 +83,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
     override fun onBackPressed() {
         if (!findNavigator().navigateUp()) super.onBackPressed()
+    }
+}
+
+class MainViewModel(private val logoutRepo: LogoutRepo): ViewModel(){
+    fun logout(){
+        logoutRepo.invoke()
     }
 }
