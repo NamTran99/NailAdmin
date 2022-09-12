@@ -50,4 +50,16 @@
     <string name="email">Email</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
+    <string name="btn_add_new_staff">Add New Staff</string>
+    <string name="btn_check_in">Check in</string>
+    <string name="btn_check_out">Check out</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_order_list">Order List</string>
+    <string name="btn_active">Active</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_inactive">Inactive</string>
+    <string name="btn_order_history">Order History</string>
+    <string name="btn_attendance_history">Attendance History</string>
 </resources>

@@ -41,6 +41,7 @@
                 android:id="@+id/etFullName"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="@dimen/size_12"
+                android:maxLength="50"
                 android:drawableStart="@drawable/ic_user_outline"
                 android:hint="@string/hint_enter_full_name" />
 
@@ -48,7 +49,7 @@
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_marginVertical="@dimen/size_16"
                 android:text="@string/label_request_information"
-                android:textColor="@color/lightBlue01"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_14" />
 
             <TextView
@@ -59,7 +60,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/AppTheme.TextView.Medium"
@@ -67,16 +69,17 @@
                     android:text="@string/label_every_available" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swStaff"
                     style="@style/Widget.AppCompat.CompoundButton.Switch"
                     android:layout_width="@dimen/size_50"
                     android:layout_height="wrap_content"
-                    android:id="@+id/swStaff"
                     android:layout_gravity="end"
                     tools:checked="false" />
             </FrameLayout>
 
             <TextView
                 android:id="@+id/tvChooseStaff"
+                android:layout_marginTop="@dimen/size_12"
                 style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:focusable="false"
@@ -121,9 +124,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:hint="@string/label_select_time"
                     android:paddingHorizontal="@dimen/size_16"
                     android:textColorHint="@color/black"
-                    android:hint="@string/label_select_time"
                     app:drawableStartCompat="@drawable/ic_time_outline" />
             </LinearLayout>
 
@@ -148,11 +151,12 @@
             <EditText
                 android:id="@+id/etSomethingElse"
                 style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:hint="@string/hint_something_else"
                 android:inputType="textMultiLine"
                 android:maxLength="300"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/size_12"
-                android:hint="@string/hint_something_else" />
+                android:visibility="gone" />
+
             <TextView
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_gravity="start"
@@ -163,9 +167,9 @@
             <EditText
                 android:id="@+id/etTotalDuration"
                 style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
                 android:drawableStart="@drawable/ic_time_outline"
                 android:hint="@string/hint_enter_minutes"
-                android:layout_marginTop="@dimen/size_12"
                 android:inputType="number"
                 android:maxLength="4" />
 

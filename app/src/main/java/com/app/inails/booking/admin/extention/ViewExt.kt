@@ -324,6 +324,10 @@ fun CheckBox.drawableStart(idDrawable: Int = 0) {
     this.setCompoundDrawablesWithIntrinsicBounds(idDrawable, 0, 0, 0)
 }
 
+fun TextView.drawableStart(idDrawable: Int = 0) {
+    this.setCompoundDrawablesWithIntrinsicBounds(idDrawable, 0, 0, 0)
+}
+
 
 fun EditText.inputTypePhoneUS() {
     val addLineNumberFormatter = UsPhoneNumberFormatter(WeakReference(this))
@@ -332,3 +336,4 @@ fun EditText.inputTypePhoneUS() {
         isFocusableInTouchMode = true
     }
 }
+

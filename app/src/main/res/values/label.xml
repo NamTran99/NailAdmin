@@ -19,4 +19,8 @@
     <string name="label_choose_staff">Choose Staff</string>
     <string name="label_select_date">Select Date</string>
     <string name="label_total_duration_service">Total Duration Service</string>
+    <string name="label_name">Name</string>
+    <string name="label_customer">Customer</string>
+    <string name="label_waiting">Waiting</string>
+    <string name="label_checked_in">Checked in</string>
 </resources>

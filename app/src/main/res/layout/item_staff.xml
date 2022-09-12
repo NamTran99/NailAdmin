@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="@dimen/size_16">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvStaffName"
+                style="@style/AppTheme.TextView.Medium"
+                tools:text="Staff Name" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_marginTop="@dimen/size_8"
+                tools:text="987-654-3210" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <ImageButton
+            android:id="@+id/btMenu"
+            style="@style/AppTheme.ImageButton"
+            android:src="@drawable/ic_more" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btCheckIn"
+            style="@style/AppTheme.ButtonDefault.Wrap"
+            android:layout_height="@dimen/size_40"
+            android:background="@drawable/button_primary_corner_20"
+            android:text="@string/btn_check_in"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/checkInLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_radius_20"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size_20"
+            android:paddingVertical="@dimen/size_6"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:text="@string/label_checked_in"
+                android:textColor="@color/gray13"
+                android:textSize="@dimen/text_size_10" />
+
+            <TextView
+                android:id="@+id/tvTimeCheckedIn"
+                style="@style/AppTheme.TextView.Medium"
+                tools:text="09:00 AM" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btCheckOut"
+            style="@style/AppTheme.ButtonDefault.Wrap"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/size_12"
+            android:background="@drawable/button_red_corner_20"
+            android:text="@string/btn_check_out"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -23,6 +23,7 @@ import com.app.inails.booking.admin.datasource.remote.BookingApi
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.BookingFactory
+import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.ui.AppointmentForm
 import com.app.inails.booking.admin.model.ui.IService
@@ -32,7 +33,6 @@ import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import com.app.inails.booking.formatter.TextFormatter
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -58,14 +58,16 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
 
         with(binding) {
             etPhone.inputTypePhoneUS()
-            swStaff.setOnCheckedChangeListener { buttonView, isChecked ->
-                viewModel.form.hasServiceCustom = isChecked
-                (!isChecked) show binding.tvChooseStaff
-            }
+
             mDatePickerDialog.setupClickWithView(tvSelectDate)
             mTimePickerDialog.setupClickWithView(tvSelectTime)
             tvChooseStaff.setOnClickListener {
                 Router.run { redirectToChooseStaff() }
+            }
+
+            swStaff.setOnCheckedChangeListener { buttonView, isChecked ->
+                viewModel.form.hasStaff = !isChecked
+                (!isChecked) show binding.tvChooseStaff
             }
 
             btAddAppointment.setOnClickListener {
@@ -73,21 +75,21 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                     phone = etPhone.text.toString()
                     name = etFullName.text.toString()
                     serviceCustom = etSomethingElse.text.toString()
-                    workTime = etTotalDuration.text.toString()
-                    services = mServiceAdapter.selectedItems.toMutableList()
+                    workTime = etTotalDuration.text.toString().toIntOrNull() ?: -1
+                    services = mServiceAdapter.selectedItems.toString()
                     dateAppointment = if (tvSelectTime.text.toString()
                             .isEmpty()
-                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}"
+                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}:00"
                 }
                 viewModel.submit()
             }
-
 
         }
 
         with(viewModel) {
             services.bind(mServiceAdapter.apply {
                 onClickItemListener = {
+                    viewModel.form.hasServiceCustom = it
                     (it) show binding.etSomethingElse
                 }
             }::submit)
@@ -140,7 +142,7 @@ class ServiceRepository(
     suspend operator fun invoke() {
         var servicesList = bookingApi.services(userLocalSource.getSalonID().toString())
             .await()
-        servicesList = servicesList.toMutableList()
+        servicesList = servicesList
         servicesList.add(ServiceDTO(name = "Something Else"))
         results.post(
             bookingFactory

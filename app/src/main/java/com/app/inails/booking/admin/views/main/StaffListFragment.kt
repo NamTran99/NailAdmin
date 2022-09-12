@@ -1,9 +1,8 @@
-package com.app.inails.booking.admin.views.booking.create_appointment
+package com.app.inails.booking.admin.views.main
 
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
-import android.support.core.route.BundleArgument
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
@@ -14,31 +13,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
-import com.app.inails.booking.admin.databinding.FragmentChooseStaffBinding
-import com.app.inails.booking.admin.model.ui.StaffForm
+import com.app.inails.booking.admin.databinding.FragmentStaffListBinding
 import com.app.inails.booking.admin.repository.auth.StaffRepo
-import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
-import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class ChooseStaffArg(
-    val idSelected: Int? = 0
-) : BundleArgument
-
-class ChooseStaffFragment : BaseRefreshFragment(R.layout.fragment_choose_staff), TopBarOwner {
-    private val binding by viewBinding(FragmentChooseStaffBinding::bind)
-    private val viewModel by viewModel<ChooseStaffViewModel>()
+class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
+    private val binding by viewBinding(FragmentStaffListBinding::bind)
+    private val viewModel by viewModel<ManageStaffViewModel>()
     override fun onRefreshListener() {
         viewModel.refresh()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topBar.setState(
-            SimpleTopBarState(
-                R.string.label_choose_staff
-            ) { findNavigator().navigateUp() })
         with(binding) {
             rvStaff.addItemDecoration(
                 DividerItemDecoration(
@@ -46,19 +32,16 @@ class ChooseStaffFragment : BaseRefreshFragment(R.layout.fragment_choose_staff),
                     LinearLayoutManager.VERTICAL
                 )
             )
+
+            btClose.setOnClickListener {
+                findNavigator().navigateUp()
+            }
         }
 
         with(viewModel) {
-            staffs.bind(SelectStaffAdapter(binding.rvStaff).apply {
+            staffs.bind(StaffStatusAdapter(binding.rvStaff).apply {
                 onClickItemListener = {
-                    form.run {
-                        id = it.id
-                        phone = it.phone
-                        name = it.name
-                    }
-                    findNavigator().navigateUp(
-                        result = form.toBundle()
-                    )
+
                 }
             }::submit)
         }
@@ -67,11 +50,10 @@ class ChooseStaffFragment : BaseRefreshFragment(R.layout.fragment_choose_staff),
 }
 
 
-class ChooseStaffViewModel(
+class ManageStaffViewModel(
     private val staffRepo: StaffRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val staffs = staffRepo.results
-    val form = StaffForm()
 
     init {
         refresh()
@@ -81,3 +63,6 @@ class ChooseStaffViewModel(
         staffRepo()
     }
 }
+
+
+

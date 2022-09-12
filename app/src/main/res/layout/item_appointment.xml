@@ -10,9 +10,15 @@
     android:orientation="vertical"
     android:padding="@dimen/size_16">
 
+    <TextView
+        android:id="@+id/tvID"
+        style="@style/AppTheme.TextView.Medium"
+        tools:text="Yen Yen" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
         android:orientation="horizontal">
 
         <TextView
@@ -108,7 +114,7 @@
             android:layout_gravity="end"
             android:layout_marginStart="@dimen/size_13"
             android:textColor="@color/yellow"
-            app:drawableStartCompat="@drawable/circle_status_waiting"
+            app:drawableStartCompat="@drawable/circle_yellow"
             tools:text="Waiting" />
     </FrameLayout>
 

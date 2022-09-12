@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+    android:padding="@dimen/size_13"
+    tools:context=".views.main.StaffListFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_white_radius"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/size_16">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_centerInParent="true"
+                android:text="@string/btn_staff_list"
+                android:textSize="@dimen/text_size_14" />
+
+            <ImageButton
+                android:id="@+id/btClose"
+                style="@style/AppTheme.ImageButton"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_menu_close"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:text="@string/label_name" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_alignParentEnd="true"
+                android:text="@string/label_customer" />
+        </RelativeLayout>
+
+        <View
+            style="@style/AppTheme.Line.Horizontal"
+            android:layout_marginTop="@dimen/size_16" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/viewRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvStaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_staff_status" />
+
+                <include layout="@layout/layout_empty" />
+            </RelativeLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

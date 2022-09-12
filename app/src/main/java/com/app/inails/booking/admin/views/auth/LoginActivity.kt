@@ -19,7 +19,6 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityLoginBinding
 import com.app.inails.booking.admin.extention.bind
-import com.app.inails.booking.admin.model.ui.IAccount
 import com.app.inails.booking.admin.model.ui.LoginForm
 import com.app.inails.booking.admin.helper.ApplicationScope
 import com.app.inails.booking.admin.navigate.Router

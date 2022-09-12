@@ -15,4 +15,6 @@
     <string name="label_select_time">Select Time</string>
     <string name="hint_something_else">Something Else</string>
     <string name="hint_enter_minutes">Enter minutes</string>
+    <string name="hint_enter_first_name">Enter First Name</string>
+    <string name="hint_enter_last_name">Enter Last Name</string>
 </resources>

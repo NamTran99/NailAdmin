@@ -6,7 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/gray07"
     android:orientation="vertical"
+    android:padding="@dimen/size_13"
     tools:context=".views.manage_staff.ManageStaffFragment">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btAddStaff"
+        style="@style/AppTheme.ButtonDefault.Wrap"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/size_20"
+        android:minWidth="220dp"
+        android:background="@drawable/button_pink_corner"
+        android:drawableStart="@drawable/ic_add"
+        android:text="@string/btn_add_new_staff" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/viewRefresh"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_white_radius"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStaff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_staff" />
+
+            <include layout="@layout/layout_empty" />
+        </RelativeLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -15,7 +15,7 @@
 
     <!--========Line============-->
     <style name="AppTheme.Line">
-        <item name="android:background">@color/grey_light</item>
+        <item name="android:background">@color/gray07</item>
     </style>
 
     <style name="AppTheme.Line.Horizontal">
@@ -48,7 +48,8 @@
     <style name="TextAppearance.Regular" parent="AppTheme.TextAppearance" />
 
     <style name="TextAppearance.Bold" parent="AppTheme.TextAppearance">
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
     <style name="TextAppearance.Italic" parent="AppTheme.TextAppearance">
@@ -112,7 +113,8 @@
     </style>
 
     <style name="AppTheme.Button.Outline.Circle" parent="AppTheme.Button.Outline">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.AppTheme.Button.Circle</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.AppTheme.Button.Circle
+        </item>
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:textStyle">bold</item>
@@ -131,6 +133,8 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+        <item name="android:layout_width">?actionBarSize</item>
+        <item name="android:layout_height">?actionBarSize</item>
     </style>
 
     <style name="AppTheme.TextViewResponsive">
@@ -152,6 +156,7 @@
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:drawablePadding">@dimen/size_8</item>
     </style>
+
     <style name="AppTheme.TextView.Title">
         <item name="fontFamily">@font/larken_extrabold_italic</item>
         <item name="android:textSize">@dimen/text_size_21</item>
@@ -200,5 +205,6 @@
     <style name="AppTheme.ButtonDefault.Wrap">
         <item name="android:layout_width">wrap_content</item>
     </style>
+
 
 </resources>

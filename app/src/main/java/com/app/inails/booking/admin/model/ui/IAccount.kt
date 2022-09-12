@@ -6,19 +6,14 @@ import com.app.inails.booking.admin.exception.viewError
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-interface IAccount {
-    val phone: String get() = ""
-    val password: String get() = ""
-}
-
 @Parcelize
 class LoginForm(
-    override var phone: String = "",
-    override var password: String = "",
+    var phone: String = "",
+    var password: String = "",
     @SerializedName("device_token")
     var deviceToken: String = ""
 
-) : IAccount, Parcelable {
+) : Parcelable {
 
     fun validate() {
         if (phone.isBlank()) viewError(R.id.etPhone, R.string.error_blank_phone)

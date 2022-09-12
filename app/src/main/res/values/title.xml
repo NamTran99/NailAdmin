@@ -10,4 +10,8 @@
     <string name="title_create_new_appointment">Create New Appointment</string>
     <string name="title_change_password">Change Password</string>
     <string name="title_email_receive_feedback">Email Receive Feedback</string>
+    <string name="title_walk_in_customer">Walk-in Customer</string>
+    <string name="title_appointment_customer">Appointment Customer</string>
+    <string name="title_create_new_staff">Create New Staff</string>
+    <string name="title_update_staff">Update Staff</string>
 </resources>

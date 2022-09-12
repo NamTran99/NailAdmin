@@ -14,7 +14,7 @@ import androidx.viewbinding.ViewBinding
 abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
-    private var mItems: List<T>? = null
+    private var mItems: ArrayList<T>? = null
 
     val items get() = mItems
 
@@ -32,7 +32,9 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
     @SuppressLint("NotifyDataSetChanged")
     @Suppress("unchecked_cast")
     open fun submit(newItems: List<T>?) {
-        mItems = newItems
+        mItems?.clear()
+        mItems = arrayListOf()
+        mItems!!.addAll(newItems?: listOf())
         notifyDataSetChanged()
     }
 
@@ -52,7 +54,7 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    fun setData(items: List<T>) {
+    fun setData(items: ArrayList<T>) {
         mItems = items
     }
 
@@ -79,7 +81,6 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         super.onViewRecycled(holder)
         (holder as? IHolder<*>)?.onRecycled()
     }
-
 }
 
 interface DiffComparable<T> {

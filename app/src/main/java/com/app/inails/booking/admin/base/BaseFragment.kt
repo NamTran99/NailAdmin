@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
+import com.app.inails.booking.admin.functional.NotSupportable
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.app.inails.booking.admin.views.dialog.loading.LoadingDialog
 
@@ -22,6 +23,7 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     ViewModelRegistrable,
     ConfirmDialogOwner,
     AppPermissionOwner,
+    NotSupportable,
     ErrorHandler by ErrorHandlerImpl() {
     val self get() = this
     val appActivity get() = activity as BaseActivity
