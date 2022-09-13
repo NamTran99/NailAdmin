@@ -1,4 +1,4 @@
-package com.app.inails.booking.admin.views.manage_staff
+package com.app.inails.booking.admin.views.management.staff
 
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner

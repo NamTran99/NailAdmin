@@ -51,5 +51,6 @@
     <color name="yellow">#FFE200</color>
     <color name="red">#F04423</color>
     <color name="color_edt_hint">#C3C3C3</color>
+    <color name="color_view_bottom_line">#F0F0F0</color>
 
 </resources>

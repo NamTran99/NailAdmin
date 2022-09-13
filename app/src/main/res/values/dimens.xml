@@ -63,4 +63,6 @@
     <dimen name="size_28">28dp</dimen>
     <dimen name="size_200">200dp</dimen>
     <dimen name="size_400">400dp</dimen>
+    <dimen name="size_17_5">17.5dp</dimen>
+    <dimen name="size_14">14dp</dimen>
 </resources>

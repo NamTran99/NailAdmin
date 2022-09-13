@@ -51,18 +51,17 @@
             android:text="@string/email_receive_feedback_description" />
 
         <EditText
-            android:id="@+id/enterEmail"
+            android:id="@+id/etEnterEmail"
             style="@style/AppTheme.EditText"
             android:layout_marginBottom="@dimen/size_12"
             android:hint="@string/email"
             android:drawableStart="@drawable/ic_email"
             android:inputType="textEmailAddress"
             android:imeOptions="actionDone"
-            android:maxLength="14"
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btAddAppointment"
+            android:id="@+id/btSave"
             style="@style/AppTheme.ButtonDefault"
             android:layout_width="match_parent"
             android:layout_gravity="bottom|center"

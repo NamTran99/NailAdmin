@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
-import com.app.inails.booking.admin.views.manage.service.ManageServiceFragment
-import com.app.inails.booking.admin.views.manage.staff.ManageStaffFragment
+import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
+import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
 import kotlinx.parcelize.Parcelize
