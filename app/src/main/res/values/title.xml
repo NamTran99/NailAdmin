@@ -13,5 +13,6 @@
     <string name="title_walk_in_customer">Walk-in Customer</string>
     <string name="title_appointment_customer">Appointment Customer</string>
     <string name="title_create_new_staff">Create New Staff</string>
+    <string name="title_create_new_service">Create New Service</string>
     <string name="title_update_staff">Update Staff</string>
 </resources>

@@ -32,8 +32,6 @@ interface StaffApi : Injectable {
 
     @POST("staff/create-staff")
     fun createStaff(@Body form: CreateStaffForm): ApiAsync<StaffDTO>
-
-
 }
 
 class StaffApiImpl(private val retrofit: Retrofit) :

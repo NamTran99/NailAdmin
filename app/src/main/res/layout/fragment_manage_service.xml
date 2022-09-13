@@ -11,7 +11,7 @@
     tools:context=".views.management.staff.ManageStaffFragment">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btAddAppointment"
+        android:id="@+id/btAddService"
         style="@style/AppTheme.ButtonDefault.Wrap"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="@dimen/size_20"

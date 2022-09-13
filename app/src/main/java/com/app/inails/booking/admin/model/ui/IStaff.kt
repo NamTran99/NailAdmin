@@ -6,7 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
-import com.app.inails.booking.model.support.ISelector
+import com.app.inails.booking.admin.model.support.ISelector
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 

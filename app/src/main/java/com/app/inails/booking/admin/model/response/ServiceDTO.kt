@@ -4,8 +4,8 @@ data class ServiceDTO(
     val created_at: String?="",
     val id: Int?=0,
     val name: String?="",
-    val price: Int?=0,
+    val price: Double?=0.0,
     val price_format: String? ="",
     val salon_id: Int? =0,
-    val updated_at: String? = ""
+    val updated_at: String? = "",
 )

@@ -10,7 +10,7 @@ import com.app.inails.booking.admin.databinding.ItemServiceSelectBinding
 import com.app.inails.booking.admin.extention.drawableStart
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
-import com.app.inails.booking.model.support.ISelector
+import com.app.inails.booking.admin.model.support.ISelector
 
 class SelectServiceAdapter(view: RecyclerView) :
     SimpleRecyclerAdapter<IService, ItemServiceSelectBinding>(view) {

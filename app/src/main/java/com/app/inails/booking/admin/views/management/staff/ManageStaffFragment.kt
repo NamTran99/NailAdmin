@@ -28,7 +28,6 @@ import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
 import com.app.inails.booking.admin.repository.auth.StaffRepo
-import com.app.inails.booking.admin.views.dialog.CreateUpdateStaffOwner
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -36,7 +35,7 @@ class ManageStaffFragment : BaseRefreshFragment(R.layout.fragment_manage_staff),
     CreateUpdateStaffOwner, PopupUserMoreOwner {
     private val binding by viewBinding(FragmentManageStaffBinding::bind)
     private val viewModel by viewModel<ManageStaffViewModel>()
-    private lateinit var mAdapter: StaffAdapter
+    private lateinit var mAdapter: ManageStaffAdapter
     override fun onRefreshListener() {
         viewModel.refresh()
     }
@@ -49,7 +48,7 @@ class ManageStaffFragment : BaseRefreshFragment(R.layout.fragment_manage_staff),
             ) { activity?.onBackPressed() })
 
         with(binding) {
-            mAdapter = StaffAdapter(binding.rvStaff)
+            mAdapter = ManageStaffAdapter(binding.rvStaff)
             rvStaff.addItemDecoration(
                 DividerItemDecoration(
                     requireContext(),

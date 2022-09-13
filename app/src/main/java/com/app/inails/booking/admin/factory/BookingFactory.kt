@@ -8,7 +8,7 @@ import com.app.inails.booking.admin.model.response.AppointmentDTO
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
 import com.app.inails.booking.admin.model.ui.*
-import com.app.inails.booking.model.support.ISelector
+import com.app.inails.booking.admin.model.support.ISelector
 
 @Inject(ShareScope.Singleton)
 class BookingFactory(private val textFormatter: TextFormatter) {
@@ -22,8 +22,12 @@ class BookingFactory(private val textFormatter: TextFormatter) {
         }
     }
 
-    fun createServiceList(servicesDTO: ArrayList<ServiceDTO>): List<IService> {
+    fun createServiceList(servicesDTO: List<ServiceDTO>): List<IService> {
         return servicesDTO.map(::createService)
+    }
+
+    fun createAService(serviceDTO: ServiceDTO): IService {
+        return createService(serviceDTO)
     }
 
     private fun createStaff(staffDTO: StaffDTO): IStaff {
@@ -48,7 +52,6 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = textFormatter.formatStatusStaffColor(staffDTO.status)
             override val timeCheckIn: String
                 get() = staffDTO.time_check_in.safe()
-
         }
     }
 
@@ -78,7 +81,6 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = textFormatter.formatStatusAppointmentIcon(appointmentDTO.status)
             override val colorStatus: Int
                 get() = textFormatter.formatStatusAppointmentColor(appointmentDTO.status)
-
         }
     }
 

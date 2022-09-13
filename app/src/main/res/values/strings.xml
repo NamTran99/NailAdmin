@@ -12,6 +12,8 @@
     <string name="msg_login_success">Login success</string>
     <string name="msg_sign_up_success">Sign up success</string>
     <string name="error_blank_phone">Please enter phone number</string>
+    <string name="error_blank_service_name">Service\'s Name should not be blank</string>
+    <string name="error_blank_service_price">Price should not be blank</string>
     <string name="error_blank_firstname">Firstname should not be blank</string>
     <string name="error_blank_lastname">Lastname should not be blank</string>
     <string name="error_not_correct_email">Please enter the correct email</string>
@@ -63,4 +65,6 @@
     <string name="btn_inactive">Inactive</string>
     <string name="btn_order_history">Order History</string>
     <string name="btn_attendance_history">Attendance History</string>
+    <string name="service_s_name">Service\'s Name</string>
+    <string name="price">Price</string>
 </resources>

@@ -13,7 +13,7 @@ import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
-class StaffAdapter(view: RecyclerView) :
+class ManageStaffAdapter(view: RecyclerView) :
     SimpleRecyclerAdapter<IStaff, ItemManageStaffBinding>(view) {
     var onClickItemListener: ((IStaff) -> Unit)? = null
     var onUpdateStatusListener: ((Int, Int) -> Unit)? = null

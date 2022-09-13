@@ -1,4 +1,4 @@
-package com.app.inails.booking.admin.views.dialog
+package com.app.inails.booking.admin.views.management.staff
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
