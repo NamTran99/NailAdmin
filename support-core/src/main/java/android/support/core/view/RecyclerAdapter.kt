@@ -134,6 +134,11 @@ abstract class RecyclerHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemV
         this.item = item
     }
 
+    open fun bind(item: T, payload: MutableList<Any>?) {
+        this.item = item
+    }
+
+
     override fun onRecycled() {
 
     }

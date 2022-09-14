@@ -17,4 +17,7 @@
     <string name="hint_enter_minutes">Enter minutes</string>
     <string name="hint_enter_first_name">Enter First Name</string>
     <string name="hint_enter_last_name">Enter Last Name</string>
+    <string name="hint_enter_reason">Enter Reason</string>
+    <string name="hint_enter_work_time">Enter Work Time</string>
+    <string name="hint_enter_service_time">Enter Service Time</string>
 </resources>

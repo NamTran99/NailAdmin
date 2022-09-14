@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:padding="@dimen/size_16"
+    tools:context=".views.dialog.ConfirmNoticeDialog">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/AppTheme.TextView.Title"
+            android:layout_centerInParent="true"
+            android:text="@string/title_estimate" />
+
+        <ImageButton
+            android:id="@+id/btClose"
+            style="@style/AppTheme.ImageButton"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu_close"
+            app:tint="@color/black" />
+    </RelativeLayout>
+
+    <View style="@style/AppTheme.Line.Horizontal" />
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginTop="@dimen/size_13"
+        android:text="@string/label_services"
+        android:textSize="@dimen/text_size_14" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvServices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <View
+        style="@style/AppTheme.Line.Horizontal"
+        android:layout_marginTop="@dimen/size_13" />
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginTop="@dimen/size_13"
+        android:text="@string/label_select_to_time"
+        android:textSize="@dimen/text_size_14" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSubmit"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/button_primary_corner"
+        android:text="@string/btn_submit" />
+</LinearLayout>

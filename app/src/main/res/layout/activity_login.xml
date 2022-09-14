@@ -26,7 +26,7 @@
             android:inputType="phone"
             android:maxLength="11"
             style="@style/AppTheme.EditText"
-            android:drawableStart="@drawable/ic_user_outline"
+            android:drawableStart="@drawable/ic_phone_outline"
             android:hint="@string/hint_phone" />
 
         <EditText

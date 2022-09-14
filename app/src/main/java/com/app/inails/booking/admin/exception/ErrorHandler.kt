@@ -41,7 +41,7 @@ class ErrorHandlerImpl : ErrorHandler {
                 }
                 return
             }
-            is ViewPassInputError ->{
+            is ViewPassInputError -> {
                 val view = if (dispatcher is BaseFragment) {
                     dispatcher.requireView().findViewById<PasswordLayout>(error.viewId)
                 } else {
@@ -53,7 +53,9 @@ class ErrorHandlerImpl : ErrorHandler {
                 }
                 return
             }
-            is ResourceException -> activity.toast(error.resource)
+            is ResourceException -> {
+                activity.toast(error.resource)
+            }
             else -> activity.errorDialog.show(error)
         }
     }

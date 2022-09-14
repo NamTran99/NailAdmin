@@ -67,4 +67,12 @@
     <string name="btn_attendance_history">Attendance History</string>
     <string name="service_s_name">Service\'s Name</string>
     <string name="price">Price</string>
+    <string name="btn_start_service">Start Service</string>
+    <string name="message_remove_appointment" formatted="true">Do you want to remove the appointment with ID: #%d?</string>
+    <string name="message_cancel_appointment" formatted="true">Do you want to cancel the appointment with ID: #%d?</string>
+    <string name="message_customer_check_in">Do you confirm that this customer checked-in at the salon?</string>
+    <string name="message_delete_staff" formatted="true">Do you want to delete the "%s" staff?</string>
+    <string name="error_empty_reason">Please enter a reason</string>
+    <string name="error_empty_service_time">Please enter the service time</string>
+    <string name="error_service_time_greater_than">Service time must be greater than 0</string>
 </resources>

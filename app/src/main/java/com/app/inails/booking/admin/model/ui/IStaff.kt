@@ -20,7 +20,9 @@ interface IStaff {
     val resIconStatus: Int @DrawableRes get() = R.drawable.circle_yellow
     val statusName: String get() = ""
     val colorStatus: Int @ColorRes get() = R.color.yellow
+    val backgroundColor: Int @ColorRes get() = R.color.white
     val timeCheckIn: String get() = ""
+    val active: Int get() = 0
 }
 
 @Parcelize

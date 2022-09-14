@@ -9,5 +9,6 @@ data class StaffDTO(
     val status: Int = 0,
     val time_check_in: String? = "",
     val status_name: String? = "",
-    val appointment_processing: AppointmentDTO?
+    val appointment_processing: AppointmentDTO?,
+    val active : Int = 0
 )

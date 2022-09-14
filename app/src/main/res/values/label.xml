@@ -6,7 +6,7 @@
     <string name="label_phone">Phone</string>
     <string name="label_email">Email</string>
     <string name="label_address">Address</string>
-    <string name="label_admin_login">Admin Login</string>
+    <string name="label_admin_login">Owner Login</string>
     <string name="label_empty_data">No data available!</string>
     <string name="label_full_name">Full Name</string>
     <string name="label_services">Services</string>
@@ -23,4 +23,10 @@
     <string name="label_customer">Customer</string>
     <string name="label_waiting">Waiting</string>
     <string name="label_checked_in">Checked in</string>
+    <string name="label_cancelled_by_guest">Cancelled by Guest</string>
+    <string name="label_cancelled_by_salon">Cancelled by Salon</string>
+    <string name="label_minute">Minutes</string>
+    <string name="hint_search">Search</string>
+    <string name="label_select_to_time">Select time to finish</string>
+
 </resources>

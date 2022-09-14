@@ -4,7 +4,7 @@ data class AppointmentDTO(
     val id: Int = 0,
     val customer_id: Int? = 0,
     val salon_id: Int? = 0,
-    val staff_id: String? = "",
+    val staff_id: Int? = 0,
     val price: Double? = 0.0,
     val updated_at: String? = "",
     val date_appointment: String? = "",
@@ -28,7 +28,8 @@ data class AppointmentDTO(
     val staff_name: String ?= "",
     val status_name: String = "",
     val customer_name :String = "",
-    val service_custom_name : String = ""
+    val service_custom_name : String,
+    val canceled_by_name : String = ""
 ) {
     companion object {
 

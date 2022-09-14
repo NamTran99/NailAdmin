@@ -7,8 +7,8 @@ import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.AppointmentDTO
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
-import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.model.support.ISelector
+import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
 class BookingFactory(private val textFormatter: TextFormatter) {
@@ -52,6 +52,10 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = textFormatter.formatStatusStaffColor(staffDTO.status)
             override val timeCheckIn: String
                 get() = staffDTO.time_check_in.safe()
+            override val active: Int
+                get() = staffDTO.active.safe()
+            override val backgroundColor: Int
+                get() =textFormatter.formatBackgroundStaffColor(staffDTO.active)
         }
     }
 
@@ -78,13 +82,25 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val statusDisplay: String
                 get() = appointmentDTO.status_name.safe()
             override val resIconStatus: Int
-                get() = textFormatter.formatStatusAppointmentIcon(appointmentDTO.status)
+                get() = textFormatter.formatStatusAppointmentIcon(appointmentDTO.status,appointmentDTO.type)
             override val colorStatus: Int
-                get() = textFormatter.formatStatusAppointmentColor(appointmentDTO.status)
+                get() = textFormatter.formatStatusAppointmentColor(appointmentDTO.status,appointmentDTO.type)
+            override val status: Int
+                get() = appointmentDTO.status
+            override val staffID: Int
+                get() = appointmentDTO.staff_id.safe()
+            override val type: Int
+                get() = appointmentDTO.type
+            override val canceledBy: String
+                get() = textFormatter.formatStatusAppointmentCancel(appointmentDTO.canceled_by_name)
         }
     }
 
     fun createAppointmentList(appointmentsDTO: List<AppointmentDTO>): List<IAppointment> {
         return appointmentsDTO.map(::createAppointment).toMutableList()
+    }
+
+    fun createAAppointment(appointmentDTO: AppointmentDTO): IAppointment {
+        return createAppointment(appointmentDTO)
     }
 }

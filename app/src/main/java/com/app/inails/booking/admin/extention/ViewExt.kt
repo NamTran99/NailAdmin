@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.extention
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Bitmap
@@ -18,6 +19,8 @@ import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.DimenRes
 import androidx.annotation.MenuRes
@@ -26,6 +29,7 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
 import java.lang.ref.WeakReference
@@ -336,4 +340,28 @@ fun EditText.inputTypePhoneUS() {
         isFocusableInTouchMode = true
     }
 }
+
+fun SwipeRefreshLayout.colorSchemeDefault(){
+    this.setColorSchemeResources(R.color.colorPrimary)
+}
+
+fun EditText.onSearchListener(onCallBack: () -> Unit) {
+    this.setOnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            onCallBack.invoke()
+            true
+        } else false
+    }
+}
+
+fun View.showKeyboard(value: Boolean) {
+    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    if (value) {
+        requestFocus()
+        (this as? EditText)?.setSelection(text.length)
+        imm.showSoftInput(this, 0)
+    } else imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
+
 

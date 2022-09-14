@@ -8,7 +8,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
-import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentBookingBinding
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
@@ -28,6 +27,10 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking), TopBarOwner {
             submit(DataConst.AppointmentTab.appointment)
             setupPageChangeWith(binding.appointTab)
         }
+
+        appEvent.changeTabBooking.bind {
+            changeTab(tab = it)
+        }
     }
 
     class Adapter(viewPager: ViewPager2, private val fragment: Fragment) :
@@ -45,39 +48,19 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking), TopBarOwner {
             tab.text = fragment.getText(mRoute?.get(position)?.first ?: 0)
         }
     }
+
+    fun changeTab(tab: Int = 0) {
+        binding.run {
+            appointViewPager.postDelayed(
+                Runnable {
+                    appointViewPager.currentItem = tab
+                }, 10
+            )
+        }
+    }
 }
 
-//class BookingViewModel(
-//    private val fetchAllUsersRepo: FetchAllUsersRepo
-//) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-//    val users = fetchAllUsersRepo.result
-//
-//    init {
-//        refresh()
-//    }
-//
-//    fun refresh() = launch(refreshLoading, error) {
-//        fetchAllUsersRepo()
-//    }
-//}
 
-//
-//@Inject(ShareScope.Fragment)
-//class FetchAppointmentRepository(
-//    private val staffApi: StaffApi,
-//    private val bookingFactory: BookingFactory,
-//    private val salonLocalSource: SalonLocalSource
-//) {
-//
-//    val results = MutableLiveData<List<IStaff>>()
-//
-//    suspend operator fun invoke(isFilterAvailable: Boolean) {
-//        results.post(
-//            bookingFactory.createStaffs(
-//                staffApi.alls(salonLocalSource.getSalonId().toString()).await(),
-//                isFilterAvailable
-//            )
-//        )
-//    }
-//}
+
+
 

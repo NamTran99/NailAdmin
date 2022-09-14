@@ -23,6 +23,7 @@
 
     <!--ORANGE-->
     <color name="orange">#EFA860</color>
+    <color name="orange01">#FF9300</color>
 
     <!--TRANSPARENCY-->
     <color name="transparency">#30000000</color>
@@ -31,6 +32,7 @@
     <color name="lightBlue">#7f8bf4</color>
     <color name="lightBlue01">#6571DA</color>
     <color name="lightBlue02">#4768F2</color>
+    <color name="lightBlue03">#2A4FEB</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -52,5 +54,6 @@
     <color name="red">#F04423</color>
     <color name="color_edt_hint">#C3C3C3</color>
     <color name="color_view_bottom_line">#F0F0F0</color>
+    <color name="green">#18DE20</color>
 
 </resources>

@@ -18,6 +18,7 @@ object DataConst {
         const val APM_FINISH = 4
         const val APM_CANCEL = 5
         const val APM_DELETED = 6
+        const val APM_ACCEPTED = 7
     }
 
     object StaffStatus {
@@ -30,6 +31,18 @@ object DataConst {
         const val CHECK_IN = 1
         const val CHECK_OUT = 2
         const val WORKING = 3
+    }
+
+    object ChangeApmStatus {
+        const val WAITING = 1
+        const val IN_PROCESSING = 2
+        const val FINISHED = 3
+        const val CANCEL = 4
+    }
+
+    object CancelAppointmentBy {
+        const val ADMIN_SALON = 1
+        const val CLIENT = 2
     }
 
 }

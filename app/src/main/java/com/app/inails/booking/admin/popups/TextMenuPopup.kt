@@ -80,8 +80,8 @@ class TextMenuPopup<T>(context: Context) : PopupWindow(context) {
     }
 
     fun show(view: View) {
-//        showAsDropDown(view, 0, -200)
-        showAtLeft(view)
+        showAsDropDown(view, 0, -200)
+//        showAtLeft(view)
     }
 
     fun showEnd(view: View) {

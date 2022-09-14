@@ -21,12 +21,15 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context) {
 
     fun show(
         @StringRes title: Int,
-        staff: IStaff?=null,
+        staff: IStaff? = null,
         function: (String, String, String) -> Unit
     ) {
         with(binding) {
             etStaffPhone.inputTypePhoneUS()
             tvTitle.setText(title)
+            etStaffFirstName.setText("")
+            etStaffLastName.setText("")
+            etStaffPhone.setText("")
             staff?.let {
                 etStaffFirstName.setText(it.firstName)
                 etStaffLastName.setText(it.lastName)

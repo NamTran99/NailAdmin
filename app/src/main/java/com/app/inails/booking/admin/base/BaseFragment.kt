@@ -4,12 +4,14 @@ import android.support.core.event.WindowStatusOwner
 import android.support.core.extensions.LifecycleSubscriberExt
 import android.support.core.route.ActivityResultRegister
 import android.support.core.route.RouteDispatcher
+import android.support.di.inject
 import android.support.viewmodel.ViewModelRegistrable
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
+import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
 import com.app.inails.booking.admin.functional.NotSupportable
@@ -27,6 +29,7 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     ErrorHandler by ErrorHandlerImpl() {
     val self get() = this
     val appActivity get() = activity as BaseActivity
+    val appEvent: AppEvent by inject()
     private val loadingDialog by lazy { LoadingDialog(requireContext(), this) }
 
     override fun onRegistryViewModel(viewModel: ViewModel) {

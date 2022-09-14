@@ -23,6 +23,8 @@ interface IAppointment {
     val colorStatus: Int @ColorRes get() = R.color.yellow
     val statusDisplay: String get() = ""
     val staffName: String get() = ""
+    val type: Int get() = 0
+    val canceledBy :String get()=""
 }
 
 @Parcelize
@@ -55,3 +57,38 @@ class AppointmentForm(
         if (workTime == -1) resourceError(R.string.error_empty_total_duration_services)
     }
 }
+
+@Parcelize
+class AppointmentStatusForm(
+    var id: Int = 0,
+    var status: Int = 0,
+    var price: Double = 0.0,
+    @SerializedName("is_accepted")
+    var isAccepted: Int = 0,
+    @SerializedName("work_time")
+    var workTime: Int = 0,
+    var reason: String = ""
+) : Parcelable
+
+
+@Parcelize
+class CancelAppointmentForm(
+    var id: Int = 0,
+    var reason: String = "",
+    @SerializedName("canceled_by")
+    var canceledBy: Int = 0
+) : Parcelable{
+    fun validate() {
+       if (reason.isEmpty()) resourceError(R.string.error_empty_reason)
+    }
+}
+
+@Parcelize
+class HandleAppointmentForm(
+    var id: Int = 0,
+    @SerializedName("is_accepted")
+    var isAccepted: Int = 0,
+    @SerializedName("work_time")
+    var workTime: Int = 0,
+    var reason: String = ""
+) : Parcelable
