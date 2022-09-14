@@ -1,25 +1,63 @@
 package com.app.inails.booking.admin.views.management.service
 
+import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemManageServiceBinding
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
+import com.app.inails.booking.admin.extention.findIndex
+import com.app.inails.booking.admin.model.ui.IService
+import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 
-data class Service(val name: String = "")
 
-class ManageServiceAdapter(view: RecyclerView): SimpleRecyclerAdapter<Service, ItemManageServiceBinding>(view) {
+class ManageServiceAdapter(view: RecyclerView) :
+    PageRecyclerAdapter<IService, ItemManageServiceBinding>(view) {
+
+    var onClickItemListener: ((IService) -> Unit)? = null
+    var onClickMenuListener: ((View, IService) -> Unit)? = null
+
     override fun onCreateBinding(parent: ViewGroup): ItemManageServiceBinding {
         return parent.bindingOf(ItemManageServiceBinding::inflate)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindHolder(
-        item: Service,
+        item: IService,
         binding: ItemManageServiceBinding,
         adapterPosition: Int
     ) {
         binding.run {
+            root.setOnClickListener {
+                onClickItemListener?.invoke(item)
+            }
+            btMenu.setOnClickListener {
+                onClickMenuListener?.invoke(it, item)
+            }
 
+            tvName.text = item.name
+            tvPrice.text = "$${item.price}"
+        }
+    }
+
+    fun updateItem(service: IService) {
+        val index = getData().findIndex { it.id == service.id }
+        if (index > -1) {
+            getData().set(index, service)
+            notifyItemChanged(index)
+        }
+    }
+
+    fun insertItem(service: IService) {
+        getData().add(0, service)
+        notifyItemInserted(0)
+    }
+
+    fun removeItem(id: Int) {
+        val index = getData().findIndex { it.id == id }
+        if (index > -1) {
+            getData().removeAt(index)
+            notifyItemRemoved(index)
         }
     }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray07"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/size_10"
@@ -12,17 +12,40 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btAddService"
-        style="@style/AppTheme.ButtonDefault.Wrap"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_marginHorizontal="@dimen/size_87"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="@dimen/size_20"
         android:background="@drawable/button_pink_corner"
         android:drawableStart="@drawable/ic_add"
         android:text="@string/btn_add_new_service" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvServices"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_marginTop="@dimen/size_13"
+        android:background="@drawable/bg_white_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_white_radius"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvServices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/size_17_5"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_manage_service" />
+
+            <include
+                android:id="@+id/emptyLayout"
+                layout="@layout/layout_empty" />
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 </LinearLayout>

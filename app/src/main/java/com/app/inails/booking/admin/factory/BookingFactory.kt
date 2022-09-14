@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.factory
 
+import android.os.Parcelable
 import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.safe
@@ -19,6 +20,8 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = serviceDTO.id.safe()
             override val name: String
                 get() = serviceDTO.name.safe()
+            override val price: Double
+                get() = serviceDTO.price.safe()
         }
     }
 

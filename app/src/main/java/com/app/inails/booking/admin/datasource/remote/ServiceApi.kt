@@ -21,8 +21,9 @@ interface ServiceApi : Injectable {
     @POST("service/list-service")
     fun getAllServiceList(@Field("salon_id") salonID: String): ApiAsync<List<ServiceDTO>>
 
+    @FormUrlEncoded
     @POST("service/delete-service")
-    fun changeStatus(@Field("id") serviceID: Int): ApiAsync<Any>
+    fun deleteService(@Field("id") serviceID: Int): ApiAsync<Any>
 
     @POST("service/update-service")
     fun updateService(@Body form: ServiceForm): ApiAsync<ServiceDTO>

@@ -7,6 +7,7 @@ import android.support.core.view.bindingOf
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -15,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemViewTextPopupBinding
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.model.popup.PopUpServiceMore
 import com.app.inails.booking.admin.model.popup.PopUpStaffMore
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
-class TextMenuPopup<T>(context: Context) : PopupWindow(context) {
+
+class TextMenuPopup<T>(val context: Context) : PopupWindow(context) {
     private var mMenuAdapter: Adapter
     private val mMaxWidth = context.resources.getDimensionPixelSize(R.dimen.size_200)
     private val mMaxHeight = context.resources.getDimensionPixelSize(R.dimen.size_400)
@@ -62,12 +65,22 @@ class TextMenuPopup<T>(context: Context) : PopupWindow(context) {
 
     fun showAtRight(view: View) {
         val translate = -(contentView.measuredWidth - view.measuredWidth)
+
         showAsDropDown(view, translate, 0)
     }
 
-    fun showAtLeft(view: View) {
-        val translate = -(contentView.measuredWidth)
-        showAsDropDown(view, translate, 0)
+    private fun showAtLeft(view: View) {
+        val xOffset = -(contentView.measuredWidth)
+
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        var measuredWidth = windowManager.defaultDisplay.width
+        var measuredHeight = windowManager.defaultDisplay.height
+
+        val viewLocation = IntArray(2)
+        view.getLocationOnScreen(viewLocation)
+
+        val yOffset = if(viewLocation[1] + view.measuredHeight + contentView.measuredHeight < measuredHeight) 0 else contentView.measuredHeight
+        showAsDropDown(view, xOffset,  -yOffset)
     }
 
     fun showAtRight(view: View, callback: (T) -> Unit) {
@@ -80,8 +93,9 @@ class TextMenuPopup<T>(context: Context) : PopupWindow(context) {
     }
 
     fun show(view: View) {
-        showAsDropDown(view, 0, -200)
-//        showAtLeft(view)
+
+//        showAsDropDown(view, 0, -200)
+        showAtLeft(view)
     }
 
     fun showEnd(view: View) {
@@ -196,6 +210,14 @@ interface PopupUserMoreOwner : ViewScopeOwner {
     val popup: TextMenuPopup<PopUpStaffMore>
         get() = with(viewScope) {
             getOr("popupStaff:dialog") { TextMenuPopup<PopUpStaffMore>(context) }
+        }
+
+}
+
+interface PopupServiceMoreOwner : ViewScopeOwner {
+    val popup: TextMenuPopup<PopUpServiceMore>
+        get() = with(viewScope) {
+            getOr("popupService:dialog") { TextMenuPopup<PopUpServiceMore>(context) }
         }
 
 }

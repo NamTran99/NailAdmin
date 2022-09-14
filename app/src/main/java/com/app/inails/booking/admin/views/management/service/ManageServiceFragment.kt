@@ -18,15 +18,19 @@ import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentManageServiceBinding
 import com.app.inails.booking.admin.datasource.remote.ServiceApi
 import com.app.inails.booking.admin.factory.BookingFactory
-import com.app.inails.booking.admin.model.ui.*
-import com.app.inails.booking.admin.repository.auth.ServiceRepo
+import com.app.inails.booking.admin.model.popup.PopUpServiceMore
+import com.app.inails.booking.admin.model.ui.IService
+import com.app.inails.booking.admin.model.ui.ServiceForm
+import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
+import com.app.inails.booking.admin.repository.auth.FetchListServiceRepo
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
-class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_service), TopBarOwner, CreateUpdateServiceOwner {
+class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_service), TopBarOwner,
+    CreateUpdateServiceOwner, PopupServiceMoreOwner {
     private val binding by viewBinding(FragmentManageServiceBinding::bind)
     private val viewModel by viewModel<ManageServiceViewModel>()
-    private lateinit var adapter: ManageServiceAdapter
+    private lateinit var mAdapter: ManageServiceAdapter
 
     override fun onRefreshListener() {
         viewModel.refresh()
@@ -41,11 +45,68 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
             ) { activity?.onBackPressed() })
 
         with(binding) {
-            adapter = ManageServiceAdapter(rvServices)
-
+            setUpManageServiceAdapter()
             btAddService.setOnClickListener {
-                createUpdateServiceDialog.show(R.string.title_create_new_service){name , price ->
+                createUpdateServiceDialog.show(R.string.title_create_new_service) { mName, mPrice ->
+                    viewModel.createForm.apply {
+                        name = mName
+                        price_input = mPrice
+                    }
+                    viewModel.create()
+                }
+            }
+        }
 
+        with(viewModel) {
+            success.bind {
+                createUpdateServiceDialog.dismiss()
+                success("Success")
+            }
+
+            listService.bind(mAdapter::submit)
+            serviceCreated.bind(mAdapter::insertItem)
+            serviceUpdated.bind(mAdapter::updateItem)
+            serviceDeleted.bind(mAdapter::removeItem)
+        }
+    }
+
+    private fun setUpManageServiceAdapter() {
+        mAdapter = ManageServiceAdapter(binding.rvServices).apply {
+            onClickItemListener = {
+                comingSoon()
+            }
+
+            onClickMenuListener = { view, item ->
+                popup.items = PopUpServiceMore.mockActive(requireContext())
+                popup.setListener {
+                    when (it.id) {
+                        PopUpServiceMore.EDIT_ID -> {
+                            createUpdateServiceDialog.show(
+                                R.string.title_update_service, item
+                            ) { mName, mPrice ->
+                                viewModel.updateForm.apply {
+                                    id = item.id
+                                    name = mName
+                                    price_input = mPrice
+                                }
+                                viewModel.update()
+                            }
+                        }
+                        PopUpServiceMore.DELETE_ID -> {
+                            confirmDialog.show(
+                                getString(R.string.title_delete_service),
+                                item.name
+                            ){
+                                viewModel.delete(item.id)
+                            }
+                        }
+                    }
+                }
+
+                popup.run {
+                    items!![0].service = item
+                    items!![1].service = item
+                    setupWithViewLeft(view)
                 }
             }
         }
@@ -53,15 +114,19 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
 }
 
 class ManageServiceViewModel(
-    private val getListServiceRepo: ServiceRepo,
+    private val getListServiceRepo: FetchListServiceRepo,
     private val createServiceRepo: CreateServiceRepository,
     private val updateServiceRepo: UpdateServiceRepository,
+    private val deleteServiceRepo: DeleteServiceRepository,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     val success = SingleLiveEvent<Any>()
+
     val serviceCreated = createServiceRepo.results
     val serviceUpdated = updateServiceRepo.results
+    val serviceDeleted = deleteServiceRepo.results
     val listService = getListServiceRepo.results
+
     val createForm = ServiceForm()
     val updateForm = ServiceForm()
 
@@ -73,12 +138,16 @@ class ManageServiceViewModel(
         getListServiceRepo()
     }
 
-    fun create() = launch(loading, error){
+    fun create() = launch(loading, error) {
         success.post(createServiceRepo(createForm))
     }
 
     fun update() = launch(loading, error) {
         success.post(updateServiceRepo(updateForm))
+    }
+
+    fun delete(serviceID: Int) = launch(loading, error) {
+        success.post(deleteServiceRepo(serviceID))
     }
 }
 
@@ -112,6 +181,19 @@ class UpdateServiceRepository(
                 .createAService(
                     serviceApi.updateService(form).await()
                 )
+        )
+    }
+}
+
+@Inject(ShareScope.Fragment)
+class DeleteServiceRepository(
+    private val serviceApi: ServiceApi,
+) {
+    val results = MutableLiveData<Int>()
+    suspend operator fun invoke(serviceID: Int) {
+        serviceApi.deleteService(serviceID).await()
+        results.post(
+            serviceID
         )
     }
 }

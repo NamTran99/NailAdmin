@@ -15,11 +15,13 @@
     <string name="title_create_new_staff">Create New Staff</string>
     <string name="title_create_new_service">Create New Service</string>
     <string name="title_update_staff">Update Staff</string>
+    <string name="title_update_service">Update Service</string>
     <string name="title_remove_appointment">Remove Appointment</string>
     <string name="title_cancel_appointment">Cancel Appointment</string>
     <string name="title_customer_check_in">Customer Check-in</string>
     <string name="title_accept_appointment">Accept Appointment</string>
     <string name="title_reject_appointment">Reject Appointment</string>
     <string name="title_delete_staff">Delete Staff</string>
+    <string name="title_delete_service">Delete Service</string>
     <string name="title_estimate">Estimate</string>
 </resources>

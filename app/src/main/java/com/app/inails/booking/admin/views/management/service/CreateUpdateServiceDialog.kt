@@ -31,7 +31,7 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context) {
             tvTitle.setText(title)
             service?.let {
                 etServiceName.setText(it.name)
-                etPrice.setText(it.price)
+                etPrice.setText(it.price.toString())
             }
             btSubmit.onClick {
                 function.invoke(

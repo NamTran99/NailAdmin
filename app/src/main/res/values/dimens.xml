@@ -65,4 +65,5 @@
     <dimen name="size_400">400dp</dimen>
     <dimen name="size_17_5">17.5dp</dimen>
     <dimen name="size_14">14dp</dimen>
+    <dimen name="size_87">87dp</dimen>
 </resources>
