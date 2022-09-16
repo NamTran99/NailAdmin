@@ -10,10 +10,43 @@
     android:orientation="vertical"
     android:padding="@dimen/size_16">
 
-    <TextView
-        android:id="@+id/tvID"
-        style="@style/AppTheme.TextView.Medium"
-        tools:text="Yen Yen" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvID"
+            style="@style/AppTheme.TextView.SemiBold"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_14"
+            tools:text="Yen Yen" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <ImageButton
+                android:id="@+id/btCall"
+                android:layout_width="@dimen/size_25"
+                android:layout_height="@dimen/size_25"
+                android:layout_marginEnd="@dimen/size_13"
+                android:background="@drawable/button_orange_circle"
+                android:src="@drawable/ic_phone_outline"
+                app:tint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btReminder"
+                android:layout_width="@dimen/size_25"
+                android:layout_height="@dimen/size_25"
+                android:background="@drawable/button_black_circle"
+                android:src="@drawable/ic_notification"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +64,7 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_13"
+            android:textColor="@color/lightBlue02"
             android:layout_weight="1"
             android:gravity="end"
             tools:text="Yen Yen" />
@@ -207,10 +241,19 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartService"
-        android:visibility="gone"
         style="@style/AppTheme.ButtonDefault.Small"
         android:layout_marginTop="@dimen/size_12"
         android:layout_weight="1"
         android:background="@drawable/button_blue3_corner"
-        android:text="@string/btn_start_service" />
+        android:text="@string/btn_start_service"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btFinish"
+        style="@style/AppTheme.ButtonDefault.Small"
+        android:layout_marginTop="@dimen/size_12"
+        android:layout_weight="1"
+        android:background="@drawable/button_green_corner"
+        android:text="@string/btn_finish"
+        android:visibility="gone" />
 </androidx.appcompat.widget.LinearLayoutCompat>

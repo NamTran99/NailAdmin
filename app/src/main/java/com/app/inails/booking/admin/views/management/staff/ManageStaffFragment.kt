@@ -147,7 +147,7 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                                     it.user
                                 ) { fn, ln, ph ->
                                     viewModel.updateForm.run {
-                                        id = it.id
+                                        id = it.user!!.id
                                         firstName = fn
                                         lastName = ln
                                         phone = ph
@@ -214,7 +214,7 @@ class ManageStaffViewModel(
     private val createStaffRepo: CreateStaffRepository,
     private val fetchAllStaffRepo: FetchAllStaffRepo,
     private val deleteStaffRepo: DeleteStaffRepository,
-    private val changeActiveStaffRepo : ChangeActiveStaffRepository
+    private val changeActiveStaffRepo: ChangeActiveStaffRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val loadingCustom: LoadingEvent = LoadingLiveData()
     val staffs = fetchAllStaffRepo.results

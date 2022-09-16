@@ -5,6 +5,7 @@ import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.AppointmentDTO
+import com.app.inails.booking.admin.model.response.AppointmentUpdateDTO
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.ui.*
 import retrofit2.Retrofit
@@ -26,7 +27,7 @@ interface BookingApi : Injectable {
     fun listAppointmentInDashboard(@Query("type") type: Int): ApiAsync<ArrayList<AppointmentDTO>>
 
     @POST("appointment/update-status-appointment")
-    fun updateStatusAppointment(@Body body: AppointmentStatusForm): ApiAsync<AppointmentDTO>
+    fun updateStatusAppointment(@Body body: AppointmentStatusForm): ApiAsync<AppointmentUpdateDTO>
 
     @FormUrlEncoded
     @POST("appointment/customer-walk-in")
@@ -39,8 +40,14 @@ interface BookingApi : Injectable {
     @POST("appointment/admin-handle-appointment")
     fun adminHandleAppointment(@Body body: HandleAppointmentForm): ApiAsync<AppointmentDTO>
 
-    @POST("appointment/cancel-appointment")
+    @POST("appointment/cancel-appointment-by-admin")
     fun cancelAppointment(@Body body: CancelAppointmentForm): ApiAsync<AppointmentDTO>
+
+    @POST("appointment/update-status-appointment")
+    fun startServiceAppointment(@Body body: StartServiceForm): ApiAsync<AppointmentUpdateDTO>
+
+    @GET("appointment/detail")
+    fun detail(@Query("id") id : Int): ApiAsync<AppointmentDTO>
 
 }
 

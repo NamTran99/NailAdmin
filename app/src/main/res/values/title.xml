@@ -24,4 +24,6 @@
     <string name="title_delete_staff">Delete Staff</string>
     <string name="title_delete_service">Delete Service</string>
     <string name="title_estimate">Estimate</string>
+    <string name="title_finish_booking">Finish Booking</string>
+    <string name="title_appointment_detail">Appointment Detail</string>
 </resources>

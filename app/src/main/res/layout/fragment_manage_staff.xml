@@ -12,10 +12,10 @@
     <com.app.inails.booking.admin.views.widget.SearchView
         android:id="@+id/searchView"
         style="@style/AppTheme.EditText"
+        android:drawableStart="@drawable/ic_search"
         android:drawableEnd="@null"
         android:hint="@string/hint_search"
         android:imeOptions="actionSearch"
-        android:drawableStart="@drawable/ic_search"
         android:longClickable="false" />
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/viewRefresh"

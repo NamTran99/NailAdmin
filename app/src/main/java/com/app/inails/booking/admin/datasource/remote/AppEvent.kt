@@ -4,8 +4,7 @@ import android.support.core.livedata.SingleLiveEvent
 import android.support.di.Inject
 import android.support.di.ShareScope
 
-@Inject(ShareScope.Fragment)
+@Inject(ShareScope.Singleton)
 class AppEvent {
     val changeTabBooking = SingleLiveEvent<Int>()
-
 }

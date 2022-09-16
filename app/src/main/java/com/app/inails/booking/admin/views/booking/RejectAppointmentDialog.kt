@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.views.booking
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import android.widget.Toast
+import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogRejectAppointmentBinding
@@ -19,9 +20,11 @@ class RejectAppointmentDialog(context: Context) : BaseDialog(context) {
     }
 
     fun show(
+        @StringRes title: Int,
         function: (String) -> Unit
     ) {
         with(binding) {
+            tvTitle.setText(title)
             btSubmit.onClick {
                 val reason = etReason.text.toString().trim()
                 if (reason.isEmpty()) {

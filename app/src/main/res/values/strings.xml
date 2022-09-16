@@ -75,4 +75,10 @@
     <string name="error_empty_reason">Please enter a reason</string>
     <string name="error_empty_service_time">Please enter the service time</string>
     <string name="error_service_time_greater_than">Service time must be greater than 0</string>
+    <string name="error_empty_duration_time_to_service">Please select the duration time to service</string>
+    <string name="btn_finish">Finish</string>
+    <string name="error_empty_amount">Please enter the total amount</string>
+    <string name="error_empty_amount_greater_than">Total amount must be greater than 0</string>
+    <string name="btn_delete_appointment">Delete Appointment</string>
+    <string name="btn_service">Service</string>
 </resources>

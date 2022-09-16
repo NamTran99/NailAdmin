@@ -28,5 +28,17 @@
     <string name="label_minute">Minutes</string>
     <string name="hint_search">Search</string>
     <string name="label_select_to_time">Select time to finish</string>
+    <string name="label_time_to_finish">Time to finish</string>
+    <string name="label_select_time_to_finish">Select time to finish</string>
+    <string name="hint_select_minute">Select minute</string>
+    <string name="label_hours">Hour(s)</string>
+    <string name="label_select_duration_time_to_service">Select Duration time to service</string>
+    <string name="label_note">Note</string>
+    <string name="label_total_amount">Total Amount</string>
+    <string name="label_customer_name">Customer Name</string>
+    <string name="label_staff_name">Staff Name</string>
+    <string name="label_info_waiting_status">The customer is waiting for the services</string>
+    <string name="label_info_service_status">Click here to start work on this customer</string>
+    <string name="label_info_finish_status">Click here when you done</string>
 
 </resources>

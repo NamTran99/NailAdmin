@@ -25,13 +25,16 @@ data class AppointmentDTO(
     val staff: StaffDTO? = null,
     val list_service_names: String? = "",
     val total_price_service: Double? = 0.0,
-    val staff_name: String ?= "",
+    val staff_name: String? = "",
     val status_name: String = "",
-    val customer_name :String = "",
-    val service_custom_name : String,
-    val canceled_by_name : String = ""
-) {
-    companion object {
+    val customer_name: String = "",
+    val service_custom_name: String,
+    val canceled_by_name: String = "",
+    val services: List<ServiceDTO> = listOf(),
+    val time_working: String = "",
+    val customer: CustomerDTO
+)
 
-    }
-}
+data class AppointmentUpdateDTO(
+    val appointment: AppointmentDTO
+)

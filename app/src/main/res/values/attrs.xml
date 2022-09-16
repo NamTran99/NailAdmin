@@ -18,6 +18,7 @@
         <attr name="android:scaleType" />
         <attr name="android:background" />
     </declare-styleable>
+
     <style name="AppDatePickerCalendarDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
         <item name="android:colorBackground">@color/white</item>
         <item name="colorAccent">@color/colorPrimary</item>
@@ -27,5 +28,9 @@
 
     <declare-styleable name="PasswordLayout">
         <attr name="hint" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="AppSpinner">
+        <attr name="android:entries" />
     </declare-styleable>
 </resources>

@@ -71,11 +71,14 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
             }
 
             btAddAppointment.setOnClickListener {
+                val hours = (spHour.selectedItem as String).toInt()
+                val minutes = (spMinute.selectedItem as String).toInt()
+                val workingTime = (hours * 60) + minutes
                 viewModel.form.run {
                     phone = etPhone.text.toString()
                     name = etFullName.text.toString()
                     serviceCustom = etSomethingElse.text.toString()
-                    workTime = etTotalDuration.text.toString().toIntOrNull() ?: -1
+                    workTime = workingTime
                     services = mServiceAdapter.selectedItems.toString()
                     dateAppointment = if (tvSelectTime.text.toString()
                             .isEmpty()

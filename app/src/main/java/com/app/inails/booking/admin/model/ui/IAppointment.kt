@@ -15,7 +15,7 @@ interface IAppointment {
     val name: String get() = ""
     val dateAppointment: String get() = ""
     val staffID: Int get() = 0
-    val services: String get() = ""
+    val servicesName: String get() = ""
     val serviceCustom: String get() = ""
     val workTime: Int get() = 0
     val status: Int get() = 0
@@ -24,7 +24,10 @@ interface IAppointment {
     val statusDisplay: String get() = ""
     val staffName: String get() = ""
     val type: Int get() = 0
-    val canceledBy :String get()=""
+    val canceledBy: String get() = ""
+    val serviceList: List<IService> get() = listOf()
+    val totalPrice: Double get() = 0.0
+    val customer: ICustomer? get() = null
 }
 
 @Parcelize
@@ -35,7 +38,7 @@ class AppointmentForm(
     override var dateAppointment: String = "",
     @SerializedName("staff_id")
     override var staffID: Int = 0,
-    override var services: String = "",
+    var services: String = "",
     @SerializedName("service_custom")
     override var serviceCustom: String = "",
     @SerializedName("work_time")
@@ -54,7 +57,7 @@ class AppointmentForm(
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
         if (services.isBlank() || services.isEmpty()) resourceError(R.string.error_empty_services)
         if (hasServiceCustom && serviceCustom.isBlank()) resourceError(R.string.error_empty_service_custom)
-        if (workTime == -1) resourceError(R.string.error_empty_total_duration_services)
+        if (workTime == 0) resourceError(R.string.error_empty_service_time)
     }
 }
 
@@ -63,25 +66,24 @@ class AppointmentStatusForm(
     var id: Int = 0,
     var status: Int = 0,
     var price: Double = 0.0,
-    @SerializedName("is_accepted")
-    var isAccepted: Int = 0,
-    @SerializedName("work_time")
-    var workTime: Int = 0,
-    var reason: String = ""
+    var note: String = ""
 ) : Parcelable
 
+@Parcelize
+class StartServiceForm(
+    var id: Int = 0,
+    var status: Int = 0,
+    @SerializedName("staff_id")
+    var staffId: Int = 0,
+    @SerializedName("work_time")
+    var workTime: Int = 0,
+) : Parcelable
 
 @Parcelize
 class CancelAppointmentForm(
     var id: Int = 0,
     var reason: String = "",
-    @SerializedName("canceled_by")
-    var canceledBy: Int = 0
-) : Parcelable{
-    fun validate() {
-       if (reason.isEmpty()) resourceError(R.string.error_empty_reason)
-    }
-}
+) : Parcelable
 
 @Parcelize
 class HandleAppointmentForm(

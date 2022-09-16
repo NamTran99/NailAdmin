@@ -14,6 +14,7 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogCreateUpdateStaffBinding::inflate)
 
     init {
+        binding.etStaffPhone.inputTypePhoneUS()
         binding.btClose.onClick {
             dismiss()
         }
@@ -25,16 +26,23 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context) {
         function: (String, String, String) -> Unit
     ) {
         with(binding) {
-            etStaffPhone.inputTypePhoneUS()
             tvTitle.setText(title)
             etStaffFirstName.setText("")
             etStaffLastName.setText("")
             etStaffPhone.setText("")
+
             staff?.let {
                 etStaffFirstName.setText(it.firstName)
                 etStaffLastName.setText(it.lastName)
-                etStaffPhone.setText(it.phone)
+                val hasCountryCode = it.phone.indexOf("1") == 0
+                var phone = it.phone.replace("-", "")
+                    .replace("(", "")
+                    .replace(")", "")
+                    .replace(" ", "").replace("+1", "").trim()
+                if (hasCountryCode) phone = phone.substring(1)
+                etStaffPhone.setText(phone)
             }
+
             btSubmit.onClick {
                 function.invoke(
                     etStaffFirstName.text.toString(),

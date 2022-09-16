@@ -20,11 +20,11 @@ class StaffRepo(
     private val userLocalSource: UserLocalSource
 ) {
     val results = MutableLiveData<List<IStaff>>()
-    suspend operator fun invoke() {
+    suspend operator fun invoke(keyword: String,page: Int) {
         results.post(
             bookingFactory
                 .createStaffList(
-                    staffApi.getAllStaffList(userLocalSource.getSalonID().toString(), 1)
+                    staffApi.getAllStaffList(userLocalSource.getSalonID().toString(), page,keyword = keyword)
                         .await()
                 )
         )
@@ -94,7 +94,7 @@ class CreateStaffRepository(
     val results = MutableLiveData<IStaff>()
     suspend operator fun invoke(form: CreateStaffForm) {
         form.validate()
-        form.phone = textFormatter.formatPhoneNumber(form.phone)
+//        form.phone = textFormatter.formatPhoneNumber(form.phone)
         results.post(
             bookingFactory
                 .createAStaff(

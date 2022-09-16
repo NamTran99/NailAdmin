@@ -1,5 +1,7 @@
 package com.app.inails.booking.admin.views.booking
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.LoadingEvent
@@ -8,28 +10,25 @@ import android.support.core.livedata.LoadingLiveData
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.core.view.viewBinding
-import android.support.di.Inject
-import android.support.di.ShareScope
+import android.support.navigation.FragmentResultCallback
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentAppointmentBinding
-import com.app.inails.booking.admin.datasource.remote.BookingApi
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.factory.BookingFactory
-import com.app.inails.booking.admin.model.ui.AppointmentStatusForm
-import com.app.inails.booking.admin.model.ui.CancelAppointmentForm
-import com.app.inails.booking.admin.model.ui.HandleAppointmentForm
-import com.app.inails.booking.admin.model.ui.IAppointment
+import com.app.inails.booking.admin.model.ui.*
+import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.repository.booking.*
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appointment),
-    TopBarOwner, CancelAppointmentOwner, AcceptAppointmentOwner, RejectAppointmentOwner {
+    TopBarOwner, CancelAppointmentOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
+    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, FragmentResultCallback {
     private val binding by viewBinding(FragmentAppointmentBinding::bind)
     private val viewModel by viewModel<AppointmentViewModel>()
     private lateinit var mAdapter: AppointmentAdapter
@@ -47,14 +46,13 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
             }
             appointments.bind(mAdapter.apply {
                 onClickItemListener = {
-
+                    Router.redirectToAppointmentDetail(self, it.id)
                 }
-                onClickCancelListener = {
-                    cancelAppointmentDialog.show { cancelBy, content ->
+                onClickCancelListener = { apm ->
+                    rejectAppointmentDialog.show(R.string.title_cancel_appointment) {
                         viewModel.formCancel.run {
-                            id = it.id
-                            canceledBy = cancelBy
-                            reason = content
+                            id = apm.id
+                            reason = it
                         }
                         viewModel.cancel()
                     }
@@ -93,7 +91,7 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                         }
                     }
                     if (status == 0) {
-                        rejectAppointmentDialog.show {
+                        rejectAppointmentDialog.show(R.string.title_reject_appointment) {
                             viewModel.formHandle.run {
                                 id = apm.id
                                 isAccepted = 0
@@ -102,8 +100,41 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                             viewModel.handle()
                         }
                     }
-
                 }
+                onClickStartServiceListener = {
+                    startServicesDialog.show(it) { staffID, duration ->
+                        viewModel.formStartService.run {
+                            id = it.id
+                            staffId = staffID
+                            workTime = duration
+                            status = DataConst.AppointmentStatus.APM_IN_PROCESSING
+                        }
+                        viewModel.startService()
+                    }
+                }
+
+                onClickFinishListener = {
+                    finishBookingDialog.show(it) { amount, notes ->
+                        viewModel.form.run {
+                            id = it.id
+                            price = amount
+                            note = notes
+                            status = DataConst.AppointmentStatus.APM_FINISH
+                        }
+                        viewModel.updateStatus()
+                    }
+                }
+
+                onClickCallListener  = {
+                    val dialIntent = Intent(Intent.ACTION_DIAL)
+                    dialIntent.data = Uri.parse("tel: ${it.phone}")
+                    startActivity(dialIntent)
+                }
+
+                onClickCustomerListener={
+                    customerInfoDialog.show(it)
+                }
+
             }::submit)
 
             appointments.bind {
@@ -121,6 +152,7 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
             }
 
             appointUpdate.bind {
+                finishBookingDialog.dismiss()
                 mAdapter.updateItem(it)
             }
 
@@ -143,6 +175,16 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                 mAdapter.updateItem(it)
             }
 
+            appointStartService.bind {
+                startServicesDialog.dismiss()
+                mAdapter.updateItem(it)
+            }
+        }
+
+        startServicesDialog.onSelectStaffListener = {
+            Router.run {
+                redirectToChooseStaff()
+            }
         }
 
     }
@@ -156,9 +198,14 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         viewModel.refresh(type)
+    }
+
+    override fun onFragmentResult(result: Bundle) {
+        val staffForm = result.get("staff") as StaffForm
+        startServicesDialog.updateStaff(staffForm)
     }
 
 }
@@ -170,7 +217,8 @@ class AppointmentViewModel(
     private val cancelAppointmentRepo: CancelAppointmentRepository,
     private val removeAppointmentRepo: RemoveAppointmentRepository,
     private val customerWalkInRepo: CustomerWalkInRepository,
-    private val handleAppointmentRepo: HandleAppointmentRepository
+    private val handleAppointmentRepo: HandleAppointmentRepository,
+    private val startServiceRepo: StartServiceRepository,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val appointments = appointmentRepo.results
     val appointUpdate = updateStatusApmRepo.results
@@ -178,9 +226,11 @@ class AppointmentViewModel(
     val idRemove = removeAppointmentRepo.results
     val appointWalkIn = customerWalkInRepo.results
     val appointHandle = handleAppointmentRepo.results
+    val appointStartService = startServiceRepo.results
     val form = AppointmentStatusForm()
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
+    val formStartService = StartServiceForm()
     val success = SingleLiveEvent<Any>()
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
@@ -213,108 +263,10 @@ class AppointmentViewModel(
         success.post(handleAppointmentRepo(formHandle))
     }
 
-
-}
-
-
-@Inject(ShareScope.Fragment)
-class AppointmentRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<List<IAppointment>>()
-    suspend operator fun invoke(type: Int) {
-        results.post(
-            bookingFactory
-                .createAppointmentList(
-                    bookingApi.listAppointmentInDashboard(type)
-                        .await()
-                )
-        )
+    fun startService() = launch(loading, error) {
+        success.post(startServiceRepo(formStartService))
     }
 }
 
-@Inject(ShareScope.Fragment)
-class UpdateStatusApmRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: AppointmentStatusForm) {
-        results.post(
-            bookingFactory
-                .createAAppointment(
-                    bookingApi.updateStatusAppointment(form)
-                        .await()
-                )
-        )
-    }
-}
-
-@Inject(ShareScope.Fragment)
-class CustomerWalkInRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(id: Int) {
-        results.post(
-            bookingFactory
-                .createAAppointment(
-                    bookingApi.customerWalkIn(id)
-                        .await()
-                )
-        )
-    }
-}
-
-@Inject(ShareScope.Fragment)
-class HandleAppointmentRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: HandleAppointmentForm) {
-        results.post(
-            bookingFactory
-                .createAAppointment(
-                    bookingApi.adminHandleAppointment(form)
-                        .await()
-                )
-        )
-    }
-}
-
-
-@Inject(ShareScope.Fragment)
-class CancelAppointmentRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: CancelAppointmentForm) {
-        results.post(
-            bookingFactory
-                .createAAppointment(
-                    bookingApi.cancelAppointment(form)
-                        .await()
-                )
-        )
-    }
-}
-
-@Inject(ShareScope.Fragment)
-class RemoveAppointmentRepository(
-    private val bookingApi: BookingApi
-) {
-    val results = MutableLiveData<Int>()
-    suspend operator fun invoke(id: Int) {
-        bookingApi.removeAppointment(id)
-            .await()
-        results.post(
-            id
-        )
-    }
-}
 
 

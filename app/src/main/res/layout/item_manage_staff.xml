@@ -29,6 +29,8 @@
                 android:id="@+id/tvPhone"
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_marginTop="@dimen/size_8"
+                android:autoLink="phone"
+                android:textColorLink="@color/black"
                 tools:text="987-654-3210" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -26,6 +26,7 @@ interface StaffApi : Injectable {
         @Field("salon_id") salonID: String,
         @Field("page") page: Int,
         @Field("active") active: Int = 1,
+        @Field("txt_search") keyword: String,
         @Field("num_per_page") itemsPerPage: Int = AppConst.perPage
     ): ApiAsync<List<StaffDTO>>
 

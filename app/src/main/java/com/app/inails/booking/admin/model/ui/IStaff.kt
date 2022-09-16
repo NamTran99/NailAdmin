@@ -22,7 +22,9 @@ interface IStaff {
     val colorStatus: Int @ColorRes get() = R.color.yellow
     val backgroundColor: Int @ColorRes get() = R.color.white
     val timeCheckIn: String get() = ""
+    val timeCheckInAppointment: String get() = ""
     val active: Int get() = 0
+    val customerName : String get()=""
 }
 
 @Parcelize

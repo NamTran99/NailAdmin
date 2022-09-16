@@ -20,4 +20,5 @@
     <string name="hint_enter_reason">Enter Reason</string>
     <string name="hint_enter_work_time">Enter Work Time</string>
     <string name="hint_enter_service_time">Enter Service Time</string>
+    <string name="hint_select_hour">Select hour</string>
 </resources>

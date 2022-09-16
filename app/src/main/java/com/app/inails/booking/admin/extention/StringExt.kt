@@ -37,3 +37,11 @@ fun Int.formatTime(): String {
 fun Int.formatID() : String{
     return "ID: #$this"
 }
+
+fun Double.formatPrice(): String {
+    return String.format("$%.2f", this).replace(",", ".")
+}
+
+fun Double.formatAmount(): String {
+    return String.format("%.2f", this).replace(",", ".")
+}

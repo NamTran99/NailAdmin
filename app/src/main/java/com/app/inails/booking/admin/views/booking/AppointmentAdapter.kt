@@ -9,16 +9,20 @@ import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.databinding.ItemAppointmentBinding
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IAppointment
+import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class AppointmentAdapter(view: RecyclerView) :
     SimpleRecyclerAdapter<IAppointment, ItemAppointmentBinding>(view) {
     var onClickItemListener: ((IAppointment) -> Unit)? = null
-    var onClickStatusListener: ((IAppointment, Int) -> Unit)? = null
+    var onClickFinishListener: ((IAppointment) -> Unit)? = null
     var onClickCancelListener: ((IAppointment) -> Unit)? = null
     var onClickRemoveListener: ((IAppointment) -> Unit)? = null
     var onClickCusWalkInListener: ((IAppointment) -> Unit)? = null
     var onClickHandleListener: ((IAppointment, Int) -> Unit)? = null
+    var onClickStartServiceListener: ((IAppointment) -> Unit)? = null
+    var onClickCallListener: ((IAppointment) -> Unit)? = null
+    var onClickCustomerListener: ((ICustomer) -> Unit)? = null
 
     override fun onCreateBinding(parent: ViewGroup): ItemAppointmentBinding {
         return parent.bindingOf(ItemAppointmentBinding::inflate)
@@ -54,20 +58,37 @@ class AppointmentAdapter(view: RecyclerView) :
                 onClickHandleListener?.invoke(item, 0)
             }
 
+            btStartService.setOnClickListener {
+                onClickStartServiceListener?.invoke(item)
+            }
+
+            btFinish.setOnClickListener {
+                onClickFinishListener?.invoke(item)
+            }
+
+            btCall.setOnClickListener {
+                onClickCallListener?.invoke(item)
+            }
+
+            tvFullName.setOnClickListener {
+                onClickCustomerListener?.invoke(item.customer!!)
+            }
+
             tvID.text = item.id.formatID()
             tvFullName.text = item.name
             tvTimeAndDate.text = item.dateAppointment
-            tvServices.text = item.services
+            tvServices.text = item.servicesName
             tvRequest.text = item.staffName
-            tvStatus.text = item.statusDisplay
             tvTypeCancel.text = item.canceledBy
-
+            tvStatus.text = item.statusDisplay
             tvStatus.drawableStart(item.resIconStatus)
             tvStatus.setTextColor(ContextCompat.getColor(view.context, item.colorStatus))
-            (item.status == DataConst.AppointmentStatus.APM_ACCEPTED && item.type == 2) show acceptLayout
+            (item.status == DataConst.AppointmentStatus.APM_ACCEPTED && item.type == 2) show acceptLayout + btReminder
             (item.status == DataConst.AppointmentStatus.APM_PENDING && item.type == 2) show waitingLayout
             (item.status == DataConst.AppointmentStatus.APM_WAITING && item.type == 1) show btStartService
-            (item.status == DataConst.AppointmentStatus.APM_CANCEL && item.type == 2) show cancelLayout
+            (item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING && item.type == 1) show btFinish
+            (item.status == DataConst.AppointmentStatus.APM_CANCEL) show cancelLayout
+            (item.type == 2) show btCall
         }
     }
 

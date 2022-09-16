@@ -23,23 +23,19 @@ class AcceptAppointmentDialog(context: Context) : BaseDialog(context) {
     ) {
         with(binding) {
             btSubmit.onClick {
-                val time = etServiceTime.text.toString().toIntOrNull()
-                if (time == null) {
-                    Toast.makeText(context, R.string.error_empty_service_time, Toast.LENGTH_SHORT)
-                        .show()
-                    return@onClick
-                }
-                if (time == 0) {
+                if (spHour.selectedItemPosition == 0 && spMinute.selectedItemPosition == 0) {
                     Toast.makeText(
                         context,
-                        R.string.error_service_time_greater_than,
+                        R.string.error_empty_duration_time_to_service,
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                     return@onClick
                 }
+                val hours = (spHour.selectedItem as String).toInt()
+                val minutes = (spMinute.selectedItem as String).toInt()
+                val time = (hours * 60) + minutes
                 function.invoke(
-                    time.toInt()
+                    time
                 )
             }
         }

@@ -9,6 +9,7 @@ import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentBookingBinding
+import com.app.inails.booking.admin.exception.setOnSelected
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.widget.ViewPager2Adapter
@@ -19,10 +20,15 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking), TopBarOwner {
     private val binding by viewBinding(FragmentBookingBinding::bind)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btAddAppointment.setOnClickListener {
-            Router.open(this, Routing.CreateAppointment)
-        }
+        with(binding) {
+            btAddAppointment.setOnClickListener {
+                Router.open(this@BookingFragment, Routing.CreateAppointment)
+            }
+            appointViewPager.isUserInputEnabled = false
+            binding.appointTab.setOnSelected{
 
+            }
+        }
         Adapter(binding.appointViewPager, this).apply {
             submit(DataConst.AppointmentTab.appointment)
             setupPageChangeWith(binding.appointTab)
@@ -32,6 +38,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking), TopBarOwner {
             changeTab(tab = it)
         }
     }
+
 
     class Adapter(viewPager: ViewPager2, private val fragment: Fragment) :
         ViewPager2Adapter(viewPager, fragment) {

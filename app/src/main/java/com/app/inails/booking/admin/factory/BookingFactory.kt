@@ -1,11 +1,11 @@
 package com.app.inails.booking.admin.factory
 
-import android.os.Parcelable
 import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.AppointmentDTO
+import com.app.inails.booking.admin.model.response.CustomerDTO
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
 import com.app.inails.booking.admin.model.support.ISelector
@@ -48,7 +48,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val status: Int
                 get() = staffDTO.status.safe()
             override val statusName: String
-                get() = textFormatter.formatStatusStaffStatus(staffDTO)
+                get() = staffDTO.status_name.safe()
             override val resIconStatus: Int
                 get() = textFormatter.formatStatusStaffIcon(staffDTO.status)
             override val colorStatus: Int
@@ -58,12 +58,16 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val active: Int
                 get() = staffDTO.active.safe()
             override val backgroundColor: Int
-                get() =textFormatter.formatBackgroundStaffColor(staffDTO.active)
+                get() = textFormatter.formatBackgroundStaffColor(staffDTO.active)
+            override val timeCheckInAppointment: String
+                get() = staffDTO.appointment_processing?.time_working.safe()
+            override val customerName: String
+                get() = staffDTO.appointment_processing?.customer_name.safe()
         }
     }
 
     fun createStaffList(staffsDTO: List<StaffDTO>): List<IStaff> {
-        return staffsDTO.map(::createStaff).toMutableList()
+        return staffsDTO.map(::createStaff)
     }
 
     fun createAStaff(staffsDTO: StaffDTO): IStaff {
@@ -78,16 +82,22 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.customer_name.safe()
             override val dateAppointment: String
                 get() = appointmentDTO.date_appointment_format
-            override val services: String
+            override val servicesName: String
                 get() = appointmentDTO.list_service_names.safe()
             override val staffName: String
                 get() = appointmentDTO.staff_name ?: "No request"
             override val statusDisplay: String
                 get() = appointmentDTO.status_name.safe()
             override val resIconStatus: Int
-                get() = textFormatter.formatStatusAppointmentIcon(appointmentDTO.status,appointmentDTO.type)
+                get() = textFormatter.formatStatusAppointmentIcon(
+                    appointmentDTO.status,
+                    appointmentDTO.type
+                )
             override val colorStatus: Int
-                get() = textFormatter.formatStatusAppointmentColor(appointmentDTO.status,appointmentDTO.type)
+                get() = textFormatter.formatStatusAppointmentColor(
+                    appointmentDTO.status,
+                    appointmentDTO.type
+                )
             override val status: Int
                 get() = appointmentDTO.status
             override val staffID: Int
@@ -96,14 +106,38 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.type
             override val canceledBy: String
                 get() = textFormatter.formatStatusAppointmentCancel(appointmentDTO.canceled_by_name)
+            override val serviceList: List<IService>
+                get() = appointmentDTO.services.map(::createService)
+            override val totalPrice: Double
+                get() = appointmentDTO.total_price_service.safe()
+            override val phone: String
+                get() = appointmentDTO.customer.phone.safe()
+            override val customer: ICustomer
+                get() = createCustomer(appointmentDTO.customer)
+
         }
     }
 
     fun createAppointmentList(appointmentsDTO: List<AppointmentDTO>): List<IAppointment> {
-        return appointmentsDTO.map(::createAppointment).toMutableList()
+        return appointmentsDTO.map(::createAppointment)
     }
 
     fun createAAppointment(appointmentDTO: AppointmentDTO): IAppointment {
         return createAppointment(appointmentDTO)
+    }
+
+    private fun createCustomer(customerDTO: CustomerDTO): ICustomer {
+        return object : ICustomer {
+            override val id: Int
+                get() = customerDTO.id.safe()
+            override val name: String
+                get() = customerDTO.name.safe()
+            override val phone: String
+                get() = textFormatter.formatPhoneUS(customerDTO.phone)
+            override val email: String
+                get() = customerDTO.email.safe("No Info")
+            override val address: String
+                get() = textFormatter.fullAddress(customerDTO)
+        }
     }
 }

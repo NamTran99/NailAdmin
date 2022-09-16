@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:padding="@dimen/size_16"
+    tools:context=".views.dialog.ConfirmNoticeDialog">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            style="@style/AppTheme.TextView.SemiBold"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_size_15"
+            tools:text="John" />
+
+        <ImageButton
+            android:id="@+id/btClose"
+            style="@style/AppTheme.ImageButton"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu_close"
+            app:tint="@color/black" />
+    </RelativeLayout>
+
+    <View style="@style/AppTheme.Line.Horizontal" />
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="@string/label_phone"
+        android:layout_marginStart="@dimen/size_16"
+        app:drawableStartCompat="@drawable/ic_phone_outline" />
+
+    <TextView
+        android:id="@+id/tvPhone"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginStart="@dimen/size_32"
+        android:autoLink="phone"
+        android:layout_marginTop="@dimen/size_8"
+        android:textColorLink="@color/colorPrimary"
+        android:text="@string/label_phone"
+        tools:text="987-654-3210" />
+
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="@string/label_email"
+        android:layout_marginStart="@dimen/size_16"
+        app:drawableStartCompat="@drawable/ic_email_outline" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginStart="@dimen/size_32"
+        android:layout_marginTop="@dimen/size_8"
+        android:text="@string/label_phone"
+        tools:text="987-654-3210" />
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="@string/label_address"
+        android:layout_marginStart="@dimen/size_16"
+        app:drawableStartCompat="@drawable/ic_address_outline" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginStart="@dimen/size_32"
+        android:layout_marginTop="@dimen/size_8"
+        android:minLines="@null"
+        android:text="@string/label_phone"
+        tools:text="987-654-3210" />
+
+</LinearLayout>

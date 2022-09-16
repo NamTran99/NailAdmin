@@ -14,24 +14,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentStaffListBinding
+import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.repository.auth.StaffRepo
 
 class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
     private val binding by viewBinding(FragmentStaffListBinding::bind)
     private val viewModel by viewModel<ManageStaffViewModel>()
+
+    private lateinit var mAdapter: StaffStatusAdapter
     override fun onRefreshListener() {
+        mAdapter.clear()
         viewModel.refresh()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            viewRefresh.colorSchemeDefault()
+            mAdapter = StaffStatusAdapter(binding.rvStaff)
             rvStaff.addItemDecoration(
                 DividerItemDecoration(
                     requireContext(),
                     LinearLayoutManager.VERTICAL
                 )
             )
+            mAdapter.onLoadMoreListener = { nexPage, _ ->
+                viewModel.refresh(nexPage)
+            }
 
             btClose.setOnClickListener {
                 findNavigator().navigateUp()
@@ -39,11 +49,11 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
         }
 
         with(viewModel) {
-            staffs.bind(StaffStatusAdapter(binding.rvStaff).apply {
-                onClickItemListener = {
-
-                }
-            }::submit)
+            staffs.bind {
+                mAdapter.submit(it)
+                binding.emptyLayout.tvEmptyData.show(it.isNullOrEmpty())
+                binding.rvStaff.show(!it.isNullOrEmpty())
+            }
         }
     }
 
@@ -59,8 +69,8 @@ class ManageStaffViewModel(
         refresh()
     }
 
-    fun refresh() = launch(refreshLoading, error) {
-        staffRepo()
+    fun refresh(page: Int = 1) = launch(refreshLoading, error) {
+        staffRepo("", page)
     }
 }
 

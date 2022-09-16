@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
+    android:orientation="vertical"
     android:padding="@dimen/size_13"
-    tools:context=".views.booking.create_appointment.ChooseStaffFragment">
+    tools:context=".views.management.staff.ManageStaffFragment">
 
-    <RelativeLayout
+    <com.app.inails.booking.admin.views.widget.SearchView
+        android:id="@+id/searchView"
+        style="@style/AppTheme.EditText"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableEnd="@null"
+        android:hint="@string/hint_search"
+        android:imeOptions="actionSearch"
+        android:longClickable="false" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_radius"
-        android:padding="@dimen/size_16">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchView"
+        android:layout_marginTop="@dimen/size_13"
+        android:background="@drawable/bg_white_radius">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvStaff"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_staff_select" />
+            android:layout_height="match_parent">
 
-        <include layout="@layout/layout_empty" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStaff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/size_70"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_staff_select" />
 
-    </RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <include layout="@layout/layout_empty"
+                android:id="@+id/emptyLayout"/>
+        </RelativeLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
