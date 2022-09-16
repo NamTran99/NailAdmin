@@ -27,7 +27,7 @@ import com.app.inails.booking.admin.repository.booking.*
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appointment),
-    TopBarOwner, CancelAppointmentOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
+    TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
     StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, FragmentResultCallback {
     private val binding by viewBinding(FragmentAppointmentBinding::bind)
     private val viewModel by viewModel<AppointmentViewModel>()
@@ -125,14 +125,17 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                     }
                 }
 
-                onClickCallListener  = {
+                onClickCallListener = {
                     val dialIntent = Intent(Intent.ACTION_DIAL)
                     dialIntent.data = Uri.parse("tel: ${it.phone}")
                     startActivity(dialIntent)
                 }
 
-                onClickCustomerListener={
+                onClickCustomerListener = {
                     customerInfoDialog.show(it)
+                }
+                onClickRemindListener = {
+                    viewModel.remind(it.id)
                 }
 
             }::submit)
@@ -157,11 +160,11 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
             }
 
             appointCancel.bind {
+                rejectAppointmentDialog.dismiss()
                 mAdapter.updateItem(it)
             }
 
             idRemove.bind {
-                cancelAppointmentDialog.dismiss()
                 mAdapter.removeItem(it)
             }
 
@@ -219,6 +222,7 @@ class AppointmentViewModel(
     private val customerWalkInRepo: CustomerWalkInRepository,
     private val handleAppointmentRepo: HandleAppointmentRepository,
     private val startServiceRepo: StartServiceRepository,
+    private val remindAppointmentRepo: RemindAppointmentRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val appointments = appointmentRepo.results
     val appointUpdate = updateStatusApmRepo.results
@@ -227,6 +231,7 @@ class AppointmentViewModel(
     val appointWalkIn = customerWalkInRepo.results
     val appointHandle = handleAppointmentRepo.results
     val appointStartService = startServiceRepo.results
+    val remind = remindAppointmentRepo.results
     val form = AppointmentStatusForm()
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
@@ -265,6 +270,10 @@ class AppointmentViewModel(
 
     fun startService() = launch(loading, error) {
         success.post(startServiceRepo(formStartService))
+    }
+
+    fun remind(id: Int) = launch(loading, error) {
+        success.post(remindAppointmentRepo(id))
     }
 }
 

@@ -57,15 +57,14 @@
         <TextView
             style="@style/AppTheme.TextView.Medium"
             android:text="@string/label_full_name"
+            android:layout_weight="1"
             android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvFullName"
             style="@style/AppTheme.TextView.Medium"
-            android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_13"
             android:textColor="@color/lightBlue02"
-            android:layout_weight="1"
             android:gravity="end"
             tools:text="Yen Yen" />
     </LinearLayout>

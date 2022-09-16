@@ -4,11 +4,8 @@ import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
 import androidx.lifecycle.MutableLiveData
-import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.BookingApi
-import com.app.inails.booking.admin.datasource.remote.StaffApi
 import com.app.inails.booking.admin.factory.BookingFactory
-import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.ui.*
 
 
@@ -135,13 +132,27 @@ class AppointmentDetailRepository(
     private val bookingFactory: BookingFactory,
 ) {
     val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(id : Int) {
+    suspend operator fun invoke(id: Int) {
         results.post(
             bookingFactory
                 .createAAppointment(
                     bookingApi.detail(id)
                         .await()
                 )
+        )
+    }
+}
+
+
+@Inject(ShareScope.Fragment)
+class RemindAppointmentRepository(
+    private val bookingApi: BookingApi
+) {
+    val results = MutableLiveData<Any>()
+    suspend operator fun invoke(id: Int) {
+        results.post(
+            bookingApi.remindAppointment(id)
+                .await()
         )
     }
 }

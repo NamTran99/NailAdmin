@@ -114,6 +114,8 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.customer.phone.safe()
             override val customer: ICustomer
                 get() = createCustomer(appointmentDTO.customer)
+            override val notes: String?
+                get() = appointmentDTO.notes
 
         }
     }

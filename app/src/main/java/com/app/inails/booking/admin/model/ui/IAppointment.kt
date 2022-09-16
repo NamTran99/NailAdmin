@@ -28,6 +28,7 @@ interface IAppointment {
     val serviceList: List<IService> get() = listOf()
     val totalPrice: Double get() = 0.0
     val customer: ICustomer? get() = null
+    val notes: String? get() = null
 }
 
 @Parcelize

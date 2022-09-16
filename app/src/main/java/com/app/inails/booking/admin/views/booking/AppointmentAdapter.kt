@@ -23,6 +23,7 @@ class AppointmentAdapter(view: RecyclerView) :
     var onClickStartServiceListener: ((IAppointment) -> Unit)? = null
     var onClickCallListener: ((IAppointment) -> Unit)? = null
     var onClickCustomerListener: ((ICustomer) -> Unit)? = null
+    var onClickRemindListener: ((IAppointment) -> Unit)? = null
 
     override fun onCreateBinding(parent: ViewGroup): ItemAppointmentBinding {
         return parent.bindingOf(ItemAppointmentBinding::inflate)
@@ -72,6 +73,10 @@ class AppointmentAdapter(view: RecyclerView) :
 
             tvFullName.setOnClickListener {
                 onClickCustomerListener?.invoke(item.customer!!)
+            }
+
+            btReminder.onClick{
+                onClickRemindListener?.invoke(item)
             }
 
             tvID.text = item.id.formatID()
