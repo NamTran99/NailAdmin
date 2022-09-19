@@ -83,7 +83,7 @@ val apiModule = module {
                 OkHttpClient.Builder()
                     .addInterceptor(get<TokenInterceptor>())
                     .addInterceptor(interceptor)
-                    .addInterceptor(ChuckInterceptor(this.get()))
+//                    .addInterceptor(ChuckInterceptor(this.get()))
 //                    .addInterceptor(get<LoggingInterceptor.Builder>().build())
                     .build()
             )
