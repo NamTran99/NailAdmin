@@ -93,5 +93,7 @@ class HandleAppointmentForm(
     var isAccepted: Int = 0,
     @SerializedName("work_time")
     var workTime: Int = 0,
-    var reason: String = ""
+    var reason: String = "",
+    @SerializedName("staff_id")
+    var staffId: Int = 0,
 ) : Parcelable

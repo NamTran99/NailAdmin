@@ -143,8 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_12"
                 android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_service_select" />
 
@@ -185,6 +184,7 @@
                         android:layout_margin="@dimen/size_2"
                         android:layout_weight="1"
                         android:background="@color/white"
+                        android:dropDownWidth="@dimen/size_150"
                         android:entries="@array/hour_array"
                         android:paddingVertical="@dimen/size_14"
                         android:spinnerMode="dropdown"
@@ -213,6 +213,7 @@
                         android:layout_margin="@dimen/size_2"
                         android:layout_weight="1"
                         android:background="@color/white"
+                        android:dropDownWidth="@dimen/size_150"
                         android:entries="@array/minute_array"
                         android:paddingVertical="@dimen/size_14"
                         android:spinnerMode="dropdown"

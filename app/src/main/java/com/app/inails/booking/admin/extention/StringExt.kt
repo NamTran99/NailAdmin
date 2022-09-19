@@ -9,6 +9,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.telephony.PhoneNumberUtils
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
@@ -44,4 +45,9 @@ fun Double.formatPrice(): String {
 
 fun Double.formatAmount(): String {
     return String.format("%.2f", this).replace(",", ".")
+}
+
+fun String.formatPhoneUS(): String {
+    return if (this.isEmpty()) ""
+    else PhoneNumberUtils.formatNumber(this, "US")
 }

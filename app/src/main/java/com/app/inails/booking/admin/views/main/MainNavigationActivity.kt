@@ -7,6 +7,7 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
@@ -36,6 +37,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ManageService -> ManageServiceFragment::class
                 is Routing.AppointmentDetail -> AppointmentDetailFragment::class
                 is Routing.ManageCustomer -> ManageCustomerFragment::class
+                is Routing.ChooseStaff -> ChooseStaffFragment::class
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())

@@ -57,12 +57,14 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = staffDTO.time_check_in.safe()
             override val active: Int
                 get() = staffDTO.active.safe()
-            override val backgroundColor: Int
-                get() = textFormatter.formatBackgroundStaffColor(staffDTO.active)
+            override val textColor: Int
+                get() = textFormatter.formatTextColorStaffColor(staffDTO.active)
             override val timeCheckInAppointment: String
                 get() = staffDTO.appointment_processing?.time_working.safe()
             override val customerName: String
                 get() = staffDTO.appointment_processing?.customer_name.safe()
+            override val appointment: IAppointment?
+                get() = staffDTO.appointment_processing?.let { createAAppointment(it) }
         }
     }
 

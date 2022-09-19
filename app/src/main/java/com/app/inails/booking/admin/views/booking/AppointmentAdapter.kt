@@ -21,7 +21,6 @@ class AppointmentAdapter(view: RecyclerView) :
     var onClickCusWalkInListener: ((IAppointment) -> Unit)? = null
     var onClickHandleListener: ((IAppointment, Int) -> Unit)? = null
     var onClickStartServiceListener: ((IAppointment) -> Unit)? = null
-    var onClickCallListener: ((IAppointment) -> Unit)? = null
     var onClickCustomerListener: ((ICustomer) -> Unit)? = null
     var onClickRemindListener: ((IAppointment) -> Unit)? = null
 
@@ -67,15 +66,11 @@ class AppointmentAdapter(view: RecyclerView) :
                 onClickFinishListener?.invoke(item)
             }
 
-            btCall.setOnClickListener {
-                onClickCallListener?.invoke(item)
-            }
-
             tvFullName.setOnClickListener {
                 onClickCustomerListener?.invoke(item.customer!!)
             }
 
-            btReminder.onClick{
+            btReminder.onClick {
                 onClickRemindListener?.invoke(item)
             }
 
@@ -85,6 +80,7 @@ class AppointmentAdapter(view: RecyclerView) :
             tvServices.text = item.servicesName
             tvRequest.text = item.staffName
             tvTypeCancel.text = item.canceledBy
+            tvPhone.text = item.phone.formatPhoneUS()
             tvStatus.text = item.statusDisplay
             tvStatus.drawableStart(item.resIconStatus)
             tvStatus.setTextColor(ContextCompat.getColor(view.context, item.colorStatus))
@@ -93,7 +89,6 @@ class AppointmentAdapter(view: RecyclerView) :
             (item.status == DataConst.AppointmentStatus.APM_WAITING && item.type == 1) show btStartService
             (item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING && item.type == 1) show btFinish
             (item.status == DataConst.AppointmentStatus.APM_CANCEL) show cancelLayout
-            (item.type == 2) show btCall
         }
     }
 

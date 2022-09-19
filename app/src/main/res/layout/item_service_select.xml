@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/AppTheme.TextView.Medium"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/custom_bg_service_check"
-    android:button="@null"
-    android:checked="false"
-    android:gravity="center"
+    android:layout_height="@dimen/size_50"
     android:layout_margin="@dimen/size_4"
-    android:paddingHorizontal="@dimen/size_16"
-    android:textColor="@color/color_service"
-    tools:text="Manicure" />
+    android:background="@drawable/custom_bg_service_check"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="@dimen/size_16">
+
+    <TextView
+        android:id="@+id/tvServiceName"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/text_desc_color"
+        android:textSize="@dimen/text_size_14"
+        tools:text="Manicure" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/AppTheme.TextView.Medium"
+        android:textColor="@color/text_desc_color"
+        android:textSize="@dimen/text_size_14"
+        tools:text="$10.00" />
+
+</LinearLayout>

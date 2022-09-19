@@ -18,6 +18,7 @@ interface BookingRoute {
     fun BaseFragment.redirectToCreateAppointment(id: Int? = null)
     fun BaseFragment.redirectToChooseStaff(id: Int? = null)
     fun redirectToAppointmentDetail(self: RouteDispatcher, id:Int)
+    fun redirectToChooseStaff(self: RouteDispatcher, type : Int = 0)
 }
 
 class BookingRouteImpl : BookingRoute {
@@ -49,5 +50,9 @@ class BookingRouteImpl : BookingRoute {
 
     override fun redirectToAppointmentDetail(self: RouteDispatcher, id: Int) {
         self.open<MainNavigationActivity>(Routing.AppointmentDetail(id))
+    }
+
+    override fun redirectToChooseStaff(self: RouteDispatcher, type: Int) {
+        self.open<MainNavigationActivity>(Routing.ChooseStaff(type))
     }
 }

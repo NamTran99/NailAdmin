@@ -46,8 +46,10 @@ class ManageStaffAdapter(view: RecyclerView) :
             tvTimeCheckedIn.text = item.timeCheckIn
 
             (item.status == DataConst.StaffStatus.STAFF_BREAK && item.active == 1) show btCheckIn
-            (item.status == DataConst.StaffStatus.STAFF_AVAILABLE) show checkOutLayout
-            container.setBackgroundColor(ContextCompat.getColor(view.context, item.backgroundColor))
+            (item.status != DataConst.StaffStatus.STAFF_BREAK && item.active == 1) show checkOutLayout
+            tvStaffName.setTextColor(ContextCompat.getColor(view.context, item.textColor))
+            tvPhone.setTextColor(ContextCompat.getColor(view.context, item.textColor))
+            tvPhone.setLinkTextColor(ContextCompat.getColor(view.context, item.textColor))
 
         }
     }

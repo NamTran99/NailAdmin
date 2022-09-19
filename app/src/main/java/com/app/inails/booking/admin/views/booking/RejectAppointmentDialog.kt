@@ -25,6 +25,7 @@ class RejectAppointmentDialog(context: Context) : BaseDialog(context) {
     ) {
         with(binding) {
             tvTitle.setText(title)
+            etReason.setText("")
             btSubmit.onClick {
                 val reason = etReason.text.toString().trim()
                 if (reason.isEmpty()) {

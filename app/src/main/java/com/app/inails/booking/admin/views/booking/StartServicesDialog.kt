@@ -15,7 +15,6 @@ import com.app.inails.booking.admin.model.ui.IStaff
 class StartServicesDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogStartServiceBinding::inflate)
     var onSelectStaffListener: (() -> Unit?)? = null
-
     private var staffID: Int? = null
 
     init {
@@ -34,9 +33,12 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
     ) {
         staffID = apm.staffID
         with(binding) {
+            tvChooseStaff.setText(R.string.label_choose_staff)
             (ServicePriceAdapter(rvServices)).apply {
                 submit(apm.serviceList)
             }
+            spHour.setSelection(0)
+            spMinute.setSelection(0)
             staffLayout.show(apm.staffID == 0)
             btSubmit.onClick {
                 if (staffID == null || staffID == 0) {

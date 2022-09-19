@@ -30,7 +30,8 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
             (ServicePriceAdapter(rvServices)).apply {
                 submit(apm.serviceList)
             }
-            etAmount.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(7, 2))
+            etNote.setText("")
+            etAmount.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(11, 2))
             etAmount.setText(apm.totalPrice.formatAmount())
             btSubmit.onClick {
                 val amount = etAmount.text.toString().toDoubleOrNull()

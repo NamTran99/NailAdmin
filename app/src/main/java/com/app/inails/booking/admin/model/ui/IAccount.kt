@@ -17,7 +17,10 @@ class LoginForm(
 ) : Parcelable {
 
     fun validate() {
-        if (phone.isBlank()) viewError(R.id.etPhone, R.string.error_blank_phone)
+        if (phone.isBlank() || phone.length < 14) viewError(
+            R.id.etPhone,
+            R.string.error_blank_phone
+        )
         if (password.isBlank()) viewError(R.id.etPassword, R.string.error_blank_password)
     }
 }

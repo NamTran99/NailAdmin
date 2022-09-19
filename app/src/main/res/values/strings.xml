@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nail Booking</string>
+    <string name="app_name">Owner - 123 Best Solution</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_confirm">Confirm</string>
@@ -37,7 +37,7 @@
     <string name="error_blank_password">Password should not be blank</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_reject">Reject</string>
-    <string name="btn_customer_check_in">Customer Check-in</string>
+    <string name="btn_customer_check_in">Client Check-in</string>
     <string name="btn_add_new_appointment">Add New Appointment</string>
     <string name="btn_add_appointment">Add Appointment</string>
     <string name="btn_staff_list">Staff List</string>
@@ -70,7 +70,7 @@
     <string name="btn_start_service">Start Service</string>
     <string name="message_remove_appointment" formatted="true">Do you want to remove the appointment with ID: #%d?</string>
     <string name="message_cancel_appointment" formatted="true">Do you want to cancel the appointment with ID: #%d?</string>
-    <string name="message_customer_check_in">Do you confirm that this customer checked-in at the salon?</string>
+    <string name="message_customer_check_in">Do you confirm that this client checked-in at the salon?</string>
     <string name="message_delete_staff" formatted="true">Do you want to delete the "%s" staff?</string>
     <string name="error_empty_reason">Please enter a reason</string>
     <string name="error_empty_service_time">Please enter the service time</string>
@@ -82,4 +82,5 @@
     <string name="btn_delete_appointment">Delete Appointment</string>
     <string name="btn_service">Service</string>
     <string name="booking_list">Booking List</string>
+    <string name="message_start_service_success">Start service success!</string>
 </resources>

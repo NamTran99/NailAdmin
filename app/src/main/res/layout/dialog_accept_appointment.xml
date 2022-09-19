@@ -28,6 +28,33 @@
             app:tint="@color/black" />
     </RelativeLayout>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/staffLayout"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_12"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_gravity="start"
+            android:layout_marginTop="@dimen/size_13"
+            android:text="@string/label_staff"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/tvChooseStaff"
+            style="@style/AppTheme.EditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_12"
+            android:focusable="false"
+            android:text="@string/label_choose_staff"
+            app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     <TextView
         style="@style/AppTheme.TextView.Medium"
         android:text="@string/label_select_duration_time_to_service"
@@ -45,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edit_text_default"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatSpinner
@@ -55,6 +83,7 @@
                 android:layout_margin="@dimen/size_2"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:dropDownWidth="@dimen/size_150"
                 android:entries="@array/hour_array"
                 android:paddingVertical="@dimen/size_14"
                 android:spinnerMode="dropdown"
@@ -73,6 +102,7 @@
             android:layout_marginStart="@dimen/size_12"
             android:layout_weight="1"
             android:background="@drawable/edit_text_default"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatSpinner
@@ -83,6 +113,7 @@
                 android:layout_margin="@dimen/size_2"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:dropDownWidth="@dimen/size_150"
                 android:entries="@array/minute_array"
                 android:paddingVertical="@dimen/size_14"
                 android:spinnerMode="dropdown"

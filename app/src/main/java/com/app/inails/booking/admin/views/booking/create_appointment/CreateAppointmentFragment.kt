@@ -9,7 +9,6 @@ import android.support.core.route.BundleArgument
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
-import android.support.navigation.FragmentResultCallback
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
@@ -27,7 +26,6 @@ import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.ui.AppointmentForm
 import com.app.inails.booking.admin.model.ui.IService
-import com.app.inails.booking.admin.model.ui.StaffForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
@@ -40,14 +38,15 @@ data class AppointmentArg(
     val id: Int? = 0
 ) : BundleArgument
 
-class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner,
-    FragmentResultCallback {
+class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner {
     private val binding by viewBinding(FragmentCreateAppointmentBinding::bind)
     private val viewModel by viewModel<CreateAppointmentViewModel>()
     private lateinit var mServiceAdapter: SelectServiceAdapter
     private val mDatePickerDialog by lazy { DatePickerDialog(appActivity) }
     private val mTimePickerDialog by lazy { TimePickerDialog(appActivity) }
-
+    private var mDateSelected = ""
+    private var mTimeSelected = ""
+    private var mDateTagSelected = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
@@ -55,10 +54,8 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 R.string.title_create_new_appointment
             ) { activity?.onBackPressed() })
         mServiceAdapter = SelectServiceAdapter(binding.rvServices)
-
         with(binding) {
             etPhone.inputTypePhoneUS()
-
             mDatePickerDialog.setupClickWithView(tvSelectDate)
             mTimePickerDialog.setupClickWithView(tvSelectTime)
             tvChooseStaff.setOnClickListener {
@@ -97,17 +94,34 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 }
             }::submit)
             success.bind {
-                success("Success")
+                success("Create appointment for customer success!")
                 activity?.onBackPressed()
             }
         }
 
+        appEvent.chooseStaffInCreateAppointment.observe(this) {
+            if (it != null) {
+                binding.tvChooseStaff.text = it.name
+                viewModel.form.staffID = it.id
+            }
+        }
     }
 
-    override fun onFragmentResult(result: Bundle) {
-        val staffForm = result.get("staff") as StaffForm
-        binding.tvChooseStaff.text = staffForm.name
-        viewModel.form.staffID = staffForm.id
+    override fun onPause() {
+        super.onPause()
+        mDateSelected = binding.tvSelectDate.text.toString()
+        mTimeSelected = binding.tvSelectTime.text.toString()
+        mDateTagSelected = binding.tvSelectDate.tag.toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (mDateSelected.isNotEmpty()) {
+            binding.tvSelectDate.text = mDateSelected
+            binding.tvSelectDate.tag = mDateTagSelected
+        }
+        if (mTimeSelected.isNotEmpty()) binding.tvSelectTime.text = mTimeSelected
+
     }
 
 }

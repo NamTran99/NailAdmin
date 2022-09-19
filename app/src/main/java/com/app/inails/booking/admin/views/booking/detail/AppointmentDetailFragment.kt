@@ -164,11 +164,13 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
         }
 
         binding.btAccept.onClick {
-            acceptAppointmentDialog.show {
+            acceptAppointmentDialog.show(mAppointment!!) { minutes, stfID ->
                 viewModel.formHandle.run {
                     id = arg.id
                     isAccepted = 1
-                    workTime = it
+                    workTime = minutes
+                    staffId = stfID
+
                 }
                 viewModel.handle()
             }

@@ -31,6 +31,25 @@ class StaffRepo(
     }
 }
 
+
+@Inject(ShareScope.Fragment)
+class StaffCheckInRepo(
+    private val staffApi: StaffApi,
+    private val bookingFactory: BookingFactory,
+    private val userLocalSource: UserLocalSource
+) {
+    val results = MutableLiveData<List<IStaff>>()
+    suspend operator fun invoke() {
+        results.post(
+            bookingFactory
+                .createStaffList(
+                    staffApi.listStaffCheckIn(userLocalSource.getSalonID().toString())
+                        .await()
+                )
+        )
+    }
+}
+
 @Inject(ShareScope.Fragment)
 class FetchAllStaffRepo(
     private val staffApi: StaffApi,

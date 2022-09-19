@@ -60,6 +60,15 @@ fun <T : BundleArgument> Fragment.argument(def: (() -> T)? = null): T {
     return BundleArgument.of(arguments) ?: def()
 }
 
+fun <T : BundleArgument?> Fragment.nullableArguments(def: (() -> T)? = null): T? {
+    if (def == null) {
+        return if (this.arguments != null)
+            BundleArgument[arguments] else null
+    }
+    return BundleArgument.of(arguments) ?: def()
+}
+
+
 fun <T : BundleArgument> Activity.lazyArgument(def: (() -> T)? = null) =
     lazy(LazyThreadSafetyMode.NONE) {
         argument(def)

@@ -15,6 +15,7 @@
         android:drawableStart="@drawable/ic_search"
         android:drawableEnd="@null"
         android:hint="@string/hint_search"
+        android:layout_marginBottom="@dimen/size_13"
         android:imeOptions="actionSearch"
         android:longClickable="false" />
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/searchView"
-        android:layout_marginTop="@dimen/size_13"
         android:background="@drawable/bg_white_radius">
 
         <RelativeLayout

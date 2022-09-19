@@ -31,6 +31,12 @@ interface StaffApi : Injectable {
     ): ApiAsync<List<StaffDTO>>
 
     @FormUrlEncoded
+    @POST("staff/list-staff-check-in")
+    fun listStaffCheckIn(
+        @Field("salon_id") salonID: String
+    ): ApiAsync<List<StaffDTO>>
+
+    @FormUrlEncoded
     @POST("staff/list-all-staff")
     fun search(
         @Field("salon_id") salonID: String,

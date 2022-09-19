@@ -9,13 +9,14 @@ import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.databinding.ItemStaffStatusBinding
 import com.app.inails.booking.admin.extention.drawableStart
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class StaffStatusAdapter(view: RecyclerView) :
     PageRecyclerAdapter<IStaff, ItemStaffStatusBinding>(view) {
     var onClickItemListener: ((IStaff) -> Unit)? = null
+    var onClickAppointmentListener: ((IAppointment?) -> Unit)? = null
 
     override fun onCreateBinding(parent: ViewGroup): ItemStaffStatusBinding {
         return parent.bindingOf(ItemStaffStatusBinding::inflate)
@@ -31,16 +32,21 @@ class StaffStatusAdapter(view: RecyclerView) :
             root.onClick {
                 onClickItemListener?.invoke(item)
             }
+            tvAppointmentID.setOnClickListener {
+                onClickAppointmentListener?.invoke(item.appointment)
+            }
             tvStaffName.text = item.name
             tvStatus.drawableStart(item.resIconStatus)
+            tvStatus.text = item.statusName
             tvStatus.setTextColor(ContextCompat.getColor(view.context, item.colorStatus))
-            if (item.status == DataConst.StaffStatus.STAFF_WORKING){
+            if (item.status == DataConst.StaffStatus.STAFF_WORKING) {
                 tvCustomerName.text = "${item.customerName} (${item.timeCheckInAppointment})"
-                tvStatus.text = "${item.statusName} (${item.timeCheckIn})"
-            }else{
-                tvCustomerName.text =""
-                tvStatus.text = item.statusName
+                tvAppointmentID.text = "Booking ID: #${item.appointment?.id}"
+            } else {
+                tvAppointmentID.text = ""
+                tvCustomerName.text = ""
             }
+
 
         }
     }

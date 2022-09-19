@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingVertical="@dimen/size_16"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/size_16">
 
     <TextView
         android:id="@+id/tvStaffName"
@@ -16,8 +16,8 @@
     <TextView
         android:id="@+id/tvStatus"
         style="@style/AppTheme.TextView.Medium"
-        android:textSize="@dimen/text_size_10"
         android:layout_marginTop="@dimen/size_8"
+        android:textSize="@dimen/text_size_10"
         app:drawableStartCompat="@drawable/circle_yellow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStaffName"
@@ -26,9 +26,17 @@
     <TextView
         android:id="@+id/tvCustomerName"
         style="@style/AppTheme.TextView.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="Customer Name" />
+
+    <TextView
+        android:id="@+id/tvAppointmentID"
+        style="@style/AppTheme.TextView.SemiBold"
+        android:layout_marginTop="@dimen/size_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/lightBlue03"
+        app:layout_constraintTop_toBottomOf="@+id/tvCustomerName"
         tools:text="Customer Name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
