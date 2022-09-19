@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/size_16">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Customer Name" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/AppTheme.ButtonDefault.Wrap"
+            android:background="@drawable/bg_button_customer_booking"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_30"
+            android:layout_alignParentEnd="true"
+            android:text="@string/booking_list"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/color_btn_booking"
+            android:textSize="@dimen/text_size_10" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvPhone"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_16"
+        android:textColor="@color/color_text_customer_infor"
+        android:textSize="@dimen/text_size_10"
+        app:drawableStartCompat="@drawable/ic_phone_outline"
+        tools:text="987-654-3210" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_16"
+        android:textColor="@color/color_text_customer_infor"
+        android:textSize="@dimen/text_size_10"
+        app:drawableStartCompat="@drawable/ic_email"
+        tools:text="Sample@gmail.com" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text_customer_infor"
+        android:textSize="@dimen/text_size_10"
+        app:drawableStartCompat="@drawable/ic_location"
+        tools:text="100 Hoa Hai, Ngu Hanh Son, Da Nang" />
+
+    <View
+        android:layout_marginTop="@dimen/size_18"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_view_bottom_line" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
