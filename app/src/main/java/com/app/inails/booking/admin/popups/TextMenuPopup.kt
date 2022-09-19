@@ -76,8 +76,8 @@ class TextMenuPopup<T>(val context: Context) : PopupWindow(context) {
         var measuredWidth = windowManager.defaultDisplay.width
         var measuredHeight = windowManager.defaultDisplay.height
 
-        val viewLocation = IntArray(2)
-        view.getLocationOnScreen(viewLocation)
+        val viewLocation = IntArray(2) // 0,0
+        view.getLocationOnScreen(viewLocation) //
 
         val yOffset = if(viewLocation[1] + view.measuredHeight + contentView.measuredHeight < measuredHeight) 0 else contentView.measuredHeight
         showAsDropDown(view, xOffset,  -yOffset)
@@ -151,7 +151,6 @@ class TextMenuPopup<T>(val context: Context) : PopupWindow(context) {
         mOnItemClickListener = {
             mOnCallBack?.invoke(it!!)
         }
-
     }
 
     fun setupWithViewRight(viewClicked: View) {

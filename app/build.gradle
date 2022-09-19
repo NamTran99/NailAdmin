@@ -3,6 +3,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -41,6 +42,7 @@ android {
 dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.2'
     def retrofitV = "2.9.0"
     def lifecycleV = "2.5.0"
     def glideV = "4.12.0"
@@ -83,4 +85,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.readystatesoftware.chuck:library:1.1.0'
 }

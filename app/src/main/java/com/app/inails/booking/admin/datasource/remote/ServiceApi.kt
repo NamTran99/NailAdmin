@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.datasource.remote
 import android.support.di.InjectBy
 import android.support.di.Injectable
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.app.AppConst
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.ui.ServiceForm
@@ -19,7 +20,13 @@ import retrofit2.http.POST
 interface ServiceApi : Injectable {
     @FormUrlEncoded
     @POST("service/list-service")
-    fun getAllServiceList(@Field("salon_id") salonID: String): ApiAsync<List<ServiceDTO>>
+    fun getAllServiceList(
+        @Field(
+            "salon_id"
+        ) salonID: String, @Field("page") page: Int,
+        @Field("txt_search") keyword: String,
+        @Field("num_per_page") itemsPerPage: Int = AppConst.perPage
+    ): ApiAsync<List<ServiceDTO>>
 
     @FormUrlEncoded
     @POST("service/delete-service")

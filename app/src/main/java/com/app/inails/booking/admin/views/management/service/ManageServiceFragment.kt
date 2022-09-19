@@ -1,28 +1,26 @@
 package com.app.inails.booking.admin.views.management.service
 
+import CreateServiceRepository
+import DeleteServiceRepository
+import FetchListServiceRepo
+import UpdateServiceRepository
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.core.view.viewBinding
-import android.support.di.Inject
-import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentManageServiceBinding
-import com.app.inails.booking.admin.datasource.remote.ServiceApi
-import com.app.inails.booking.admin.factory.BookingFactory
+import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.model.popup.PopUpServiceMore
-import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.model.ui.ServiceForm
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
-import com.app.inails.booking.admin.repository.auth.FetchListServiceRepo
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -33,7 +31,7 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
     private lateinit var mAdapter: ManageServiceAdapter
 
     override fun onRefreshListener() {
-        viewModel.refresh()
+        viewModel.search()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +43,8 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
             ) { activity?.onBackPressed() })
 
         with(binding) {
+            viewRefresh.colorSchemeDefault()
+            viewRefresh.setOnRefreshListener { refreshView() }
             setUpManageServiceAdapter()
             btAddService.setOnClickListener {
                 createUpdateServiceDialog.show(R.string.title_create_new_service) { mName, mPrice ->
@@ -58,6 +58,11 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
         }
 
         with(viewModel) {
+            // NamTD8: Need find the scheme of loading road
+            loading.bind {
+                mAdapter.isLoading = it
+                binding.viewRefresh.isRefreshing = it
+            }
             success.bind {
                 createUpdateServiceDialog.dismiss()
                 success("Success")
@@ -70,10 +75,19 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
         }
     }
 
+    private fun refreshView() {
+        mAdapter.clear()
+        viewModel.search()
+    }
+
     private fun setUpManageServiceAdapter() {
         mAdapter = ManageServiceAdapter(binding.rvServices).apply {
             onClickItemListener = {
                 comingSoon()
+            }
+
+            onLoadMoreListener = { nexPage, _ ->
+                viewModel.search(page = nexPage)
             }
 
             onClickMenuListener = { view, item ->
@@ -96,7 +110,7 @@ class ManageServiceFragment : BaseRefreshFragment(R.layout.fragment_manage_servi
                             confirmDialog.show(
                                 getString(R.string.title_delete_service),
                                 item.name
-                            ){
+                            ) {
                                 viewModel.delete(item.id)
                             }
                         }
@@ -131,11 +145,11 @@ class ManageServiceViewModel(
     val updateForm = ServiceForm()
 
     init {
-        refresh()
+        search()
     }
 
-    fun refresh() = launch(refreshLoading, error) {
-        getListServiceRepo()
+    fun search(keyword: String = "", page:Int = 1) = launch(refreshLoading, error) {
+        getListServiceRepo(keyword, page)
     }
 
     fun create() = launch(loading, error) {
@@ -148,52 +162,5 @@ class ManageServiceViewModel(
 
     fun delete(serviceID: Int) = launch(loading, error) {
         success.post(deleteServiceRepo(serviceID))
-    }
-}
-
-@Inject(ShareScope.Fragment)
-class CreateServiceRepository(
-    private val serviceApi: ServiceApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IService>()
-    suspend operator fun invoke(form: ServiceForm) {
-        form.validate()
-        results.post(
-            bookingFactory
-                .createAService(
-                    serviceApi.createService(form).await()
-                )
-        )
-    }
-}
-
-@Inject(ShareScope.Fragment)
-class UpdateServiceRepository(
-    private val serviceApi: ServiceApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IService>()
-    suspend operator fun invoke(form: ServiceForm) {
-        form.validate()
-        results.post(
-            bookingFactory
-                .createAService(
-                    serviceApi.updateService(form).await()
-                )
-        )
-    }
-}
-
-@Inject(ShareScope.Fragment)
-class DeleteServiceRepository(
-    private val serviceApi: ServiceApi,
-) {
-    val results = MutableLiveData<Int>()
-    suspend operator fun invoke(serviceID: Int) {
-        serviceApi.deleteService(serviceID).await()
-        results.post(
-            serviceID
-        )
     }
 }

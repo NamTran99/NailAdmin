@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,21 @@
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/size_10"
     android:paddingVertical="@dimen/size_12"
-    tools:context=".views.management.staff.ManageStaffFragment">
+    tools:context=".views.management.service.ManageServiceFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btAddService"
-        style="@style/AppTheme.ButtonDefault"
-        android:layout_marginHorizontal="@dimen/size_87"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="@dimen/size_20"
-        android:background="@drawable/button_pink_corner"
-        android:drawableStart="@drawable/ic_add"
-        android:text="@string/btn_add_new_service" />
+    <com.app.inails.booking.admin.views.widget.SearchView
+        android:id="@+id/searchView"
+        style="@style/AppTheme.EditText"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableEnd="@null"
+        android:hint="@string/hint_search"
+        android:imeOptions="actionSearch"
+        android:longClickable="false" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
+        android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/size_13"
         android:background="@drawable/bg_white_radius">
@@ -30,14 +30,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_white_radius"
-            >
+            android:background="@drawable/bg_white_radius">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvServices"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/size_17_5"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/size_70"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_manage_service" />
 
@@ -47,5 +48,14 @@
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-</LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btAddService"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="@dimen/size_87"
+        android:layout_marginBottom="@dimen/size_20"
+        android:background="@drawable/button_pink_corner"
+        android:drawableStart="@drawable/ic_add"
+        android:layout_alignParentBottom="true"
+        android:text="@string/btn_add_new_service" />
+</RelativeLayout>

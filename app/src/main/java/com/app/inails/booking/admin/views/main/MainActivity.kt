@@ -56,7 +56,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 Router.open(this, Routing.ManageStaff)
             }
             R.id.navManageCustomer -> {
-
+                Router.open(this, Routing.ManageCustomer)
             }
             R.id.navEmailReceiveFeedback -> {
                 Router.open(this, Routing.EmailReceiveFeedBack)

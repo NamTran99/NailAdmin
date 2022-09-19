@@ -81,4 +81,5 @@
     <string name="error_empty_amount_greater_than">Total amount must be greater than 0</string>
     <string name="btn_delete_appointment">Delete Appointment</string>
     <string name="btn_service">Service</string>
+    <string name="booking_list">Booking List</string>
 </resources>

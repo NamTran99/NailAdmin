@@ -60,5 +60,7 @@
     <color name="color_view_bottom_line">#F0F0F0</color>
     <color name="green">#18DE20</color>
     <color name="black01">#363636</color>
+    <color name="color_text_customer_infor">#868686</color>
+    <color name="color_btn_booking">#BC40C1</color>
 
 </resources>

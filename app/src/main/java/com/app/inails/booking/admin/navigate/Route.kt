@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
+import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
@@ -50,6 +51,12 @@ interface Routing : BundleArgument {
     object ManageService : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = ManageServiceFragment::class
+    }
+
+    @Parcelize
+    object ManageCustomer: Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = ManageCustomerFragment::class
     }
 
     @Parcelize

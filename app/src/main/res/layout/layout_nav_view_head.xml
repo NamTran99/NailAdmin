@@ -9,7 +9,7 @@
         android:id="@+id/btMenuClose"
         android:layout_gravity="bottom"
         style="@style/AppTheme.Button"
-        android:fontFamily="@font/larken_extrabold_italic"
+            android:fontFamily="@font/larken_extrabold_italic"
         android:layout_width="wrap_content"
         android:textSize="@dimen/text_size_15"
         android:layout_height="wrap_content"
