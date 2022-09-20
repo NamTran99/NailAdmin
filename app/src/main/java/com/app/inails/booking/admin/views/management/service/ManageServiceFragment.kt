@@ -17,7 +17,6 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
-import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentManageServiceBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.model.popup.PopUpServiceMore
@@ -127,7 +126,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                         PopUpServiceMore.DELETE_ID -> {
                             confirmDialog.show(
                                 getString(R.string.title_delete_service),
-                                item.name
+                                getString(R.string.content_delete_service)
                             ) {
                                 viewModel.delete(item.id)
                             }

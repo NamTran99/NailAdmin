@@ -68,4 +68,5 @@
     <dimen name="size_87">87dp</dimen>
     <dimen name="size_32">32dp</dimen>
     <dimen name="size_150">150dp</dimen>
+    <dimen name="size_9">9dp</dimen>
 </resources>

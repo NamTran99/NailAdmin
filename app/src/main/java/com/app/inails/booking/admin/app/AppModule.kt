@@ -11,6 +11,7 @@ import com.app.inails.booking.admin.helper.network.ApiAsyncAdapterFactory
 import com.app.inails.booking.admin.helper.network.DefaultApiErrorHandler
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+//import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform

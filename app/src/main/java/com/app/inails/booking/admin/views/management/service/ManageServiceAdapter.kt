@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemManageServiceBinding
 import com.app.inails.booking.admin.extention.findIndex
+import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 
@@ -37,7 +38,7 @@ class ManageServiceAdapter(view: RecyclerView) :
             }
 
             tvName.text = item.name
-            tvPrice.text = "$${item.price}"
+            tvPrice.text = "${item.price.formatPrice()}"
 
             tvPrice.setTextColor(ContextCompat.getColor(view.context, item.textColor))
             tvName.setTextColor(ContextCompat.getColor(view.context, item.textColor))

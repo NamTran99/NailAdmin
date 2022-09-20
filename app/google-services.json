@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "660811193562",
+    "project_id": "the-best-booking",
+    "storage_bucket": "the-best-booking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660811193562:android:2e12cb897e8fec488c19e3",
+        "android_client_info": {
+          "package_name": "com.app.booking.inails.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwOQ91CXuzh44-d5iFOHGET66pP2sB3JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660811193562:android:9c3579da79d5280a8c19e3",
+        "android_client_info": {
+          "package_name": "com.app.inails.booking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660811193562-k9im4hogaiadok82uj7q5msu6t1vq3go.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.inails.booking",
+            "certificate_hash": "507d6128ff9caac572c029c9747242a57db0dc51"
+          }
+        },
+        {
+          "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwOQ91CXuzh44-d5iFOHGET66pP2sB3JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

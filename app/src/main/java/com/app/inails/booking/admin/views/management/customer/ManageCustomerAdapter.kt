@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemManageCustomerBinding
-import com.app.inails.booking.admin.databinding.ItemManageServiceBinding
-import com.app.inails.booking.admin.extention.findIndex
 import com.app.inails.booking.admin.model.ui.ICustomer
-import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 
 
@@ -37,7 +34,4 @@ class ManageCustomerAdapter(view: RecyclerView) :
             tvPhone.text = item.phone
         }
     }
-
-
-
 }

@@ -20,7 +20,6 @@
             android:layout_alignBottom="@+id/layout"
             android:layout_alignParentStart="true"
             android:gravity="center"
-            android:textSize="@dimen/text_size_10"
             tools:text="Manicure" />
 
         <LinearLayout
@@ -36,7 +35,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/size_14"
-                android:textSize="@dimen/text_size_10"
                 tools:text="80.00" />
 
             <ImageButton

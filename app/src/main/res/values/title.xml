@@ -23,6 +23,8 @@
     <string name="title_reject_appointment">Reject Appointment</string>
     <string name="title_delete_staff">Delete Staff</string>
     <string name="title_delete_service">Delete Service</string>
+    <string name="content_delete_service">When you delete this service, it will hide the interface from you and you will not be able to view it again. Are you sure you want delete?
+</string>
     <string name="title_estimate">Estimate</string>
     <string name="title_finish_booking">Finish Booking</string>
     <string name="title_appointment_detail">Appointment Detail</string>
