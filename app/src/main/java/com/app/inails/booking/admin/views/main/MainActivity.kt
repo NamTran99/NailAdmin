@@ -1,10 +1,13 @@
 package com.app.inails.booking.admin.views.main
 
 import android.os.Bundle
+import android.support.core.livedata.call
+import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.viewModel
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -46,10 +49,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 .onClick { drawerLayout.closeDrawer(GravityCompat.START, true) }
             navView.setNavigationItemSelectedListener(this@MainActivity)
 
-            headView.findViewById<MaterialButton>(R.id.btMenuClose).text =
-                "${viewModel.user?.admin?.name} - ${viewModel.user?.admin?.phone?.formatPhoneUS()}"
+            headView.findViewById<TextView>(R.id.btMenuClose).text =
+                "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUS()}"
 
         }
+
         Router.run { redirectToBooking() }
     }
 
@@ -90,6 +94,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onBackPressed() {
         if (!findNavigator().navigateUp()) super.onBackPressed()
     }
+
 }
 
 class MainViewModel(

@@ -224,4 +224,9 @@
         <item name="android:popupElevation">0dp</item>
     </style>
 
+    <style name="AppTheme.RatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="colorControlActivated">@color/orange</item>
+    </style>
+
+
 </resources>

@@ -73,81 +73,89 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <View
-        style="@style/AppTheme.Line.Horizontal"
-        android:layout_marginTop="@dimen/size_13" />
-
-    <TextView
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_marginTop="@dimen/size_13"
-        android:text="@string/label_select_duration_time_to_service"
-        android:textSize="@dimen/text_size_14" />
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_12"
-        android:orientation="horizontal">
+        android:id="@+id/durationLayout"
+        android:orientation="vertical">
+
+        <View
+            style="@style/AppTheme.Line.Horizontal"
+            android:layout_marginTop="@dimen/size_13" />
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_marginTop="@dimen/size_13"
+            android:text="@string/label_select_duration_time_to_service"
+            android:textSize="@dimen/text_size_14" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:background="@drawable/edit_text_default"
+            android:layout_marginTop="@dimen/size_12"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spHour"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/size_50"
-                android:layout_margin="@dimen/size_2"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:dropDownWidth="@dimen/size_150"
-                android:background="@color/white"
-                android:entries="@array/hour_array"
-                android:paddingVertical="@dimen/size_14"
-                android:spinnerMode="dropdown"
-                android:theme="@style/AppTheme.Spinner" />
+                android:background="@drawable/edit_text_default"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                style="@style/AppTheme.TextView.Medium"
-                android:layout_marginEnd="@dimen/size_12"
-                android:text="@string/label_hours" />
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spHour"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_50"
+                    android:layout_margin="@dimen/size_2"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:dropDownWidth="@dimen/size_150"
+                    android:entries="@array/hour_array"
+                    android:paddingVertical="@dimen/size_14"
+                    android:spinnerMode="dropdown"
+                    android:theme="@style/AppTheme.Spinner" />
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_marginEnd="@dimen/size_12"
+                    android:text="@string/label_hours" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_12"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_default"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spMinute"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_50"
+                    android:layout_margin="@dimen/size_2"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:dropDownWidth="@dimen/size_150"
+                    android:entries="@array/minute_array"
+                    android:paddingVertical="@dimen/size_14"
+                    android:spinnerMode="dropdown"
+                    android:theme="@style/AppTheme.Spinner" />
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_marginEnd="@dimen/size_12"
+                    android:text="@string/label_minute" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_12"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:background="@drawable/edit_text_default"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spMinute"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/size_50"
-                android:layout_margin="@dimen/size_2"
-                android:dropDownWidth="@dimen/size_150"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:entries="@array/minute_array"
-                android:paddingVertical="@dimen/size_14"
-                android:spinnerMode="dropdown"
-                android:theme="@style/AppTheme.Spinner" />
-
-            <TextView
-                style="@style/AppTheme.TextView.Medium"
-                android:layout_marginEnd="@dimen/size_12"
-                android:text="@string/label_minute" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btSubmit"

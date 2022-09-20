@@ -40,8 +40,8 @@ class StaffStatusAdapter(view: RecyclerView) :
             tvStatus.text = item.statusName
             tvStatus.setTextColor(ContextCompat.getColor(view.context, item.colorStatus))
             if (item.status == DataConst.StaffStatus.STAFF_WORKING) {
-                tvCustomerName.text = "${item.customerName} (${item.timeCheckInAppointment})"
-                tvAppointmentID.text = "Booking ID: #${item.appointment?.id}"
+                tvCustomerName.text = "${item.customerName} (#${item.appointment?.id})"
+                tvAppointmentID.text = "${item.timeCheckInAppointment} - ${item.timeEndAppointment}"
             } else {
                 tvAppointmentID.text = ""
                 tvCustomerName.text = ""

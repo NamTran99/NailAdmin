@@ -69,6 +69,11 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = staffDTO.appointment_processing?.customer_name.safe()
             override val appointment: IAppointment?
                 get() = staffDTO.appointment_processing?.let { createAAppointment(it) }
+            override val timeEndAppointment: String
+                get() = textFormatter.getTimeEndAppointment(
+                    staffDTO.appointment_processing?.time_working,
+                    staffDTO.appointment_processing?.work_time
+                )
         }
     }
 
@@ -87,9 +92,13 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val name: String
                 get() = appointmentDTO.customer_name.safe()
             override val dateAppointment: String
-                get() = appointmentDTO.date_appointment_format
+                get() = textFormatter.getDateTimeWithEndAppointment(
+                    appointmentDTO.date_appointment.safe(),
+                    appointmentDTO.date_appointment_format,
+                    appointmentDTO.work_time
+                )
             override val servicesName: String
-                get() = appointmentDTO.list_service_names.safe()
+                get() = appointmentDTO.list_service_names_with_price.safe()
             override val staffName: String
                 get() = appointmentDTO.staff_name ?: "No request"
             override val statusDisplay: String
@@ -122,6 +131,25 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = createCustomer(appointmentDTO.customer)
             override val notes: String?
                 get() = appointmentDTO.notes
+            override val dateTime: String
+                get() = appointmentDTO.date_appointment.safe()
+            override val reasonCancel: String
+                get() = appointmentDTO.reason_cancel.safe()
+            override val hasFeedback: Boolean
+                get() = appointmentDTO.feedback != null
+            override val feedbackContent: String
+                get() = appointmentDTO.feedback?.content.safe()
+            override val feedbackRating: Int
+                get() = appointmentDTO.feedback?.rating.safe()
+            override val noteFinish: String
+                get() = appointmentDTO.notes.safe()
+            override val price: Double
+                get() = appointmentDTO.price.safe()
+            override val workTime: Int
+                get() = appointmentDTO.work_time.safe()
+            override val serviceCustomObj: IService?
+                get() = appointmentDTO.service_custom?.let { createAService(it) }
+
 
         }
     }

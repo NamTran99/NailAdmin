@@ -27,8 +27,10 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
         function: (Double, String) -> Unit
     ) {
         with(binding) {
+            val list = apm.serviceList.toMutableList()
+            apm.serviceCustomObj?.let { list.add(it) }
             (ServicePriceAdapter(rvServices)).apply {
-                submit(apm.serviceList)
+                submit(list)
             }
             etNote.setText("")
             etAmount.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(11, 2))

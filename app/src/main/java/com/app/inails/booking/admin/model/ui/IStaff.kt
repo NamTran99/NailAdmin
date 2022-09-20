@@ -23,6 +23,7 @@ interface IStaff {
     val textColor: Int @ColorRes get() = R.color.black
     val timeCheckIn: String get() = ""
     val timeCheckInAppointment: String get() = ""
+    val timeEndAppointment: String get() = ""
     val active: Int get() = 0
     val customerName : String get()=""
     val appointment : IAppointment? get() = null

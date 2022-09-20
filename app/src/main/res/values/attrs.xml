@@ -26,6 +26,13 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="TimePickerDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
     <declare-styleable name="PasswordLayout">
         <attr name="hint" format="string" />
     </declare-styleable>

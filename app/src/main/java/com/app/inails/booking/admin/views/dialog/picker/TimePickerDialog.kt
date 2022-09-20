@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.views.dialog.picker
 
 import android.app.TimePickerDialog
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
@@ -62,8 +63,7 @@ class TimePickerDialog(private val activity: BaseActivity) :
         var timeNowL = timeNow
         val calendar = Calendar.getInstance()
         val timePickerDialog = TimePickerDialog(
-            activity,
-            R.style.AppDatePickerCalendarDialog,
+            ContextThemeWrapper(activity, android.R.style.Theme_Holo_Light_Dialog_NoActionBar),
             { _, hourOfDay, minute ->
                 var hours = hourOfDay
                 var type = "AM"
@@ -85,9 +85,8 @@ class TimePickerDialog(private val activity: BaseActivity) :
             true
         )
 
-
         timePickerDialog.show()
-        timePickerDialog.window?.setBackgroundDrawableResource(android.R.color.white)
+        timePickerDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         timePickerDialog.getButton(BUTTON_POSITIVE)
             .setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
         timePickerDialog.getButton(BUTTON_NEGATIVE)

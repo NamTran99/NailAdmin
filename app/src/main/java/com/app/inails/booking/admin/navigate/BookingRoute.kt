@@ -18,7 +18,7 @@ interface BookingRoute {
     fun BaseFragment.redirectToCreateAppointment(id: Int? = null)
     fun BaseFragment.redirectToChooseStaff(id: Int? = null)
     fun redirectToAppointmentDetail(self: RouteDispatcher, id:Int)
-    fun redirectToChooseStaff(self: RouteDispatcher, type : Int = 0)
+    fun redirectToChooseStaff(self: RouteDispatcher, type : Int = 0, dateTime : String ?= null)
 }
 
 class BookingRouteImpl : BookingRoute {
@@ -26,8 +26,9 @@ class BookingRouteImpl : BookingRoute {
         findNavigator().navigate(
             BookingFragment::class, navOptions = NavOptions(
                 popupTo = BookingFragment::class,
-                reuseInstance = true,
-                inclusive = true
+                reuseInstance = false,
+                inclusive = false,
+                singleTask = true
             )
         )
     }
@@ -52,7 +53,7 @@ class BookingRouteImpl : BookingRoute {
         self.open<MainNavigationActivity>(Routing.AppointmentDetail(id))
     }
 
-    override fun redirectToChooseStaff(self: RouteDispatcher, type: Int) {
-        self.open<MainNavigationActivity>(Routing.ChooseStaff(type))
+    override fun redirectToChooseStaff(self: RouteDispatcher, type: Int, dateTime : String?) {
+        self.open<MainNavigationActivity>(Routing.ChooseStaff(type,dateTime))
     }
 }

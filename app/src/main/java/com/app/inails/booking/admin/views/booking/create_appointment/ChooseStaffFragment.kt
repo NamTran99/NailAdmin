@@ -18,6 +18,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentChooseStaffBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.isCurrentDate
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.StaffForm
 import com.app.inails.booking.admin.navigate.Routing
@@ -39,10 +40,10 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
                 R.string.label_choose_staff
             ) { appActivity.onBackPressed() })
         with(binding) {
-            searchView.show(arg?.type != 1)
+            searchView.show(arg?.type != 1 && arg?.type != 2)
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener {
-                if (arg?.type != 1)
+                if (arg?.type != 1 || (arg?.type == 2 && !arg!!.dateTime.isCurrentDate()))
                     refresh(searchView.text.toString())
                 else viewModel.staffCheckIn()
             }
@@ -64,7 +65,7 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
                         phone = it.phone
                         name = it.name
                     }
-                    if (arg?.type != 1)
+                    if (arg?.type != 1  && arg?.type != 2)
                         appEvent.chooseStaffInCreateAppointment.post(it)
                     else
                         appActivity.appEvent.chooseStaff.post(it)
@@ -104,7 +105,7 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
 
     override fun onResume() {
         super.onResume()
-        if (arg?.type != 1)
+        if (arg?.type != 1 || (arg?.type == 2 && !arg!!.dateTime.isCurrentDate()))
             refresh(binding.searchView.text.toString())
         else viewModel.staffCheckIn()
     }

@@ -5,6 +5,8 @@ import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
+import android.support.core.route.clear
+import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
@@ -15,8 +17,8 @@ import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityLoginBinding
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.model.ui.LoginForm
-import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.LoginRepo
+import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity(R.layout.activity_login) {
@@ -40,7 +42,7 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
         with(viewModel) {
             loading.bind(binding.btLogin::setEnabled) { !this }
-            loginSuccess.bind { Router.run { redirectToMain() } }
+            loginSuccess.bind { open<MainActivity>().clear() }
         }
     }
 }

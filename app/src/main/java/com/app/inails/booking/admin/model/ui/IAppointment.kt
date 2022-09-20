@@ -29,6 +29,15 @@ interface IAppointment {
     val totalPrice: Double get() = 0.0
     val customer: ICustomer? get() = null
     val notes: String? get() = null
+    val dateTime: String get() = ""
+    val hasFeedback : Boolean get() = false
+    val feedbackContent : String get() = ""
+    val feedbackRating : Int get() = 0
+    val noteFinish : String get() = ""
+    val reasonCancel : String get() = ""
+    val price: Double get() = 0.0
+    val serviceCustomObj : IService? get() = null
+
 }
 
 @Parcelize

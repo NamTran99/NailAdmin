@@ -101,6 +101,7 @@
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_13"
             android:layout_weight="1"
+            android:maxLines="@null"
             android:gravity="end"
             tools:text="Aug 23 2022 - 2:58 PM" />
     </LinearLayout>
@@ -120,8 +121,9 @@
             android:id="@+id/tvServices"
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="0dp"
-            android:layout_marginStart="@dimen/size_13"
+            android:layout_marginStart="@dimen/size_50"
             android:layout_weight="1"
+            android:maxLines="@null"
             android:gravity="end"
             tools:text="Manicure, Pedicure, Wax" />
     </LinearLayout>
@@ -163,6 +165,28 @@
             android:layout_marginStart="@dimen/size_13"
             android:textColor="@color/yellow"
             app:drawableStartCompat="@drawable/circle_yellow"
+            tools:text="Waiting" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/totalAmountLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelStatus"
+        android:layout_marginTop="@dimen/size_10"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_total_amount"
+            android:textColor="@color/gray08" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
             tools:text="Waiting" />
     </FrameLayout>
 
@@ -229,7 +253,7 @@
         android:layout_marginTop="@dimen/size_12"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <View
             android:layout_width="match_parent"
@@ -243,6 +267,16 @@
             android:includeFontPadding="false"
             tools:text="Cancelled by Guest" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btRemove"
+            android:gravity="center"
+            android:text="@string/label_status"
+            android:layout_marginTop="@dimen/size_10"
+            android:textColor="@color/gray08" />
+
         <ImageButton
             android:id="@+id/btRemove"
             android:layout_width="@dimen/size_30"
@@ -252,7 +286,65 @@
             android:background="@drawable/button_red_circle"
             android:src="@drawable/ic_delete_outline" />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/noteLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/totalAmountLayout"
+        android:layout_marginTop="@dimen/size_10"
+        android:visibility="gone">
 
+        <View style="@style/AppTheme.Line.Horizontal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNote"
+            style="@style/AppTheme.TextView.Medium"
+            android:maxLines="@null"
+            android:layout_marginTop="@dimen/size_10"
+            android:textColor="@color/gray08"
+            tools:text="Waiting" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/feedbackLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noteLayout"
+        android:layout_marginTop="@dimen/size_10"
+        android:visibility="gone">
+
+        <View style="@style/AppTheme.Line.Horizontal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_marginTop="@dimen/size_10"
+            android:gravity="center"
+            android:text="@string/title_feed_back"
+            android:textColor="@color/black" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/size_10"
+            android:gravity="center"
+            android:theme="@style/AppTheme.RatingBar"
+            android:text="@string/title_feed_back"
+            android:clickable="false"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFeedbackContent"
+           style="@style/AppTheme.TextView.Medium"
+            android:layout_below="@+id/ratingBar"
+            android:layout_marginTop="@dimen/size_10"
+            android:maxLines="@null"
+            android:textColor="@color/gray08"
+            tools:text="Waiting" />
+
+    </RelativeLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartService"
         style="@style/AppTheme.ButtonDefault.Small"

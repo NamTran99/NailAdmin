@@ -43,7 +43,7 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
                 viewModel.refresh(nexPage)
             }
             mAdapter.onClickAppointmentListener = {
-                Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
+//                Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
             }
 
             btClose.setOnClickListener {

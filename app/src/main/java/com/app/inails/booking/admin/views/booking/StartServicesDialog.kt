@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.views.booking
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
+import android.util.Log
 import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
@@ -34,9 +35,13 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
         staffID = apm.staffID
         with(binding) {
             tvChooseStaff.setText(R.string.label_choose_staff)
+            val list = apm.serviceList.toMutableList()
+            apm.serviceCustomObj?.let { list.add(it) }
             (ServicePriceAdapter(rvServices)).apply {
-                submit(apm.serviceList)
+                submit(list)
             }
+            val hasDuration = apm.workTime > 0
+            durationLayout.show(!hasDuration)
             spHour.setSelection(0)
             spMinute.setSelection(0)
             staffLayout.show(apm.staffID == 0)
@@ -46,7 +51,8 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
                         .show()
                     return@onClick
                 }
-                if (spHour.selectedItemPosition == 0 && spMinute.selectedItemPosition == 0) {
+                Log.d("yenyen", "$hasDuration ${apm.workTime}")
+                if (spHour.selectedItemPosition == 0 && spMinute.selectedItemPosition == 0 && !hasDuration) {
                     Toast.makeText(
                         context,
                         R.string.error_empty_duration_time_to_service,
@@ -56,7 +62,7 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
                 }
                 val hours = (spHour.selectedItem as String).toInt()
                 val minutes = (spMinute.selectedItem as String).toInt()
-                val workingTime = (hours * 60) + minutes
+                val workingTime = if (hasDuration) apm.workTime else (hours * 60) + minutes
                 function.invoke(
                     staffID!!, workingTime
                 )

@@ -89,6 +89,16 @@ class AppointmentAdapter(view: RecyclerView) :
             (item.status == DataConst.AppointmentStatus.APM_WAITING && item.type == 1) show btStartService
             (item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING && item.type == 1) show btFinish
             (item.status == DataConst.AppointmentStatus.APM_CANCEL) show cancelLayout
+            feedbackLayout.show(item.hasFeedback)
+            tvFeedbackContent.text = item.feedbackContent
+            ratingBar.rating = item.feedbackRating.toFloat()
+            noteLayout.show(item.noteFinish.isNotEmpty())
+            tvNote.text = item.noteFinish
+            tvReason.text = item.reasonCancel
+            totalAmountLayout.show((item.status == DataConst.AppointmentStatus.APM_FINISH))
+            tvAmount.text = item.price.formatPrice()
+            ratingBar.rating = item.feedbackRating.toFloat()
+
         }
     }
 

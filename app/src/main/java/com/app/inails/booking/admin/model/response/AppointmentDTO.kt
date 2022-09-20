@@ -15,7 +15,7 @@ data class AppointmentDTO(
     val status: Int = 0,
     val date_finished: String? = null,
     val notes: String? = null,
-    val work_time: String? = null,
+    val work_time: Int? = null,
     val reason_cancel: String? = null,
     val canceled_by: String? = null,
     val rating: Float? = null,
@@ -32,7 +32,10 @@ data class AppointmentDTO(
     val canceled_by_name: String = "",
     val services: List<ServiceDTO> = listOf(),
     val time_working: String = "",
-    val customer: CustomerDTO
+    val customer: CustomerDTO,
+    val list_service_names_with_price: String = "",
+    val feedback: FeedbackDTO?,
+    val service_custom : ServiceDTO?
 )
 
 data class AppointmentUpdateDTO(

@@ -17,7 +17,6 @@
         android:id="@+id/tvStatus"
         style="@style/AppTheme.TextView.Medium"
         android:layout_marginTop="@dimen/size_8"
-        android:textSize="@dimen/text_size_10"
         app:drawableStartCompat="@drawable/circle_yellow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStaffName"
@@ -35,8 +34,8 @@
         style="@style/AppTheme.TextView.SemiBold"
         android:layout_marginTop="@dimen/size_8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/lightBlue03"
         app:layout_constraintTop_toBottomOf="@+id/tvCustomerName"
         tools:text="Customer Name" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,12 +14,14 @@
         style="@style/AppTheme.TextView.Medium"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:maxLines="2"
         android:textColor="@color/text_desc_color"
         android:textSize="@dimen/text_size_14"
-        tools:text="Manicure" />
+        tools:text="Manicure Manicure Manicure Manicure Manicure Manicure Manicure Manicure" />
 
     <TextView
         android:id="@+id/tvPrice"
+        android:layout_marginStart="@dimen/size_13"
         style="@style/AppTheme.TextView.Medium"
         android:textColor="@color/text_desc_color"
         android:textSize="@dimen/text_size_14"

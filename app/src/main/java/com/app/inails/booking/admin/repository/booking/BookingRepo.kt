@@ -15,6 +15,8 @@ class AppointmentRepository(
     private val bookingFactory: BookingFactory,
 ) {
     val results = MutableLiveData<List<IAppointment>>()
+    val result = MutableLiveData<IAppointment>()
+    val resultRemove = MutableLiveData<Int>()
     suspend operator fun invoke(type: Int) {
         results.post(
             bookingFactory
@@ -24,16 +26,9 @@ class AppointmentRepository(
                 )
         )
     }
-}
 
-@Inject(ShareScope.Fragment)
-class UpdateStatusApmRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: AppointmentStatusForm) {
-        results.post(
+    suspend fun updateStatusAppointment(form: AppointmentStatusForm) {
+        result.post(
             bookingFactory
                 .createAAppointment(
                     bookingApi.updateStatusAppointment(form)
@@ -41,33 +36,16 @@ class UpdateStatusApmRepository(
                 )
         )
     }
-}
 
-@Inject(ShareScope.Fragment)
-class CustomerWalkInRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(id: Int) {
-        results.post(
-            bookingFactory
-                .createAAppointment(
-                    bookingApi.customerWalkIn(id)
-                        .await()
-                )
-        )
+    suspend fun customerWalkIn(id: Int) {
+        bookingApi.customerWalkIn(id)
+            .await()
+        resultRemove.post(id)
+
     }
-}
 
-@Inject(ShareScope.Fragment)
-class HandleAppointmentRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: HandleAppointmentForm) {
-        results.post(
+    suspend fun adminHandleAppointment(form: HandleAppointmentForm) {
+        result.post(
             bookingFactory
                 .createAAppointment(
                     bookingApi.adminHandleAppointment(form)
@@ -75,17 +53,9 @@ class HandleAppointmentRepository(
                 )
         )
     }
-}
 
-
-@Inject(ShareScope.Fragment)
-class CancelAppointmentRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: CancelAppointmentForm) {
-        results.post(
+    suspend fun cancelAppointment(form: CancelAppointmentForm) {
+        result.post(
             bookingFactory
                 .createAAppointment(
                     bookingApi.cancelAppointment(form)
@@ -93,30 +63,17 @@ class CancelAppointmentRepository(
                 )
         )
     }
-}
 
-@Inject(ShareScope.Fragment)
-class RemoveAppointmentRepository(
-    private val bookingApi: BookingApi
-) {
-    val results = MutableLiveData<Int>()
-    suspend operator fun invoke(id: Int) {
+    suspend fun removeAppointment(id: Int) {
         bookingApi.removeAppointment(id)
             .await()
-        results.post(
+        resultRemove.post(
             id
         )
     }
-}
 
-@Inject(ShareScope.Fragment)
-class StartServiceRepository(
-    private val bookingApi: BookingApi,
-    private val bookingFactory: BookingFactory,
-) {
-    val results = MutableLiveData<IAppointment>()
-    suspend operator fun invoke(form: StartServiceForm) {
-        results.post(
+    suspend fun startServiceAppointment(form: StartServiceForm) {
+        result.post(
             bookingFactory
                 .createAAppointment(
                     bookingApi.startServiceAppointment(form)
@@ -124,6 +81,7 @@ class StartServiceRepository(
                 )
         )
     }
+
 }
 
 @Inject(ShareScope.Fragment)

@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:minHeight="?actionBarSize">
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:id="@+id/btMenuClose"
-        android:layout_gravity="bottom"
-        style="@style/AppTheme.Button"
-            android:fontFamily="@font/larken_extrabold_italic"
-        android:layout_width="wrap_content"
-        android:textSize="@dimen/text_size_15"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="@dimen/size_13"
+        android:drawablePadding="@dimen/size_16"
+        android:fontFamily="@font/larken_extrabold_italic"
         android:text="@string/title_menu"
         android:textAllCaps="false"
+        android:gravity="start|center"
         android:textColor="@color/colorPrimary"
-        app:backgroundTint="@color/white"
-        app:iconPadding="@dimen/size_10"
-        app:icon="@drawable/ic_menu_close"
-        app:iconGravity="textStart"
-        app:iconTint="@color/colorPrimary"
-        app:rippleColor="@color/colorPrimary" />
+        android:textSize="@dimen/text_size_15"
+        app:drawableStartCompat="@drawable/ic_menu_close" />
 </FrameLayout>

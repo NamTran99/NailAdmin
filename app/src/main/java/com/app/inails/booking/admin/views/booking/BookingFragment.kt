@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.views.booking
 
 import android.os.Bundle
 import android.support.core.view.viewBinding
+import android.support.navigation.findNavigator
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -25,10 +26,11 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking), TopBarOwner {
                 Router.open(this@BookingFragment, Routing.CreateAppointment)
             }
             appointViewPager.isUserInputEnabled = false
-            binding.appointTab.setOnSelected{
+            binding.appointTab.setOnSelected {
 
             }
         }
+
         Adapter(binding.appointViewPager, this).apply {
             submit(DataConst.AppointmentTab.appointment)
             setupPageChangeWith(binding.appointTab)

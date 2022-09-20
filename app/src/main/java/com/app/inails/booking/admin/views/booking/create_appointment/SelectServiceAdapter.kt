@@ -10,6 +10,7 @@ import com.app.inails.booking.admin.databinding.ItemServiceSelectBinding
 import com.app.inails.booking.admin.extention.drawableStart
 import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.support.ISelector
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
@@ -19,7 +20,7 @@ class SelectServiceAdapter(view: RecyclerView) :
     var onClickItemListener: ((Boolean) -> Unit)? = null
     val selectedItems: List<Int>
         get() = if (items.isNullOrEmpty()) emptyList()
-        else items?.filter { (it as ISelector).isSelector }?.map { it.id } ?: emptyList()
+        else items?.filter { (it as ISelector).isSelector && it.id != 0 }?.map { it.id } ?: emptyList()
 
     override fun onCreateBinding(parent: ViewGroup): ItemServiceSelectBinding {
         return parent.bindingOf(ItemServiceSelectBinding::inflate)
@@ -34,6 +35,7 @@ class SelectServiceAdapter(view: RecyclerView) :
         binding.apply {
             tvServiceName.text = item.name
             tvPrice.text = item.price.formatPrice()
+            tvPrice.show(item.id != 0)
             configSelect(this, (item as ISelector).isSelector)
             root.onClick {
                 item.isSelector = !item.isSelector

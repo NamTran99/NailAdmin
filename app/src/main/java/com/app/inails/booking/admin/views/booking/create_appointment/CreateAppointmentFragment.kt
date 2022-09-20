@@ -79,7 +79,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                     services = mServiceAdapter.selectedItems.toString()
                     dateAppointment = if (tvSelectTime.text.toString()
                             .isEmpty()
-                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}:00"
+                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}"
                 }
                 viewModel.submit()
             }
@@ -91,6 +91,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 onClickItemListener = {
                     viewModel.form.hasServiceCustom = it
                     (it) show binding.etSomethingElse
+                    if (!it) binding.etSomethingElse.setText("")
                 }
             }::submit)
             success.bind {
@@ -121,7 +122,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
             binding.tvSelectDate.tag = mDateTagSelected
         }
         if (mTimeSelected.isNotEmpty()) binding.tvSelectTime.text = mTimeSelected
-
+        (viewModel.form.hasServiceCustom) show binding.etSomethingElse
     }
 
 }

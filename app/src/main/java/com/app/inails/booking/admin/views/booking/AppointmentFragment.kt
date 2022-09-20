@@ -46,7 +46,7 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
             }
             appointments.bind(mAdapter.apply {
                 onClickItemListener = {
-                    Router.redirectToAppointmentDetail(self, it.id)
+//                    Router.redirectToAppointmentDetail(self, it.id)
                 }
                 onClickCancelListener = { apm ->
                     rejectAppointmentDialog.show(R.string.title_cancel_appointment) {
@@ -82,7 +82,7 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                 onClickHandleListener = { apm, status ->
                     if (status == 1) {
                         acceptAppointmentDialog.onSelectStaffListener = {
-                            Router.redirectToChooseStaff(self, 1)
+                            Router.redirectToChooseStaff(self, 2, apm.dateAppointment)
                         }
                         acceptAppointmentDialog.show(apm) { minutes, stffID ->
                             viewModel.formHandle.run {
@@ -155,13 +155,11 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                 appEvent.changeTabBooking.post(0)
             }
 
-            appointUpdate.bind {
+            appointment.bind {
                 finishBookingDialog.dismiss()
-                mAdapter.updateItem(it)
-            }
-
-            appointCancel.bind {
                 rejectAppointmentDialog.dismiss()
+                startServicesDialog.dismiss()
+                acceptAppointmentDialog.dismiss()
                 mAdapter.updateItem(it)
             }
 
@@ -169,23 +167,10 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
                 mAdapter.removeItem(it)
             }
 
-            appointWalkIn.bind {
-                mAdapter.removeItem(it.id)
-            }
-
-            appointHandle.bind {
-                acceptAppointmentDialog.dismiss()
-                rejectAppointmentDialog.dismiss()
-                mAdapter.updateItem(it)
-            }
-
-            appointStartService.bind {
-                startServicesDialog.dismiss()
-                mAdapter.updateItem(it)
-            }
         }
 
         appActivity.appEvent.chooseStaff.observe(viewLifecycleOwner) {
+            toast("select staff")
             startServicesDialog.updateStaff(it)
             acceptAppointmentDialog.updateStaff(it)
         }
@@ -209,21 +194,11 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
 
 class AppointmentViewModel(
     private val appointmentRepo: AppointmentRepository,
-    private val updateStatusApmRepo: UpdateStatusApmRepository,
-    private val cancelAppointmentRepo: CancelAppointmentRepository,
-    private val removeAppointmentRepo: RemoveAppointmentRepository,
-    private val customerWalkInRepo: CustomerWalkInRepository,
-    private val handleAppointmentRepo: HandleAppointmentRepository,
-    private val startServiceRepo: StartServiceRepository,
     private val remindAppointmentRepo: RemindAppointmentRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val appointments = appointmentRepo.results
-    val appointUpdate = updateStatusApmRepo.results
-    val appointCancel = cancelAppointmentRepo.results
-    val idRemove = removeAppointmentRepo.results
-    val appointWalkIn = customerWalkInRepo.results
-    val appointHandle = handleAppointmentRepo.results
-    val appointStartService = startServiceRepo.results
+    val idRemove = appointmentRepo.resultRemove
+    val appointment = appointmentRepo.result
     val form = AppointmentStatusForm()
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
@@ -241,26 +216,26 @@ class AppointmentViewModel(
     }
 
     fun updateStatus() = launch(loading, error) {
-        updateStatusApmRepo(form)
+        appointmentRepo.updateStatusAppointment(form)
         success.post("Finish booking success")
     }
 
     fun cancel() = launch(loading, error) {
-        cancelAppointmentRepo(formCancel)
+        appointmentRepo.cancelAppointment(formCancel)
         success.post("Cancel success")
     }
 
     fun remove(id: Int) = launch(loading, error) {
-        removeAppointmentRepo(id)
+        appointmentRepo.removeAppointment(id)
         success.post("Remove booking success")
     }
 
     fun customerWalkIn(id: Int) = launch(loading, error) {
-        checkInSuccess.post(customerWalkInRepo(id))
+        checkInSuccess.post(appointmentRepo.customerWalkIn(id))
     }
 
     fun handle() = launch(loading, error) {
-        handleAppointmentRepo(formHandle)
+        appointmentRepo.adminHandleAppointment(formHandle)
         if (formHandle.isAccepted == 1)
             success.post("Accept booking success")
         else
@@ -268,7 +243,7 @@ class AppointmentViewModel(
     }
 
     fun startService() = launch(loading, error) {
-        startServiceRepo(formStartService)
+        appointmentRepo.startServiceAppointment(formStartService)
         success.post("Start service success")
     }
 

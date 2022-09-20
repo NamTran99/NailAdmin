@@ -22,7 +22,8 @@ import com.app.inails.booking.admin.databinding.FragmentAppointmentDetailBinding
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Routing
-import com.app.inails.booking.admin.repository.booking.*
+import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
+import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -75,32 +76,21 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 appEvent.changeTabBooking.post(0)
             }
 
-            appointUpdate.bind {
-                finishBookingDialog.dismiss()
-                displays(it)
+            checkInSuccess.bind {
+                success("Client check-in success")
+                appEvent.changeTabBooking.post(0)
             }
 
-            appointCancel.bind {
+            appointment.bind {
+                finishBookingDialog.dismiss()
+                rejectAppointmentDialog.dismiss()
+                startServicesDialog.dismiss()
+                acceptAppointmentDialog.dismiss()
                 displays(it)
             }
 
             idRemove.bind {
                 findNavigator().navigateUp()
-            }
-
-            appointWalkIn.bind {
-                displays(it)
-            }
-
-            appointHandle.bind {
-                acceptAppointmentDialog.dismiss()
-                rejectAppointmentDialog.dismiss()
-                displays(it)
-            }
-
-            appointStartService.bind {
-                startServicesDialog.dismiss()
-                displays(it)
             }
         }
         setListeners()
@@ -221,20 +211,10 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
 
 class AppointmentDetailViewModel(
     private val appointmentDetailRepo: AppointmentDetailRepository,
-    private val updateStatusApmRepo: UpdateStatusApmRepository,
-    private val cancelAppointmentRepo: CancelAppointmentRepository,
-    private val removeAppointmentRepo: RemoveAppointmentRepository,
-    private val customerWalkInRepo: CustomerWalkInRepository,
-    private val handleAppointmentRepo: HandleAppointmentRepository,
-    private val startServiceRepo: StartServiceRepository,
+    private val appointmentRepo: AppointmentRepository,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val appointment = appointmentDetailRepo.results
-    val appointUpdate = updateStatusApmRepo.results
-    val appointCancel = cancelAppointmentRepo.results
-    val idRemove = removeAppointmentRepo.results
-    val appointWalkIn = customerWalkInRepo.results
-    val appointHandle = handleAppointmentRepo.results
-    val appointStartService = startServiceRepo.results
+    val idRemove = appointmentRepo.resultRemove
     val form = AppointmentStatusForm()
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
@@ -252,27 +232,27 @@ class AppointmentDetailViewModel(
     }
 
     fun updateStatus() = launch(loading, error) {
-        success.post(updateStatusApmRepo(form))
+        success.post(appointmentRepo.updateStatusAppointment(form))
     }
 
     fun cancel() = launch(loading, error) {
-        success.post(cancelAppointmentRepo(formCancel))
+        success.post(appointmentRepo.cancelAppointment(formCancel))
     }
 
     fun remove(id: Int) = launch(loading, error) {
-        success.post(removeAppointmentRepo(id))
+        success.post(appointmentRepo.removeAppointment(id))
     }
 
     fun customerWalkIn(id: Int) = launch(loading, error) {
-        checkInSuccess.post(customerWalkInRepo(id))
+        checkInSuccess.post(appointmentRepo.customerWalkIn(id))
     }
 
     fun handle() = launch(loading, error) {
-        success.post(handleAppointmentRepo(formHandle))
+        success.post(appointmentRepo.adminHandleAppointment(formHandle))
     }
 
     fun startService() = launch(loading, error) {
-        success.post(startServiceRepo(formStartService))
+        success.post(appointmentRepo.startServiceAppointment(formStartService))
     }
 }
 

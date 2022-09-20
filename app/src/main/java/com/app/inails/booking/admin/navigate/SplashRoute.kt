@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.navigate
 
 import android.support.core.route.RouteDispatcher
+import android.support.core.route.clear
 import android.support.core.route.close
 import android.support.core.route.open
 import com.app.inails.booking.admin.views.auth.LoginActivity
@@ -13,7 +14,7 @@ interface SplashRoute {
 
 open class SplashRouteImpl : SplashRoute {
     override fun RouteDispatcher.redirectToMain() {
-        open<MainActivity>().close()
+        open<MainActivity>().clear()
     }
 
     override fun RouteDispatcher.redirectToLogin() {

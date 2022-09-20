@@ -5,8 +5,11 @@ import android.support.di.ShareScope
 import android.telephony.PhoneNumberUtils
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.extention.toDate
 import com.app.inails.booking.admin.model.response.CustomerDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @Inject(ShareScope.Singleton)
@@ -47,6 +50,7 @@ class TextFormatter {
     fun formatBackgroundStaffColor(active: Int): Int {
         return if (active == 1) R.color.white else R.color.gray11
     }
+
     fun formatTextColorStaffColor(active: Int): Int {
         return if (active == 1) R.color.black else R.color.gray05
     }
@@ -86,9 +90,38 @@ class TextFormatter {
 
     fun fullAddress(customerDTO: CustomerDTO) =
         if (customerDTO.address.isNullOrEmpty() && customerDTO.city.isNullOrEmpty()
-            && customerDTO.state.isNullOrEmpty() && customerDTO.zip.isNullOrEmpty())
+            && customerDTO.state.isNullOrEmpty() && customerDTO.zip.isNullOrEmpty()
+        )
             "No Info"
         else
             "${customerDTO.address ?: ""}, ${customerDTO.city ?: ""}, ${customerDTO.state ?: ""}, ${customerDTO.zip ?: ""}"
 
+    fun getTimeEndAppointment(timeCheckIn: String?, workTime: Int?): String {
+        if (timeCheckIn.isNullOrEmpty()) return ""
+        if (workTime == null || workTime == 0) return ""
+        val df = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val d = df.parse(timeCheckIn)
+        val today = Calendar.getInstance()
+        if (d != null) {
+            today.time = d
+        }
+        val timePlus = today.timeInMillis + (workTime * 60 * 1000)
+        return df.format(Date(timePlus))
+    }
+
+    fun getDateTimeWithEndAppointment(
+        dateTime: String,
+        dateTimeFormat: String,
+        workTime: Int?
+    ): String {
+
+        if (dateTimeFormat.isEmpty()) return dateTimeFormat
+        if (workTime == null || workTime == 0) return dateTimeFormat
+        val timeStart = dateTimeFormat.toDate()
+        val today = Calendar.getInstance()
+        today.time = timeStart
+        val timePlus = today.timeInMillis + (workTime * 60 * 1000)
+        val parser = SimpleDateFormat("MMM dd,yyyy hh:mm a", Locale.getDefault())
+        return "$dateTimeFormat-\n${parser.format(Date(timePlus))}"
+    }
 }

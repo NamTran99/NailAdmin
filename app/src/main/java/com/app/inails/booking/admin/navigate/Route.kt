@@ -67,7 +67,7 @@ interface Routing : BundleArgument {
     }
 
     @Parcelize
-    class ChooseStaff(val type : Int = 0): Routing{
+    class ChooseStaff(val type : Int = 0,val dateTime : String?): Routing{
         override val fragmentClass: KClass<out Fragment>
             get() = ChooseStaffFragment::class
     }

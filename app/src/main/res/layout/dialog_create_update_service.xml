@@ -40,7 +40,7 @@
         style="@style/AppTheme.EditText"
         android:layout_marginTop="@dimen/size_12"
         android:hint="@string/price"
-        android:inputType="phone"
+        android:inputType="number"
         android:drawableEnd="@drawable/ic_dollar"
         android:maxLength="14" />
 
