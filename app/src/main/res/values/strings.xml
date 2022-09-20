@@ -83,4 +83,7 @@
     <string name="btn_service">Service</string>
     <string name="booking_list">Booking List</string>
     <string name="message_start_service_success">Start service success!</string>
+    <string name="your_email">Your Email</string>
+    <string name="sample_gmail_com">sample@gmail.com</string>
+    <string name="edit">edit</string>
 </resources>

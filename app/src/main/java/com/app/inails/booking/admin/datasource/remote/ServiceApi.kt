@@ -32,6 +32,10 @@ interface ServiceApi : Injectable {
     @POST("service/delete-service")
     fun deleteService(@Field("id") serviceID: Int): ApiAsync<Any>
 
+    @FormUrlEncoded
+    @POST("service/change-active")
+    fun changeActiveService(@Field("id") serviceID: Int): ApiAsync<ServiceDTO>
+
     @POST("service/update-service")
     fun updateService(@Body form: ServiceForm): ApiAsync<ServiceDTO>
 

@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.model.ui
 
 import android.os.Parcelable
+import androidx.annotation.ColorRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.extention.safe
@@ -9,10 +10,12 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-interface IService {
+interface IService{
     val id: Int get() = 0
     val name: String get() = ""
     val price: Double get() = 0.0
+    val isActive: Int get() = 0
+    val textColor: Int @ColorRes get() = R.color.white
 }
 
 class ServiceImpl : IService, ISelector {

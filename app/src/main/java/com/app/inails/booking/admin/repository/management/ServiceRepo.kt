@@ -56,6 +56,22 @@ class DeleteServiceRepository(
 }
 
 @Inject(ShareScope.Fragment)
+class ChangeActiveServiceRepository(
+    private val serviceApi: ServiceApi,
+    private val bookingFactory: BookingFactory,
+) {
+    val results = MutableLiveData<IService>()
+    suspend operator fun invoke(serviceID: Int) {
+        results.post(
+            bookingFactory
+                .createAService(
+                    serviceApi.changeActiveService(serviceID).await()
+                )
+        )
+    }
+}
+
+@Inject(ShareScope.Fragment)
 class FetchListServiceRepo(
     private val serviceApi: ServiceApi,
     private val bookingFactory: BookingFactory,

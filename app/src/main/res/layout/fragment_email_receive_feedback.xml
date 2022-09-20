@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,64 +10,55 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/size_10"
         android:background="@drawable/bg_white_radius"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/size_15"
         android:paddingTop="@dimen/size_24"
-        android:paddingBottom="@dimen/size_16">
+        android:paddingBottom="@dimen/size_27">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/size_28"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                style="@style/AppTheme.TextView.Medium"
-                android:text="@string/enter_your_email" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/size_12"
-                android:background="?selectableItemBackgroundBorderless"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_close" />
-
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/your_email" />
 
         <TextView
             style="@style/AppTheme.TextViewResponsive"
-            android:textAlignment="center"
             android:layout_marginHorizontal="@dimen/size_74"
-            android:textColor="@color/text_hint_description"
             android:layout_marginBottom="@dimen/size_28"
-            android:text="@string/email_receive_feedback_description" />
+            android:text="@string/email_receive_feedback_description"
+            android:textAlignment="center"
+            android:textColor="@color/text_hint_description" />
 
-        <EditText
-            android:id="@+id/etEnterEmail"
-            style="@style/AppTheme.EditText"
-            android:layout_marginBottom="@dimen/size_12"
-            android:hint="@string/email"
-            android:drawableStart="@drawable/ic_email"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionDone"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btSave"
-            style="@style/AppTheme.ButtonDefault"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_gravity="bottom|center"
-            android:background="@drawable/button_blue_corner"
-            android:text="@string/btn_save" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_5"
+                android:drawablePadding="@dimen/size_13"
+                android:text="@string/sample_gmail_com"
+                app:drawableStartCompat="@drawable/ic_email" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/size_10"
+                android:drawablePadding="@dimen/size_10"
+                android:text="@string/edit"
+                android:textColor="@color/colorPrimary"
+                app:drawableStartCompat="@drawable/ic_edit_2" />
+
+        </RelativeLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

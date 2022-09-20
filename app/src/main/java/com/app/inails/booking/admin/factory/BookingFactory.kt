@@ -22,6 +22,10 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = serviceDTO.name.safe()
             override val price: Double
                 get() = serviceDTO.price.safe()
+            override val isActive: Int
+                get() = serviceDTO.active.safe()
+            override val textColor: Int
+                get() = textFormatter.formatTextColorStaffColor(serviceDTO.active.safe())
         }
     }
 

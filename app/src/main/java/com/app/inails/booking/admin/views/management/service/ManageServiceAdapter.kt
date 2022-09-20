@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemManageServiceBinding
 import com.app.inails.booking.admin.extention.findIndex
@@ -37,6 +38,9 @@ class ManageServiceAdapter(view: RecyclerView) :
 
             tvName.text = item.name
             tvPrice.text = "$${item.price}"
+
+            tvPrice.setTextColor(ContextCompat.getColor(view.context, item.textColor))
+            tvName.setTextColor(ContextCompat.getColor(view.context, item.textColor))
         }
     }
 

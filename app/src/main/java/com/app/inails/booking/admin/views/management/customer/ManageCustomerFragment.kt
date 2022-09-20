@@ -51,7 +51,7 @@ class ManageCustomerFragment : BaseRefreshFragment(R.layout.fragment_manage_cust
     private fun setUpView() {
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_staff
+                R.string.mn_manage_customer
             ) { activity?.onBackPressed() })
 
         with(binding) {

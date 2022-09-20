@@ -30,11 +30,11 @@ class EmailReceiveFeedbackFragment : BaseFragment(R.layout.fragment_email_receiv
                 R.string.title_email_receive_feedback
             ) { activity?.onBackPressed() })
 
-        with(binding){
-            btSave.setOnClickListener {
-                viewModel.submit(etEnterEmail.text.toString())
-            }
-        }
+//        with(binding){
+//            btSave.setOnClickListener {
+//                viewModel.submit(etEnterEmail.text.toString())
+//            }
+//        }
 
         with(viewModel){
             success.bind {

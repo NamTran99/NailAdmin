@@ -12,12 +12,22 @@ class PopUpServiceMore(var id: Int, var name: String, var pos: Int, var service:
 
     companion object {
         const val EDIT_ID = 0
-        const val DELETE_ID = 1
+        const val ACTIVE_ID = 1
+        const val DELETE_ID = 2
 
         fun mockActive(context: Context): ArrayList<PopUpServiceMore> {
             return arrayListOf(
                 PopUpServiceMore(EDIT_ID, context.getString(R.string.btn_edit), 0, null),
-                PopUpServiceMore(DELETE_ID, context.getString(R.string.btn_delete), 1, null)
+                PopUpServiceMore(ACTIVE_ID, context.getString(R.string.btn_inactive), 1, null),
+                PopUpServiceMore(DELETE_ID, context.getString(R.string.btn_delete), 2, null)
+            )
+        }
+
+        fun mockInActive(context: Context): ArrayList<PopUpServiceMore> {
+            return arrayListOf(
+                PopUpServiceMore(EDIT_ID, context.getString(R.string.btn_edit), 0, null),
+                PopUpServiceMore(ACTIVE_ID, context.getString(R.string.btn_active), 1, null),
+                PopUpServiceMore(DELETE_ID, context.getString(R.string.btn_delete), 2, null)
             )
         }
     }

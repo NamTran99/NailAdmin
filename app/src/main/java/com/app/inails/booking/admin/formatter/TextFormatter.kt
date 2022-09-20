@@ -44,9 +44,15 @@ class TextFormatter {
         }
     }
 
+    fun formatBackgroundStaffColor(active: Int): Int {
+        return if (active == 1) R.color.white else R.color.gray11
+    }
     fun formatTextColorStaffColor(active: Int): Int {
         return if (active == 1) R.color.black else R.color.gray05
+    }
 
+    fun formatBackgroundServiceColor(active: Int): Int {
+        return if (active == 1) R.color.white else R.color.gray11
     }
 
     fun formatStatusAppointmentIcon(status: Int?, type: Int): Int {
