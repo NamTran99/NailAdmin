@@ -3,7 +3,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
-//    id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -86,5 +86,5 @@ dependencies {
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-//    implementation 'com.readystatesoftware.chuck:library:1.1.0'
+    implementation 'com.readystatesoftware.chuck:library:1.1.0'
 }
