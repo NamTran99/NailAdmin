@@ -25,7 +25,8 @@ import com.app.inails.booking.admin.model.ui.CreateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
-import com.app.inails.booking.admin.repository.auth.*
+import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
+import com.app.inails.booking.admin.repository.auth.StaffRepo
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -88,22 +89,10 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
             staff.bind {
                 mAdapter.updateItem(it)
             }
-
-            staffCreated.bind {
-                mAdapter.insertItem(it)
-            }
-
-            staffUpdated.bind {
-                mAdapter.updateItem(it)
-            }
-
-            staffDelete.bind {
+            staffRemove.bind {
                 mAdapter.removeItem(it)
             }
 
-            staffChange.bind {
-                mAdapter.updateItem(it)
-            }
         }
     }
 
@@ -209,20 +198,13 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
 
 
 class ManageStaffViewModel(
-    private val changeStatusRepo: ChangeStatusRepository,
-    private val updateStaffRepo: UpdateStaffRepository,
-    private val createStaffRepo: CreateStaffRepository,
     private val fetchAllStaffRepo: FetchAllStaffRepo,
-    private val deleteStaffRepo: DeleteStaffRepository,
-    private val changeActiveStaffRepo: ChangeActiveStaffRepository
+    private val staffRepo: StaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val loadingCustom: LoadingEvent = LoadingLiveData()
     val staffs = fetchAllStaffRepo.results
-    val staff = changeStatusRepo.results
-    val staffCreated = createStaffRepo.results
-    val staffUpdated = updateStaffRepo.results
-    val staffDelete = deleteStaffRepo.results
-    val staffChange = changeActiveStaffRepo.results
+    val staff = staffRepo.result
+    val staffRemove = staffRepo.resultRemove
     val form = UpdateStatusStaffForm()
     val updateForm = UpdateStaffForm()
     val createForm = CreateStaffForm()
@@ -237,23 +219,23 @@ class ManageStaffViewModel(
     }
 
     fun changeStatus() = launch(loading, error) {
-        success.post(changeStatusRepo(form))
+        success.post(staffRepo.changeStatus(form))
     }
 
     fun create() = launch(loading, error) {
-        success.post(createStaffRepo(createForm))
+        success.post(staffRepo.create(createForm))
     }
 
     fun update() = launch(loading, error) {
-        success.post(updateStaffRepo(updateForm))
+        success.post(staffRepo.update(updateForm))
     }
 
     fun delete(id: Int) = launch(loading, error) {
-        success.post(deleteStaffRepo(id))
+        success.post(staffRepo.delete(id))
     }
 
     fun changeActive(id: Int) = launch(loading, error) {
-        success.post(changeActiveStaffRepo(id))
+        success.post(staffRepo.changeActive(id))
     }
 }
 
