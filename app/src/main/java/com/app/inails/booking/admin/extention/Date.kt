@@ -25,9 +25,5 @@ fun String.toDate(
 
 fun Long.toDate(
 ): Date {
-    val date = Date(this)
-    val parser = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-    parser.timeZone = TimeZone.getTimeZone("UTC")
-    val dateString = parser.format(date)
-    return dateString.toDate("yyyy-MM-dd HH:mm")
+    return  Date(this)
 }
