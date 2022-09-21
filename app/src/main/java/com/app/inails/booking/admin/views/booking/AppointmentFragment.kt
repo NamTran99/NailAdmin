@@ -49,7 +49,7 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
             }
             appointments.bind(mAdapter.apply {
                 onClickItemListener = {
-//                    Router.redirectToAppointmentDetail(self, it.id)
+                    Router.redirectToAppointmentDetail(self, it.id)
                 }
                 onClickCancelListener = { apm ->
                     rejectAppointmentDialog.show(R.string.title_cancel_appointment) {
@@ -173,7 +173,6 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
         }
 
         appActivity.appEvent.chooseStaff.observe(viewLifecycleOwner) {
-            toast("select staff")
             startServicesDialog.updateStaff(it)
             acceptAppointmentDialog.updateStaff(it)
         }

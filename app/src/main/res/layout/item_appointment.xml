@@ -92,7 +92,7 @@
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
-            android:text="@string/label_time_and_date"
+            android:text="@string/label_appointment_time"
             android:textColor="@color/gray08" />
 
         <TextView

@@ -35,7 +35,8 @@ data class AppointmentDTO(
     val customer: CustomerDTO,
     val list_service_names_with_price: String = "",
     val feedback: FeedbackDTO?,
-    val service_custom : ServiceDTO?
+    val service_custom : ServiceDTO?,
+    val date_appointment_timestamp :Long
 )
 
 data class AppointmentUpdateDTO(

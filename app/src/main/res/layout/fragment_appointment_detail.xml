@@ -90,11 +90,13 @@
                 <TextView
                     style="@style/AppTheme.TextView.Medium"
                     android:layout_marginTop="@dimen/size_20"
-                    android:text="@string/label_time_and_date"
+                    android:text="@string/label_appointment_time"
                     android:textColor="@color/gray08" />
 
                 <TextView
                     android:id="@+id/tvTimeAndDate"
+                    android:layout_width="match_parent"
+                    android:maxLines="@null"
                     style="@style/AppTheme.TextView.Medium"
                     android:layout_marginTop="@dimen/size_12" />
 

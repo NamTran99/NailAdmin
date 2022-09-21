@@ -40,5 +40,6 @@
     <string name="label_info_waiting_status">The customer is waiting for the services</string>
     <string name="label_info_service_status">Click here to start work on this customer</string>
     <string name="label_info_finish_status">Click here when you done</string>
+    <string name="label_appointment_time">Appointment Time</string>
 
 </resources>

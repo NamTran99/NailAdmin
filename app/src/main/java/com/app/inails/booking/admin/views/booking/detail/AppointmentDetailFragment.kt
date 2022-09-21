@@ -116,7 +116,6 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             (item.status == DataConst.AppointmentStatus.APM_ACCEPTED && item.type == 2) show acceptLayout
             (item.status == DataConst.AppointmentStatus.APM_PENDING && item.type == 2) show waitingLayout
             (item.status == DataConst.AppointmentStatus.APM_FINISH) show finishLayout
-
             (ServicePriceAdapter(rvServices)).apply {
                 submit(item.serviceList)
             }

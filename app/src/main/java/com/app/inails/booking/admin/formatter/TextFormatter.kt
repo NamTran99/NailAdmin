@@ -110,18 +110,18 @@ class TextFormatter {
     }
 
     fun getDateTimeWithEndAppointment(
-        dateTime: String,
+        dateTime: Long,
         dateTimeFormat: String,
         workTime: Int?
     ): String {
 
         if (dateTimeFormat.isEmpty()) return dateTimeFormat
         if (workTime == null || workTime == 0) return dateTimeFormat
-        val timeStart = dateTimeFormat.toDate()
+        val timeStart = dateTime.toDate()
         val today = Calendar.getInstance()
         today.time = timeStart
         val timePlus = today.timeInMillis + (workTime * 60 * 1000)
-        val parser = SimpleDateFormat("MMM dd,yyyy hh:mm a", Locale.getDefault())
+        val parser = SimpleDateFormat("MMMM dd,yyyy hh:mm a", Locale.getDefault())
         return "$dateTimeFormat-\n${parser.format(Date(timePlus))}"
     }
 }
