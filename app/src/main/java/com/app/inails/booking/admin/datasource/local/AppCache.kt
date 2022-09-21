@@ -12,7 +12,7 @@ import java.lang.reflect.Type
 class AppCache(context: Context) : Caching(context, ParserImpl()) {
     var email: String by string("email", "")
     var password: String by string("password", "")
-    var tokenPush: String by string("token", "")
+    var deviceToken: String by string("device_token", "")
     var token: String by string("token", "")
 }
 

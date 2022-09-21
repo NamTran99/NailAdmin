@@ -179,7 +179,7 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
 
         appActivity.appEvent.notifyCloudMessage.observe(viewLifecycleOwner){
             // chị tìm object NotifyFireBaseCloudType để filter theo type
-            Log.d("TAG", "NamTD8 onViewCreated: aaa")
+            viewModel.refresh(type)
         }
     }
 
@@ -213,10 +213,6 @@ class AppointmentViewModel(
     val success = SingleLiveEvent<String>()
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
-
-    init {
-//        refresh()
-    }
 
     fun refresh(type: Int) = launch(loadingCustom, error) {
         appointmentRepo(type)

@@ -68,7 +68,6 @@ class UserLocalSource(
 
     fun logout() {
         user = null
-        appCache.tokenPush = ""
     }
 
 }

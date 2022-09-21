@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "429729681629",
-    "project_id": "kiotapp-fce73",
-    "storage_bucket": "kiotapp-fce73.appspot.com"
+    "project_number": "660811193562",
+    "project_id": "the-best-booking",
+    "storage_bucket": "the-best-booking.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:429729681629:android:898f332e592231c3f4cb34",
+        "mobilesdk_app_id": "1:660811193562:android:2e12cb897e8fec488c19e3",
         "android_client_info": {
           "package_name": "com.app.booking.inails.admin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "429729681629-3ol0uklpdi8egur4hce1uchjen8qqn1k.apps.googleusercontent.com",
+          "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyByfW70awc26Tt7w_PH_G9KjIBHPIX3Bdk"
+          "current_key": "AIzaSyCwOQ91CXuzh44-d5iFOHGET66pP2sB3JE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "429729681629-3ol0uklpdi8egur4hce1uchjen8qqn1k.apps.googleusercontent.com",
+              "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,27 +36,51 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:429729681629:android:bf8149ad01cb99baf4cb34",
+        "mobilesdk_app_id": "1:660811193562:android:9c3579da79d5280a8c19e3",
         "android_client_info": {
-          "package_name": "com.example.cocarelish"
+          "package_name": "com.app.inails.booking"
         }
       },
       "oauth_client": [
         {
-          "client_id": "429729681629-3ol0uklpdi8egur4hce1uchjen8qqn1k.apps.googleusercontent.com",
+          "client_id": "660811193562-jumg7slvp1mdq1gfbgo91ul403cua0uv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.inails.booking",
+            "certificate_hash": "7e3c82922475ab9bcdb307a5798a400f8fe0154b"
+          }
+        },
+        {
+          "client_id": "660811193562-k9im4hogaiadok82uj7q5msu6t1vq3go.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.inails.booking",
+            "certificate_hash": "507d6128ff9caac572c029c9747242a57db0dc51"
+          }
+        },
+        {
+          "client_id": "660811193562-nr8jbljc3pnji1lh7ljugc9afvns3gum.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.inails.booking",
+            "certificate_hash": "a1b3240e5e7cef0279dee413e083f67108c28f08"
+          }
+        },
+        {
+          "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyByfW70awc26Tt7w_PH_G9KjIBHPIX3Bdk"
+          "current_key": "AIzaSyCwOQ91CXuzh44-d5iFOHGET66pP2sB3JE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "429729681629-3ol0uklpdi8egur4hce1uchjen8qqn1k.apps.googleusercontent.com",
+              "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

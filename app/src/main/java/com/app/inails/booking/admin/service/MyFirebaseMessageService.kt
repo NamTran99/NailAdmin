@@ -21,7 +21,6 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
     private lateinit var appCache: AppCache
 
     @SuppressLint("LongLogTag")
-
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         try {
             Log.d(TAG, "onMessageReceived: NamTD8")
@@ -47,7 +46,7 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
         appCache = AppCache(applicationContext)
-        appCache.tokenPush = p0
-        Log.d(TAG, "NamTD8 onTokenRefresh: ${appCache.tokenPush} ")
+        appCache.deviceToken = p0
+        Log.d(TAG, "NamTD8 onTokenRefresh: ${appCache.deviceToken} ")
     }
 }
