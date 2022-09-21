@@ -92,7 +92,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 Router.open(this, Routing.ChangePassword)
             }
             R.id.navReport -> {
-
+                Router.open(this, Routing.ReportSale)
             }
             else -> confirmDialog.show(
                 title = R.string.title_logout,

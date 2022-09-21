@@ -105,3 +105,7 @@ fun formatUsNumber(text: Editable): String {
 fun String.displaySafe(): String {
     return this.ifEmpty { "No Information" }
 }
+
+fun String?.displaySafe1(): String {
+    return if (this.isNullOrEmpty()) return "No Information" else this
+}

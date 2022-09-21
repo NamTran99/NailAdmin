@@ -90,7 +90,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
         return object : IAppointment {
             override val id: Int
                 get() = appointmentDTO.id.safe()
-            override val name: String
+            override val customerName: String
                 get() = appointmentDTO.customer_name.safe()
             override val dateAppointment: String
                 get() = textFormatter.getDateTimeWithEndAppointment(

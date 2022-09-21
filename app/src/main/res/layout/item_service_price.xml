@@ -12,10 +12,12 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:maxLines="2"
-        android:textColor="@color/gray15" />
+        android:textColor="@color/gray15"
+        android:textSize="@dimen/text_size_14" />
 
     <TextView
         android:id="@+id/tvPrice"
+        style="@style/AppTheme.TextView.Medium"
         android:layout_marginStart="@dimen/size_13"
-        style="@style/AppTheme.TextView.Medium" />
+        android:textSize="@dimen/text_size_14" />
 </androidx.appcompat.widget.LinearLayoutCompat>

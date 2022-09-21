@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:paddingTop="@dimen/size_16">
+    android:padding="@dimen/size_18">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,14 +28,16 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/lightBlue02"
             android:layout_alignParentEnd="true"
-            android:text="@string/booking_id"
-            android:textSize="@dimen/text_size_12" />
+            android:textSize="@dimen/text_size_12"
+            tools:text="John Cena" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -53,7 +59,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -81,9 +88,59 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_13">
 
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/service" />
 
+        <TextView
+            android:id="@+id/tvActionShow"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/hide"
+            android:textColor="@color/lightBlue02"
+            app:drawableEndCompat="@drawable/ic_arrow_down" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvServices"
+        android:layout_marginTop="@dimen/size_13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_report_list_services"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginTop="@dimen/size_6"
+        android:background="@color/color_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_amount" />
+
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/hide"
+            tools:text="$260.00" />
     </RelativeLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

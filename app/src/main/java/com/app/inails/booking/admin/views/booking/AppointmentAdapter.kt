@@ -75,7 +75,7 @@ class AppointmentAdapter(view: RecyclerView) :
             }
 
             tvID.text = item.id.formatID()
-            tvFullName.text = item.name
+            tvFullName.text = item.customerName
             tvTimeAndDate.text = item.dateAppointment
             tvServices.text = item.servicesName
             tvRequest.text = item.staffName

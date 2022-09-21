@@ -27,7 +27,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_and_date"
@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/tvDate"
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -50,7 +50,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/service"
@@ -59,7 +59,7 @@
 
         <TextView
             android:id="@+id/tvServiceName"
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -73,7 +73,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/request"
@@ -82,7 +82,7 @@
 
         <TextView
             android:id="@+id/tvRequest"
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -96,7 +96,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/total_amount"
@@ -105,7 +105,7 @@
 
         <TextView
             android:id="@+id/tvTotalAmount"
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

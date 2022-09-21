@@ -109,7 +109,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
     private fun displays(item: IAppointment) {
         mAppointment = item
         with(binding) {
-            tvCustomerName.text = item.name
+            tvCustomerName.text = item.customerName
             tvTimeAndDate.text = item.dateAppointment
             tvStaffName.text = item.staffName
             tvID.text = item.id.formatID()

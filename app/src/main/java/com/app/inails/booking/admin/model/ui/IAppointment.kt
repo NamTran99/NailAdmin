@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 interface IAppointment {
     val id: Int get() = 0
     val phone: String get() = ""
-    val name: String get() = ""
+    val customerName: String get() = ""
     val dateAppointment: String get() = ""
     val staffID: Int get() = 0
     val servicesName: String get() = ""
@@ -43,7 +43,7 @@ interface IAppointment {
 @Parcelize
 class AppointmentForm(
     override var phone: String = "",
-    override var name: String = "",
+    override var customerName: String = "",
     @SerializedName("date_appointment")
     override var dateAppointment: String = "",
     @SerializedName("staff_id")
@@ -62,7 +62,7 @@ class AppointmentForm(
             R.id.etPhone,
             R.string.error_blank_phone
         )
-        if (name.isBlank()) viewError(R.id.etFullName, R.string.error_blank_name)
+        if (customerName.isBlank()) viewError(R.id.etFullName, R.string.error_blank_name)
         if (staffID == 0 && hasStaff) resourceError(R.string.error_blank_staff_id)
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
         if (services.isBlank() || services.isEmpty()) resourceError(R.string.error_empty_services)

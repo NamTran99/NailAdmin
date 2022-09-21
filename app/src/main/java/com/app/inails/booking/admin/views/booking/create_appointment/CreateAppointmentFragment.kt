@@ -73,7 +73,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 val workingTime = (hours * 60) + minutes
                 viewModel.form.run {
                     phone = etPhone.text.toString()
-                    name = etFullName.text.toString()
+                    customerName = etFullName.text.toString()
                     serviceCustom = etSomethingElse.text.toString()
                     workTime = workingTime
                     services = mServiceAdapter.selectedItems.toString()

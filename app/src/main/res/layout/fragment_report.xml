@@ -7,39 +7,27 @@
     android:background="@color/gray07"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/size_10"
-    android:paddingVertical="@dimen/size_12"
-    tools:context=".views.management.service.ManageServiceFragment">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-    </LinearLayout>
+    android:paddingVertical="@dimen/size_12">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
-        android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/size_13"
-        android:background="@drawable/bg_white_radius">
+        android:layout_marginTop="@dimen/size_13">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_white_radius">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvServices"
+                android:id="@+id/rvReport"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@null"
                 android:clipToPadding="false"
-                android:paddingHorizontal="@dimen/size_17_5"
                 android:paddingBottom="@dimen/size_70"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_manage_service" />
+                tools:listitem="@layout/item_report_sale" />
 
             <include
                 android:id="@+id/emptyLayout"
@@ -47,14 +35,4 @@
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btAddService"
-        style="@style/AppTheme.ButtonDefault"
-        android:layout_gravity="bottom|center"
-        android:layout_marginHorizontal="@dimen/size_87"
-        android:layout_marginBottom="@dimen/size_20"
-        android:background="@drawable/button_pink_corner"
-        android:drawableStart="@drawable/ic_add"
-        android:layout_alignParentBottom="true"
-        android:text="@string/btn_add_new_service" />
 </RelativeLayout>
