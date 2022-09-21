@@ -21,21 +21,17 @@
             android:textSize="@dimen/text_size_14"
             tools:text="Yen Yen" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
-
-
-            <ImageButton
-                android:id="@+id/btReminder"
-                android:layout_width="@dimen/size_25"
-                android:layout_height="@dimen/size_25"
-                android:background="@drawable/button_black_circle"
-                android:src="@drawable/ic_notification"
-                app:tint="@color/white" />
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/btReminder"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_alignParentEnd="true"
+            android:text="@string/btn_remind"
+            android:paddingHorizontal="@dimen/size_10"
+            android:paddingVertical="@dimen/size_4"
+            android:background="@drawable/button_red_corner"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/ic_notification"
+            app:drawableTint="@color/white" />
 
     </RelativeLayout>
 
@@ -48,16 +44,16 @@
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
-            android:text="@string/label_full_name"
             android:layout_weight="1"
+            android:text="@string/label_full_name"
             android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvFullName"
             style="@style/AppTheme.TextView.Medium"
             android:layout_marginStart="@dimen/size_13"
-            android:textColor="@color/lightBlue02"
             android:gravity="end"
+            android:textColor="@color/lightBlue02"
             tools:text="Yen Yen" />
     </LinearLayout>
 
@@ -69,18 +65,18 @@
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
-            android:text="@string/label_phone"
             android:layout_weight="1"
+            android:text="@string/label_phone"
             android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvPhone"
             style="@style/AppTheme.TextView.Medium"
             android:layout_marginStart="@dimen/size_13"
-            android:textColorLink="@color/black"
-            android:textColor="@color/lightBlue02"
-            android:gravity="end"
             android:autoLink="phone"
+            android:gravity="end"
+            android:textColor="@color/lightBlue02"
+            android:textColorLink="@color/black"
             tools:text="Yen Yen" />
     </LinearLayout>
 
@@ -101,8 +97,8 @@
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_13"
             android:layout_weight="1"
-            android:maxLines="@null"
             android:gravity="end"
+            android:maxLines="@null"
             tools:text="Aug 23 2022 - 2:58 PM" />
     </LinearLayout>
 
@@ -123,8 +119,8 @@
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_50"
             android:layout_weight="1"
-            android:maxLines="@null"
             android:gravity="end"
+            android:maxLines="@null"
             tools:text="Manicure, Pedicure, Wax" />
     </LinearLayout>
 
@@ -177,15 +173,13 @@
         android:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextView.Medium"
             android:text="@string/label_total_amount"
             android:textColor="@color/gray08" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_gravity="end"
             tools:text="Waiting" />
     </FrameLayout>
@@ -253,7 +247,7 @@
         android:layout_marginTop="@dimen/size_12"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <View
             android:layout_width="match_parent"
@@ -263,18 +257,21 @@
         <TextView
             android:id="@+id/tvTypeCancel"
             style="@style/AppTheme.TextView.Italic"
+            android:layout_alignTop="@+id/btRemove"
+            android:layout_alignBottom="@+id/btRemove"
             android:layout_centerInParent="true"
-            android:includeFontPadding="false"
+            android:gravity="center"
             tools:text="Cancelled by Guest" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvReason"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btRemove"
+            android:layout_below="@+id/tvTypeCancel"
+            android:layout_marginTop="@dimen/size_10"
             android:gravity="center"
             android:text="@string/label_status"
-            android:layout_marginTop="@dimen/size_10"
             android:textColor="@color/gray08" />
 
         <ImageButton
@@ -286,6 +283,7 @@
             android:background="@drawable/button_red_circle"
             android:src="@drawable/ic_delete_outline" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/noteLayout"
         android:layout_width="match_parent"
@@ -299,12 +297,13 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNote"
             style="@style/AppTheme.TextView.Medium"
-            android:maxLines="@null"
             android:layout_marginTop="@dimen/size_10"
+            android:maxLines="@null"
             android:textColor="@color/gray08"
             tools:text="Waiting" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/feedbackLayout"
         android:layout_width="match_parent"
@@ -329,15 +328,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/size_10"
-            android:gravity="center"
-            android:theme="@style/AppTheme.RatingBar"
-            android:text="@string/title_feed_back"
             android:clickable="false"
-            android:textColor="@color/black" />
+            android:gravity="center"
+            android:text="@string/title_feed_back"
+            android:textColor="@color/black"
+            android:theme="@style/AppTheme.RatingBar" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFeedbackContent"
-           style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_below="@+id/ratingBar"
             android:layout_marginTop="@dimen/size_10"
             android:maxLines="@null"
@@ -345,6 +344,7 @@
             tools:text="Waiting" />
 
     </RelativeLayout>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartService"
         style="@style/AppTheme.ButtonDefault.Small"

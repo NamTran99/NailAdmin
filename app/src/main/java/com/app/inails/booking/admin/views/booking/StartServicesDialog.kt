@@ -41,9 +41,10 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
                 submit(list)
             }
             val hasDuration = apm.workTime > 0
-            durationLayout.show(!hasDuration)
-            spHour.setSelection(0)
-            spMinute.setSelection(0)
+            val minute = apm.workTime % 60 / 10
+            val hour = apm.workTime / 60
+            spHour.setSelection(minute)
+            spMinute.setSelection(hour)
             staffLayout.show(apm.staffID == 0)
             btSubmit.onClick {
                 if (staffID == null || staffID == 0) {
@@ -52,7 +53,7 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
                     return@onClick
                 }
                 Log.d("yenyen", "$hasDuration ${apm.workTime}")
-                if (spHour.selectedItemPosition == 0 && spMinute.selectedItemPosition == 0 && !hasDuration) {
+                if (spHour.selectedItemPosition == 0 && spMinute.selectedItemPosition == 0) {
                     Toast.makeText(
                         context,
                         R.string.error_empty_duration_time_to_service,
@@ -62,7 +63,7 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
                 }
                 val hours = (spHour.selectedItem as String).toInt()
                 val minutes = (spMinute.selectedItem as String).toInt()
-                val workingTime = if (hasDuration) apm.workTime else (hours * 60) + minutes
+                val workingTime = (hours * 60) + minutes
                 function.invoke(
                     staffID!!, workingTime
                 )

@@ -19,11 +19,53 @@
         app:tabTextAppearance="@style/TextAppearance.Bold"
         app:tabTextColor="@color/gray14" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/appointViewPager"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appointTab" />
+        android:layout_below="@+id/appointTab"
+        android:background="@color/gray07"
+        android:orientation="vertical">
+
+        <com.app.inails.booking.admin.views.widget.SearchView
+            android:id="@+id/searchView"
+            style="@style/AppTheme.EditText"
+            android:layout_margin="@dimen/size_13"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableEnd="@null"
+            android:hint="@string/hint_search"
+            android:imeOptions="actionSearch"
+            android:longClickable="false"
+            android:visibility="gone" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/viewRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray07">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAppointment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingBottom="@dimen/size_50"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_appointment" />
+
+                <include
+                    android:id="@+id/emptyLayout"
+                    layout="@layout/layout_empty" />
+
+            </RelativeLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btAddAppointment"

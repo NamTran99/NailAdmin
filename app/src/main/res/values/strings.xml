@@ -96,4 +96,6 @@
     <string name="total_amount">Total Amount</string>
     <string name="customer_name">Customer Name</string>
     <string name="staff_name">Staff</string>
+    <string name="message_delete_appointment_content">When you delete it means it will hide the interface from you and you cannot view it again. Other people (clients) will still see this booking. Are you sure you want to delete?</string>
+    <string name="btn_remind">Remind</string>
 </resources>

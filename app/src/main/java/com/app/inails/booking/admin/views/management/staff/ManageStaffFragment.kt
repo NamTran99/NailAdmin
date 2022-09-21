@@ -76,9 +76,11 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
             }
 
             staffs.bind {
-                mAdapter.submit(it)
-                binding.emptyLayout.tvEmptyData.show(it.isNullOrEmpty())
-                binding.rvStaff.show(!it.isNullOrEmpty())
+                if (it.first == 1) {
+                    mAdapter.clear()
+                }
+                mAdapter.submit(it.second)
+                binding.emptyLayout.tvEmptyData.show(it.second.isEmpty() && it.first == 1)
             }
 
             success.bind {
@@ -174,8 +176,10 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                         items!![0].user = it
                         items!![1].user = it
                         items!![2].user = it
-                        items!![3].user = it
-                        items!![4].user = it
+                        if (items!!.size > 3) {
+                            items!![3].user = it
+                            items!![4].user = it
+                        }
                         setupWithViewLeft(view)
                     }
                 }

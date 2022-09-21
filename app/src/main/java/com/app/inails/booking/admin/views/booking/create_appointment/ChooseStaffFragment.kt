@@ -65,7 +65,9 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
                         phone = it.phone
                         name = it.name
                     }
-                    if (arg?.type != 1  && arg?.type != 2)
+                    if (arg?.type == 3)
+                        appEvent.chooseStaffInDetailAppointment.post(it)
+                    else if (arg?.type != 1 && arg?.type != 2)
                         appEvent.chooseStaffInCreateAppointment.post(it)
                     else
                         appActivity.appEvent.chooseStaff.post(it)

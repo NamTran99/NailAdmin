@@ -26,9 +26,8 @@ class BookingRouteImpl : BookingRoute {
         findNavigator().navigate(
             BookingFragment::class, navOptions = NavOptions(
                 popupTo = BookingFragment::class,
-                reuseInstance = false,
-                inclusive = false,
-                singleTask = true
+                reuseInstance = true,
+                inclusive = true
             )
         )
     }

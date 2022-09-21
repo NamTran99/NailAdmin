@@ -16,6 +16,7 @@ class AppointmentRepository(
 ) {
     val results = MutableLiveData<List<IAppointment>>()
     val result = MutableLiveData<IAppointment>()
+    val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
     suspend operator fun invoke(type: Int) {
         results.post(
@@ -38,9 +39,11 @@ class AppointmentRepository(
     }
 
     suspend fun customerWalkIn(id: Int) {
-        bookingApi.customerWalkIn(id)
-            .await()
-        resultRemove.post(id)
+        resultCheckIn.post(  bookingFactory
+            .createAAppointment(
+                bookingApi.customerWalkIn(id)
+                    .await()
+            ))
 
     }
 

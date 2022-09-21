@@ -13,5 +13,6 @@ class AppEvent {
     val changeTabBooking = SingleLiveEvent<Int>()
     val chooseStaff = MutableLiveData<IStaff>()
     val chooseStaffInCreateAppointment = SingleLiveEvent<IStaff>()
+    val chooseStaffInDetailAppointment = SingleLiveEvent<IStaff>()
     val notifyCloudMessage = SingleLiveEvent<FireBaseCloudMessage>()
 }

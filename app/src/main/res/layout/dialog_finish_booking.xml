@@ -98,6 +98,7 @@
         android:layout_marginTop="@dimen/size_12"
         android:gravity="top|start"
         android:inputType="textMultiLine"
+        android:maxLength="200"
         android:lines="4" />
 
     <androidx.appcompat.widget.AppCompatButton

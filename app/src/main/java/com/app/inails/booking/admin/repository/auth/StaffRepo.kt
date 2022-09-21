@@ -109,9 +109,9 @@ class FetchAllStaffRepo(
     private val bookingFactory: BookingFactory,
     private val userLocalSource: UserLocalSource
 ) {
-    val results = MutableLiveData<List<IStaff>>()
+    val results = MutableLiveData<Pair<Int,List<IStaff>>>()
     suspend operator fun invoke(keyword: String, page: Int) {
-        results.post(
+        results.post(page to
             bookingFactory
                 .createStaffList(
                     staffApi.search(userLocalSource.getSalonID().toString(), keyword, page)

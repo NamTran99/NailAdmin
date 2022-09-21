@@ -95,10 +95,10 @@
 
                 <TextView
                     android:id="@+id/tvTimeAndDate"
-                    android:layout_width="match_parent"
-                    android:maxLines="@null"
                     style="@style/AppTheme.TextView.Medium"
-                    android:layout_marginTop="@dimen/size_12" />
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_12"
+                    android:maxLines="@null" />
 
                 <TextView
                     style="@style/AppTheme.TextView.Medium"
@@ -178,16 +178,26 @@
                     android:id="@+id/cancelLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:orientation="vertical"
                     android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvTypeCancel"
                         style="@style/AppTheme.TextView.Italic"
-                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
                         android:includeFontPadding="false"
                         tools:text="Cancelled by Guest" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvReason"
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTypeCancel"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:gravity="center"
+                        android:text="@string/label_status"
+                        android:textColor="@color/gray08" />
 
                 </RelativeLayout>
 
@@ -206,76 +216,87 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/size_12"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btWaiting"
                             style="@style/AppTheme.ButtonDefault.Small"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_yellow_corner_20"
+                            android:layout_width="wrap_content"
+                            android:background="@drawable/button_gray_yellow_corner_20"
                             android:drawableStart="@drawable/ic_check_white"
-                            android:text="@string/label_waiting" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btService"
-                            style="@style/AppTheme.ButtonDefault.Small"
-                            android:layout_width="0dp"
-                            android:layout_marginHorizontal="@dimen/size_12"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_blue3_corner_20"
-                            android:drawableStart="@drawable/circle_blue3"
                             android:enabled="false"
-                            android:text="@string/btn_service" />
+                            android:minWidth="@dimen/size_150"
+                            android:text="@string/label_waiting"
+                            android:textColor="@color/color_button_status" />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btFinish"
-                            style="@style/AppTheme.ButtonDefault.Small"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_green_corner_20"
-                            android:drawableStart="@drawable/circle_green"
-                            android:enabled="false"
-                            android:text="@string/btn_finish" />
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_marginStart="@dimen/size_13"
+                            android:maxLines="@null"
+                            android:text="@string/label_info_waiting_status" />
+
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/size_15"
-                        android:layout_marginTop="@dimen/size_24"
-                        android:background="@drawable/bg_line_start"
-                        android:orientation="vertical">
+                        android:layout_marginTop="@dimen/size_12"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:text="@string/label_info_waiting_status"
-                            app:drawableStartCompat="@drawable/circle_yellow_15" />
-
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:layout_marginTop="@dimen/size_12"
-                            android:text="@string/label_info_service_status"
-                            app:drawableStartCompat="@drawable/circle_blue3_15" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btService"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="wrap_content"
+                            android:background="@drawable/button_gray_blue3_corner_20"
+                            android:drawableStart="@drawable/circle_blue3"
+                            android:minWidth="@dimen/size_150"
+                            android:text="@string/btn_service"
+                            android:textColor="@color/color_button_status" />
 
                         <TextView
                             style="@style/AppTheme.TextView.Medium"
-                            android:layout_marginTop="@dimen/size_12"
-                            android:text="@string/label_info_finish_status"
-                            app:drawableStartCompat="@drawable/circle_green_15" />
+                            android:layout_marginStart="@dimen/size_13"
+                            android:maxLines="@null"
+                            android:text="@string/label_info_service_status" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_12"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btFinish"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="wrap_content"
+                            android:background="@drawable/button_green_corner_20"
+                            android:drawableStart="@drawable/circle_green"
+                            android:enabled="false"
+                            android:minWidth="@dimen/size_150"
+                            android:text="@string/btn_finish" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_marginStart="@dimen/size_13"
+                            android:maxLines="@null"
+                            android:text="@string/label_info_finish_status" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/finishLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/finishLayout"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -300,14 +321,56 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/tvNotes"
                         style="@style/AppTheme.TextView.Italic"
                         android:layout_centerVertical="true"
-                        android:id="@+id/tvNotes"
                         android:layout_marginTop="@dimen/size_12"
+                        android:visibility="gone"
+                        android:maxLines="@null"
                         android:textColor="@color/gray15" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <RelativeLayout
+                    android:id="@+id/feedbackLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/noteLayout"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:visibility="gone">
+
+                    <View style="@style/AppTheme.Line.Horizontal" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:gravity="center"
+                        android:text="@string/title_feed_back"
+                        android:textColor="@color/black" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="@string/title_feed_back"
+                        android:textColor="@color/black"
+                        android:theme="@style/AppTheme.RatingBar" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFeedbackContent"
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_below="@+id/ratingBar"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:maxLines="@null"
+                        android:textColor="@color/gray08"
+                        tools:text="Waiting" />
+
+                </RelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -317,7 +380,8 @@
                 android:layout_marginTop="@dimen/size_24"
                 android:background="@drawable/button_red_corner_25"
                 android:drawableStart="@drawable/ic_delete_outline"
-                android:text="@string/btn_delete_appointment" />
+                android:text="@string/btn_delete_appointment"
+                android:visibility="gone" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -43,7 +43,7 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
                 viewModel.refresh(nexPage)
             }
             mAdapter.onClickAppointmentListener = {
-//                Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
+                Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
             }
 
             btClose.setOnClickListener {
@@ -60,6 +60,10 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+    }
 }
 
 
@@ -67,10 +71,6 @@ class ManageStaffViewModel(
     private val staffRepo: StaffRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val staffs = staffRepo.results
-
-    init {
-        refresh()
-    }
 
     fun refresh(page: Int = 1) = launch(refreshLoading, error) {
         staffRepo("", page)
