@@ -57,6 +57,10 @@ class UserLocalSource(
         userLive.post(userDTO)
     }
 
+    fun updateEmailFeedbackUser(email: String){
+        user?.admin?.salon?.email = email
+    }
+
     // When log out
     fun clearUser(){
         user = null

@@ -62,5 +62,7 @@
     <color name="black01">#363636</color>
     <color name="color_text_customer_infor">#868686</color>
     <color name="color_btn_booking">#BC40C1</color>
+    <color name="color_title_booking_list">#B1B1B1</color>
+    <color name="color_line">#EAEAEA</color>
 
 </resources>

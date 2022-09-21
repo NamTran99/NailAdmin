@@ -22,18 +22,16 @@ import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.model.popup.PopUpServiceMore
 import com.app.inails.booking.admin.model.ui.ServiceForm
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
+import com.app.inails.booking.admin.views.management.service.adapters.DetailServiceDialogOwner
+import com.app.inails.booking.admin.views.management.service.adapters.ManageServiceAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), TopBarOwner,
-    CreateUpdateServiceOwner, PopupServiceMoreOwner {
+    CreateUpdateServiceOwner, PopupServiceMoreOwner, DetailServiceDialogOwner {
     private val binding by viewBinding(FragmentManageServiceBinding::bind)
     private val viewModel by viewModel<ManageServiceViewModel>()
     private lateinit var mAdapter: ManageServiceAdapter
-
-//    override fun onRefreshListener() {
-//        viewModel.search()
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -91,12 +89,13 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
 
     private fun setUpManageServiceAdapter() {
         mAdapter = ManageServiceAdapter(binding.rvServices).apply {
-            onClickItemListener = {
-                comingSoon()
-            }
 
             onLoadMoreListener = { nexPage, _ ->
                 viewModel.search(page = nexPage)
+            }
+
+            onClickItemListener = { item ->
+                detailServiceDialog.show(item)
             }
 
             onClickMenuListener = { view, item ->

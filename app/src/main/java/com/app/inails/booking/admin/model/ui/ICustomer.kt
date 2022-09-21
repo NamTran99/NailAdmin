@@ -6,6 +6,7 @@ interface ICustomer {
     val phone: String get() = ""
     val email: String get() = ""
     val address: String get() = ""
+    val listService: List<IService> get() = listOf()
 }
 
 class CustomerImpl: ICustomer

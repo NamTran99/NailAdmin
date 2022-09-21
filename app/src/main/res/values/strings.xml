@@ -85,5 +85,15 @@
     <string name="message_start_service_success">Start service success!</string>
     <string name="your_email">Your Email</string>
     <string name="sample_gmail_com">sample@gmail.com</string>
-    <string name="edit">edit</string>
+    <string name="edit">Edit</string>
+    <string name="create_email_feedback_content">Your email isn’t created yet. Please update your email</string>
+    <string name="create">Create</string>
+    <string name="time_and_date">Time and Date</string>
+    <string name="booking_id">Booking ID</string>
+    <string name="service">Service</string>
+    <string name="request">Request</string>
+    <string name="anyone">Anyone</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="staff_name">Staff</string>
 </resources>

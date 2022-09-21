@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/size_10"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="@dimen/size_10"
+    android:padding="@dimen/size_17"
+    android:background="@drawable/bg_white_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booking_id"
+            android:textColor="@color/color_title_booking_list"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tvID"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/booking_id"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_and_date"
+            android:textColor="@color/color_title_booking_list"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Aug 23 2022 - 2:58 PM"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/service"
+            android:textColor="@color/color_title_booking_list"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tvServiceName"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/booking_id"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request"
+            android:textColor="@color/color_title_booking_list"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tvRequest"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/anyone"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_amount"
+            android:textColor="@color/color_title_booking_list"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/booking_id"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

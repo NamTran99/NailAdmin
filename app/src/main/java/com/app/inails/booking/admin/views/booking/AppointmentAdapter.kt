@@ -80,7 +80,7 @@ class AppointmentAdapter(view: RecyclerView) :
             tvServices.text = item.servicesName
             tvRequest.text = item.staffName
             tvTypeCancel.text = item.canceledBy
-            tvPhone.text = item.phone.formatPhoneUS()
+            tvPhone.text = item.phone
             tvStatus.text = item.statusDisplay
             tvStatus.drawableStart(item.resIconStatus)
             tvStatus.setTextColor(ContextCompat.getColor(view.context, item.colorStatus))

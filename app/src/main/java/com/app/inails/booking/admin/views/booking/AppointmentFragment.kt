@@ -8,14 +8,17 @@ import android.support.core.livedata.LoadingLiveData
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.core.view.viewBinding
+import android.support.di.inject
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentAppointmentBinding
+import com.app.inails.booking.admin.datasource.local.AppCache
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.AppointmentStatusForm
@@ -173,6 +176,11 @@ class AppointmentFragment(val type: Int) : BaseFragment(R.layout.fragment_appoin
             toast("select staff")
             startServicesDialog.updateStaff(it)
             acceptAppointmentDialog.updateStaff(it)
+        }
+
+        appActivity.appEvent.notifyCloudMessage.observe(viewLifecycleOwner){
+            // chị tìm object NotifyFireBaseCloudType để filter theo type
+            Log.d("TAG", "NamTD8 onViewCreated: aaa")
         }
     }
 

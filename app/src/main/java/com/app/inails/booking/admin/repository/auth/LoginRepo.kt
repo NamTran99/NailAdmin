@@ -2,10 +2,13 @@ package com.app.inails.booking.admin.repository.auth
 
 import android.support.di.Inject
 import android.support.di.ShareScope
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.local.AppCache
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.AuthenticateApi
 import com.app.inails.booking.admin.formatter.TextFormatter
+import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.ui.LoginForm
 
 @Inject(ShareScope.Activity)
@@ -19,7 +22,18 @@ class LoginRepo(
         form.validate()
         form.phone = textFormatter.formatPhoneNumber(form.phone)
 		form.deviceToken = appCache.tokenPush
+        Log.d("TAG", "NamTD8 token 2 ${appCache.tokenPush}")
         val user = authenticateApi.login(form).await()
         userLocalSource.saveUser(user)
+    }
+}
+
+
+@Inject(ShareScope.Activity)
+class GetOwnerInformation(
+    private val userLocalSource: UserLocalSource,
+) {
+    operator fun invoke(): UserDTO? {
+        return userLocalSource.getUserDto()
     }
 }

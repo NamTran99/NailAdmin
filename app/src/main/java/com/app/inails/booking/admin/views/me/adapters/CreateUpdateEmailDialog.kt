@@ -22,6 +22,7 @@ class CreateUpdateEmailDialog(context: Context) : BaseDialog(context) {
         with(binding) {
             btSave.setOnClickListener {
                 function.invoke(etEnterEmail.text.toString())
+                dismiss()
             }
         }
         super.show()

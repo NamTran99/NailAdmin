@@ -18,7 +18,8 @@ interface IService{
     val textColor: Int @ColorRes get() = R.color.white
 }
 
-class ServiceImpl : IService, ISelector {
+@Parcelize
+class ServiceImpl : IService, ISelector, Parcelable {
     override var isSelector: Boolean = false
 }
 

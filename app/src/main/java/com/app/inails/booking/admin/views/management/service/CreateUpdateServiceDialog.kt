@@ -35,12 +35,17 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context) {
             service?.let {
                 etServiceName.setText(it.name)
                 etPrice.setText(it.price.toString())
+            }?:run{
+                etServiceName.text.clear()
+                etPrice.text.clear()
             }
             btSubmit.onClick {
                 function.invoke(
                     etServiceName.text.toString(),
                     etPrice.text.toString(),
                 )
+
+                dismiss()
             }
         }
         super.show()

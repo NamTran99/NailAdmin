@@ -6,13 +6,18 @@ import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.CustomerDTO
 import com.app.inails.booking.admin.model.response.CustomerFullInfoDTO
+import com.app.inails.booking.admin.model.response.ServiceDTO
+import com.app.inails.booking.admin.model.support.ISelector
+import com.app.inails.booking.admin.model.ui.CustomerImpl
 import com.app.inails.booking.admin.model.ui.ICustomer
+import com.app.inails.booking.admin.model.ui.IService
+import com.app.inails.booking.admin.model.ui.ServiceImpl
 
 @Inject(ShareScope.Singleton)
 class CustomerFactory(private val textFormatter: TextFormatter) {
     private fun createCustomer(customerFullInforDTO: CustomerFullInfoDTO):ICustomer {
         val customer = customerFullInforDTO.customer
-        return object: ICustomer {
+        return object: ICustomer by CustomerImpl() {
             override val address: String
                 get() = customer.address.safe()
             override val email: String
@@ -23,10 +28,35 @@ class CustomerFactory(private val textFormatter: TextFormatter) {
                 get() = customer.id.safe()
             override val name: String
                 get() = customer.name.safe()
+            override val listService: List<IService>
+                get() = createServiceList(customerFullInforDTO.services?: listOf())
         }
     }
 
     fun createCustomerList(customerDTO: List<CustomerFullInfoDTO>): List<ICustomer>{
         return customerDTO.map(::createCustomer)
     }
+
+    fun createServiceList(servicesDTO: List<ServiceDTO>): List<IService> {
+        return servicesDTO.map(::createService)
+    }
+
+    private fun createService(serviceDTO: ServiceDTO): IService {
+        return object : IService, ISelector by ServiceImpl() {
+            override val id: Int
+                get() = serviceDTO.id.safe()
+            override val name: String
+                get() = serviceDTO.name.safe()
+            override val price: Double
+                get() = serviceDTO.price.safe()
+            override val isActive: Int
+                get() = serviceDTO.active.safe()
+            override val textColor: Int
+                get() = textFormatter.formatTextColorStaffColor(serviceDTO.active.safe())
+        }
+    }
+
+//    fun createServiceList(servicesDTO: List<ServiceDTO>): List<IService> {
+//        return servicesDTO.map(::createService)
+//    }
 }

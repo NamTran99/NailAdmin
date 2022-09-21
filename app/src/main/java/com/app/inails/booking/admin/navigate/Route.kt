@@ -73,7 +73,7 @@ interface Routing : BundleArgument {
     }
 }
 
-interface Router : SplashRoute, SettingRoute, BookingRoute, ManageStaffRoute {
+interface Router : SplashRoute, SettingRoute, BookingRoute, ManageStaffRoute, ManageCustomerRoute {
     fun open(dispatcher: RouteDispatcher, route: Routing)
     fun navigate(dispatcher: RouteDispatcher, route: Routing)
 
@@ -84,6 +84,7 @@ class ProdRoute : Router,
     SplashRoute by SplashRouteImpl(),
     SettingRoute by SettingRouteImpl(),
     BookingRoute by BookingRouteImpl(),
+    ManageCustomerRoute by ManageCustomerRouteImpl(),
     ManageStaffRoute by ManageStaffRouteImpl() {
     override fun open(dispatcher: RouteDispatcher, route: Routing) {
         dispatcher.open<MainNavigationActivity>(route)

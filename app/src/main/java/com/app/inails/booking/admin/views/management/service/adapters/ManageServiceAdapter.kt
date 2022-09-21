@@ -1,4 +1,4 @@
-package com.app.inails.booking.admin.views.management.service
+package com.app.inails.booking.admin.views.management.service.adapters
 
 import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
@@ -16,8 +16,8 @@ import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 class ManageServiceAdapter(view: RecyclerView) :
     PageRecyclerAdapter<IService, ItemManageServiceBinding>(view) {
 
-    var onClickItemListener: ((IService) -> Unit)? = null
     var onClickMenuListener: ((View, IService) -> Unit)? = null
+    var onClickItemListener: ((IService) -> Unit)? = null
 
     override fun onCreateBinding(parent: ViewGroup): ItemManageServiceBinding {
         return parent.bindingOf(ItemManageServiceBinding::inflate)
@@ -33,6 +33,7 @@ class ManageServiceAdapter(view: RecyclerView) :
             root.setOnClickListener {
                 onClickItemListener?.invoke(item)
             }
+
             btMenu.setOnClickListener {
                 onClickMenuListener?.invoke(it, item)
             }

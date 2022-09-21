@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
+    android:orientation="vertical"
     tools:context=".views.me.ChangePasswordFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layoutUpdateEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
         android:layout_marginHorizontal="@dimen/size_10"
         android:background="@drawable/bg_white_radius"
         android:orientation="vertical"
@@ -28,7 +31,7 @@
 
         <TextView
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_marginHorizontal="@dimen/size_74"
+            android:layout_marginHorizontal="@dimen/size_20"
             android:layout_marginBottom="@dimen/size_28"
             android:text="@string/email_receive_feedback_description"
             android:textAlignment="center"
@@ -39,15 +42,19 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvEmail"
                 style="@style/AppTheme.TextView.Medium"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/tvEditEmail"
                 android:layout_marginStart="@dimen/size_5"
                 android:drawablePadding="@dimen/size_13"
                 android:text="@string/sample_gmail_com"
+                android:layout_marginEnd="@dimen/size_10"
                 app:drawableStartCompat="@drawable/ic_email" />
 
             <TextView
+                android:id="@+id/tvEditEmail"
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,4 +69,47 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</FrameLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:visibility="gone"
+        android:id="@+id/layoutCreateEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:background="@drawable/bg_white_radius"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_15"
+        android:paddingTop="@dimen/size_24"
+        android:paddingBottom="@dimen/size_27"
+        tools:visibility="visible">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/size_28"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/your_email" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_marginHorizontal="@dimen/size_20"
+            android:layout_marginBottom="@dimen/size_28"
+            android:text="@string/create_email_feedback_content"
+            android:textAlignment="center"
+            android:textColor="@color/text_hint_description" />
+
+       <Button
+           android:id="@+id/btCreate"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginHorizontal="@dimen/size_15"
+           style="@style/AppTheme.ButtonDefault"
+           android:background="@drawable/button_blue_corner"
+           android:text="@string/create"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

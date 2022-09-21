@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.views.dialog
 
 import android.content.Context
+import android.support.core.view.ViewScopeOwner
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogMessageBinding
 import com.app.inails.booking.admin.extention.onClick

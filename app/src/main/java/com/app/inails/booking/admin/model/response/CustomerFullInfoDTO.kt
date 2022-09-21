@@ -10,5 +10,6 @@ data class CustomerFullInfoDTO(
     val status: Int? = 0,
     val type: Int? = 0,
     val salon: SalonDTO = SalonDTO(),
-    val customer: CustomerDTO = CustomerDTO()
+    val customer: CustomerDTO = CustomerDTO(),
+    val services: List<ServiceDTO>?= listOf()
 )

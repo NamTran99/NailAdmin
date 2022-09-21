@@ -54,6 +54,4 @@ interface ConfirmDialogOwner : ViewScopeOwner {
         get() = with(viewScope) {
             getOr("confirm:dialog") { ConfirmNoticeDialog(context) }
         }
-
-
 }
