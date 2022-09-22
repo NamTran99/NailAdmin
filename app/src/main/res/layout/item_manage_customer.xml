@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/tvPhone"
-        style="@style/AppTheme.TextView.SemiBold"
+        style="@style/AppTheme.TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
@@ -50,7 +50,7 @@
 
     <TextView
         android:id="@+id/tvEmail"
-        style="@style/AppTheme.TextView.SemiBold"
+        style="@style/AppTheme.TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
@@ -61,7 +61,7 @@
 
     <TextView
         android:id="@+id/tvAddress"
-        style="@style/AppTheme.TextView.SemiBold"
+        style="@style/AppTheme.TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="@dimen/size_10"

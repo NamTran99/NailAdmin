@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/tvName"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="match_parent"
             android:layout_toStartOf="@id/layout"
             android:layout_marginEnd="@dimen/size_10"
@@ -34,9 +34,10 @@
 
             <TextView
                 android:id="@+id/tvPrice"
+                style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="80.00" />
+                tools:text="$80.00" />
 
             <ImageButton
                 android:id="@+id/btMenu"

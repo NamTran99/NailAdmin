@@ -13,7 +13,6 @@ import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.dialog.ConfirmNoticeDialog
 
 class DetailServiceDialog(context: Context) : BaseDialog(context) {
-    private var mOnDismiss: () -> Unit = {}
     private val binding = viewBinding(DialogDetailServiceBinding::inflate)
 
     init {
