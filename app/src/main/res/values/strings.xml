@@ -98,4 +98,11 @@
     <string name="staff_name">Staff</string>
     <string name="message_delete_appointment_content">When you delete it means it will hide the interface from you and you cannot view it again. Other people (clients) will still see this booking. Are you sure you want to delete?</string>
     <string name="btn_remind">Remind</string>
+    <string name="please_check_your_email_for_feedback">Please check your email for feedback!</string>
+    <string name="phone_number">Phone number</string>
+    <string name="staff">Staff</string>
+    <string name="time">Time</string>
+    <string name="rating">Rating</string>
+    <string name="view_detail">View detail</string>
+    <string name="close">Close</string>
 </resources>

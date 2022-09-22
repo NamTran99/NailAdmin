@@ -3,34 +3,23 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/size_10"
     android:layout_marginBottom="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/size_10"
     android:padding="@dimen/size_17"
-    android:background="@drawable/bg_white_radius">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/booking_id"
-            android:textColor="@color/color_title_booking_list"
-            android:textSize="@dimen/text_size_12" />
-
-        <TextView
-            android:id="@+id/tvID"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/booking_id"
-            android:textSize="@dimen/text_size_12" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvID"
+        style="@style/AppTheme.TextView.SemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="@string/booking_id"
+        android:textSize="@dimen/text_size_14"
+        tools:text = "ID: #492" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,7 +27,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_and_date"
@@ -47,7 +36,7 @@
 
         <TextView
             android:id="@+id/tvDate"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -61,7 +50,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/service"
@@ -70,7 +59,7 @@
 
         <TextView
             android:id="@+id/tvServiceName"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -84,7 +73,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/request"
@@ -93,7 +82,7 @@
 
         <TextView
             android:id="@+id/tvRequest"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -107,7 +96,7 @@
         android:layout_marginTop="@dimen/size_5">
 
         <TextView
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/total_amount"
@@ -116,7 +105,7 @@
 
         <TextView
             android:id="@+id/tvTotalAmount"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

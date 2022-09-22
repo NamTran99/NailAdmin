@@ -15,9 +15,10 @@
 
         <TextView
             android:id="@+id/tvCustomerName"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextView.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/lightBlue02"
             android:textSize="@dimen/text_size_14"
             tools:text="Customer Name" />
 
@@ -28,7 +29,7 @@
             android:layout_height="@dimen/size_30"
             android:layout_alignParentEnd="true"
             android:background="@drawable/bg_button_customer_booking"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/montserrat_semi_bold"
             android:text="@string/booking_list"
             android:textColor="@color/color_btn_booking"
             android:textSize="@dimen/text_size_10" />
@@ -36,18 +37,20 @@
 
     <TextView
         android:id="@+id/tvPhone"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextView.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
+        android:autoLink="phone"
         android:drawablePadding="@dimen/size_9"
         android:textColor="@color/color_text_customer_infor"
+        android:textColorLink="@color/black"
         app:drawableStartCompat="@drawable/ic_phone_outline"
         tools:text="987-654-3210" />
 
     <TextView
         android:id="@+id/tvEmail"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextView.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
@@ -58,7 +61,7 @@
 
     <TextView
         android:id="@+id/tvAddress"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextView.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="@dimen/size_10"

@@ -249,7 +249,7 @@ class AppointmentDetailViewModel(
     private val appointmentDetailRepo: AppointmentDetailRepository,
     private val appointmentRepo: AppointmentRepository,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-    val appointment = appointmentDetailRepo.results
+    val appointment = appointmentDetailRepo.result
     val appointmentAction = appointmentRepo.result
     val appointmentCheckIn = appointmentRepo.resultCheckIn
     val idRemove = appointmentRepo.resultRemove

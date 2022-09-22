@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    tools:context=".views.dialog.ConfirmNoticeDialog">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/larken_medium"
+        android:textColor="@color/color_title"
+        android:textSize="@dimen/text_size_15"
+        android:textStyle="normal"
+        tools:text="You have received a new appointmentfrom a customer!" />
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:text="@string/please_check_your_email_for_feedback"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_10" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginHorizontal="@dimen/size_13"
+        android:layout_marginTop="@dimen/size_20"
+        android:background="@color/color_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_19">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booking_id" />
+
+        <TextView
+            android:id="@+id/tvBookingID"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/text_size_12"
+            tools:text="#123456" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="23dp"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_name" />
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:text="John Doe" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_number" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:text="987-654-3210" />
+    </RelativeLayout>
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_23"
+        android:text="@string/service" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_12" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginHorizontal="@dimen/size_13"
+        android:layout_marginTop="@dimen/size_14"
+        android:background="@color/color_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_19">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/staff" />
+
+        <TextView
+            android:id="@+id/tvStaffName"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/text_size_12"
+            tools:text="Amanda" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time" />
+
+        <TextView
+            android:id="@+id/tvDateTime"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/text_size_12"
+            tools:text="Amanda" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_5">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:clickable="false"
+            android:text="@string/title_feed_back"
+            android:textColor="@color/black"
+            android:theme="@style/AppTheme.RatingBar" />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_24"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btAccept"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_red_corner"
+            android:backgroundTint="@color/lightBlue02"
+            android:text="@string/btn_accept"
+            android:textAllCaps="true" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btViewDetail"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/button_red_corner"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/view_detail"
+            android:textAllCaps="true" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btReject"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/button_red_corner"
+            android:text="@string/btn_reject"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/tvClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/close" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btClose"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/button_red_corner"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/btn_reject"
+            android:textAllCaps="true" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</LinearLayout>

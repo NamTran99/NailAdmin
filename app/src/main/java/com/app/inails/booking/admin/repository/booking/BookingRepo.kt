@@ -92,9 +92,9 @@ class AppointmentDetailRepository(
     private val bookingApi: BookingApi,
     private val bookingFactory: BookingFactory,
 ) {
-    val results = MutableLiveData<IAppointment>()
+    val result = MutableLiveData<IAppointment>()
     suspend operator fun invoke(id: Int) {
-        results.post(
+        result.post(
             bookingFactory
                 .createAAppointment(
                     bookingApi.detail(id)

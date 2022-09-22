@@ -2,14 +2,11 @@ package com.app.inails.booking.admin.views.management.customer.adapters
 
 import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemCustomerBookingListBinding
-import com.app.inails.booking.admin.databinding.ItemManageCustomerBinding
-import com.app.inails.booking.admin.extention.formatPhoneUS
+import com.app.inails.booking.admin.extention.displaySafe
 import com.app.inails.booking.admin.extention.formatPrice
-import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 
@@ -30,9 +27,9 @@ class ManageCustomerListBookingAdapter(view: RecyclerView) :
         adapterPosition: Int
     ) {
         binding.run {
-            tvID.text = item.id.toString()
-            tvServiceName.text = item.name
-            tvTotalAmount.text = item.price.formatPrice()
+            tvID.text = "ID: #${item.id}"
+            tvServiceName.text = item.name.displaySafe()
+            tvTotalAmount.text = item.price.formatPrice().displaySafe()
         }
     }
 }
