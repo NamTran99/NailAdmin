@@ -48,6 +48,7 @@ object DataConst {
     object NotifyFireBaseCloudType{
         const val CUSTOMER_CREATE_APPOINTMENT = 1
         const val CUSTOMER_CANCEL_APPOINTMENT = 11
+        const val CUSTOMER_FEEDBACK = 14
     }
 
 }

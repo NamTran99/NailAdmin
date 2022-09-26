@@ -6,7 +6,6 @@ import android.support.di.ShareScope
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.IStaff
-import com.google.android.gms.cloudmessaging.CloudMessage
 
 @Inject(ShareScope.Singleton)
 class AppEvent {

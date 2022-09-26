@@ -107,4 +107,18 @@
     <string name="close">Close</string>
     <string name="service_name">Service Name</string>
     <string name="detail_service">Detail Service</string>
+    <string name="dialog_notify_create_title">You have received a new appointment from a customer !</string>
+    <string name="dialog_notify_cancel_title">The appointment has been cancelled by the customer !</string>
+    <string name="dialog_notify_feedback_title">Customers have given feedback to your salon</string>
+    <string name="reason">Reason</string>
+    <string name="filter">Filter</string>
+    <string name="reset">Reset</string>
+    <string name="by_date_and_time">By Date and Time</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="by_staff">By Staff</string>
+    <string name="enter_name_or_phone">Enter name or Phone</string>
+    <string name="by_customer">By Customer</string>
+    <string name="enter_service_name">Enter service name</string>
+    <string name="by_service">By Service</string>
 </resources>

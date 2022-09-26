@@ -6,7 +6,7 @@ import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.CustomerFullInfoDTO
 import retrofit2.Retrofit
-import retrofit2.http.GET
+import retrofit2.http.*
 
 /**
  * http://api.booking.kendemo.com:3005/api/v1/

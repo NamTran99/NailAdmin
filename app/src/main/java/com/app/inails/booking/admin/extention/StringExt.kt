@@ -107,5 +107,5 @@ fun String.displaySafe(): String {
 }
 
 fun String?.displaySafe1(): String {
-    return if (this.isNullOrEmpty()) return "No Information" else this
+    return this?:"".displaySafe()
 }

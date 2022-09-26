@@ -1,13 +1,16 @@
 package com.app.inails.booking.admin.views.main
 
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
+import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.view.GravityCompat
@@ -20,10 +23,12 @@ import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.alpha
 import com.app.inails.booking.admin.extention.formatPhoneUS
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
+import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
@@ -32,7 +37,25 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
-    NavigationView.OnNavigationItemSelectedListener {
+    NavigationView.OnNavigationItemSelectedListener, NotifyDialogOwner {
+
+    companion object{
+        fun getPendingIntent(
+            context: Context,
+            fireBaseMessage: FireBaseCloudMessage?
+        ): PendingIntent? {
+            if (fireBaseMessage == null) return null
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            intent.putExtra("FCM", fireBaseMessage)
+            return PendingIntent.getActivity(
+                context, System.currentTimeMillis().toInt(), intent,
+                PendingIntent.FLAG_IMMUTABLE
+                        or PendingIntent.FLAG_UPDATE_CURRENT
+                        or PendingIntent.FLAG_ONE_SHOT
+            )
+        }
+    }
     override lateinit var topBar: TopBarAdapter
 
     private val binding by viewBinding(ActivityMainBinding::bind)
@@ -58,16 +81,19 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
         }
 
-        with(viewModel){
-            detailAppointment.bind{
+        with(viewModel) {
+            detailAppointment.bind {
 
             }
         }
 
         appEvent.notifyCloudMessage.bind {
-            with(viewModel){
-                getDetailAppointment(it.data.appointment_id)
-                typeNotifyDialog = it.type
+            with(viewModel) {
+                notifyDialog.show(it,
+                    onClickViewDetailAppointment = {
+                        Router.open(this@MainActivity,Routing.AppointmentDetail(it))
+                    }
+                )
             }
         }
 
@@ -121,14 +147,9 @@ class MainViewModel(
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     val detailAppointment = appointmentDetailRepository.result
-    var typeNotifyDialog = NotifyFireBaseCloudType.CUSTOMER_CANCEL_APPOINTMENT
-
-    fun getDetailAppointment(appointmentID: Int)= launch(loading, error) {
-        appointmentDetailRepository.invoke(appointmentID)
-    }
 
     val user = userLocalSource.getUserDto()
-    fun logout() {
+    fun logout()= launch(loading,error) {
         logoutRepo.invoke()
     }
 }

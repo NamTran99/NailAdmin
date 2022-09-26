@@ -7,13 +7,12 @@
     android:paddingVertical="@dimen/size_20"
     tools:context=".views.dialog.MessageDialog">
 
-
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        style="@style/AppTheme.TextView.SemiBold"
+        style="@style/AppTheme.TextView.Medium"
         android:textSize="@dimen/text_size_16"
         android:text="@string/detail_service" />
 

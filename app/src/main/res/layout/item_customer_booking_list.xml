@@ -24,7 +24,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -47,7 +47,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -70,7 +70,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -93,7 +93,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
