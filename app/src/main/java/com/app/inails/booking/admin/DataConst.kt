@@ -1,15 +1,7 @@
 package com.app.inails.booking.admin
 
-import com.app.inails.booking.admin.views.booking.AppointmentFragment
-
 
 object DataConst {
-    object AppointmentTab {
-        val appointment = listOf(
-            R.string.title_walk_in_customer to AppointmentFragment(1),
-            R.string.title_appointment_customer to AppointmentFragment(2)
-        )
-    }
 
     object AppointmentStatus {
         const val APM_PENDING = 1

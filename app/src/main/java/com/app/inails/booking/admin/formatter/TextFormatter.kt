@@ -100,14 +100,14 @@ class TextFormatter {
     fun getTimeEndAppointment(timeCheckIn: String?, workTime: Int?): String {
         if (timeCheckIn.isNullOrEmpty()) return ""
         if (workTime == null || workTime == 0) return ""
-        val df = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val d = df.parse(timeCheckIn)
-        val today = Calendar.getInstance()
-        if (d != null) {
-            today.time = d
-        }
-        val timePlus = today.timeInMillis + (workTime * 60 * 1000)
-        return df.format(Date(timePlus))
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val date =
+            dateFormat.parse(timeCheckIn)
+        val timePlus = date.time + (workTime * 60 * 1000)
+        date.time = timePlus
+        val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return simpleDateFormat.format(date)
     }
 
     fun getDateTimeWithEndAppointment(
