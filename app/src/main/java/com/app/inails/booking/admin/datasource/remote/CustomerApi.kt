@@ -14,7 +14,7 @@ import retrofit2.http.*
 @InjectBy(CustomerApiImpl::class, ShareScope.Singleton)
 interface CustomerApi : Injectable {
     @GET("customer/list-customer")
-    fun getAllListCustomer(): ApiAsync<List<CustomerFullInfoDTO>>
+    fun getAllListCustomer(@Query("txt_search") search: String): ApiAsync<List<CustomerFullInfoDTO>>
 }
 
 class CustomerApiImpl(private val retrofit: Retrofit) :

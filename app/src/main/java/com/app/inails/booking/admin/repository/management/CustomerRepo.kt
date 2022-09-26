@@ -13,10 +13,10 @@ class FetchListCustomerRepo(
     private val customerFactory: CustomerFactory,
 ) {
     val results = MutableLiveData<List<ICustomer>>()
-    suspend operator fun invoke() {
+    suspend operator fun invoke(search: String) {
         results.post(customerFactory
                 .createCustomerList(
-                    CustomerApi.getAllListCustomer().await()
+                    CustomerApi.getAllListCustomer(search).await()
                 )
         )
     }

@@ -14,7 +14,6 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentManageCustomerBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
-import com.app.inails.booking.admin.model.ui.CustomerImpl
 import com.app.inails.booking.admin.model.ui.ServiceImpl
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
@@ -36,14 +35,15 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
         setUpListener()
     }
 
-    private fun setUpListener(){
+    private fun setUpListener() {
         with(viewModel) {
-            refreshLoading.bind{
+            refreshLoading.bind {
                 mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
             }
 
             listCustomer.bind(mAdapter::submit)
+
         }
     }
 
@@ -65,14 +65,18 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
                     Router.run { redirectToCustomerBookingList(it.listService as List<ServiceImpl>) }
                 }
             }
+            searchView.setOnSearchListener(
+                onLoading = {
+                    viewRefresh.isRefreshing = true
+                    mAdapter.clear()
+                },
+                onSearch = { refresh(it) })
         }
     }
 
 
     private fun refresh(key: String) {
-        mAdapter.clear()
-        viewModel.refresh()
-//        viewModel.search(key)
+        viewModel.getListCustomer(key)
     }
 }
 
@@ -85,15 +89,11 @@ class ManageCustomerViewModel(
     val success = SingleLiveEvent<Any>()
 
     init {
-        refresh()
-    }
-
-    fun refresh() {
         getListCustomer()
     }
 
-    fun getListCustomer() = launch(refreshLoading, error) {
-        fetchListCustomerRepo()
+    fun getListCustomer(search: String = "") = launch(refreshLoading, error) {
+        fetchListCustomerRepo(search)
     }
 }
 

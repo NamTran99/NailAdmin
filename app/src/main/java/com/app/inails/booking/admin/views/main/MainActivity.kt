@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
-import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
@@ -15,7 +14,6 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
-import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
@@ -39,7 +37,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     NavigationView.OnNavigationItemSelectedListener, NotifyDialogOwner {
 
-    companion object{
+    companion object {
         fun getPendingIntent(
             context: Context,
             fireBaseMessage: FireBaseCloudMessage?
@@ -56,6 +54,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             )
         }
     }
+
     override lateinit var topBar: TopBarAdapter
 
     private val binding by viewBinding(ActivityMainBinding::bind)
@@ -91,7 +90,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             with(viewModel) {
                 notifyDialog.show(it,
                     onClickViewDetailAppointment = {
-                        Router.open(this@MainActivity,Routing.AppointmentDetail(it))
+                        Router.open(this@MainActivity, Routing.AppointmentDetail(it))
                     }
                 )
             }
@@ -149,7 +148,7 @@ class MainViewModel(
     val detailAppointment = appointmentDetailRepository.result
 
     val user = userLocalSource.getUserDto()
-    fun logout()= launch(loading,error) {
+    fun logout() = launch(loading, error) {
         logoutRepo.invoke()
     }
 }
