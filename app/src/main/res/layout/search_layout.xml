@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/lvStartParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_radius"
+        android:padding="@dimen/size_21">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/size_12"
+            android:text="@string/filter"
+            app:drawableStartCompat="@drawable/ic_filter" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_arrow_right" />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_radius"
+            android:padding="@dimen/size_21">
+
+            <ImageButton
+                android:id="@+id/btClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/size_12"
+                android:src="@drawable/ic_close"/>
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter"
+                android:layout_toEndOf="@id/btClose"/>
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/reset"
+                android:textColor="@color/lightBlue02" />
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lvFilterDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9"
+            android:background="@drawable/bg_white_radius"
+            android:orientation="vertical"
+            android:padding="@dimen/size_21">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_date_and_time" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_17"
+                android:background="@drawable/bg_view_stroke"
+                android:paddingHorizontal="@dimen/size_21"
+                android:paddingVertical="@dimen/size_13">
+
+                <EditText
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/size_10"
+                    android:layout_toLeftOf="@id/tvDisDate"
+                    android:background="@null"
+                    android:text="@string/from" />
+
+                <TextView
+                    android:id="@+id/tvDisDate"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/label_select_date"
+                    app:drawableStartCompat="@drawable/ic_calendar_outline" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_17"
+                android:background="@drawable/bg_view_stroke"
+                android:paddingHorizontal="@dimen/size_21"
+                android:paddingVertical="@dimen/size_13">
+
+                <EditText
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/size_10"
+                    android:layout_toStartOf="@id/tvDisDate2"
+                    android:background="@null"
+                    android:text="@string/to" />
+
+                <TextView
+                    android:id="@+id/tvDisDate2"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/label_select_date"
+                    app:drawableStartCompat="@drawable/ic_calendar_outline" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9"
+            android:background="@drawable/bg_white_radius"
+            android:orientation="vertical"
+            android:padding="@dimen/size_21">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_staff" />
+
+            <EditText
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_17"
+                android:hint="Enter name or Phone"
+                android:paddingVertical="@dimen/size_13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9"
+            android:background="@drawable/bg_white_radius"
+            android:orientation="vertical"
+            android:padding="@dimen/size_21">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_customer" />
+
+            <EditText
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_17"
+                android:hint="@string/enter_name_or_phone"
+                android:paddingVertical="@dimen/size_13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9"
+            android:background="@drawable/bg_white_radius"
+            android:orientation="vertical"
+            android:padding="@dimen/size_21">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_service" />
+
+            <EditText
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_17"
+                android:hint="@string/enter_service_name"
+                android:paddingVertical="@dimen/size_13" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btViewDetail"
+            style="@style/AppTheme.ButtonDefault.Small"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/button_red_corner"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/filter" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

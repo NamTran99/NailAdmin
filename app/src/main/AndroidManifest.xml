@@ -20,7 +20,8 @@
 
         <activity
             android:name="com.app.inails.booking.admin.views.splash.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

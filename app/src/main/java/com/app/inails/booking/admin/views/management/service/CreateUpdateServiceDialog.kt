@@ -7,6 +7,8 @@ import androidx.annotation.StringRes
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateServiceBinding
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateStaffBinding
+import com.app.inails.booking.admin.extention.formatAmount
+import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IService
@@ -34,7 +36,7 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context) {
             etPrice.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(4, 2))
             service?.let {
                 etServiceName.setText(it.name)
-                etPrice.setText(it.price.toString())
+                etPrice.setText(it.price.formatAmount())
             }?:run{
                 etServiceName.text.clear()
                 etPrice.text.clear()

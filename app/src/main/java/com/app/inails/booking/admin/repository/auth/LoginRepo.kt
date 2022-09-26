@@ -21,7 +21,6 @@ class LoginRepo(
         form.validate()
         form.phone = textFormatter.formatPhoneNumber(form.phone)
 		form.deviceToken = appCache.deviceToken
-        Log.d("TAG", "NamTD8 token 2 ${appCache.deviceToken}")
         val user = authenticateApi.login(form).await()
         userLocalSource.saveUser(user)
     }

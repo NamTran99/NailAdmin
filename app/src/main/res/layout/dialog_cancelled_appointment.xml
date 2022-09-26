@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_white_radius"
     android:orientation="vertical"
+    android:paddingVertical="@dimen/size_22"
     tools:context=".views.dialog.ConfirmNoticeDialog">
 
     <TextView
@@ -12,13 +14,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/larken_medium"
+        android:fontFamily="@font/larken_bold"
+        android:textAlignment="center"
         android:textColor="@color/color_title"
         android:textSize="@dimen/text_size_15"
         android:textStyle="normal"
         tools:text="You have received a new appointmentfrom a customer!" />
 
     <TextView
+        android:id="@+id/tvDescription"
         style="@style/AppTheme.TextView.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="23dp"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -81,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -103,13 +107,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_8"
         android:text="@string/service" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvServices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_12" />
+        android:layout_marginTop="@dimen/size_12"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <View
         android:layout_width="match_parent"
@@ -144,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -163,10 +170,33 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/lvReason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_5">
+        android:layout_marginTop="@dimen/size_8">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reason" />
+
+        <TextView
+            android:id="@+id/tvReason"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:text="Amanda" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lvRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_23"
+        android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -186,6 +216,15 @@
             android:theme="@style/AppTheme.RatingBar" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tvFeedbackContent"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_17"
+        android:text="@string/rating" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -194,31 +233,12 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btAccept"
-            style="@style/AppTheme.ButtonDefault.Small"
-            android:layout_width="match_parent"
-            android:background="@drawable/button_red_corner"
-            android:backgroundTint="@color/lightBlue02"
-            android:text="@string/btn_accept"
-            android:textAllCaps="true" />
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btViewDetail"
             style="@style/AppTheme.ButtonDefault.Small"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/size_10"
             android:background="@drawable/button_red_corner"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/view_detail"
-            android:textAllCaps="true" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btReject"
-            style="@style/AppTheme.ButtonDefault.Small"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/size_10"
-            android:background="@drawable/button_red_corner"
-            android:text="@string/btn_reject"
             android:textAllCaps="true" />
 
         <TextView
@@ -236,11 +256,7 @@
             android:layout_marginTop="@dimen/size_10"
             android:background="@drawable/button_red_corner"
             android:backgroundTint="@color/colorPrimary"
-            android:text="@string/btn_reject"
+            android:text="@string/btn_close"
             android:textAllCaps="true" />
-
-
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 </LinearLayout>

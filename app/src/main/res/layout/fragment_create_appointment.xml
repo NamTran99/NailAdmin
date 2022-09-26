@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_of_edit_text"
                 android:layout_marginTop="@dimen/size_12"
-                android:background="@drawable/edit_text_default"
+                android:background="@drawable/bg_view_stroke"
                 android:orientation="horizontal">
 
                 <TextView
@@ -173,7 +173,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/edit_text_default"
+                    android:background="@drawable/bg_view_stroke"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatSpinner
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_12"
                     android:layout_weight="1"
-                    android:background="@drawable/edit_text_default"
+                    android:background="@drawable/bg_view_stroke"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatSpinner
