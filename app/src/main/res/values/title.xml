@@ -29,4 +29,5 @@
     <string name="title_estimate">Estimate</string>
     <string name="title_finish_booking">Finish Booking</string>
     <string name="title_appointment_detail">Appointment Detail</string>
+    <string name="title_update_appointment">Update Appointment</string>
 </resources>

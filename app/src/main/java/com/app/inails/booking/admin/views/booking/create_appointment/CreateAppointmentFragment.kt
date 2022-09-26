@@ -6,6 +6,7 @@ import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.core.route.BundleArgument
+import android.support.core.route.nullableArguments
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
@@ -24,9 +25,14 @@ import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.ServiceDTO
+import com.app.inails.booking.admin.model.support.ISelector
 import com.app.inails.booking.admin.model.ui.AppointmentForm
+import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.IService
+import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
@@ -41,18 +47,25 @@ data class AppointmentArg(
 class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner {
     private val binding by viewBinding(FragmentCreateAppointmentBinding::bind)
     private val viewModel by viewModel<CreateAppointmentViewModel>()
+    private val arg by lazy { nullableArguments<Routing.CreateAppointment>() }
     private lateinit var mServiceAdapter: SelectServiceAdapter
     private val mDatePickerDialog by lazy { DatePickerDialog(appActivity) }
     private val mTimePickerDialog by lazy { TimePickerDialog(appActivity) }
     private var mDateSelected = ""
     private var mTimeSelected = ""
     private var mDateTagSelected = ""
+    private var loadData = false
+    private var mStaff: IStaff? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_create_new_appointment
-            ) { activity?.onBackPressed() })
+               if (arg?.id != null) R.string.title_update_appointment else  R.string.title_create_new_appointment,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            )
+        )
         mServiceAdapter = SelectServiceAdapter(binding.rvServices)
         with(binding) {
             etPhone.inputTypePhoneUS()
@@ -73,7 +86,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 val workingTime = (hours * 60) + minutes
                 viewModel.form.run {
                     phone = etPhone.text.toString()
-                    customerName = etFullName.text.toString()
+                    name = etFullName.text.toString()
                     serviceCustom = etSomethingElse.text.toString()
                     workTime = workingTime
                     services = mServiceAdapter.selectedItems.toString()
@@ -81,12 +94,22 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                             .isEmpty()
                     ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}"
                 }
-                viewModel.submit()
+                if (arg?.id != null)
+                    viewModel.update()
+                else
+                    viewModel.submit()
             }
+            btAddAppointment.setText(if (arg?.id == null) R.string.btn_add_appointment else R.string.btn_update)
 
         }
 
         with(viewModel) {
+            services.bind {
+                if (arg?.id != null && arg?.id != 0 && !loadData) {
+                    loadData = true
+                    viewModel.detail(arg!!.id!!)
+                }
+            }
             services.bind(mServiceAdapter.apply {
                 onClickItemListener = {
                     viewModel.form.hasServiceCustom = it
@@ -95,17 +118,20 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 }
             }::submit)
             success.bind {
-                success("Create appointment for customer success!")
+                success(it)
                 activity?.onBackPressed()
             }
+            appointment.bind(::display)
         }
 
         appEvent.chooseStaffInCreateAppointment.observe(this) {
             if (it != null) {
+                mStaff = it
                 binding.tvChooseStaff.text = it.name
                 viewModel.form.staffID = it.id
             }
         }
+
     }
 
     override fun onPause() {
@@ -125,16 +151,43 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
         (viewModel.form.hasServiceCustom) show binding.etSomethingElse
     }
 
+    private fun display(apm: IAppointment) {
+        with(binding) {
+            viewModel.form.id = apm.id
+            etPhone.setText(apm.phone)
+            etFullName.setText(apm.customerName)
+            if (apm.staffID > 0 && mStaff == null) {
+                viewModel.form.staffID = apm.staffID
+                tvChooseStaff.text = apm.staffName
+            }
+            tvSelectDate.text = apm.dateSelected
+            tvSelectDate.tag = apm.dateTag
+            tvSelectTime.text = apm.timeSelected
+            val minute = apm.workTime % 60 / 10
+            val hour = apm.workTime / 60
+            spHour.setSelection(hour)
+            spMinute.setSelection(minute)
+            if (apm.serviceCustomObj != null) {
+                etSomethingElse.setText(apm.serviceCustomObj!!.name)
+                etSomethingElse.show()
+                (mServiceAdapter.items?.last() as ISelector).isSelector = true
+            }
+            mServiceAdapter.setSelected(apm.serviceList)
+        }
+    }
+
 }
 
 
 class CreateAppointmentViewModel(
     private val serviceRepo: ServiceRepository,
-    private val createAppointmentRepo: CreateAppointmentRepository
+    private val createAppointmentRepo: CreateAppointmentRepository,
+    private val appointmentDetailRepo: AppointmentDetailRepository,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val services = serviceRepo.results
     val form = AppointmentForm()
-    val success = SingleLiveEvent<Any>()
+    val success = SingleLiveEvent<String>()
+    val appointment = appointmentDetailRepo.result
 
     init {
         onLaunch()
@@ -145,7 +198,17 @@ class CreateAppointmentViewModel(
     }
 
     fun submit() = launch(loading, error) {
-        success.post(createAppointmentRepo(form))
+        createAppointmentRepo(form)
+        success.post("Create appointment for customer success!")
+    }
+
+    fun update() = launch(loading, error) {
+        createAppointmentRepo.update(form)
+        success.post("Update appointment success")
+    }
+
+    fun detail(id: Int) = launch(loading, error) {
+        appointmentDetailRepo(id)
     }
 }
 
@@ -158,9 +221,8 @@ class ServiceRepository(
 ) {
     val results = MutableLiveData<List<IService>>()
     suspend operator fun invoke() {
-        var servicesList = bookingApi.services(userLocalSource.getSalonID().toString())
+        val servicesList = bookingApi.services(userLocalSource.getSalonID().toString())
             .await()
-        servicesList = servicesList
         servicesList.add(ServiceDTO(name = "Something Else"))
         results.post(
             bookingFactory
@@ -181,6 +243,12 @@ class CreateAppointmentRepository(
         form.validate()
         form.phone = textFormatter.formatPhoneNumber(form.phone)
         bookingApi.createAppointment(form).await()
+    }
+
+    suspend fun update(form: AppointmentForm) {
+        form.validate()
+        form.phone = textFormatter.formatPhoneNumber(form.phone)
+        bookingApi.updateAppointment(form).await()
     }
 }
 

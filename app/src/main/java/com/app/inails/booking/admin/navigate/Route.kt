@@ -32,7 +32,7 @@ interface Routing : BundleArgument {
     }
 
     @Parcelize
-    object CreateAppointment : Routing {
+    class CreateAppointment(val id : Int?) : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = CreateAppointmentFragment::class
     }

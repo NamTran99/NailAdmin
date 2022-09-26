@@ -50,8 +50,11 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
     private fun setUpView() {
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_customer
-            ) { activity?.onBackPressed() })
+                R.string.mn_manage_customer,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            ) )
 
         with(binding) {
             viewRefresh.colorSchemeDefault()

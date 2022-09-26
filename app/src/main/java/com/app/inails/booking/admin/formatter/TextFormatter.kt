@@ -5,6 +5,7 @@ import android.support.di.ShareScope
 import android.telephony.PhoneNumberUtils
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.extention.formatDateAppointment
 import com.app.inails.booking.admin.extention.toDate
 import com.app.inails.booking.admin.model.response.CustomerDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
@@ -110,18 +111,16 @@ class TextFormatter {
     }
 
     fun getDateTimeWithEndAppointment(
-        dateTime: Long,
+        dateTime: String,
         dateTimeFormat: String,
         workTime: Int?
     ): String {
-
         if (dateTimeFormat.isEmpty()) return dateTimeFormat
         if (workTime == null || workTime == 0) return dateTimeFormat
-        val timeStart = dateTime.toDate()
-        val today = Calendar.getInstance()
-        today.time = timeStart
-        val timePlus = today.timeInMillis + (workTime * 60 * 1000)
-        val parser = SimpleDateFormat("MMMM dd,yyyy hh:mm a", Locale.getDefault())
-        return "$dateTimeFormat-\n${parser.format(Date(timePlus))}"
+        val date = dateTime.toDate()
+        val timePlus = date.time + (workTime * 60 * 1000)
+        date.time = timePlus
+
+        return "${dateTime.formatDateAppointment()}-${date.formatDateAppointment()}"
     }
 }

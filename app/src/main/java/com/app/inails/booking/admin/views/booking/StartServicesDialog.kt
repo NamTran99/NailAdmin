@@ -40,11 +40,10 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
             (ServicePriceAdapter(rvServices)).apply {
                 submit(list)
             }
-            val hasDuration = apm.workTime > 0
             val minute = apm.workTime % 60 / 10
             val hour = apm.workTime / 60
-            spHour.setSelection(minute)
-            spMinute.setSelection(hour)
+            spHour.setSelection(hour)
+            spMinute.setSelection(minute)
             staffLayout.show(apm.staffID == 0)
             btSubmit.onClick {
                 if (staffID == null || staffID == 0) {
@@ -52,7 +51,6 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
                         .show()
                     return@onClick
                 }
-                Log.d("yenyen", "$hasDuration ${apm.workTime}")
                 if (spHour.selectedItemPosition == 0 && spMinute.selectedItemPosition == 0) {
                     Toast.makeText(
                         context,

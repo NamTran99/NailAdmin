@@ -30,39 +30,43 @@ interface IAppointment {
     val customer: ICustomer? get() = null
     val notes: String? get() = null
     val dateTime: String get() = ""
-    val hasFeedback : Boolean get() = false
-    val feedbackContent : String get() = ""
-    val feedbackRating : Int get() = 0
-    val noteFinish : String get() = ""
-    val reasonCancel : String get() = ""
+    val hasFeedback: Boolean get() = false
+    val feedbackContent: String get() = ""
+    val feedbackRating: Int get() = 0
+    val noteFinish: String get() = ""
+    val reasonCancel: String get() = ""
     val price: Double get() = 0.0
-    val serviceCustomObj : IService? get() = null
-
+    val serviceCustomObj: IService? get() = null
+    val createAt: String get() = ""
+    val dateSelected: String get() = ""
+    val timeSelected: String get() = ""
+    val dateTag: String get() = ""
 }
 
 @Parcelize
 class AppointmentForm(
-    override var phone: String = "",
-    override var customerName: String = "",
+    var id: Int? = null,
+    var phone: String = "",
+    var name: String = "",
     @SerializedName("date_appointment")
-    override var dateAppointment: String = "",
+    var dateAppointment: String = "",
     @SerializedName("staff_id")
-    override var staffID: Int = 0,
+    var staffID: Int = 0,
     var services: String = "",
     @SerializedName("service_custom")
-    override var serviceCustom: String = "",
+    var serviceCustom: String = "",
     @SerializedName("work_time")
-    override var workTime: Int = 0,
+    var workTime: Int = 0,
     var hasServiceCustom: Boolean = false,
     var hasStaff: Boolean = true
-) : IAppointment, Parcelable {
+) :  Parcelable {
 
     fun validate() {
         if (phone.isBlank() || phone.length < 14) viewError(
             R.id.etPhone,
             R.string.error_blank_phone
         )
-        if (customerName.isBlank()) viewError(R.id.etFullName, R.string.error_blank_name)
+        if (name.isBlank()) viewError(R.id.etFullName, R.string.error_blank_name)
         if (staffID == 0 && hasStaff) resourceError(R.string.error_blank_staff_id)
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
         if (services.isBlank() || services.isEmpty()) resourceError(R.string.error_empty_services)

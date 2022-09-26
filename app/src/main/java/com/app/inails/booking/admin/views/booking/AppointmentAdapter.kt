@@ -98,7 +98,7 @@ class AppointmentAdapter(view: RecyclerView) :
             totalAmountLayout.show((item.status == DataConst.AppointmentStatus.APM_FINISH))
             tvAmount.text = item.price.formatPrice()
             ratingBar.rating = item.feedbackRating.toFloat()
-
+            tvCreatedAt.text = item.createAt
         }
     }
 

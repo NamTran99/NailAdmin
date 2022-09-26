@@ -9,4 +9,5 @@ data class CustomerDTO(
     val state : String?="",
     val zip : String?="",
     val city : String?="",
+    val phone_format : String?="",
 )

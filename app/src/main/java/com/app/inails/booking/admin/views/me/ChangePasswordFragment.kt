@@ -28,8 +28,11 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password), 
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_change_password
-            ) { activity?.onBackPressed() })
+                R.string.mn_change_password,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            ))
 
         with(binding) {
             btUpdatePassword.setOnClickListener {

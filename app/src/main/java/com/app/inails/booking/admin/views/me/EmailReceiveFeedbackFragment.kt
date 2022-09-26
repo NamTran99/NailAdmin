@@ -33,8 +33,12 @@ class EmailReceiveFeedbackFragment : BaseFragment(R.layout.fragment_email_receiv
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_email_receive_feedback
-            ) { activity?.onBackPressed() })
+                R.string.title_email_receive_feedback,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            )
+        )
 
 
 
@@ -57,7 +61,7 @@ class EmailReceiveFeedbackFragment : BaseFragment(R.layout.fragment_email_receiv
 
         with(viewModel) {
             updatedEmail.bind {
-                if(it.isBlank()) return@bind
+                if (it.isBlank()) return@bind
                 binding.tvEmail.text = it
 
                 checkForVisibleView(it)
@@ -72,7 +76,7 @@ class EmailReceiveFeedbackFragment : BaseFragment(R.layout.fragment_email_receiv
     }
 
 
-    private fun checkForVisibleView(email: String){
+    private fun checkForVisibleView(email: String) {
         (email.isBlank()) show binding.layoutCreateEmail
         email.isNotBlank() show binding.layoutUpdateEmail
     }

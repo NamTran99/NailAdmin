@@ -19,6 +19,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentManageStaffBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.onSearchListener
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.popup.PopUpStaffMore
 import com.app.inails.booking.admin.model.ui.CreateStaffForm
@@ -40,8 +41,11 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_staff
-            ) { activity?.onBackPressed() })
+                R.string.mn_manage_staff,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            ) )
 
         with(binding) {
             viewRefresh.colorSchemeDefault()
@@ -184,9 +188,10 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                     }
                 }
             }
-            searchView.setOnSearchListener(
-                onLoading = { viewRefresh.isRefreshing = true },
-                onSearch = { refresh(it) })
+
+            searchView.onSearchListener {
+                refresh(searchView.text.toString())
+            }
         }
     }
 

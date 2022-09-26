@@ -62,6 +62,7 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
 
     override fun onResume() {
         super.onResume()
+        mAdapter.clear()
         viewModel.refresh()
     }
 }

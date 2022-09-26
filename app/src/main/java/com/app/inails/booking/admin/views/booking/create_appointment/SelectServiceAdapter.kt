@@ -20,7 +20,8 @@ class SelectServiceAdapter(view: RecyclerView) :
     var onClickItemListener: ((Boolean) -> Unit)? = null
     val selectedItems: List<Int>
         get() = if (items.isNullOrEmpty()) emptyList()
-        else items?.filter { (it as ISelector).isSelector && it.id != 0 }?.map { it.id } ?: emptyList()
+        else items?.filter { (it as ISelector).isSelector && it.id != 0 }?.map { it.id }
+            ?: emptyList()
 
     override fun onCreateBinding(parent: ViewGroup): ItemServiceSelectBinding {
         return parent.bindingOf(ItemServiceSelectBinding::inflate)
@@ -85,5 +86,16 @@ class SelectServiceAdapter(view: RecyclerView) :
             )
         )
 
+    }
+
+    fun setSelected(list: List<IService>) {
+        list.forEach {
+            items?.forEachIndexed { index, iService ->
+                if (it.id == iService.id) {
+                    (items!![index] as ISelector).isSelector = true
+                }
+            }
+        }
+        notifyDataSetChanged()
     }
 }

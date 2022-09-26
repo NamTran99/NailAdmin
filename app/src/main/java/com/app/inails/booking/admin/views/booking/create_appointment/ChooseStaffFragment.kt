@@ -19,6 +19,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentChooseStaffBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.isCurrentDate
+import com.app.inails.booking.admin.extention.onSearchListener
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.StaffForm
 import com.app.inails.booking.admin.navigate.Routing
@@ -37,13 +38,16 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.label_choose_staff
-            ) { appActivity.onBackPressed() })
+                R.string.label_choose_staff,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            ))
         with(binding) {
             searchView.show(arg?.type != 1 && arg?.type != 2)
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener {
-                if (arg?.type != 1 || (arg?.type == 2 && !arg!!.dateTime.isCurrentDate()))
+                if ((arg?.type == null) || ((arg?.type == 2 || arg?.type == 3) && !arg!!.dateTime.isCurrentDate()))
                     refresh(searchView.text.toString())
                 else viewModel.staffCheckIn()
             }
@@ -75,9 +79,9 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
                 }
             }
 
-            searchView.setOnSearchListener(
-                onLoading = { viewRefresh.isRefreshing = true },
-                onSearch = { refresh(it) })
+            searchView.onSearchListener {
+                refresh(searchView.text.toString())
+            }
 
         }
 
@@ -107,7 +111,7 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
 
     override fun onResume() {
         super.onResume()
-        if (arg?.type != 1 || (arg?.type == 2 && !arg!!.dateTime.isCurrentDate()))
+        if ((arg?.type == null) || ((arg?.type == 2 || arg?.type == 3) && !arg!!.dateTime.isCurrentDate()))
             refresh(binding.searchView.text.toString())
         else viewModel.staffCheckIn()
     }

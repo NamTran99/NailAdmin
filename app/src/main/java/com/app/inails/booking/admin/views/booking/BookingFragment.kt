@@ -10,7 +10,6 @@ import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
@@ -25,7 +24,6 @@ import com.app.inails.booking.admin.model.ui.CancelAppointmentForm
 import com.app.inails.booking.admin.model.ui.HandleAppointmentForm
 import com.app.inails.booking.admin.model.ui.StartServiceForm
 import com.app.inails.booking.admin.navigate.Router
-import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.repository.booking.RemindAppointmentRepository
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -45,7 +43,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener { refreshData(mType) }
             btAddAppointment.setOnClickListener {
-                Router.open(this@BookingFragment, Routing.CreateAppointment)
+                Router.redirectToCreateAppointment(self)
             }
             appointTab.addTab(appointTab.newTab().setText(R.string.title_walk_in_customer))
             appointTab.addTab(appointTab.newTab().setText(R.string.title_appointment_customer))
@@ -95,7 +93,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
                 onClickHandleListener = { apm, status ->
                     if (status == 1) {
                         acceptAppointmentDialog.onSelectStaffListener = {
-                            Router.redirectToChooseStaff(self, 2, apm.dateAppointment)
+                            Router.redirectToChooseStaff(self, 2, apm.dateTag)
                         }
                         acceptAppointmentDialog.show(apm) { minutes, stffID ->
                             viewModel.formHandle.run {
@@ -194,8 +192,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
         }
 
         appActivity.appEvent.notifyCloudMessage.observe(viewLifecycleOwner) {
-            // chị tìm object NotifyFireBaseCloudType để filter theo type
-            Log.d("TAG", "NamTD8 onViewCreated: aaa")
+            viewModel.refresh(mType)
         }
     }
 
@@ -216,6 +213,13 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
     override fun onResume() {
         super.onResume()
+        if (mType == 1) {
+            val tab: TabLayout.Tab? = binding.appointTab.getTabAt(0)
+            tab?.select()
+        } else {
+            val tab: TabLayout.Tab? = binding.appointTab.getTabAt(1)
+            tab?.select()
+        }
         refreshData(mType)
     }
 }

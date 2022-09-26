@@ -76,6 +76,7 @@
                         android:id="@+id/tvCustomerName"
                         style="@style/AppTheme.TextView.Medium"
                         android:layout_width="0dp"
+                        android:textColor="@color/lightBlue02"
                         android:layout_weight="1" />
 
                     <TextView
@@ -87,6 +88,19 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:text="@string/label_phone"
+                    android:textColor="@color/gray08" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:autoLink="phone"
+                    android:textColorLink="@color/black"
+                    android:layout_marginTop="@dimen/size_12"/>
                 <TextView
                     style="@style/AppTheme.TextView.Medium"
                     android:layout_marginTop="@dimen/size_20"
@@ -197,6 +211,7 @@
                         android:layout_marginTop="@dimen/size_10"
                         android:gravity="center"
                         android:text="@string/label_status"
+                        android:maxLines="@null"
                         android:textColor="@color/gray08" />
 
                 </RelativeLayout>
@@ -371,6 +386,22 @@
                         tools:text="Waiting" />
 
                 </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvCreatedAt"
+                        style="@style/AppTheme.TextView.Italic"
+                        android:gravity="end"
+                        android:textColor="@color/gray08"
+                        android:textSize="@dimen/text_size_10"
+                        android:maxLines="@null"
+                        tools:text="Aug 23 2022 - 2:58 PM" />
+                </LinearLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatButton

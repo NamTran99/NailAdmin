@@ -40,8 +40,14 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_appointment_detail
-            ) { activity?.onBackPressed() })
+                R.string.title_appointment_detail, showEdit = false,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+                onEditClick = {
+                    Router.redirectToCreateAppointment(self, arg.id)
+                }
+            ))
 
         with(binding) {
             viewRefresh.colorSchemeDefault()
@@ -55,6 +61,11 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                     )
                 ) {
                     viewModel.remove(arg.id)
+                }
+            }
+            tvCustomerName.setOnClickListener {
+                mAppointment?.let {
+                    customerInfoDialog.show(it.customer!!)
                 }
             }
         }
@@ -116,7 +127,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             tvStatus.text = item.statusDisplay
             tvStatus.drawableStart(item.resIconStatus)
             tvStatus.setTextColor(ContextCompat.getColor(requireContext(), item.colorStatus))
-            tvTotalAmount.text = item.totalPrice.formatPrice()
+            tvTotalAmount.text = item.price.formatPrice()
             tvNotes.text = item.notes
             tvNotes.show(!item.notes.isNullOrEmpty())
             (item.status == DataConst.AppointmentStatus.APM_CANCEL || item.status == DataConst.AppointmentStatus.APM_FINISH) show btDelete
@@ -150,6 +161,20 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             feedbackLayout.show(item.hasFeedback)
             tvFeedbackContent.text = item.feedbackContent
             ratingBar.rating = item.feedbackRating.toFloat()
+            tvPhone.text = item.phone.formatPhoneUS()
+            tvCreatedAt.text = item.createAt
+
+            topBar.setState(
+                SimpleTopBarState(
+                    R.string.title_appointment_detail,
+                    showEdit = item.status != DataConst.AppointmentStatus.APM_FINISH && item.status != DataConst.AppointmentStatus.APM_CANCEL && item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING,
+                    onBackClick = {
+                        activity?.onBackPressed()
+                    },
+                    onEditClick = {
+                        Router.redirectToCreateAppointment(self, arg.id)
+                    }
+                ))
         }
 
     }
@@ -184,6 +209,9 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
         }
 
         binding.btAccept.onClick {
+            acceptAppointmentDialog.onSelectStaffListener = {
+                Router.redirectToChooseStaff(self, 3, mAppointment!!.dateTag)
+            }
             acceptAppointmentDialog.show(mAppointment!!) { minutes, stfID ->
                 viewModel.formHandle.run {
                     id = arg.id
@@ -213,7 +241,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 }
                 startServicesDialog.show(it) { staffID, duration ->
                     viewModel.formStartService.run {
-                        id = it.id
+                        id = it.id!!
                         staffId = staffID
                         workTime = duration
                         status = DataConst.AppointmentStatus.APM_IN_PROCESSING

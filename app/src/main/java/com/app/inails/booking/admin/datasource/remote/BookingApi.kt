@@ -52,6 +52,9 @@ interface BookingApi : Injectable {
     @FormUrlEncoded
     @POST("appointment/remind-appointment")
     fun remindAppointment(@Field("id") id : Int): ApiAsync<Any>
+
+    @POST("appointment/admin-update-appointment")
+    fun updateAppointment(@Body body: AppointmentForm): ApiAsync<Any>
 }
 
 class BookingApiImpl(private val retrofit: Retrofit) :

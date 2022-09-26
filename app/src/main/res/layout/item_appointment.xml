@@ -25,10 +25,10 @@
             android:id="@+id/btReminder"
             style="@style/AppTheme.TextView.Medium"
             android:layout_alignParentEnd="true"
-            android:text="@string/btn_remind"
+            android:background="@drawable/button_red_corner"
             android:paddingHorizontal="@dimen/size_10"
             android:paddingVertical="@dimen/size_4"
-            android:background="@drawable/button_red_corner"
+            android:text="@string/btn_remind"
             android:textColor="@color/white"
             app:drawableStartCompat="@drawable/ic_notification"
             app:drawableTint="@color/white" />
@@ -170,7 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/labelStatus"
         android:layout_marginTop="@dimen/size_10"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/AppTheme.TextView.Medium"
@@ -181,8 +181,25 @@
             android:id="@+id/tvAmount"
             style="@style/AppTheme.TextView.Medium"
             android:layout_gravity="end"
-            tools:text="Waiting" />
+            tools:text="$10.00" />
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvCreatedAt"
+            style="@style/AppTheme.TextView.Italic"
+            android:gravity="end"
+            android:maxLines="@null"
+            android:textColor="@color/gray08"
+            android:textSize="@dimen/text_size_10"
+            tools:text="Aug 23 2022 - 2:58 PM" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/waitingLayout"
@@ -271,6 +288,7 @@
             android:layout_below="@+id/tvTypeCancel"
             android:layout_marginTop="@dimen/size_10"
             android:gravity="center"
+            android:maxLines="@null"
             android:text="@string/label_status"
             android:textColor="@color/gray08" />
 

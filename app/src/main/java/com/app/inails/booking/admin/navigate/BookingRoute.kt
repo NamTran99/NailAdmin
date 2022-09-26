@@ -15,7 +15,7 @@ import com.app.inails.booking.admin.views.main.MainNavigationActivity
 
 interface BookingRoute {
     fun BaseActivity.redirectToBooking()
-    fun BaseFragment.redirectToCreateAppointment(id: Int? = null)
+    fun redirectToCreateAppointment(self: RouteDispatcher,id: Int? = null)
     fun BaseFragment.redirectToChooseStaff(id: Int? = null)
     fun redirectToAppointmentDetail(self: RouteDispatcher, id:Int)
     fun redirectToChooseStaff(self: RouteDispatcher, type : Int = 0, dateTime : String ?= null)
@@ -32,15 +32,6 @@ class BookingRouteImpl : BookingRoute {
         )
     }
 
-    override fun BaseFragment.redirectToCreateAppointment(
-        id: Int?
-    ) {
-        findNavigator().navigate(
-            CreateAppointmentFragment::class,
-            args = AppointmentArg(id = id).toBundle()
-        )
-    }
-
     override fun BaseFragment.redirectToChooseStaff(
         id: Int?) {
         findNavigator().navigate(
@@ -54,5 +45,9 @@ class BookingRouteImpl : BookingRoute {
 
     override fun redirectToChooseStaff(self: RouteDispatcher, type: Int, dateTime : String?) {
         self.open<MainNavigationActivity>(Routing.ChooseStaff(type,dateTime))
+    }
+
+    override fun redirectToCreateAppointment(self: RouteDispatcher, id : Int?) {
+        self.open<MainNavigationActivity>(Routing.CreateAppointment(id))
     }
 }

@@ -51,8 +51,12 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
     private fun setUpView() {
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_customer
-            ) { activity?.onBackPressed() })
+                R.string.mn_manage_customer,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            )
+        )
 
         with(binding) {
             viewRefresh.colorSchemeDefault()
@@ -62,7 +66,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
         }
     }
 
-    private fun refresh(){
+    private fun refresh() {
         mAdapter.clear()
         viewModel.refresh()
     }

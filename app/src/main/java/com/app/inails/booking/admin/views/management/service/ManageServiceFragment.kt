@@ -38,8 +38,11 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
 
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_service
-            ) { activity?.onBackPressed() })
+                R.string.mn_manage_service,
+                onBackClick = {
+                    activity?.onBackPressed()
+                },
+            ) )
 
         with(binding) {
             viewRefresh.colorSchemeDefault()

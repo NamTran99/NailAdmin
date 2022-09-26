@@ -23,4 +23,15 @@
         android:layout_centerInParent="true"
         tools:text="Hello world" />
 
+    <TextView
+        android:id="@+id/btEdit"
+        style="@style/AppTheme.TextView.Title.Small"
+        android:padding="@dimen/size_15"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone"
+        android:textSize="@dimen/text_size_12"
+        android:layout_centerInParent="true"
+        android:text="@string/btn_edit" />
+
 </RelativeLayout>

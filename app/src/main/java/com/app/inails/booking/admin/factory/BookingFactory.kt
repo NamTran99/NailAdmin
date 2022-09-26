@@ -2,7 +2,7 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
-import com.app.inails.booking.admin.extention.safe
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.AppointmentDTO
 import com.app.inails.booking.admin.model.response.CustomerDTO
@@ -59,7 +59,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val colorStatus: Int
                 get() = textFormatter.formatStatusStaffColor(staffDTO.status)
             override val timeCheckIn: String
-                get() = staffDTO.time_check_in.safe()
+                get() = staffDTO.checked_time?.toTimeCheckIn().safe()
             override val active: Int
                 get() = staffDTO.active.safe()
             override val textColor: Int
@@ -94,7 +94,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.customer_name.safe()
             override val dateAppointment: String
                 get() = textFormatter.getDateTimeWithEndAppointment(
-                    appointmentDTO.date_appointment_timestamp,
+                    appointmentDTO.date_appointment!!,
                     appointmentDTO.date_appointment_format,
                     appointmentDTO.work_time
                 )
@@ -127,7 +127,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val totalPrice: Double
                 get() = appointmentDTO.total_price_service.safe()
             override val phone: String
-                get() = appointmentDTO.customer.phone.safe()
+                get() = appointmentDTO.customer.phone_format.safe()
             override val customer: ICustomer
                 get() = createCustomer(appointmentDTO.customer)
             override val notes: String?
@@ -150,8 +150,14 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.work_time.safe()
             override val serviceCustomObj: IService?
                 get() = appointmentDTO.service_custom?.let { createAService(it) }
-
-
+            override val createAt: String
+                get() = appointmentDTO.created_at_timestamp.toCreatedAt()
+            override val dateSelected: String
+                get() = appointmentDTO.date_appointment!!.toDateAppointment()
+            override val dateTag: String
+                get() = appointmentDTO.date_appointment!!.toDateTagAppointment()
+            override val timeSelected: String
+                get() = appointmentDTO.date_appointment!!.toTimeAppointment()
         }
     }
 
@@ -170,7 +176,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val name: String
                 get() = customerDTO.name.safe()
             override val phone: String
-                get() = textFormatter.formatPhoneUS(customerDTO.phone)
+                get() = customerDTO.phone_format.safe()
             override val email: String
                 get() = customerDTO.email.safe("No Info")
             override val address: String
