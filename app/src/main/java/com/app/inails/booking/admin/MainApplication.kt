@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.di.dependencies
 import com.app.inails.booking.admin.app.appModule
 
-@Suppress("unused")
 class MainApplication : Application() {
 
     override fun onCreate() {
@@ -17,7 +16,7 @@ class MainApplication : Application() {
         }
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks{
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-                activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+                activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT;
             }
 
             override fun onActivityStarted(p0: Activity) {

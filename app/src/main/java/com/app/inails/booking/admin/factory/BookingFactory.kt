@@ -159,6 +159,8 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.date_appointment!!.toDateTagAppointment()
             override val timeSelected: String
                 get() = appointmentDTO.date_appointment!!.toTimeAppointment()
+            override val customerID: Int
+                get() = appointmentDTO.customer_id.safe()
         }
     }
 
@@ -182,7 +184,6 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = customerDTO.email.safe("No Info")
             override val address: String
                 get() = textFormatter.fullAddress(customerDTO)
-
         }
     }
 }

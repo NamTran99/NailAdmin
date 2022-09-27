@@ -6,6 +6,7 @@ import android.support.core.extensions.LifecycleSubscriberExt
 import android.support.core.route.RouteDispatcher
 import android.support.di.inject
 import android.support.viewmodel.ViewModelRegistrable
+import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.StringRes

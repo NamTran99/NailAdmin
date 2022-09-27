@@ -4,7 +4,6 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.formatter.TextFormatter
-import com.app.inails.booking.admin.model.response.CustomerDTO
 import com.app.inails.booking.admin.model.response.CustomerFullInfoDTO
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.support.ISelector
@@ -15,9 +14,8 @@ import com.app.inails.booking.admin.model.ui.ServiceImpl
 
 @Inject(ShareScope.Singleton)
 class CustomerFactory(private val textFormatter: TextFormatter) {
-    private fun createCustomer(customerFullInforDTO: CustomerFullInfoDTO):ICustomer {
-        val customer = customerFullInforDTO.customer
-        return object: ICustomer by CustomerImpl() {
+    private fun createCustomer(customer: CustomerFullInfoDTO): ICustomer {
+        return object : ICustomer by CustomerImpl() {
             override val address: String
                 get() = customer.address.safe()
             override val email: String
@@ -28,12 +26,10 @@ class CustomerFactory(private val textFormatter: TextFormatter) {
                 get() = customer.id.safe()
             override val name: String
                 get() = customer.name.safe()
-            override val listService: List<IService>
-                get() = createServiceList(customerFullInforDTO.services?: listOf())
         }
     }
 
-    fun createCustomerList(customerDTO: List<CustomerFullInfoDTO>): List<ICustomer>{
+    fun createCustomerList(customerDTO: List<CustomerFullInfoDTO>): List<ICustomer> {
         return customerDTO.map(::createCustomer)
     }
 

@@ -2,13 +2,17 @@ package com.app.inails.booking.admin.views.main.dialogs
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.support.core.livedata.post
 import android.support.core.view.ViewScopeOwner
+import android.support.di.inject
+import androidx.core.text.htmlEncode
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.CUSTOMER_CANCEL_APPOINTMENT
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.CUSTOMER_CREATE_APPOINTMENT
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.CUSTOMER_FEEDBACK
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCancelledAppointmentBinding
+import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.firebase.Data
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
@@ -20,6 +24,11 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogCancelledAppointmentBinding::inflate)
     private var appointment = Data()
     private var onClickViewDetailAppointment: ((Int) -> Unit)? = null
+    private val appEvent by inject<AppEvent>()
+
+    init{
+        setCancelable(false)
+    }
 
     @SuppressLint("SetTextI18n")
     fun show(fireBaseCloudMessage: FireBaseCloudMessage, onClickViewDetailAppointment: ((Int) -> Unit)) {
@@ -35,7 +44,7 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
             tvStaffName.text = appointment.staff_name.displaySafe1()
             tvDateTime.text = appointment.date_appointment_format.displaySafe1()
             tvReason.text = appointment.reason_cancel
-            tvFeedbackContent.text = appointment.content_feedback
+            tvFeedbackContent.text = appointment.content_feedback.safe().htmlEncode()
             ratingBar.rating = appointment.rating.safe().toFloat()
 
             val listService = appointment.services.map {
@@ -84,16 +93,21 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
     private fun setUpListener() {
         with(binding) {
             btClose.setOnClickListener {
-                dismiss()
+                dismissAndRefreshData()
             }
             tvClose.setOnClickListener {
-                dismiss()
+                dismissAndRefreshData()
             }
             btViewDetail.setOnClickListener {
                 onClickViewDetailAppointment?.invoke(appointment.id.safe())
-                dismiss()
+                dismissAndRefreshData()
             }
         }
+    }
+
+    private fun dismissAndRefreshData(){
+        appEvent.refreshData.post(true)
+        dismiss()
     }
 }
 

@@ -41,6 +41,7 @@ interface IAppointment {
     val dateSelected: String get() = ""
     val timeSelected: String get() = ""
     val dateTag: String get() = ""
+    val customerID: Int get() = 0
 }
 
 @Parcelize

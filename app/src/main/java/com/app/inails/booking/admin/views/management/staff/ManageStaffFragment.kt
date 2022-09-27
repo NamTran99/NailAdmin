@@ -98,7 +98,10 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
             staffRemove.bind {
                 mAdapter.removeItem(it)
             }
+        }
 
+        appEvent.refreshData.observe(this){
+            refresh(binding.searchView.text.toString())
         }
     }
 

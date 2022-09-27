@@ -45,7 +45,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             if (fireBaseMessage == null) return null
             val intent = Intent(context, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            intent.putExtra("FCM", fireBaseMessage)
             return PendingIntent.getActivity(
                 context, System.currentTimeMillis().toInt(), intent,
                 PendingIntent.FLAG_IMMUTABLE
@@ -77,25 +76,14 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
             headView.findViewById<TextView>(R.id.btMenuClose).text =
                 "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUS()}"
-
         }
-
-        with(viewModel) {
-            detailAppointment.bind {
-
-            }
-        }
-
         appEvent.notifyCloudMessage.bind {
-            with(viewModel) {
-                notifyDialog.show(it,
-                    onClickViewDetailAppointment = {
-                        Router.open(this@MainActivity, Routing.AppointmentDetail(it))
-                    }
-                )
-            }
+            notifyDialog.show(it,
+                onClickViewDetailAppointment = { appointmentID ->
+                    Router.open(this, Routing.AppointmentDetail(appointmentID))
+                }
+            )
         }
-
         Router.run { redirectToBooking() }
     }
 

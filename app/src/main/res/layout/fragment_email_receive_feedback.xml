@@ -12,8 +12,8 @@
         android:id="@+id/layoutUpdateEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10"
         android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
         android:background="@drawable/bg_white_radius"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/size_15"
@@ -23,10 +23,10 @@
         <TextView
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/size_28"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/size_28"
             android:text="@string/your_email" />
 
         <TextView
@@ -41,23 +41,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/imgEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                android:src="@drawable/ic_email" />
+
             <TextView
                 android:id="@+id/tvEmail"
-                style="@style/AppTheme.TextView.Medium"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/tvEditEmail"
                 android:layout_marginStart="@dimen/size_5"
-                android:drawablePadding="@dimen/size_13"
-                android:text="@string/sample_gmail_com"
                 android:layout_marginEnd="@dimen/size_10"
-                app:drawableStartCompat="@drawable/ic_email" />
+                android:layout_toStartOf="@+id/tvEditEmail"
+                android:layout_toEndOf="@+id/imgEmail"
+                android:text="@string/sample_gmail_com" />
 
             <TextView
                 android:id="@+id/tvEditEmail"
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_3"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/size_10"
                 android:drawablePadding="@dimen/size_10"
@@ -70,26 +77,26 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:visibility="gone"
         android:id="@+id/layoutCreateEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10"
         android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
         android:background="@drawable/bg_white_radius"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/size_15"
         android:paddingTop="@dimen/size_24"
         android:paddingBottom="@dimen/size_27"
+        android:visibility="gone"
         tools:visibility="visible">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/size_28"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/size_28"
             android:text="@string/your_email" />
 
         <TextView
@@ -100,14 +107,14 @@
             android:textAlignment="center"
             android:textColor="@color/text_hint_description" />
 
-       <Button
-           android:id="@+id/btCreate"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginHorizontal="@dimen/size_15"
-           style="@style/AppTheme.ButtonDefault"
-           android:background="@drawable/button_blue_corner"
-           android:text="@string/create"/>
+        <Button
+            android:id="@+id/btCreate"
+            style="@style/AppTheme.ButtonDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_15"
+            android:background="@drawable/button_blue_corner"
+            android:text="@string/create" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -7,18 +7,15 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.views.booking.BookingFragment
-import com.app.inails.booking.admin.views.booking.create_appointment.AppointmentArg
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
-import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
-import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 
 interface BookingRoute {
     fun BaseActivity.redirectToBooking()
-    fun redirectToCreateAppointment(self: RouteDispatcher,id: Int? = null)
+    fun redirectToCreateAppointment(self: RouteDispatcher, id: Int? = null)
     fun BaseFragment.redirectToChooseStaff(id: Int? = null)
-    fun redirectToAppointmentDetail(self: RouteDispatcher, id:Int)
-    fun redirectToChooseStaff(self: RouteDispatcher, type : Int = 0, dateTime : String ?= null)
+    fun redirectToAppointmentDetail(self: RouteDispatcher, id: Int)
+    fun redirectToChooseStaff(self: RouteDispatcher, type: Int = 0, dateTime: String? = null)
 }
 
 class BookingRouteImpl : BookingRoute {
@@ -33,7 +30,8 @@ class BookingRouteImpl : BookingRoute {
     }
 
     override fun BaseFragment.redirectToChooseStaff(
-        id: Int?) {
+        id: Int?
+    ) {
         findNavigator().navigate(
             ChooseStaffFragment::class
         )
@@ -43,11 +41,11 @@ class BookingRouteImpl : BookingRoute {
         self.open<MainNavigationActivity>(Routing.AppointmentDetail(id))
     }
 
-    override fun redirectToChooseStaff(self: RouteDispatcher, type: Int, dateTime : String?) {
-        self.open<MainNavigationActivity>(Routing.ChooseStaff(type,dateTime))
+    override fun redirectToChooseStaff(self: RouteDispatcher, type: Int, dateTime: String?) {
+        self.open<MainNavigationActivity>(Routing.ChooseStaff(type, dateTime))
     }
 
-    override fun redirectToCreateAppointment(self: RouteDispatcher, id : Int?) {
+    override fun redirectToCreateAppointment(self: RouteDispatcher, id: Int?) {
         self.open<MainNavigationActivity>(Routing.CreateAppointment(id))
     }
 }

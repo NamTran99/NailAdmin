@@ -113,8 +113,11 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 acceptAppointmentDialog.updateStaff(it)
             }
         }
-        setListeners()
 
+        appEvent.refreshData.observe(this){
+            viewModel.refresh(arg.id)
+        }
+        setListeners()
     }
 
     private fun displays(item: IAppointment) {
@@ -250,7 +253,6 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 }
             }
         }
-
 
         binding.btFinish.onClick {
             if (mAppointment != null)

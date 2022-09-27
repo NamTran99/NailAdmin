@@ -6,10 +6,12 @@ import android.support.core.route.argument
 import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
+import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
+import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
@@ -20,7 +22,8 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
-class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), TopBarOwner {
+class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), TopBarOwner,
+     NotifyDialogOwner {
     override lateinit var topBar: TopBarAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,14 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())
+        }
+
+        appEvent.notifyCloudMessage.bind {
+            notifyDialog.show(it,
+                onClickViewDetailAppointment = { appointmentID ->
+                    Router.open(this, Routing.AppointmentDetail(appointmentID))
+                }
+            )
         }
     }
 

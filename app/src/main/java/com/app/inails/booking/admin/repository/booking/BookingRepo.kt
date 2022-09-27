@@ -18,7 +18,20 @@ class AppointmentRepository(
     val result = MutableLiveData<IAppointment>()
     val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
-    suspend operator fun invoke(type: Int) {
+
+    suspend fun getAppointmentByCustomerID(customerID: Int){
+        results.post(
+            bookingFactory
+                .createAppointmentList(
+                    bookingApi.listAppointmentInDashboard(null)
+                        .await().filter {
+                            it.customer_id == customerID
+                        }
+                )
+        )
+    }
+
+    suspend operator fun invoke(type: Int? = null) {
         results.post(
             bookingFactory
                 .createAppointmentList(

@@ -24,7 +24,7 @@ interface BookingApi : Injectable {
     fun createAppointment(@Body body: AppointmentForm): ApiAsync<Any>
 
     @GET("dashboard/list-appointment-in-dashboard")
-    fun listAppointmentInDashboard(@Query("type") type: Int): ApiAsync<ArrayList<AppointmentDTO>>
+    fun listAppointmentInDashboard(@Query("type") type: Int?): ApiAsync<ArrayList<AppointmentDTO>>
 
     @POST("appointment/update-status-appointment")
     fun updateStatusAppointment(@Body body: AppointmentStatusForm): ApiAsync<AppointmentUpdateDTO>

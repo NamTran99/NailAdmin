@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.widget
 
+import android.annotation.SuppressLint
 import android.support.core.view.RecyclerAdapter
 import android.support.core.view.RecyclerHolder
 import android.view.ViewGroup
@@ -23,6 +24,12 @@ abstract class SimpleRecyclerAdapter<T, V : ViewBinding>(protected val view: Rec
                 onBindHolder(item, binding, adapterPosition)
             }
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clear() {
+        items?.clear()
+        notifyDataSetChanged()
     }
 
     protected abstract fun onCreateBinding(parent: ViewGroup): V

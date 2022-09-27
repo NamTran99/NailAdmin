@@ -14,4 +14,5 @@ class AppEvent {
     val chooseStaffInCreateAppointment = SingleLiveEvent<IStaff>()
     val chooseStaffInDetailAppointment = SingleLiveEvent<IStaff>()
     val notifyCloudMessage = SingleLiveEvent<FireBaseCloudMessage>()
+    val refreshData = SingleLiveEvent<Any>()
 }

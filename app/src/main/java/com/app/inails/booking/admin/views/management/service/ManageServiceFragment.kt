@@ -19,6 +19,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentManageServiceBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.popup.PopUpServiceMore
 import com.app.inails.booking.admin.model.ui.ServiceForm
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
@@ -67,7 +68,6 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                 mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
             }
-            // NamTD8: Need find the scheme of loading road
             loading.bind {
                 mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
@@ -78,10 +78,18 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
             }
 
             listService.bind(mAdapter::submit)
+            listService.bind{
+                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
+                !it.isNullOrEmpty() show binding.rvServices
+            }
             serviceCreated.bind(mAdapter::insertItem)
             serviceUpdated.bind(mAdapter::updateItem)
             serviceDeleted.bind(mAdapter::removeItem)
             serviceChanged.bind(mAdapter::updateItem)
+        }
+
+        appEvent.refreshData.observe(this){
+            refreshView(binding.searchView.text.toString())
         }
     }
 

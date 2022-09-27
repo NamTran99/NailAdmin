@@ -194,6 +194,9 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
         appActivity.appEvent.notifyCloudMessage.observe(viewLifecycleOwner) {
             viewModel.refresh(mType)
         }
+        appEvent.refreshData.observe(viewLifecycleOwner){
+            refreshData(mType)
+        }
     }
 
     private fun showConfirmDialog(title: String, message: String, function: () -> Unit) {

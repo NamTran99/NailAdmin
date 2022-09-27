@@ -218,12 +218,16 @@
 
     <TextView
         android:id="@+id/tvFeedbackContent"
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_width="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/size_23"
         android:layout_marginTop="@dimen/size_17"
-        android:text="@string/rating" />
+        android:textColor="#7C7C7C"
+        android:maxLines="@null"
+        android:textSize="@dimen/text_size_10"
+        tools:text="Feedback" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

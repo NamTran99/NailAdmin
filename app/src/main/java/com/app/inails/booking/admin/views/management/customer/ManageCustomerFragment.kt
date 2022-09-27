@@ -14,6 +14,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentManageCustomerBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.ServiceImpl
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
@@ -43,7 +44,10 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
             }
 
             listCustomer.bind(mAdapter::submit)
-
+            listCustomer.bind{
+                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
+                !it.isNullOrEmpty() show binding.rvCustomers
+            }
         }
     }
 
@@ -62,7 +66,7 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
 
             mAdapter = ManageCustomerAdapter(rvCustomers).apply {
                 onClickOpenBookingList = {
-                    Router.run { redirectToCustomerBookingList(it.listService as List<ServiceImpl>) }
+                    Router.run { redirectToCustomerBookingList(it.id) }
                 }
             }
             searchView.setOnSearchListener(
@@ -72,10 +76,19 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
                 },
                 onSearch = { refresh(it) })
         }
+
+        appEvent.refreshData.observe(this){
+            refresh(binding.searchView.text.toString())
+        }
     }
 
+    override fun onResume() {
+        super.onResume()
+        refresh(binding.searchView.text.toString())
+    }
 
     private fun refresh(key: String) {
+        mAdapter.clear()
         viewModel.getListCustomer(key)
     }
 }
