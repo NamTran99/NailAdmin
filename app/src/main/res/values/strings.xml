@@ -122,4 +122,6 @@
     <string name="enter_service_name">Enter service name</string>
     <string name="by_service">By Service</string>
     <string name="btn_reset">Reset</string>
+    <string name="search_by_name_phone_email">Search by name, phone, email</string>
+    <string name="total_booking_amount">TOTAL BOOKING AMOUNT</string>
 </resources>

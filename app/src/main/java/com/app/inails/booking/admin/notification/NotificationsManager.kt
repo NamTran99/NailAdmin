@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger
 class NotificationsManager(private val mContext: Context) {
 
     val id: Int
-        get() = c.incrementAndGet()
+        get() = 5
 
     fun defaultNotify(cloudMessage: FireBaseCloudMessage) {
         val pendingIntent = MainActivity.getPendingIntent(mContext, cloudMessage)
@@ -56,7 +56,7 @@ class NotificationsManager(private val mContext: Context) {
         }
 
         notificationManager.notify(
-            cloudMessage.id?.toIntOrNull() ?: id,
+            id,
             notificationBuilder.build()
         )
     }

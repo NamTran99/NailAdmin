@@ -343,10 +343,6 @@ class BookingViewModel(
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
 
-    init {
-//        refresh()
-    }
-
     fun refresh(type: Int) = launch(loadingCustom, error) {
         appointmentRepo(if (type == 1) filterCheckInForm else filterCustomerForm)
     }

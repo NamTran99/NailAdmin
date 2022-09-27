@@ -10,6 +10,7 @@ import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.view.GravityCompat
@@ -38,18 +39,23 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     NavigationView.OnNavigationItemSelectedListener, NotifyDialogOwner {
 
     companion object {
+        const val APPOINTMENT_ID = "Appointment_id"
+
         fun getPendingIntent(
             context: Context,
             fireBaseMessage: FireBaseCloudMessage?
         ): PendingIntent? {
             if (fireBaseMessage == null) return null
             val intent = Intent(context, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            Log.d("TAG", "NamTD8 getPendingIntent: ${fireBaseMessage.data.id}")
+            val bundle = Bundle()
+            bundle.putInt(APPOINTMENT_ID, 5)
+            intent.putExtras(bundle)
             return PendingIntent.getActivity(
-                context, System.currentTimeMillis().toInt(), intent,
+                context, 5, intent,
                 PendingIntent.FLAG_IMMUTABLE
                         or PendingIntent.FLAG_UPDATE_CURRENT
-                        or PendingIntent.FLAG_ONE_SHOT
             )
         }
     }
@@ -59,8 +65,15 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
 
+    override fun onResume() {
+        super.onResume()
+        val appointmentID =  intent.extras?.getInt(APPOINTMENT_ID,0)
+        Log.d("TAG", "NamTD8 onCreate() called with: savedInstanceState = $appointmentID")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
         topBar.setState(MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
@@ -85,6 +98,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             )
         }
         Router.run { redirectToBooking() }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.d("TAG", "NamTD8 {${intent?.getIntExtra(APPOINTMENT_ID, 0)}}")
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

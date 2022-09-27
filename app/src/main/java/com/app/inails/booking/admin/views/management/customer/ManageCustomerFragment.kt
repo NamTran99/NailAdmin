@@ -15,7 +15,6 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentManageCustomerBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.model.ui.ServiceImpl
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
 import com.app.inails.booking.admin.views.management.customer.adapters.ManageCustomerAdapter
@@ -31,7 +30,6 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUpView()
         setUpListener()
     }
@@ -39,7 +37,6 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
     private fun setUpListener() {
         with(viewModel) {
             refreshLoading.bind {
-                mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
             }
 
@@ -47,6 +44,9 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
             listCustomer.bind{
                 it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
                 !it.isNullOrEmpty() show binding.rvCustomers
+
+                 binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isNullOrEmpty())
+                     "There are no results matching your search keyword." else "Your salon doesn't have any customers yet"
             }
         }
     }
@@ -93,7 +93,6 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
     }
 }
 
-
 class ManageCustomerViewModel(
     val fetchListCustomerRepo: FetchListCustomerRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
@@ -101,15 +100,7 @@ class ManageCustomerViewModel(
     val listCustomer = fetchListCustomerRepo.results
     val success = SingleLiveEvent<Any>()
 
-    init {
-        getListCustomer()
-    }
-
     fun getListCustomer(search: String = "") = launch(refreshLoading, error) {
         fetchListCustomerRepo(search)
     }
 }
-
-
-
-

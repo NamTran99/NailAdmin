@@ -75,4 +75,5 @@
     <dimen name="size_19">19dp</dimen>
     <dimen name="size_23">23dp</dimen>
     <dimen name="size_22">22dp</dimen>
+    <dimen name="size_37">37dp</dimen>
 </resources>

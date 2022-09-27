@@ -23,6 +23,7 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
     @SuppressLint("LongLogTag")
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         try {
+            Log.d(TAG, "onMessageReceived: ")
             val params = remoteMessage.data
             val `object` = JSONObject(params as Map<*, *>?)
             val objectFilter =

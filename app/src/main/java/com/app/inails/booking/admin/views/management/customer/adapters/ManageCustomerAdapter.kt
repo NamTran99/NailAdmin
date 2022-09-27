@@ -12,10 +12,11 @@ import com.app.inails.booking.admin.extention.formatPhoneUS
 import com.app.inails.booking.admin.extention.formatPhoneUSCustom
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
+import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 
 class ManageCustomerAdapter(view: RecyclerView) :
-    PageRecyclerAdapter<ICustomer, ItemManageCustomerBinding>(view) {
+    SimpleRecyclerAdapter<ICustomer, ItemManageCustomerBinding>(view) {
 
     var onClickItemListener: ((ICustomer) -> Unit)? = null
     var onClickOpenBookingList: ((ICustomer) -> Unit)? = null
