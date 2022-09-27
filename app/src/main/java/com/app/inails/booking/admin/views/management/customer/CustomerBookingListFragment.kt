@@ -98,6 +98,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
         )
 
         with(binding) {
+            binding.emptyLayout.tvEmptyData.text = "This customer doesn't booking any appointments yet"
             mAdapter = AppointmentAdapter(rvServices).apply {
                 onClickItemListener = {
                     Router.redirectToAppointmentDetail(self, it.id)

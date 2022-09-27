@@ -49,9 +49,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             val intent = Intent(context, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             Log.d("TAG", "NamTD8 getPendingIntent: ${fireBaseMessage.data.id}")
-            val bundle = Bundle()
-            bundle.putInt(APPOINTMENT_ID, 5)
-            intent.putExtras(bundle)
+            intent.putExtra(APPOINTMENT_ID, fireBaseMessage.data.id)
             return PendingIntent.getActivity(
                 context, 5, intent,
                 PendingIntent.FLAG_IMMUTABLE
@@ -65,15 +63,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
 
-    override fun onResume() {
-        super.onResume()
-        val appointmentID =  intent.extras?.getInt(APPOINTMENT_ID,0)
-        Log.d("TAG", "NamTD8 onCreate() called with: savedInstanceState = $appointmentID")
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        onNewIntent(intent)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
         topBar.setState(MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
@@ -102,7 +94,10 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.d("TAG", "NamTD8 {${intent?.getIntExtra(APPOINTMENT_ID, 0)}}")
+        val appointmentID = intent?.getIntExtra(APPOINTMENT_ID, -1)?: -1
+        if (appointmentID != -1){
+            Router.open(this, Routing.AppointmentDetail(appointmentID))
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
