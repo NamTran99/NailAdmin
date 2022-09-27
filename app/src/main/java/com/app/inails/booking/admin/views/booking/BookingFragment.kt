@@ -11,27 +11,29 @@ import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentBookingBinding
 import com.app.inails.booking.admin.exception.setOnSelected
-import com.app.inails.booking.admin.extention.colorSchemeDefault
-import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.model.ui.AppointmentStatusForm
-import com.app.inails.booking.admin.model.ui.CancelAppointmentForm
-import com.app.inails.booking.admin.model.ui.HandleAppointmentForm
-import com.app.inails.booking.admin.model.ui.StartServiceForm
+import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.repository.booking.RemindAppointmentRepository
+import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.material.tabs.TabLayout
 
+
 class BookingFragment : BaseFragment(R.layout.fragment_booking),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
-    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner {
+    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, FilterApmOwner {
     private val binding by viewBinding(FragmentBookingBinding::bind)
     private val viewModel by viewModel<BookingViewModel>()
     private var mType = 1
@@ -49,6 +51,16 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             appointTab.addTab(appointTab.newTab().setText(R.string.title_appointment_customer))
             appointTab.setOnSelected {
                 refreshData(it + 1)
+            }
+            tvFilter.onClick {
+                showFilterDialog()
+            }
+            ivFilter.onClick {
+                showFilterDialog()
+            }
+
+            btClear.onClick {
+                clearFilter()
             }
         }
         with(viewModel) {
@@ -194,9 +206,27 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
         appActivity.appEvent.notifyCloudMessage.observe(viewLifecycleOwner) {
             viewModel.refresh(mType)
         }
-        appEvent.refreshData.observe(viewLifecycleOwner){
+        appEvent.refreshData.observe(viewLifecycleOwner) {
             refreshData(mType)
         }
+    }
+
+    private fun clearFilter() {
+        if (mType == 1)
+            viewModel.filterCheckInForm.run {
+                searchCustomer = null
+                searchStaff = null
+                date = null
+                toDate = null
+            }
+        else
+            viewModel.filterCustomerForm.run {
+                searchCustomer = null
+                searchStaff = null
+                date = null
+                toDate = null
+            }
+        refreshData(mType)
     }
 
     private fun showConfirmDialog(title: String, message: String, function: () -> Unit) {
@@ -211,7 +241,8 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
     private fun refreshData(type: Int) {
         mType = type
         binding.rvAppointment.removeAllViews()
-        viewModel.refresh(type)
+        displayFilter()
+        viewModel.refresh(mType)
     }
 
     override fun onResume() {
@@ -225,6 +256,72 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
         }
         refreshData(mType)
     }
+
+    private fun displayFilter() {
+        val haveFilter = viewModel.checkHaveFilter(mType)
+        (haveFilter) show binding.filterScrollLayout + binding.btClear
+        (!haveFilter) show binding.tvFilter
+        if (haveFilter) {
+            binding.filterContentLayout.removeAllViews()
+            if (viewModel.getDateToDate(mType).isNotEmpty()) {
+                binding.filterContentLayout.addView(renderSearchItem(viewModel.getDateToDate(mType)))
+            }
+            if (viewModel.getStaffSearch(mType).isNotEmpty()) {
+                binding.filterContentLayout.addView(renderSearchItem(viewModel.getStaffSearch(mType)))
+            }
+
+            if (viewModel.getCustomerSearch(mType).isNotEmpty()) {
+                binding.filterContentLayout.addView(
+                    renderSearchItem(
+                        viewModel.getCustomerSearch(
+                            mType
+                        )
+                    )
+                )
+            }
+
+        }
+    }
+
+    private fun renderSearchItem(label: String): TextView {
+        val textView = TextView(appActivity)
+        textView.text = label
+        TextViewCompat.setTextAppearance(textView, R.style.AppTheme_TextView_Medium)
+        textView.setTextColor(ContextCompat.getColor(appActivity, R.color.colorPrimary))
+        textView.setBackgroundResource(R.drawable.bg_primary_stroke)
+        textView.setPadding(15, 8, 15, 4)
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.setMargins(0, 0, 15, 0)
+        textView.layoutParams = lp
+        return textView
+    }
+
+    private fun showFilterDialog() {
+        filterApmDialog.show(
+            if (mType == 1) viewModel.filterCheckInForm
+            else viewModel.filterCustomerForm
+        ) { form ->
+            if (mType == 1)
+                viewModel.filterCheckInForm.run {
+                    searchCustomer = form.searchCustomer
+                    searchStaff = form.searchStaff
+                    date = form.date
+                    toDate = form.toDate
+                }
+            else
+                viewModel.filterCustomerForm.run {
+                    searchCustomer = form.searchCustomer
+                    searchStaff = form.searchStaff
+                    date = form.date
+                    toDate = form.toDate
+                }
+            refreshData(mType)
+        }
+    }
+
 }
 
 
@@ -237,6 +334,8 @@ class BookingViewModel(
     val appointment = appointmentRepo.result
     val resultCheckIn = appointmentRepo.resultCheckIn
     val form = AppointmentStatusForm()
+    val filterCheckInForm = AppointmentFilterForm(type = 1)
+    val filterCustomerForm = AppointmentFilterForm(type = 2)
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
     val formStartService = StartServiceForm()
@@ -249,7 +348,7 @@ class BookingViewModel(
     }
 
     fun refresh(type: Int) = launch(loadingCustom, error) {
-        appointmentRepo(type)
+        appointmentRepo(if (type == 1) filterCheckInForm else filterCustomerForm)
     }
 
     fun updateStatus() = launch(loading, error) {
@@ -287,6 +386,96 @@ class BookingViewModel(
     fun remind(id: Int) = launch(loading, error) {
         remindAppointmentRepo(id)
         success.post("Remind customer success")
+    }
+
+    fun checkHaveFilter(
+        type: Int
+    ): Boolean {
+        return if (type == 1)
+            !filterCheckInForm.date.isNullOrEmpty() || !filterCheckInForm.toDate.isNullOrEmpty() || !filterCheckInForm.searchStaff.isNullOrEmpty() || !filterCheckInForm.searchCustomer.isNullOrEmpty()
+        else !filterCustomerForm.date.isNullOrEmpty() || !filterCustomerForm.toDate.isNullOrEmpty() || !filterCustomerForm.searchStaff.isNullOrEmpty() || !filterCustomerForm.searchCustomer.isNullOrEmpty()
+    }
+
+    fun getDateToDate(
+        type: Int
+    ): String {
+        if (type == 1) {
+            return if (!filterCheckInForm.date.isNullOrEmpty() && !filterCheckInForm.toDate.isNullOrEmpty()) {
+                "${
+                    filterCheckInForm.date!!.toDateAppointment(
+                        format = DatePickerDialog.FORMAT_DATE_API,
+                        parseFormat = "MMM dd"
+                    )
+                } - ${
+                    filterCheckInForm.toDate!!.toDateAppointment(
+                        format = DatePickerDialog.FORMAT_DATE_API,
+                        parseFormat = "MMM dd"
+                    )
+                }"
+            } else if (!filterCheckInForm.date.isNullOrEmpty()) {
+                filterCheckInForm.date!!.toDateAppointment(
+                    format = DatePickerDialog.FORMAT_DATE_API,
+                    parseFormat = "MMM dd"
+                )
+            } else if (!filterCheckInForm.toDate.isNullOrEmpty()) {
+                filterCheckInForm.toDate!!.toDateAppointment(
+                    format = DatePickerDialog.FORMAT_DATE_API,
+                    parseFormat = "MMM dd"
+                )
+            } else ""
+        } else {
+            return if (!filterCustomerForm.date.isNullOrEmpty() && !filterCustomerForm.toDate.isNullOrEmpty()) {
+                "${
+                    filterCustomerForm.date!!.toDateAppointment(
+                        format = DatePickerDialog.FORMAT_DATE_API,
+                        parseFormat = "MMM dd"
+                    )
+                } - ${
+                    filterCustomerForm.toDate!!.toDateAppointment(
+                        format = DatePickerDialog.FORMAT_DATE_API,
+                        parseFormat = "MMM dd"
+                    )
+                }"
+            } else if (!filterCustomerForm.date.isNullOrEmpty()) {
+                filterCustomerForm.date!!.toDateAppointment(
+                    format = DatePickerDialog.FORMAT_DATE_API,
+                    parseFormat = "MMM dd"
+                )
+            } else if (!filterCustomerForm.toDate.isNullOrEmpty()) {
+                filterCustomerForm.toDate!!.toDateAppointment(
+                    format = DatePickerDialog.FORMAT_DATE_API,
+                    parseFormat = "MMM dd"
+                )
+            } else ""
+        }
+    }
+
+    fun getCustomerSearch(
+        type: Int
+    ): String {
+        return if (type == 1) {
+            if (!filterCheckInForm.searchCustomer.isNullOrEmpty()) {
+                "Customer: ${filterCheckInForm.searchCustomer}"
+            } else ""
+        } else {
+            if (!filterCustomerForm.searchCustomer.isNullOrEmpty()) {
+                "Customer: ${filterCustomerForm.searchCustomer}"
+            } else ""
+        }
+    }
+
+    fun getStaffSearch(
+        type: Int
+    ): String {
+        return if (type == 1) {
+            if (!filterCheckInForm.searchStaff.isNullOrEmpty()) {
+                "Staff: ${filterCheckInForm.searchStaff}"
+            } else ""
+        } else {
+            if (!filterCustomerForm.searchStaff.isNullOrEmpty()) {
+                "Customer: ${filterCustomerForm.searchStaff}"
+            } else ""
+        }
     }
 }
 

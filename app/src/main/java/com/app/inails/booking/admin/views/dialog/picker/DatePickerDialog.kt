@@ -51,6 +51,10 @@ class DatePickerDialog(private val activity: BaseActivity) :
         mDisableFutureDate = disableFutureDates
     }
 
+    fun setDisablePastDates(disablePastDates: Boolean) {
+        mDisablePastDate = disablePastDates
+    }
+
     fun setupClickWithView(view: View) {
         mView = view
         view.setOnClickListener {

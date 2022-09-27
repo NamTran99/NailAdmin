@@ -41,5 +41,11 @@
     <string name="label_info_service_status">Click here to start work on this customer</string>
     <string name="label_info_finish_status">Click here when you done</string>
     <string name="label_appointment_time">Appointment Time</string>
+    <string name="label_by_date_and_time">By Date and Time</string>
+    <string name="label_to">To</string>
+    <string name="label_by_date">By Date</string>
+    <string name="label_by_staff">By Staff</string>
+    <string name="label_by_customer">By Customer</string>
+    <string name="label_filter">Filter</string>
 
 </resources>

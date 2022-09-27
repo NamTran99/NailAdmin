@@ -81,6 +81,10 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         super.onViewRecycled(holder)
         (holder as? IHolder<*>)?.onRecycled()
     }
+
+    fun clear(){
+        mItems?.clear()
+    }
 }
 
 interface DiffComparable<T> {

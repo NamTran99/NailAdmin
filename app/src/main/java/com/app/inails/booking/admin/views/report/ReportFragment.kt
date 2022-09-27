@@ -15,6 +15,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentReportBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.model.ui.AppointmentFilterForm
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.management.service.CreateUpdateServiceOwner
@@ -92,7 +93,8 @@ class ReportFragmentViewModel(
     }
 
     fun getListAppointment() = launch(refreshLoading, error) {
-        appointmentRepository(TYPE_WALK_IN_CUSTOMER)
+        val form = AppointmentFilterForm(type = TYPE_WALK_IN_CUSTOMER)
+        appointmentRepository(form)
     }
 
     companion object {

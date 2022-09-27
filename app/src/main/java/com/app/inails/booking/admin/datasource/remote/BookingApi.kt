@@ -24,7 +24,13 @@ interface BookingApi : Injectable {
     fun createAppointment(@Body body: AppointmentForm): ApiAsync<Any>
 
     @GET("dashboard/list-appointment-in-dashboard")
-    fun listAppointmentInDashboard(@Query("type") type: Int?): ApiAsync<ArrayList<AppointmentDTO>>
+    fun listAppointmentInDashboard(
+        @Query("type") type: Int?,
+        @Query("date") date: String? = null,
+        @Query("to_date") toDate: String? = null,
+        @Query("search_staff") searchStaff: String? = null,
+        @Query("search_customer") searchCustomer: String? = null,
+    ): ApiAsync<ArrayList<AppointmentDTO>>
 
     @POST("appointment/update-status-appointment")
     fun updateStatusAppointment(@Body body: AppointmentStatusForm): ApiAsync<AppointmentUpdateDTO>
@@ -47,11 +53,11 @@ interface BookingApi : Injectable {
     fun startServiceAppointment(@Body body: StartServiceForm): ApiAsync<AppointmentUpdateDTO>
 
     @GET("appointment/detail")
-    fun detail(@Query("id") id : Int): ApiAsync<AppointmentDTO>
+    fun detail(@Query("id") id: Int): ApiAsync<AppointmentDTO>
 
     @FormUrlEncoded
     @POST("appointment/remind-appointment")
-    fun remindAppointment(@Field("id") id : Int): ApiAsync<Any>
+    fun remindAppointment(@Field("id") id: Int): ApiAsync<Any>
 
     @POST("appointment/admin-update-appointment")
     fun updateAppointment(@Body body: AppointmentForm): ApiAsync<Any>

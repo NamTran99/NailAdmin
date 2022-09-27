@@ -21,4 +21,6 @@
     <string name="hint_enter_work_time">Enter Work Time</string>
     <string name="hint_enter_service_time">Enter Service Time</string>
     <string name="hint_select_hour">Select hour</string>
+    <string name="hint_from">From</string>
+    <string name="hint_enter_name_or_phone">Enter Name or Phone</string>
 </resources>

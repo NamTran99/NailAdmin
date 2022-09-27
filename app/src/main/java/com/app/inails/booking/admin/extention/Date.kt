@@ -47,11 +47,13 @@ fun String.toDate(
 }
 
 fun String.toDateAppointment(
+    format: String = "yyyy-MM-dd'T'HH:mm:ss",
+    parseFormat :String = "MMM dd (EEEE)"
 ): String {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    val dateFormat = SimpleDateFormat(format, Locale.getDefault())
     val date =
         dateFormat.parse(this)
-    val simpleDateFormat = SimpleDateFormat("MMM dd (EEEE)", Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat(parseFormat, Locale.getDefault())
     return simpleDateFormat.format(date)
 }
 
@@ -76,7 +78,7 @@ fun String.toTimeAppointment(
 
 
 fun String?.toTimeCheckIn(
-    format :String= "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 ): String {
     if (this.isNullOrEmpty()) return ""
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())

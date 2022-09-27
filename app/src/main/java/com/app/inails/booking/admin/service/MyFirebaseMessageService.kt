@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.service
 import android.annotation.SuppressLint
 import android.support.core.livedata.post
 import android.support.di.inject
+import android.util.Log
 import com.app.inails.booking.admin.datasource.local.AppCache
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage

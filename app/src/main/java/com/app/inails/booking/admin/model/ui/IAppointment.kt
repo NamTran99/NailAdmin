@@ -60,7 +60,7 @@ class AppointmentForm(
     var workTime: Int = 0,
     var hasServiceCustom: Boolean = false,
     var hasStaff: Boolean = true
-) :  Parcelable {
+) : Parcelable {
 
     fun validate() {
         if (phone.isBlank() || phone.length < 14) viewError(
@@ -110,4 +110,17 @@ class HandleAppointmentForm(
     var reason: String = "",
     @SerializedName("staff_id")
     var staffId: Int = 0,
+) : Parcelable
+
+
+@Parcelize
+class AppointmentFilterForm(
+    @SerializedName("to_date")
+    var toDate: String? = null,
+    var date: String? = null,
+    @SerializedName("search_staff")
+    var searchStaff: String? = null,
+    @SerializedName("search_customer")
+    var searchCustomer: String? = null,
+    var type: Int = 1
 ) : Parcelable

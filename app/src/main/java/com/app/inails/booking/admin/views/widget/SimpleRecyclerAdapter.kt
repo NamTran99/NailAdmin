@@ -27,7 +27,7 @@ abstract class SimpleRecyclerAdapter<T, V : ViewBinding>(protected val view: Rec
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun clear() {
+    override fun clear() {
         items?.clear()
         notifyDataSetChanged()
     }

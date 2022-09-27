@@ -19,7 +19,7 @@ class AppointmentRepository(
     val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
 
-    suspend fun getAppointmentByCustomerID(customerID: Int){
+    suspend fun getAppointmentByCustomerID(customerID: Int) {
         results.post(
             bookingFactory
                 .createAppointmentList(
@@ -31,11 +31,16 @@ class AppointmentRepository(
         )
     }
 
-    suspend operator fun invoke(type: Int? = null) {
+    suspend operator fun invoke(form: AppointmentFilterForm) {
         results.post(
             bookingFactory
                 .createAppointmentList(
-                    bookingApi.listAppointmentInDashboard(type)
+                    bookingApi.listAppointmentInDashboard(
+                        form.type,
+                        date = form.date,
+                        toDate = form.toDate,
+                        searchStaff = form.searchStaff,
+                        searchCustomer = form.searchCustomer)
                         .await()
                 )
         )
@@ -52,11 +57,13 @@ class AppointmentRepository(
     }
 
     suspend fun customerWalkIn(id: Int) {
-        resultCheckIn.post(  bookingFactory
-            .createAAppointment(
-                bookingApi.customerWalkIn(id)
-                    .await()
-            ))
+        resultCheckIn.post(
+            bookingFactory
+                .createAAppointment(
+                    bookingApi.customerWalkIn(id)
+                        .await()
+                )
+        )
 
     }
 

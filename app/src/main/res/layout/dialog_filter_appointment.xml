@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+    android:orientation="vertical"
+    android:padding="@dimen/size_16"
+    tools:context=".views.dialog.ConfirmNoticeDialog">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_radius">
+
+        <ImageButton
+            android:id="@+id/btClose"
+            style="@style/AppTheme.ImageButton"
+            android:src="@drawable/ic_menu_close"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/btClose"
+            android:text="@string/title_filter"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/tvReset"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/size_8"
+            android:gravity="center"
+            android:text="@string/btn_reset"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_14" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@drawable/bg_white_radius"
+        android:orientation="vertical"
+        android:padding="@dimen/size_20">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_by_date" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_of_edit_text"
+            android:layout_marginTop="@dimen/size_16"
+            android:background="@drawable/bg_view_stroke"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/size_16"
+                android:text="@string/hint_from"
+                android:textColorHint="@color/black" />
+
+            <TextView
+                android:id="@+id/tvDateFrom"
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/label_select_date"
+                android:paddingHorizontal="@dimen/size_16"
+                android:textColorHint="@color/black"
+                app:drawableStartCompat="@drawable/ic_calendar_outline" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_of_edit_text"
+            android:layout_marginTop="@dimen/size_16"
+            android:background="@drawable/bg_view_stroke"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/size_16"
+                android:text="@string/label_to"
+                android:textColorHint="@color/black" />
+
+            <TextView
+                android:id="@+id/tvDateTo"
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/label_select_date"
+                android:paddingHorizontal="@dimen/size_16"
+                android:textColorHint="@color/black"
+                app:drawableStartCompat="@drawable/ic_calendar_outline" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@drawable/bg_white_radius"
+        android:orientation="vertical"
+        android:padding="@dimen/size_20">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_by_staff" />
+
+        <EditText
+            android:id="@+id/etStaff"
+            style="@style/AppTheme.EditText"
+            android:layout_marginTop="@dimen/size_16"
+            android:hint="@string/hint_enter_name_or_phone" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@drawable/bg_white_radius"
+        android:orientation="vertical"
+        android:padding="@dimen/size_20">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/label_by_customer" />
+
+        <EditText
+            android:id="@+id/etCustomer"
+            style="@style/AppTheme.EditText"
+            android:layout_marginTop="@dimen/size_16"
+            android:hint="@string/hint_enter_name_or_phone" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSubmit"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/button_primary_corner"
+        android:text="@string/btn_submit" />
+</LinearLayout>
