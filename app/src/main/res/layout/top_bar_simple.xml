@@ -26,12 +26,23 @@
     <TextView
         android:id="@+id/btEdit"
         style="@style/AppTheme.TextView.Title.Small"
-        android:padding="@dimen/size_15"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/colorPrimary"
-        android:visibility="gone"
-        android:textSize="@dimen/text_size_12"
         android:layout_centerInParent="true"
-        android:text="@string/btn_edit" />
+        android:padding="@dimen/size_15"
+        android:text="@string/btn_edit"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_12"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btSetting"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_more"
+        app:tint="@color/colorPrimary" />
 
 </RelativeLayout>

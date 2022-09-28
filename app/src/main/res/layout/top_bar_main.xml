@@ -29,9 +29,44 @@
         android:id="@+id/btStaffList"
         style="@style/AppTheme.ButtonDefault.Wrap"
         android:layout_height="@dimen/size_40"
-        android:layout_marginEnd="@dimen/size_16"
         android:background="@drawable/button_primary_stroke"
         android:drawableStart="@drawable/ic_staff_list"
         android:text="@string/btn_staff_list"
         android:textColor="@color/colorPrimary" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:background="?selectableItemBackgroundBorderless">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btNotification"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_notification_black"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCountNoti"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="@dimen/size_22"
+            android:layout_height="@dimen/size_22"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/size_8"
+            android:layout_marginEnd="@dimen/size_8"
+            android:background="@drawable/circle_primary"
+            android:gravity="center"
+            android:padding="@dimen/size_3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_8"
+            android:visibility="gone"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="99+" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </LinearLayout>

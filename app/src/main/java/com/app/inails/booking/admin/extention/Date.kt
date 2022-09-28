@@ -48,7 +48,7 @@ fun String.toDate(
 
 fun String.toDateAppointment(
     format: String = "yyyy-MM-dd'T'HH:mm:ss",
-    parseFormat :String = "MMM dd (EEEE)"
+    parseFormat: String = "MMM dd (EEEE)"
 ): String {
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())
     val date =
@@ -86,5 +86,15 @@ fun String?.toTimeCheckIn(
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return simpleDateFormat.format(date)
+}
+
+fun String.toCreatedAt(
+): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val date =
+        dateFormat.parse(this)
+    val simpleDateFormat = SimpleDateFormat("MMMM dd yyyy - hh:mm a", Locale.getDefault())
     return simpleDateFormat.format(date)
 }

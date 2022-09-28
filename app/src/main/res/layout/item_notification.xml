@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/size_13"
+    android:background="@drawable/bg_white_radius">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cbSelect"
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_6"
+        android:background="@drawable/custom_cancel_radiobutton"
+        android:button="@null"
+        android:gravity="center"
+        android:scaleX="0.40"
+        android:scaleY="0.40" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        style="@style/AppTheme.TextView.SemiBold"
+        android:layout_marginTop="@dimen/size_16"
+        android:layout_toStartOf="@+id/btMore"
+        android:layout_toEndOf="@+id/cbSelect"
+        android:maxLines="@null"
+        tools:text="Your booking #123 of salon “name” has been accepted !" />
+
+    <TextView
+        android:id="@+id/tvDateTime"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_below="@+id/tvContent"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginBottom="@dimen/size_16"
+        android:layout_toEndOf="@+id/cbSelect"
+        android:textColor="@color/gray08"
+        android:textSize="@dimen/text_size_12"
+        tools:text="Aug 23 2022 - 2:58 PM" />
+
+    <ImageButton
+        android:id="@+id/btMore"
+        style="@style/AppTheme.ImageButton"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_more" />
+
+
+</RelativeLayout>

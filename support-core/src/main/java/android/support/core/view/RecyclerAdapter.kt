@@ -82,7 +82,7 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         (holder as? IHolder<*>)?.onRecycled()
     }
 
-    fun clear(){
+    open fun clear(){
         mItems?.clear()
     }
 }

@@ -6,6 +6,7 @@
     <dimen name="offset_horizontal">10dp</dimen>
     <dimen name="offset_haft_horizontal">5dp</dimen>
 
+    <dimen name="size_0">0dp</dimen>
     <dimen name="size_0_5">0.5dp</dimen>
     <dimen name="size_1">1dp</dimen>
     <dimen name="size_2">2dp</dimen>

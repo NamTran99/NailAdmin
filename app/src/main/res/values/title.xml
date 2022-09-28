@@ -31,4 +31,8 @@
     <string name="title_appointment_detail">Appointment Detail</string>
     <string name="title_update_appointment">Update Appointment</string>
     <string name="title_filter">Filter</string>
+    <string name="title_notification">Notifications</string>
+    <string name="title_delete_notification">Delete Notification</string>
+    <string name="title_delete_all_notifications">Delete all notifications</string>
+    <string name="title_delete_all_selected_notifications">Delete all selected notifications</string>
 </resources>

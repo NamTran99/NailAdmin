@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemViewTextPopupBinding
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.model.popup.PopUpNotificationItemMore
+import com.app.inails.booking.admin.model.popup.PopUpNotificationMore
 import com.app.inails.booking.admin.model.popup.PopUpServiceMore
 import com.app.inails.booking.admin.model.popup.PopUpStaffMore
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
@@ -79,8 +81,9 @@ class TextMenuPopup<T>(val context: Context) : PopupWindow(context) {
         val viewLocation = IntArray(2) // 0,0
         view.getLocationOnScreen(viewLocation) //
 
-        val yOffset = if(viewLocation[1] + view.measuredHeight + contentView.measuredHeight < measuredHeight) 0 else contentView.measuredHeight
-        showAsDropDown(view, xOffset,  -yOffset)
+        val yOffset =
+            if (viewLocation[1] + view.measuredHeight + contentView.measuredHeight < measuredHeight) 0 else contentView.measuredHeight
+        showAsDropDown(view, xOffset, -yOffset)
     }
 
     fun showAtRight(view: View, callback: (T) -> Unit) {
@@ -217,6 +220,19 @@ interface PopupServiceMoreOwner : ViewScopeOwner {
     val popup: TextMenuPopup<PopUpServiceMore>
         get() = with(viewScope) {
             getOr("popupService:dialog") { TextMenuPopup<PopUpServiceMore>(context) }
+        }
+
+}
+
+interface PopupNotiItemMoreOwner : ViewScopeOwner {
+    val popupItem: TextMenuPopup<PopUpNotificationItemMore>
+        get() = with(viewScope) {
+            getOr("popupNotiItem:dialog") { TextMenuPopup<PopUpNotificationItemMore>(context) }
+        }
+
+    val popupNoti: TextMenuPopup<PopUpNotificationMore>
+        get() = with(viewScope) {
+            getOr("popupNoti:dialog") { TextMenuPopup<PopUpNotificationMore>(context) }
         }
 
 }

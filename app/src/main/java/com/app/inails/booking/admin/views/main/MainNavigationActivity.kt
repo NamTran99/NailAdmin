@@ -17,6 +17,7 @@ import com.app.inails.booking.admin.views.management.service.ManageServiceFragme
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
+import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
@@ -43,6 +44,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ManageCustomer -> ManageCustomerFragment::class
                 is Routing.ChooseStaff -> ChooseStaffFragment::class
                 is Routing.ReportSale -> ReportFragment::class
+                is Routing.Notification -> NotificationFragment::class
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())

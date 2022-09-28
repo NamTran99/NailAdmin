@@ -27,6 +27,7 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
+import com.app.inails.booking.admin.views.notification.NotificationRepository
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
@@ -58,15 +59,18 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
-
+    private lateinit var mainTopBarState: MainTopBarState
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
-        topBar.setState(MainTopBarState(R.string.title_dashboard, onMenuClick = {
+        mainTopBarState = MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
         }, onStaffListClick = {
             Router.run { redirectToStaffList() }
-        }))
+        }, onNotificationClick = {
+            Router.open(this, Routing.Notification)
+        })
+        topBar.setState(mainTopBarState)
         with(binding) {
             navView.alpha(230)
             val headView = navView.getHeaderView(0)
@@ -85,6 +89,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             )
         }
         Router.run { redirectToBooking() }
+        viewModel.count.bind {
+            mainTopBarState.setNotificationUnreadCount(it)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -125,18 +132,29 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         if (!findNavigator().navigateUp()) super.onBackPressed()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.numberNotificationSalonUnread()
+    }
+
 }
 
 class MainViewModel(
     private val logoutRepo: LogoutRepo,
     private val userLocalSource: UserLocalSource,
-    private val appointmentDetailRepository: AppointmentDetailRepository
+    private val appointmentDetailRepository: AppointmentDetailRepository,
+    private val notificationRepo: NotificationRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     val detailAppointment = appointmentDetailRepository.result
+    val count = notificationRepo.count
 
     val user = userLocalSource.getUserDto()
     fun logout() = launch(loading, error) {
         logoutRepo.invoke()
+    }
+
+    fun numberNotificationSalonUnread() = launch {
+        notificationRepo.numberNotificationSalonUnread()
     }
 }

@@ -123,4 +123,9 @@ class TextFormatter {
 
         return "${dateTime.formatDateAppointment()}-${date.formatDateAppointment()}"
     }
+
+    fun formatColorNotification(isRead: Int): Int {
+        return if (isRead == 1) R.color.gray19 else R.color.black
+    }
+
 }

@@ -324,6 +324,29 @@ fun View.setMargins(@DimenRes sizeRes: Int) {
     }
 }
 
+fun View.setMargins(@DimenRes horizontalSizeRes: Int, @DimenRes verticalSizeRes: Int) {
+    val horizontalSize = resources.getDimensionPixelSize(horizontalSizeRes)
+    val verticalSize = resources.getDimensionPixelSize(verticalSizeRes)
+    this.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        this.setMargins(horizontalSize, verticalSize, horizontalSize, verticalSize)
+    }
+}
+
+fun View.setMargins(
+    @DimenRes leftRes: Int,
+    @DimenRes topRes: Int,
+    @DimenRes rightRes: Int,
+    @DimenRes bottomRes: Int
+) {
+    val left = resources.getDimensionPixelSize(leftRes)
+    val top = resources.getDimensionPixelSize(topRes)
+    val right = resources.getDimensionPixelSize(rightRes)
+    val bottom = resources.getDimensionPixelSize(bottomRes)
+    this.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        this.setMargins(left, top, right, bottom)
+    }
+}
+
 fun CheckBox.drawableStart(idDrawable: Int = 0) {
     this.setCompoundDrawablesWithIntrinsicBounds(idDrawable, 0, 0, 0)
 }
@@ -341,7 +364,7 @@ fun EditText.inputTypePhoneUS() {
     }
 }
 
-fun SwipeRefreshLayout.colorSchemeDefault(){
+fun SwipeRefreshLayout.colorSchemeDefault() {
     this.setColorSchemeResources(R.color.colorPrimary)
 }
 
