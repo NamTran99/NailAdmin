@@ -14,7 +14,7 @@
         android:id="@+id/searchView"
         style="@style/AppTheme.EditText"
         android:drawableEnd="@null"
-        android:hint="@string/hint_search"
+        android:hint="@string/search_by_name_phone_email"
         android:imeOptions="actionSearch"
         android:drawableStart="@drawable/ic_search"
         android:longClickable="false" />
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/size_17_5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_manage_service" />
+                tools:listitem="@layout/item_manage_customer" />
 
             <include
                 android:id="@+id/emptyLayout"

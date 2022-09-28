@@ -26,7 +26,7 @@ interface IAppointment {
     val type: Int get() = 0
     val canceledBy: String get() = ""
     val serviceList: List<IService> get() = listOf()
-    val totalPrice: Double get() = 0.0
+    val totalPrice: Double get() = 0.0 // là total price service
     val customer: ICustomer? get() = null
     val notes: String? get() = null
     val dateTime: String get() = ""

@@ -79,6 +79,7 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
 interface FilterApmOwner : ViewScopeOwner {
     val filterApmDialog: FilterApmDialog
         get() = with(viewScope) {
-            getOr("filter:dialog") { FilterApmDialog(context) }
+            getOr("filter:dialog") {
+                FilterApmDialog(context) }
         }
 }

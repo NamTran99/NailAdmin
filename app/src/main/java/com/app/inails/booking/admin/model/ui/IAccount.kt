@@ -12,8 +12,9 @@ class LoginForm(
     var phone: String = "",
     var password: String = "",
     @SerializedName("device_token")
-    var deviceToken: String = ""
-
+    var deviceToken: String = "",
+    @SerializedName("device_type")
+    val deviceType: String = "android"
 ) : Parcelable {
 
     fun validate() {

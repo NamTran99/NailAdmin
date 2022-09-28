@@ -10,6 +10,7 @@ import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.view.GravityCompat
@@ -39,18 +40,21 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     NavigationView.OnNavigationItemSelectedListener, NotifyDialogOwner {
 
     companion object {
+        const val APPOINTMENT_ID = "Appointment_id"
+
         fun getPendingIntent(
             context: Context,
             fireBaseMessage: FireBaseCloudMessage?
         ): PendingIntent? {
             if (fireBaseMessage == null) return null
             val intent = Intent(context, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            Log.d("TAG", "NamTD8 getPendingIntent: ${fireBaseMessage.data.id}")
+            intent.putExtra(APPOINTMENT_ID, fireBaseMessage.data.id)
             return PendingIntent.getActivity(
-                context, System.currentTimeMillis().toInt(), intent,
+                context, 5, intent,
                 PendingIntent.FLAG_IMMUTABLE
                         or PendingIntent.FLAG_UPDATE_CURRENT
-                        or PendingIntent.FLAG_ONE_SHOT
             )
         }
     }
@@ -62,6 +66,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private lateinit var mainTopBarState: MainTopBarState
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onNewIntent(intent)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
         mainTopBarState = MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
@@ -91,6 +96,14 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         Router.run { redirectToBooking() }
         viewModel.count.bind {
             mainTopBarState.setNotificationUnreadCount(it)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val appointmentID = intent?.getIntExtra(APPOINTMENT_ID, -1)?: -1
+        if (appointmentID != -1){
+            Router.open(this, Routing.AppointmentDetail(appointmentID))
         }
     }
 

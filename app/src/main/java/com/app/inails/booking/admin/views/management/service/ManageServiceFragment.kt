@@ -81,6 +81,9 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
             listService.bind{
                 it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
                 !it.isNullOrEmpty() show binding.rvServices
+
+                binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isNullOrEmpty())
+                    "Your salon doesn't have any services yet" else "There are no results matching your search keyword."
             }
             serviceCreated.bind(mAdapter::insertItem)
             serviceUpdated.bind(mAdapter::updateItem)

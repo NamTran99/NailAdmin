@@ -15,20 +15,24 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentReportBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.formatPrice
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.AppointmentFilterForm
+import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
+import com.app.inails.booking.admin.views.booking.AppointmentAdapter
+import com.app.inails.booking.admin.views.booking.FilterApmOwner
 import com.app.inails.booking.admin.views.management.service.CreateUpdateServiceOwner
-import com.app.inails.booking.admin.views.report.adapters.ReportFragmentAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
-    CreateUpdateServiceOwner, PopupServiceMoreOwner {
+    CreateUpdateServiceOwner, PopupServiceMoreOwner, FilterApmOwner {
 
     private val binding by viewBinding(FragmentReportBinding::bind)
     private val viewModel by viewModel<ReportFragmentViewModel>()
-    private lateinit var mAdapter: ReportFragmentAdapter
+    private lateinit var mAdapter: AppointmentAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,11 +44,12 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
     private fun setUpListener() {
         with(viewModel) {
             refreshLoading.bind {
-                mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
             }
-
             listCustomer.bind(mAdapter::submit)
+            total.bind{
+                binding.tvTotal.text = it.formatPrice()
+            }
         }
     }
 
@@ -52,7 +57,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
     private fun setUpView() {
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_customer,
+                R.string.mn_report,
                 onBackClick = {
                     activity?.onBackPressed()
                 },
@@ -61,15 +66,50 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
 
         with(binding) {
             viewRefresh.colorSchemeDefault()
-            viewRefresh.setOnRefreshListener { refresh() }
+            viewRefresh.setOnRefreshListener { refreshView() }
+            mAdapter = AppointmentAdapter(rvReport).apply {
+                onClickItemListener = {
+                    Router.redirectToAppointmentDetail(self, it.id)
+                }
+            }
+            tvFilter.onClick {
+                showFilterDialog()
+            }
+            ivFilter.onClick {
+                showFilterDialog()
+            }
+        }
+        refreshView()
+    }
 
-            mAdapter = ReportFragmentAdapter(rvReport)
+    private fun refreshView() {
+        binding.tvTotal.text = totalDefault
+        mAdapter.clear()
+        viewModel.refresh()
+    }
+
+    private fun showFilterDialog() {
+        filterApmDialog.show(
+            viewModel.filterCustomerForm
+        ) { form ->
+            viewModel.filterCustomerForm.run {
+                searchCustomer = form.searchCustomer
+                searchStaff = form.searchStaff
+                date = form.date
+                toDate = form.toDate
+            }
+
+            refreshView()
         }
     }
 
-    private fun refresh() {
-        mAdapter.clear()
-        viewModel.refresh()
+    override fun onResume() {
+        super.onResume()
+        refreshView()
+    }
+
+    companion object{
+        const val totalDefault = "$---.--"
     }
 }
 
@@ -77,24 +117,27 @@ class ReportFragmentViewModel(
     val appointmentRepository: AppointmentRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
+    val filterCustomerForm = AppointmentFilterForm(type = TYPE_WALK_IN_CUSTOMER)
+
     val listCustomer = appointmentRepository.results.map {
         it?.filter { appointment ->
             appointment.status == APM_FINISH
         }
     }
-    val success = SingleLiveEvent<Any>()
 
-    init {
-        refresh()
+    val total = listCustomer.map {
+        it?.fold(0.0){total, item ->
+            total + item.price
+        }
     }
+    val success = SingleLiveEvent<Any>()
 
     fun refresh() {
         getListAppointment()
     }
 
-    fun getListAppointment() = launch(refreshLoading, error) {
-        val form = AppointmentFilterForm(type = TYPE_WALK_IN_CUSTOMER)
-        appointmentRepository(form)
+    private fun getListAppointment() = launch(refreshLoading, error) {
+        appointmentRepository(filterCustomerForm)
     }
 
     companion object {

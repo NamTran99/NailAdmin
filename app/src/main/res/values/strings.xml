@@ -132,4 +132,6 @@
     <string name="btn_unselect_all">Unselect All</string>
     <string name="btn_delete_selected">Delete Selected</string>
     <string name="message_delete_all_selected_notification">Do you want to delete all selected notifications</string>
+    <string name="search_by_name_phone_email">Search by name, phone, email</string>
+    <string name="total_booking_amount">TOTAL BOOKING AMOUNT</string>
 </resources>

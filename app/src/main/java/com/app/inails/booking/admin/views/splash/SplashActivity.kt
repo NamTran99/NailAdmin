@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.viewmodel.viewModel
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
@@ -16,7 +18,8 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
     private val viewModel by viewModel<SplashViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val appointmentID =  intent.extras?.getInt(MainActivity.APPOINTMENT_ID,0)
+//        Log.d("TAG", "NamTD8 onCreate() called with: savedInstanceState = $appointmentID")
         CoroutineScope(Dispatchers.IO).launch {
             delay(TimeUnit.SECONDS.toMillis(3))
             withContext(Dispatchers.Main) {
