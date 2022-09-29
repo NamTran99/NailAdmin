@@ -142,7 +142,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val hasFeedback: Boolean
                 get() = appointmentDTO.feedback != null
             override val feedbackContent: String
-                get() = appointmentDTO.feedback?.content.safe()
+                get() = appointmentDTO.feedback?.content.safe().decode()
             override val feedbackRating: Int
                 get() = appointmentDTO.feedback?.rating.safe()
             override val noteFinish: String

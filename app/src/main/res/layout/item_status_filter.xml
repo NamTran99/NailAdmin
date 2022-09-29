@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/cbStatusName"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_10"
+        android:background="@drawable/custom_status_select"
+        android:button="@null"
+        android:checked="false"
+        android:paddingHorizontal="@dimen/size_20"
+        android:textColor="@color/color_status_filter"
+        tools:text="abc" />
+</FrameLayout>

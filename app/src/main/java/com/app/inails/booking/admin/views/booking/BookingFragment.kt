@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.booking
 
+import FetchListCustomerRepo
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.LoadingEvent
@@ -11,10 +12,6 @@ import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
@@ -24,16 +21,19 @@ import com.app.inails.booking.admin.exception.setOnSelected
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.repository.booking.RemindAppointmentRepository
+import com.app.inails.booking.admin.views.booking.dialog_filter.SearchCustomerOwner
+import com.app.inails.booking.admin.views.booking.dialog_filter.SearchStaffOwner
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.material.tabs.TabLayout
 
-
 class BookingFragment : BaseFragment(R.layout.fragment_booking),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
-    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, FilterApmOwner {
+    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, FilterApmOwner, SearchCustomerOwner,
+    SearchStaffOwner {
     private val binding by viewBinding(FragmentBookingBinding::bind)
     private val viewModel by viewModel<BookingViewModel>()
     private var mType = 1
@@ -52,15 +52,18 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             appointTab.setOnSelected {
                 refreshData(it + 1)
             }
-            tvFilter.onClick {
+            btFilter.onClick {
                 showFilterDialog()
             }
             ivFilter.onClick {
                 showFilterDialog()
             }
 
-            btClear.onClick {
-                clearFilter()
+            searchView.onSearchListener {
+                if (mType == 1) viewModel.filterCheckInForm.keyword =
+                    searchView.text.toString() else viewModel.filterCustomerForm.keyword =
+                    searchView.text.toString()
+                refreshData(mType)
             }
         }
         with(viewModel) {
@@ -196,6 +199,40 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
                 mAdapter.removeItem(it)
             }
 
+            customerList.bind {
+                if (it.first == 1) {
+                    searchCustomerDialog.onLoadMoreListener = { keyword, page ->
+                        viewModel.loadCustomer(keyword, page)
+                    }
+                    searchCustomerDialog.onSearchListener = { keyword ->
+                        viewModel.loadCustomer(keyword, 1)
+                    }
+                    searchCustomerDialog.show(it.second) {
+                        filterApmDialog.updateCustomer(it)
+                    }
+                } else {
+                    searchCustomerDialog.addList(it.second)
+                }
+
+            }
+
+            staffList.bind {
+                if (it.first == 1) {
+                    searchStaffDialog.onLoadMoreListener = { keyword, page ->
+                        viewModel.loadStaff(keyword, page)
+                    }
+                    searchStaffDialog.onSearchListener = { keyword ->
+                        viewModel.loadStaff(keyword, 1)
+                    }
+                    searchStaffDialog.show(it.second) {
+                        filterApmDialog.updateStaff(it)
+                    }
+                } else {
+                    searchStaffDialog.addList(it.second)
+                }
+
+            }
+
         }
 
         appActivity.appEvent.chooseStaff.observe(viewLifecycleOwner) {
@@ -210,24 +247,24 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             refreshData(mType)
         }
     }
-
-    private fun clearFilter() {
-        if (mType == 1)
-            viewModel.filterCheckInForm.run {
-                searchCustomer = null
-                searchStaff = null
-                date = null
-                toDate = null
-            }
-        else
-            viewModel.filterCustomerForm.run {
-                searchCustomer = null
-                searchStaff = null
-                date = null
-                toDate = null
-            }
-        refreshData(mType)
-    }
+//
+//    private fun clearFilter() {
+//        if (mType == 1)
+//            viewModel.filterCheckInForm.run {
+//                searchCustomer = null
+//                searchStaff = null
+//                date = null
+//                toDate = null
+//            }
+//        else
+//            viewModel.filterCustomerForm.run {
+//                searchCustomer = null
+//                searchStaff = null
+//                date = null
+//                toDate = null
+//            }
+//        refreshData(mType)
+//    }
 
     private fun showConfirmDialog(title: String, message: String, function: () -> Unit) {
         confirmDialog.show(
@@ -259,65 +296,64 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
     private fun displayFilter() {
         val haveFilter = viewModel.checkHaveFilter(mType)
-        (haveFilter) show binding.filterScrollLayout + binding.btClear
-        (!haveFilter) show binding.tvFilter
-        if (haveFilter) {
-            binding.filterContentLayout.removeAllViews()
-            if (viewModel.getDateToDate(mType).isNotEmpty()) {
-                binding.filterContentLayout.addView(renderSearchItem(viewModel.getDateToDate(mType)))
-            }
-            if (viewModel.getStaffSearch(mType).isNotEmpty()) {
-                binding.filterContentLayout.addView(renderSearchItem(viewModel.getStaffSearch(mType)))
-            }
-
-            if (viewModel.getCustomerSearch(mType).isNotEmpty()) {
-                binding.filterContentLayout.addView(
-                    renderSearchItem(
-                        viewModel.getCustomerSearch(
-                            mType
-                        )
-                    )
-                )
-            }
-
-        }
+        binding.ivFilter.show(haveFilter)
+        val keyword = viewModel.getKeyword(mType)
+        binding.searchView.setText(keyword)
+//        (haveFilter) show binding.filterScrollLayout + binding.btClear
+//        (!haveFilter) show binding.tvFilter
+//        if (haveFilter) {
+//            binding.filterContentLayout.removeAllViews()
+//            if (viewModel.getDateToDate(mType).isNotEmpty()) {
+//                binding.filterContentLayout.addView(renderSearchItem(viewModel.getDateToDate(mType)))
+//            }
+//            if (viewModel.getStaffSearch(mType).isNotEmpty()) {
+//                binding.filterContentLayout.addView(renderSearchItem(viewModel.getStaffSearch(mType)))
+//            }
+//
+//            if (viewModel.getCustomerSearch(mType).isNotEmpty()) {
+//                binding.filterContentLayout.addView(
+//                    renderSearchItem(
+//                        viewModel.getCustomerSearch(
+//                            mType
+//                        )
+//                    )
+//                )
+//            }
+//
+//        }
     }
 
-    private fun renderSearchItem(label: String): TextView {
-        val textView = TextView(appActivity)
-        textView.text = label
-        TextViewCompat.setTextAppearance(textView, R.style.AppTheme_TextView_Medium)
-        textView.setTextColor(ContextCompat.getColor(appActivity, R.color.colorPrimary))
-        textView.setBackgroundResource(R.drawable.bg_primary_stroke)
-        textView.setPadding(15, 8, 15, 4)
-        val lp = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        lp.setMargins(0, 0, 15, 0)
-        textView.layoutParams = lp
-        return textView
-    }
+//    private fun renderSearchItem(label: String): TextView {
+//        val textView = TextView(appActivity)
+//        textView.text = label
+//        TextViewCompat.setTextAppearance(textView, R.style.AppTheme_TextView_Medium)
+//        textView.setTextColor(ContextCompat.getColor(appActivity, R.color.colorPrimary))
+//        textView.setBackgroundResource(R.drawable.bg_primary_stroke)
+//        textView.setPadding(15, 8, 15, 4)
+//        val lp = LinearLayout.LayoutParams(
+//            LinearLayout.LayoutParams.WRAP_CONTENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        lp.setMargins(0, 0, 15, 0)
+//        textView.layoutParams = lp
+//        return textView
+//    }
 
     private fun showFilterDialog() {
         filterApmDialog.show(
             if (mType == 1) viewModel.filterCheckInForm
-            else viewModel.filterCustomerForm
+            else viewModel.filterCustomerForm,
+            openSearchCustomer = {
+                viewModel.loadCustomer("", 1)
+            },
+            openSearchStaff = {
+                viewModel.loadStaff("", 1)
+            }
         ) { form ->
             if (mType == 1)
-                viewModel.filterCheckInForm.run {
-                    searchCustomer = form.searchCustomer
-                    searchStaff = form.searchStaff
-                    date = form.date
-                    toDate = form.toDate
-                }
+                viewModel.filterCheckInForm = form
             else
-                viewModel.filterCustomerForm.run {
-                    searchCustomer = form.searchCustomer
-                    searchStaff = form.searchStaff
-                    date = form.date
-                    toDate = form.toDate
-                }
+                viewModel.filterCustomerForm = form
             refreshData(mType)
         }
     }
@@ -327,15 +363,19 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
 class BookingViewModel(
     private val appointmentRepo: AppointmentRepository,
-    private val remindAppointmentRepo: RemindAppointmentRepository
+    private val remindAppointmentRepo: RemindAppointmentRepository,
+    private val customerRepo: FetchListCustomerRepo,
+    private val staffRepo: FetchAllStaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val appointments = appointmentRepo.results
     val idRemove = appointmentRepo.resultRemove
     val appointment = appointmentRepo.result
     val resultCheckIn = appointmentRepo.resultCheckIn
+    val customerList = customerRepo.resultWithPage
+    val staffList = staffRepo.results
     val form = AppointmentStatusForm()
-    val filterCheckInForm = AppointmentFilterForm(type = 1)
-    val filterCustomerForm = AppointmentFilterForm(type = 2)
+    var filterCheckInForm = AppointmentFilterForm(type = 1)
+    var filterCustomerForm = AppointmentFilterForm(type = 2)
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
     val formStartService = StartServiceForm()
@@ -388,8 +428,12 @@ class BookingViewModel(
         type: Int
     ): Boolean {
         return if (type == 1)
-            !filterCheckInForm.date.isNullOrEmpty() || !filterCheckInForm.toDate.isNullOrEmpty() || !filterCheckInForm.searchStaff.isNullOrEmpty() || !filterCheckInForm.searchCustomer.isNullOrEmpty()
-        else !filterCustomerForm.date.isNullOrEmpty() || !filterCustomerForm.toDate.isNullOrEmpty() || !filterCustomerForm.searchStaff.isNullOrEmpty() || !filterCustomerForm.searchCustomer.isNullOrEmpty()
+            !filterCheckInForm.date.isNullOrEmpty() || !filterCheckInForm.toDate.isNullOrEmpty() ||
+                    filterCheckInForm.staff != null || filterCheckInForm.customer != null
+                    || filterCheckInForm.status != null
+        else !filterCustomerForm.date.isNullOrEmpty() || !filterCustomerForm.toDate.isNullOrEmpty()
+                || filterCustomerForm.staff != null || filterCustomerForm.customer != null
+                || filterCustomerForm.status != null
     }
 
     fun getDateToDate(
@@ -446,32 +490,22 @@ class BookingViewModel(
         }
     }
 
-    fun getCustomerSearch(
+    fun getKeyword(
         type: Int
     ): String {
         return if (type == 1) {
-            if (!filterCheckInForm.searchCustomer.isNullOrEmpty()) {
-                "Customer: ${filterCheckInForm.searchCustomer}"
-            } else ""
+            filterCheckInForm.keyword ?: ""
         } else {
-            if (!filterCustomerForm.searchCustomer.isNullOrEmpty()) {
-                "Customer: ${filterCustomerForm.searchCustomer}"
-            } else ""
+            filterCustomerForm.keyword ?: ""
         }
     }
 
-    fun getStaffSearch(
-        type: Int
-    ): String {
-        return if (type == 1) {
-            if (!filterCheckInForm.searchStaff.isNullOrEmpty()) {
-                "Staff: ${filterCheckInForm.searchStaff}"
-            } else ""
-        } else {
-            if (!filterCustomerForm.searchStaff.isNullOrEmpty()) {
-                "Customer: ${filterCustomerForm.searchStaff}"
-            } else ""
-        }
+    fun loadCustomer(keyword: String, page: Int) = launch(if (page == 1) loading else null, error) {
+        customerRepo.search(keyword, page)
+    }
+
+    fun loadStaff(keyword: String, page: Int) = launch(if (page == 1) loading else null, error) {
+        staffRepo(keyword, page)
     }
 }
 

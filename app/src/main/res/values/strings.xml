@@ -138,4 +138,5 @@
     <string name="you_want_to_say_something">Write down your note</string>
     <string name="appointment_s_note">Appointment Note</string>
     <string name="search_by_booking_id">Search by booking id</string>
+    <string name="label_select_staff">Select Staff</string>
 </resources>

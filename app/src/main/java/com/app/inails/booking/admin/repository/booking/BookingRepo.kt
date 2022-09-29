@@ -19,7 +19,11 @@ class AppointmentRepository(
     val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
 
-    suspend fun getAppointmentByCustomerID(customerID: Int, search: String,form: AppointmentFilterForm) {
+    suspend fun getAppointmentByCustomerID(
+        customerID: Int,
+        search: String,
+        form: AppointmentFilterForm
+    ) {
         results.post(
             bookingFactory
                 .createAppointmentList(
@@ -28,7 +32,8 @@ class AppointmentRepository(
                         date = form.date,
                         toDate = form.toDate,
                         searchStaff = form.searchStaff,
-                        searchCustomer = null)
+                        searchCustomer = null
+                    )
                         .await().filter {
                             it.customer_id == customerID && it.id.toString().contains(search)
                         }
@@ -44,8 +49,11 @@ class AppointmentRepository(
                         form.type,
                         date = form.date,
                         toDate = form.toDate,
-                        searchStaff = form.searchStaff,
-                        searchCustomer = form.searchCustomer)
+                        searchStaff = form.staff?.id?.toString(),
+                        searchCustomer = form.customer?.id?.toString(),
+                        keyword = form.keyword,
+                        status = form.status
+                    )
                         .await()
                 )
         )

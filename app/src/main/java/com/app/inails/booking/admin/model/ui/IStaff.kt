@@ -25,8 +25,8 @@ interface IStaff {
     val timeCheckInAppointment: String get() = ""
     val timeEndAppointment: String get() = ""
     val active: Int get() = 0
-    val customerName : String get()=""
-    val appointment : IAppointment? get() = null
+    val customerName: String get() = ""
+    val appointment: IAppointment? get() = null
 }
 
 @Parcelize
@@ -50,7 +50,8 @@ class UpdateStatusStaffForm(
 
 ) : Parcelable
 
-class StaffImpl : IStaff, ISelector {
+@Parcelize
+class StaffImpl : IStaff, ISelector, Parcelable {
     override var isSelector: Boolean = false
 }
 

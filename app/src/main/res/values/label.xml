@@ -47,5 +47,14 @@
     <string name="label_by_staff">By Staff</string>
     <string name="label_by_customer">By Customer</string>
     <string name="label_filter">Filter</string>
+    <string name="label_by_status">By Status</string>
+    <string name="label_status_waiting_for_approval">Waiting for approval</string>
+    <string name="label_accepted">Accepted</string>
+    <string name="label_canceled">Canceled</string>
+    <string name="label_status_waiting_for_service">Waiting for service</string>
+    <string name="label_status_serving">Serving</string>
+    <string name="label_status_finished">Finished</string>
+    <string name="search_by_name_phone">Search by Name, Phone</string>
+    <string name="label_select_customer">Select Customer</string>
 
 </resources>

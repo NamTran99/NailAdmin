@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".views.management.service.ManageServiceFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AppTheme.TextView.Title.Small"
+            android:layout_centerInParent="true"
+            android:text="@string/label_select_staff" />
+
+        <ImageButton
+            android:id="@+id/btClose"
+            style="@style/AppTheme.ImageButton"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu_close"
+            app:tint="@color/black" />
+    </RelativeLayout>
+
+    <com.app.inails.booking.admin.views.widget.SearchView
+        android:id="@+id/searchView"
+        style="@style/AppTheme.EditText"
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableEnd="@null"
+        android:hint="@string/search_by_name_phone"
+        android:imeOptions="actionSearch"
+        android:longClickable="false" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginTop="@dimen/size_16">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvStaff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_staff_search" />
+
+        <include
+            android:id="@+id/emptyLayout"
+            layout="@layout/layout_empty" />
+    </RelativeLayout>
+</LinearLayout>

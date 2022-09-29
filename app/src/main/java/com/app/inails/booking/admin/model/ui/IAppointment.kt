@@ -113,7 +113,6 @@ class HandleAppointmentForm(
 ) : Parcelable
 
 
-@Parcelize
 class AppointmentFilterForm(
     @SerializedName("to_date")
     var toDate: String? = null,
@@ -122,5 +121,9 @@ class AppointmentFilterForm(
     var searchStaff: String? = null,
     @SerializedName("search_customer")
     var searchCustomer: String? = null,
+    var staff : IStaff ?= null,
+    var customer : ICustomer ?= null,
+    var keyword: String? = null,
+    var status: Int? = null,
     var type: Int = 1
-) : Parcelable
+)
