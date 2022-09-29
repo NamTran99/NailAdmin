@@ -59,7 +59,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val colorStatus: Int
                 get() = textFormatter.formatStatusStaffColor(staffDTO.status)
             override val timeCheckIn: String
-                get() = staffDTO.checked_time?.toTimeCheckIn().safe()
+                get() = staffDTO.checked_time?.toTimeCheckIn(format = "yyyy-MM-dd'T'HH:mm:ss'Z'").safe()
             override val active: Int
                 get() = staffDTO.active.safe()
             override val textColor: Int
