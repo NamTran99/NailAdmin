@@ -17,11 +17,9 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentCustomerBookingListBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.model.ui.AppointmentStatusForm
-import com.app.inails.booking.admin.model.ui.CancelAppointmentForm
-import com.app.inails.booking.admin.model.ui.HandleAppointmentForm
-import com.app.inails.booking.admin.model.ui.StartServiceForm
+import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
@@ -35,7 +33,7 @@ data class CustomerListBookingArg(
 ) : BundleArgument
 
 class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_list),
-    TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
+    TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner, FilterApmOwner,
     StartServicesOwner, FinishBookingOwner, CustomerInfoOwner {
     private val binding by viewBinding(FragmentCustomerBookingListBinding::bind)
     private val viewModel by viewModel<CustomerBookingListViewModel>()
@@ -98,7 +96,8 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
         )
 
         with(binding) {
-            binding.emptyLayout.tvEmptyData.text = "This customer doesn't booking any appointments yet"
+            binding.emptyLayout.tvEmptyData.text =
+                "This customer doesn't booking any appointments yet"
             mAdapter = AppointmentAdapter(rvServices).apply {
                 onClickItemListener = {
                     Router.redirectToAppointmentDetail(self, it.id)
@@ -192,6 +191,33 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
             viewRefresh.setOnRefreshListener {
                 refreshView()
             }
+
+            tvFilter.onClick {
+                showFilterDialog()
+            }
+            ivFilter.onClick {
+                showFilterDialog()
+            }
+            searchView.setOnSearchListener(onLoading = {
+                viewRefresh.isRefreshing = true
+                mAdapter.clear()
+            },
+                onSearch = { refreshView() })
+        }
+    }
+
+    private fun showFilterDialog() {
+        filterApmDialog.show(
+            viewModel.filterCustomerForm, type = FilterType.FILTER_BY_CUSTOMER
+        ) { form ->
+            viewModel.filterCustomerForm.run {
+                searchCustomer = form.searchCustomer
+                searchStaff = form.searchStaff
+                date = form.date
+                toDate = form.toDate
+            }
+
+            refreshView()
         }
     }
 
@@ -202,7 +228,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
 
     private fun refreshView() {
         mAdapter.clear()
-        viewModel.getAppointment(args.customerID)
+        viewModel.getAppointment(args.customerID, binding.searchView.text.toString())
     }
 
     private fun showConfirmDialog(title: String, message: String, function: () -> Unit) {
@@ -229,9 +255,10 @@ class CustomerBookingListViewModel(
     val checkInSuccess = SingleLiveEvent<Any>()
     val form = AppointmentStatusForm()
     val formCancel = CancelAppointmentForm()
+    val filterCustomerForm = AppointmentFilterForm()
 
-    fun getAppointment(customerID: Int) = launch(refreshLoading, error) {
-        appointmentRepo.getAppointmentByCustomerID(customerID)
+    fun getAppointment(customerID: Int, search: String = "") = launch(refreshLoading, error) {
+        appointmentRepo.getAppointmentByCustomerID(customerID, search, filterCustomerForm)
     }
 
     fun updateStatus() = launch(loading, error) {

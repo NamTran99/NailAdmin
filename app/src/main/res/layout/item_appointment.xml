@@ -144,6 +144,26 @@
             tools:text="Anyone" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/lvAppointmentNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/appointment_s_note"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tv_appointment_note"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            tools:text="Note" />
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

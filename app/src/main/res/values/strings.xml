@@ -134,4 +134,8 @@
     <string name="message_delete_all_selected_notification">Do you want to delete all selected notifications</string>
     <string name="search_by_name_phone_email">Search by name, phone, email</string>
     <string name="total_booking_amount">TOTAL BOOKING AMOUNT</string>
+    <string name="note">Note</string>
+    <string name="you_want_to_say_something">Write down your note</string>
+    <string name="appointment_s_note">Appointment Note</string>
+    <string name="search_by_booking_id">Search by booking id</string>
 </resources>

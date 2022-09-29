@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
-    tools:context=".views.booking.create_appointment.CreateAppointmentFragment">
+    tools:context=".views.booking.create_appointment.CreateUpdateAppointmentFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -147,14 +147,7 @@
                 tools:itemCount="10"
                 tools:listitem="@layout/item_service_select" />
 
-            <EditText
-                android:id="@+id/etSomethingElse"
-                style="@style/AppTheme.EditText"
-                android:layout_marginTop="@dimen/size_12"
-                android:hint="@string/hint_something_else"
-                android:inputType="textMultiLine"
-                android:maxLength="300"
-                android:visibility="gone" />
+
 
             <TextView
                 style="@style/AppTheme.TextView.Medium"
@@ -226,6 +219,22 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/size_12"
+                android:text="@string/note"
+                android:textSize="@dimen/text_size_14" />
+
+            <EditText
+                android:id="@+id/et_note"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:hint="@string/you_want_to_say_something"
+                android:inputType="textMultiLine"
+                android:maxLength="300"
+                tools:visibility="visible"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

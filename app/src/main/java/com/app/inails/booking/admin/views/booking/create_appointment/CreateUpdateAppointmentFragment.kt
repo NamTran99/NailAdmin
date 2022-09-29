@@ -44,7 +44,7 @@ data class AppointmentArg(
     val id: Int? = 0
 ) : BundleArgument
 
-class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner {
+class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner {
     private val binding by viewBinding(FragmentCreateAppointmentBinding::bind)
     private val viewModel by viewModel<CreateAppointmentViewModel>()
     private val arg by lazy { nullableArguments<Routing.CreateAppointment>() }
@@ -87,7 +87,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                 viewModel.form.run {
                     phone = etPhone.text.toString()
                     name = etFullName.text.toString()
-                    serviceCustom = etSomethingElse.text.toString()
+                    note = etNote.text.toString()
                     workTime = workingTime
                     services = mServiceAdapter.selectedItems.toString()
                     dateAppointment = if (tvSelectTime.text.toString()
@@ -110,13 +110,7 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
                     viewModel.detail(arg!!.id!!)
                 }
             }
-            services.bind(mServiceAdapter.apply {
-                onClickItemListener = {
-                    viewModel.form.hasServiceCustom = it
-                    (it) show binding.etSomethingElse
-                    if (!it) binding.etSomethingElse.setText("")
-                }
-            }::submit)
+            services.bind(mServiceAdapter::submit)
             success.bind {
                 success(it)
                 activity?.onBackPressed()
@@ -148,7 +142,6 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
             binding.tvSelectDate.tag = mDateTagSelected
         }
         if (mTimeSelected.isNotEmpty()) binding.tvSelectTime.text = mTimeSelected
-        (viewModel.form.hasServiceCustom) show binding.etSomethingElse
     }
 
     private fun display(apm: IAppointment) {
@@ -168,8 +161,8 @@ class CreateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointm
             spHour.setSelection(hour)
             spMinute.setSelection(minute)
             if (apm.serviceCustomObj != null) {
-                etSomethingElse.setText(apm.serviceCustomObj!!.name)
-                etSomethingElse.show()
+                etNote.setText(apm.serviceCustomObj!!.name)
+                etNote.show()
                 (mServiceAdapter.items?.last() as ISelector).isSelector = true
             }
             mServiceAdapter.setSelected(apm.serviceList)
@@ -223,7 +216,6 @@ class ServiceRepository(
     suspend operator fun invoke() {
         val servicesList = bookingApi.services(userLocalSource.getSalonID().toString())
             .await()
-        servicesList.add(ServiceDTO(name = "Something Else"))
         results.post(
             bookingFactory
                 .createServiceList(

@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.views.booking.create_appointment
 
 import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
+import android.util.Log
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,6 @@ import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class SelectServiceAdapter(view: RecyclerView) :
     SimpleRecyclerAdapter<IService, ItemServiceSelectBinding>(view) {
-    var onClickItemListener: ((Boolean) -> Unit)? = null
     val selectedItems: List<Int>
         get() = if (items.isNullOrEmpty()) emptyList()
         else items?.filter { (it as ISelector).isSelector && it.id != 0 }?.map { it.id }
@@ -42,7 +42,7 @@ class SelectServiceAdapter(view: RecyclerView) :
                 item.isSelector = !item.isSelector
                 notifyItemChanged(adapterPosition)
                 if (item.id == 0) {
-                    onClickItemListener?.invoke(item.isSelector)
+                    Log.d("TAG", "NamTD8 onBindHolder: ${item.name}")
                 }
             }
         }

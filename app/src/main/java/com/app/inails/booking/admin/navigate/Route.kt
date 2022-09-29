@@ -8,7 +8,7 @@ import android.support.navigation.findNavigator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
-import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
+import com.app.inails.booking.admin.views.booking.create_appointment.CreateUpdateAppointmentFragment
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
@@ -35,7 +35,7 @@ interface Routing : BundleArgument {
     @Parcelize
     class CreateAppointment(val id : Int?) : Routing {
         override val fragmentClass: KClass<out Fragment>
-            get() = CreateAppointmentFragment::class
+            get() = CreateUpdateAppointmentFragment::class
     }
 
     @Parcelize

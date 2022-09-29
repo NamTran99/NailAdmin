@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,75 @@
     android:background="@color/gray07"
     android:orientation="vertical"
     tools:context=".views.management.service.ManageServiceFragment">
+
+    <com.app.inails.booking.admin.views.widget.SearchView
+        android:id="@+id/searchView"
+        style="@style/AppTheme.EditText"
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableEnd="@null"
+        android:hint="@string/search_by_booking_id"
+        android:imeOptions="actionSearch"
+        android:longClickable="false" />
+
+    <RelativeLayout
+        android:id="@+id/filterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/bg_white_radius"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/ivFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_16"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/tvFilter"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/size_16"
+            android:layout_toEndOf="@+id/ivFilter"
+            android:gravity="center_vertical"
+            android:text="@string/label_filter"
+            app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+
+        <HorizontalScrollView
+            android:id="@+id/filterScrollLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btClear"
+            android:layout_toEndOf="@+id/ivFilter"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/filterContentLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="?actionBarSize"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <ImageButton
+            android:id="@+id/btClear"
+            style="@style/AppTheme.ImageButton"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_close"
+            android:visibility="gone"
+            app:tint="@color/black" />
+
+    </RelativeLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/viewRefresh"
@@ -32,4 +101,4 @@
                 layout="@layout/layout_empty" />
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</RelativeLayout>
+</LinearLayout>

@@ -9,7 +9,7 @@ import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
-import com.app.inails.booking.admin.views.booking.create_appointment.CreateAppointmentFragment
+import com.app.inails.booking.admin.views.booking.create_appointment.CreateUpdateAppointmentFragment
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
@@ -36,7 +36,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
         if (savedInstanceState == null) {
             val clazz = when (args) {
                 is Routing.ManageStaff -> ManageStaffFragment::class
-                is Routing.CreateAppointment -> CreateAppointmentFragment::class
+                is Routing.CreateAppointment -> CreateUpdateAppointmentFragment::class
                 is Routing.ChangePassword -> ChangePasswordFragment::class
                 is Routing.EmailReceiveFeedBack -> EmailReceiveFeedbackFragment::class
                 is Routing.ManageService -> ManageServiceFragment::class

@@ -21,7 +21,7 @@ class CustomerInfoDialog(context: Context) : BaseDialog(context) {
         customer: ICustomer
     ) {
         with(binding) {
-            tvCustomerName.text = customer.name
+            tvStaffName.text = customer.name
             tvPhone.text = customer.phone
             tvAddress.text = customer.address
             tvEmail.text = customer.email

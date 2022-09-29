@@ -22,7 +22,7 @@ data class AppointmentDTO(
     val reviews: String? = "",
     val date_appointment_format: String = "",
     val salon: SalonDTO? = null,
-    val staff: StaffDTO? = null,
+    val staff: StaffDTO,
     val list_service_names: String? = "",
     val total_price_service: Double? = 0.0,
     val staff_name: String? = "",
@@ -38,6 +38,7 @@ data class AppointmentDTO(
     val service_custom : ServiceDTO?,
     val date_appointment_timestamp :Long,
     val created_at_timestamp :Long,
+    val note_appointment: String? = ""
 )
 
 data class AppointmentUpdateDTO(

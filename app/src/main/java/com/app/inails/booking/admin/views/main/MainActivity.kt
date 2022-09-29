@@ -155,11 +155,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 class MainViewModel(
     private val logoutRepo: LogoutRepo,
     private val userLocalSource: UserLocalSource,
-    private val appointmentDetailRepository: AppointmentDetailRepository,
     private val notificationRepo: NotificationRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
-    val detailAppointment = appointmentDetailRepository.result
     val count = notificationRepo.count
 
     val user = userLocalSource.getUserDto()

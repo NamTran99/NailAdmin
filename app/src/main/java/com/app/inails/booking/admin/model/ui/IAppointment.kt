@@ -28,7 +28,8 @@ interface IAppointment {
     val serviceList: List<IService> get() = listOf()
     val totalPrice: Double get() = 0.0 // là total price service
     val customer: ICustomer? get() = null
-    val notes: String? get() = null
+    val staff: IStaff? get() = null
+    val notes: String get() = ""
     val dateTime: String get() = ""
     val hasFeedback: Boolean get() = false
     val feedbackContent: String get() = ""
@@ -58,8 +59,8 @@ class AppointmentForm(
     var serviceCustom: String = "",
     @SerializedName("work_time")
     var workTime: Int = 0,
-    var hasServiceCustom: Boolean = false,
-    var hasStaff: Boolean = true
+    var hasStaff: Boolean = true,
+    var note: String = ""
 ) : Parcelable {
 
     fun validate() {
@@ -71,7 +72,6 @@ class AppointmentForm(
         if (staffID == 0 && hasStaff) resourceError(R.string.error_blank_staff_id)
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
         if (services.isBlank() || services.isEmpty()) resourceError(R.string.error_empty_services)
-        if (hasServiceCustom && serviceCustom.isBlank()) resourceError(R.string.error_empty_service_custom)
         if (workTime == 0) resourceError(R.string.error_empty_service_time)
     }
 }

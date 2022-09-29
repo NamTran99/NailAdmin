@@ -47,36 +47,4 @@
         android:text="@string/label_phone"
         tools:text="987-654-3210" />
 
-
-    <TextView
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_marginTop="@dimen/size_16"
-        android:text="@string/label_email"
-        android:layout_marginStart="@dimen/size_16"
-        app:drawableStartCompat="@drawable/ic_email_outline" />
-
-    <TextView
-        android:id="@+id/tvEmail"
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_marginStart="@dimen/size_32"
-        android:layout_marginTop="@dimen/size_8"
-        android:text="@string/label_phone"
-        tools:text="987-654-3210" />
-
-    <TextView
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_marginTop="@dimen/size_16"
-        android:text="@string/label_address"
-        android:layout_marginStart="@dimen/size_16"
-        app:drawableStartCompat="@drawable/ic_address_outline" />
-
-    <TextView
-        android:id="@+id/tvAddress"
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_marginStart="@dimen/size_32"
-        android:layout_marginTop="@dimen/size_8"
-        android:minLines="@null"
-        android:text="@string/label_phone"
-        tools:text="987-654-3210" />
-
 </LinearLayout>

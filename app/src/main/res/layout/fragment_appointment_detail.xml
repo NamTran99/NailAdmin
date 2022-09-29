@@ -76,15 +76,16 @@
                         android:id="@+id/tvCustomerName"
                         style="@style/AppTheme.TextView.Medium"
                         android:layout_width="0dp"
-                        android:textColor="@color/lightBlue02"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:textColor="@color/lightBlue02" />
 
                     <TextView
                         android:id="@+id/tvStaffName"
                         style="@style/AppTheme.TextView.Medium"
                         android:layout_width="0dp"
                         android:layout_marginStart="@dimen/size_12"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:textColor="@color/lightBlue02"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -98,9 +99,10 @@
                     android:id="@+id/tvPhone"
                     style="@style/AppTheme.TextView.Medium"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/size_12"
                     android:autoLink="phone"
-                    android:textColorLink="@color/black"
-                    android:layout_marginTop="@dimen/size_12"/>
+                    android:textColorLink="@color/black" />
+
                 <TextView
                     style="@style/AppTheme.TextView.Medium"
                     android:layout_marginTop="@dimen/size_20"
@@ -129,6 +131,27 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_service_price" />
+
+                <LinearLayout
+                    android:id="@+id/lvAppointmentNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_marginTop="@dimen/size_20"
+                        android:text="@string/appointment_s_note"
+                        android:textColor="@color/gray08" />
+
+                    <TextView
+                        android:id="@+id/tvAppointmentNote"
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/size_12"
+                        android:maxLines="@null" />
+
+                </LinearLayout>
 
                 <View
                     style="@style/AppTheme.Line.Horizontal"
@@ -210,8 +233,8 @@
                         android:layout_below="@+id/tvTypeCancel"
                         android:layout_marginTop="@dimen/size_10"
                         android:gravity="center"
-                        android:text="@string/label_status"
                         android:maxLines="@null"
+                        android:text="@string/label_status"
                         android:textColor="@color/gray08" />
 
                 </RelativeLayout>
@@ -311,7 +334,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -340,9 +364,10 @@
                         style="@style/AppTheme.TextView.Italic"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="@dimen/size_12"
-                        android:visibility="gone"
                         android:maxLines="@null"
-                        android:textColor="@color/gray15" />
+                        android:textColor="@color/gray15"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -386,6 +411,7 @@
                         tools:text="Waiting" />
 
                 </RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -397,9 +423,9 @@
                         android:id="@+id/tvCreatedAt"
                         style="@style/AppTheme.TextView.Italic"
                         android:gravity="end"
+                        android:maxLines="@null"
                         android:textColor="@color/gray08"
                         android:textSize="@dimen/text_size_10"
-                        android:maxLines="@null"
                         tools:text="Aug 23 2022 - 2:58 PM" />
                 </LinearLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>

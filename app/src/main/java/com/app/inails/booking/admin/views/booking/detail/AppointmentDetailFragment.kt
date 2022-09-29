@@ -30,7 +30,7 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_detail),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
-    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner {
+    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, StaffInfoDialogOwner {
     private val binding by viewBinding(FragmentAppointmentDetailBinding::bind)
     private val viewModel by viewModel<AppointmentDetailViewModel>()
     private val arg by lazy { argument<Routing.AppointmentDetail>() }
@@ -66,6 +66,12 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             tvCustomerName.setOnClickListener {
                 mAppointment?.let {
                     customerInfoDialog.show(it.customer!!)
+                }
+            }
+
+            tvStaffName.setOnClickListener {
+                mAppointment?.let {
+                    staffInfoDialog.show(it.staff!!)
                 }
             }
         }
@@ -131,8 +137,8 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             tvStatus.drawableStart(item.resIconStatus)
             tvStatus.setTextColor(ContextCompat.getColor(requireContext(), item.colorStatus))
             tvTotalAmount.text = item.price.formatPrice()
-            tvNotes.text = item.notes
-            tvNotes.show(!item.notes.isNullOrEmpty())
+            tvNotes.text = item.noteFinish
+            tvNotes.show(!item.noteFinish.isNullOrEmpty())
             (item.status == DataConst.AppointmentStatus.APM_CANCEL || item.status == DataConst.AppointmentStatus.APM_FINISH) show btDelete
             afterAcceptLayout.show((item.status == DataConst.AppointmentStatus.APM_WAITING || item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING) && item.type == 1)
             (item.status == DataConst.AppointmentStatus.APM_ACCEPTED && item.type == 2) show acceptLayout
@@ -166,6 +172,9 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             ratingBar.rating = item.feedbackRating.toFloat()
             tvPhone.text = item.phone.formatPhoneUS()
             tvCreatedAt.text = item.createAt
+            tvAppointmentNote.text = item.notes
+
+            (item.notes.isNotEmpty()) show lvAppointmentNote
 
             topBar.setState(
                 SimpleTopBarState(

@@ -99,6 +99,9 @@ class AppointmentAdapter(view: RecyclerView) :
             tvAmount.text = item.price.formatPrice()
             ratingBar.rating = item.feedbackRating.toFloat()
             tvCreatedAt.text = item.createAt
+            tvAppointmentNote.text = item.notes
+
+            (item.notes).isNotEmpty() show tvAppointmentNote
         }
     }
 
