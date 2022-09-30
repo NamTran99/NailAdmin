@@ -10,7 +10,6 @@ import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.view.GravityCompat
@@ -26,7 +25,6 @@ import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
-import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.notification.NotificationRepository
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
@@ -49,7 +47,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             if (fireBaseMessage == null) return null
             val intent = Intent(context, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            Log.d("TAG", "NamTD8 getPendingIntent: ${fireBaseMessage.data.id}")
             intent.putExtra(APPOINTMENT_ID, fireBaseMessage.data.id)
             return PendingIntent.getActivity(
                 context, 5, intent,
@@ -101,8 +98,8 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        val appointmentID = intent?.getIntExtra(APPOINTMENT_ID, -1)?: -1
-        if (appointmentID != -1){
+        val appointmentID = intent?.getIntExtra(APPOINTMENT_ID, -1) ?: -1
+        if (appointmentID != -1) {
             Router.open(this, Routing.AppointmentDetail(appointmentID))
         }
     }

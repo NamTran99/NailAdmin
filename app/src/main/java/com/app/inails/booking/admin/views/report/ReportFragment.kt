@@ -22,7 +22,7 @@ import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.AppointmentAdapter
-import com.app.inails.booking.admin.views.booking.FilterApmOwner
+import com.app.inails.booking.admin.views.booking.dialog_filter.FilterApmOwner
 import com.app.inails.booking.admin.views.management.service.CreateUpdateServiceOwner
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner

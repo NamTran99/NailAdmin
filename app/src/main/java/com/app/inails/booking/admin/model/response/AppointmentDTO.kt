@@ -22,7 +22,7 @@ data class AppointmentDTO(
     val reviews: String? = "",
     val date_appointment_format: String = "",
     val salon: SalonDTO? = null,
-    val staff: StaffDTO,
+    val staff: StaffDTO? = null,
     val list_service_names: String? = "",
     val total_price_service: Double? = 0.0,
     val staff_name: String? = "",

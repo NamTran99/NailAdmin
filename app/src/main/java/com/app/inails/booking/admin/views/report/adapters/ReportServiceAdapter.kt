@@ -5,10 +5,10 @@ import android.support.core.view.bindingOf
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemReportListServicesBinding
+import com.app.inails.booking.admin.databinding.ItemServicePriceBinding
 import com.app.inails.booking.admin.extention.displaySafe
 import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.model.ui.IService
-import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class ReportServiceAdapter(view: RecyclerView) :

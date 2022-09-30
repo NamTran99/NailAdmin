@@ -84,8 +84,7 @@
                         style="@style/AppTheme.TextView.Medium"
                         android:layout_width="0dp"
                         android:layout_marginStart="@dimen/size_12"
-                        android:layout_weight="1"
-                        android:textColor="@color/lightBlue02"/>
+                        android:layout_weight="1" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -38,7 +38,7 @@
         android:layout_marginTop="@dimen/size_20"
         android:background="@color/color_line" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
@@ -48,19 +48,20 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/booking_id" />
+            android:text="@string/booking_id"
+            android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvBookingID"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:gravity="end"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:textSize="@dimen/text_size_12"
             tools:text="#123456" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="23dp"
@@ -70,18 +71,19 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray08"
             android:text="@string/customer_name" />
 
         <TextView
             android:id="@+id/tvCustomerName"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:gravity="end"
             tools:text="John Doe" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
@@ -91,16 +93,17 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phone_number" />
+            android:text="@string/phone_number"
+            android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvPhone"
             style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:gravity="end"
             tools:text="987-654-3210" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         style="@style/AppTheme.TextView.Medium"
@@ -108,6 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_23"
         android:layout_marginTop="@dimen/size_8"
+        android:textColor="@color/gray08"
         android:text="@string/service" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -116,7 +120,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
         android:layout_marginTop="@dimen/size_12"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_report_list_services"/>
 
     <View
         android:layout_width="match_parent"
@@ -135,7 +140,8 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/staff" />
+            android:text="@string/staff"
+            android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvStaffName"
@@ -147,29 +153,32 @@
             tools:text="Amanda" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
+        android:orientation="horizontal"
         android:layout_marginTop="@dimen/size_8">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray08"
             android:text="@string/time" />
 
         <TextView
             android:id="@+id/tvDateTime"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:textAlignment="textEnd"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textSize="@dimen/text_size_12"
             tools:text="Amanda" />
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/lvReason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -180,16 +189,19 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray08"
             android:text="@string/reason" />
 
         <TextView
+            android:layout_marginStart="@dimen/size_10"
             android:id="@+id/tvReason"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
             android:layout_alignParentEnd="true"
             tools:text="Amanda" />
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <RelativeLayout
         android:id="@+id/lvRating"
@@ -202,7 +214,8 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rating" />
+            android:text="@string/rating"
+            android:textColor="@color/gray08" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -223,10 +236,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/size_23"
+        android:textColor="@color/gray08"
         android:layout_marginTop="@dimen/size_17"
-        android:textColor="#7C7C7C"
-        android:maxLines="@null"
-        android:textSize="@dimen/text_size_10"
+        android:justificationMode="inter_word"
         tools:text="Feedback" />
 
     <androidx.appcompat.widget.LinearLayoutCompat

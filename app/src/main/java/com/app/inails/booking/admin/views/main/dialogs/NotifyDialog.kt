@@ -5,13 +5,12 @@ import android.content.Context
 import android.support.core.livedata.post
 import android.support.core.view.ViewScopeOwner
 import android.support.di.inject
-import androidx.core.text.htmlEncode
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.CUSTOMER_CANCEL_APPOINTMENT
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.CUSTOMER_CREATE_APPOINTMENT
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.CUSTOMER_FEEDBACK
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
-import com.app.inails.booking.admin.databinding.DialogCancelledAppointmentBinding
+import com.app.inails.booking.admin.databinding.NotifyDialogAppointmentBinding
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.firebase.Data
@@ -21,17 +20,20 @@ import com.app.inails.booking.admin.model.ui.ServiceImpl
 import com.app.inails.booking.admin.views.report.adapters.ReportServiceAdapter
 
 class NotifyDialog(context: Context) : BaseDialog(context) {
-    private val binding = viewBinding(DialogCancelledAppointmentBinding::inflate)
+    private val binding = viewBinding(NotifyDialogAppointmentBinding::inflate)
     private var appointment = Data()
     private var onClickViewDetailAppointment: ((Int) -> Unit)? = null
     private val appEvent by inject<AppEvent>()
 
-    init{
+    init {
         setCancelable(false)
     }
 
     @SuppressLint("SetTextI18n")
-    fun show(fireBaseCloudMessage: FireBaseCloudMessage, onClickViewDetailAppointment: ((Int) -> Unit)) {
+    fun show(
+        fireBaseCloudMessage: FireBaseCloudMessage,
+        onClickViewDetailAppointment: ((Int) -> Unit)
+    ) {
         this.onClickViewDetailAppointment = onClickViewDetailAppointment
         adjustViewVisibility(fireBaseCloudMessage.type.toInt())
         setUpListener()
@@ -105,7 +107,7 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
         }
     }
 
-    private fun dismissAndRefreshData(){
+    private fun dismissAndRefreshData() {
         appEvent.refreshData.post(true)
         dismiss()
     }

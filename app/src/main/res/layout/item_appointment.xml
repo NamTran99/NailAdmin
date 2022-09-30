@@ -44,15 +44,17 @@
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
-            android:layout_weight="1"
-            android:text="@string/label_full_name"
+            android:layout_width="wrap_content"
+            android:text="@string/client_name"
             android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvFullName"
             style="@style/AppTheme.TextView.Medium"
             android:layout_marginStart="@dimen/size_13"
+            android:layout_width="match_parent"
             android:gravity="end"
+            android:maxLines="2"
             android:textColor="@color/lightBlue02"
             tools:text="Yen Yen" />
     </LinearLayout>
@@ -65,16 +67,18 @@
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:text="@string/label_phone"
             android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvPhone"
+            android:layout_width="match_parent"
             style="@style/AppTheme.TextView.Medium"
             android:layout_marginStart="@dimen/size_13"
             android:autoLink="phone"
             android:gravity="end"
+            android:maxLines="2"
             android:textColor="@color/lightBlue02"
             android:textColorLink="@color/black"
             tools:text="Yen Yen" />
@@ -98,7 +102,7 @@
             android:layout_marginStart="@dimen/size_13"
             android:layout_weight="1"
             android:gravity="end"
-            android:maxLines="@null"
+            android:maxLines="2"
             tools:text="Aug 23 2022 - 2:58 PM" />
     </LinearLayout>
 
@@ -125,6 +129,26 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lvAppointmentNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:text="@string/something_else_note"
+            android:textColor="@color/gray08" />
+
+        <TextView
+            android:id="@+id/tv_appointment_note"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            tools:text="Note" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_12"
@@ -132,7 +156,7 @@
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
-            android:text="@string/label_request"
+            android:text="@string/staff"
             android:textColor="@color/gray08" />
 
         <TextView
@@ -142,26 +166,6 @@
             android:layout_weight="1"
             android:gravity="end"
             tools:text="Anyone" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lvAppointmentNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_12"
-        android:orientation="vertical">
-
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:text="@string/appointment_s_note"
-            android:textColor="@color/gray08" />
-
-        <TextView
-            android:id="@+id/tv_appointment_note"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/size_10"
-            tools:text="Note" />
     </LinearLayout>
 
     <FrameLayout

@@ -34,7 +34,8 @@
         android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_12"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:visibility="visible">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"

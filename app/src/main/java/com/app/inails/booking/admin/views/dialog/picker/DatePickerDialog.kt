@@ -21,7 +21,7 @@ class DatePickerDialog(private val activity: BaseActivity) :
     private var mDisableFutureDate = false
     private var mDisablePastDate = true
     private var mNumberLimit: Int = 0
-    var onDateListener: ((Int, Int, Int) -> Unit)? = null
+    var onDateListener: ((Calendar) -> Unit)? = null
 
     init {
         activity.lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -107,7 +107,7 @@ class DatePickerDialog(private val activity: BaseActivity) :
                     simpleDateFormat.format(calendar.time),
                     simpleDateTagFormat.format(calendar.time)
                 )
-                onDateListener?.invoke(year1, monthOfYear, dayOfMonth)
+                onDateListener?.invoke(calendar)
             },
             year,
             month,

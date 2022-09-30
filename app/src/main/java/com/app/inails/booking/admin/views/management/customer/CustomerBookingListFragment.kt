@@ -23,6 +23,8 @@ import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
+import com.app.inails.booking.admin.views.booking.dialog_filter.FilterApmOwner
+import com.app.inails.booking.admin.views.booking.dialog_filter.FilterType
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import kotlinx.parcelize.Parcelize
@@ -83,6 +85,13 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
         appEvent.refreshData.observe(this) {
             refreshView()
         }
+
+        appEvent.chooseStaffInDetailAppointment.observe(this) {
+            if (it != null) {
+                startServicesDialog.updateStaff(it)
+                acceptAppointmentDialog.updateStaff(it)
+            }
+        }
     }
 
     private fun setUpView() {
@@ -136,14 +145,14 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
                 onClickHandleListener = { apm, status ->
                     if (status == 1) {
                         acceptAppointmentDialog.onSelectStaffListener = {
-                            Router.redirectToChooseStaff(self, 2, apm.dateAppointment)
+                            Router.redirectToChooseStaff(self, 3, apm.dateTag)
                         }
-                        acceptAppointmentDialog.show(apm) { minutes, stffID ->
+                        acceptAppointmentDialog.show(apm) { minutes, staffID ->
                             viewModel.formHandle.run {
                                 id = apm.id
                                 isAccepted = 1
                                 workTime = minutes
-                                staffId = stffID
+                                staffId = staffID
                             }
                             viewModel.handle()
                         }

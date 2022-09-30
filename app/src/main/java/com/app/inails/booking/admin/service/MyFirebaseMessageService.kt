@@ -25,7 +25,7 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
         try {
             Log.d(TAG, "onMessageReceived: ")
             val params = remoteMessage.data
-            val `object` = JSONObject(params as Map<*, *>?)
+            val `object` = JSONObject(params as Map<*, *>)
             val objectFilter =
                 `object`.toString().replace("\"{", "{").replace("}\"", "}").replace("\\\"", "\"")
             val cloudMessage =

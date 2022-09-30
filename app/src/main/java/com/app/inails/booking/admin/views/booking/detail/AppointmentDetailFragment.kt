@@ -70,8 +70,8 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             }
 
             tvStaffName.setOnClickListener {
-                mAppointment?.let {
-                    staffInfoDialog.show(it.staff!!)
+                mAppointment?.staff?.let {
+                    staffInfoDialog.show(it)
                 }
             }
         }
@@ -120,7 +120,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             }
         }
 
-        appEvent.refreshData.observe(this){
+        appEvent.refreshData.observe(this) {
             viewModel.refresh(arg.id)
         }
         setListeners()
@@ -175,6 +175,14 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             tvAppointmentNote.text = item.notes
 
             (item.notes.isNotEmpty()) show lvAppointmentNote
+            item.staff?.let {
+                tvStaffName.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.lightBlue02
+                    )
+                )
+            }
 
             topBar.setState(
                 SimpleTopBarState(

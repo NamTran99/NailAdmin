@@ -101,7 +101,7 @@ class AppointmentAdapter(view: RecyclerView) :
             tvCreatedAt.text = item.createAt
             tvAppointmentNote.text = item.notes
 
-            (item.notes).isNotEmpty() show tvAppointmentNote
+            (item.notes).trim().isNotEmpty() show lvAppointmentNote
         }
     }
 

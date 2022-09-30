@@ -1,4 +1,4 @@
-package com.app.inails.booking.admin.views.booking
+package com.app.inails.booking.admin.views.booking.dialog_filter
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
@@ -25,22 +25,38 @@ import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog.Companion.FORMAT_DATE_API
+import java.util.*
 
 
 class FilterApmDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogFilterAppointmentBinding::inflate)
-    private val mDatePickerDialog by lazy { DatePickerDialog(context as BaseActivity) }
+    private val mFromDatePickerDialog by lazy { DatePickerDialog(context as BaseActivity) }
     private val mToDatePickerDialog by lazy { DatePickerDialog(context as BaseActivity) }
+
+    private var mFromDate: Calendar? = null
+    private var mToDate: Calendar? = null
 
     init {
         with(binding) {
             btClose.onClick {
                 dismiss()
             }
-            mDatePickerDialog.setDisablePastDates(false)
-            mToDatePickerDialog.setDisablePastDates(false)
-            mDatePickerDialog.setupClickWithView(tvDateFrom)
-            mToDatePickerDialog.setupClickWithView(tvDateTo)
+            mFromDatePickerDialog.apply {
+                setDisablePastDates(false)
+                setupClickWithView(tvDateFrom)
+                onDateListener = {
+                    mFromDate = it
+                }
+            }
+
+            mToDatePickerDialog.apply {
+                setDisablePastDates(false)
+                setupClickWithView(tvDateTo)
+                onDateListener = {
+                    mToDate = it
+                }
+            }
+
             tvDateFrom.text = ""
             tvDateTo.text = ""
             tvDateTo.tag = ""
@@ -108,8 +124,11 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
                     date = tvDateFrom.tag?.toString()
                     status = mStatus
                 }
-                function.invoke(form)
-                dismiss()
+
+                if(isValidRangeDate()){
+                    function.invoke(form)
+                    dismiss()
+                }
             }
 
             tvCustomer.setOnClickListener {
@@ -191,6 +210,14 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
         if (it != null){
             mStaff = it
             binding.tvStaff.text = "${it.name} - ${it.phone}"
+        }
+    }
+
+    private fun isValidRangeDate(): Boolean{
+        if(mFromDate == null || mToDate == null) return true
+        (mFromDate!! > mToDate!!).apply {
+            show(binding.tvDateError)
+            return !this
         }
     }
 }

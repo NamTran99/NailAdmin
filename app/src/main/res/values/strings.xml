@@ -138,5 +138,8 @@
     <string name="you_want_to_say_something">Write down your note</string>
     <string name="appointment_s_note">Appointment Note</string>
     <string name="search_by_booking_id">Search by booking id</string>
+    <string name="to_date_must_be_greater_or_equal_than_from_date">(*) To date must be greater or equal than From date</string>
+    <string name="client_name">Client Name</string>
+    <string name="something_else_note">Something else (note)</string>
     <string name="label_select_staff">Select Staff</string>
 </resources>
