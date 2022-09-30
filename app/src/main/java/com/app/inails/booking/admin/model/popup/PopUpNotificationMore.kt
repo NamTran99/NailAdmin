@@ -12,6 +12,12 @@ class PopUpNotificationMore(
     }
 
     companion object {
+        fun mock(context: Context): ArrayList<PopUpNotificationMore> {
+            return arrayListOf(
+                PopUpNotificationMore(0, context.getString(R.string.btn_read_all)),
+                PopUpNotificationMore(1, context.getString(R.string.btn_delete_all)),
+            )
+        }
         fun mockUnselect(context: Context): ArrayList<PopUpNotificationMore> {
             return arrayListOf(
                 PopUpNotificationMore(2, context.getString(R.string.btn_select)),

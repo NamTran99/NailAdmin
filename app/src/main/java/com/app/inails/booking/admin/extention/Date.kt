@@ -105,10 +105,21 @@ fun String.toCreatedAt(
 }
 
 fun String.toServerUTC(
-    format :String = "yyyy-MM-dd HH:mm"
+    format: String = "yyyy-MM-dd HH:mm",
+    outFormat: String = "yyyy-MM-dd HH:mm"
 ): String {
-    val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
-    val date = simpleDateFormat.parse(this)
+    val parseFormat = SimpleDateFormat(format, Locale.getDefault())
+    val date = parseFormat.parse(this)
+    val simpleDateFormat = SimpleDateFormat(outFormat, Locale.getDefault())
     simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
     return simpleDateFormat.format(date)
+}
+
+fun String.toServerUTC2(
+    format: String = "yyyy/MM/dd"
+): String {
+    val simpleTimeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    val currentTime = simpleTimeFormat.format(Date());
+    val dateWithTime = "$this $currentTime"
+    return dateWithTime.toServerUTC(outFormat = format, format = "yyyy-MM-dd HH:mm")
 }

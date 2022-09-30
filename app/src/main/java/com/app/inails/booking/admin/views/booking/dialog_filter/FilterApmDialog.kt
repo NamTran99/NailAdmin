@@ -125,7 +125,7 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
                     status = mStatus
                 }
 
-                if(isValidRangeDate()){
+                if (isValidRangeDate()) {
                     function.invoke(form)
                     dismiss()
                 }
@@ -181,15 +181,20 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
             )
             cbStatusName.setBackgroundResource(R.drawable.custom_status_select)
             cbStatusName.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    mStatus = buttonView.tag as Int
-                    statusViews.map {
-                        if (it.key != buttonView.tag) {
-                            statusViews[it.key]?.isChecked = false
+                if (buttonView.isPressed) {
+                    if (isChecked) {
+                        mStatus = buttonView.tag as Int
+                        statusViews.map {
+                            if (it.key != buttonView.tag) {
+                                statusViews[it.key]?.isChecked = false
+                            }
                         }
-                    }
 
+                    } else {
+                        mStatus = null
+                    }
                 }
+
             }
             statusViews[it.key] = cbStatusName
             binding.statusLayout.addView(
@@ -200,21 +205,21 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
     }
 
     fun updateCustomer(it: ICustomer?) {
-        if (it != null){
+        if (it != null) {
             mCustomer = it
             binding.tvCustomer.text = "${it.name} - ${it.phone.formatPhoneUSCustom()}"
         }
     }
 
     fun updateStaff(it: IStaff?) {
-        if (it != null){
+        if (it != null) {
             mStaff = it
             binding.tvStaff.text = "${it.name} - ${it.phone}"
         }
     }
 
-    private fun isValidRangeDate(): Boolean{
-        if(mFromDate == null || mToDate == null) return true
+    private fun isValidRangeDate(): Boolean {
+        if (mFromDate == null || mToDate == null) return true
         (mFromDate!! > mToDate!!).apply {
             show(binding.tvDateError)
             return !this

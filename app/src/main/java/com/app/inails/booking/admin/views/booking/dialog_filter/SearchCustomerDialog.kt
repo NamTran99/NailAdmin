@@ -4,8 +4,7 @@ import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogSearchCustomerBinding
-import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.extention.onSearchListener
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.ICustomer
 
 
@@ -31,11 +30,23 @@ class SearchCustomerDialog(context: Context) : BaseDialog(context) {
         }
 
         binding.searchView.onSearchListener {
+            binding.searchView.setSelection(binding.searchView.text.toString().length)
+            binding.btClear.show(binding.searchView.text.toString().isNotEmpty())
             mAdapter.clear()
             onSearchListener?.invoke(binding.searchView.text.toString())
+            binding.searchView.showKeyboard(false)
+        }
+        binding.btClear.onClick {
+            mAdapter.clear()
+            binding.searchView.setText("")
+            onSearchListener?.invoke(binding.searchView.text.toString())
+            binding.searchView.showKeyboard(false)
+            binding.btClear.hide()
         }
 
         binding.btClose.onClick {
+            binding.searchView.setText("")
+            binding.btClear.hide()
             dismiss()
         }
         super.show()

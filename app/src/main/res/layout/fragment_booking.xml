@@ -44,9 +44,23 @@
                 android:hint="@string/hint_search_by_booking_id_customer_name_staff_name"
                 android:imeOptions="actionSearch"
                 android:longClickable="false"
-                android:paddingEnd="@dimen/height_of_edit_text" />
+                android:paddingEnd="90dp"
+                android:textSize="@dimen/text_size_11" />
+
+            <ImageButton
+                android:id="@+id/btClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/filterLayout"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/size_10"
+                android:visibility="gone"
+                android:src="@drawable/ic_close"
+                app:tint="@color/black" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/filterLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

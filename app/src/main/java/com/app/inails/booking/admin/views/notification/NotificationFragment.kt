@@ -47,10 +47,10 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification), TopBa
                     activity?.onBackPressed()
                 },
                 onSettingClick = {
-                    if (mAdapter.isShowSelect)
-                        popupNoti.items = PopUpNotificationMore.mockSelect(requireContext())
-                    else
-                        popupNoti.items = PopUpNotificationMore.mockUnselect(requireContext())
+//                    if (mAdapter.isShowSelect)
+//                        popupNoti.items = PopUpNotificationMore.mockSelect(requireContext())
+//                    else
+                    popupNoti.items = PopUpNotificationMore.mock(requireContext())
                     popupNoti.setListener {
                         when (it.id) {
                             0 -> {

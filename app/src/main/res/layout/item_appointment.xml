@@ -102,7 +102,7 @@
             android:layout_marginStart="@dimen/size_13"
             android:layout_weight="1"
             android:gravity="end"
-            android:maxLines="2"
+            android:maxLines="@null"
             tools:text="Aug 23 2022 - 2:58 PM" />
     </LinearLayout>
 

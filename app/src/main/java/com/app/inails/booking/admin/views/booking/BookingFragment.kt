@@ -61,10 +61,23 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             }
 
             searchView.onSearchListener {
+                searchView.setSelection(searchView.text.toString().length)
+                btClear.show(searchView.text.toString().isNotEmpty())
                 if (mType == 1) viewModel.filterCheckInForm.keyword =
                     searchView.text.toString() else viewModel.filterCustomerForm.keyword =
                     searchView.text.toString()
                 refreshData(mType)
+                binding.searchView.showKeyboard(false)
+            }
+
+            btClear.onClick {
+                btClear.hide()
+                searchView.setText("")
+                if (mType == 1) viewModel.filterCheckInForm.keyword =
+                    null else viewModel.filterCustomerForm.keyword = null
+                searchView.showKeyboard(false)
+                refreshData(mType)
+
             }
         }
         with(viewModel) {
