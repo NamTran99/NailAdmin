@@ -22,6 +22,7 @@ import com.app.inails.booking.admin.extention.alpha
 import com.app.inails.booking.admin.extention.formatPhoneUS
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
+import com.app.inails.booking.admin.model.ui.NotificationIDForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
@@ -84,6 +85,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUS()}"
         }
         appEvent.notifyCloudMessage.bind {
+            notifyDialog.onReadNotiListener = {
+                viewModel.read(it)
+            }
             notifyDialog.show(it,
                 onClickViewDetailAppointment = { appointmentID ->
                     Router.open(this, Routing.AppointmentDetail(appointmentID))
@@ -93,6 +97,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         Router.run { redirectToBooking() }
         viewModel.count.bind {
             mainTopBarState.setNotificationUnreadCount(it)
+        }
+        viewModel.result.bind {
+
         }
     }
 
@@ -156,7 +163,8 @@ class MainViewModel(
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     val count = notificationRepo.count
-
+    val result = notificationRepo.result
+    val idForm = NotificationIDForm()
     val user = userLocalSource.getUserDto()
     fun logout() = launch(loading, error) {
         logoutRepo.invoke()
@@ -164,5 +172,11 @@ class MainViewModel(
 
     fun numberNotificationSalonUnread() = launch {
         notificationRepo.numberNotificationSalonUnread()
+    }
+
+    fun read(id: Int) = launch {
+        idForm.id = id
+        notificationRepo.read(idForm)
+        numberNotificationSalonUnread()
     }
 }

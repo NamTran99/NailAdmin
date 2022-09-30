@@ -22,9 +22,9 @@ import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.BookingApi
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.show
+import com.app.inails.booking.admin.extention.toServerUTC
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
-import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.support.ISelector
 import com.app.inails.booking.admin.model.ui.AppointmentForm
 import com.app.inails.booking.admin.model.ui.IAppointment
@@ -44,7 +44,8 @@ data class AppointmentArg(
     val id: Int? = 0
 ) : BundleArgument
 
-class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment), TopBarOwner {
+class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment),
+    TopBarOwner {
     private val binding by viewBinding(FragmentCreateAppointmentBinding::bind)
     private val viewModel by viewModel<CreateAppointmentViewModel>()
     private val arg by lazy { nullableArguments<Routing.CreateAppointment>() }
@@ -56,11 +57,13 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
     private var mDateTagSelected = ""
     private var loadData = false
     private var mStaff: IStaff? = null
+    private var mHour = 0
+    private var mMinute = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-               if (arg?.id != null) R.string.title_update_appointment else  R.string.title_create_new_appointment,
+                if (arg?.id != null) R.string.title_update_appointment else R.string.title_create_new_appointment,
                 onBackClick = {
                     activity?.onBackPressed()
                 },
@@ -92,7 +95,7 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                     services = mServiceAdapter.selectedItems.toString()
                     dateAppointment = if (tvSelectTime.text.toString()
                             .isEmpty()
-                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}"
+                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}".toServerUTC()
                 }
                 if (arg?.id != null)
                     viewModel.update()
@@ -133,6 +136,8 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
         mDateSelected = binding.tvSelectDate.text.toString()
         mTimeSelected = binding.tvSelectTime.text.toString()
         mDateTagSelected = binding.tvSelectDate.tag.toString()
+        mHour = binding.spHour.selectedItemPosition
+        mMinute = binding.spMinute.selectedItemPosition
     }
 
     override fun onResume() {
@@ -142,6 +147,9 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
             binding.tvSelectDate.tag = mDateTagSelected
         }
         if (mTimeSelected.isNotEmpty()) binding.tvSelectTime.text = mTimeSelected
+
+        binding.spMinute.setSelection(mMinute)
+        binding.spHour.setSelection(mHour)
     }
 
     private fun display(apm: IAppointment) {

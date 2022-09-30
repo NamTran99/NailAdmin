@@ -26,6 +26,7 @@ fun Long.toCreatedAt(
 fun String.formatDateAppointment(
 ): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
     val parser = SimpleDateFormat("MMMM dd,yyyy hh:mm a")
@@ -43,6 +44,7 @@ fun String.toDate(
     format: String = "yyyy-MM-dd'T'HH:mm:ss"
 ): Date {
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     return dateFormat.parse(this)
 }
 
@@ -51,6 +53,7 @@ fun String.toDateAppointment(
     parseFormat: String = "MMM dd (EEEE)"
 ): String {
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat(parseFormat, Locale.getDefault())
@@ -60,6 +63,7 @@ fun String.toDateAppointment(
 fun String.toDateTagAppointment(
 ): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -70,6 +74,7 @@ fun String.toDateTagAppointment(
 fun String.toTimeAppointment(
 ): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
@@ -91,10 +96,19 @@ fun String?.toTimeCheckIn(
 
 fun String.toCreatedAt(
 ): String {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat("MMMM dd yyyy - hh:mm a", Locale.getDefault())
+    return simpleDateFormat.format(date)
+}
+
+fun String.toServerUTC(
+    format :String = "yyyy-MM-dd HH:mm"
+): String {
+    val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
+    val date = simpleDateFormat.parse(this)
+    simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
     return simpleDateFormat.format(date)
 }

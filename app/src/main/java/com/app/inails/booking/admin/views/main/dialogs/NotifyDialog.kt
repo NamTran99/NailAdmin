@@ -23,6 +23,7 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(NotifyDialogAppointmentBinding::inflate)
     private var appointment = Data()
     private var onClickViewDetailAppointment: ((Int) -> Unit)? = null
+     var onReadNotiListener: ((Int) -> Unit)? = null
     private val appEvent by inject<AppEvent>()
 
     init {
@@ -95,12 +96,15 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
     private fun setUpListener() {
         with(binding) {
             btClose.setOnClickListener {
+                onReadNotiListener?.invoke(appointment.id.safe())
                 dismissAndRefreshData()
             }
             tvClose.setOnClickListener {
+                onReadNotiListener?.invoke(appointment.id.safe())
                 dismissAndRefreshData()
             }
             btViewDetail.setOnClickListener {
+                onReadNotiListener?.invoke(appointment.id.safe())
                 onClickViewDetailAppointment?.invoke(appointment.id.safe())
                 dismissAndRefreshData()
             }

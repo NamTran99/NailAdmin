@@ -5,8 +5,10 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.remote.BookingApi
+import com.app.inails.booking.admin.extention.toServerUTC
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.model.ui.*
+import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 
 
 @Inject(ShareScope.Fragment)
@@ -47,8 +49,8 @@ class AppointmentRepository(
                 .createAppointmentList(
                     bookingApi.listAppointmentInDashboard(
                         form.type,
-                        date = form.date,
-                        toDate = form.toDate,
+                        date = form.date?.toServerUTC(DatePickerDialog.FORMAT_DATE_API),
+                        toDate = form.toDate?.toServerUTC(DatePickerDialog.FORMAT_DATE_API),
                         searchStaff = form.staff?.id?.toString(),
                         searchCustomer = form.customer?.id?.toString(),
                         keyword = form.keyword,
