@@ -9,15 +9,17 @@
     android:padding="@dimen/size_13"
     tools:context=".views.management.staff.ManageStaffFragment">
 
-    <com.app.inails.booking.admin.views.widget.SearchView
+    <com.app.inails.booking.admin.views.widget.SearchFilterView
         android:id="@+id/searchView"
-        style="@style/AppTheme.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_13"
         android:drawableStart="@drawable/ic_search"
         android:drawableEnd="@null"
         android:hint="@string/hint_search"
-        android:layout_marginBottom="@dimen/size_13"
         android:imeOptions="actionSearch"
         android:longClickable="false" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
@@ -39,8 +41,9 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_staff_select" />
 
-            <include layout="@layout/layout_empty"
-                android:id="@+id/emptyLayout"/>
+            <include
+                android:id="@+id/emptyLayout"
+                layout="@layout/layout_empty" />
         </RelativeLayout>
 
 

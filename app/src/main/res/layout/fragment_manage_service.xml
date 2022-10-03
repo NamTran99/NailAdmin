@@ -10,9 +10,10 @@
     android:paddingVertical="@dimen/size_12"
     tools:context=".views.management.service.ManageServiceFragment">
 
-    <com.app.inails.booking.admin.views.widget.SearchView
+    <com.app.inails.booking.admin.views.widget.SearchFilterView
         android:id="@+id/searchView"
-        style="@style/AppTheme.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_search"
         android:drawableEnd="@null"
         android:hint="@string/hint_search"

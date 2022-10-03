@@ -28,8 +28,8 @@ interface BookingApi : Injectable {
         @Query("type") type: Int?,
         @Query("date") date: String? = null,
         @Query("to_date") toDate: String? = null,
-        @Query("search_staff") searchStaff: String? = null,
-        @Query("search_customer") searchCustomer: String? = null,
+        @Query("search_staff") searchStaff: Int? = null,
+        @Query("search_customer") searchCustomer: Int? = null,
         @Query("keyword") keyword: String? = null,
         @Query("status") status: Int? = null,
     ): ApiAsync<ArrayList<AppointmentDTO>>

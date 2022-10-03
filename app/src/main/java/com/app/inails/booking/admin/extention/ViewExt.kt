@@ -368,10 +368,10 @@ fun SwipeRefreshLayout.colorSchemeDefault() {
     this.setColorSchemeResources(R.color.colorPrimary)
 }
 
-fun EditText.onSearchListener(onCallBack: () -> Unit) {
+fun EditText.onSearchListener(onClickSearchAction: (String) -> Unit) {
     this.setOnEditorActionListener { _, actionId, _ ->
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            onCallBack.invoke()
+            onClickSearchAction.invoke(text.toString())
             true
         } else false
     }

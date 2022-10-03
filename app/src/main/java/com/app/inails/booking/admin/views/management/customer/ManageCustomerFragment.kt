@@ -69,12 +69,15 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
                     Router.run { redirectToCustomerBookingList(it.id) }
                 }
             }
-            searchView.setOnSearchListener(
-                onLoading = {
-                    viewRefresh.isRefreshing = true
-                    mAdapter.clear()
-                },
-                onSearch = { refresh(it) })
+            searchView.onClickSearchAction = {
+                refresh(it)
+            }
+//            searchView.setOnSearchListener(
+//                onLoading = {
+//                    viewRefresh.isRefreshing = true
+//                    mAdapter.clear()
+//                },
+//                onSearch = { refresh(it) })
         }
 
         appEvent.refreshData.observe(this){
@@ -83,8 +86,8 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
     }
 
     override fun onResume() {
+        refresh(binding.searchView.text)
         super.onResume()
-        refresh(binding.searchView.text.toString())
     }
 
     private fun refresh(key: String) {

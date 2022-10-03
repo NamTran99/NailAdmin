@@ -19,7 +19,6 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentManageStaffBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
-import com.app.inails.booking.admin.extention.onSearchListener
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.popup.PopUpStaffMore
 import com.app.inails.booking.admin.model.ui.CreateStaffForm
@@ -192,7 +191,7 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                 }
             }
 
-            searchView.onSearchListener {
+            searchView.onClickSearchAction = {
                 refresh(searchView.text.toString())
             }
         }

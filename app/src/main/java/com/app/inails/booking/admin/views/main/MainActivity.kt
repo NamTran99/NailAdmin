@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.main
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -62,6 +63,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var mainTopBarState: MainTopBarState
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onNewIntent(intent)
@@ -113,6 +115,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.navManageSalon ->{
+
+            }
             R.id.navManageService -> {
                 Router.open(this, Routing.ManageService)
             }
@@ -153,7 +158,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         super.onResume()
         viewModel.numberNotificationSalonUnread()
     }
-
 }
 
 class MainViewModel(

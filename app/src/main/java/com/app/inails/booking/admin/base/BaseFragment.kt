@@ -1,11 +1,13 @@
 package com.app.inails.booking.admin.base
 
+import android.os.Bundle
 import android.support.core.event.WindowStatusOwner
 import android.support.core.extensions.LifecycleSubscriberExt
 import android.support.core.route.ActivityResultRegister
 import android.support.core.route.RouteDispatcher
 import android.support.di.inject
 import android.support.viewmodel.ViewModelRegistrable
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -49,5 +51,10 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
 
     fun success(@StringRes msg: Int, time: Int? = Toast.LENGTH_SHORT) {
         appActivity.success(msg, time)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Fragment Tracer", "Go into ${this.javaClass.name}")
     }
 }

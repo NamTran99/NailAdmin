@@ -19,7 +19,6 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentChooseStaffBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.isCurrentDate
-import com.app.inails.booking.admin.extention.onSearchListener
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.StaffForm
 import com.app.inails.booking.admin.navigate.Routing
@@ -48,7 +47,7 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener {
                 if ((arg?.type == null) || ((arg?.type == 2 || arg?.type == 3) && !arg!!.dateTime.isCurrentDate()))
-                    refresh(searchView.text.toString())
+                    refresh(searchView.text)
                 else viewModel.staffCheckIn()
             }
             mAdapter = SelectStaffAdapter(binding.rvStaff)
@@ -79,7 +78,7 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
                 }
             }
 
-            searchView.onSearchListener {
+            searchView.onClickSearchAction = {
                 refresh(searchView.text.toString())
             }
 

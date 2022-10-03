@@ -22,38 +22,16 @@ class AppointmentRepository(
     val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
 
-    suspend fun getAppointmentByCustomerID(
-        customerID: Int,
-        search: String,
-        form: AppointmentFilterForm
-    ) {
-        results.post(
-            bookingFactory
-                .createAppointmentList(
-                    bookingApi.listAppointmentInDashboard(
-                        null,
-                        date = form.date,
-                        toDate = form.toDate,
-                        searchStaff = form.searchStaff,
-                        searchCustomer = null
-                    )
-                        .await().filter {
-                            it.customer_id == customerID && it.id.toString().contains(search)
-                        }
-                )
-        )
-    }
-
     suspend operator fun invoke(form: AppointmentFilterForm) {
         results.post(
             bookingFactory
                 .createAppointmentList(
                     bookingApi.listAppointmentInDashboard(
                         form.type,
-                        date = form.date?.toServerUTC2(DatePickerDialog.FORMAT_DATE_API),
+                        date = form.fromDate?.toServerUTC2(DatePickerDialog.FORMAT_DATE_API),
                         toDate = form.toDate?.toServerUTC2(DatePickerDialog.FORMAT_DATE_API),
-                        searchStaff = form.staff?.id?.toString(),
-                        searchCustomer = form.customer?.id?.toString(),
+                        searchStaff = form.searchStaff?: form.staff?.id,
+                        searchCustomer =  form.searchCustomer?: form.customer?.id,
                         keyword = form.keyword,
                         status = form.status
                     )

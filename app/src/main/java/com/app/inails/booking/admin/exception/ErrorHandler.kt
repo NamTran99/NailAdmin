@@ -8,7 +8,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.extention.cast
-import com.app.inails.booking.admin.widgets.PasswordLayout
+import com.app.inails.booking.admin.views.widget.PasswordLayout
 
 interface ErrorHandler {
     fun handle(activity: BaseActivity, error: Throwable)

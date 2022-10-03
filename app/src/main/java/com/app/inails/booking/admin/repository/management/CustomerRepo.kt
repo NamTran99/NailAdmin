@@ -14,11 +14,11 @@ class FetchListCustomerRepo(
 ) {
     val results = MutableLiveData<List<ICustomer>>()
     val resultWithPage = MutableLiveData<Pair<Int,List<ICustomer>>>()
-    suspend operator fun invoke(search: String) {
+    suspend operator fun invoke(search: String?) {
         results.post(
             customerFactory
                 .createCustomerList(
-                    CustomerApi.getAllListCustomer(search).await()
+                    CustomerApi.getAllListCustomer(search?:"").await()
                 )
         )
     }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/navManageSalon"
+        android:title="@string/manage_salon" />
+    <item
         android:id="@+id/navManageService"
         android:title="@string/mn_manage_service" />
     <item

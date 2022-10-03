@@ -78,4 +78,7 @@
     <dimen name="size_23">23dp</dimen>
     <dimen name="size_22">22dp</dimen>
     <dimen name="size_37">37dp</dimen>
+    <dimen name="size_65">65dp</dimen>
+    <dimen name="size_55">55dp</dimen>
+    <dimen name="size_58">58dp</dimen>
 </resources>

@@ -25,34 +25,17 @@
             app:tint="@color/black" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <com.app.inails.booking.admin.views.widget.SearchFilterView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10">
-
-        <com.app.inails.booking.admin.views.widget.SearchView
-            android:id="@+id/searchView"
-            style="@style/AppTheme.EditText"
-            android:layout_marginHorizontal="@dimen/size_10"
-            android:drawableStart="@drawable/ic_search"
-            android:drawableEnd="@null"
-            android:hint="@string/search_by_name_phone"
-            android:imeOptions="actionSearch"
-            android:longClickable="false"
-            android:paddingEnd="@dimen/height_of_edit_text" />
-
-        <ImageButton
-            android:id="@+id/btClear"
-            android:layout_width="@dimen/height_of_edit_text"
-            android:layout_height="@dimen/height_of_edit_text"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="@dimen/size_10"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_close"
-            android:visibility="gone"
-            app:tint="@color/black" />
-    </RelativeLayout>
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableEnd="@null"
+        android:hint="@string/search_by_name_phone"
+        android:imeOptions="actionSearch"
+        android:longClickable="false" />
 
     <RelativeLayout
         android:layout_width="match_parent"

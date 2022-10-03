@@ -50,11 +50,10 @@
 
         <TextView
             android:id="@+id/tvFullName"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_marginStart="@dimen/size_13"
             android:layout_width="match_parent"
             android:gravity="end"
-            android:maxLines="2"
             android:textColor="@color/lightBlue02"
             tools:text="Yen Yen" />
     </LinearLayout>
@@ -74,11 +73,10 @@
         <TextView
             android:id="@+id/tvPhone"
             android:layout_width="match_parent"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_marginStart="@dimen/size_13"
             android:autoLink="phone"
             android:gravity="end"
-            android:maxLines="2"
             android:textColor="@color/lightBlue02"
             android:textColorLink="@color/black"
             tools:text="Yen Yen" />
@@ -97,12 +95,11 @@
 
         <TextView
             android:id="@+id/tvTimeAndDate"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_13"
             android:layout_weight="1"
             android:gravity="end"
-            android:maxLines="@null"
             tools:text="Aug 23 2022 - 2:58 PM" />
     </LinearLayout>
 
@@ -119,12 +116,11 @@
 
         <TextView
             android:id="@+id/tvServices"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/size_50"
             android:layout_weight="1"
             android:gravity="end"
-            android:maxLines="@null"
             tools:text="Manicure, Pedicure, Wax" />
     </LinearLayout>
 
@@ -161,7 +157,7 @@
 
         <TextView
             android:id="@+id/tvRequest"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="end"
@@ -180,7 +176,7 @@
 
         <TextView
             android:id="@+id/tvStatus"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_gravity="end"
             android:layout_marginStart="@dimen/size_13"
             android:textColor="@color/yellow"
@@ -203,7 +199,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAmount"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_gravity="end"
             tools:text="$10.00" />
     </FrameLayout>

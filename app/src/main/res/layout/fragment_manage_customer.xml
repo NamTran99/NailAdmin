@@ -10,13 +10,14 @@
     android:paddingVertical="@dimen/size_12"
     tools:context=".views.management.service.ManageServiceFragment">
 
-    <com.app.inails.booking.admin.views.widget.SearchView
+    <com.app.inails.booking.admin.views.widget.SearchFilterView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:id="@+id/searchView"
-        style="@style/AppTheme.EditText"
+        android:drawableStart="@drawable/ic_search"
         android:drawableEnd="@null"
         android:hint="@string/search_by_name_phone_email"
         android:imeOptions="actionSearch"
-        android:drawableStart="@drawable/ic_search"
         android:longClickable="false" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -35,7 +36,6 @@
                 android:id="@+id/rvCustomers"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="@dimen/size_17_5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_manage_customer" />
 
@@ -44,6 +44,5 @@
                 layout="@layout/layout_empty" />
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 </LinearLayout>

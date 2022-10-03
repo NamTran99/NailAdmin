@@ -1,4 +1,4 @@
-package com.app.inails.booking.admin.widgets
+package com.app.inails.booking.admin.views.widget
 
 import android.content.Context
 import android.util.AttributeSet

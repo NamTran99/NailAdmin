@@ -116,14 +116,30 @@ class HandleAppointmentForm(
 class AppointmentFilterForm(
     @SerializedName("to_date")
     var toDate: String? = null,
-    var date: String? = null,
+    @SerializedName("date")
+    var fromDate: String? = null,
     @SerializedName("search_staff")
-    var searchStaff: String? = null,
+    var searchStaff: Int? = null,
     @SerializedName("search_customer")
-    var searchCustomer: String? = null,
+    var searchCustomer: Int? = null,
     var staff : IStaff ?= null,
     var customer : ICustomer ?= null,
-    var keyword: String? = null,
+    var keyword: String = "",
     var status: Int? = null,
-    var type: Int = 1
-)
+    var type: Int? = 1 // type = null: filter type 1 && 2
+){
+    fun isHaveDataForFilter(): Boolean{
+        return  !fromDate.isNullOrEmpty() || !toDate.isNullOrEmpty() ||
+                staff != null || customer != null
+                || status != null
+    }
+
+    fun setDataFromDialog(form: AppointmentFilterForm){
+        toDate = form.toDate
+        fromDate = form.fromDate
+        staff = form.staff
+        customer = form.customer
+        searchStaff = form.staff?.id
+        searchCustomer = form.customer?.id
+    }
+}

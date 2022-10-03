@@ -64,8 +64,6 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
         }
     }
 
-    val form = AppointmentFilterForm()
-
     var mStatus: Int? = null
     var mStaff: IStaff? = null
     var mCustomer: ICustomer? = null
@@ -74,15 +72,16 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
         type: FilterType = FilterType.NORMAL,
         openSearchStaff: (() -> Unit)? = null,
         openSearchCustomer: (() -> Unit)? = null,
-        function: (AppointmentFilterForm) -> Unit,
+        onSummitData: (AppointmentFilterForm) -> Unit,
     ) {
 
         with(binding) {
-            (type == FilterType.NORMAL) show lvCustomer
-            (type == FilterType.NORMAL) show lvStaff
-            tvDateFrom.tag = form.date
+
+            setUpViewByType(type)
+
+            tvDateFrom.tag = form.fromDate
             tvDateTo.tag = form.toDate
-            tvDateFrom.text = form.date?.toDateAppointment(FORMAT_DATE_API)
+            tvDateFrom.text = form.fromDate?.toDateAppointment(FORMAT_DATE_API)
             tvDateTo.text = form.toDate?.toDateAppointment(FORMAT_DATE_API)
             if (form.staff != null) {
                 updateStaff(form.staff!!)
@@ -109,10 +108,10 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
                     staff = null
                     customer = null
                     toDate = null
-                    date = null
+                    fromDate = null
                     status = null
                 }
-                function.invoke(form)
+                onSummitData.invoke(form)
 
             }
 
@@ -121,12 +120,12 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
                     customer = mCustomer
                     staff = mStaff
                     toDate = tvDateTo.tag?.toString()
-                    date = tvDateFrom.tag?.toString()
+                    fromDate = tvDateFrom.tag?.toString()
                     status = mStatus
                 }
 
-                if (isValidRangeDate()) {
-                    function.invoke(form)
+                if(isValidRangeDate()){
+                    onSummitData.invoke(form)
                     dismiss()
                 }
             }
@@ -142,21 +141,41 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
         super.show()
     }
 
+    private fun setUpViewByType(type: FilterType) {
+        with(binding){
+            lvCustomer.show(type != FilterType.FILTER_BY_CUSTOMER)
+            lvStatus.show(type != FilterType.FILTER_IN_REPORT)
+        }
+    }
+
     val statusViews = linkedMapOf<Int, CheckBox>()
 
-    private fun displayStatusList(type: Int) {
+    private fun displayStatusList(type: Int?) {
         statusViews.clear()
         val statusList = linkedMapOf<Int, Int>()
-        if (type == 2) {
-            statusList[APM_PENDING] = R.string.label_status_waiting_for_approval
-            statusList[APM_ACCEPTED] = R.string.label_accepted
-            statusList[APM_CANCEL] = R.string.label_canceled
-        } else {
-            statusList[DataConst.AppointmentStatus.APM_WAITING] =
-                R.string.label_status_waiting_for_service
-            statusList[DataConst.AppointmentStatus.APM_IN_PROCESSING] =
-                R.string.label_status_serving
-            statusList[DataConst.AppointmentStatus.APM_FINISH] = R.string.label_status_finished
+        when (type) {
+            2 -> {
+                statusList[APM_PENDING] = R.string.label_status_waiting_for_approval
+                statusList[APM_ACCEPTED] = R.string.label_accepted
+                statusList[APM_CANCEL] = R.string.label_canceled
+            }
+            1 -> {
+                statusList[DataConst.AppointmentStatus.APM_WAITING] =
+                    R.string.label_status_waiting_for_service
+                statusList[DataConst.AppointmentStatus.APM_IN_PROCESSING] =
+                    R.string.label_status_serving
+                statusList[DataConst.AppointmentStatus.APM_FINISH] = R.string.label_status_finished
+            }
+            else -> {
+                statusList[APM_PENDING] = R.string.label_status_waiting_for_approval
+                statusList[APM_ACCEPTED] = R.string.label_accepted
+                statusList[APM_CANCEL] = R.string.label_canceled
+                statusList[DataConst.AppointmentStatus.APM_WAITING] =
+                    R.string.label_status_waiting_for_service
+                statusList[DataConst.AppointmentStatus.APM_IN_PROCESSING] =
+                    R.string.label_status_serving
+                statusList[DataConst.AppointmentStatus.APM_FINISH] = R.string.label_status_finished
+            }
         }
 
         binding.statusLayout.removeAllViews()
@@ -205,21 +224,21 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
     }
 
     fun updateCustomer(it: ICustomer?) {
-        if (it != null) {
+        if (it != null){
             mCustomer = it
             binding.tvCustomer.text = "${it.name} - ${it.phone.formatPhoneUSCustom()}"
         }
     }
 
     fun updateStaff(it: IStaff?) {
-        if (it != null) {
+        if (it != null){
             mStaff = it
             binding.tvStaff.text = "${it.name} - ${it.phone}"
         }
     }
 
-    private fun isValidRangeDate(): Boolean {
-        if (mFromDate == null || mToDate == null) return true
+    private fun isValidRangeDate(): Boolean{
+        if(mFromDate == null || mToDate == null) return true
         (mFromDate!! > mToDate!!).apply {
             show(binding.tvDateError)
             return !this
@@ -229,7 +248,8 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
 
 enum class FilterType {
     NORMAL,
-    FILTER_BY_CUSTOMER
+    FILTER_BY_CUSTOMER,
+    FILTER_IN_REPORT,
 }
 
 interface FilterApmOwner : ViewScopeOwner {

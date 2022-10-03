@@ -29,66 +29,17 @@
         android:background="@color/gray07"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <com.app.inails.booking.admin.views.widget.SearchFilterView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.app.inails.booking.admin.views.widget.SearchView
-                android:id="@+id/searchView"
-                style="@style/AppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/size_13"
-                android:drawableStart="@drawable/ic_search"
-                android:drawableEnd="@null"
-                android:hint="@string/hint_search_by_booking_id_customer_name_staff_name"
-                android:imeOptions="actionSearch"
-                android:longClickable="false"
-                android:paddingEnd="90dp"
-                android:textSize="@dimen/text_size_11" />
-
-            <ImageButton
-                android:id="@+id/btClear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/filterLayout"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="@dimen/size_10"
-                android:visibility="gone"
-                android:src="@drawable/ic_close"
-                app:tint="@color/black" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/filterLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/size_13">
-
-                <ImageButton
-                    android:id="@+id/btFilter"
-                    android:layout_width="@dimen/height_of_edit_text"
-                    android:layout_height="@dimen/height_of_edit_text"
-                    android:layout_marginEnd="@dimen/size_10"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="@dimen/size_10"
-                    android:src="@drawable/ic_filter"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/ivFilter"
-                    android:layout_width="@dimen/size_10"
-                    android:layout_height="@dimen/size_10"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/size_10"
-                    android:src="@drawable/circle_primary"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </RelativeLayout>
+            android:layout_marginHorizontal="@dimen/size_13"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableEnd="@null"
+            android:hint="@string/hint_search_by_booking_id_customer_name_staff_name"
+            android:imeOptions="actionSearch"
+            android:longClickable="false"
+            app:isEnableFilter="true" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/viewRefresh"

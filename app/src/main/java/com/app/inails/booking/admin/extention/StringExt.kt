@@ -4,7 +4,6 @@ import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import java.net.URLDecoder
-import java.net.URLEncoder
 
 fun Int.formatTime(): String {
     return if (this < 10) "0$this"
@@ -96,4 +95,8 @@ fun String?.displaySafe1(): String {
 
 fun String.decode(): String {
     return URLDecoder.decode(this, "UTF-8")
+}
+
+fun String.lowerCaseContain(key: String): Boolean {
+    return lowercase().contains(key)
 }
