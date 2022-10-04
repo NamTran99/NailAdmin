@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
+    android:paddingHorizontal="@dimen/size_10"
     tools:context=".views.booking.BookingFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/appointTab"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_marginStart="@dimen/size_13"
+        android:layout_marginBottom="@dimen/size_10"
         android:layout_marginTop="@dimen/size_13"
-        android:layout_marginEnd="@dimen/size_13"
-        android:layout_marginBottom="@dimen/size_13"
         app:tabBackground="@drawable/tab_selector"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
@@ -33,7 +32,6 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/size_13"
             android:drawableStart="@drawable/ic_search"
             android:drawableEnd="@null"
             android:hint="@string/hint_search_by_booking_id_customer_name_staff_name"

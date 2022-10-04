@@ -16,6 +16,7 @@ import com.app.inails.booking.admin.views.management.service.ManageServiceFragme
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
+import com.app.inails.booking.admin.views.me.DetailSalonFragment
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import kotlinx.parcelize.Parcelize
@@ -54,6 +55,12 @@ interface Routing : BundleArgument {
     object ManageService : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = ManageServiceFragment::class
+    }
+
+    @Parcelize
+    object ManageSalon : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = DetailSalonFragment::class
     }
 
     @Parcelize

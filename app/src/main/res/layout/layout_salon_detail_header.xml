@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/size_16">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDirection"
+        style="@style/AppTheme.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/direct"
+        android:textAllCaps="false"
+        android:textColor="@color/blue_40"
+        app:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/ic_direct"
+        app:iconGravity="textEnd"
+        app:iconTint="@color/blue_40"
+        app:rippleColor="@color/blue_40" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_location" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgAddress"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_marginEnd="@dimen/size_10"
+        android:layout_toStartOf="@+id/btnDirection"
+        android:layout_toEndOf="@+id/imgAddress"
+        android:drawablePadding="@dimen/size_10"
+        tools:text="100 Plainfield Ave Edison NJ 08817" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAddress"
+        android:layout_marginTop="@dimen/size_10"
+        app:srcCompat="@drawable/ic_phone_outline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgPhone"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_toEndOf="@+id/imgPhone"
+        android:autoLink="phone"
+        android:background="?selectableItemBackground"
+        android:drawablePadding="@dimen/size_10"
+        tools:text="+987 654 3210" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtPhone"
+        android:layout_marginTop="@dimen/size_10"
+        app:srcCompat="@drawable/ic_time_outline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelLocalTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgTime"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_toEndOf="@+id/imgTime"
+        android:text="@string/local_time" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelLocalTime"
+        android:layout_alignStart="@+id/labelLocalTime"
+        android:layout_marginTop="@dimen/size_10"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="7"
+        tools:listitem="@layout/item_view_salon_schedule" />
+
+</RelativeLayout>

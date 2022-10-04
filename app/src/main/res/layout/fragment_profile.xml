@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center_horizontal">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSalonName"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="?actionBarSize"
+        android:layout_marginTop="@dimen/size_10"
+        android:ellipsize="end"
+        android:gravity="top|center_horizontal"
+        android:textSize="@dimen/text_size_22"
+        tools:text="Healthy Nail Salon Collaborative" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtSalonName"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@drawable/box_white_radius_top">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size_16"
+            android:paddingVertical="@dimen/size_16">
+
+            <include
+                android:id="@+id/viewHeader"
+                layout="@layout/layout_salon_detail_header" />
+
+            <View
+                style="@style/AppTheme.Line.Horizontal"
+                android:layout_marginBottom="@dimen/size_16" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size_16">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:src="@drawable/ic_owner" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.Italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginHorizontal="@dimen/size_10"
+                    android:text="@string/owner"
+                    android:textColor="@color/colorPrimary" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtOwner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="Kiet Nguyen" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vpImage"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginHorizontal="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_20"
+                tools:layout="@layout/item_view_salon_image" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabDots"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                app:tabBackground="@drawable/tab_selector_2"
+                app:tabIndicatorHeight="0dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDescription"
+                style="@style/TextAppearance.Italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:padding="@dimen/size_16"
+                android:textColor="@color/gray05"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat" />
+            <Button
+                android:id="@+id/btnEdit"
+                style="@style/AppTheme.Button"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+</RelativeLayout>

@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 @Inject(ShareScope.Singleton)
 class UserLocalSource(
-    shareIOScope: ShareIOScope,
+    private val shareIOScope: ShareIOScope,
     context: Context,
     private val appCache: AppCache,
 ) {
@@ -46,7 +46,7 @@ class UserLocalSource(
         appCache.password = ""
     }
 
-    fun getUserDto(): UserDTO? = user
+    fun getUserDto(): UserDTO = user?: UserDTO()
 
     fun getUserLive(): MutableLiveData<UserDTO> {
         return userLive
@@ -54,7 +54,9 @@ class UserLocalSource(
 
     fun saveUser(userDTO: UserDTO) {
         user = userDTO
-        userLive.post(userDTO)
+        shareIOScope.launch {
+            userLive.post(userDTO)
+        }
     }
 
     fun updateEmailFeedbackUser(email: String){

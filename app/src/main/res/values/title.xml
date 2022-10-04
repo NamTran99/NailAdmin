@@ -15,6 +15,7 @@
     <string name="title_create_new_staff">Create New Staff</string>
     <string name="title_create_new_service">Create New Service</string>
     <string name="title_booking_list">Booking List</string>
+    <string name="title_order_history">Order History</string>
     <string name="title_update_staff">Update Staff</string>
     <string name="title_update_service">Update Service</string>
     <string name="title_remove_appointment">Remove Appointment</string>

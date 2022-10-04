@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
+    android:paddingHorizontal="@dimen/size_10"
     android:orientation="vertical"
     tools:context=".views.management.service.ManageServiceFragment">
 
@@ -12,7 +13,6 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_13"
         android:layout_marginTop="@dimen/size_12"
         android:drawableStart="@drawable/ic_search"
         android:hint="@string/hint_search_booking_list"
@@ -24,7 +24,7 @@
         android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/size_13"
+        android:layout_marginTop="@dimen/size_4"
         android:background="@drawable/bg_white_radius">
 
         <RelativeLayout

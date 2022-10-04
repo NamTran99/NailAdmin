@@ -43,7 +43,7 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_13"
+        android:layout_marginHorizontal="@dimen/size_10"
         android:layout_marginTop="@dimen/size_12"
         android:drawableStart="@drawable/ic_search"
         android:hint="@string/hint_search_by_booking_id_customer_name_staff_name"
@@ -55,7 +55,8 @@
         android:id="@+id/viewRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/size_13">
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_4">
 
         <RelativeLayout
             android:layout_width="match_parent"

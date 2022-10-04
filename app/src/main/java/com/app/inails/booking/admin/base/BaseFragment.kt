@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
+import com.app.inails.booking.admin.app.AppSettingsOwner
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
@@ -28,6 +29,7 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     ConfirmDialogOwner,
     AppPermissionOwner,
     NotSupportable,
+    AppSettingsOwner,
     ErrorHandler by ErrorHandlerImpl() {
     val self get() = this
     val appActivity get() = activity as BaseActivity

@@ -6,8 +6,11 @@ import android.telephony.PhoneNumberUtils
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.extention.formatDateAppointment
+import com.app.inails.booking.admin.extention.toCreatedAt
 import com.app.inails.booking.admin.extention.toDate
 import com.app.inails.booking.admin.model.response.CustomerDTO
+import com.app.inails.booking.admin.model.response.SalonDTO
+import com.app.inails.booking.admin.model.response.Schedule
 import com.app.inails.booking.admin.model.response.StaffDTO
 import java.text.SimpleDateFormat
 import java.util.*
@@ -82,6 +85,24 @@ class TextFormatter {
         }
     }
 
+    fun formatFullAddress(salonDTO: SalonDTO): String {
+        val result = StringBuffer()
+        if (!salonDTO.address.isNullOrEmpty())
+            result.append(salonDTO.address)
+        if (!salonDTO.city.isNullOrEmpty())
+            result.append(" ").append(salonDTO.city)
+        if (!salonDTO.state.isNullOrEmpty())
+            result.append(" ").append(salonDTO.state)
+        if (!salonDTO.zipcode.isNullOrEmpty())
+            result.append(" ").append(salonDTO.zipcode)
+        return result.toString()
+    }
+
+    fun formatSalonSchedule(it: Schedule): String {
+        return if (it.startTime.isNullOrEmpty() || it.startTime.isNullOrEmpty()) "OFF"
+        else "${it.startTime} - ${it.endTime}"
+    }
+
     fun formatStatusAppointmentCancel(cancelledBy: String?): String {
         if (!cancelledBy.isNullOrEmpty()) {
             return "Cancelled by $cancelledBy"
@@ -119,7 +140,7 @@ class TextFormatter {
         val timePlus = date.time + (workTime * 60 * 1000)
         date.time = timePlus
 
-        return "${dateTime.formatDateAppointment()}-${date.formatDateAppointment()}"
+        return "${dateTime.toDate().time.toCreatedAt()}-${date.formatDateAppointment()}"
     }
 
     fun formatColorNotification(isRead: Int): Int {

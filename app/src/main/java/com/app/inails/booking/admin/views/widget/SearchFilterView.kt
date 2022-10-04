@@ -20,11 +20,19 @@ import com.app.inails.booking.admin.extention.visible
 import com.app.inails.booking.admin.model.ui.AppointmentFilterForm
 import java.util.*
 
-class SearchFilterView(context: Context, attributeSet: AttributeSet) :
-    ConstraintLayout(context, attributeSet) {
+interface SearchFilterViewInf{
+    var onLayoutFilterClick: (()-> Unit)?
+    var onClickSearchAction: ((String) -> Unit)?
+    fun setText(search: String)
+    fun setHint(@StringRes hint: Int)
+    fun showHideImgFilter(form: AppointmentFilterForm)
+}
 
-    var onLayoutFilterClick: (()-> Unit)? = null
-    var onClickSearchAction: ((String) -> Unit)? = null
+class SearchFilterView(context: Context, attributeSet: AttributeSet) :
+    ConstraintLayout(context, attributeSet), SearchFilterViewInf {
+
+    override var onLayoutFilterClick: (()-> Unit)? = null
+    override var onClickSearchAction: ((String) -> Unit)? = null
     val text: String
         get() = binding.searchView.text.toString()
 
@@ -46,14 +54,18 @@ class SearchFilterView(context: Context, attributeSet: AttributeSet) :
         setUpListener()
     }
 
-    fun showHideImgFilter(form: AppointmentFilterForm){
+    override fun showHideImgFilter(form: AppointmentFilterForm){
         form.isHaveDataForFilter().show(binding.imgFilter)
     }
 
-    fun setText(search: String){
+    override fun setText(search: String){
         if(search == binding.searchView.text.toString() && search == "") return // if remove this line will be crash
         binding.searchView.setText(search)
         binding.searchView.setSelection(search.length)
+    }
+
+    override fun setHint(@StringRes hint: Int) {
+        binding.searchView.setHint(hint)
     }
 
     fun setOnSearchListener(

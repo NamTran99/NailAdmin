@@ -7,6 +7,13 @@ import com.app.inails.booking.admin.exception.viewPassInputError
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+interface IUser {
+    val phone: String get() = ""
+    val email: String get() = ""
+    val address: String get() = ""
+    val name: String get() = ""
+}
+
 @Parcelize
 class LoginForm(
     var phone: String = "",

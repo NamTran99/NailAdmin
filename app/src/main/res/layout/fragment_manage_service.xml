@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/size_13"
+        android:layout_marginTop="@dimen/size_10"
         android:background="@drawable/bg_white_radius">
 
         <RelativeLayout

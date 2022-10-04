@@ -9,6 +9,7 @@ import android.support.core.livedata.map
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst.AppointmentStatus.APM_FINISH
@@ -48,15 +49,11 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
 
     private fun setUpListener() {
         with(viewModel) {
-            filterCustomerForm.apply {
-                type = ReportFragmentViewModel.TYPE_WALK_IN_CUSTOMER
-                status = APM_FINISH
-            }
             refreshLoading.bind {
                 binding.viewRefresh.isRefreshing = it
             }
             listAppointment.bind(mAdapter::submit)
-            total.bind{
+            total.bind {
                 binding.tvTotal.text = it.formatPrice()
             }
             staffList.bind {
@@ -128,6 +125,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                             viewModel.loadStaff("", 1)
                         }
                     ) { form ->
+                        Log.d("TAG", "NamTD8: status ${form.status}")
                         viewModel.filterCustomerForm.setDataFromDialog(form)
                         searchView.showHideImgFilter(viewModel.filterCustomerForm)
                         refreshView()
@@ -149,7 +147,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
         refreshView()
     }
 
-    companion object{
+    companion object {
         const val totalDefault = "$---.--"
     }
 }
@@ -160,14 +158,17 @@ class ReportFragmentViewModel(
     private val staffRepo: FetchAllStaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
-    val filterCustomerForm = AppointmentFilterForm()
+    val filterCustomerForm = AppointmentFilterForm(
+        type = ReportFragmentViewModel.TYPE_WALK_IN_CUSTOMER,
+        status = APM_FINISH
+    )
 
     val listAppointment = appointmentRepository.results
     val staffList = staffRepo.results
     val customerList = customerRepo.resultWithPage
 
     val total = listAppointment.map {
-        it?.fold(0.0){total, item ->
+        it?.fold(0.0) { total, item ->
             total + item.price
         }
     }
@@ -178,6 +179,11 @@ class ReportFragmentViewModel(
     }
 
     private fun getListAppointment() = launch(refreshLoading, error) {
+//        filterCustomerForm.apply {
+//            type = ReportFragmentViewModel.TYPE_WALK_IN_CUSTOMER
+//            status = APM_FINISH
+//        }
+        Log.d("TAG", "NamTD8 getListAppointment: ${filterCustomerForm.status} ")
         appointmentRepository(filterCustomerForm)
     }
 

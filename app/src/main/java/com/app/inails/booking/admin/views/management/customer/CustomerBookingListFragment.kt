@@ -36,8 +36,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CustomerListBookingArg(
-    val customerID: Int = 0
+    val id: Int = 0,
+    val idType: TypeID = TypeID.Customer
 ) : BundleArgument
+
+enum class TypeID{
+    Customer, Staff
+}
 
 class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_list),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner, FilterApmOwner,
@@ -50,6 +55,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.setUpDataUI(args)
         setUpView()
         setUpListener()
     }
@@ -58,10 +64,13 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
         with(viewModel) {
             filterCustomerForm.apply {
                 type = null
-                searchCustomer = args.customerID
+                searchCustomer = if(args.idType == TypeID.Customer) args.id else null
+                searchStaff = if(args.idType == TypeID.Staff) args.id else null
             }
             listAppointment.bind {
                 mAdapter.submit(it)
+                binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isEmpty())
+                    customerListBookingUI.emptyData else "There are no results matching your search keyword."
                 it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
                 !it.isNullOrEmpty() show binding.rvServices
             }
@@ -137,15 +146,14 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
     private fun setUpView() {
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_booking_list,
+                viewModel.customerListBookingUI.titleTopBar,
                 onBackClick = {
                     activity?.onBackPressed()
                 },
             )
         )
         with(binding) {
-            binding.emptyLayout.tvEmptyData.text =
-                "This customer doesn't booking any appointments yet"
+            searchView.setHint( R.string.hint_search_order_history)
             mAdapter = AppointmentAdapter(rvServices).apply {
                 onClickItemListener = {
                     Router.redirectToAppointmentDetail(self, it.id)
@@ -248,7 +256,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
                 onLayoutFilterClick = {
                     filterApmDialog.show(
                         viewModel.filterCustomerForm,
-                        type = FilterType.FILTER_BY_CUSTOMER,
+                        type = if(args.idType == TypeID.Customer) FilterType.FILTER_BY_CUSTOMER else FilterType.FILTER_BY_STAFF,
                         openSearchCustomer = {
                             viewModel.loadCustomer("", 1)
                         },
@@ -290,12 +298,16 @@ class CustomerBookingListViewModel(
     private val customerRepo: FetchListCustomerRepo,
     private val staffRepo: FetchAllStaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-
+    val customerListBookingUI = CustomerBookingListUI()
     val idRemove = appointmentRepo.resultRemove
     val resultCheckIn = appointmentRepo.resultCheckIn
     val listAppointment = appointmentRepo.results.map { list ->
         list?.filter {
-            it.id.toString().lowerCaseContain(filterCustomerForm.keyword) || it.staffName.lowerCaseContain(filterCustomerForm.keyword)
+            if(customerListBookingUI.idType == TypeID.Customer){
+                it.id.toString().lowerCaseContain(filterCustomerForm.keyword) || it.staffName.lowerCaseContain(filterCustomerForm.keyword)
+            }else{
+                it.id.toString().lowerCaseContain(filterCustomerForm.keyword) || it.customerName.lowerCaseContain(filterCustomerForm.keyword)
+            }
         }
     }
     val appointment = appointmentRepo.result
@@ -308,6 +320,10 @@ class CustomerBookingListViewModel(
     val filterCustomerForm = AppointmentFilterForm()
     val staffList = staffRepo.results
     val customerList = customerRepo.resultWithPage
+
+    fun setUpDataUI(customerListBookingArg: CustomerListBookingArg){
+        customerListBookingUI.setUpData(customerListBookingArg)
+    }
 
     fun getAppointment() = launch(refreshLoading, error) {
         appointmentRepo(filterCustomerForm)
@@ -351,5 +367,30 @@ class CustomerBookingListViewModel(
 
     fun loadStaff(keyword: String, page: Int) = launch(if (page == 1) loading else null, error) {
         staffRepo(keyword, page)
+    }
+}
+
+data class CustomerBookingListUI(
+    var customerId: Int? = null,
+    var staffId: Int? = null,
+    var idType: TypeID = TypeID.Customer,
+    var searchHint: Int = 0,
+    var emptyData: String = "",
+    var titleTopBar: Int = 0,
+){
+
+    fun setUpData(customerListBookingArg: CustomerListBookingArg){
+        idType = customerListBookingArg.idType
+        if(customerListBookingArg.idType == TypeID.Customer){
+            customerId = customerListBookingArg.id
+            searchHint = R.string.hint_search_booking_list
+            emptyData = "This customer doesn't booking any appointments yet"
+            titleTopBar = R.string.title_booking_list
+        }else{
+            staffId = customerListBookingArg.id
+            searchHint = R.string.hint_search_order_history
+            emptyData = "This staff doesn't have any orders yet"
+            titleTopBar =  R.string.title_order_history
+        }
     }
 }

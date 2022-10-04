@@ -66,5 +66,6 @@
     <color name="color_title_booking_list">#B1B1B1</color>
     <color name="color_line">#EAEAEA</color>
     <color name="color_title">#BC40C1</color>
+    <color name="blue_40">#286DF0</color>
 
 </resources>

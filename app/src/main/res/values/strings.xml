@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Owner - 123 Best Solution</string>
+    <string name="app_name">Owner - 123 Best Solutions</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_confirm">Confirm</string>
@@ -143,4 +143,7 @@
     <string name="something_else_note">Something else (note)</string>
     <string name="label_select_staff">Select Staff</string>
     <string name="manage_salon">Manage Salon</string>
+    <string name="owner">Owner</string>
+    <string name="direct">Direct</string>
+    <string name="local_time">Local time</string>
 </resources>

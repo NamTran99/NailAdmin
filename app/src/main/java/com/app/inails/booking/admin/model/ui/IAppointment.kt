@@ -141,5 +141,6 @@ class AppointmentFilterForm(
         customer = form.customer
         searchStaff = form.staff?.id
         searchCustomer = form.customer?.id
+        status = form.status
     }
 }

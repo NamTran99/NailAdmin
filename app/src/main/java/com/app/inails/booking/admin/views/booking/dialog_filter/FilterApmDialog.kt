@@ -16,10 +16,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogFilterAppointmentBinding
-import com.app.inails.booking.admin.extention.formatPhoneUSCustom
-import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.extention.toDateAppointment
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.AppointmentFilterForm
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.model.ui.IStaff
@@ -97,6 +94,9 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
             displayStatusList(form.type)
             tvReset.onClick {
                 dismiss()
+                tvDateError.hide()
+                mFromDate = null
+                mToDate = null
                 tvDateFrom.text = ""
                 tvDateTo.text = ""
                 tvStaff.text = ""
@@ -112,7 +112,6 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
                     status = null
                 }
                 onSummitData.invoke(form)
-
             }
 
             btSubmit.onClick {
@@ -144,6 +143,7 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
     private fun setUpViewByType(type: FilterType) {
         with(binding){
             lvCustomer.show(type != FilterType.FILTER_BY_CUSTOMER)
+            lvStaff.show(type != FilterType.FILTER_BY_STAFF)
             lvStatus.show(type != FilterType.FILTER_IN_REPORT)
         }
     }
@@ -249,6 +249,7 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
 enum class FilterType {
     NORMAL,
     FILTER_BY_CUSTOMER,
+    FILTER_BY_STAFF,
     FILTER_IN_REPORT,
 }
 

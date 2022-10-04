@@ -24,6 +24,7 @@ import com.app.inails.booking.admin.model.popup.PopUpStaffMore
 import com.app.inails.booking.admin.model.ui.CreateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
+import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
 import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
 import com.app.inails.booking.admin.repository.auth.StaffRepo
@@ -159,7 +160,7 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                                 viewModel.changeActive(it.user!!.id)
                             }
                             3 -> {
-                                comingSoon()
+                                Router.run { redirectToStaffBookingList(it.user!!.id) }
                             }
                             4 -> {
                                 comingSoon()

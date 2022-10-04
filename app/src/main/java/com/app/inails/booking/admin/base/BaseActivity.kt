@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
+import com.app.inails.booking.admin.app.AppSettingsOwner
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
@@ -27,6 +28,7 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
     ErrorDialogOwner,
     AppPermissionOwner,
     ConfirmDialogOwner,
+    AppSettingsOwner,
     ErrorHandler by ErrorHandlerImpl() {
     val appEvent by inject<AppEvent>()
     private val loadingDialog by lazy { LoadingDialog(this, this) }

@@ -23,6 +23,7 @@
     <string name="hint_select_hour">Select hour</string>
     <string name="hint_from">From</string>
     <string name="hint_enter_name_or_phone">Enter Name or Phone</string>
-    <string name="hint_search_by_booking_id_customer_name_staff_name"><font size = "10">Search by Booking ID, Customer Name, Staff Name</font></string>
+    <string name="hint_search_by_booking_id_customer_name_staff_name"><font size = "9">Search by Booking ID, Customer Name, Staff Name</font></string>
     <string name="hint_search_booking_list"><font size = "12">Search by Booking ID, Staff Name</font></string>
+    <string name="hint_search_order_history"><font size = "12">Search by Booking ID, Customer Name</font></string>
 </resources>
