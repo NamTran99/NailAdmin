@@ -96,7 +96,6 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val dateAppointment: String
                 get() = textFormatter.getDateTimeWithEndAppointment(
                     appointmentDTO.date_appointment!!,
-                    appointmentDTO.date_appointment_format,
                     appointmentDTO.work_time
                 )
             override val servicesName: String

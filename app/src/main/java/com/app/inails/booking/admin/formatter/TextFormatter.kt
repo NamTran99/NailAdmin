@@ -112,11 +112,9 @@ class TextFormatter {
 
     fun getDateTimeWithEndAppointment(
         dateTime: String,
-        dateTimeFormat: String,
         workTime: Int?
     ): String {
-        if (dateTimeFormat.isEmpty()) return dateTimeFormat
-        if (workTime == null || workTime == 0) return dateTimeFormat
+        if (workTime == null || workTime == 0) return dateTime.formatDateAppointment()
         val date = dateTime.toDate()
         val timePlus = date.time + (workTime * 60 * 1000)
         date.time = timePlus

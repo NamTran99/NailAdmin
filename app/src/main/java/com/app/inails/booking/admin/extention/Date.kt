@@ -19,7 +19,7 @@ fun Long.toDate(
 
 fun Long.toCreatedAt(
 ): String {
-    val parser = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+    val parser = SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault())
     return parser.format(this.toDate())
 }
 
