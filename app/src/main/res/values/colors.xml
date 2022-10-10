@@ -68,4 +68,8 @@
     <color name="color_title">#BC40C1</color>
     <color name="blue_40">#286DF0</color>
 
+    <color name="white_700">#B3FFFFFF</color>
+
+    <!--RED-->
+    <color name="red_240">#F24747</color>
 </resources>

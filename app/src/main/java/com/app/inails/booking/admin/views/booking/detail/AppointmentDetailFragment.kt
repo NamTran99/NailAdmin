@@ -174,7 +174,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             tvCreatedAt.text = item.createAt
             tvAppointmentNote.text = item.notes
 
-            (item.notes.isNotEmpty()) show lvAppointmentNote
+            (item.notes.trim().isNotEmpty()) show lvAppointmentNote
             item.staff?.let {
                 tvStaffName.setTextColor(
                     ContextCompat.getColor(

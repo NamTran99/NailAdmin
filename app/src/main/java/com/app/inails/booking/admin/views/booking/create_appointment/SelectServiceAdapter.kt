@@ -41,9 +41,6 @@ class SelectServiceAdapter(view: RecyclerView) :
             root.onClick {
                 item.isSelector = !item.isSelector
                 notifyItemChanged(adapterPosition)
-                if (item.id == 0) {
-                    Log.d("TAG", "NamTD8 onBindHolder: ${item.name}")
-                }
             }
         }
     }

@@ -1,16 +1,13 @@
 package com.app.inails.booking.admin.factory
+
 import android.support.di.Inject
 import android.support.di.ShareScope
-import com.app.inails.booking.admin.extention.displaySafe
-import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.extention.safe
+import com.app.inails.booking.admin.extention.toTimeCheckIn
+import com.app.inails.booking.admin.extention.toTimeEditSchedule
 import com.app.inails.booking.admin.formatter.TextFormatter
-import com.app.inails.booking.admin.model.entity.AccountEntity
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
-import com.app.inails.booking.admin.model.response.ServiceDTO
-import com.app.inails.booking.admin.model.response.UserDTO
-import com.app.inails.booking.admin.model.support.ISelector
 import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
@@ -32,11 +29,16 @@ class SalonFactory(private val textFormatter: TextFormatter) {
         }
     }
 
-    fun createSchedule(schedules: List<Schedule>?): List<Pair<String, String>>? {
+    fun createSchedule(schedules: List<Schedule>?): List<ISchedule>? {
         return schedules?.map {
-            Pair(
-                it.dayName,
-                textFormatter.formatSalonSchedule(it)
+            ISchedule(
+                day = it.day,
+                timeFormat = textFormatter.formatSalonSchedule(it),
+                startTimeFormat = it.startTimeFormat,
+                endTimeFormat = it.endTimeFormat,
+                startTime = it.startTime.toTimeEditSchedule(),
+                endTime = it.endTime.toTimeEditSchedule(),
+                dayFormat = it.dayName
             )
         }
     }
@@ -51,9 +53,9 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = salonDTO.lat
             override val lng: Float
                 get() = salonDTO.lng
-            override val images: List<String>?
-                get() = salonDTO.images?.map { it.image }
-            override val schedules: List<Pair<String, String>>?
+            override val images: List<SalonImage>
+                get() = salonDTO.images?.map { SalonImage(it.id.toInt(), it.image) } ?: listOf()
+            override val schedules: List<ISchedule>?
                 get() = createSchedule(salonDTO.schedules)
         }
     }

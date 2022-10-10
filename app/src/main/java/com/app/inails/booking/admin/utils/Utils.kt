@@ -3,6 +3,8 @@ package com.app.inails.booking.admin.utils
 import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
+import android.util.Log
+import android.webkit.MimeTypeMap
 
 object Utils {
 
@@ -28,5 +30,13 @@ object Utils {
             }
         }
         return isInBackground
+    }
+
+    fun getMimeType(url: String?): String? {
+        var type: String? = null
+        val extension: String = MimeTypeMap.getFileExtensionFromUrl(url)
+        type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+        Log.d("TAG", "getMimeType: NamTD8 $type")
+        return type
     }
 }

@@ -5,15 +5,13 @@ import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.app.AppConst
 import com.app.inails.booking.admin.helper.network.ApiAsync
+import com.app.inails.booking.admin.model.response.CheckInOutByDateDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
 import com.app.inails.booking.admin.model.ui.CreateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
 import retrofit2.Retrofit
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * http://api.booking.kendemo.com:3005/api/v1/
@@ -61,6 +59,9 @@ interface StaffApi : Injectable {
     @FormUrlEncoded
     @POST("staff/change-active")
     fun changeActive(@Field("id") id: Int): ApiAsync<StaffDTO>
+
+    @GET("staff/history-check-in-out")
+    fun getHistoryCheckInOut(@Query("id") staffID: Int): ApiAsync<List<CheckInOutByDateDTO>>
 }
 
 class StaffApiImpl(private val retrofit: Retrofit) :

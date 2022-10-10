@@ -46,7 +46,7 @@ class UserLocalSource(
         appCache.password = ""
     }
 
-    fun getUserDto(): UserDTO = user?: UserDTO()
+    fun getUserDto(): UserDTO? = user
 
     fun getUserLive(): MutableLiveData<UserDTO> {
         return userLive

@@ -16,7 +16,10 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityLoginBinding
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.LoginForm
+import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LoginRepo
 import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.launch
@@ -28,6 +31,9 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         super.onCreate(savedInstanceState)
         with(binding) {
             etPhone.inputTypePhoneUS()
+            tvResetPassword.onClick{
+                Router.open(this@LoginActivity, Routing.ResetPassword)
+            }
         }
 
         binding.btLogin.setOnClickListener {

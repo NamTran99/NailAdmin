@@ -26,7 +26,6 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
     LifecycleSubscriberExt,
     ViewModelRegistrable, RouteDispatcher,
     ErrorDialogOwner,
-    AppPermissionOwner,
     ConfirmDialogOwner,
     AppSettingsOwner,
     ErrorHandler by ErrorHandlerImpl() {

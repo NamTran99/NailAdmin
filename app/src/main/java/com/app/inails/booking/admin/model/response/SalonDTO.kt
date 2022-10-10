@@ -33,9 +33,14 @@ data class Schedule(
     @SerializedName("day_name")
     val dayName: String = "",
     @SerializedName("start_time_format")
-    val startTime: String? = "",
+    val startTimeFormat: String? = "",
     @SerializedName("end_time_format")
-    val endTime: String?= ""
+    val endTimeFormat: String?= "",
+    @SerializedName("start_time")
+    val startTime: String?= "",
+    @SerializedName("end_time")
+    val endTime: String?= "",
+    val day: Int = 0
 )
 
 data class Partner(

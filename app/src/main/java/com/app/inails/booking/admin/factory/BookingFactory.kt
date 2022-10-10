@@ -14,7 +14,6 @@ import com.app.inails.booking.admin.model.ui.*
 @Inject(ShareScope.Singleton)
 class BookingFactory(private val textFormatter: TextFormatter) {
 
-
     private fun createService(serviceDTO: ServiceDTO): IService {
         return object : IService, ISelector by ServiceImpl() {
             override val id: Int

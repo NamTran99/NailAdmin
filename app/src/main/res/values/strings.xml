@@ -146,4 +146,22 @@
     <string name="owner">Owner</string>
     <string name="direct">Direct</string>
     <string name="local_time">Local time</string>
+    <string name="salon_name">Salon name</string>
+    <string name="enter_salon_name">Enter salon name</string>
+    <string name="enter_salon_phone_number">Enter salon phone number</string>
+    <string name="address">Address</string>
+    <string name="enter_salon_address">Enter salon address</string>
+    <string name="images">Images</string>
+    <string name="business_hour">Business hour</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="reset_here"><u>Reset here</u></string>
+    <string name="enter_your_registered_phone_number_to_reset_password">Enter your registered phone number to reset password:</string>
+    <string name="auth_otp_verify">You need to verify this phone number is yours. We have sent you an OTP via SMS.\n\nPlease enter verification to receive a new password.</string>
+    <string name="auth_otp_loading">Verifying your OTP code…</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="auth_pw_have_reset">Your password have been reset !</string>
+    <string name="auth_new_pw">Your new password is</string>
+    <string name="btn_to_login">To Login</string>
+    <string name="description">Description</string>
+    <string name="time_zone">Time Zone</string>
 </resources>

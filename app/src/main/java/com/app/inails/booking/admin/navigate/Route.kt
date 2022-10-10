@@ -13,10 +13,12 @@ import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragme
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
-import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
-import com.app.inails.booking.admin.views.me.ChangePasswordFragment
-import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
+import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
+import com.app.inails.booking.admin.views.me.reset.ResetPasswordFragment
 import com.app.inails.booking.admin.views.me.DetailSalonFragment
+import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
+import com.app.inails.booking.admin.views.me.reset.OTPVerifyFragment
+import com.app.inails.booking.admin.views.me.reset.ResetPasswordSuccessFragment
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import kotlinx.parcelize.Parcelize
@@ -30,7 +32,7 @@ interface Routing : BundleArgument {
     @Parcelize
     object ManageStaff : Routing {
         override val fragmentClass: KClass<out Fragment>
-            get() = ManageStaffFragment::class
+            get() = CheckInOutFragment::class
     }
 
     @Parcelize
@@ -42,7 +44,7 @@ interface Routing : BundleArgument {
     @Parcelize
     object ChangePassword : Routing {
         override val fragmentClass: KClass<out Fragment>
-            get() = ChangePasswordFragment::class
+            get() = ResetPasswordFragment::class
     }
 
     @Parcelize
@@ -58,7 +60,7 @@ interface Routing : BundleArgument {
     }
 
     @Parcelize
-    object ManageSalon : Routing {
+    object DetailSalon : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = DetailSalonFragment::class
     }
@@ -92,9 +94,27 @@ interface Routing : BundleArgument {
         override val fragmentClass: KClass<out Fragment>
             get() = NotificationFragment::class
     }
+
+    @Parcelize
+    object ResetPassword : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = ResetPasswordFragment::class
+    }
+
+    @Parcelize
+    class OTPVerify(val phoneNumber: String) : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = OTPVerifyFragment::class
+    }
+
+    @Parcelize
+    class ResetPasswordSuccess(val newPassword: String) : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = ResetPasswordSuccessFragment::class
+    }
 }
 
-interface Router : SplashRoute, SettingRoute, BookingRoute, ManageStaffRoute, ManageCustomerRoute {
+interface Router : SplashRoute, SettingRoute, BookingRoute, ManageStaffRoute, ManageCustomerRoute, ManageSalonRoute {
     fun open(dispatcher: RouteDispatcher, route: Routing)
     fun navigate(dispatcher: RouteDispatcher, route: Routing)
 
@@ -106,7 +126,8 @@ class ProdRoute : Router,
     SettingRoute by SettingRouteImpl(),
     BookingRoute by BookingRouteImpl(),
     ManageCustomerRoute by ManageCustomerRouteImpl(),
-    ManageStaffRoute by ManageStaffRouteImpl() {
+    ManageStaffRoute by ManageStaffRouteImpl(),
+    ManageSalonRoute by ManageSalonRouteImpl(){
     override fun open(dispatcher: RouteDispatcher, route: Routing) {
         dispatcher.open<MainNavigationActivity>(route)
     }

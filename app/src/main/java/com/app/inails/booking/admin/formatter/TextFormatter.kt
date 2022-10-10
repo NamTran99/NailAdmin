@@ -99,8 +99,8 @@ class TextFormatter {
     }
 
     fun formatSalonSchedule(it: Schedule): String {
-        return if (it.startTime.isNullOrEmpty() || it.startTime.isNullOrEmpty()) "OFF"
-        else "${it.startTime} - ${it.endTime}"
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) "OFF"
+        else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 
     fun formatStatusAppointmentCancel(cancelledBy: String?): String {

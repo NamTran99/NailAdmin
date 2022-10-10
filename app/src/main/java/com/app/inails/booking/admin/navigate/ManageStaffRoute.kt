@@ -4,7 +4,7 @@ import android.support.navigation.findNavigator
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.views.main.StaffListFragment
-import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
+import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
 
 interface ManageStaffRoute {
     fun BaseFragment.redirectToList()
@@ -14,7 +14,7 @@ interface ManageStaffRoute {
 class ManageStaffRouteImpl : ManageStaffRoute {
 
     override fun BaseFragment.redirectToList() {
-        findNavigator().navigate(ManageStaffFragment::class)
+        findNavigator().navigate(CheckInOutFragment::class)
     }
 
     override fun BaseActivity.redirectToStaffList() {

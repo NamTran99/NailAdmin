@@ -1,4 +1,4 @@
-package com.app.inails.booking.admin.views.management.staff
+package com.app.inails.booking.admin.views.management.staff.adapters
 
 import android.support.core.view.bindingOf
 import android.view.View

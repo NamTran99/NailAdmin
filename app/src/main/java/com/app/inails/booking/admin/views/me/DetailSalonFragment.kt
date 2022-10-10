@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.me
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -15,22 +16,23 @@ import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentProfileBinding
-import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.MeApi
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.factory.SalonFactory
-import com.app.inails.booking.admin.model.ui.ISalon
 import com.app.inails.booking.admin.model.ui.ISalonDetail
-import com.app.inails.booking.admin.model.ui.IUser
+import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.views.me.adapters.HomeBannerPager
 import com.app.inails.booking.admin.views.me.adapters.SalonScheduleAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
+
 class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner {
     val viewModel by viewModel<DetailSalonViewModel>()
     val binding by viewBinding(FragmentProfileBinding::bind)
     private lateinit var adapter: HomeBannerPager
+
+    var path = ArrayList<Uri>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,10 +45,10 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
             )
         )
 
-        with(binding){
+        with(binding) {
             tabDots.setupWithViewPager(vpImage)
-            btnEdit.onClick{
-                comingSoon()
+            btnEdit.onClick {
+                Router.run { redirectToUpdateSalon() }
             }
             adapter = HomeBannerPager(binding.vpImage)
         }
@@ -61,19 +63,18 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
     private fun displays(item: ISalonDetail) = with(binding) {
         txtSalonName.text = item.salonName
         viewHeader.apply {
-
             txtAddress.text = item.address
             txtPhone.text = item.phoneNumber
 //           txtTime.text=it.phoneNumber
             txtOwner.text = item.ownerName
             txtDescription.text = item.des
             SalonScheduleAdapter(rcvSchedule).submit(item.schedules)
-            adapter.items = item.images
+            adapter.items = item.images?.map { it.path }
             btnDirection.onClick { appSettings.navigateMyLocationWithGoogleMap(item.lat, item.lng) }
         }
     }
 
-    private fun refreshView(){
+    private fun refreshView() {
         viewModel.getDetailSalon()
     }
 
@@ -81,7 +82,6 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         super.onResume()
         refreshView()
     }
-
 }
 
 class DetailSalonViewModel(
@@ -90,7 +90,7 @@ class DetailSalonViewModel(
 
     val salonDetail = profileRepository.result
 
-    fun getDetailSalon() = launch(loading,error){
+    fun getDetailSalon() = launch(loading, error) {
         profileRepository()
     }
 }
@@ -100,8 +100,8 @@ class ProfileRepository(
     private val meApi: MeApi,
     private val profileFactory: SalonFactory
 ) {
-    val result  = MutableLiveData<ISalonDetail>()
-    suspend operator fun invoke(){
-         result.post(profileFactory.createDetail(meApi.getSalonDetail().await()))
+    val result = MutableLiveData<ISalonDetail>()
+    suspend operator fun invoke() {
+        result.post(profileFactory.createDetail(meApi.getSalonDetail().await()))
     }
 }

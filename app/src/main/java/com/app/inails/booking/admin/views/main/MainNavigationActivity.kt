@@ -14,10 +14,14 @@ import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragme
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
+import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
-import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
+import com.app.inails.booking.admin.views.me.reset.ResetPasswordFragment
 import com.app.inails.booking.admin.views.me.DetailSalonFragment
+import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
+import com.app.inails.booking.admin.views.me.reset.OTPVerifyFragment
+import com.app.inails.booking.admin.views.me.reset.ResetPasswordSuccessFragment
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
@@ -46,7 +50,10 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ChooseStaff -> ChooseStaffFragment::class
                 is Routing.ReportSale -> ReportFragment::class
                 is Routing.Notification -> NotificationFragment::class
-                is Routing.ManageSalon -> DetailSalonFragment::class
+                is Routing.DetailSalon -> DetailSalonFragment::class
+                is Routing.ResetPassword -> ResetPasswordFragment::class
+                is Routing.OTPVerify -> OTPVerifyFragment::class
+                is Routing.ResetPasswordSuccess -> ResetPasswordSuccessFragment::class
                 else -> error("Not support")
             }
             navigator.navigate(clazz, args = args.toBundle())

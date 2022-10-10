@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/size_10">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size_17"
+            android:paddingVertical="@dimen/size_15">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                android:text="@string/salon_name" />
+
+            <EditText
+                android:id="@+id/etSalonName"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:autofillHints="name"
+                android:hint="@string/enter_salon_name" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15"
+                android:text="@string/phone_number" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:autofillHints="phone"
+                android:hint="@string/enter_salon_phone_number"
+                android:inputType="phone" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15"
+                android:text="@string/address" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:autofillHints="emailAddress"
+                android:hint="@string/enter_salon_address"
+                android:inputType="phone" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15"
+                android:text="@string/images" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:listitem="@layout/item_picture_holder" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/business_hour" />
+
+                <TextView
+                    android:id="@+id/tvEditSchedule"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/edit"
+                    android:textColor="@color/colorPrimary"
+                    app:drawableStartCompat="@drawable/ic_edit_2" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="7"
+                tools:listitem="@layout/item_view_salon_schedule" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etDescription"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_12"
+                android:gravity="top"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:maxLength="200"
+                android:maxLines="10"
+                android:minLines="10"
+                android:scrollbars="vertical" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSave"
+                style="@style/AppTheme.ButtonDefault"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="@dimen/size_14"
+                android:background="@drawable/button_blue_corner"
+                android:text="@string/btn_save" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

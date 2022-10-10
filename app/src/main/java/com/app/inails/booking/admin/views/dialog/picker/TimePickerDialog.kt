@@ -15,7 +15,7 @@ import java.util.*
 
 class TimePickerDialog(private val activity: BaseActivity) :
     TimePickerDialog(activity, null, 0, 0, true) {
-    private var mOnTimePickedListener: ((hours: String, hoursDisplay: String, minute: String, type: String) -> Unit)? =
+    var onTimePickedListener: ((display: String) -> Unit)? =
         null
 
     init {
@@ -79,6 +79,7 @@ class TimePickerDialog(private val activity: BaseActivity) :
                 display(
                     time
                 )
+                onTimePickedListener?.invoke(time)
             },
             calendar.get(Calendar.HOUR_OF_DAY),
             calendar.get(Calendar.MINUTE),

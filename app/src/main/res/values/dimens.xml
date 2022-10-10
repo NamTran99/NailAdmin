@@ -81,4 +81,5 @@
     <dimen name="size_65">65dp</dimen>
     <dimen name="size_55">55dp</dimen>
     <dimen name="size_58">58dp</dimen>
+    <dimen name="text_size_8">8sp</dimen>
 </resources>

@@ -28,6 +28,7 @@ import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
 import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
 import com.app.inails.booking.admin.repository.auth.StaffRepo
+import com.app.inails.booking.admin.views.management.staff.adapters.ManageStaffAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -163,7 +164,7 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                                 Router.run { redirectToStaffBookingList(it.user!!.id) }
                             }
                             4 -> {
-                                comingSoon()
+                                Router.run { redirectToStaffCheckInHistory(it.user!!.id) }
                             }
                             5 -> {
                                 showConfirmDialog(
@@ -207,7 +208,6 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
         }
     }
 }
-
 
 class ManageStaffViewModel(
     private val fetchAllStaffRepo: FetchAllStaffRepo,

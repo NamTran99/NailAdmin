@@ -62,7 +62,6 @@ private class LoopHandler(val function: () -> Unit) : Handler() {
 
     private var mRunnable = object : Runnable {
         override fun run() {
-            Log.d("TAG", "NamTD8: next ++")
             function()
             postDelayed(this, LOOP_TIME_OUT)
         }
