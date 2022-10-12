@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.core.view.viewBinding
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ViewBusinessHourBinding
@@ -36,7 +37,7 @@ interface BusinessHourViewInf {
     fun setDate(index: Int)
     fun setStartTime(text: String?)
     fun setEndTime(text: String?)
-    fun setOnTimeChange(callBack: (ISchedule) ->Unit)
+    fun setOnTimeChange(callBack: (ISchedule) -> Unit)
 }
 
 class BusinessHourView(context: Context, attributeSet: AttributeSet) :
@@ -49,6 +50,8 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
     private var date: Day = Day.Monday
     private var onTimeChange: ((ISchedule) -> Unit)? = null
     private val data = ISchedule()
+    private var mStartHours = 0
+    private var mEndHours = 0
 
     init {
         context.loadAttrs(attributeSet, R.styleable.BusinessHourView) {
@@ -63,15 +66,36 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         with(binding) {
             mToTimePickerDialog.apply {
                 setupClickWithView(tvTotime)
-                onTimePickedListener = {
-                    data.endTime = it
-                    onTimeChange?.invoke(data)
+                onTimePickedListener = { time, hours ->
+                    if (hours < mStartHours) {
+                        Toast.makeText(
+                            context,
+                            R.string.message_end_time_greather_than_start_time,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        setEndTime(null)
+                    } else {
+                        mEndHours = hours
+                        data.endTime = time
+                    }
                 }
+                onTimeChange?.invoke(data)
             }
             mFromTimePickerDialog.apply {
                 setupClickWithView(tvFromTime)
-                onTimePickedListener = {
-                    data.startTime = it
+                onTimePickedListener = { time, hours ->
+                    if (mEndHours in 1 until hours) {
+                        Toast.makeText(
+                            context,
+                            R.string.message_end_time_greather_than_start_time,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        setEndTime(null)
+                    } else {
+                        mStartHours = hours
+                        data.startTime = time
+                    }
+
                     onTimeChange?.invoke(data)
                 }
             }
@@ -103,20 +127,22 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
     }
 
     override fun setStartTime(text: String?) {
-        data.startTime =  text?: DEFAULT_TIME
-        binding.tvFromTime.text =  text?: DEFAULT_TIME
+        mStartHours = text?.substring(0,2)?.toIntOrNull()?:0
+        data.startTime = text
+        binding.tvFromTime.text = text ?: DEFAULT_TIME
     }
 
     override fun setEndTime(text: String?) {
-        data.endTime =  text?: DEFAULT_TIME
-        binding.tvTotime.text = text?: DEFAULT_TIME
+        mEndHours = text?.substring(0,2)?.toIntOrNull()?:0
+        data.endTime = text
+        binding.tvTotime.text = text ?: DEFAULT_TIME
     }
 
     override fun setOnTimeChange(callBack: (ISchedule) -> Unit) {
         onTimeChange = callBack
     }
 
-    companion object{
+    companion object {
         const val DEFAULT_TIME = "Select Time"
     }
 }

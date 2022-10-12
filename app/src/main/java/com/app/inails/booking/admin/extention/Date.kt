@@ -1,7 +1,6 @@
 package com.app.inails.booking.admin.extention
 
 import android.text.format.DateUtils
-import com.app.inails.booking.admin.model.ui.ScheduleForm
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -113,7 +112,6 @@ fun String?.toTimeDisplay(
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat("hh:mma", Locale.getDefault())
-    simpleDateFormat
     return simpleDateFormat.format(date)
 }
 
@@ -122,12 +120,10 @@ fun String?.convertTime(
     toFormat: String = "HH:mm:ss",
 ): String? {
     if (this.isNullOrEmpty()) return null
-    val dateFormat = SimpleDateFormat(fromFormat, Locale.getDefault())
-    val date =
-        dateFormat.parse(this)
-    val simpleDateFormat = SimpleDateFormat(toFormat, Locale.getDefault())
-    simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
-    return simpleDateFormat.format(date)
+    val simpleTimeFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val currentTime = simpleTimeFormat.format(Date())
+    val dateWithTime = "$currentTime $this"
+    return dateWithTime.toServerUTC(outFormat = toFormat, format = "yyyy-MM-dd HH:mm")
 }
 
 fun String.toCreatedAt(
@@ -165,7 +161,7 @@ fun String.toServerUTC2(
     format: String = "yyyy/MM/dd"
 ): String {
     val simpleTimeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-    val currentTime = simpleTimeFormat.format(Date());
+    val currentTime = simpleTimeFormat.format(Date())
     val dateWithTime = "$this $currentTime"
     return dateWithTime.toServerUTC(outFormat = format, format = "yyyy-MM-dd HH:mm")
 }

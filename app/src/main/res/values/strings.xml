@@ -164,4 +164,5 @@
     <string name="btn_to_login">To Login</string>
     <string name="description">Description (Enter your salon information)</string>
     <string name="time_zone">Time Zone</string>
+    <string name="message_end_time_greather_than_start_time">The end time must be greater than the start time</string>
 </resources>
