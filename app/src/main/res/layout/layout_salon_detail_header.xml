@@ -41,6 +41,7 @@
         android:layout_below="@+id/txtAddress"
         android:layout_marginTop="@dimen/size_10"
         android:autoLink="phone"
+        android:textColor="@color/lightBlue02"
         android:background="?selectableItemBackground"
         android:drawableStart="@drawable/ic_phone_outline"
         android:drawablePadding="@dimen/size_15"

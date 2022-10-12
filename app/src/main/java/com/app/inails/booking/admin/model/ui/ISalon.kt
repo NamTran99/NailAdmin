@@ -26,6 +26,11 @@ interface ISalonDetail : ISalon {
     val des: String? get() = ""
     val images: List<SalonImage> get() = listOf()
     val lat: Float get() = 0f
+    val email: String get() = ""
+    val state: String get() = ""
+    val city: String get() = ""
+    val country: String get() = ""
+    val zipCode: String get() = ""
     val lng: Float get() = 0f
     val schedules: List<ISchedule>? get() = listOf()
     val tzDisplay: String get() = ""
@@ -42,10 +47,16 @@ class ISchedule(
 ): Serializable
 
 class SalonForm(
+    var timeZone : String = "",
+    var email: String = "",
     var id: Int = 0,
     var name: String = "",
     var phone: String = "",
     var address: String = "",
+    var state: String = "",
+    var city: String = "",
+    var zipCode: String = "",
+    var country: String = "",
     var description: String = "",
     var zoneID: String = "",
     var offsetDisplay: String = "",
