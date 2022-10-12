@@ -206,9 +206,16 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
         }
         scheduleAdapter.submit(item.schedules)
         viewModel.listSchedules = item.schedules?: listOf()
+
+        // Save Old Data
         viewModel.salonForm.run {
             lat = item.lat.toDouble()
             long = item.lng.toDouble()
+            email = item.email
+            state = item.state
+            zipCode = item.zipCode
+            country = item.country
+            city = item.city
         }
     }
 
@@ -258,12 +265,12 @@ class UpdateSalonRepository(
                     .put("id", salonForm.id)
                     .put("name", salonForm.name)
                     .put("phone", textFormatter.formatPhoneNumber(salonForm.phone))
-                    .put("email", "anhtran.it.dev@gmail.com")
-                    .put("state", "NJ")
-                    .put("city", "Sayreville")
+                    .put("email", salonForm.email)
+                    .put("state", salonForm.state)
+                    .put("city", salonForm.city)
                     .put("address", salonForm.address)
-                    .put("zipcode", "80526")
-                    .put("country", "US")
+                    .put("zipcode", salonForm.zipCode)
+                    .put("country", salonForm.country)
                     .put("description", salonForm.description)
                     .put("schedules", salonForm.schedules)
                     .put("delete_images", salonForm.deleteImage)

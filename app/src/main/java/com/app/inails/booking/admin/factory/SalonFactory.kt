@@ -43,6 +43,16 @@ class SalonFactory(private val textFormatter: TextFormatter) {
 
     fun createDetail(salonDTO: SalonDTO): ISalonDetail {
         return object : ISalonDetail, ISalon by create(salonDTO) {
+            override val email: String
+                get() = salonDTO.email.safe()
+            override val state: String
+                get() = salonDTO.state.safe()
+            override val city: String
+                get() = salonDTO.city.safe()
+            override val zipCode: String
+                get() = salonDTO.zipcode.safe()
+            override val country: String
+                get() = salonDTO.country.safe()
             override val ownerName: String
                 get() = salonDTO.partner?.name.safe()
             override val des: String
