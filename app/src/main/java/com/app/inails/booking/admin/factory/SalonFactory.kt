@@ -43,6 +43,8 @@ class SalonFactory(private val textFormatter: TextFormatter) {
 
     fun createDetail(salonDTO: SalonDTO): ISalonDetail {
         return object : ISalonDetail, ISalon by create(salonDTO) {
+            override val salonID: Long
+                get() = salonDTO.id
             override val email: String
                 get() = salonDTO.email.safe()
             override val state: String

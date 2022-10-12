@@ -14,7 +14,6 @@ import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
-import android.webkit.MimeTypeMap
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -42,12 +41,6 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.libraries.places.api.model.Place
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
 
 
 class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBarOwner {
@@ -71,7 +64,6 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                 pathLocalImage.addAll(pathImage.map { pathUri -> SalonImage(path = pathUri.toString()) })
                 allImage.clear()
                 allImage.addAll(pathLocalImage)
-//                allImage.addAll(pathServerImage)
                 imageAdapter.changePath(allImage)
             }
         }
@@ -89,6 +81,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
         )
 
         with(binding) {
+            tvBusinessHour.text = viewModel.salonForm.timeZone
             etPhone.inputTypePhoneUS()
             scheduleAdapter = SalonScheduleAdapter(rcvSchedule)
             imageAdapter = UploadPhotoAdapter(rvImages).apply {
@@ -121,7 +114,6 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
 
             btSave.onClick {
                 viewModel.salonForm.run {
-                    id = 11
                     name = etSalonName.text.toString()
                     address = etAddress.text.toString()
                     phone = etPhone.text.toString()
@@ -205,10 +197,12 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
             imageAdapter.changePath(allImage)
         }
         scheduleAdapter.submit(item.schedules)
-        viewModel.listSchedules = item.schedules?: listOf()
+        viewModel.listSchedules = item.schedules ?: listOf()
 
         // Save Old Data
         viewModel.salonForm.run {
+            timeZone = item.tzDisplay
+            id = item.salonID.toInt()
             lat = item.lat.toDouble()
             long = item.lng.toDouble()
             email = item.email
@@ -284,6 +278,5 @@ class UpdateSalonRepository(
                 localSource.changeSalonName(name)
             })
         )
-
     }
 }

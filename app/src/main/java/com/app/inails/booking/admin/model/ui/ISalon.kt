@@ -47,6 +47,7 @@ class ISchedule(
 ): Serializable
 
 class SalonForm(
+    var timeZone : String = "",
     var email: String = "",
     var id: Int = 0,
     var name: String = "",

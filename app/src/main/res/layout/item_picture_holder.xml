@@ -11,10 +11,10 @@
         android:id="@+id/imgHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_baseline_add_24"
         android:background="@drawable/bg_white_radius"
-        android:clipToOutline="true"/>
+        android:clipToOutline="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_add_24" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/btClose"
