@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.base
 
 
+import android.content.Intent
 import android.support.core.event.WindowStatusOwner
 import android.support.core.extensions.LifecycleSubscriberExt
 import android.support.core.route.RouteDispatcher
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
 import com.app.inails.booking.admin.app.AppSettingsOwner
+import com.app.inails.booking.admin.app.ResultsLifecycleOwner
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
@@ -28,9 +30,15 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
     ErrorDialogOwner,
     ConfirmDialogOwner,
     AppSettingsOwner,
+    ResultsLifecycleOwner,
     ErrorHandler by ErrorHandlerImpl() {
     val appEvent by inject<AppEvent>()
     private val loadingDialog by lazy { LoadingDialog(this, this) }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        resultLifecycle.handleActivityResult(requestCode, resultCode, data)
+    }
 
     override fun onRegistryViewModel(viewModel: ViewModel) {
         if (viewModel is WindowStatusOwner) {

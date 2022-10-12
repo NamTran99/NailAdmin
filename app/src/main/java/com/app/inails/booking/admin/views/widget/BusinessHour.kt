@@ -54,14 +54,9 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         context.loadAttrs(attributeSet, R.styleable.BusinessHourView) {
             setDate(it.getInt(R.styleable.BusinessHourView_date, 0))
         }
-        setUpView()
         setupListener()
     }
 
-    private fun setUpView() {
-        with(binding) {
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     private fun setupListener() {
@@ -84,6 +79,9 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
             btnReset.onClick {
                 tvTotime.text = DEFAULT_TIME
                 tvFromTime.text = DEFAULT_TIME
+                data.endTime = null
+                data.startTime = null
+                onTimeChange?.invoke(data)
             }
         }
     }
@@ -99,6 +97,8 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
             Day.Friday -> "Friday"
             Day.Saturday -> "Saturday"
             Day.Sunday -> "Sunday"
+        }.apply {
+            data.dayFormat = this
         }
     }
 

@@ -58,7 +58,7 @@ interface BookingApi : Injectable {
     fun detail(@Query("id") id: Int): ApiAsync<AppointmentDTO>
 
     @FormUrlEncoded
-    @POST("appointment/remind-appointment")
+@POST("appointment/remind-appointment")
     fun remindAppointment(@Field("id") id: Int): ApiAsync<Any>
 
     @POST("appointment/admin-update-appointment")

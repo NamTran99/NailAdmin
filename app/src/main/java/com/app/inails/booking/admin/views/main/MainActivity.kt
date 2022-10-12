@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.views.main
 
 import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,7 @@ import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -20,7 +22,7 @@ import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.alpha
-import com.app.inails.booking.admin.extention.formatPhoneUS
+import com.app.inails.booking.admin.extention.formatPhoneUSCustom
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.NotificationIDForm
@@ -33,8 +35,11 @@ import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+//import com.github.arturogutierrez.Badges
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
+import okhttp3.internal.notify
+
 
 class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     NavigationView.OnNavigationItemSelectedListener, NotifyDialogOwner {
@@ -63,6 +68,8 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var mainTopBarState: MainTopBarState
+    private lateinit var btnClose: TextView
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,15 +89,18 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             headView.findViewById<MaterialButton>(R.id.btMenuClose)
                 .onClick { drawerLayout.closeDrawer(GravityCompat.START, true) }
             navView.setNavigationItemSelectedListener(this@MainActivity)
-
-            headView.findViewById<TextView>(R.id.btMenuClose).text =
-                "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUS()}"
+            btnClose = headView.findViewById(R.id.btMenuClose)
+            btnClose.text =
+                "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUSCustom()}"
         }
-        appEvent.notifyCloudMessage.bind {
+
+        appEvent.notifyCloudMessage.bind { noti ->
+            viewModel.numberNotificationSalonUnread()
+
             notifyDialog.onReadNotiListener = {
-                viewModel.read(it)
+                viewModel.read(noti.id)
             }
-            notifyDialog.show(it,
+            notifyDialog.show(noti,
                 onClickViewDetailAppointment = { appointmentID ->
                     Router.open(this, Routing.AppointmentDetail(appointmentID))
                 }
@@ -99,9 +109,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         Router.run { redirectToBooking() }
         viewModel.count.bind {
             mainTopBarState.setNotificationUnreadCount(it)
-        }
-        viewModel.result.bind {
-
         }
     }
 
@@ -154,9 +161,12 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         if (!findNavigator().navigateUp()) super.onBackPressed()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
         viewModel.numberNotificationSalonUnread()
+        btnClose.text =
+            "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUSCustom()}"
     }
 }
 

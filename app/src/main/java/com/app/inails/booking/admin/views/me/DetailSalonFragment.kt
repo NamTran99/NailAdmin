@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
+import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.di.Inject
@@ -11,11 +12,11 @@ import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentProfileBinding
+import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.MeApi
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.factory.SalonFactory
@@ -38,18 +39,18 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_salon,
+                R.string.mn_manage_salon, showEdit = true,
                 onBackClick = {
                     activity?.onBackPressed()
                 },
+                onEditClick = {
+                    Router.run { redirectToUpdateSalon() }
+                }
             )
         )
 
         with(binding) {
             tabDots.setupWithViewPager(vpImage)
-            btnEdit.onClick {
-                Router.run { redirectToUpdateSalon() }
-            }
             adapter = HomeBannerPager(binding.vpImage)
         }
 
@@ -65,7 +66,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         viewHeader.apply {
             txtAddress.text = item.address
             txtPhone.text = item.phoneNumber
-//           txtTime.text=it.phoneNumber
+            labelLocalTime.text = item.tzDisplay
             txtOwner.text = item.ownerName
             txtDescription.text = item.des
             SalonScheduleAdapter(rcvSchedule).submit(item.schedules)
@@ -98,10 +99,15 @@ class DetailSalonViewModel(
 @Inject(ShareScope.Fragment)
 class ProfileRepository(
     private val meApi: MeApi,
-    private val profileFactory: SalonFactory
+    private val profileFactory: SalonFactory,
+    private val localSource: UserLocalSource
 ) {
-    val result = MutableLiveData<ISalonDetail>()
+    val result = SingleLiveEvent<ISalonDetail>()
     suspend operator fun invoke() {
-        result.post(profileFactory.createDetail(meApi.getSalonDetail().await()))
+        result.post(
+            profileFactory.createDetail(
+                meApi.getSalonDetail(localSource.getSalonID() ?: 0).await()
+            )
+        )
     }
 }

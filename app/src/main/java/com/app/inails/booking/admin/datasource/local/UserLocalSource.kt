@@ -6,6 +6,8 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.persistent.cache.GsonCaching
 import androidx.lifecycle.MutableLiveData
+import com.app.inails.booking.admin.extention.displaySafe
+import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.helper.ShareIOScope
 import com.app.inails.booking.admin.model.response.UserDTO
 import kotlinx.coroutines.launch
@@ -47,6 +49,13 @@ class UserLocalSource(
     }
 
     fun getUserDto(): UserDTO? = user
+    fun getSlug(): String = user?.admin?.salon?.slug.displaySafe1()
+    fun changeUserSlug(slug:String?){
+        user?.admin?.salon?.slug = slug?:""
+    }
+    fun changeSalonName(salonName:String?){
+        user?.admin?.salon?.name = salonName
+    }
 
     fun getUserLive(): MutableLiveData<UserDTO> {
         return userLive
@@ -67,9 +76,4 @@ class UserLocalSource(
     fun clearUser(){
         user = null
     }
-
-    fun logout() {
-        user = null
-    }
-
 }

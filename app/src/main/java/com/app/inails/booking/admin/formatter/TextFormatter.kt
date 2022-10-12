@@ -25,6 +25,9 @@ class TextFormatter {
             .replace(" ", "").trim()
     }
 
+    fun formatDisplayTimeZone(salonDTO: SalonDTO): String {
+        return "Business hour (${salonDTO.timezone} ${salonDTO.tz})"
+    }
 
     fun formatPhoneUS(phone: String?): String {
         return if (phone.isNullOrEmpty()) ""
@@ -99,7 +102,7 @@ class TextFormatter {
     }
 
     fun formatSalonSchedule(it: Schedule): String {
-        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) "OFF"
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) "Not open"
         else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 

@@ -60,8 +60,8 @@ interface StaffApi : Injectable {
     @POST("staff/change-active")
     fun changeActive(@Field("id") id: Int): ApiAsync<StaffDTO>
 
-    @GET("staff/history-check-in-out")
-    fun getHistoryCheckInOut(@Query("id") staffID: Int): ApiAsync<List<CheckInOutByDateDTO>>
+    @GET("staff/history-in-out")
+    fun getHistoryCheckInOut(@Query("id") staffID: Int, @Query("timezone") timeZone: String): ApiAsync<List<CheckInOutByDateDTO>>
 }
 
 class StaffApiImpl(private val retrofit: Retrofit) :

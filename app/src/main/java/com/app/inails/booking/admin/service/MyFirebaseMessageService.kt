@@ -16,14 +16,11 @@ import org.json.JSONObject
 
 class MyFirebaseMessageService : FirebaseMessagingService() {
 
-    private val TAG: String = "MyFirebaseMessageService"
     val appEvent by inject<AppEvent>()
     private val appCache by inject<AppCache>()
 
-    @SuppressLint("LongLogTag")
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         try {
-            Log.d(TAG, "onMessageReceived: ")
             val params = remoteMessage.data
             val `object` = JSONObject(params as Map<*, *>)
             val objectFilter =
@@ -37,7 +34,6 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
         }
     }
 
-    @SuppressLint("LongLogTag")
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
         appCache.deviceToken = p0

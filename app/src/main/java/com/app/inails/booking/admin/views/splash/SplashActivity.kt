@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.splash
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -14,6 +15,7 @@ import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity(R.layout.activity_splash) {
     private val viewModel by viewModel<SplashViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,7 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
         CoroutineScope(Dispatchers.IO).launch {
             delay(TimeUnit.SECONDS.toMillis(3))
             withContext(Dispatchers.Main) {
+                Log.d("TAG", "onCreate: NamTD8 logout ${viewModel.user}")
                 if (viewModel.user != null) {
                     Router.run { redirectToMain() }
                 } else {

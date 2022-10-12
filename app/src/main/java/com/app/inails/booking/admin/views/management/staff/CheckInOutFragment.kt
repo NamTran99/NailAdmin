@@ -21,7 +21,9 @@ import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.CheckInOutFactory
 import com.app.inails.booking.admin.model.ui.ICheckInOutByDate
+import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
+import com.app.inails.booking.admin.utils.TimeUtils
 import com.app.inails.booking.admin.views.management.staff.adapters.ManageCheckInByDateAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -96,7 +98,7 @@ class FetchCheckInOutHistory(
         results.post(
             checkInOutFactory
                 .createListCheckInOutByDate(
-                    staffApi.getHistoryCheckInOut(staffID)
+                    staffApi.getHistoryCheckInOut(staffID, TimeUtils.getZoneID())
                         .await()
                 )
         )

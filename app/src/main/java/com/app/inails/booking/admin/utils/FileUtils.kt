@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.annotation.RequiresApi
 import java.io.File
@@ -25,10 +26,12 @@ object FileUtils {
      */
     fun getMimeType(url: String): String? {
         var type: String? = null
-        val extension = MimeTypeMap.getFileExtensionFromUrl(url)
-        if (extension != null) {
-            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase())
+        var extension = ""
+        val i: Int = url.lastIndexOf('.')
+        if (i > 0) {
+            extension = url.substring(i + 1)
         }
+        type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
         return type
     }
 

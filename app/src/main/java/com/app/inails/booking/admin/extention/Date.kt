@@ -82,16 +82,15 @@ fun String.toTimeAppointment(
     return simpleDateFormat.format(date)
 }
 
-
 fun String?.toTimeCheckIn(
-    format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    format: String = "yyyy-MM-dd'T'HH:mm:ssXXX"
 ): String {
     if (this.isNullOrEmpty()) return ""
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
-    val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
     return simpleDateFormat.format(date)
 }
 
@@ -113,7 +112,8 @@ fun String?.toTimeDisplay(
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())
     val date =
         dateFormat.parse(this)
-    val simpleDateFormat = SimpleDateFormat("HH:mma", Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat("hh:mma", Locale.getDefault())
+    simpleDateFormat
     return simpleDateFormat.format(date)
 }
 
@@ -126,6 +126,7 @@ fun String?.convertTime(
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat(toFormat, Locale.getDefault())
+    simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
     return simpleDateFormat.format(date)
 }
 
@@ -157,7 +158,6 @@ fun String.toDateCheckIn(
     val parseFormat = SimpleDateFormat(format, Locale.getDefault())
     val date = parseFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat(outFormat, Locale.getDefault())
-    simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
     return simpleDateFormat.format(date)
 }
 
@@ -169,5 +169,3 @@ fun String.toServerUTC2(
     val dateWithTime = "$this $currentTime"
     return dateWithTime.toServerUTC(outFormat = format, format = "yyyy-MM-dd HH:mm")
 }
-
-

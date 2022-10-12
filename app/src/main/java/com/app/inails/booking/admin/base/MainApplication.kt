@@ -1,16 +1,20 @@
-package com.app.inails.booking.admin
+package com.app.inails.booking.admin.base
 
 import android.app.Activity
 import android.app.Application
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.di.dependencies
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.app.appModule
+import com.google.android.libraries.places.api.Places
 
 class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Places.initialize(applicationContext, getString(R.string.google_maps_key))
+        Places.createClient(this)
         dependencies {
             modules(appModule)
         }

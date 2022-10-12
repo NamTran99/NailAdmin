@@ -13,7 +13,7 @@ class CheckInOutFactory(private val textFormatter: TextFormatter) {
     private fun createCheckInOutDetail(item: CheckInOutDetailDTO): ICheckInOutDetail {
         return object : ICheckInOutDetail {
             override val dateTimeFormat: String
-                get() = item.date_time.toTimeCheckIn("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                get() = item.date_time.toTimeCheckIn()
             override val typeInOut: String
                 get() = if(item.status == 1) "Check in" else "Check out"
         }

@@ -162,6 +162,6 @@
     <string name="auth_pw_have_reset">Your password have been reset !</string>
     <string name="auth_new_pw">Your new password is</string>
     <string name="btn_to_login">To Login</string>
-    <string name="description">Description</string>
+    <string name="description">Description (Enter your salon information)</string>
     <string name="time_zone">Time Zone</string>
 </resources>

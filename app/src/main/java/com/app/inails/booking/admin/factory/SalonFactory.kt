@@ -2,9 +2,7 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
-import com.app.inails.booking.admin.extention.safe
-import com.app.inails.booking.admin.extention.toTimeCheckIn
-import com.app.inails.booking.admin.extention.toTimeEditSchedule
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
@@ -21,9 +19,9 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = salonDTO.slug.safe()
             override val value: SalonDTO get() = salonDTO
             override val address: String
-                get() = textFormatter.formatFullAddress(salonDTO)
+                get() = salonDTO.address.displaySafe1()
             override val phoneNumber: String
-                get() = salonDTO.phone.safe()
+                get() = textFormatter.formatPhoneUS(salonDTO.phone)
             override val rating: Float
                 get() = salonDTO.rating.safe()
         }
@@ -57,6 +55,8 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = salonDTO.images?.map { SalonImage(it.id.toInt(), it.image) } ?: listOf()
             override val schedules: List<ISchedule>?
                 get() = createSchedule(salonDTO.schedules)
+            override val tzDisplay: String
+                get() = textFormatter.formatDisplayTimeZone(salonDTO)
         }
     }
 }

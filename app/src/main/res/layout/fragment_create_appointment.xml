@@ -127,7 +127,7 @@
                     android:hint="@string/label_select_time"
                     android:paddingHorizontal="@dimen/size_16"
                     android:textColorHint="@color/black"
-                    app:drawableStartCompat="@drawable/ic_time_outline" />
+                    app:drawableStartCompat="@drawable/ic_time" />
             </LinearLayout>
 
             <TextView
@@ -146,8 +146,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_service_select" />
-
-
 
             <TextView
                 style="@style/AppTheme.TextView.Medium"

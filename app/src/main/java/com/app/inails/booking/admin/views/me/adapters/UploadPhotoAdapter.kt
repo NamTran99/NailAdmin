@@ -1,17 +1,27 @@
 package com.app.inails.booking.admin.views.me.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.ColorFilter
+import android.os.Build
 import android.support.core.view.IHolder
 import android.support.core.view.RecyclerHolder
 import android.support.core.view.bindingOf
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemPictureHolderBinding
 import com.app.inails.booking.admin.databinding.LayoutBtnAddPictureBinding
 import com.app.inails.booking.admin.extention.findIndex
 import com.app.inails.booking.admin.model.ui.SalonImage
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
+
 
 class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -72,11 +82,25 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
 
     inner class ImageViewHolder(val binding: ItemPictureHolderBinding) :
         RecyclerHolder<SalonImage>(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.Q)
+        @SuppressLint("CheckResult", "ResourceAsColor")
         override fun bind(item: SalonImage) {
             binding.apply {
+
+                val circleProgressDrawable = CircularProgressDrawable(view.context)
+                circleProgressDrawable.strokeWidth = 5f;
+                circleProgressDrawable.centerRadius = 30f;
+                circleProgressDrawable.start();
+
+                val requestOptions = RequestOptions()
+                requestOptions.placeholder(circleProgressDrawable)
+                requestOptions.skipMemoryCache(true)
+                requestOptions.fitCenter()
+
                 Glide.with(view.context)
                     .load(item.path)
-                    .placeholder(R.drawable.ic_ab_back)
+                    .apply(requestOptions)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .into(imgHolder)
                 btClose.setOnClickListener {
                     onCloseImageAction?.invoke(item)

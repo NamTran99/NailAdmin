@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.model.ui
 
+import android.os.Parcelable
 import android.support.core.route.BundleArgument
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
@@ -27,15 +28,16 @@ interface ISalonDetail : ISalon {
     val lat: Float get() = 0f
     val lng: Float get() = 0f
     val schedules: List<ISchedule>? get() = listOf()
+    val tzDisplay: String get() = ""
 }
 
 class ISchedule(
     var day: Int = 0,
-    val dayFormat: String = "",
-    var startTimeFormat: String? = null,
-    var endTimeFormat: String? = null,
-    var startTime: String? = null,
-    var endTime: String? = null,
+    var dayFormat: String = "",
+    var startTimeFormat: String? = null,// format 12H with AM/PM
+    var endTimeFormat: String? = null,  // format 12H with AM/PM
+    var startTime: String? = null,      // format 24H
+    var endTime: String? = null,        // format 24H
     var timeFormat: String? = null,
 ): Serializable
 
@@ -45,18 +47,27 @@ class SalonForm(
     var phone: String = "",
     var address: String = "",
     var description: String = "",
+    var zoneID: String = "",
+    var offsetDisplay: String = "",
+    var lat: Double = 0.0,
+    var long: Double = 0.0,
     var images: List<SalonImage> = listOf(),
     val deleteImage: MutableList<Int> = mutableListOf(),
     var schedules: List<ScheduleForm> = listOf()
 )
 
-class ScheduleForm(
+@Parcelize
+data class ScheduleForm(
     val day: Int = 0,
     @SerializedName("start_time")
-    val startTime: String? = null,
+    val startTime: String? = null, // Format HH:MM:SS
     @SerializedName("end_time")
-    val endTime: String? = null,
-)
+    val endTime: String? = null,    // Format HH:MM:SS
+):  Parcelable{
+    override fun toString(): String {
+        return "{\"day\":\"$day\",\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace("\"null\"", "null")
+    }
+}
 
 data class SalonImage(
     val id: Int? = null,

@@ -24,6 +24,7 @@
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="@dimen/size_5"
                 android:text="@string/salon_name" />
 
@@ -39,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_15"
+                android:textStyle="bold"
                 android:text="@string/phone_number" />
 
             <EditText
@@ -51,6 +53,7 @@
 
             <TextView
                 style="@style/AppTheme.TextView.Medium"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_15"
@@ -59,16 +62,17 @@
             <EditText
                 android:id="@+id/etAddress"
                 style="@style/AppTheme.EditText"
+                android:focusable="false"
                 android:layout_marginTop="@dimen/size_12"
                 android:autofillHints="emailAddress"
-                android:hint="@string/enter_salon_address"
-                android:inputType="phone" />
+                android:hint="@string/enter_salon_address" />
 
             <TextView
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_15"
+                android:textStyle="bold"
                 android:text="@string/images" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -79,16 +83,19 @@
                 app:spanCount="3"
                 tools:listitem="@layout/item_picture_holder" />
 
-            <RelativeLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_15">
 
                 <TextView
-
+                    android:layout_weight="1"
+                    android:id="@+id/tvBusinessHour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/business_hour" />
+                    android:text="@string/business_hour"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvEditSchedule"
@@ -99,7 +106,7 @@
                     android:text="@string/edit"
                     android:textColor="@color/colorPrimary"
                     app:drawableStartCompat="@drawable/ic_edit_2" />
-            </RelativeLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvSchedule"
@@ -120,8 +127,6 @@
                 android:gravity="top"
                 android:hint="@string/description"
                 android:inputType="textMultiLine"
-                android:maxLength="200"
-                android:maxLines="10"
                 android:minLines="10"
                 android:scrollbars="vertical" />
 

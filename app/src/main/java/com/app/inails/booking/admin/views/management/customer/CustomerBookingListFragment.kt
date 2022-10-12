@@ -25,6 +25,7 @@ import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
+import com.app.inails.booking.admin.repository.booking.RemindAppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
 import com.app.inails.booking.admin.views.booking.dialog_filter.FilterApmOwner
 import com.app.inails.booking.admin.views.booking.dialog_filter.FilterType
@@ -241,6 +242,13 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
                         viewModel.updateStatus()
                     }
                 }
+                onClickCustomerListener = {
+                    customerInfoDialog.show(it)
+                }
+
+                onClickRemindListener = {
+                    viewModel.remind(it.id)
+                }
             }
 
             viewRefresh.colorSchemeDefault()
@@ -296,6 +304,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
 class CustomerBookingListViewModel(
     private val appointmentRepo: AppointmentRepository,
     private val customerRepo: FetchListCustomerRepo,
+    private val remindAppointmentRepo: RemindAppointmentRepository,
     private val staffRepo: FetchAllStaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val customerListBookingUI = CustomerBookingListUI()
@@ -355,6 +364,11 @@ class CustomerBookingListViewModel(
     fun startService() = launch(loading, error) {
         appointmentRepo.startServiceAppointment(formStartService)
         success.post("Start service success")
+    }
+
+    fun remind(id: Int) = launch(loading, error) {
+        remindAppointmentRepo(id)
+        success.post("Remind customer success")
     }
 
     fun customerWalkIn(id: Int) = launch(loading, error) {

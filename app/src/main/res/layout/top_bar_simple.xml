@@ -32,7 +32,8 @@
         android:text="@string/btn_edit"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_12"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility= "visible"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btSetting"

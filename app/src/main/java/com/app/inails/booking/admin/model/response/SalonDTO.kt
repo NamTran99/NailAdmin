@@ -6,9 +6,9 @@ data class SalonDTO(
     val id: Long = 0,
     val lat: Float = 0f,
     val lng: Float = 0f,
-    val name: String? = "",
+    var name: String? = "",
     var email: String? = "",
-    val slug: String? = "",
+    var slug: String? = "",
     val address: String? = "",
     val city: String? = "",
     val state: String? = "",
@@ -20,7 +20,9 @@ data class SalonDTO(
     val fullAddress: String? = "",
     val partner: Partner? = null,
     val images: List<Image>? = null,
-    val schedules: List<Schedule>? = null
+    val schedules: List<Schedule>? = null,
+    val timezone: String? = "",
+    val tz: String? = ""
 )
 
 data class Image(

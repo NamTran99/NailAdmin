@@ -24,8 +24,8 @@ interface MeApi : Injectable {
     @POST("setting/setting-email-receive-feedback")
     fun settingEmailReceiveFeedback(@Field("email") email: String): ApiAsync<Any>
 
-    @GET("salon/healthy-nail-salon-collaborative")
-    fun getSalonDetail(): ApiAsync<SalonDTO>
+    @GET("salon/{id}")
+    fun getSalonDetail(@Path("id") salonID: Int): ApiAsync<SalonDTO>
 
     @Multipart
     @POST("salon/update-salon")

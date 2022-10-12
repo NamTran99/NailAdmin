@@ -26,13 +26,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/time_zone" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvTimeZone"
                 style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_50"
+                android:focusable="false"
                 android:layout_marginTop="@dimen/size_19"
-                android:text="Viet nam" />
+                tools:text="Viet nam" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSchedule"
