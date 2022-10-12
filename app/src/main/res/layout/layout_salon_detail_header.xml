@@ -23,10 +23,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtAddress"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        style="@style/AppTheme.TextView.Medium"
         android:layout_marginEnd="@dimen/size_10"
         android:layout_toStartOf="@+id/btnDirection"
         android:drawableStart="@drawable/ic_location"
@@ -35,9 +35,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtPhone"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/AppTheme.TextView.Medium"
         android:layout_below="@+id/txtAddress"
         android:layout_marginTop="@dimen/size_10"
         android:autoLink="phone"
@@ -48,11 +48,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelLocalTime"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPhone"
         android:layout_marginTop="@dimen/size_10"
-        style="@style/AppTheme.TextView.Medium"
         android:drawableStart="@drawable/ic_time"
         android:drawablePadding="@dimen/size_15"
         android:text="@string/local_time" />

@@ -63,6 +63,7 @@
                 android:id="@+id/etAddress"
                 style="@style/AppTheme.EditText"
                 android:focusable="false"
+                android:inputType="textMultiLine"
                 android:layout_marginTop="@dimen/size_12"
                 android:autofillHints="emailAddress"
                 android:hint="@string/enter_salon_address" />
@@ -94,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/business_hour"
-                    style="@style/AppTheme.TextView.Medium"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:textStyle="bold" />
 
                 <TextView

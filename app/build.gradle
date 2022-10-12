@@ -56,6 +56,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'io.github.sangcomz:fishbun:1.1.0'
 
     //Architecture
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleV"
@@ -86,5 +87,9 @@ dependencies {
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    implementation 'id.zelory:compressor:3.0.1'
 //    implementation 'com.readystatesoftware.chuck:library:1.1.0'
+
+    implementation "com.google.android.libraries.places:places:$placeVersion"
+//    implementation "com.github.arturogutierrez:badges:1.0.5@aar"
 }
