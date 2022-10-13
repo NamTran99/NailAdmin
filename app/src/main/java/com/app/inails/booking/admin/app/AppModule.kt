@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.app
 import android.app.Application
 import android.support.di.module
 import androidx.viewbinding.BuildConfig
+import com.app.inails.booking.admin.datasource.remote.GoogleApi
 import com.app.inails.booking.admin.helper.factory.TLSSocketFactory
 import com.app.inails.booking.admin.helper.interceptor.Logger
 import com.app.inails.booking.admin.helper.interceptor.LoggingInterceptor
@@ -90,5 +91,12 @@ val apiModule = module {
             .baseUrl(AppConfig.endpoint)
             .addCallAdapterFactory(ApiAsyncAdapterFactory(DefaultApiErrorHandler()))
             .build()
+
+        single {
+            get<Retrofit.Builder>()
+                .baseUrl(AppConfig.endpointGoogleMap)
+                .build()
+                .create(GoogleApi::class.java)
+        }
     }
 }

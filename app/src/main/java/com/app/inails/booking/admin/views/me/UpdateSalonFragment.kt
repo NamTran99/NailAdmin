@@ -33,7 +33,6 @@ import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.factory.TimeZoneFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.helper.RequestBodyBuilder
-import com.app.inails.booking.admin.model.response.TimeZoneDTO
 import com.app.inails.booking.admin.model.response.TimeZoneForm
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
@@ -47,9 +46,7 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.libraries.places.api.model.Place
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.await
 
 
 class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBarOwner {
@@ -333,22 +330,28 @@ class FetchTimeZone(
     val result = MutableLiveData<ITimeZone>()
     suspend operator fun invoke(timeZone: TimeZoneForm) {
 
-        googleApi.getTimeZone(
+        val rs=googleApi.getTimeZone(
             location = timeZone.location,
             timestamp = timeZone.timestamp,
             key = timeZone.key
-        ).enqueue(object : Callback<TimeZoneDTO> {
-            override fun onResponse(call: Call<TimeZoneDTO>, response: Response<TimeZoneDTO>) {
-                if(response.isSuccessful){
-                    result.post(timeZoneFactory.createTimeZone(response.body()!!))
-                }
-            }
+        ).await()
 
-            override fun onFailure(call: Call<TimeZoneDTO>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        } )
+//        googleApi.getTimeZone(
+//            location = timeZone.location,
+//            timestamp = timeZone.timestamp,
+//            key = timeZone.key
+//        ).enqueue(object : Callback<TimeZoneDTO> {
+//            override fun onResponse(call: Call<TimeZoneDTO>, response: Response<TimeZoneDTO>) {
+//                if(response.isSuccessful){
+//                    result.post(timeZoneFactory.createTimeZone(response.body()!!))
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<TimeZoneDTO>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        } )
     }
 }
 
