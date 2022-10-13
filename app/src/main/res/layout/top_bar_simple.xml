@@ -24,7 +24,7 @@
         tools:text="Hello world" />
 
     <TextView
-        android:id="@+id/btEdit"
+        android:id="@+id/btExtension"
         style="@style/AppTheme.TextView.Title.Small"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
@@ -33,7 +33,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_12"
         android:visibility="gone"
-        tools:visibility= "visible"/>
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btSetting"

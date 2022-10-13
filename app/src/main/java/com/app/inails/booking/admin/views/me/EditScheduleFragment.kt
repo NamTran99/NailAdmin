@@ -1,15 +1,19 @@
 package com.app.inails.booking.admin.views.me
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.support.core.route.BundleArgument
 import android.support.core.view.viewBinding
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentUpdateScheduleBinding
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.ISchedule
+import com.app.inails.booking.admin.utils.TimeUtils
 import com.app.inails.booking.admin.views.me.adapters.SalonEditScheduleAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -23,7 +27,6 @@ data class EditScheduleArgs(
 ) : BundleArgument
 
 class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), TopBarOwner {
-    //    val viewModel by viewModel<EditScheduleVM>()
     val binding by viewBinding(FragmentUpdateScheduleBinding::bind)
     private lateinit var adapter: SalonEditScheduleAdapter
     private val arg by lazy { BundleArgument.of(arguments) ?: EditScheduleArgs() }
@@ -42,6 +45,8 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
         const val REQUEST_KEY = "EditScheduleFragment"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
@@ -80,28 +85,7 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                 )
                 activity?.onBackPressed()
             }
-            val calendar = Calendar.getInstance(
-                TimeZone.getTimeZone("GMT"),
-                Locale.getDefault()
-            )
-//            val currentLocalTime = calendar.time
-//            val date: DateFormat = SimpleDateFormat("z", Locale.getDefault())
-//            val localTime: String = date.format(currentLocalTime)
-            tvTimeZone.setText(arg.timeZoneDisplay)
-
-//            adapter.updateItem(it.schedules)
+            tvTimeZone.setText("${TimeUtils.getZoneID()} UTC ${TimeUtils.getTimeOffset()}")
         }
     }
 }
-
-//class EditScheduleVM(
-//    private val profileRepository: ProfileRepository,
-//    private val updateSalonRepository: UpdateSalonRepository
-//) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-//
-//    val salonDetail = profileRepository.result
-//
-//    fun getDetailSalon() = launch(loading, error) {
-//        profileRepository()
-//    }
-//}

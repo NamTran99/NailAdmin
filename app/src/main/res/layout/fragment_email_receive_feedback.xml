@@ -41,13 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imgEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_5"
-                android:src="@drawable/ic_email" />
-
             <TextView
                 android:id="@+id/tvEmail"
                 style="@style/AppTheme.TextViewResponsive"
@@ -56,8 +49,8 @@
                 android:layout_marginStart="@dimen/size_5"
                 android:layout_marginEnd="@dimen/size_10"
                 android:layout_toStartOf="@+id/tvEditEmail"
-                android:layout_toEndOf="@+id/imgEmail"
-                android:text="@string/sample_gmail_com" />
+                android:text="@string/sample_gmail_com"
+                app:drawableStartCompat="@drawable/ic_email" />
 
             <TextView
                 android:id="@+id/tvEditEmail"

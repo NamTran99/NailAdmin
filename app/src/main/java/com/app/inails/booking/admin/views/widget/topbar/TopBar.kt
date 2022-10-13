@@ -9,16 +9,20 @@ import com.app.inails.booking.admin.databinding.TopBarSimpleBinding
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 
+data class ExtensionButton(
+    var isShow: Boolean = false,
+    var content: String = "Edit",
+    val onclick: (() -> Unit)? = null
+)
+
 class SimpleTopBarState(
     @StringRes
     private val title: Int,
     @DrawableRes
     private val iconBack: Int = R.drawable.ic_ab_back,
-    private val showEdit: Boolean = false,
     private val onBackClick: () -> Unit = {},
-    private val onEditClick: (() -> Unit)? = null,
     private val onSettingClick: ((View) -> Unit)? = null,
-
+    private val extensionButton: ExtensionButton = ExtensionButton()
     ) : TopBarState() {
     override val stateBinding by bindingOf(TopBarSimpleBinding::inflate)
 
@@ -27,10 +31,11 @@ class SimpleTopBarState(
             tvTitle.setText(title)
             btBack.setImageResource(iconBack)
             btBack.setOnClickListener { onBackClick() }
-            btEdit.show(showEdit)
-            btEdit.setOnClickListener {
-                onEditClick?.let { it1 -> it1() }
+            btExtension.show(extensionButton.isShow)
+            btExtension.setOnClickListener {
+                extensionButton.onclick?.let { it1 -> it1() }
             }
+            btExtension.text = extensionButton.content
 
             btSetting.show(onSettingClick != null)
             btSetting.onClick {

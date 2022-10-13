@@ -52,6 +52,7 @@ class NotificationsManager(private val mContext: Context) {
             channel.enableLights(true)
             channel.lightColor = Color.CYAN
             channel.enableVibration(true)
+            channel.setShowBadge(false)
             notificationManager.createNotificationChannel(channel)
         }
 

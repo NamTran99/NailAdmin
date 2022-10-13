@@ -41,7 +41,7 @@ data class CustomerListBookingArg(
     val idType: TypeID = TypeID.Customer
 ) : BundleArgument
 
-enum class TypeID{
+enum class TypeID {
     Customer, Staff
 }
 
@@ -65,12 +65,12 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
         with(viewModel) {
             filterCustomerForm.apply {
                 type = null
-                searchCustomer = if(args.idType == TypeID.Customer) args.id else null
-                searchStaff = if(args.idType == TypeID.Staff) args.id else null
+                searchCustomer = if (args.idType == TypeID.Customer) args.id else null
+                searchStaff = if (args.idType == TypeID.Staff) args.id else null
             }
             listAppointment.bind {
                 mAdapter.submit(it)
-                binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isEmpty())
+                binding.emptyLayout.tvEmptyData.text = if (binding.searchView.text.isEmpty())
                     customerListBookingUI.emptyData else "There are no results matching your search keyword."
                 it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
                 !it.isNullOrEmpty() show binding.rvServices
@@ -154,7 +154,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
             )
         )
         with(binding) {
-            searchView.setHint( R.string.hint_search_order_history)
+            searchView.setHint(R.string.hint_search_order_history)
             mAdapter = AppointmentAdapter(rvServices).apply {
                 onClickItemListener = {
                     Router.redirectToAppointmentDetail(self, it.id)
@@ -264,7 +264,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
                 onLayoutFilterClick = {
                     filterApmDialog.show(
                         viewModel.filterCustomerForm,
-                        type = if(args.idType == TypeID.Customer) FilterType.FILTER_BY_CUSTOMER else FilterType.FILTER_BY_STAFF,
+                        type = if (args.idType == TypeID.Customer) FilterType.FILTER_BY_CUSTOMER else FilterType.FILTER_BY_STAFF,
                         openSearchCustomer = {
                             viewModel.loadCustomer("", 1)
                         },
@@ -312,10 +312,16 @@ class CustomerBookingListViewModel(
     val resultCheckIn = appointmentRepo.resultCheckIn
     val listAppointment = appointmentRepo.results.map { list ->
         list?.filter {
-            if(customerListBookingUI.idType == TypeID.Customer){
-                it.id.toString().lowerCaseContain(filterCustomerForm.keyword) || it.staffName.lowerCaseContain(filterCustomerForm.keyword)
-            }else{
-                it.id.toString().lowerCaseContain(filterCustomerForm.keyword) || it.customerName.lowerCaseContain(filterCustomerForm.keyword)
+            if (customerListBookingUI.idType == TypeID.Customer) {
+                it.id.toString()
+                    .lowerCaseContain(filterCustomerForm.keyword) || it.staffName.lowerCaseContain(
+                    filterCustomerForm.keyword
+                )
+            } else {
+                it.id.toString()
+                    .lowerCaseContain(filterCustomerForm.keyword) || it.customerName.lowerCaseContain(
+                    filterCustomerForm.keyword
+                )
             }
         }
     }
@@ -330,7 +336,7 @@ class CustomerBookingListViewModel(
     val staffList = staffRepo.results
     val customerList = customerRepo.resultWithPage
 
-    fun setUpDataUI(customerListBookingArg: CustomerListBookingArg){
+    fun setUpDataUI(customerListBookingArg: CustomerListBookingArg) {
         customerListBookingUI.setUpData(customerListBookingArg)
     }
 
@@ -391,20 +397,20 @@ data class CustomerBookingListUI(
     var searchHint: Int = 0,
     var emptyData: String = "",
     var titleTopBar: Int = 0,
-){
+) {
 
-    fun setUpData(customerListBookingArg: CustomerListBookingArg){
+    fun setUpData(customerListBookingArg: CustomerListBookingArg) {
         idType = customerListBookingArg.idType
-        if(customerListBookingArg.idType == TypeID.Customer){
+        if (customerListBookingArg.idType == TypeID.Customer) {
             customerId = customerListBookingArg.id
             searchHint = R.string.hint_search_booking_list
             emptyData = "This customer doesn't booking any appointments yet"
             titleTopBar = R.string.title_booking_list
-        }else{
+        } else {
             staffId = customerListBookingArg.id
             searchHint = R.string.hint_search_order_history
             emptyData = "This staff doesn't have any orders yet"
-            titleTopBar =  R.string.title_order_history
+            titleTopBar = R.string.title_order_history
         }
     }
 }

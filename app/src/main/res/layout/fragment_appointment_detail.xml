@@ -31,7 +31,8 @@
 
                     <TextView
                         android:id="@+id/tvID"
-                        style="@style/AppTheme.TextView.Medium" />
+                        style="@style/AppTheme.TextView.Medium"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/tvStatus"

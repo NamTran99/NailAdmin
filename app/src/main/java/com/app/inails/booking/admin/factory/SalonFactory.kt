@@ -67,8 +67,10 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = salonDTO.images?.map { SalonImage(it.id.toInt(), it.image) } ?: listOf()
             override val schedules: List<ISchedule>?
                 get() = createSchedule(salonDTO.schedules)
-            override val tzDisplay: String
+            override val tzDisplay1: String
                 get() = textFormatter.formatDisplayTimeZone(salonDTO)
+            override val tzDisplay2: String
+                get() = "${salonDTO.timezone} ${salonDTO.tz}"
         }
     }
 }

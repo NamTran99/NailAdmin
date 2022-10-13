@@ -22,8 +22,11 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.model.ui.ISalonDetail
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.views.extension.LocalImage
+import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.app.inails.booking.admin.views.me.adapters.HomeBannerPager
 import com.app.inails.booking.admin.views.me.adapters.SalonScheduleAdapter
+import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -39,19 +42,28 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_manage_salon, showEdit = true,
+                R.string.mn_manage_salon,
+                extensionButton = ExtensionButton(isShow = true, onclick = {
+                    Router.run { redirectToUpdateSalon() }
+                }, content = "Edit"),
                 onBackClick = {
                     activity?.onBackPressed()
                 },
-                onEditClick = {
-                    Router.run { redirectToUpdateSalon() }
-                }
             )
         )
 
         with(binding) {
             tabDots.setupWithViewPager(vpImage)
-            adapter = HomeBannerPager(binding.vpImage)
+            adapter = HomeBannerPager(binding.vpImage).apply {
+                onClickItem = {
+                    val listImage = viewModel.salonDetail.value?.images?.map {
+                        LocalImage(it.path)
+                    }
+                    if(!listImage.isNullOrEmpty()){
+                        Router.run { redirectToShowZoomImage(ShowZoomImageArgs(data = listImage to it)) }
+                    }
+                }
+            }
         }
 
         with(viewModel) {
@@ -66,11 +78,11 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         viewHeader.apply {
             txtAddress.text = item.address
             txtPhone.text = item.phoneNumber
-            labelLocalTime.text = item.tzDisplay
+            labelLocalTime.text = item.tzDisplay1
             txtOwner.text = item.ownerName
             txtDescription.text = item.des
             SalonScheduleAdapter(rcvSchedule).submit(item.schedules)
-            adapter.items = item.images?.map { it.path }
+            adapter.items = item.images.map { it.path }
             btnDirection.onClick { appSettings.navigateMyLocationWithGoogleMap(item.lat, item.lng) }
         }
     }

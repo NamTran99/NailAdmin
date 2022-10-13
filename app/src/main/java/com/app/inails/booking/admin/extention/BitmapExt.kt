@@ -12,6 +12,7 @@ import id.zelory.compressor.constraint.quality
 import id.zelory.compressor.constraint.size
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 suspend fun String.scalePhotoLibrary(context: Context): File {
     try {
@@ -29,7 +30,7 @@ suspend fun String.scalePhotoLibrary(context: Context): File {
                 Compressor.compress(context, File(this)) {
                     //        resolution(720, 1280)
                     quality(60)
-                    format(Bitmap.CompressFormat.PNG)
+                    format(Bitmap.CompressFormat.WEBP)
                     size(2_097_152) // 2 MB
                 }
             }

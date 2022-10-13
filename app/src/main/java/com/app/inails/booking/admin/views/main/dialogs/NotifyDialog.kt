@@ -48,6 +48,7 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
             tvDateTime.text = appointment.date_appointment?.formatDateAppointment().displaySafe1()
             tvReason.text = appointment.reason_cancel
             tvFeedbackContent.text = appointment.content_feedback.safe().replace("\\n", "\n").trim()
+            tvFeedbackContent.show(tvFeedbackContent.text.isNotEmpty())
             ratingBar.rating = appointment.rating.safe().toFloat()
 
             val listService = appointment.services.map {

@@ -16,15 +16,20 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_add_24" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/btClose"
-        android:layout_width="@dimen/size_15"
-        android:layout_height="@dimen/size_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/size_5"
-        android:layout_marginEnd="@dimen/size_5"
-        android:background="@drawable/bg_image_clear"
-        android:padding="@dimen/size_3"
-        android:src="@drawable/ic_close"
-        app:tint="@color/white" />
+        android:padding="@dimen/size_5"
+        android:gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/size_15"
+            android:layout_height="@dimen/size_15"
+            android:background="@drawable/bg_image_clear"
+            android:padding="@dimen/size_3"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>

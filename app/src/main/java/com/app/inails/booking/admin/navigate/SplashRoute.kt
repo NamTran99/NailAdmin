@@ -18,6 +18,6 @@ open class SplashRouteImpl : SplashRoute {
     }
 
     override fun RouteDispatcher.redirectToLogin() {
-        open<LoginActivity>().close()
+        open<LoginActivity>().clear()
     }
 }

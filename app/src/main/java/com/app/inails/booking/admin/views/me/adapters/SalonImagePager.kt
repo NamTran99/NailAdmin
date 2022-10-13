@@ -8,9 +8,12 @@ import androidx.viewpager.widget.ViewPager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BasePager
 import com.app.inails.booking.admin.base.PagerHolder
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.views.widget.AppImageView
 
 class HomeBannerPager(private val view: ViewPager) : BasePager() {
+
+    var onClickItem: ((position: Int) ->Unit)?=null
 
     private val mViewLooper = LoopHandler {
         val next = (view.currentItem + 1) % count
@@ -44,6 +47,9 @@ class HomeBannerPager(private val view: ViewPager) : BasePager() {
         override fun bind(item: String) {
             super.bind(item)
             (itemView as AppImageView).setImageUrl(item)
+            itemView.onClick{
+                onClickItem?.invoke(position)
+            }
         }
     }
 

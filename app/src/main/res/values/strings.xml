@@ -12,6 +12,7 @@
     <string name="msg_login_success">Login success</string>
     <string name="msg_sign_up_success">Sign up success</string>
     <string name="error_blank_phone">Please enter phone number</string>
+    <string name="error_loading_photo">Error loading photo</string>
     <string name="error_blank_service_name">Service\'s Name should not be blank</string>
     <string name="error_blank_service_price">Price should not be blank</string>
     <string name="error_blank_firstname">Firstname should not be blank</string>
@@ -20,6 +21,7 @@
     <string name="msg_sent_feedback">Feedback has been sent successfully</string>
     <string name="error_blank_name">Name should not be blank</string>
     <string name="error_blank_staff_id">Please select a staff</string>
+    <string name="error_not_enough_image_count">Please select at least one image</string>
     <string name="error_blank_date_time">Please select date and time</string>
     <string name="error_empty_services">Please select the service</string>
     <string name="error_empty_service_custom">Please enter the other service</string>

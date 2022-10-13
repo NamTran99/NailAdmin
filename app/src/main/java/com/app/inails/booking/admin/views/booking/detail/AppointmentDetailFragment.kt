@@ -25,6 +25,7 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
+import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -40,13 +41,13 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_appointment_detail, showEdit = false,
+                R.string.title_appointment_detail,
+                extensionButton = ExtensionButton(isShow =  false, onclick = {
+                    Router.redirectToCreateAppointment(self, arg.id)
+                }, content = "Edit"),
                 onBackClick = {
                     activity?.onBackPressed()
                 },
-                onEditClick = {
-                    Router.redirectToCreateAppointment(self, arg.id)
-                }
             ))
 
         with(binding) {
@@ -187,13 +188,15 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             topBar.setState(
                 SimpleTopBarState(
                     R.string.title_appointment_detail,
-                    showEdit = item.status != DataConst.AppointmentStatus.APM_FINISH && item.status != DataConst.AppointmentStatus.APM_CANCEL && item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING,
+                    extensionButton = ExtensionButton(isShow = item.status != DataConst.AppointmentStatus.APM_FINISH && item.status != DataConst.AppointmentStatus.APM_CANCEL && item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING,
+                    onclick = {
+                        Router.redirectToCreateAppointment(self, arg.id)
+                    }, content = "Edit"
+                        )
+                    ,
                     onBackClick = {
                         activity?.onBackPressed()
                     },
-                    onEditClick = {
-                        Router.redirectToCreateAppointment(self, arg.id)
-                    }
                 ))
         }
 

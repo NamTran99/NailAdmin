@@ -47,7 +47,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
 
         with(binding) {
             viewRefresh.colorSchemeDefault()
-            viewRefresh.setOnRefreshListener { refreshView() }
+            viewRefresh.setOnRefreshListener { refreshView(searchView.text) }
             setUpManageServiceAdapter()
             btAddService.setOnClickListener {
                 createUpdateServiceDialog.show(R.string.title_create_new_service) { mName, mPrice ->
@@ -74,6 +74,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
             }
             success.bind {
                 createUpdateServiceDialog.dismiss()
+                refreshView(binding.searchView.text)
                 success("Success")
             }
 
@@ -92,7 +93,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
         }
 
         appEvent.refreshData.observe(this){
-            refreshView(binding.searchView.text.toString())
+            refreshView(binding.searchView.text)
         }
     }
 
@@ -103,7 +104,6 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
 
     private fun setUpManageServiceAdapter() {
         mAdapter = ManageServiceAdapter(binding.rvServices).apply {
-
             onLoadMoreListener = { nexPage, _ ->
                 viewModel.search(page = nexPage)
             }

@@ -2,6 +2,8 @@ package com.app.inails.booking.admin.model.ui
 
 import android.os.Parcelable
 import android.support.core.route.BundleArgument
+import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
 import com.google.gson.annotations.SerializedName
@@ -33,7 +35,8 @@ interface ISalonDetail : ISalon {
     val zipCode: String get() = ""
     val lng: Float get() = 0f
     val schedules: List<ISchedule>? get() = listOf()
-    val tzDisplay: String get() = ""
+    val tzDisplay1: String get() = "" // display at Update Salon Information (include Business Hour)
+    val tzDisplay2: String get() = "" // display at Business Hour (not include Business Hour)
 }
 
 class ISchedule(
@@ -47,6 +50,7 @@ class ISchedule(
 ): Serializable
 
 class SalonForm(
+    var allImageCount: Int =0,
     var timeZone : String = "",
     var email: String = "",
     var id: Int = 0,
@@ -65,7 +69,13 @@ class SalonForm(
     var images: List<SalonImage> = listOf(),
     val deleteImage: MutableList<Int> = mutableListOf(),
     var schedules: List<ScheduleForm> = listOf()
-)
+){
+    fun validate(){
+        if(allImageCount == 0){
+            resourceError(R.string.error_not_enough_image_count)
+        }
+    }
+}
 
 @Parcelize
 data class ScheduleForm(

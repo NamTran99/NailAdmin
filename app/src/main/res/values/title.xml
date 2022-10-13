@@ -18,6 +18,7 @@
     <string name="title_order_history">Order History</string>
     <string name="title_update_staff">Update Staff</string>
     <string name="title_business_hour">Business Hour</string>
+    <string name="title_salon_image">Salon\'s images</string>
     <string name="title_update_salon_information">Update Salon Information</string>
     <string name="title_update_service">Update Service</string>
     <string name="title_remove_appointment">Remove Appointment</string>

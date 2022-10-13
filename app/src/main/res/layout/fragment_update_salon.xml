@@ -131,16 +131,6 @@
                 android:minLines="10"
                 android:scrollbars="vertical" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btSave"
-                style="@style/AppTheme.ButtonDefault"
-                android:layout_width="match_parent"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="@dimen/size_14"
-                android:background="@drawable/button_blue_corner"
-                android:text="@string/btn_save" />
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

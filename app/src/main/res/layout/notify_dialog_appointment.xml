@@ -52,9 +52,11 @@
             android:textColor="@color/gray08" />
 
         <TextView
+            android:layout_weight="1"
+            android:textStyle="bold"
             android:id="@+id/tvBookingID"
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:gravity="end"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_12"
@@ -130,10 +132,11 @@
         android:layout_marginTop="@dimen/size_14"
         android:background="@color/color_line" />
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
+        android:orientation="horizontal"
         android:layout_marginTop="@dimen/size_19">
 
         <TextView
@@ -144,14 +147,16 @@
             android:textColor="@color/gray08" />
 
         <TextView
+            android:textAlignment="textEnd"
+            android:layout_weight="1"
             android:id="@+id/tvStaffName"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textSize="@dimen/text_size_12"
             tools:text="Amanda" />
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -168,9 +173,10 @@
             android:text="@string/time" />
 
         <TextView
+            android:layout_weight="1"
             android:id="@+id/tvDateTime"
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:textAlignment="textEnd"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -198,6 +204,7 @@
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
             android:justificationMode="inter_word"
             android:layout_alignParentEnd="true"
             tools:text="Amanda" />
