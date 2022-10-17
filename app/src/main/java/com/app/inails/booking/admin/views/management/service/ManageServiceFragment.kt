@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
+import android.support.core.livedata.map
 import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
@@ -175,7 +176,11 @@ class ManageServiceViewModel(
     val serviceUpdated = updateServiceRepo.results
     val serviceDeleted = deleteServiceRepo.results
     val serviceChanged = changeActiveServiceRepository.results
-    val listService = getListServiceRepo.results
+    val listService = getListServiceRepo.results.map {
+        it?.sortedByDescending {
+            it.isActive
+        }
+    }
 
     val createForm = ServiceForm()
     val updateForm = ServiceForm()

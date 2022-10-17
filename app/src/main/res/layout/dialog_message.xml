@@ -11,6 +11,7 @@
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:textSize="@dimen/text_size_16"
         tools:text="Title" />
 

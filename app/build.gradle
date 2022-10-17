@@ -14,7 +14,7 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "1.0_dev"    // format x.x_dev for dev, x.x for release (must follow format)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,7 +89,7 @@ dependencies {
 
     implementation 'id.zelory:compressor:3.0.1'
     implementation "com.squareup.picasso:picasso:$picassoVersion"
-    implementation 'com.readystatesoftware.chuck:library:1.1.0'
+//    implementation 'com.readystatesoftware.chuck:library:1.1.0'
 
     implementation "com.google.android.libraries.places:places:$placeVersion"
 }

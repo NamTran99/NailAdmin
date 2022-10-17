@@ -116,15 +116,15 @@ fun String?.toTimeDisplay(
 }
 
 fun String?.convertTime(
-    fromFormat: String = "HH:mm",
     toFormat: String = "HH:mm:ss",
+    fromZoneID: String = "UTC"
 ): String? {
     if (this.isNullOrEmpty()) return null
     val simpleTimeFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val currentTime = simpleTimeFormat.format(Date())
     val dateWithTime = "$currentTime $this"
-    return dateWithTime.toServerUTC(outFormat = toFormat, format = "yyyy-MM-dd HH:mm")
-}
+    return dateWithTime.toServerUTC(outFormat = toFormat, format = "yyyy-MM-dd HH:mm", fromTimeZoneID = fromZoneID)
+} /// this must format "HH:mm"
 
 fun String.toCreatedAt(
 ): String {
@@ -138,9 +138,13 @@ fun String.toCreatedAt(
 
 fun String.toServerUTC(
     format: String = "yyyy-MM-dd HH:mm",
-    outFormat: String = "yyyy-MM-dd HH:mm"
+    outFormat: String = "yyyy-MM-dd HH:mm",
+    fromTimeZoneID: String? = null
 ): String {
     val parseFormat = SimpleDateFormat(format, Locale.getDefault())
+    fromTimeZoneID?.let {
+        parseFormat.timeZone = TimeZone.getTimeZone(it)
+    }
     val date = parseFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat(outFormat, Locale.getDefault())
     simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")

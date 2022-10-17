@@ -5,7 +5,6 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.remote.BookingApi
-import com.app.inails.booking.admin.extention.toServerUTC
 import com.app.inails.booking.admin.extention.toServerUTC2
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.model.ui.*

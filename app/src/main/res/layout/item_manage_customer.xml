@@ -8,16 +8,18 @@
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:layout_marginHorizontal="@dimen/size_13"
-    android:layout_marginVertical="@dimen/size_6"
     android:paddingTop="@dimen/size_16">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:layout_weight="1"
             android:id="@+id/tvCustomerName"
-            style="@style/AppTheme.TextView.SemiBold"
+            style="@style/AppTheme.TextViewResponsive"
+            android:includeFontPadding="false"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lightBlue02"
@@ -35,11 +37,12 @@
             android:text="@string/booking_list"
             android:textColor="@color/color_btn_booking"
             android:textSize="@dimen/text_size_10" />
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
+        android:layout_marginTop="@dimen/size_5"
         android:id="@+id/tvPhone"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
@@ -53,7 +56,7 @@
 
     <TextView
         android:id="@+id/tvEmail"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
@@ -64,7 +67,7 @@
 
     <TextView
         android:id="@+id/tvAddress"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_2"

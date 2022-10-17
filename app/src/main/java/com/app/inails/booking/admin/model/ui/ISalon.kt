@@ -1,11 +1,9 @@
 package com.app.inails.booking.admin.model.ui
 
 import android.os.Parcelable
-import android.support.core.route.BundleArgument
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.Schedule
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
@@ -35,6 +33,8 @@ interface ISalonDetail : ISalon {
     val zipCode: String get() = ""
     val lng: Float get() = 0f
     val schedules: List<ISchedule>? get() = listOf()
+    val zoneID: String get() = ""
+    val zoneOffSet: String get() = ""
     val tzDisplay1: String get() = "" // display at Update Salon Information (include Business Hour)
     val tzDisplay2: String get() = "" // display at Business Hour (not include Business Hour)
 }
@@ -51,7 +51,8 @@ class ISchedule(
 
 class SalonForm(
     var allImageCount: Int =0,
-    var timeZone : String = "",
+    var fullTimeZoneDisplay1 : String = "", // display at Update Salon Information (include Business Hour)
+    var fullTimeZoneDisplay2 : String = "", // display at Business Hour (not include Business Hour)
     var email: String = "",
     var id: Int = 0,
     var name: String = "",
@@ -70,6 +71,13 @@ class SalonForm(
     val deleteImage: MutableList<Int> = mutableListOf(),
     var schedules: List<ScheduleForm> = listOf()
 ){
+    fun setUpDataTimeZone(offset: String, zoneID: String){
+        offsetDisplay = "UTC $offset"
+        this.zoneID = zoneID
+        fullTimeZoneDisplay1 = "Business Hour (${zoneID} ${offsetDisplay})"
+        fullTimeZoneDisplay2 = "${zoneID} ${offsetDisplay}"
+    }
+
     fun validate(){
         if(allImageCount == 0){
             resourceError(R.string.error_not_enough_image_count)

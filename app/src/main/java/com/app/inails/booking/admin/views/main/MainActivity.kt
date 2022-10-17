@@ -29,6 +29,7 @@ import com.app.inails.booking.admin.model.ui.NotificationIDForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
+import com.app.inails.booking.admin.utils.Utils
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.notification.NotificationRepository
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
@@ -92,6 +93,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             btnClose = headView.findViewById(R.id.btMenuClose)
             btnClose.text =
                 "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUSCustom()}"
+            tvVersion.text = Utils.getDisplayBuildConfig()
         }
 
         appEvent.notifyCloudMessage.bind { noti ->

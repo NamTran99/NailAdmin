@@ -167,4 +167,11 @@
     <string name="description">Description (Enter your salon information)</string>
     <string name="time_zone">Time Zone</string>
     <string name="message_end_time_greather_than_start_time">The end time must be greater than the start time</string>
+    <string name="auth_otp_not_received">You did not receive the OTP code?</string>
+    <string name="auth_otp_resend_in_remaining_s">Resend verification code after %s seconds</string>
+    <string name="btn_reset_pw">Reset Password</string>
+    <string name="auth_otp_resend">Resend verification code</string>
+    <string name="auth_otp_sending">Resending verification code</string>
+    <string name="tittle_exit_update_salon">Update Salon Information</string>
+    <string name="message_exit">Are you sure you want to exit?</string>
 </resources>

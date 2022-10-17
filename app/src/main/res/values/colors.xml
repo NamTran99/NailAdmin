@@ -73,4 +73,5 @@
     <!--RED-->
     <color name="red_240">#F24747</color>
     <color name="colorTransparencyWhite50">#80FFFFFF</color>
+    <color name="magenta_130">#80148E</color>
 </resources>

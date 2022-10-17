@@ -12,7 +12,7 @@ import com.app.inails.booking.admin.helper.network.ApiAsyncAdapterFactory
 import com.app.inails.booking.admin.helper.network.DefaultApiErrorHandler
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.readystatesoftware.chuck.ChuckInterceptor
+//import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
@@ -84,19 +84,26 @@ val apiModule = module {
                 OkHttpClient.Builder()
                     .addInterceptor(get<TokenInterceptor>())
                     .addInterceptor(interceptor)
-                    .addInterceptor(ChuckInterceptor(this.get()))
+//                    .addInterceptor(ChuckInterceptor(this.get()))
                     .addInterceptor(get<LoggingInterceptor.Builder>().build())
                     .build()
             )
             .baseUrl(AppConfig.endpoint)
             .addCallAdapterFactory(ApiAsyncAdapterFactory(DefaultApiErrorHandler()))
             .build()
-
-        single {
-            get<Retrofit.Builder>()
-                .baseUrl(AppConfig.endpointGoogleMap)
-                .build()
-                .create(GoogleApi::class.java)
-        }
+    }
+    single {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        get<Retrofit.Builder>()
+            .baseUrl(AppConfig.endpointGoogleMap)
+            .client(  OkHttpClient.Builder()
+                .addInterceptor(get<TokenInterceptor>())
+                .addInterceptor(interceptor)
+//                .addInterceptor(ChuckInterceptor(this.get()))
+                .addInterceptor(get<LoggingInterceptor.Builder>().build())
+                .build())
+            .build()
+            .create(GoogleApi::class.java)
     }
 }

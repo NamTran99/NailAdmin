@@ -69,8 +69,9 @@
                     tools:itemCount="5"
                     tools:listitem="@layout/item_staff_status" />
 
-                <include layout="@layout/layout_empty"
-                    android:id="@+id/emptyLayout"/>
+                <include
+                    android:id="@+id/emptyLayout"
+                    layout="@layout/layout_empty" />
             </RelativeLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

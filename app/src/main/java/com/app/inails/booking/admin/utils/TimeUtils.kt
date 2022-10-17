@@ -20,4 +20,10 @@ object TimeUtils {
         return TimeUnit.HOURS.convert(currentLocalTime.rawOffset.toLong(), TimeUnit.MILLISECONDS)
             .toNumericString()
     }
+
+    fun getTimeOffset(timeZoneID: String): String{
+        val currentLocalTime: TimeZone = TimeZone.getTimeZone(timeZoneID)
+        return TimeUnit.HOURS.convert(currentLocalTime.rawOffset.toLong(), TimeUnit.MILLISECONDS)
+            .toNumericString()
+    }
 }

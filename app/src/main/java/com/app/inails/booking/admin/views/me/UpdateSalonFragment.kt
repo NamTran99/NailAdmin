@@ -37,6 +37,7 @@ import com.app.inails.booking.admin.model.response.TimeZoneForm
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.utils.TimeUtils
+import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
 import com.app.inails.booking.admin.views.me.EditScheduleFragment.Companion.REQUEST_KEY
 import com.app.inails.booking.admin.views.me.adapters.SalonScheduleAdapter
 import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter
@@ -49,7 +50,8 @@ import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 import retrofit2.await
 
 
-class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBarOwner {
+class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBarOwner,
+    MessageDialogOwner {
     val viewModel by viewModel<UpdateSalonViewModel>()
     val binding by viewBinding(FragmentUpdateSalonBinding::bind)
     private lateinit var imageAdapter: UploadPhotoAdapter
@@ -81,7 +83,13 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
             SimpleTopBarState(
                 R.string.title_update_salon_information,
                 onBackClick = {
-                    activity?.onBackPressed()
+                    confirmDialog.show(
+                        title = getString(R.string.tittle_exit_update_salon),
+                        message = getString(R.string.message_exit),
+                        function = {
+                            activity?.onBackPressed()
+                        }
+                    )
                 },
                 extensionButton = ExtensionButton(
                     isShow = true,
@@ -94,13 +102,11 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                                 phone = etPhone.text.toString()
                                 images = allImage.toList()
                                 description = etDescription.text.toString()
-                                zoneID = TimeUtils.getZoneID()
-                                offsetDisplay = "UTC ${TimeUtils.getTimeOffset()}"
                                 schedules = viewModel.listSchedules.map {
                                     ScheduleForm(
                                         day = it.day,
-                                        startTime = it.startTime.convertTime(),
-                                        endTime = it.endTime.convertTime()
+                                        startTime = it.startTime.convertTime(fromZoneID = zoneID),
+                                        endTime = it.endTime.convertTime(fromZoneID = zoneID)
                                     )
                                 }
                             }
@@ -113,7 +119,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
         )
 
         with(binding) {
-            tvBusinessHour.text = viewModel.salonForm.timeZone
+            tvBusinessHour.text = viewModel.salonForm.fullTimeZoneDisplay1
             etPhone.inputTypePhoneUS()
             scheduleAdapter = SalonScheduleAdapter(rcvSchedule)
             imageAdapter = UploadPhotoAdapter(rvImages).apply {
@@ -147,7 +153,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
             tvEditSchedule.onClick {
                 val editScheduleArgs = EditScheduleArgs(
                     viewModel.listSchedules,
-                    viewModel.salonDetail.value?.tzDisplay2 ?: ""
+                    "${viewModel.salonForm.zoneID} ${viewModel.salonForm.offsetDisplay}"
                 )
                 Router.run { redirectToEditScheduleSalon(editScheduleArgs) }
             }
@@ -158,7 +164,18 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
 
         with(viewModel) {
             timeZoneResult.bind {
-                binding.tvBusinessHour.text = "Business Hour (${it.timeZoneId + 8})"
+                val oldTimezone = salonForm.fullTimeZoneDisplay2
+                salonForm.run {
+                    setUpDataTimeZone(TimeUtils.getTimeOffset(it.timeZoneId), it.timeZoneId)
+                }
+                binding.tvBusinessHour.text = salonForm.fullTimeZoneDisplay1
+
+                if (oldTimezone != salonForm.fullTimeZoneDisplay2) {
+                    messageDialog.show(
+                        "Notice",
+                        "Your timezone has changed from $oldTimezone to ${salonForm.fullTimeZoneDisplay2}\nPlease check your business hour before saving information!"
+                    )
+                }
             }
             scheduleAdapter.submit(listSchedules)
             salonDetail.bind(::displays)
@@ -235,7 +252,10 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
 
         // Save Old Data
         viewModel.salonForm.run {
-            timeZone = item.tzDisplay1
+            fullTimeZoneDisplay2 = item.tzDisplay2
+            zoneID = item.zoneID
+            offsetDisplay = item.zoneOffSet
+            fullTimeZoneDisplay1 = item.tzDisplay1
             id = item.salonID.toInt()
             lat = item.lat.toDouble()
             long = item.lng.toDouble()
@@ -329,29 +349,15 @@ class FetchTimeZone(
 ) {
     val result = MutableLiveData<ITimeZone>()
     suspend operator fun invoke(timeZone: TimeZoneForm) {
-
-        val rs=googleApi.getTimeZone(
-            location = timeZone.location,
-            timestamp = timeZone.timestamp,
-            key = timeZone.key
-        ).await()
-
-//        googleApi.getTimeZone(
-//            location = timeZone.location,
-//            timestamp = timeZone.timestamp,
-//            key = timeZone.key
-//        ).enqueue(object : Callback<TimeZoneDTO> {
-//            override fun onResponse(call: Call<TimeZoneDTO>, response: Response<TimeZoneDTO>) {
-//                if(response.isSuccessful){
-//                    result.post(timeZoneFactory.createTimeZone(response.body()!!))
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<TimeZoneDTO>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        } )
+        result.post(
+            timeZoneFactory.createTimeZone(
+                googleApi.getTimeZone(
+                    location = timeZone.location,
+                    timestamp = timeZone.timestamp,
+                    key = timeZone.key
+                ).await()
+            )
+        )
     }
 }
 

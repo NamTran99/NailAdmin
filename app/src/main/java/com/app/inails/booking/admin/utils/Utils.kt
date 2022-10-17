@@ -3,8 +3,7 @@ package com.app.inails.booking.admin.utils
 import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
-import android.util.Log
-import android.webkit.MimeTypeMap
+import com.app.inails.booking.admin.BuildConfig
 
 object Utils {
 
@@ -32,5 +31,10 @@ object Utils {
         return isInBackground
     }
 
+    fun getDisplayBuildConfig(): String {
+        val listItems = BuildConfig.VERSION_NAME.split("_")
 
+        val display = "Version ${listItems[0]}"
+        return if(listItems.size > 1) "${display}\n(${listItems[1]})" else display
+    }
 }

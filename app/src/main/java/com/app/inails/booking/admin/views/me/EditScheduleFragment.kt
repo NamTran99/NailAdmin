@@ -15,6 +15,7 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.utils.TimeUtils
 import com.app.inails.booking.admin.views.me.adapters.SalonEditScheduleAdapter
+import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import kotlinx.parcelize.Parcelize
@@ -55,6 +56,32 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                 onBackClick = {
                     activity?.onBackPressed()
                 },
+                extensionButton = ExtensionButton(
+                    isShow = true,
+                    content = "Save",
+                    onclick = {
+                        val schedule = adapter.items?.find {
+                            (it.startTime != null && it.endTime == null) ||
+                                    (it.endTime != null && it.startTime == null)
+                        }
+                        if (schedule != null) {
+                            if (schedule.startTime == null) {
+                                toast("Please select the Start Time of ${schedule.dayFormat}")
+                            }
+
+                            if (schedule.endTime == null) {
+                                toast("Please select the End Time of ${schedule.dayFormat}")
+                            }
+
+                            return@ExtensionButton
+                        }
+                        parentFragmentManager.setFragmentResult(
+                            REQUEST_KEY,
+                            bundleOf("schedules" to adapter.items?.toList())
+                        )
+                        activity?.onBackPressed()
+                    }
+                )
             )
         )
 
@@ -63,29 +90,7 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                 submit(schedules)
                 updateItem(arg.schedules)
             }
-            btSave.onClick {
-                val schedule = adapter.items?.find {
-                    (it.startTime != null && it.endTime == null) ||
-                            (it.endTime != null && it.startTime == null)
-                }
-                if (schedule != null) {
-                    if (schedule.startTime == null) {
-                        toast("Please select the Start Time of ${schedule.dayFormat}")
-                    }
-
-                    if (schedule.endTime == null) {
-                        toast("Please select the End Time of ${schedule.dayFormat}")
-                    }
-
-                    return@onClick
-                }
-                parentFragmentManager.setFragmentResult(
-                    REQUEST_KEY,
-                    bundleOf("schedules" to adapter.items?.toList())
-                )
-                activity?.onBackPressed()
-            }
-            tvTimeZone.setText("${TimeUtils.getZoneID()} UTC ${TimeUtils.getTimeOffset()}")
+            tvTimeZone.setText(arg.timeZoneDisplay)
         }
     }
 }

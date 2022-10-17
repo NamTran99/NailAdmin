@@ -6,6 +6,7 @@ import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogMessageBinding
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
+import com.app.inails.booking.admin.views.main.dialogs.NotifyDialog
 
 open class MessageDialog(context: Context) : BaseDialog(context) {
     private var mOnDismiss: () -> Unit = {}
@@ -32,4 +33,10 @@ open class MessageDialog(context: Context) : BaseDialog(context) {
     override fun show() {
         error("Not support")
     }
+}
+interface MessageDialogOwner : ViewScopeOwner {
+    val messageDialog: MessageDialog
+        get() = with(viewScope) {
+            getOr("message:dialog") { MessageDialog(context) }
+        }
 }

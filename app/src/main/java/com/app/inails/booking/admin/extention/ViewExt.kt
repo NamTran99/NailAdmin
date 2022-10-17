@@ -32,8 +32,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
+import com.google.android.material.button.MaterialButton
 import java.lang.ref.WeakReference
 import java.util.*
+
+infix fun Boolean.lockButton(button: MaterialButton) {
+    button.isEnabled = this
+    button.backgroundTintList =
+        button.context.colorStateList(if (this) R.color.colorPrimary else R.color.gray)
+}
 
 fun View.onClick(callback: View.OnClickListener?) {
     val clickTime = 300

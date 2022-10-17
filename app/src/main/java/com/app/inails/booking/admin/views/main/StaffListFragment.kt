@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.views.main
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
+import android.support.core.livedata.map
 import android.support.core.view.viewBinding
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
@@ -71,7 +72,11 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
 class ManageStaffViewModel(
     private val staffRepo: StaffRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-    val staffs = staffRepo.results
+    val staffs = staffRepo.results.map {
+        it?.sortedByDescending {
+            it.status
+        }?.reversed()
+    }
 
     fun refresh(page: Int = 1) = launch(refreshLoading, error) {
         staffRepo("", page)

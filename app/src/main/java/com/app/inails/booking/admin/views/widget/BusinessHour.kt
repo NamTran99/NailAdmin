@@ -78,8 +78,8 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
                         mEndHours = hours
                         data.endTime = time
                     }
+                    onTimeChange?.invoke(data)
                 }
-                onTimeChange?.invoke(data)
             }
             mFromTimePickerDialog.apply {
                 setupClickWithView(tvFromTime)

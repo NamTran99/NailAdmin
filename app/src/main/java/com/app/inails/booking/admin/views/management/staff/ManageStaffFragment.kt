@@ -6,6 +6,7 @@ import android.support.core.event.LoadingEvent
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.LoadingLiveData
 import android.support.core.livedata.SingleLiveEvent
+import android.support.core.livedata.map
 import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
@@ -85,7 +86,7 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                     mAdapter.clear()
                 }
                 mAdapter.submit(it.second)
-                binding.emptyLayout.tvEmptyData.show(it.second.isEmpty() && it.first == 1)
+                binding.emptyLayout.tvEmptyData.show(it.second.isNullOrEmpty() && it.first == 1)
             }
 
             success.bind {
@@ -215,7 +216,9 @@ class ManageStaffViewModel(
     private val staffRepo: StaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val loadingCustom: LoadingEvent = LoadingLiveData()
-    val staffs = fetchAllStaffRepo.results
+    val staffs = fetchAllStaffRepo.results.map {
+        it?.first to it?.second?.sortedByDescending { it.active }
+    }
     val staff = staffRepo.result
     val staffRemove = staffRepo.resultRemove
     val form = UpdateStatusStaffForm()

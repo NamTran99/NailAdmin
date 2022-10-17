@@ -71,6 +71,10 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = textFormatter.formatDisplayTimeZone(salonDTO)
             override val tzDisplay2: String
                 get() = "${salonDTO.timezone} ${salonDTO.tz}"
+            override val zoneID: String
+                get() = salonDTO.timezone.safe()
+            override val zoneOffSet: String
+                get() = salonDTO.tz.safe()
         }
     }
 }
