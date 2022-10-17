@@ -22,6 +22,7 @@ class LoginRepo(
 		form.deviceToken = appCache.deviceToken
         val user = authenticateApi.login(form).await()
         userLocalSource.saveUser(user)
+        userLocalSource.saveToken(user.token)
     }
 }
 

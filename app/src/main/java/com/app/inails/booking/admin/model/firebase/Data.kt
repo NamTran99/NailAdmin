@@ -12,6 +12,7 @@ data class Data(
     val rating: Int? = 0,
     val reason_cancel: String? = "",
     val salon_name: String? = "",
+    val salon_id: Int? = 0,
     val service_custom_name: String? = "",
     val services: List<Service> = listOf(),
     val staff_name: String? = "",
