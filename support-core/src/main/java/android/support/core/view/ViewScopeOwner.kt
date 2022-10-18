@@ -1,6 +1,7 @@
 package android.support.core.view
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.support.core.R
 import android.view.View
@@ -14,6 +15,7 @@ interface ViewScopeOwner {
                 is Activity -> this.findViewById(android.R.id.content)
                 is ViewGroup -> this
                 is Fragment -> requireView() as ViewGroup
+                is Dialog -> this.findViewById(android.R.id.content)
                 else -> error("${this.javaClass.name} is not ContextOwner")
             }
             var tag = view.getTag(R.id.view_scope) as? ViewScope

@@ -1,3 +1,4 @@
+import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
@@ -13,7 +14,7 @@ class FetchListCustomerRepo(
     private val customerFactory: CustomerFactory,
 ) {
     val results = MutableLiveData<List<ICustomer>>()
-    val resultWithPage = MutableLiveData<Pair<Int,List<ICustomer>>>()
+    val resultWithPage = SingleLiveEvent<Pair<Int,List<ICustomer>>>()
     suspend operator fun invoke(search: String?) {
         results.post(
             customerFactory

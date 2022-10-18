@@ -3,20 +3,29 @@ package com.app.inails.booking.admin.views.management.staff
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import androidx.annotation.StringRes
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateStaffBinding
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IStaff
+import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 
 
-class CreateUpdateStaffDialog(context: Context) : BaseDialog(context) {
+class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
     private val binding = viewBinding(DialogCreateUpdateStaffBinding::inflate)
 
     init {
+        setCancelable(false)
         binding.etStaffPhone.inputTypePhoneUS()
         binding.btClose.onClick {
-            dismiss()
+            confirmDialog.show(
+                title = context.getString(R.string.tittle_exit_update_salon),
+                message = context.getString(R.string.message_exit),
+                function = {
+                    dismiss()
+                }
+            )
         }
     }
 

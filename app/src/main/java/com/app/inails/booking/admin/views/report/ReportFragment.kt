@@ -18,6 +18,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentReportBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.formatPrice
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.AppointmentFilterForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
@@ -53,6 +54,15 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                 binding.viewRefresh.isRefreshing = it
             }
             listAppointment.bind(mAdapter::submit)
+            listAppointment.bind{
+                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
+                !it.isNullOrEmpty() show binding.rvReport
+
+                binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isEmpty())
+                    "Your salon doesn't have any reports yet" else "There are no results matching your search keyword."
+
+                binding.tvTotalApm.text = if(it.size <=1) "( ${it.size} booking )" else "( ${it.size} bookings )"
+            }
             total.bind {
                 binding.tvTotal.text = it.formatPrice()
             }
@@ -138,6 +148,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
 
     private fun refreshView() {
         binding.tvTotal.text = totalDefault
+        binding.tvTotalApm.text = totalApmDefault
         mAdapter.clear()
         viewModel.refresh()
     }
@@ -149,6 +160,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
 
     companion object {
         const val totalDefault = "$---.--"
+        const val totalApmDefault = "( --- bookings )"
     }
 }
 
@@ -183,7 +195,6 @@ class ReportFragmentViewModel(
 //            type = ReportFragmentViewModel.TYPE_WALK_IN_CUSTOMER
 //            status = APM_FINISH
 //        }
-        Log.d("TAG", "NamTD8 getListAppointment: ${filterCustomerForm.status} ")
         appointmentRepository(filterCustomerForm)
     }
 

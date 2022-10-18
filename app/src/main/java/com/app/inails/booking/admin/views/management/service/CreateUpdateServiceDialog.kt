@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import android.text.InputFilter
 import androidx.annotation.StringRes
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateServiceBinding
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateStaffBinding
@@ -13,16 +14,25 @@ import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.model.ui.IStaff
+import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
+import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
 import com.app.inails.booking.admin.views.management.staff.CreateUpdateStaffDialog
 import com.app.inails.booking.admin.views.widget.DecimalDigitsInputFilter
 
 
-class CreateUpdateServiceDialog(context: Context) : BaseDialog(context) {
+class CreateUpdateServiceDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
     private val binding = viewBinding(DialogCreateUpdateServiceBinding::inflate)
 
     init {
+        setCancelable(false)
         binding.btClose.onClick {
-            dismiss()
+            confirmDialog.show(
+                title = context.getString(R.string.tittle_exit_update_salon),
+                message = context.getString(R.string.message_exit),
+                function = {
+                    dismiss()
+                }
+            )
         }
     }
 
@@ -46,8 +56,6 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context) {
                     etServiceName.text.toString(),
                     etPrice.text.toString(),
                 )
-
-                dismiss()
             }
         }
         super.show()

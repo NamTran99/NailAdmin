@@ -154,7 +154,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val createAt: String
                 get() = appointmentDTO.created_at_timestamp.toCreatedAt()
             override val dateSelected: String
-                get() = appointmentDTO.date_appointment!!.toDateAppointment()
+                get() = appointmentDTO.date_appointment!!.toDateAppointment(formatTz = "UTC")
             override val dateTag: String
                 get() = appointmentDTO.date_appointment!!.toDateTagAppointment()
             override val timeSelected: String

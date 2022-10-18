@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.repository.auth
 
+import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
@@ -109,7 +110,7 @@ class FetchAllStaffRepo(
     private val bookingFactory: BookingFactory,
     private val userLocalSource: UserLocalSource
 ) {
-    val results = MutableLiveData<Pair<Int,List<IStaff>>>()
+    val results = SingleLiveEvent<Pair<Int,List<IStaff>>>()
     suspend operator fun invoke(keyword: String, page: Int) {
         results.post(page to
             bookingFactory

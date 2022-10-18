@@ -50,10 +50,13 @@ fun String.toDate(
 
 fun String.toDateAppointment(
     format: String = "yyyy-MM-dd'T'HH:mm:ss",
-    parseFormat: String = "MMM dd (EEEE)"
+    parseFormat: String = "MMM dd (EEEE)",
+    formatTz: String? = null
 ): String {
     val dateFormat = SimpleDateFormat(format, Locale.getDefault())
-    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    formatTz?.let {
+        dateFormat.timeZone = TimeZone.getTimeZone(it)
+    }
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat(parseFormat, Locale.getDefault())
