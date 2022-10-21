@@ -81,10 +81,11 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
             }
             success.bind {
                 success(it)
+                refreshView()
             }
             checkInSuccess.bind {
                 success("Client check-in success")
-                appEvent.changeTabBooking.post(0)
+                refreshView()
             }
             appointment.bind {
                 finishBookingDialog.dismiss()
@@ -154,7 +155,7 @@ class CustomerBookingListFragment : BaseFragment(R.layout.fragment_customer_book
             )
         )
         with(binding) {
-            searchView.setHint(R.string.hint_search_order_history)
+            searchView.setHint(viewModel.customerListBookingUI.searchHint)
             mAdapter = AppointmentAdapter(rvServices).apply {
                 onClickItemListener = {
                     Router.redirectToAppointmentDetail(self, it.id)
@@ -379,6 +380,7 @@ class CustomerBookingListViewModel(
 
     fun customerWalkIn(id: Int) = launch(loading, error) {
         checkInSuccess.post(appointmentRepo.customerWalkIn(id))
+        success.post("Remind customer success")
     }
 
     fun loadCustomer(keyword: String, page: Int) = launch(if (page == 1) loading else null, error) {

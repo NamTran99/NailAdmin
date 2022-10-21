@@ -176,11 +176,7 @@ class ManageServiceViewModel(
     val serviceUpdated = updateServiceRepo.results
     val serviceDeleted = deleteServiceRepo.results
     val serviceChanged = changeActiveServiceRepository.results
-    val listService = getListServiceRepo.results.map {
-        it?.sortedByDescending {
-            it.isActive
-        }
-    }
+    val listService = getListServiceRepo.results
 
     val createForm = ServiceForm()
     val updateForm = ServiceForm()

@@ -109,7 +109,9 @@ class FilterApmDialog(context: Context) : BaseDialog(context) {
                     customer = null
                     toDate = null
                     fromDate = null
-                    status = null
+                    status = if(type == FilterType.FILTER_IN_REPORT) status else null
+                    searchStaff = if(type == FilterType.FILTER_BY_STAFF) searchStaff else null
+                    searchCustomer = if(type == FilterType.FILTER_BY_CUSTOMER) searchCustomer else null
                 }
                 onSummitData.invoke(form)
             }

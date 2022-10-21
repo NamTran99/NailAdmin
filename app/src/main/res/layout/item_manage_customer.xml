@@ -18,7 +18,6 @@
             android:layout_weight="1"
             android:id="@+id/tvCustomerName"
             style="@style/AppTheme.TextViewResponsive"
-            android:includeFontPadding="false"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

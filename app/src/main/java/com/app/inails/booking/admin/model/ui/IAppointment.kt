@@ -126,7 +126,7 @@ class AppointmentFilterForm(
     var customer : ICustomer ?= null,
     var keyword: String = "",
     var status: Int? = null,
-    var type: Int? = 1 // type = null: filter type 1 && 2
+    var type: Int? = 1, // type = null: filter type 1 && 2
 ){
     fun isHaveDataForFilter(): Boolean{
         return  !fromDate.isNullOrEmpty() || !toDate.isNullOrEmpty() ||
@@ -139,8 +139,8 @@ class AppointmentFilterForm(
         fromDate = form.fromDate
         staff = form.staff
         customer = form.customer
-        searchStaff = form.staff?.id
-        searchCustomer = form.customer?.id
+        searchStaff = form.staff?.id ?:form.searchStaff
+        searchCustomer = form.customer?.id ?: form.searchCustomer
         status = form.status
     }
 }

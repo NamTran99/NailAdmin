@@ -184,7 +184,6 @@ class ReportFragmentViewModel(
             total + item.price
         }
     }
-    val success = SingleLiveEvent<Any>()
 
     fun refresh() {
         getListAppointment()

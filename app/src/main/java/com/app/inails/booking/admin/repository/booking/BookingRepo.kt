@@ -3,11 +3,14 @@ package com.app.inails.booking.admin.repository.booking
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.remote.BookingApi
+import com.app.inails.booking.admin.extention.toDateCheckIn
 import com.app.inails.booking.admin.extention.toServerUTC2
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.model.ui.*
+import com.app.inails.booking.admin.utils.TimeUtils
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 
 
@@ -22,17 +25,20 @@ class AppointmentRepository(
     val resultRemove = MutableLiveData<Int>()
 
     suspend operator fun invoke(form: AppointmentFilterForm) {
+        Log.d("TAG", "invoke: NamTD8 time: ${        TimeUtils.getTimeZoneOffSet()
+        }")
         results.post(
             bookingFactory
                 .createAppointmentList(
                     bookingApi.listAppointmentInDashboard(
                         form.type,
-                        date = form.fromDate?.toServerUTC2(DatePickerDialog.FORMAT_DATE_API),
-                        toDate = form.toDate?.toServerUTC2(DatePickerDialog.FORMAT_DATE_API),
+                        date = form.fromDate,
+                        toDate = form.toDate,
                         searchStaff = form.searchStaff?: form.staff?.id,
                         searchCustomer =  form.searchCustomer?: form.customer?.id,
                         keyword = form.keyword,
-                        status = form.status
+                        status = form.status,
+                        timeZone = TimeUtils.getTimeZoneOffSet()
                     )
                         .await()
                 )

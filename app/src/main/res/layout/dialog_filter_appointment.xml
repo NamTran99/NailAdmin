@@ -172,9 +172,12 @@
                 <TextView
                     android:id="@+id/tvStaff"
                     style="@style/AppTheme.EditText"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_16"
                     android:focusable="false"
                     android:hint="@string/label_select_staff"
+                    android:inputType="textMultiLine"
+                    android:minHeight="@dimen/height_of_edit_text"
                     app:drawableEndCompat="@drawable/ic_arrow_right" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -195,9 +198,12 @@
                 <TextView
                     android:id="@+id/tvCustomer"
                     style="@style/AppTheme.EditText"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_16"
                     android:focusable="false"
                     android:hint="@string/label_select_customer"
+                    android:inputType="textMultiLine"
+                    android:minHeight="@dimen/height_of_edit_text"
                     app:drawableEndCompat="@drawable/ic_arrow_right" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 

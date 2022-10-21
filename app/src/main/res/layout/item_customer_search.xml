@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:gravity="center"
     android:paddingVertical="@dimen/size_16"
     android:paddingHorizontal="@dimen/size_24">
 
     <TextView
         android:id="@+id/tvCustomerName"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_weight="1"
         tools:text="abc" />
 

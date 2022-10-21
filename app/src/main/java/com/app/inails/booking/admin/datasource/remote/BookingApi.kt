@@ -32,6 +32,7 @@ interface BookingApi : Injectable {
         @Query("search_customer") searchCustomer: Int? = null,
         @Query("keyword") keyword: String? = null,
         @Query("status") status: Int? = null,
+        @Query("tz") timeZone: String? = null
     ): ApiAsync<ArrayList<AppointmentDTO>>
 
     @POST("appointment/update-status-appointment")

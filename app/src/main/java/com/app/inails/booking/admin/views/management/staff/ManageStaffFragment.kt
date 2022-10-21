@@ -120,10 +120,6 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                     viewModel.search(searchView.text.toString(), nexPage)
                 }
 
-                onClickItemListener = {
-
-                }
-
                 onUpdateStatusListener = { staffID, stt ->
                     viewModel.form.run {
                         id = staffID
@@ -216,9 +212,7 @@ class ManageStaffViewModel(
     private val staffRepo: StaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val loadingCustom: LoadingEvent = LoadingLiveData()
-    val staffs = fetchAllStaffRepo.results.map {
-        it?.first to it?.second?.sortedByDescending { it.active }
-    }
+    val staffs = fetchAllStaffRepo.results
     val staff = staffRepo.result
     val staffRemove = staffRepo.resultRemove
     val form = UpdateStatusStaffForm()

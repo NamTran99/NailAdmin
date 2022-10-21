@@ -40,6 +40,7 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
         }
         binding.tvVersion.text = Utils.getDisplayBuildConfig()
     }
+
 }
 
 class SplashViewModel(

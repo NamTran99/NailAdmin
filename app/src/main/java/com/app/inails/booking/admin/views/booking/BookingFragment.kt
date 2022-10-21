@@ -11,7 +11,10 @@ import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
@@ -175,6 +178,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
             success.bind {
                 success(it)
+                refresh(mType)
             }
 
             checkInSuccess.bind {

@@ -100,7 +100,8 @@ class DatePickerDialog(private val activity: BaseActivity) :
         val datePickerDialog = DatePickerDialog(
             context,
             R.style.AppDatePickerCalendarDialog, { _, year1, monthOfYear, dayOfMonth ->
-                calendar.set(year1, monthOfYear, dayOfMonth)
+                calendar.clear()
+                calendar.set(year1, monthOfYear, dayOfMonth, 0, 0, 0)
                 val simpleDateFormat = SimpleDateFormat(FORMAT_DATE_DISPLAY, Locale.getDefault())
                 val simpleDateTagFormat = SimpleDateFormat(FORMAT_DATE_API, Locale.getDefault())
                 display(
