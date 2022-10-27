@@ -10,13 +10,15 @@ import com.app.inails.booking.admin.databinding.ItemStaffStatusBinding
 import com.app.inails.booking.admin.extention.drawableStart
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IAppointment
+import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 
 class StaffStatusAdapter(view: RecyclerView) :
     PageRecyclerAdapter<IStaff, ItemStaffStatusBinding>(view) {
-    var onClickItemListener: ((IStaff) -> Unit)? = null
     var onClickAppointmentListener: ((IAppointment?) -> Unit)? = null
+    var onClickShowStaffInfor: ((IStaff?) -> Unit)? = null
+    var onClickShowCustomerInfor: ((ICustomer?) -> Unit)? = null
 
     override fun onCreateBinding(parent: ViewGroup): ItemStaffStatusBinding {
         return parent.bindingOf(ItemStaffStatusBinding::inflate)
@@ -29,11 +31,14 @@ class StaffStatusAdapter(view: RecyclerView) :
         adapterPosition: Int
     ) {
         binding.apply {
-            root.onClick {
-                onClickItemListener?.invoke(item)
-            }
             tvAppointmentID.setOnClickListener {
                 onClickAppointmentListener?.invoke(item.appointment)
+            }
+            tvStaffName.onClick{
+                onClickShowStaffInfor?.invoke(item)
+            }
+            tvCustomerName.onClick{
+                onClickShowCustomerInfor?.invoke(item.appointment?.customer)
             }
             tvStaffName.text = item.name
             tvStatus.drawableStart(item.resIconStatus)
@@ -41,15 +46,13 @@ class StaffStatusAdapter(view: RecyclerView) :
             tvStatus.setTextColor(ContextCompat.getColor(view.context, item.colorStatus))
             if (item.status == DataConst.StaffStatus.STAFF_WORKING) {
                 tvCustomerName.text = item.customerName
-                tvAppointmentID.text = "(#${item.appointment?.id})"
-                tvDateTime.text = "${item.timeCheckInAppointment} - ${item.timeEndAppointment}"
+                tvAppointmentID.text = "#${item.appointment?.id}"
+                tvDateTime.text = "(${item.timeCheckInAppointment} - ${item.timeEndAppointment})"
             } else {
                 tvDateTime.text = ""
                 tvAppointmentID.text = ""
                 tvCustomerName.text = ""
             }
-
-
         }
     }
 }

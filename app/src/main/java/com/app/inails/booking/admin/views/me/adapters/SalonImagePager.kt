@@ -74,7 +74,6 @@ private class LoopHandler(val function: () -> Unit) : Handler() {
     }
 
     fun start() {
-        Log.d("TAG", "NamTD8: start")
         if (mRunning) return
         mRunning = true
         postDelayed(mRunnable, LOOP_TIME_OUT)

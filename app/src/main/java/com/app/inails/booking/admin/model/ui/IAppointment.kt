@@ -33,7 +33,7 @@ interface IAppointment {
     val dateTime: String get() = ""
     val hasFeedback: Boolean get() = false
     val feedbackContent: String get() = ""
-    val feedbackRating: Int get() = 0
+    val feedbackRating: Float get() = 0f
     val noteFinish: String get() = ""
     val reasonCancel: String get() = ""
     val price: Double get() = 0.0

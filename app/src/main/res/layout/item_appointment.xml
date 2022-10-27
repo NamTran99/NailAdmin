@@ -137,7 +137,7 @@
 
         <TextView
             android:id="@+id/tv_appointment_note"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/size_10"
             tools:text="Note" />

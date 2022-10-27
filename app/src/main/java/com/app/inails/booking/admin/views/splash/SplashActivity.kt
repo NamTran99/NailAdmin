@@ -26,11 +26,9 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val appointmentID =  intent.extras?.getInt(MainActivity.APPOINTMENT_ID,0)
-//        Log.d("TAG", "NamTD8 onCreate() called with: savedInstanceState = $appointmentID")
         CoroutineScope(Dispatchers.IO).launch {
             delay(TimeUnit.SECONDS.toMillis(3))
             withContext(Dispatchers.Main) {
-                Log.d("TAG", "onCreate: NamTD8 logout ${viewModel.user}")
                 if (viewModel.user != null) {
                     Router.run { redirectToMain() }
                 } else {

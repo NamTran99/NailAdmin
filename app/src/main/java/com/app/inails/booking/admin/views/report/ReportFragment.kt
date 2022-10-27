@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.views.report
 
 import FetchListCustomerRepo
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -48,24 +49,31 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
         setUpListener()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUpListener() {
         with(viewModel) {
             refreshLoading.bind {
+                mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
             }
-            listAppointment.bind(mAdapter::submit)
             listAppointment.bind{
-                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
-                !it.isNullOrEmpty() show binding.rvReport
+                if(it.first == 1){
+                    mAdapter.clear()
+                }
+                mAdapter.submit(it.second.appointment)
+
+                (mAdapter.itemCount == 0) show binding.emptyLayout.tvEmptyData
+                (mAdapter.itemCount > 0) show binding.rvReport
 
                 binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isEmpty())
                     "Your salon doesn't have any reports yet" else "There are no results matching your search keyword."
 
-                binding.tvTotalApm.text = if(it.size <=1) "( ${it.size} booking )" else "( ${it.size} bookings )"
+                it.second.totalAppointment.let { size ->
+                    binding.tvTotalApm.text = if(size <=1) "( $size booking )" else "( $size bookings )"
+                }
+                binding.tvTotal.text = "$${it.second.totalPrice}"
             }
-            total.bind {
-                binding.tvTotal.text = it.formatPrice()
-            }
+
             staffList.bind {
                 if (it.first == 1) {
                     searchStaffDialog.onLoadMoreListener = { keyword, page ->
@@ -115,6 +123,10 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener { refreshView() }
             mAdapter = AppointmentAdapter(rvReport).apply {
+                onLoadMoreListener = { nextPage, _ ->
+                    viewModel.getListAppointment(nextPage)
+                }
+
                 onClickItemListener = {
                     Router.redirectToAppointmentDetail(self, it.id)
                 }
@@ -135,7 +147,6 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                             viewModel.loadStaff("", 1)
                         }
                     ) { form ->
-                        Log.d("TAG", "NamTD8: status ${form.status}")
                         viewModel.filterCustomerForm.setDataFromDialog(form)
                         searchView.showHideImgFilter(viewModel.filterCustomerForm)
                         refreshView()
@@ -150,14 +161,13 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
         binding.tvTotal.text = totalDefault
         binding.tvTotalApm.text = totalApmDefault
         mAdapter.clear()
-        viewModel.refresh()
+        viewModel.getListAppointment()
     }
 
     override fun onResume() {
         super.onResume()
         refreshView()
     }
-
     companion object {
         const val totalDefault = "$---.--"
         const val totalApmDefault = "( --- bookings )"
@@ -171,30 +181,16 @@ class ReportFragmentViewModel(
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     val filterCustomerForm = AppointmentFilterForm(
-        type = ReportFragmentViewModel.TYPE_WALK_IN_CUSTOMER,
+        type = null,
         status = APM_FINISH
     )
 
-    val listAppointment = appointmentRepository.results
+    val listAppointment = appointmentRepository.resultReport
     val staffList = staffRepo.results
     val customerList = customerRepo.resultWithPage
 
-    val total = listAppointment.map {
-        it?.fold(0.0) { total, item ->
-            total + item.price
-        }
-    }
-
-    fun refresh() {
-        getListAppointment()
-    }
-
-    private fun getListAppointment() = launch(refreshLoading, error) {
-//        filterCustomerForm.apply {
-//            type = ReportFragmentViewModel.TYPE_WALK_IN_CUSTOMER
-//            status = APM_FINISH
-//        }
-        appointmentRepository(filterCustomerForm)
+    fun getListAppointment(page: Int = 1) = launch(refreshLoading, error) {
+        appointmentRepository.getApmFinishForReport(filterCustomerForm, page)
     }
 
     fun loadCustomer(keyword: String, page: Int) = launch(if (page == 1) loading else null, error) {

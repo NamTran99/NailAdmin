@@ -52,14 +52,14 @@
             android:textColor="@color/gray08" />
 
         <TextView
-            android:layout_weight="1"
-            android:textStyle="bold"
             android:id="@+id/tvBookingID"
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="0dp"
-            android:gravity="end"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
             android:textSize="@dimen/text_size_12"
+            android:textStyle="bold"
             tools:text="#123456" />
     </LinearLayout>
 
@@ -73,8 +73,8 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray08"
-            android:text="@string/customer_name" />
+            android:text="@string/customer_name"
+            android:textColor="@color/gray08" />
 
         <TextView
             android:id="@+id/tvCustomerName"
@@ -113,8 +113,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_23"
         android:layout_marginTop="@dimen/size_8"
-        android:textColor="@color/gray08"
-        android:text="@string/service" />
+        android:text="@string/service"
+        android:textColor="@color/gray08" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvServices"
@@ -123,7 +123,7 @@
         android:layout_marginHorizontal="@dimen/size_23"
         android:layout_marginTop="@dimen/size_12"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_report_list_services"/>
+        tools:listitem="@layout/item_report_list_services" />
 
     <View
         android:layout_width="match_parent"
@@ -136,8 +136,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/size_19">
+        android:layout_marginTop="@dimen/size_19"
+        android:orientation="horizontal">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -147,13 +147,13 @@
             android:textColor="@color/gray08" />
 
         <TextView
-            android:textAlignment="textEnd"
-            android:layout_weight="1"
             android:id="@+id/tvStaffName"
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
             android:textSize="@dimen/text_size_12"
             tools:text="Amanda" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -162,24 +162,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/size_8">
+        android:layout_marginTop="@dimen/size_8"
+        android:orientation="horizontal">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray08"
-            android:text="@string/time" />
+            android:text="@string/time"
+            android:textColor="@color/gray08" />
 
         <TextView
-            android:layout_weight="1"
             android:id="@+id/tvDateTime"
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="wrap_content"
-            android:textAlignment="textEnd"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
             android:textSize="@dimen/text_size_12"
             tools:text="Amanda" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -195,18 +195,18 @@
             style="@style/AppTheme.TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray08"
-            android:text="@string/reason" />
+            android:text="@string/reason"
+            android:textColor="@color/gray08" />
 
         <TextView
-            android:layout_marginStart="@dimen/size_10"
             android:id="@+id/tvReason"
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:justificationMode="inter_word"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size_10"
+            android:justificationMode="inter_word"
+            android:textAlignment="textEnd"
             tools:text="Amanda" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -236,16 +236,17 @@
             android:theme="@style/AppTheme.RatingBar" />
     </RelativeLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvFeedbackContent"
         style="@style/AppTheme.TextViewResponsive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/size_23"
-        android:textColor="@color/gray08"
         android:layout_marginTop="@dimen/size_17"
         android:justificationMode="inter_word"
+        android:maxLines="@null"
+        android:textColor="@color/gray08"
         tools:text="Feedback" />
 
     <androidx.appcompat.widget.LinearLayoutCompat

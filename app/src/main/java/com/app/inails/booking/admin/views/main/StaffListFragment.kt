@@ -19,8 +19,10 @@ import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.StaffRepo
+import com.app.inails.booking.admin.views.booking.CustomerInfoOwner
+import com.app.inails.booking.admin.views.booking.StaffInfoDialogOwner
 
-class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
+class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list), StaffInfoDialogOwner, CustomerInfoOwner {
     private val binding by viewBinding(FragmentStaffListBinding::bind)
     private val viewModel by viewModel<ManageStaffViewModel>()
     private lateinit var mAdapter: StaffStatusAdapter
@@ -33,19 +35,30 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             viewRefresh.colorSchemeDefault()
-            mAdapter = StaffStatusAdapter(binding.rvStaff)
+            mAdapter = StaffStatusAdapter(binding.rvStaff).apply {
+                onLoadMoreListener = { nexPage, _ ->
+                    viewModel.refresh(nexPage)
+                }
+                onClickAppointmentListener = {
+                    Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
+                }
+                onClickShowStaffInfor = {
+                    it?.let {
+                        staffInfoDialog.show(it)
+                    }
+                }
+                onClickShowCustomerInfor = {
+                    it?.let {
+                        customerInfoDialog.show(it)
+                    }
+                }
+            }
             rvStaff.addItemDecoration(
                 DividerItemDecoration(
                     requireContext(),
                     LinearLayoutManager.VERTICAL
                 )
             )
-            mAdapter.onLoadMoreListener = { nexPage, _ ->
-                viewModel.refresh(nexPage)
-            }
-            mAdapter.onClickAppointmentListener = {
-                Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
-            }
 
             btClose.setOnClickListener {
                 findNavigator().navigateUp()
@@ -74,7 +87,7 @@ class ManageStaffViewModel(
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val staffs = staffRepo.results.map {
         it?.sortedByDescending {
-            it.status
+            it.orderStaffStatusList
         }?.reversed()
     }
 
@@ -82,6 +95,3 @@ class ManageStaffViewModel(
         staffRepo("", page)
     }
 }
-
-
-

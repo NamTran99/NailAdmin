@@ -130,7 +130,7 @@ class TextFormatter {
             dateFormat.parse(timeCheckIn)
         val timePlus = date.time + (workTime * 60 * 1000)
         date.time = timePlus
-        val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val simpleDateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return simpleDateFormat.format(date)
     }
 

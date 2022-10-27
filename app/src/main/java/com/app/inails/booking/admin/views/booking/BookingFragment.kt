@@ -11,17 +11,15 @@ import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentBookingBinding
 import com.app.inails.booking.admin.exception.setOnSelected
-import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
@@ -30,7 +28,6 @@ import com.app.inails.booking.admin.repository.booking.RemindAppointmentReposito
 import com.app.inails.booking.admin.views.booking.dialog_filter.FilterApmOwner
 import com.app.inails.booking.admin.views.booking.dialog_filter.SearchCustomerOwner
 import com.app.inails.booking.admin.views.booking.dialog_filter.SearchStaffOwner
-import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.material.tabs.TabLayout
 
@@ -44,7 +41,104 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
     private lateinit var mAdapter: AppointmentAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAdapter = AppointmentAdapter(binding.rvAppointment)
+        mAdapter = AppointmentAdapter(binding.rvAppointment).apply {
+            onLoadMoreListener = { page, _ ->
+                viewModel.refresh(mType, page)
+            }
+            onClickItemListener = {
+                Router.redirectToAppointmentDetail(self, it.id)
+            }
+            onClickCancelListener = { apm ->
+                rejectAppointmentDialog.show(R.string.title_cancel_appointment) {
+                    viewModel.formCancel.run {
+                        id = apm.id
+                        reason = it
+                    }
+                    viewModel.cancel()
+                }
+            }
+
+            onClickRemoveListener = {
+                showConfirmDialog(
+                    getString(R.string.title_remove_appointment),
+                    String.format(
+                        getString(R.string.message_delete_appointment_content),
+                        it.id
+                    )
+                ) {
+                    viewModel.remove(it.id)
+                }
+            }
+
+            onClickCusWalkInListener = {
+                showConfirmDialog(
+                    getString(R.string.title_customer_check_in),
+                    getString(R.string.message_customer_check_in)
+                ) {
+                    viewModel.customerWalkIn(it.id)
+                }
+            }
+
+            onClickHandleListener = { apm, status ->
+                if (status == 1) {
+                    acceptAppointmentDialog.onSelectStaffListener = {
+                        Router.redirectToChooseStaff(self, 2, apm.dateTag)
+                    }
+                    acceptAppointmentDialog.show(apm) { minutes, stffID ->
+                        viewModel.formHandle.run {
+                            id = apm.id
+                            isAccepted = 1
+                            workTime = minutes
+                            staffId = stffID
+                        }
+                        viewModel.handle()
+                    }
+                }
+                if (status == 0) {
+                    rejectAppointmentDialog.show(R.string.title_reject_appointment) {
+                        viewModel.formHandle.run {
+                            id = apm.id
+                            isAccepted = 0
+                            reason = it
+                        }
+                        viewModel.handle()
+                    }
+                }
+            }
+            onClickStartServiceListener = {
+                startServicesDialog.onSelectStaffListener = {
+                    Router.redirectToChooseStaff(self, 1)
+                }
+                startServicesDialog.show(it) { staffID, duration ->
+                    viewModel.formStartService.run {
+                        id = it.id
+                        staffId = staffID
+                        workTime = duration
+                        status = DataConst.AppointmentStatus.APM_IN_PROCESSING
+                    }
+                    viewModel.startService()
+                }
+            }
+
+            onClickFinishListener = {
+                finishBookingDialog.show(it) { amount, notes ->
+                    viewModel.form.run {
+                        id = it.id
+                        price = amount
+                        note = notes
+                        status = DataConst.AppointmentStatus.APM_FINISH
+                    }
+                    viewModel.updateStatus()
+                }
+            }
+
+            onClickCustomerListener = {
+                customerInfoDialog.show(it)
+            }
+            onClickRemindListener = {
+                viewModel.remind(it.id)
+            }
+        }
         with(binding) {
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener { refreshData(mType) }
@@ -64,7 +158,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
                         it
                     refreshData(mType)
                 }
-                onLayoutFilterClick ={
+                onLayoutFilterClick = {
                     showFilterDialog()
                 }
             }
@@ -72,108 +166,16 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
         with(viewModel) {
             loadingCustom.bind {
+                mAdapter.isLoading = it
                 binding.viewRefresh.isRefreshing = it
             }
-            appointments.bind(mAdapter.apply {
-                onClickItemListener = {
-                    Router.redirectToAppointmentDetail(self, it.id)
+            appointments.bind{
+                if(it.first == 1){
+                    mAdapter.clear()
                 }
-                onClickCancelListener = { apm ->
-                    rejectAppointmentDialog.show(R.string.title_cancel_appointment) {
-                        viewModel.formCancel.run {
-                            id = apm.id
-                            reason = it
-                        }
-                        viewModel.cancel()
-                    }
-                }
-
-                onClickRemoveListener = {
-                    showConfirmDialog(
-                        getString(R.string.title_remove_appointment),
-                        String.format(
-                            getString(R.string.message_delete_appointment_content),
-                            it.id
-                        )
-                    ) {
-                        viewModel.remove(it.id)
-                    }
-                }
-
-                onClickCusWalkInListener = {
-                    showConfirmDialog(
-                        getString(R.string.title_customer_check_in),
-                        getString(R.string.message_customer_check_in)
-                    ) {
-                        viewModel.customerWalkIn(it.id)
-                    }
-                }
-
-                onClickHandleListener = { apm, status ->
-                    if (status == 1) {
-                        acceptAppointmentDialog.onSelectStaffListener = {
-                            Router.redirectToChooseStaff(self, 2, apm.dateTag)
-                        }
-                        acceptAppointmentDialog.show(apm) { minutes, stffID ->
-                            viewModel.formHandle.run {
-                                id = apm.id
-                                isAccepted = 1
-                                workTime = minutes
-                                staffId = stffID
-                            }
-                            viewModel.handle()
-                        }
-                    }
-                    if (status == 0) {
-                        rejectAppointmentDialog.show(R.string.title_reject_appointment) {
-                            viewModel.formHandle.run {
-                                id = apm.id
-                                isAccepted = 0
-                                reason = it
-                            }
-                            viewModel.handle()
-                        }
-                    }
-                }
-                onClickStartServiceListener = {
-                    startServicesDialog.onSelectStaffListener = {
-                        Router.redirectToChooseStaff(self, 1)
-                    }
-                    startServicesDialog.show(it) { staffID, duration ->
-                        viewModel.formStartService.run {
-                            id = it.id
-                            staffId = staffID
-                            workTime = duration
-                            status = DataConst.AppointmentStatus.APM_IN_PROCESSING
-                        }
-                        viewModel.startService()
-                    }
-                }
-
-                onClickFinishListener = {
-                    finishBookingDialog.show(it) { amount, notes ->
-                        viewModel.form.run {
-                            id = it.id
-                            price = amount
-                            note = notes
-                            status = DataConst.AppointmentStatus.APM_FINISH
-                        }
-                        viewModel.updateStatus()
-                    }
-                }
-
-                onClickCustomerListener = {
-                    customerInfoDialog.show(it)
-                }
-                onClickRemindListener = {
-                    viewModel.remind(it.id)
-                }
-
-            }::submit)
-
-            appointments.bind {
-                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
-                !it.isNullOrEmpty() show binding.rvAppointment
+                mAdapter.submit(it.second)
+                (mAdapter.itemCount == 0) show binding.emptyLayout.tvEmptyData
+                (mAdapter.itemCount > 0) show binding.rvAppointment
             }
 
             success.bind {
@@ -281,6 +283,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
     }
 
     private fun refreshData(type: Int) {
+        mAdapter.clear()
         mType = type
         binding.rvAppointment.removeAllViews()
         displayFilter()
@@ -371,7 +374,7 @@ class BookingViewModel(
     private val customerRepo: FetchListCustomerRepo,
     private val staffRepo: FetchAllStaffRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-    val appointments = appointmentRepo.results
+    val appointments = appointmentRepo.results1
     val idRemove = appointmentRepo.resultRemove
     val appointment = appointmentRepo.result
     val resultCheckIn = appointmentRepo.resultCheckIn
@@ -387,8 +390,8 @@ class BookingViewModel(
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
 
-    fun refresh(type: Int) = launch(loadingCustom, error) {
-        appointmentRepo(if (type == 1) filterCheckInForm else filterCustomerForm)
+    fun refresh(type: Int, page: Int = 1) = launch(loadingCustom, error) {
+        appointmentRepo(if (type == 1) filterCheckInForm else filterCustomerForm, page)
     }
 
     fun updateStatus() = launch(loading, error) {

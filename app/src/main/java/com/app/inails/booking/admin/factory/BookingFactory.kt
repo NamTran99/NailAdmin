@@ -2,12 +2,12 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_AVAILABLE
+import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_BREAK
+import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_WORKING
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.formatter.TextFormatter
-import com.app.inails.booking.admin.model.response.AppointmentDTO
-import com.app.inails.booking.admin.model.response.CustomerDTO
-import com.app.inails.booking.admin.model.response.ServiceDTO
-import com.app.inails.booking.admin.model.response.StaffDTO
+import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.support.ISelector
 import com.app.inails.booking.admin.model.ui.*
 
@@ -64,7 +64,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val textColor: Int
                 get() = textFormatter.formatTextColorStaffColor(staffDTO.active)
             override val timeCheckInAppointment: String
-                get() = staffDTO.appointment_processing?.time_working.toTimeCheckIn(format = "yyyy-MM-dd'T'HH:mm:ss")
+                get() = staffDTO.appointment_processing?.date_appointment.toTimeCheckIn(format = "yyyy-MM-dd'T'HH:mm:ss")
                     .safe()
             override val customerName: String
                 get() = staffDTO.appointment_processing?.customer_name.safe()
@@ -72,9 +72,11 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = staffDTO.appointment_processing?.let { createAAppointment(it) }
             override val timeEndAppointment: String
                 get() = textFormatter.getTimeEndAppointment(
-                    staffDTO.appointment_processing?.time_working,
-                    staffDTO.appointment_processing?.work_time
+                    staffDTO.appointment_processing?.date_appointment,
+                    staffDTO.appointment_processing?.work_time,
                 )
+            override val orderStaffStatusList: Int
+                get() = getOrderPriorityForStaffStatus(staffDTO.status.safe())
         }
     }
 
@@ -84,6 +86,17 @@ class BookingFactory(private val textFormatter: TextFormatter) {
 
     fun createAStaff(staffsDTO: StaffDTO): IStaff {
         return createStaff(staffsDTO)
+    }
+
+    fun createReportAppointment(reportDTO: ReportDTO):IReport{
+        return object :IReport{
+            override val appointment: List<IAppointment>
+                get() = createAppointmentList(reportDTO.appointments)
+            override val totalAppointment: Int
+                get() = reportDTO.total_appointment
+            override val totalPrice: String
+                get() = reportDTO.total_price
+        }
     }
 
     private fun createAppointment(appointmentDTO: AppointmentDTO): IAppointment {
@@ -130,7 +143,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val customer: ICustomer
                 get() = createCustomer(appointmentDTO.customer)
             override val staff: IStaff?
-                get() = appointmentDTO.staff?.let{createStaff(it)}
+                get() = appointmentDTO.staff?.let { createStaff(it) }
             override val notes: String
                 get() = appointmentDTO.note_appointment.safe()
             override val dateTime: String
@@ -141,7 +154,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.feedback != null
             override val feedbackContent: String
                 get() = appointmentDTO.feedback?.content.safe().decode()
-            override val feedbackRating: Int
+            override val feedbackRating: Float
                 get() = appointmentDTO.feedback?.rating.safe()
             override val noteFinish: String
                 get() = appointmentDTO.notes.safe()
@@ -184,6 +197,15 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = customerDTO.email.safe("No Info")
             override val address: String
                 get() = textFormatter.fullAddress(customerDTO)
+        }
+    }
+
+    private fun getOrderPriorityForStaffStatus(status: Int): Int {
+        return when (status) {
+            STAFF_AVAILABLE -> 1
+            STAFF_WORKING -> 2
+            STAFF_BREAK -> 3
+            else -> 4
         }
     }
 }

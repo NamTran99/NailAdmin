@@ -46,7 +46,7 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
             tvPhone.text = appointment.customer_phone?.formatPhoneUS().displaySafe1()
             tvStaffName.text = appointment.staff_name.displaySafe1()
             tvDateTime.text = appointment.date_appointment?.formatDateAppointment().displaySafe1()
-            tvReason.text = appointment.reason_cancel
+            tvReason.text = appointment.reason_cancel.safe().replace("\\n", "\n").trim()
             tvFeedbackContent.text = appointment.content_feedback.safe().replace("\\n", "\n").trim()
             tvFeedbackContent.show(tvFeedbackContent.text.isNotEmpty())
             ratingBar.rating = appointment.rating.safe().toFloat()

@@ -56,7 +56,7 @@
                     android:clipToPadding="false"
                     android:paddingBottom="@dimen/size_50"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="10"
+                    tools:itemCount="3"
                     tools:listitem="@layout/item_appointment" />
 
                 <include

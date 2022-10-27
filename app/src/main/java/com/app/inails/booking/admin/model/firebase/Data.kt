@@ -9,7 +9,7 @@ data class Data(
     val id: Int?= 0,
     val notes: String? = "",
     val price: Double? = 0.0,
-    val rating: Int? = 0,
+    val rating: Float? = 0f,
     val reason_cancel: String? = "",
     val salon_name: String? = "",
     val salon_id: Int? = 0,

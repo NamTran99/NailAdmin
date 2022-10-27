@@ -28,7 +28,6 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
                 `object`.toString().replace("\"{", "{").replace("}\"", "}").replace("\\\"", "\"")
             val cloudMessage =
                 Gson().fromJson(objectFilter, FireBaseCloudMessage::class.java)
-            Log.d("TAG", "onMessageReceived: NamTD8 dsabdhsajdbj:${appCache.token}")
             if (appCache.token.isEmpty() || cloudMessage.data.salon_id != userLocalSource.getSalonID()) {
                 return
             }

@@ -13,27 +13,21 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
             android:id="@+id/tvStaffName"
             style="@style/AppTheme.TextViewResponsive"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="@dimen/size_0"
+            android:layout_weight="1"
             tools:text="Staff Name" />
 
         <TextView
             android:id="@+id/tvCustomerName"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_marginEnd="@dimen/size_10"
-            app:layout_constraintEnd_toStartOf="@+id/tvAppointmentID"
-            app:layout_constraintTop_toTopOf="parent"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="@dimen/size_0"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textColor="@color/gray05"
             tools:text="Customer Name" />
-
-        <TextView
-            android:id="@+id/tvAppointmentID"
-            style="@style/AppTheme.TextView.Medium"
-            android:textColor="@color/lightBlue02"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
     </LinearLayout>
@@ -41,25 +35,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvStatus"
-            android:layout_weight="1"
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_marginTop="@dimen/size_8"
+            android:layout_weight="1"
             app:drawableStartCompat="@drawable/circle_yellow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvStaffName"
             tools:text="Staff Name" />
 
+        <TextView
+            android:id="@+id/tvAppointmentID"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textColor="@color/lightBlue02"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDateTime"
-            style="@style/AppTheme.TextView.SemiBold"
-            android:layout_marginTop="@dimen/size_8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustomerName"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_marginStart="@dimen/size_3"
+            android:textAlignment="textEnd"
             tools:text="Customer Name" />
+
+
     </LinearLayout>
 </LinearLayout>

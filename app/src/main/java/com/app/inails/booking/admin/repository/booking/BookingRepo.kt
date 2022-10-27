@@ -3,15 +3,13 @@ package com.app.inails.booking.admin.repository.booking
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.remote.BookingApi
-import com.app.inails.booking.admin.extention.toDateCheckIn
-import com.app.inails.booking.admin.extention.toServerUTC2
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.utils.TimeUtils
-import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
+import kotlinx.coroutines.*
+import okhttp3.internal.wait
 
 
 @Inject(ShareScope.Fragment)
@@ -20,13 +18,35 @@ class AppointmentRepository(
     private val bookingFactory: BookingFactory,
 ) {
     val results = MutableLiveData<List<IAppointment>>()
+    val results1 = MutableLiveData<Pair<Int,List<IAppointment>>>()
+    val resultReport = MutableLiveData<Pair<Int, IReport>>()
+    var results1Job:Job? = null
     val result = MutableLiveData<IAppointment>()
     val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
 
-    suspend operator fun invoke(form: AppointmentFilterForm) {
-        Log.d("TAG", "invoke: NamTD8 time: ${        TimeUtils.getTimeZoneOffSet()
-        }")
+    suspend operator fun invoke(form: AppointmentFilterForm, page: Int = 1) {
+        if(page == 1) results1Job?.cancel()
+        results1Job = CoroutineScope(Dispatchers.IO).launch {
+            results1.post(
+                page to
+                        bookingFactory
+                            .createAppointmentList(
+                                bookingApi.listAppointmentInDashboard(
+                                    form.type,
+                                    date = form.fromDate,
+                                    toDate = form.toDate,
+                                    searchStaff = form.searchStaff?: form.staff?.id,
+                                    searchCustomer =  form.searchCustomer?: form.customer?.id,
+                                    keyword = form.keyword,
+                                    status = form.status,
+                                    timeZone = TimeUtils.getTimeZoneOffSet(),
+                                    page = page
+                                )
+                                    .await()
+                            )
+            )
+        }
         results.post(
             bookingFactory
                 .createAppointmentList(
@@ -38,10 +58,71 @@ class AppointmentRepository(
                         searchCustomer =  form.searchCustomer?: form.customer?.id,
                         keyword = form.keyword,
                         status = form.status,
-                        timeZone = TimeUtils.getTimeZoneOffSet()
+                        timeZone = TimeUtils.getTimeZoneOffSet(),
+                        page = page
                     )
                         .await()
                 )
+        )
+        results1Job?.join()
+    }
+
+    suspend fun getCustomerBookingList(form: AppointmentFilterForm, page: Int = 1){
+        results1.post(
+            page to
+            bookingFactory
+                .createAppointmentList(
+                    bookingApi.listCustomerBookingList(
+                        customerId = form.searchCustomer,
+                        date = form.fromDate,
+                        toDate = form.toDate,
+                        searchStaff = form.searchStaff?: form.staff?.id,
+                        keyword = form.keyword,
+                        status = form.status,
+                        timeZone = TimeUtils.getTimeZoneOffSet(),
+                        page = page
+                    )
+                        .await()
+                )
+        )
+    }
+
+    suspend fun getStaffBookingList(form: AppointmentFilterForm, page: Int = 1){
+        results1.post(
+            page to
+            bookingFactory
+                .createAppointmentList(
+                    bookingApi.listStaffBookingList(
+                        staffID = form.searchStaff,
+                        date = form.fromDate,
+                        toDate = form.toDate,
+                        searchCustomer =  form.searchCustomer?: form.customer?.id,
+                        keyword = form.keyword,
+                        status = form.status,
+                        timeZone = TimeUtils.getTimeZoneOffSet(),
+                        page = page
+                    )
+                        .await()
+                )
+        )
+    }
+
+    suspend fun getApmFinishForReport(form: AppointmentFilterForm, page: Int = 1){
+        resultReport.post(
+            page to
+                    bookingFactory
+                        .createReportAppointment(
+                            bookingApi.getApmFinishForReport(
+                                searchStaff = form.searchStaff,
+                                date = form.fromDate,
+                                toDate = form.toDate,
+                                searchCustomer =  form.searchCustomer?: form.customer?.id,
+                                keyword = form.keyword,
+                                timeZone = TimeUtils.getTimeZoneOffSet(),
+                                page = page
+                            )
+                                .await()
+                        )
         )
     }
 

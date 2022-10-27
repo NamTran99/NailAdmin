@@ -351,6 +351,3 @@ class AppointmentDetailViewModel(
         success.post("Start service success")
     }
 }
-
-
-

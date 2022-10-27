@@ -27,6 +27,7 @@ interface IStaff {
     val active: Int get() = 0
     val customerName: String get() = ""
     val appointment: IAppointment? get() = null
+    val orderStaffStatusList: Int? get()= 0
 }
 
 @Parcelize

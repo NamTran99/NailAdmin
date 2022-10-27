@@ -101,7 +101,7 @@ val apiModule = module {
                 .addInterceptor(get<TokenInterceptor>())
                 .addInterceptor(interceptor)
 //                .addInterceptor(ChuckInterceptor(this.get()))
-                .addInterceptor(get<LoggingInterceptor.Builder>().build())
+                .addInterceptor(    get<LoggingInterceptor.Builder>().build())
                 .build())
             .build()
             .create(GoogleApi::class.java)

@@ -10,10 +10,11 @@ import com.app.inails.booking.admin.databinding.ItemAppointmentBinding
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.ICustomer
+import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class AppointmentAdapter(view: RecyclerView) :
-    SimpleRecyclerAdapter<IAppointment, ItemAppointmentBinding>(view) {
+    PageRecyclerAdapter<IAppointment, ItemAppointmentBinding>(view) {
     var onClickItemListener: ((IAppointment) -> Unit)? = null
     var onClickFinishListener: ((IAppointment) -> Unit)? = null
     var onClickCancelListener: ((IAppointment) -> Unit)? = null
@@ -91,13 +92,12 @@ class AppointmentAdapter(view: RecyclerView) :
             (item.status == DataConst.AppointmentStatus.APM_CANCEL) show cancelLayout
             feedbackLayout.show(item.hasFeedback)
             tvFeedbackContent.text = item.feedbackContent
-            ratingBar.rating = item.feedbackRating.toFloat()
+            ratingBar.rating = item.feedbackRating
             noteLayout.show(item.noteFinish.isNotEmpty())
             tvNote.text = item.noteFinish
             tvReason.text = item.reasonCancel
             totalAmountLayout.show((item.status == DataConst.AppointmentStatus.APM_FINISH))
             tvAmount.text = item.price.formatPrice()
-            ratingBar.rating = item.feedbackRating.toFloat()
             tvCreatedAt.text = item.createAt
             tvAppointmentNote.text = item.notes
 
@@ -106,17 +106,17 @@ class AppointmentAdapter(view: RecyclerView) :
     }
 
     fun updateItem(item: IAppointment) {
-        val index = items?.findIndex { it.id == item.id } ?: -1
+        val index = items().getData().findIndex { it.id == item.id } ?: -1
         if (index > -1) {
-            items?.set(index, item)
+            items().getData()[index] = item
             notifyItemChanged(index)
         }
     }
 
     fun removeItem(id: Int) {
-        val index = items?.findIndex { it.id == id } ?: -1
+        val index = getData().findIndex { it.id == id } ?: -1
         if (index > -1) {
-            items?.removeAt(index)
+            getData().removeAt(index)
             notifyItemRemoved(index)
         }
     }

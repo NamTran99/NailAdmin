@@ -15,6 +15,7 @@
         tools:text="abc" />
 
     <TextView
+        android:layout_marginStart="@dimen/size_5"
         android:id="@+id/tvPhone"
         style="@style/AppTheme.TextView.Medium"
         tools:text="0369308986" />
