@@ -27,13 +27,73 @@ fun String.formatPhoneUS(): String {
     else PhoneNumberUtils.formatNumber(this, "US")
 }
 
-fun String.formatPhoneUSCustom(): String {
-    return if (this.isEmpty()) ""
-    else formatUsNumber(SpannableStringBuilder(this))
+fun String.convertPhoneToNormalFormat(): String {
+    return this.replace("-", "")
+        .replace("(", "")
+        .replace(")", "")
+        .replace(" ", "").trim()
 }
 
-fun formatUsNumber(text: Editable): String {
+fun String.formatPhoneUSCustom(): String {
+    return if (this.isEmpty()) ""
+    else formatUsNumberCustom(SpannableStringBuilder(this))
+}
+
+fun formatUsNumberCustom(text: Editable): String {
     val formattedString = StringBuilder()
+    var p = 0
+    while (p < text.length) {
+        val ch = text[p]
+        if (!Character.isDigit(ch)) {
+            text.delete(p, p + 1)
+        } else {
+            p++
+        }
+    }
+    val allDigitString = text.toString()
+    val totalDigitCount = allDigitString.length
+    if (totalDigitCount == 0
+        || totalDigitCount > 10 && !allDigitString.startsWith("1")
+        || totalDigitCount > 11
+    ) {
+        text.clear()
+        text.append(allDigitString)
+        return allDigitString
+    }
+    var alreadyPlacedDigitCount = 0
+    if (totalDigitCount - alreadyPlacedDigitCount > 3) {
+        formattedString.append(
+            "("
+                    + allDigitString.substring(
+                alreadyPlacedDigitCount,
+                alreadyPlacedDigitCount + 3
+            ) + ") "
+        )
+        alreadyPlacedDigitCount += 3
+    }
+    if (totalDigitCount - alreadyPlacedDigitCount > 3) {
+        formattedString.append(
+            allDigitString.substring(
+                alreadyPlacedDigitCount, alreadyPlacedDigitCount + 3
+            ) + "-"
+        )
+        alreadyPlacedDigitCount += 3
+    }
+    if (totalDigitCount > alreadyPlacedDigitCount) {
+        formattedString.append(
+            allDigitString
+                .substring(alreadyPlacedDigitCount)
+        )
+    }
+
+    text.clear()
+    text.append(formattedString.toString())
+    return formattedString.toString()
+}
+
+fun String.formatUsNumberCustom(): String {
+    val formattedString = StringBuilder()
+    val text = SpannableStringBuilder(this)
     var p = 0
     while (p < text.length) {
         val ch = text[p]

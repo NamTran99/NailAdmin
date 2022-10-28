@@ -5,6 +5,8 @@ import androidx.annotation.RequiresApi
 import com.app.inails.booking.admin.extention.toNumericString
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -24,10 +26,11 @@ object TimeUtils {
             .toNumericString()
     } // return +7
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getTimeOffset(timeZoneID: String): String{
-        val currentLocalTime: TimeZone = TimeZone.getTimeZone(timeZoneID)
-        return TimeUnit.HOURS.convert(currentLocalTime.rawOffset.toLong(), TimeUnit.MILLISECONDS)
-            .toNumericString()
+        val zoneId= ZoneId.of(timeZoneID)
+        val zoneDateTime = zoneId.rules.previousTransition(Instant.now()).instant.atZone(zoneId)
+        return TimeUnit.HOURS.convert(zoneDateTime.offset.totalSeconds.toLong(), TimeUnit.SECONDS).toNumericString()
     }
 
     fun getTimeZoneOffSet(): String{

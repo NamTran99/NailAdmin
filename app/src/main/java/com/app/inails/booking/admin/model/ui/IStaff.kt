@@ -67,7 +67,7 @@ class UpdateStaffForm(
 ) : IStaff, Parcelable {
 
     fun validate() {
-        if (phone.isBlank() || phone.length < 14) resourceError(
+        if (phone.isBlank()) resourceError(
             R.string.error_blank_phone
         )
         if (firstName.isBlank()) resourceError(R.string.error_blank_firstname)
@@ -86,7 +86,7 @@ class CreateStaffForm(
 ) : IStaff, Parcelable {
 
     fun validate() {
-        if (phone.isBlank() || phone.length < 14) resourceError(
+        if (phone.isBlank()) resourceError(
             R.string.error_blank_phone
         )
         if (firstName.isBlank()) resourceError(R.string.error_blank_firstname)

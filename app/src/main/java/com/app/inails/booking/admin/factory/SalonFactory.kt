@@ -21,7 +21,7 @@ class SalonFactory(private val textFormatter: TextFormatter) {
             override val address: String
                 get() = salonDTO.address.displaySafe1()
             override val phoneNumber: String
-                get() = textFormatter.formatPhoneUS(salonDTO.phone)
+                get() = salonDTO.phone.safe().formatUsNumberCustom()
             override val rating: Float
                 get() = salonDTO.rating.safe()
         }

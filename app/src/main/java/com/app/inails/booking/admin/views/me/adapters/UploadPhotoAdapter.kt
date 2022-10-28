@@ -1,19 +1,14 @@
 package com.app.inails.booking.admin.views.me.adapters
 
 import android.annotation.SuppressLint
-import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
-import android.graphics.ColorFilter
 import android.os.Build
 import android.support.core.view.IHolder
 import android.support.core.view.RecyclerHolder
 import android.support.core.view.bindingOf
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemPictureHolderBinding
 import com.app.inails.booking.admin.databinding.LayoutBtnAddPictureBinding
 import com.app.inails.booking.admin.extention.findIndex
@@ -40,7 +35,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
     val items get() = mItems
 
     var onAddImagesAction: (() -> Unit)? = null
-    var onCloseImageAction: ((SalonImage) -> Unit)? = null
+    var onRemoveImageAction: ((SalonImage) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun changePath(listImage: List<SalonImage>?){
@@ -103,7 +98,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(imgHolder)
                 btClose.setOnClickListener {
-                    onCloseImageAction?.invoke(item)
+                    onRemoveImageAction?.invoke(item)
                     removeItem(item)
                 }
             }

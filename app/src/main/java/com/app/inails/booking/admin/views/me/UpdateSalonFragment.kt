@@ -69,8 +69,9 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 pathLocalImage.clear()
-                pathLocalImage.addAll(pathImage.map { pathUri -> SalonImage(path = pathUri.toString()) })
+                pathLocalImage.addAll(pathImage.filter { !it.toString().contains("http") }.map { pathUri -> SalonImage(path = pathUri.toString()) })
                 allImage.clear()
+                allImage.addAll(pathServerImage)
                 allImage.addAll(pathLocalImage)
                 imageAdapter.changePath(allImage)
             }
@@ -138,7 +139,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                         .startAlbumWithActivityResultCallback(startForResult)
                 }
 
-                onCloseImageAction = {
+                onRemoveImageAction = {
                     if (it.id == null) {
                         pathLocalImage.remove(it)
                     } else {

@@ -6,6 +6,8 @@ import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateStaffBinding
+import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
+import com.app.inails.booking.admin.extention.formatPhoneUS
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IStaff
@@ -56,7 +58,7 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDi
                 function.invoke(
                     etStaffFirstName.text.toString(),
                     etStaffLastName.text.toString(),
-                    etStaffPhone.text.toString()
+                    etStaffPhone.text.toString().convertPhoneToNormalFormat()
                 )
             }
         }

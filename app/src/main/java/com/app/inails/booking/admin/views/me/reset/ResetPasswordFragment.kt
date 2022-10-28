@@ -62,7 +62,7 @@ class ResetPasswordViewModel(
     val redirectToVerifyOTP = SingleLiveEvent<Any>()
 
     fun submit(phoneNumber: String) = launch(loading, error) {
-        if (phoneNumber.isBlank() || phoneNumber.length < 14) viewError(
+        if (phoneNumber.isBlank()) viewError(
             R.id.edtPhoneNumber,
             R.string.error_blank_phone
         )

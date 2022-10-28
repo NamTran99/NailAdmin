@@ -64,7 +64,7 @@ class AppointmentForm(
 ) : Parcelable {
 
     fun validate() {
-        if (phone.isBlank() || phone.length < 14) viewError(
+        if (phone.isBlank()) viewError(
             R.id.etPhone,
             R.string.error_blank_phone
         )
