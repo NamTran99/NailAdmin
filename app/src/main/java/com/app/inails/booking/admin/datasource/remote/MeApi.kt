@@ -6,6 +6,7 @@ import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
+import com.app.inails.booking.admin.model.response.VersionDTO
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -33,6 +34,9 @@ interface MeApi : Injectable {
         @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
         @Part vararg images: MultipartBody.Part?
     ): ApiAsync<SalonDTO>
+
+    @GET("check-version")
+    fun checkVersion(@Query("platform") platform:String = "android", @Query("app_type") appType: String = "owner"): ApiAsync<VersionDTO>
 }
 
 class MeApiImpl(private val retrofit: Retrofit) :

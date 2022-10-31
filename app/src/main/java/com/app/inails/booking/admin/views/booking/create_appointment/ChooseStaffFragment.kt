@@ -43,7 +43,7 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
                 },
             ))
         with(binding) {
-            searchView.show(arg?.type != 1 && arg?.type != 2)
+//            searchView.show(arg?.type != 1 && arg?.type != 2)
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener {
                 if ((arg?.type == null) || ((arg?.type == 2 || arg?.type == 3) && !arg!!.dateTime.isCurrentDate()))

@@ -94,7 +94,7 @@ data class ScheduleForm(
     val endTime: String? = null,    // Format HH:MM:SS
 ):  Parcelable{
     override fun toString(): String {
-        return "{\"day\":\"$day\",\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace("\"null\"", "null")
+        return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace("\"null\"", "null")
     }
 }
 

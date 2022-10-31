@@ -12,7 +12,10 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -20,6 +23,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentCreateAppointmentBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.BookingApi
+import com.app.inails.booking.admin.extention.bind
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.extention.toServerUTC
@@ -128,6 +132,13 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                 viewModel.form.staffID = it.id
             }
         }
+
+//        binding.etFullName.bind {
+//            viewModel.form.name = it }
+//        binding.etPhone.bind { viewModel.form.phone = it }
+//        // save state
+//        binding.etFullName.setText(viewModel.form.name)
+//        binding.etPhone.setText(viewModel.form.phone)
 
     }
 

@@ -27,7 +27,7 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context), Confirm
         setCancelable(false)
         binding.btClose.onClick {
             confirmDialog.show(
-                title = context.getString(R.string.tittle_exit_update_salon),
+                title = context.getString(R.string.tittle_exit_update_service),
                 message = context.getString(R.string.message_exit),
                 function = {
                     dismiss()

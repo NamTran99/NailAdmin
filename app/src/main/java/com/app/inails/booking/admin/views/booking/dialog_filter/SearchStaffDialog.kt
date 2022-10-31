@@ -44,6 +44,7 @@ class SearchStaffDialog(context: Context) : BaseDialog(context) {
 
     fun addList(list: List<IStaff>) {
         mAdapter.submit(list)
+        mAdapter.isLoading = false
     }
 }
 

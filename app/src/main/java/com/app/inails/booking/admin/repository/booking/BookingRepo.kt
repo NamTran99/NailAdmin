@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.repository.booking
 
+import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
@@ -192,7 +193,7 @@ class AppointmentDetailRepository(
     private val bookingApi: BookingApi,
     private val bookingFactory: BookingFactory,
 ) {
-    val result = MutableLiveData<IAppointment>()
+    val result = SingleLiveEvent<IAppointment>()
     suspend operator fun invoke(id: Int) {
         result.post(
             bookingFactory

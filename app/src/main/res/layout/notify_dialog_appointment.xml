@@ -38,216 +38,229 @@
         android:layout_marginTop="@dimen/size_20"
         android:background="@color/color_line" />
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_19">
-
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/booking_id"
-            android:textColor="@color/gray08" />
-
-        <TextView
-            android:id="@+id/tvBookingID"
-            style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textSize="@dimen/text_size_12"
-            android:textStyle="bold"
-            tools:text="#123456" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="23dp"
-        android:layout_marginTop="@dimen/size_8">
-
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/customer_name"
-            android:textColor="@color/gray08" />
-
-        <TextView
-            android:id="@+id/tvCustomerName"
-            style="@style/AppTheme.TextViewResponsive"
+        android:layout_height="0dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            tools:text="John Doe" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_19">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_8">
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/booking_id"
+                    android:textColor="@color/gray08" />
 
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/phone_number"
-            android:textColor="@color/gray08" />
+                <TextView
+                    android:id="@+id/tvBookingID"
+                    style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textSize="@dimen/text_size_12"
+                    android:textStyle="bold"
+                    tools:text="#123456" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvPhone"
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            tools:text="987-654-3210" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="23dp"
+                android:layout_marginTop="@dimen/size_8">
 
-    <TextView
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_8"
-        android:text="@string/service"
-        android:textColor="@color/gray08" />
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/customer_name"
+                    android:textColor="@color/gray08" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvServices"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_12"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_report_list_services" />
+                <TextView
+                    android:id="@+id/tvCustomerName"
+                    style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    tools:text="John Doe" />
+            </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_1"
-        android:layout_marginHorizontal="@dimen/size_13"
-        android:layout_marginTop="@dimen/size_14"
-        android:background="@color/color_line" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_8">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_19"
-        android:orientation="horizontal">
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/gray08" />
 
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/staff"
-            android:textColor="@color/gray08" />
+                <TextView
+                    android:id="@+id/tvPhone"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    tools:text="987-654-3210" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvStaffName"
-            style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_weight="1"
-            android:textAlignment="textEnd"
-            android:textSize="@dimen/text_size_12"
-            tools:text="Amanda" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_8"
+                android:text="@string/service"
+                android:textColor="@color/gray08" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_8"
-        android:orientation="horizontal">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvServices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_12"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_report_list_services" />
 
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time"
-            android:textColor="@color/gray08" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1"
+                android:layout_marginHorizontal="@dimen/size_13"
+                android:layout_marginTop="@dimen/size_14"
+                android:background="@color/color_line" />
 
-        <TextView
-            android:id="@+id/tvDateTime"
-            style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_weight="1"
-            android:textAlignment="textEnd"
-            android:textSize="@dimen/text_size_12"
-            tools:text="Amanda" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_19"
+                android:orientation="horizontal">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/lvReason"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_8">
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/staff"
+                    android:textColor="@color/gray08" />
 
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reason"
-            android:textColor="@color/gray08" />
+                <TextView
+                    android:id="@+id/tvStaffName"
+                    style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:textSize="@dimen/text_size_12"
+                    tools:text="Amanda" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
-            android:id="@+id/tvReason"
-            style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/size_10"
-            android:justificationMode="inter_word"
-            android:textAlignment="textEnd"
-            tools:text="Amanda" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_8"
+                android:orientation="horizontal">
 
-    <RelativeLayout
-        android:id="@+id/lvRating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_8">
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time"
+                    android:textColor="@color/gray08" />
 
-        <TextView
-            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rating"
-            android:textColor="@color/gray08" />
+                <TextView
+                    android:id="@+id/tvDateTime"
+                    style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:textSize="@dimen/text_size_12"
+                    tools:text="Amanda" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:clickable="false"
-            android:text="@string/title_feed_back"
-            android:textColor="@color/black"
-            android:theme="@style/AppTheme.RatingBar" />
-    </RelativeLayout>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lvReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_8">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvFeedbackContent"
-        style="@style/AppTheme.TextViewResponsive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="@dimen/size_23"
-        android:layout_marginTop="@dimen/size_17"
-        android:justificationMode="inter_word"
-        android:maxLines="@null"
-        android:textColor="@color/gray08"
-        tools:text="Feedback" />
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reason"
+                    android:textColor="@color/gray08" />
+
+                <TextView
+                    android:id="@+id/tvReason"
+                    style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/size_10"
+                    android:justificationMode="inter_word"
+                    android:textAlignment="textEnd"
+                    tools:text="Amanda" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <RelativeLayout
+                android:id="@+id/lvRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_8">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rating"
+                    android:textColor="@color/gray08" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="false"
+                    android:text="@string/title_feed_back"
+                    android:textColor="@color/black"
+                    android:theme="@style/AppTheme.RatingBar" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFeedbackContent"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/size_23"
+                android:layout_marginTop="@dimen/size_17"
+                android:justificationMode="inter_word"
+                android:maxLines="@null"
+                android:textColor="@color/gray08"
+                tools:text="Feedback" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

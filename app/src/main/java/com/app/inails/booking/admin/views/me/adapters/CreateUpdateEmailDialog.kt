@@ -2,17 +2,26 @@ package com.app.inails.booking.admin.views.me.adapters
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogEmailReceiveFeedbackBinding
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 
 
-class CreateUpdateEmailDialog(context: Context) : BaseDialog(context) {
+class CreateUpdateEmailDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
     private val binding = viewBinding(DialogEmailReceiveFeedbackBinding::inflate)
 
     init {
+        setCancelable(false)
         binding.btnClose.onClick {
-            dismiss()
+            confirmDialog.show(
+                title = context.getString(R.string.tittle_exit_update_email),
+                message = context.getString(R.string.message_exit),
+                function = {
+                    dismiss()
+                }
+            )
         }
     }
 

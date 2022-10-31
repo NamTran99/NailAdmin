@@ -254,24 +254,6 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             refreshData(mType)
         }
     }
-//
-//    private fun clearFilter() {
-//        if (mType == 1)
-//            viewModel.filterCheckInForm.run {
-//                searchCustomer = null
-//                searchStaff = null
-//                date = null
-//                toDate = null
-//            }
-//        else
-//            viewModel.filterCustomerForm.run {
-//                searchCustomer = null
-//                searchStaff = null
-//                date = null
-//                toDate = null
-//            }
-//        refreshData(mType)
-//    }
 
     private fun showConfirmDialog(title: String, message: String, function: () -> Unit) {
         confirmDialog.show(
@@ -438,60 +420,6 @@ class BookingViewModel(
             filterCheckInForm
         else filterCustomerForm
     }
-
-//    fun getDateToDate(
-//        type: Int
-//    ): String {
-//        if (type == 1) {
-//            return if (!filterCheckInForm.fromDate.isNullOrEmpty() && !filterCheckInForm.toDate.isNullOrEmpty()) {
-//                "${
-//                    filterCheckInForm.fromDate!!.toDateAppointment(
-//                        format = DatePickerDialog.FORMAT_DATE_API,
-//                        parseFormat = "MMM dd"
-//                    )
-//                } - ${
-//                    filterCheckInForm.toDate!!.toDateAppointment(
-//                        format = DatePickerDialog.FORMAT_DATE_API,
-//                        parseFormat = "MMM dd"
-//                    )
-//                }"
-//            } else if (!filterCheckInForm.fromDate.isNullOrEmpty()) {
-//                filterCheckInForm.fromDate!!.toDateAppointment(
-//                    format = DatePickerDialog.FORMAT_DATE_API,
-//                    parseFormat = "MMM dd"
-//                )
-//            } else if (!filterCheckInForm.toDate.isNullOrEmpty()) {
-//                filterCheckInForm.toDate!!.toDateAppointment(
-//                    format = DatePickerDialog.FORMAT_DATE_API,
-//                    parseFormat = "MMM dd"
-//                )
-//            } else ""
-//        } else {
-//            return if (!filterCustomerForm.fromDate.isNullOrEmpty() && !filterCustomerForm.toDate.isNullOrEmpty()) {
-//                "${
-//                    filterCustomerForm.fromDate!!.toDateAppointment(
-//                        format = DatePickerDialog.FORMAT_DATE_API,
-//                        parseFormat = "MMM dd"
-//                    )
-//                } - ${
-//                    filterCustomerForm.toDate!!.toDateAppointment(
-//                        format = DatePickerDialog.FORMAT_DATE_API,
-//                        parseFormat = "MMM dd"
-//                    )
-//                }"
-//            } else if (!filterCustomerForm.fromDate.isNullOrEmpty()) {
-//                filterCustomerForm.fromDate!!.toDateAppointment(
-//                    format = DatePickerDialog.FORMAT_DATE_API,
-//                    parseFormat = "MMM dd"
-//                )
-//            } else if (!filterCustomerForm.toDate.isNullOrEmpty()) {
-//                filterCustomerForm.toDate!!.toDateAppointment(
-//                    format = DatePickerDialog.FORMAT_DATE_API,
-//                    parseFormat = "MMM dd"
-//                )
-//            } else ""
-//        }
-//    }
 
     fun getKeyword(
         type: Int

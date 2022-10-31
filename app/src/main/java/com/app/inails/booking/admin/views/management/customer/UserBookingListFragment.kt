@@ -136,6 +136,11 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
             }
         }
 
+        appActivity.appEvent.chooseStaff.observe(viewLifecycleOwner) {
+            startServicesDialog.updateStaff(it)
+            acceptAppointmentDialog.updateStaff(it)
+        }
+
         appEvent.refreshData.observe(this) {
             refreshView()
         }

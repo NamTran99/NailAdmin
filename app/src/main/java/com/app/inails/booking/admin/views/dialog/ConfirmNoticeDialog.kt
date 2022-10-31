@@ -7,12 +7,14 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogNoticeConfirmBinding
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.show
 
 
 class ConfirmNoticeDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogNoticeConfirmBinding::inflate)
 
     init {
+        setCancelable(false)
         binding.btnCancel.onClick {
             dismiss()
         }
@@ -36,8 +38,10 @@ class ConfirmNoticeDialog(context: Context) : BaseDialog(context) {
         @StringRes title: Int,
         @StringRes message: Int,
         @StringRes buttonConfirm: Int = R.string.btn_confirm,
+        isShowCancel: Boolean = true,
         function: () -> Unit = {}
     ) {
+        isShowCancel.show(binding.btnCancel)
         binding.txtTitle.setText(title)
         binding.txtBody.setText(message)
         binding.btnDismiss.setText(buttonConfirm)

@@ -21,6 +21,7 @@ import com.app.inails.booking.admin.model.ui.LoginForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LoginRepo
+import com.app.inails.booking.admin.utils.Utils
 import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.launch
 
@@ -31,9 +32,11 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         super.onCreate(savedInstanceState)
         with(binding) {
             etPhone.inputTypePhoneUS()
-            tvResetPassword.onClick{
+            tvResetPassword.onClick {
                 Router.open(this@LoginActivity, Routing.ResetPassword)
             }
+
+            binding.tvVersion.text = Utils.getDisplayBuildConfig()
         }
 
         binding.btLogin.setOnClickListener {

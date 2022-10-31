@@ -22,7 +22,7 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDi
         binding.etStaffPhone.inputTypePhoneUS()
         binding.btClose.onClick {
             confirmDialog.show(
-                title = context.getString(R.string.tittle_exit_update_salon),
+                title = context.getString(R.string.tittle_exit_update_staff),
                 message = context.getString(R.string.message_exit),
                 function = {
                     dismiss()

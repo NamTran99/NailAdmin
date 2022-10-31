@@ -14,6 +14,7 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -310,6 +311,7 @@ class UpdateSalonRepository(
     val result = MutableLiveData<Any>()
     suspend operator fun invoke(salonForm: SalonForm) {
         salonForm.validate()
+        Log.d("TAG", "invoke: NamTD8889 ${salonForm.schedules.toString()}")
         val imageParts =
             salonForm.images.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
                 context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)
@@ -328,7 +330,7 @@ class UpdateSalonRepository(
                     .put("zipcode", salonForm.zipCode)
                     .put("country", salonForm.country)
                     .put("description", salonForm.description)
-                    .put("schedules", salonForm.schedules)
+                    .put("schedules", salonForm.schedules.toString())
                     .put("delete_images", salonForm.deleteImage)
                     .put("tz", salonForm.offsetDisplay)
                     .put("timezone", salonForm.zoneID)

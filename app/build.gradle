@@ -14,7 +14,7 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "1.0_dev"    // format x.x_dev for dev, x.x for release (must follow format)
+        versionName "1.0.0"    // format x.x_dev for dev, x.x for release (must follow format)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,6 +49,7 @@ dependencies {
     def okhttp3V = "4.9.0"
     def toastyVersion="1.3.0"
     def kotlin_version = "1.6.21"
+    def ktx_app_update_v  = "2.0.0"
 
     // Support design
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -89,7 +90,10 @@ dependencies {
 
     implementation 'id.zelory:compressor:3.0.1'
     implementation "com.squareup.picasso:picasso:$picassoVersion"
-//    implementation 'com.readystatesoftware.chuck:library:1.1.0'
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
     implementation "com.google.android.libraries.places:places:$placeVersion"
+
+    implementation "com.google.android.play:app-update-ktx:$ktx_app_update_v"
 }
