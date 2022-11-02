@@ -9,6 +9,7 @@ interface ICustomer {
     val phone: String get() = ""
     val email: String get() = ""
     val address: String get() = ""
+    val birthDay: String get()  = ""
 }
 @Parcelize
 class CustomerImpl: ICustomer,Parcelable

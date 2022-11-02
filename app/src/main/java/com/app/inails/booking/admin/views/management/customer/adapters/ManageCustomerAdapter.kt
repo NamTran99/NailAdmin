@@ -37,6 +37,7 @@ class ManageCustomerAdapter(view: RecyclerView) :
             tvCustomerName.text = item.name.displaySafe()
             tvEmail.text = item.email.displaySafe()
             tvPhone.text = item.phone.formatPhoneUSCustom().displaySafe()
+            tvBirthday.text = item.birthDay.displaySafe()
 
             btBookingList.setOnClickListener {
                 onClickOpenBookingList?.invoke(item)

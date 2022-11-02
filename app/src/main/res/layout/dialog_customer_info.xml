@@ -84,4 +84,20 @@
         android:text="@string/label_phone"
         tools:text="987-654-3210" />
 
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="@string/birthday"
+        android:layout_marginStart="@dimen/size_16"
+        app:drawableStartCompat="@drawable/ic_birthday" />
+
+    <TextView
+        android:id="@+id/tvBirthday"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_marginStart="@dimen/size_32"
+        android:layout_marginTop="@dimen/size_8"
+        android:minLines="@null"
+        android:text="@string/label_phone"
+        tools:text="12-12-2022" />
+
 </LinearLayout>

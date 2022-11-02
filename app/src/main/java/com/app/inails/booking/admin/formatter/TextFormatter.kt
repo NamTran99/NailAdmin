@@ -117,7 +117,7 @@ class TextFormatter {
         if (customerDTO.address.isNullOrEmpty() && customerDTO.city.isNullOrEmpty()
             && customerDTO.state.isNullOrEmpty() && customerDTO.zip.isNullOrEmpty()
         )
-            "No Info"
+            "No Information"
         else
             "${customerDTO.address ?: ""}, ${customerDTO.city ?: ""}, ${customerDTO.state ?: ""}, ${customerDTO.zip ?: ""}"
 

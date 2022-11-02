@@ -194,7 +194,7 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val phone: String
                 get() = customerDTO.phone_format.safe()
             override val email: String
-                get() = customerDTO.email.safe("No Info")
+                get() = customerDTO.email.safe("No Information")
             override val address: String
                 get() = textFormatter.fullAddress(customerDTO)
         }

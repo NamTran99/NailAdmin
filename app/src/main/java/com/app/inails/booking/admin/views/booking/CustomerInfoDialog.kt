@@ -26,6 +26,7 @@ class CustomerInfoDialog(context: Context) : BaseDialog(context) {
             tvPhone.text = customer.phone.displaySafe()
             tvAddress.text = customer.address.displaySafe()
             tvEmail.text = customer.email.displaySafe()
+            tvBirthday.text = customer.birthDay.displaySafe()
         }
         super.show()
     }

@@ -66,6 +66,7 @@
 
     <TextView
         android:id="@+id/tvAddress"
+        android:layout_marginBottom="@dimen/size_16"
         style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,6 +75,18 @@
         android:textColor="@color/color_text_customer_infor"
         app:drawableStartCompat="@drawable/ic_location"
         tools:text="100 Hoa Hai, Ngu Hanh Son, Da Nang" />
+
+    <TextView
+        android:id="@+id/tvBirthday"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_2"
+        android:drawablePadding="@dimen/size_8"
+        android:textColor="@color/color_text_customer_infor"
+        app:drawableStartCompat="@drawable/ic_birthday"
+        tools:text="10-12-2022" />
+
 
     <View
         android:layout_width="match_parent"
