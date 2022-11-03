@@ -88,7 +88,8 @@
         style="@style/AppTheme.TextView.Medium"
         android:layout_marginTop="@dimen/size_16"
         android:text="@string/birthday"
-        android:layout_marginStart="@dimen/size_16"
+        android:drawablePadding="@dimen/size_5"
+        android:layout_marginStart="@dimen/size_13"
         app:drawableStartCompat="@drawable/ic_birthday" />
 
     <TextView

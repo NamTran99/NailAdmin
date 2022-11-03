@@ -10,5 +10,6 @@ data class CustomerDTO(
     val zip : String?="",
     val city : String?="",
     val phone_format : String?="",
-    val customer_id: Int? = 0
+    val customer_id: Int? = 0,
+    val birthdate: String? = ""
 )
