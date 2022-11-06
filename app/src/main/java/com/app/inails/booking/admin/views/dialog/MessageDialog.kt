@@ -30,6 +30,16 @@ open class MessageDialog(context: Context) : BaseDialog(context) {
         super.show()
     }
 
+    fun show(title: String, resMsg: Int, onDismiss: () -> Unit = {}) {
+        mOnDismiss = onDismiss
+        binding.txtBody.setText(resMsg)
+        binding.txtTitle.show(title.isNotBlank()) {
+            text = title
+        }
+        super.show()
+    }
+
+
     override fun show() {
         error("Not support")
     }

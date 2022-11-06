@@ -8,10 +8,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
+import android.support.core.livedata.SingleLiveEvent
+import android.support.core.livedata.call
 import android.support.core.view.viewBinding
+import android.support.di.Inject
+import android.support.di.ShareScope
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
@@ -21,6 +26,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
+import com.app.inails.booking.admin.datasource.remote.sockets.AuthSocket
 import com.app.inails.booking.admin.extention.alpha
 import com.app.inails.booking.admin.extention.formatPhoneUSCustom
 import com.app.inails.booking.admin.extention.onClick
@@ -112,6 +118,14 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         viewModel.count.bind {
             mainTopBarState.setNotificationUnreadCount(it)
         }
+        viewModel.deleteAccount.bind{
+            notificationDialog.show(R.string.auth_msg_deleted_account) {
+                Router.run {
+                    redirectToLogin()
+                    viewModel.logout()
+                }
+            }
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -175,9 +189,10 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
 class MainViewModel(
     private val logoutRepo: LogoutRepo,
     private val userLocalSource: UserLocalSource,
-    private val notificationRepo: NotificationRepository
+    private val notificationRepo: NotificationRepository,
+    private val deleteAccountRepo: DeleteAccountRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-
+    val deleteAccount = deleteAccountRepo.deletedSalonAccount
     val count = notificationRepo.count
     val result = notificationRepo.result
     val idForm = NotificationIDForm()
@@ -194,5 +209,21 @@ class MainViewModel(
         idForm.id = id
         notificationRepo.read(idForm)
         numberNotificationSalonUnread()
+    }
+}
+
+@Inject(ShareScope.FragmentOrActivity)
+class DeleteAccountRepo(authSocket: AuthSocket) {
+
+    val deletedSalonAccount = SingleLiveEvent<Any>()
+
+    init {
+        authSocket.apply {
+
+            observeSalonDeleteAccount {
+                Log.e("----------> ", it[0].toString())
+                deletedSalonAccount.call()
+            }
+        }
     }
 }

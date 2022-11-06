@@ -180,4 +180,5 @@
     <string name="title_new_version_update">Update New Version</string>
     <string name="text_pls_new_version_update">123 Best Solution updated to the new version. Please update the version for a better app experience. Thank you!!</string>
     <string name="birthday">Birthday</string>
+    <string name="auth_msg_deleted_account">Your account has been deleted. Please try again later!</string>
 </resources>

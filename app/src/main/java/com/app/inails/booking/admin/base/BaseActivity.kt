@@ -21,10 +21,12 @@ import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.app.inails.booking.admin.views.dialog.ErrorDialogOwner
+import com.app.inails.booking.admin.views.dialog.NotificationDialogOwner
 import com.app.inails.booking.admin.views.dialog.loading.LoadingDialog
 import es.dmoral.toasty.Toasty
 
 abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutId),
+    NotificationDialogOwner,
     LifecycleSubscriberExt,
     ViewModelRegistrable, RouteDispatcher,
     ErrorDialogOwner,
