@@ -1,10 +1,7 @@
 package com.app.inails.booking.admin.helper.network
 
 import android.support.core.extensions.withIO
-import com.app.inails.booking.admin.exception.ApiRequestException
-import com.app.inails.booking.admin.exception.InternalServerException
-import com.app.inails.booking.admin.exception.ParameterInvalidException
-import com.app.inails.booking.admin.exception.ServerResponseNullException
+import com.app.inails.booking.admin.exception.*
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Response
@@ -108,6 +105,7 @@ class DefaultApiErrorHandler : ApiCallErrorHandler {
         val errorCode = response.code()
 
         return when {
+            errorCode == 401 -> UnauthorizedException()
             errorCode in 400..499 -> ApiRequestException(errorBody)
             errorCode >= 500 -> InternalServerException()
             else -> ParameterInvalidException(response.message())

@@ -173,6 +173,15 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         return true
     }
 
+    override fun logout() {
+        notificationDialog.show(R.string.auth_msg_deleted_account) {
+            Router.run {
+                redirectToLogin()
+                viewModel.logout()
+            }
+        }
+    }
+
     override fun onBackPressed() {
         if (!findNavigator().navigateUp()) super.onBackPressed()
     }

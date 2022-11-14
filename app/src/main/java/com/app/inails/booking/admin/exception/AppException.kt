@@ -5,6 +5,7 @@ import com.google.gson.Gson
 
 class InternalServerException : RuntimeException("Error internal server")
 class ServerResponseNullException : RuntimeException("Server response no Content")
+class UnauthorizedException  : RuntimeException("Unauthorized")
 class ParameterInvalidException(message: String) : RuntimeException(message)
 
 open class ApiRequestException(rawMessage: String?) : RuntimeException() {

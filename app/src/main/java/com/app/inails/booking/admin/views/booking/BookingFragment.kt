@@ -30,6 +30,7 @@ import com.app.inails.booking.admin.views.booking.dialog_filter.SearchCustomerOw
 import com.app.inails.booking.admin.views.booking.dialog_filter.SearchStaffOwner
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.delay
 
 class BookingFragment : BaseFragment(R.layout.fragment_booking),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
@@ -373,7 +374,7 @@ class BookingViewModel(
     val loadingCustom: LoadingEvent = LoadingLiveData()
 
     fun refresh(type: Int, page: Int = 1) = launch(loadingCustom, error) {
-        appointmentRepo(if (type == 1) filterCheckInForm else filterCustomerForm, page)
+        appointmentRepo(if (type == 1) filterCheckInForm else filterCustomerForm, page , this)
     }
 
     fun updateStatus() = launch(loading, error) {

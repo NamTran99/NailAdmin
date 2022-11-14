@@ -66,4 +66,7 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
         toasty.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 220)
         toasty.show()
     }
+
+    open fun logout(){
+    }
 }

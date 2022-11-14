@@ -26,9 +26,10 @@ class AppointmentRepository(
     val resultCheckIn = MutableLiveData<IAppointment>()
     val resultRemove = MutableLiveData<Int>()
 
-    suspend operator fun invoke(form: AppointmentFilterForm, page: Int = 1) {
+    suspend operator fun invoke(form: AppointmentFilterForm, page: Int = 1, scope: CoroutineScope) {
         if(page == 1) results1Job?.cancel()
-        results1Job = CoroutineScope(Dispatchers.IO).launch {
+
+        results1Job = CoroutineScope(scope.coroutineContext).launch {
             results1.post(
                 page to
                         bookingFactory

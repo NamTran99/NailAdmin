@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.exception
 import android.app.Activity
 import android.support.core.extensions.block
 import android.support.core.route.RouteDispatcher
+import android.util.Log
 import android.widget.EditText
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
@@ -56,8 +57,12 @@ class ErrorHandlerImpl : ErrorHandler {
             is ResourceException -> {
                 activity.toast(error.resource)
             }
+            is UnauthorizedException ->{
+                activity.logout()
+            }
             else -> activity.errorDialog.show(error)
         }
     }
+
 }
 

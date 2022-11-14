@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.core.route.BundleArgument
 import android.support.core.route.argument
 import android.support.navigation.findNavigator
+import android.support.viewmodel.viewModel
+import android.util.Log
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Router
@@ -31,6 +33,7 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), TopBarOwner,
      NotifyDialogOwner {
     override lateinit var topBar: TopBarAdapter
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,9 +69,21 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 }
             )
         }
+        viewModel.deleteAccount.bind{
+            logout()
+        }
     }
 
     override fun onBackPressed() {
         if (!findNavigator().navigateUp()) super.onBackPressed()
+    }
+
+    override fun logout() {
+        notificationDialog.show(R.string.auth_msg_deleted_account) {
+            Router.run {
+                redirectToLogin()
+                viewModel.logout()
+            }
+        }
     }
 }
