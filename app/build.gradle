@@ -6,6 +6,9 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(rootProject.file("keystore-release.properties")))
+
 android {
     compileSdk 31
 
@@ -14,9 +17,18 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "1.0.0"    // format x.x.x_dev for dev, x.x for release (must follow format)
+        versionName "1.0"    // format x.x.x_dev for dev, x.x for release (must follow format)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties["keyAlias"]
+            keyPassword keystoreProperties["keyPassword"]
+            storeFile file(keystoreProperties["storeFile"])
+            storePassword keystoreProperties["storePassword"]
+        }
     }
 
     buildTypes {
