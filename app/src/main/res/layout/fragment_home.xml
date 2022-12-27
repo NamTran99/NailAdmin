@@ -153,20 +153,22 @@
                             android:layout_height="0dp"
                             app:layout_constraintDimensionRatio="H,484:403"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabDotsGuidance"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="@dimen/size_5"
+                            android:background="@null"
+                            android:clipToPadding="false"
+                            app:tabBackground="@drawable/tab_selector_2"
+                            app:tabGravity="center"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:tabIndicatorHeight="0dp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabDotsGuidance"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/size_5"
-                        android:background="@null"
-                        android:clipToPadding="false"
-                        app:tabBackground="@drawable/tab_selector_2"
-                        app:tabGravity="center"
-                        app:tabIndicatorHeight="0dp" />
+
                 </RelativeLayout>
 
             </LinearLayout>

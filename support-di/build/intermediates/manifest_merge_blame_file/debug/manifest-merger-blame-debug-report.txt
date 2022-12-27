@@ -3,9 +3,9 @@
 3    package="android.support.di" >
 4
 5    <uses-sdk
-6        android:minSdkVersion="21"
+6        android:minSdkVersion="23"
 6-->/Users/yenyen/Desktop/project/kantek/android_booking_inails_admin/support-di/src/main/AndroidManifest.xml
-7        android:targetSdkVersion="31" />
+7        android:targetSdkVersion="33" />
 7-->/Users/yenyen/Desktop/project/kantek/android_booking_inails_admin/support-di/src/main/AndroidManifest.xml
 8
 9</manifest>

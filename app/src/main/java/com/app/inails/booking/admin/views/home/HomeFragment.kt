@@ -1,5 +1,8 @@
 package com.app.inails.booking.admin.views.home
 
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
@@ -9,9 +12,7 @@ import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.core.view.doOnLayout
 import androidx.lifecycle.ViewModel
-import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentHomeBinding
@@ -24,7 +25,6 @@ import com.app.inails.booking.admin.views.booking.CustomerInfoOwner
 import com.app.inails.booking.admin.views.booking.StaffInfoDialogOwner
 import com.app.inails.booking.admin.views.home.adapters.AdsAdapter
 import com.app.inails.booking.admin.views.home.adapters.GuidanceAdapter
-import com.app.inails.booking.admin.views.main.MainActivity
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.material.tabs.TabLayoutMediator
@@ -45,7 +45,7 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
         with(binding) {
             topBar.state<MainTopBarState>().setTitle(R.string.title_dashboard)
             appPermission.accessNotification { }.request()
-            viewRefresh.isEnabled= false
+            viewRefresh.isEnabled = false
             btnManageSalon.onClick {
                 Router.open(this@HomeFragment, Routing.DetailSalon)
             }
@@ -67,22 +67,27 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
 
             adsAdapter = AdsAdapter(viewPagerAds).apply {
                 onItemClick = {
-                    if (it.url.isNotEmpty()) {
-                        Router.run { redirectToWebView(WebViewArgs(it.url)) }
-                    }
+                    if (it.content.isNotEmpty()) {
+                        Router.run { redirectToWebView(WebViewArgs("", it.content, true)) }
+                    } else
+                        if (it.url.isNotEmpty()) {
+                            Router.run { redirectToWebView(WebViewArgs(it.url)) }
+                        }
                 }
             }
 
             guidanceAdapter = GuidanceAdapter(viewPagerGuidance).apply {
                 onItemClick = {
-                    if (it.fileType == FileType.Image) {
+                    if (it.fileType != FileType.Video && it.content.isNotEmpty()) {
 //                        Router.open(this@HomeFragment, Routing.ShowZoomSingleImage(it.file))
                         Router.run { redirectToWebView(WebViewArgs("", it.content, true)) }
                     } else {
 //                     startActivity(Intent(requireContext(), YoutubeActivity::class.java).apply {
 //                         putExtras(YoutubeActivityArgs(it.file).toBundle())
 //                     })
-                        Router.run { redirectToWebView(WebViewArgs(it.url)) }
+                        if (it.file.isNotEmpty()) {
+                            Router.run { redirectToWebView(WebViewArgs(it.file)) }
+                        }
                     }
 
                 }
