@@ -212,16 +212,5 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <com.app.inails.booking.admin.views.widget.SpannedTextView
-            android:id="@+id/btnAuth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="@dimen/size_16"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            app:spannedAnchorColor="@color/white"
-            app:spannedText="@string/label_auth_to_booking"
-            app:underlineSpannedText="true" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -15,6 +15,7 @@ import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragme
 import com.app.inails.booking.admin.views.clients.appointment.AppointmentDetailClientFragment
 import com.app.inails.booking.admin.views.clients.feedbacks.SubmitFeedbackFragment
 import com.app.inails.booking.admin.views.clients.profile.ProfileClientFragment
+import com.app.inails.booking.admin.views.clients.salon.SalonDetailClientFragment
 import com.app.inails.booking.admin.views.clients.salon.SalonGalleryFragment
 import com.app.inails.booking.admin.views.extension.ShowZoomSingleImageFragment
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
@@ -70,6 +71,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ShowZoomSingleImage -> ShowZoomSingleImageFragment::class
                 is Routing.AppointmentDetailClient -> AppointmentDetailClientFragment::class
                 is Routing.SalonGallery -> SalonGalleryFragment::class
+                is Routing.SalonDetail -> SalonDetailClientFragment::class
                 else -> error("Not Found Routing")
             }
             navigator.navigate(clazz, args = args.toBundle())

@@ -10,9 +10,12 @@ import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.model.ui.VoucherType
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 class VoucherAdapter(view: RecyclerView) :
     SimpleRecyclerAdapter<IVoucher, ItemVoucherBinding>(view) {
+
+    var onItemCLick: ((IVoucher) -> Unit) = {}
 
     override fun onCreateBinding(parent: ViewGroup): ItemVoucherBinding {
         return parent.bindingOf(ItemVoucherBinding::inflate)
@@ -25,14 +28,17 @@ class VoucherAdapter(view: RecyclerView) :
     ) {
         binding.apply {
             tvCode.text = item.code
-            tvCustomerType.text = item.typeCustomer
-            if(item.type == VoucherType.PERCENT){
-                tvValue.text = "-${item.value}%"
-            }else{
-                tvValue.text = "-${item.value}$"
+            root.setOnClickListener {
+                onItemCLick.invoke(item)
             }
-            tvStartTime.text = item.startDate
-            tvEndTime.text = item.endDate
+//            tvCustomerType.text = item.typeCustomer
+//            if(item.type == VoucherType.PERCENT){
+//                tvValue.text = "-${item.value}%"
+//            }else{
+//                tvValue.text = "-${item.value}$"
+//            }
+//            tvStartTime.text = item.startDate
+//            tvEndTime.text = item.endDate
         }
     }
 }

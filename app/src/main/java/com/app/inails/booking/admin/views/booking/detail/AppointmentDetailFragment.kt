@@ -30,6 +30,7 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
+import com.app.inails.booking.admin.views.booking.dialog.VoucherDetailDialogOwner
 import com.app.inails.booking.admin.views.extension.LocalImage
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
 import com.app.inails.booking.admin.views.management.service.adapters.AppImagesAdapter
@@ -41,7 +42,7 @@ import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 
 class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_detail),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
-    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, StaffInfoDialogOwner {
+    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, StaffInfoDialogOwner, VoucherDetailDialogOwner {
     private val binding by viewBinding(FragmentAppointmentDetailBinding::bind)
     private val viewModel by viewModel<AppointmentDetailViewModel>()
     private val arg by lazy { argument<Routing.AppointmentDetail>() }
@@ -228,8 +229,14 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
 
         mAppointment = item
         with(binding) {
-            txtDiscount.show(item.showPercent)
-            txtDiscount.text = item.percent
+            btnInfo.onClick{
+                item.voucher?.let{
+                    voucherDetailDialog.show(it)
+                }
+            }
+//            txtVoucherCode.text = item.voucherCode
+//            txtDiscount.show(item.showPercent)
+//            txtDiscount.text = item.percent
             txtPriceDiscount.text = item.discount
             txtTotalAmount.text = item.totalAmount
             voucherLayout.show(item.hasVoucher)
@@ -253,7 +260,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             afterAcceptLayout.show((item.status == DataConst.AppointmentStatus.APM_WAITING || item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING) && item.type == 1)
             (item.status == DataConst.AppointmentStatus.APM_ACCEPTED && item.type == 2) show acceptLayout
             (item.status == DataConst.AppointmentStatus.APM_PENDING && item.type == 2) show waitingLayout
-            (item.status == DataConst.AppointmentStatus.APM_FINISH) show finishLayout
+//            (item.status == DataConst.AppointmentStatus.APM_FINISH) show finishLayout
             (item.status == DataConst.AppointmentStatus.APM_CANCEL) show cancelLayout
             val list = item.serviceList.toMutableList()
             item.serviceCustomObj?.let { list.add(it) }

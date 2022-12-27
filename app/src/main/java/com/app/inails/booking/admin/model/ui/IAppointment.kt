@@ -51,6 +51,8 @@ interface IAppointment {
     val showPercent : Boolean get() =false
     val discount: String get() = ""
     val totalAmount: String get() = ""
+    val voucherCode: String get() = ""
+    val voucher: IVoucher? get() = null
 }
 
 @Parcelize

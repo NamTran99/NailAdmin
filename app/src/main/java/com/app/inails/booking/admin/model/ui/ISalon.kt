@@ -49,6 +49,7 @@ interface IVoucher {
     val endDate: String get() = ""
     val typeCustomer: String get() = "All" // 1 : all || 2 : normal || 3 : vip
     val value: Double get() = 0.0 // 1 : all || 2 : normal || 3 : vip
+    val description: String get() = ""
 }
 
 enum class VoucherType {

@@ -24,7 +24,6 @@ interface BookingRouteClient {
     fun redirectToSubmitFeedback(self: RouteDispatcher, booingID: Long = 0, salonID: Long)
     fun BaseFragment.redirectToStaff(
         services: List<IServiceClient>,
-        datetime: String,
         note: String
     )
     fun BaseFragment.redirectToSuccess()
@@ -60,14 +59,12 @@ class BookingRouteClientImpl : BookingRouteClient {
 
     override fun BaseFragment.redirectToStaff(
         services: List<IServiceClient>,
-        datetime: String,
         note: String
     ) {
         findNavigator().navigate(
             BookingStaffFragment::class,
             args = BookingArg(
                 services = services.map { it.id },
-                datetime = datetime,
                 note = note
             ).toBundle()
         )

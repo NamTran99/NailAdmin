@@ -23,6 +23,7 @@ import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.model.ui.ISalonDetail
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.views.booking.dialog.VoucherDetailDialogOwner
 import com.app.inails.booking.admin.views.extension.LocalImage
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.app.inails.booking.admin.views.me.adapters.HomeBannerPager
@@ -33,7 +34,8 @@ import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 
-class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner {
+class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner,
+    VoucherDetailDialogOwner {
     val viewModel by viewModel<DetailSalonViewModel>()
     val binding by viewBinding(FragmentProfileBinding::bind)
     private lateinit var adapter: HomeBannerPager
@@ -57,7 +59,11 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
 
         with(binding) {
             tabDots.setupWithViewPager(vpImage)
-            voucherAdapter = VoucherAdapter(viewHeader.rcVoucher)
+            voucherAdapter = VoucherAdapter(viewHeader.rcVoucher).apply {
+                onItemCLick ={
+                    voucherDetailDialog.show(it)
+                }
+            }
             adapter = HomeBannerPager(binding.vpImage).apply {
                 onClickItem = {
                     val listImage = viewModel.salonDetail.value?.images?.map {

@@ -7,6 +7,7 @@ import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_AVAILABLE
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_BREAK
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_WORKING
 import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.factory.SalonFactory.Companion.createVoucher
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.support.ISelector
@@ -196,13 +197,17 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val totalAmount: String
                 get() = textFormatter.formatPrice(appointmentDTO.price).safe()
             override val discount: String
-                get() = appointmentDTO.total_discount_format.toPriceFormat()
+                get() = "-${appointmentDTO.total_discount_format.toPriceFormat()}"
             override val hasVoucher: Boolean
                 get() = appointmentDTO.voucher != null
             override val percent: String
                 get() = appointmentDTO.voucher?.value?.let { textFormatter.formatPercent(it) }.safe()
             override val showPercent: Boolean
                 get() = appointmentDTO.voucher?.type == DataConst.VoucherType.TYPE_PERCENT
+            override val voucherCode: String
+                get() = appointmentDTO.voucher?.code.displaySafe1()
+            override val voucher: IVoucher?
+                get() = appointmentDTO.voucher?.let{createVoucher(it)}
         }
     }
 

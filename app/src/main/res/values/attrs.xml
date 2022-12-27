@@ -81,5 +81,9 @@
         <attr name="underlineSpannedText" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="PasswordLayout2">
+        <attr name="iconColorr" format="color" />
+    </declare-styleable>
+
 
 </resources>

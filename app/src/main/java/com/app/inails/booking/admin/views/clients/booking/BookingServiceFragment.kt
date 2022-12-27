@@ -128,7 +128,7 @@ class BookingServiceFragment : BaseRefreshFragment(R.layout.fragment_booking_ser
                 binding.btnTime.text = mTimeAdapter.timeSelected?.time
             }
             openStaff.bind {
-                Router.run { redirectToStaff(it.first, it.second, binding.edtNote.text.toString()) }
+                Router.run { redirectToStaff(it.first,  binding.edtNote.text.toString()) }
             }
             logoutCustomerSuccess.bind {
 //                open<AuthenticateActivity>(AuthenticateArg(AuthenticateArg.Type.CHECK_IN)).clear()
@@ -162,17 +162,13 @@ class BookingServiceFragment : BaseRefreshFragment(R.layout.fragment_booking_ser
         val userCustomer = it.second
         topBar.state<ServiceTopBarState>().setTitle(userCustomer?.welcomeName)
         topBar.state<ServiceTopBarState>().showLogoutCustomer(true)
-        if (it.first) {
             binding.dateTimeLayout.hide()
-        }
         if (userCustomer == null) {
             topBar.state<ServiceTopBarState>().showMenu(false)
             appEvent.enableMenuLeft.post(false)
-            binding.btnAuth.show()
         } else {
             topBar.state<ServiceTopBarState>().showMenu(true)
             appEvent.enableMenuLeft.post(true)
-            binding.btnAuth.hide()
         }
     }
 
@@ -241,7 +237,7 @@ class BookingServiceVM(
         date: String,
         time: String?
     ) = launch(loading, errorCustom) {
-        validate(services, time, allUserLive.value?.first ?: false)
+        validate(services)
         appCache.servicesSelected = services
         val dateTime = if (allUserLive.value?.first == true) "" else "$date $time"
         openStaff.post(services to dateTime)
@@ -249,10 +245,8 @@ class BookingServiceVM(
 
     private fun validate(
         services: List<IServiceClient>?,
-        time: String?, isOwner: Boolean = false
     ) {
         if (services.isNullOrEmpty()) resourceError(R.string.error_blank_service)
-        if ((time == null || time.isEmpty()) && !isOwner) resourceError(R.string.error_blank_time)
     }
 
     fun logoutCustomer() = launch(loading, error) {

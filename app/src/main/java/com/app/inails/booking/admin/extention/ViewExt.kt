@@ -453,7 +453,7 @@ fun TextView.setDrawableStart(resIcon: Int) {
 
 
 fun ShapeableImageView.setImageUrl(url: String) {
-    Glide.with(context).load(url).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.box_grey))
+    Glide.with(context).load(url).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.img_logo))
         .into(this)
 }
 

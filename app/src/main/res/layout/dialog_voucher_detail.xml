@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_15"
+    android:paddingTop="@dimen/size_24"
+    android:paddingBottom="@dimen/size_18">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_10"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_size_16"
+            android:text="@string/voucher_information" />
+
+    </RelativeLayout>
+
+    <View style="@style/AppTheme.Line.Horizontal" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_20"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/voucher_code" />
+
+        <TextView
+            android:id="@+id/tvCode"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:gravity="end"
+            android:text="@string/voucher_code"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/value" />
+
+        <TextView
+            android:id="@+id/tvValue"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:gravity="end"
+            android:text="@string/voucher_code"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_time" />
+
+        <TextView
+            android:id="@+id/tvStartTime"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:gravity="end"
+            android:text="@string/voucher_code"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_time" />
+
+        <TextView
+            android:id="@+id/tvEndTime"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:gravity="end"
+            android:text="@string/voucher_code"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_type" />
+
+        <TextView
+            android:id="@+id/tvCustomerType"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:gravity="end"
+            android:text="@string/voucher_code"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_1" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:gravity="end"
+            android:text="@string/voucher_code"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btClose"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/button_primary_corner"
+        android:text="@string/btn_close" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

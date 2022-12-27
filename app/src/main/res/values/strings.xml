@@ -180,6 +180,7 @@
     <string name="auth_new_pw">Your new password is</string>
     <string name="btn_to_login">To Login</string>
     <string name="description">Description (Enter your salon information)</string>
+    <string name="description_1">Description</string>
     <string name="time_zone">Time Zone</string>
     <string name="message_end_time_greather_than_start_time">The end time must be greater than the start time</string>
     <string name="auth_otp_not_received">You did not receive the OTP code?</string>
@@ -359,6 +360,7 @@
     <string name="label_voucher_information">Voucher Information</string>
     <string name="title_salon_gallery">Salon\'s Gallery</string>
     <string name="your_salon_is_waiting_for_approval">(Your salon is waiting for approval)</string>
+    <string name="voucher_information">Voucher Information</string>
 </resources>
 
 

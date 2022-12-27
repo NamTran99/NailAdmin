@@ -183,6 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/line"
             android:orientation="vertical"
+            tools:visibility="visible"
             android:visibility="gone">
 
             <RelativeLayout

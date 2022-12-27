@@ -132,6 +132,123 @@
                     tools:itemCount="4"
                     tools:listitem="@layout/item_service_price" />
 
+                <View
+                    style="@style/AppTheme.Line.Horizontal"
+                    android:layout_marginVertical="@dimen/size_16" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/finishLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/voucherLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_centerVertical="true"
+                                android:text="@string/label_total"
+                                android:textColor="@color/gray15" />
+
+                            <TextView
+                                android:id="@+id/txtTotal"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/applyVoucherLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_16"
+                            android:orientation="horizontal">
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/labelVoucher"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_voucher_discount"
+                                android:textColor="@color/gray15" />
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/btnInfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/size_5"
+                                android:layout_toEndOf="@+id/txtDiscount"
+                                android:background="?selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_info" />
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtPriceDiscount"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:textColor="@color/colorPrimary" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            style="@style/AppTheme.Line.Horizontal"
+                            android:layout_marginVertical="@dimen/size_16" />
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_view_stroke"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/size_16">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_centerVertical="true"
+                            android:text="@string/label_total_amount"
+                            android:textColor="@color/gray15"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/txtTotalAmount"
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_alignParentEnd="true"
+                            android:textSize="@dimen/text_size_14" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tvNotes"
+                        style="@style/AppTheme.TextView.Italic"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/size_12"
+                        android:maxLines="@null"
+                        android:textColor="@color/gray15"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
                 <LinearLayout
                     android:id="@+id/lvAppointmentNote"
                     android:layout_width="match_parent"
@@ -153,9 +270,6 @@
 
                 </LinearLayout>
 
-                <View
-                    style="@style/AppTheme.Line.Horizontal"
-                    android:layout_marginVertical="@dimen/size_16" />
 
                 <LinearLayout
                     android:id="@+id/waitingLayout"
@@ -333,115 +447,6 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/finishLayout"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/voucherLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        tools:visibility="visible">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/AppTheme.TextView.Medium"
-                                android:layout_centerVertical="true"
-                                android:text="@string/label_total"
-                                android:textColor="@color/gray15"
-                                />
-
-                            <TextView
-                                android:id="@+id/txtTotal"
-                                style="@style/AppTheme.TextView.Medium"
-                                android:layout_alignParentEnd="true"
-                                />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/applyVoucherLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/size_16">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/labelVoucher"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="@style/AppTheme.TextView.Medium"
-                                android:text="@string/label_voucher_discount"
-                                android:textColor="@color/gray15" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtDiscount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/size_5"
-                                style="@style/AppTheme.TextView.Medium"
-                                android:layout_toEndOf="@+id/labelVoucher"
-                                android:textColor="@color/colorPrimary" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtPriceDiscount"
-                                android:layout_width="wrap_content"
-                                style="@style/AppTheme.TextView.Medium"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:textColor="@color/colorPrimary" />
-                        </RelativeLayout>
-
-                        <View
-                            style="@style/AppTheme.Line.Horizontal"
-                            android:layout_marginVertical="@dimen/size_16" />
-
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/size_16"
-                        android:background="@drawable/bg_view_stroke"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:layout_centerVertical="true"
-                            android:text="@string/label_total_amount"
-                            android:textColor="@color/gray15"
-                            android:textSize="@dimen/text_size_14"
-                            />
-
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:id="@+id/txtTotalAmount"
-                            android:layout_alignParentEnd="true"
-                            android:textSize="@dimen/text_size_14"
-                            />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/tvNotes"
-                        style="@style/AppTheme.TextView.Italic"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="@dimen/size_12"
-                        android:maxLines="@null"
-                        android:textColor="@color/gray15"
-                        android:visibility="gone"
-                        tools:visibility="visible" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <LinearLayout
                     android:layout_width="match_parent"

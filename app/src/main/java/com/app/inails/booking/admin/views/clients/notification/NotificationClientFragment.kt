@@ -19,16 +19,12 @@ import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
-import com.app.inails.booking.admin.databinding.FragmentNotificationBinding
 import com.app.inails.booking.admin.databinding.FragmentNotificationClientBinding
-import com.app.inails.booking.admin.datasource.remote.NotificationApi
 import com.app.inails.booking.admin.datasource.remote.clients.NotificationClientApi
 import com.app.inails.booking.admin.extention.lock
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.factory.NotificationFactory
 import com.app.inails.booking.admin.factory.client.NotificationClientFactory
 import com.app.inails.booking.admin.factory.client.NotificationOptionRepository
-import com.app.inails.booking.admin.model.ui.INotification
 import com.app.inails.booking.admin.model.ui.client.INotificationClient
 import com.app.inails.booking.admin.model.ui.client.popup.INotificationItemOption
 import com.app.inails.booking.admin.model.ui.client.popup.INotificationOption
@@ -37,14 +33,13 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.client.NotificationRepository
 import com.app.inails.booking.admin.views.clients.popup.MenuPopupOwner
 import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
-import com.app.inails.booking.admin.views.notification.NotificationAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleWithMoreTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class NotificationClientFragment : BaseRefreshFragment(R.layout.fragment_notification_client),
     TopBarOwner,
     MenuPopupOwner,
-MessageDialogOwner{
+    MessageDialogOwner {
     override fun onRefreshListener() {
         refresh()
     }
@@ -120,9 +115,9 @@ MessageDialogOwner{
     }
 
     private fun openDetails(it: INotificationClient) {
-        if(it.type == OWNER_ACCOUNT_APPROVE){
+        if (it.type == OWNER_ACCOUNT_APPROVE) {
             messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
-        }else{
+        } else {
             Router.navigate(self, Routing.AppointmentDetailClient(it.bookingID, it.id, it.salonID))
         }
     }

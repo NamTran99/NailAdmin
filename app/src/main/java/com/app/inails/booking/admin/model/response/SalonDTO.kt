@@ -41,7 +41,8 @@ data class VoucherDTO(
     val start_date: String? = "",
     val expiration_date: String? = "",
     val type_customer: Int? = 1, // 1 : all || 2 : normal || 3 : vip
-    val value: Double = 0.0 // 1 : all || 2 : normal || 3 : vip
+    val value: Double = 0.0, // 1 : all || 2 : normal || 3 : vip
+    val description: String? = ""
 )
 
 data class Image(
@@ -56,11 +57,11 @@ data class Schedule(
     @SerializedName("start_time_format")
     val startTimeFormat: String? = "",
     @SerializedName("end_time_format")
-    val endTimeFormat: String?= "",
+    val endTimeFormat: String? = "",
     @SerializedName("start_time")
-    val startTime: String?= "",
+    val startTime: String? = "",
     @SerializedName("end_time")
-    val endTime: String?= "",
+    val endTime: String? = "",
     val day: Int = 0
 )
 

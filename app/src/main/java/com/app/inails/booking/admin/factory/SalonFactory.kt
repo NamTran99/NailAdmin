@@ -88,30 +88,33 @@ class SalonFactory(private val textFormatter: TextFormatter) {
         }
     }
 
-    fun createVoucher(voucherDto: VoucherDTO): IVoucher{
-        return object : IVoucher{
-            override val code: String
-                get() = voucherDto.code.safe()
-            override val type: VoucherType
-                get() =
-                    when(voucherDto.type){
-                        1 -> VoucherType.PERCENT
-                        else -> VoucherType.VALUE
+    companion object{
+        fun createVoucher(voucherDto: VoucherDTO): IVoucher{
+            return object : IVoucher{
+                override val code: String
+                    get() = voucherDto.code.safe()
+                override val type: VoucherType
+                    get() =
+                        when(voucherDto.type){
+                            1 -> VoucherType.PERCENT
+                            else -> VoucherType.VALUE
+                        }
+                override val endDate: String
+                    get() = voucherDto.expiration_date.toVoucherTIme()
+                override val startDate: String
+                    get() = voucherDto.start_date.toVoucherTIme()
+                override val typeCustomer: String
+                    get() = when(voucherDto.type_customer){
+                        1 ->  "All"
+                        2 -> "Normal"
+                        else -> "Vip"
                     }
-            override val endDate: String
-                get() = voucherDto.expiration_date.toVoucherTIme()
-            override val startDate: String
-                get() = voucherDto.start_date.toVoucherTIme()
-            override val typeCustomer: String
-                get() = when(voucherDto.type_customer){
-                    1 ->  "All"
-                    2 -> "Normal"
-                    else -> "Vip"
-                }
-            override val value: Double
-                get() = voucherDto.value
+                override val value: Double
+                    get() = voucherDto.value
+                override val description: String
+                    get() = voucherDto.description.safe()
+            }
         }
     }
-
 
 }

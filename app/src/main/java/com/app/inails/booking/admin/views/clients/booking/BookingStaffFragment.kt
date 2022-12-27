@@ -7,7 +7,6 @@ import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.call
 import android.support.core.livedata.post
 import android.support.core.route.BundleArgument
-import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
@@ -22,34 +21,26 @@ import com.app.inails.booking.admin.databinding.FragmentBookingStaffBinding
 import com.app.inails.booking.admin.datasource.local.AppCache
 import com.app.inails.booking.admin.datasource.local.SalonLocalSource
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
-import com.app.inails.booking.admin.datasource.remote.BookingApi
-import com.app.inails.booking.admin.datasource.remote.StaffApi
 import com.app.inails.booking.admin.datasource.remote.clients.BookingClientApi
 import com.app.inails.booking.admin.datasource.remote.clients.StaffClientApi
 import com.app.inails.booking.admin.exception.currentDatetime
 import com.app.inails.booking.admin.exception.toDateUTC
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.factory.client.BookingClientFactory
 import com.app.inails.booking.admin.model.form.BookingForm
 import com.app.inails.booking.admin.model.form.VoucherForm
-import com.app.inails.booking.admin.model.ui.IStaff
-import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.model.ui.client.IStaffClient
 import com.app.inails.booking.admin.model.ui.client.IVoucherClient
 import com.app.inails.booking.admin.navigate.Router
-import com.app.inails.booking.admin.navigate.Router.Companion.navigate
 import com.app.inails.booking.admin.repository.client.AuthenticateRepository
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarClientState
-import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BookingArg(
     val services: List<Int> = listOf(),
-    val datetime: String = "",
     val note: String = ""
 ) : BundleArgument
 
@@ -59,6 +50,7 @@ class BookingStaffFragment : BaseFragment(R.layout.fragment_booking_staff), TopB
     private val viewModel by viewModel<BookingStaffVM>()
     private lateinit var mStaffAdapter: StaffAdapter
     private val arg by lazy { BundleArgument.of(arguments) ?: BookingArg() }
+    val currentDateTime = currentDatetime().toDateUTC()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,12 +75,12 @@ class BookingStaffFragment : BaseFragment(R.layout.fragment_booking_staff), TopB
                 viewModel.form.run {
                     staffId = mStaffAdapter.selectedItem?.id
                     services = arg.services.toString()
-                    datetime = arg.datetime
+                    datetime = currentDateTime
                     note = arg.note
                 }
                 summaryBookingDialog.show(
                     mStaffAdapter.selectedItem?.name,
-                    arg.datetime,
+                    currentDateTime,
                     viewModel.serviceList,
                     {
                         it?.let {
@@ -101,8 +93,9 @@ class BookingStaffFragment : BaseFragment(R.layout.fragment_booking_staff), TopB
                             code = voucher
                         }
                         viewModel.checkVoucher(total)
-                    },{
-                        notificationDialog.show(getString(R.string.label_voucher_information),it
+                    }, {
+                        notificationDialog.show(
+                            getString(R.string.label_voucher_information), it
                         )
                     })
             }
@@ -118,7 +111,7 @@ class BookingStaffFragment : BaseFragment(R.layout.fragment_booking_staff), TopB
                 summaryBookingDialog.dismiss()
                 Router.run { redirectToSuccess() }
             }
-            fetch(arg.datetime)
+            fetch(currentDateTime)
 
             voucherResult.bind {
                 summaryBookingDialog.updateVoucher(it)
@@ -173,11 +166,6 @@ class CreateAppointmentRepository(
         form.type = if (userLocalSource.isOwnerLogin()) BookingForm.TYPE_WALK_IN
         else BookingForm.TYPE_APPOINTMENT
         form.salonSlug = salonLocalSource.getSalonSlug()
-        val datetime=form.datetime
-        if (datetime.isEmpty()) {
-            form.datetime = currentDatetime().toDateUTC()
-        } else form.datetime = datetime.toDateUTC()
-
         salonLocalSource.setAppointmentCurrent(bookingApi.create(form).await())
     }
 
