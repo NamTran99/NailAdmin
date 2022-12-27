@@ -85,7 +85,7 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
 //                     startActivity(Intent(requireContext(), YoutubeActivity::class.java).apply {
 //                         putExtras(YoutubeActivityArgs(it.file).toBundle())
 //                     })
-                        if (it.file.isNotEmpty()) {
+                        if (it.fileType == FileType.Video &&  it.file.isNotEmpty()) {
                             Router.run { redirectToWebView(WebViewArgs(it.file)) }
                         }
                     }
