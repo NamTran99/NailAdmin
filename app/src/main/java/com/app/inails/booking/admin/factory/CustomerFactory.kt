@@ -14,7 +14,7 @@ import com.app.inails.booking.admin.model.ui.ServiceImpl
 
 @Inject(ShareScope.Singleton)
 class CustomerFactory(private val textFormatter: TextFormatter) {
-    private fun createCustomer(customer: CustomerFullInfoDTO): ICustomer {
+    fun createCustomer(customer: CustomerFullInfoDTO): ICustomer {
         return object : ICustomer by CustomerImpl() {
             override val address: String
                 get() = customer.address.safe()
@@ -28,6 +28,10 @@ class CustomerFactory(private val textFormatter: TextFormatter) {
                 get() = customer.name.safe()
             override val birthDay: String
                 get() = customer.birthdate.safe()
+            override val type: Int
+                get() = customer.type?: 2
+            override val note: String
+                get() = customer.note.safe()
         }
     }
 

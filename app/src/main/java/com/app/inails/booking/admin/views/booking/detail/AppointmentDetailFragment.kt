@@ -1,5 +1,7 @@
 package com.app.inails.booking.admin.views.booking.detail
 
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.LoadingEvent
@@ -12,7 +14,10 @@ import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
@@ -25,9 +30,14 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.repository.booking.AppointmentRepository
 import com.app.inails.booking.admin.views.booking.*
+import com.app.inails.booking.admin.views.extension.LocalImage
+import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
+import com.app.inails.booking.admin.views.management.service.adapters.AppImagesAdapter
 import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.sangcomz.fishbun.FishBun
+import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 
 class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_detail),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
@@ -37,8 +47,77 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
     private val arg by lazy { argument<Routing.AppointmentDetail>() }
     private var mAppointment: IAppointment? = null
 
+    private var beforeImagePath = ArrayList<AppImage>()
+    private var afterImagePath = ArrayList<AppImage>()
+
+    private lateinit var mFeebackImageAdapter: AppImagesAdapter
+    private lateinit var mBeforeImagesAdapter: AppImagesAdapter
+    private lateinit var mAfterImagesAdapter: AppImagesAdapter
+
+    private val startForResultBeforeImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                val pathImage =
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
+                beforeImagePath =
+                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                finishBookingDialog.updateBeforeImages(beforeImagePath)
+            }
+        }
+
+    private val startForResultAfterImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                val pathImage =
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
+                afterImagePath =
+                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                finishBookingDialog.updateAfterImages(afterImagePath)
+            }
+        }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        finishBookingDialog.apply {
+            onAddBeforeImage = {
+                FishBun.with(this@AppointmentDetailFragment)
+                    .setImageAdapter(GlideAdapter())
+                    .setMaxCount(5)
+                    .setMinCount(1)
+                    .setSelectedImages(ArrayList(beforeImagePath.map { it.path.toUri() }))
+                    .setActionBarColor(
+                        ContextCompat.getColor(context, R.color.colorPrimary),
+                        ContextCompat.getColor(context, R.color.colorPrimary),
+                        true
+                    )
+                    .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                    .startAlbumWithActivityResultCallback(startForResultBeforeImage)
+            }
+
+            onAddAfterImage = {
+                FishBun.with(this@AppointmentDetailFragment)
+                    .setImageAdapter(GlideAdapter())
+                    .setMaxCount(5)
+                    .setMinCount(1)
+                    .setSelectedImages(ArrayList(afterImagePath.map { it.path.toUri() }))
+                    .setActionBarColor(
+                        ContextCompat.getColor(context, R.color.colorPrimary),
+                        ContextCompat.getColor(context, R.color.colorPrimary),
+                        true
+                    )
+                    .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                    .startAlbumWithActivityResultCallback(startForResultAfterImage)
+            }
+
+            onclickRemoveAfterImage = { image ->
+                afterImagePath.removeAll { it.path == image.path }
+            }
+
+            onclickRemoveBeforeImage = { image ->
+                beforeImagePath.removeAll { it.path == image.path }
+            }
+        }
         topBar.setState(
             SimpleTopBarState(
                 R.string.title_appointment_detail,
@@ -53,6 +132,21 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
         with(binding) {
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener { viewModel.refresh(arg.id) }
+            mFeebackImageAdapter = AppImagesAdapter(rcFeedbackImage).apply {
+                onItemImageClick  = {
+                    Router.run { redirectToShowZoomImage1(ShowZoomImageArgs1(this@apply.items().getData().map{ LocalImage(it.path) }, it)) }
+                }
+            }
+            mBeforeImagesAdapter = AppImagesAdapter(rcBeforePhoto).apply {
+                onItemImageClick  = {
+                    Router.run { redirectToShowZoomImage1(ShowZoomImageArgs1(this@apply.items().getData().map{ LocalImage(it.path) }, it)) }
+                }
+            }
+            mAfterImagesAdapter = AppImagesAdapter(rcAfterphoto).apply {
+                onItemImageClick  = {
+                    Router.run { redirectToShowZoomImage1(ShowZoomImageArgs1(this@apply.items().getData().map{ LocalImage(it.path) }, it)) }
+                }
+            }
             btDelete.setOnClickListener {
                 showConfirmDialog(
                     getString(R.string.title_remove_appointment),
@@ -128,8 +222,24 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
     }
 
     private fun displays(item: IAppointment) {
+        mFeebackImageAdapter.clear()
+        mBeforeImagesAdapter.clear()
+        mAfterImagesAdapter.clear()
+
         mAppointment = item
         with(binding) {
+            txtDiscount.show(item.showPercent)
+            txtDiscount.text = item.percent
+            txtPriceDiscount.text = item.discount
+            txtTotalAmount.text = item.totalAmount
+            voucherLayout.show(item.hasVoucher)
+            lvBeforeAfterImg.hide(item.beforeImage.isEmpty() && item.afterImage.isEmpty())
+            tvBeforeImg.hide(item.beforeImage.isEmpty())
+            tvAfterImg.hide(item.afterImage.isEmpty())
+            mFeebackImageAdapter.submit(item.feedbackImages)
+            mBeforeImagesAdapter.submit(item.beforeImage)
+            mAfterImagesAdapter.submit(item.afterImage)
+            txtTotal.text = item.totalPriceService
             tvCustomerName.text = item.customerName
             tvTimeAndDate.text = item.dateAppointment
             tvStaffName.text = item.staffName
@@ -137,7 +247,6 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             tvStatus.text = item.statusDisplay
             tvStatus.drawableStart(item.resIconStatus)
             tvStatus.setTextColor(ContextCompat.getColor(requireContext(), item.colorStatus))
-            tvTotalAmount.text = item.price.formatPrice()
             tvNotes.text = item.noteFinish
             tvNotes.show(!item.noteFinish.isNullOrEmpty())
             (item.status == DataConst.AppointmentStatus.APM_CANCEL || item.status == DataConst.AppointmentStatus.APM_FINISH) show btDelete
@@ -276,7 +385,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
 
         binding.btFinish.onClick {
             if (mAppointment != null)
-                finishBookingDialog.show(mAppointment!!) { amount, notes ->
+                finishBookingDialog.show( mAppointment!!) { amount, notes ->
                     viewModel.form.run {
                         id = mAppointment!!.id
                         price = amount

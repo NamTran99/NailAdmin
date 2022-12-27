@@ -62,5 +62,24 @@
         <attr name="iconColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="SalonServiceView">
+        <attr name="custom_display_type" format="enum" >
+            <enum name = "TypeService" value="0"/>
+            <enum name = "OneService" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="LoadingImageView">
+        <attr name="custom_enable_remove_image" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="SpannedTextView">
+        <attr name="spannedText" format="string" />
+        <attr name="spannedAnchorColor" format="color" />
+        <attr name="underlineAll" format="boolean" />
+        <attr name="underlineSpannedText" format="boolean" />
+    </declare-styleable>
+
 
 </resources>

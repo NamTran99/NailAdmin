@@ -23,7 +23,25 @@ data class SalonDTO(
     val images: List<Image>? = null,
     val schedules: List<Schedule>? = null,
     val timezone: String? = "",
-    val tz: String? = ""
+    val tz: String? = "",
+    val vouchers: List<VoucherDTO>,
+    val gallery: List<GalleryImage>,
+    val created_at: String? = null
+)
+
+data class GalleryImage(
+    val id: Int? = 0,
+    val image: String? = "",
+    val type: Int? = 1, //1: before, 2 after
+)
+
+data class VoucherDTO(
+    val code: String? = "",
+    val type: Int? = 1, // 1 : %  || 2 : value
+    val start_date: String? = "",
+    val expiration_date: String? = "",
+    val type_customer: Int? = 1, // 1 : all || 2 : normal || 3 : vip
+    val value: Double = 0.0 // 1 : all || 2 : normal || 3 : vip
 )
 
 data class Image(

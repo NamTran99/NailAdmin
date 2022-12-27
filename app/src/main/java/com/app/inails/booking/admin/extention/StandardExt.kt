@@ -28,6 +28,14 @@ fun Float?.safe(def: Float = 0f): Float {
 		return this ?: def
 }
 
+fun Long?.safe(def: Long = 0): Long {
+	return this ?: def
+}
+
+fun String?.noInfo(def: String = "No info"): String {
+	return this ?: def
+}
+
 fun Boolean?.safe(def: Boolean = false): Boolean {
 		return this ?: def
 }

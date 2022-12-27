@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@id/viewRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray07"
+            android:clipToPadding="false"
+            android:padding="@dimen/size_16"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:context=".views.appointment.AppointmentFragment"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_view_appointment" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/viewNoData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/msg_no_data"
+        android:textSize="@dimen/text_size_22" />
+</FrameLayout>

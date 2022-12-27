@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+    tools:context=".views.clients.feedbacks.SubmitFeedbackFragment"
+ >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_app"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/viewContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/size_16"
+            android:background="@drawable/bg_white_dialog"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size_16"
+            android:paddingTop="@dimen/size_20"
+            tools:context=".views.auth.FeedbackFragment">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/viewContent"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_16"
+                android:layout_marginBottom="@dimen/size_20"
+                android:text="@string/title_feed_back"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_22" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_16"
+                android:gravity="center_horizontal"
+                android:text="@string/tips_feedback"
+                android:textColor="@color/gray_103" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:layout_marginVertical="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@color/gray_235" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:rating="5"
+                android:stepSize="1"
+                android:theme="@style/AppTheme.RatingBar.Grey" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtFbName"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/size_16"
+                android:drawableStart="@drawable/ic_user"
+                android:hint="@string/hint_your_name"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtFbEmail"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/size_16"
+                android:drawableStart="@drawable/ic_email"
+                android:hint="@string/hint_enter_your_email_optional"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16"
+                android:drawablePadding="@dimen/size_10"
+                android:text="@string/label_add_photo" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_image_feedback" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtFbContents"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16"
+                android:gravity="top"
+                android:hint="@string/hint_feedback"
+                android:inputType="textMultiLine"
+                android:maxLength="200"
+                android:maxLines="10"
+                android:minLines="10"
+                android:scrollbars="vertical" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSendFeedback"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16"
+                android:text="@string/btn_send_feedback"
+                app:backgroundTint="@color/orange_250" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFbClose"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/size_5"
+                android:stateListAnimator="@null"
+                android:text="@string/btn_close"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white"
+                app:rippleColor="@color/colorPrimary" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+</androidx.core.widget.NestedScrollView>

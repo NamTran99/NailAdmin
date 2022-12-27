@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/size_16"
+    app:cardCornerRadius="@dimen/radius_default">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_16">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelBookingID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_booking_id"
+            android:textColor="@color/gray_145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtBookingID"
+            style="@style/TextAppearance.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelBookingID"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_toEndOf="@+id/labelBookingID"
+            android:gravity="end"
+            android:textColor="@color/black"
+            tools:text="#123456" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelSalonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtBookingID"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/label_salon_name"
+            android:textColor="@color/gray_145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtSalonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelSalonName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_toEndOf="@+id/labelSalonName"
+            android:background="?selectableItemBackground"
+            android:gravity="end"
+            android:textColor="@color/colorAccent"
+            tools:text="Healthy Nail Salon Collaborative" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelDatetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSalonName"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/label_appointment_time"
+            android:textColor="@color/gray_145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDatetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelSalonName"
+            android:layout_alignTop="@+id/labelDatetime"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_toEndOf="@+id/labelDatetime"
+            android:gravity="end"
+            tools:text="Aug 23 2022 - 2:58 PM" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDatetime"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/label_request"
+            android:textColor="@color/gray_145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelRequest"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_toEndOf="@+id/labelRequest"
+            android:gravity="end"
+            tools:text="Johnson Champlin" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelSomethingElse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtRequest"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/hint_note"
+            android:textColor="@color/gray_145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtSomethingElse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelSomethingElse"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_toEndOf="@+id/labelSomethingElse"
+            android:gravity="end"
+            tools:text="@string/hint_note" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSomethingElse"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/label_status"
+            android:textColor="@color/gray_145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelStatus"
+            android:layout_alignParentEnd="true"
+            android:drawablePadding="@dimen/size_10"
+            tools:text="Waiting"
+            tools:textColor="@color/yellow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCreateAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtStatus"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/size_5"
+            android:textColor="@color/gray_145"
+            android:textSize="@dimen/text_size_12"
+            android:textStyle="italic"
+            tools:text="Aug 23 2022 - 2:58 PM" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/AppTheme.Line.Horizontal"
+            android:layout_below="@+id/txtCreateAt"
+            android:layout_marginVertical="@dimen/size_16" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider"
+            android:text="@string/label_services" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelService"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_view_service_summary" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/rcvService"
+            android:layout_marginVertical="@dimen/size_16"
+            android:background="@color/gray_235" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/voucherLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_total"
+                    android:textColor="@color/gray_08" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/applyVoucherLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/labelVoucher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_voucher_discount"
+                    android:textColor="@color/gray_08" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_5"
+                    android:layout_toEndOf="@+id/labelVoucher"
+                    android:textColor="@color/colorPrimary" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_toEndOf="@+id/txtDiscount"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_5"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_info"
+                    android:layout_gravity="center"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtPriceDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorPrimary" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/size_16"
+                android:background="@color/gray_235" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <RelativeLayout
+            android:id="@+id/totalAmountLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/voucherLayout">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_total"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14" />
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/cancelLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/totalAmountLayout"
+            android:layout_marginTop="@dimen/size_10"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View style="@style/AppTheme.Line.Horizontal" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCancelBy"
+                style="@style/TextAppearance.Italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                tools:text="Cancelled by Ken" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtCancelBy"
+                android:layout_marginTop="@dimen/size_4"
+                android:gravity="center"
+                android:textColor="@color/gray_145"
+                tools:text="Reason" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/noteLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/totalAmountLayout"
+            android:layout_marginTop="@dimen/size_10"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View style="@style/AppTheme.Line.Horizontal" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:textColor="@color/gray_145"
+                tools:text="Note..." />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <RelativeLayout
+            android:id="@+id/feedbackLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noteLayout"
+            android:layout_marginTop="@dimen/size_10"
+            android:visibility="gone">
+
+            <View style="@style/AppTheme.Line.Horizontal" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:gravity="center"
+                android:text="@string/title_feed_back"
+                android:textColor="@color/black" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/size_10"
+                android:gravity="center"
+                android:text="@string/title_feed_back"
+                android:textColor="@color/black"
+                android:theme="@style/AppTheme.RatingBar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtFeedbackContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingBar"
+                android:layout_marginTop="@dimen/size_10"
+                android:textColor="@color/gray_145"
+                tools:text="Waiting" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvFeedbackImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFeedbackContent"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_image_feedback" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/imageBeforeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/feedbackLayout"
+            android:layout_marginTop="@dimen/size_10"
+            android:visibility="gone">
+
+            <View style="@style/AppTheme.Line.Horizontal" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/beforeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:gravity="center"
+                android:text="@string/label_before_service_image"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvImagesBefore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/beforeLabel"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_image_feedback" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/imageAfterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageBeforeLayout"
+            android:layout_marginTop="@dimen/size_10"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/afterLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:gravity="center"
+                android:text="@string/label_after_service_image"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvImagesAfter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/afterLabel"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_image_feedback" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

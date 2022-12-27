@@ -8,6 +8,7 @@ import com.app.inails.booking.admin.datasource.local.AppCache
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.AuthenticateApi
 import com.app.inails.booking.admin.notification.NotificationsManager
+import com.app.inails.booking.admin.notification.NotificationsManagerClient
 
 @Inject(ShareScope.Activity)
 class LogoutRepo(
@@ -21,6 +22,8 @@ class LogoutRepo(
             clearUser()
             clearToken()
             NotificationsManager(context).cancelAll()
+            NotificationsManagerClient(context).cancelAll()
+            logoutCustomer()
             authenticateApi.logout(appCache.deviceToken).await()
         }
     }

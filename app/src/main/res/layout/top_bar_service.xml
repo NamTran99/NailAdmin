@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    tools:context=".views.widget.topbar.ServiceTopBarState">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="center_vertical"
+        android:background="?selectableItemBackgroundBorderless"
+        android:paddingHorizontal="@dimen/size_10"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_menu"
+        app:tint="@color/colorPrimary" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtABTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingVertical="@dimen/size_5"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_15"
+            tools:text="Welcome, Guest" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChangeSalon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_10"
+            android:text="@string/btn_change_salon"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_10"
+            android:theme="@style/AppTheme.Button.Outline.Circle"
+            app:backgroundTint="@color/grayish_magenta_240"
+            app:icon="@drawable/ic_salon_view"
+            app:iconGravity="start"
+            app:iconTint="@color/colorPrimary"
+            app:strokeColor="@color/colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogoutCustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_10"
+            android:text="@string/btn_logout"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_10"
+            android:theme="@style/AppTheme.Button.Outline.Circle"
+            android:visibility="gone"
+            app:backgroundTint="@color/grayish_magenta_240"
+            app:icon="@drawable/ic_logout"
+            app:iconGravity="start"
+            app:iconTint="@color/colorPrimary"
+            app:strokeColor="@color/colorPrimary" />
+
+        <FrameLayout
+            android:id="@+id/viewNotify"
+            android:layout_width="40dp"
+            android:layout_height="?actionBarSize"
+            android:background="?selectableItemBackgroundBorderless">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_notification_black"
+                app:tint="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCountNotify"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_marginEnd="@dimen/size_2"
+                android:background="@drawable/ic_oval_def"
+                android:gravity="center"
+                android:maxLength="3"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_8"
+                android:visibility="gone"
+                tools:text="99+" />
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,7 +2,7 @@
 <resources>
     <string name="mn_manage_salon">Manage Salon</string>
     <string name="mn_profile">Profile</string>
-    <string name="mn_appointments">Appointments</string>
+    <string name="mn_appointments">Appointment</string>
     <string name="mn_logout">Logout</string>
     <string name="mn_send_feedback">Send Feedback</string>
     <string name="mn_change_password">Change Password</string>
@@ -11,4 +11,8 @@
     <string name="mn_manage_customer">Manage Customer</string>
     <string name="mn_email_receive_feedback">Email Receive Feedback</string>
     <string name="mn_report">Report</string>
+    <string name="mn_home">Home</string>
+    <string name="mn_check_in_booking">Booking</string>
+    <string name="mn_check_in">Check-in</string>
+    <string name="mn_account">Account</string>
 </resources>

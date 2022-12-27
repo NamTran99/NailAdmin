@@ -7,9 +7,10 @@ import com.app.inails.booking.admin.app.AppConst
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.CheckInOutByDateDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
-import com.app.inails.booking.admin.model.ui.CreateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.http.*
 
@@ -46,11 +47,17 @@ interface StaffApi : Injectable {
     @POST("staff/change-status")
     fun changeStatus(@Body form: UpdateStatusStaffForm): ApiAsync<StaffDTO>
 
+    @Multipart
     @POST("staff/update-staff")
-    fun updateStaff(@Body form: UpdateStaffForm): ApiAsync<StaffDTO>
+    fun updateStaff( @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+                     @Part avatar: MultipartBody.Part?): ApiAsync<StaffDTO>
 
+    @Multipart
     @POST("staff/create-staff")
-    fun createStaff(@Body form: CreateStaffForm): ApiAsync<StaffDTO>
+    fun createStaff(
+        @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part avatar: MultipartBody.Part?,
+    ): ApiAsync<StaffDTO>
 
     @FormUrlEncoded
     @POST("staff/delete-staff")
@@ -61,7 +68,10 @@ interface StaffApi : Injectable {
     fun changeActive(@Field("id") id: Int): ApiAsync<StaffDTO>
 
     @GET("staff/history-in-out")
-    fun getHistoryCheckInOut(@Query("id") staffID: Int, @Query("timezone") timeZone: String): ApiAsync<List<CheckInOutByDateDTO>>
+    fun getHistoryCheckInOut(
+        @Query("id") staffID: Int,
+        @Query("timezone") timeZone: String
+    ): ApiAsync<List<CheckInOutByDateDTO>>
 }
 
 class StaffApiImpl(private val retrofit: Retrofit) :

@@ -58,9 +58,9 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
     private lateinit var imageAdapter: UploadPhotoAdapter
     private lateinit var scheduleAdapter: SalonScheduleAdapter
 
-    var pathServerImage = ArrayList<SalonImage>()
-    var pathLocalImage = ArrayList<SalonImage>()
-    var allImage = ArrayList<SalonImage>()
+    var pathServerImage = ArrayList<AppImage>()
+    var pathLocalImage = ArrayList<AppImage>()
+    var allImage = ArrayList<AppImage>()
 
     var firstTimeOpen = true
 
@@ -70,7 +70,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 pathLocalImage.clear()
-                pathLocalImage.addAll(pathImage.filter { !it.toString().contains("http") }.map { pathUri -> SalonImage(path = pathUri.toString()) })
+                pathLocalImage.addAll(pathImage.filter { !it.toString().contains("http") }.map { pathUri -> AppImage(path = pathUri.toString()) })
                 allImage.clear()
                 allImage.addAll(pathServerImage)
                 allImage.addAll(pathLocalImage)
@@ -207,16 +207,16 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
     }
 
     private fun onPlaceSelected(place: Place) {
-        binding.etAddress.setText(place.address.toString())
+        binding.etAddress.setText(place.address?.toString())
         val geocoder = Geocoder(requireContext())
         val listAddress = geocoder.getFromLocation(place.latLng.latitude, place.latLng.longitude, 1)
 
         viewModel.apply {
             salonForm.run {
-                lat = place.latLng.latitude
-                long = place.latLng.longitude
-                if (listAddress.isNotEmpty()) {
-                    listAddress[0].apply {
+                lat = place.latLng!!.latitude
+                long = place.latLng!!.longitude
+                if (listAddress!!.isNotEmpty()) {
+                    listAddress[0]!!.apply {
                         country = this.countryCode ?: country
                         zipCode = this.postalCode ?: zipCode
                         state = this.adminArea ?: state
@@ -311,7 +311,6 @@ class UpdateSalonRepository(
     val result = MutableLiveData<Any>()
     suspend operator fun invoke(salonForm: SalonForm) {
         salonForm.validate()
-        Log.d("TAG", "invoke: NamTD8889 ${salonForm.schedules.toString()}")
         val imageParts =
             salonForm.images.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
                 context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)

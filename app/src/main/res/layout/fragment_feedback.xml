@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+  >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
+        android:scaleType="centerCrop" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        style="@style/AppTheme.Button.Outline.Circle"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="start"
+        app:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/ic_back"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/colorAccent"
+        app:strokeColor="@android:color/transparent"
+        tools:ignore="HardcodedText" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSalonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="?actionBarSize"
+        android:layout_marginTop="@dimen/size_10"
+        android:ellipsize="end"
+        android:gravity="top|center_horizontal"
+        android:text="@string/title_feed_back"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_22" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@id/viewRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtSalonName"
+        android:layout_marginTop="@dimen/size_20">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_white_radius_top"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size_16"
+            android:paddingVertical="@dimen/size_20">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_total_rating" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSalonName"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_16"
+                android:isIndicator="true"
+                android:rating="5"
+               />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotalRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="(15 Feedbacks )" />
+
+            <View
+                style="@style/AppTheme.Line.Horizontal"
+                android:layout_marginVertical="@dimen/size_20" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_view_feedback" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

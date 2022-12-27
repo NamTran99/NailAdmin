@@ -3,7 +3,9 @@ package com.app.inails.booking.admin.base
 import android.app.Activity
 import android.app.Application
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.support.di.dependencies
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.app.appModule
@@ -42,5 +44,13 @@ class MainApplication : Application() {
             }
 
         })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
+                    .detectNonSdkApiUsage()
+                    .penaltyLog()
+                    .build()
+            )
+        }
     }
 }

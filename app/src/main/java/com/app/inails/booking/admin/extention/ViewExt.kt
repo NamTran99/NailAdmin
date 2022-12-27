@@ -8,8 +8,11 @@ import android.graphics.Bitmap
 import android.graphics.BlurMaskFilter
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
@@ -19,20 +22,28 @@ import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.DimenRes
 import androidx.annotation.MenuRes
 import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.GravityCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doOnTextChanged
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.imageview.ShapeableImageView
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -53,6 +64,9 @@ fun View.onClick(callback: View.OnClickListener?) {
         }
     }
 }
+
+fun AppCompatEditText.getTextString() = this.text.toString()
+fun EditText.getTextString() = this.text.toString()
 
 fun RecyclerView.LayoutParams.itemMargin(position: Int, margin: Int) {
     setMargins(margin, if (position == 0) margin else 0, margin, margin)
@@ -75,6 +89,23 @@ fun EditText.focus() {
 fun View.alpha(value: Int = 170) {
     this.background.alpha = value
 }
+
+fun View.rotationDropdownWithView(view: View) {
+    val deg = if (this.rotation == 90f) 0f else 90f
+    this.animate().rotation(deg).interpolator = AccelerateDecelerateInterpolator()
+    view.show(this.rotation == 0f)
+}
+
+fun ImageView.startAnimVector(delays: Long = 100) {
+    android.os.Handler(Looper.getMainLooper()).postDelayed({
+        val drawable = this.drawable
+        if (drawable is AnimatedVectorDrawableCompat)
+            drawable.start()
+        else if (drawable is AnimatedVectorDrawable)
+            drawable.start()
+    }, delays)
+}
+
 
 fun View.disableAlpha() {
     this.background.alpha = 255//max
@@ -174,6 +205,14 @@ fun <T : View> T.visible(b: Boolean = true, function: T.() -> Unit = {}) {
         function()
         View.VISIBLE
     } else View.INVISIBLE
+}
+
+fun View.hide(b: Boolean) {
+    if(b){
+        visibility = View.GONE
+    }else{
+        visibility = View.VISIBLE
+    }
 }
 
 fun View.hide() {
@@ -291,6 +330,8 @@ fun Context.getAppResourceId(attr: Int): Int {
     return typedValue.resourceId
 }
 
+
+
 fun AttributeSet?.load(
     view: View, attr: IntArray,
     function: TypedArray.() -> Unit
@@ -393,5 +434,31 @@ fun View.showKeyboard(value: Boolean) {
     } else imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
+infix fun DrawerLayout.openDrawerLayout(isOpen: Boolean) {
+    if (isOpen)
+        this.openDrawer(GravityCompat.START, true)
+    else this.closeDrawer(GravityCompat.START, true)
+}
+
+infix fun DrawerLayout.lockDrawerLayout(isClose: Boolean) {
+    if (isClose)
+        this.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    else
+        this.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+}
+
+fun TextView.setDrawableStart(resIcon: Int) {
+    this.setCompoundDrawablesWithIntrinsicBounds(resIcon, 0, 0, 0)
+}
 
 
+fun ShapeableImageView.setImageUrl(url: String) {
+    Glide.with(context).load(url).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.box_grey))
+        .into(this)
+}
+
+
+fun ShapeableImageView.setImageUri(uri: Uri) {
+    Glide.with(context).load(uri).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.box_grey))
+        .into(this)
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/viewRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gray07"
+                android:orientation="vertical"
+                android:padding="@dimen/size_16">
+
+                <include
+                    android:id="@+id/viewContents"
+                    layout="@layout/partial_appointment_detail_content" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/finishLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/feedbackLayout"
+                    android:layout_marginVertical="@dimen/size_16"
+                    android:orientation="horizontal"
+                    tools:visibility="visible"
+                    android:visibility="gone">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFeedback"
+                        style="@style/AppTheme.Button.NoAnimator"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="@dimen/size_16"
+                        android:layout_weight="1"
+                        android:minWidth="120dp"
+                        android:text="@string/btn_feedback"
+                        android:textAllCaps="false"
+                        app:cornerRadius="@dimen/radius_40" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDelete"
+                        style="@style/AppTheme.Button.NoAnimator"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:maxWidth="250dp"
+                        android:minWidth="120dp"
+                        android:text="@string/btn_delete"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/red_240"
+                        app:cornerRadius="@dimen/radius_40" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    style="@style/AppTheme.Button.NoAnimator"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/noteLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/size_16"
+                    android:text="@string/btn_cancel"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    app:cornerRadius="@dimen/radius_40"
+                    tools:visibility="visible" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDirect"
+                    style="@style/AppTheme.Button.NoAnimator"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/noteLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/size_16"
+                    android:text="@string/btn_direction_to_salon"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    app:cornerRadius="@dimen/radius_40"
+                    app:icon="@drawable/ic_direct"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="@dimen/size_10" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/viewNoData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gray07"
+                android:gravity="center"
+                tools:visibility="gone"
+                android:text="@string/msg_no_data" />
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

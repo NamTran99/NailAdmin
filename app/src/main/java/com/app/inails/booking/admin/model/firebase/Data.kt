@@ -11,10 +11,10 @@ data class Data(
     val price: Double? = 0.0,
     val rating: Float? = 0f,
     val reason_cancel: String? = "",
-    val salon_name: String? = "",
+    val salon_name: String? = "Notification",
     val salon_id: Int? = 0,
     val service_custom_name: String? = "",
     val services: List<Service> = listOf(),
     val staff_name: String? = "",
-    val work_time: String? = ""
+    val work_time: String? = "",
 )

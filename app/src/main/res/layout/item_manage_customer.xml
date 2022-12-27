@@ -5,45 +5,67 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/size_13"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/size_13"
     android:paddingTop="@dimen/size_16">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
             android:id="@+id/tvCustomerName"
             style="@style/AppTheme.TextViewResponsive"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lightBlue02"
             android:textSize="@dimen/text_size_14"
+            android:textStyle="bold"
             tools:text="Customer Name" />
+        <RelativeLayout
+            android:id="@+id/lvVip"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_color_primary_radius"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/size_15"
+                android:paddingVertical="@dimen/size_5"
+                android:text="@string/vip"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btBookingList"
+            android:id="@+id/btEdit"
             style="@style/AppTheme.ButtonDefault.Wrap"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/size_30"
             android:layout_alignParentEnd="true"
             android:background="@drawable/bg_button_customer_booking"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="@string/booking_list"
+            android:text="@string/edit"
             android:textColor="@color/color_btn_booking"
             android:textSize="@dimen/text_size_10" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
-        android:layout_marginTop="@dimen/size_5"
         android:id="@+id/tvPhone"
         style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5"
         android:layout_marginBottom="@dimen/size_16"
         android:autoLink="phone"
         android:drawablePadding="@dimen/size_8"
@@ -66,11 +88,11 @@
 
     <TextView
         android:id="@+id/tvAddress"
-        android:layout_marginBottom="@dimen/size_16"
         style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_2"
+        android:layout_marginBottom="@dimen/size_16"
         android:drawablePadding="@dimen/size_8"
         android:textColor="@color/color_text_customer_infor"
         app:drawableStartCompat="@drawable/ic_location"
@@ -86,6 +108,45 @@
         app:drawableStartCompat="@drawable/ic_birthday"
         tools:text="10-12-2022" />
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lvNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_12"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/bg_gray_radius"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextView.Medium"
+            android:textStyle="normal"
+            android:textSize="@dimen/text_size_13"
+            android:text="@string/note"/>
+        <TextView
+            android:id="@+id/tvNote"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/size_4"
+            android:layout_marginTop="@dimen/size_10"
+            android:textSize="@dimen/text_size_11"
+            android:textColor="@color/color_text_customer_infor"
+            tools:text="10-12-2022" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btBookingList"
+        style="@style/AppTheme.ButtonDefault.Wrap"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_height="@dimen/size_40"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/bg_button_customer_booking"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/booking_list"
+        android:textColor="@color/color_btn_booking"
+        android:textSize="@dimen/text_size_10" />
 
     <View
         android:layout_width="match_parent"

@@ -1,7 +1,9 @@
 package com.app.inails.booking.admin.base
 
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.support.core.event.WindowStatusOwner
 import android.support.core.extensions.LifecycleSubscriberExt
 import android.support.core.route.RouteDispatcher
@@ -9,6 +11,9 @@ import android.support.di.inject
 import android.support.viewmodel.ViewModelRegistrable
 import android.util.Log
 import android.view.Gravity
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +21,14 @@ import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
 import com.app.inails.booking.admin.app.AppSettingsOwner
 import com.app.inails.booking.admin.app.ResultsLifecycleOwner
+import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
-import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
-import com.app.inails.booking.admin.views.dialog.ErrorDialogOwner
-import com.app.inails.booking.admin.views.dialog.NotificationDialogOwner
+import com.app.inails.booking.admin.notification.NotificationsManager
+import com.app.inails.booking.admin.notification.NotificationsManagerClient
+import com.app.inails.booking.admin.views.clients.dialog.view_image.ViewImageDialogOwner
+import com.app.inails.booking.admin.views.dialog.*
 import com.app.inails.booking.admin.views.dialog.loading.LoadingDialog
 import es.dmoral.toasty.Toasty
 
@@ -33,9 +40,13 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
     ConfirmDialogOwner,
     AppSettingsOwner,
     ResultsLifecycleOwner,
+    ViewImageDialogOwner,
+    MessageDialogOwner,
     ErrorHandler by ErrorHandlerImpl() {
     val appEvent by inject<AppEvent>()
     private val loadingDialog by lazy { LoadingDialog(this, this) }
+    val notificationsManager by lazy { NotificationsManagerClient(this) }
+    val userLocalSource by inject<UserLocalSource>()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -65,6 +76,24 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
         val toasty: Toast = Toasty.success(this, getString(msg), time!!)
         toasty.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 220)
         toasty.show()
+    }
+
+    // unfocus edittext when select outside
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 
     open fun logout(){

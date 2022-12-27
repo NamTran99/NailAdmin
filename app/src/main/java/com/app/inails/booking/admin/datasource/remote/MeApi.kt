@@ -6,6 +6,7 @@ import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.StaffDTO
+import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.VersionDTO
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import okhttp3.MultipartBody
@@ -35,8 +36,19 @@ interface MeApi : Injectable {
         @Part vararg images: MultipartBody.Part?
     ): ApiAsync<SalonDTO>
 
+    @Multipart
+    @POST("salon/sign-up")
+    fun signUp(
+        @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part vararg images: MultipartBody.Part?
+    ): ApiAsync<UserDTO>
+
     @GET("check-version")
     fun checkVersion(@Query("platform") platform:String = "android", @Query("app_type") appType: String = "owner"): ApiAsync<VersionDTO>
+
+    @FormUrlEncoded
+    @POST("salon/delete-salon-gallery")
+    fun deleteSalonGallery(@Field("delete_images") listImageID: String): ApiAsync<Any>
 }
 
 class MeApiImpl(private val retrofit: Retrofit) :

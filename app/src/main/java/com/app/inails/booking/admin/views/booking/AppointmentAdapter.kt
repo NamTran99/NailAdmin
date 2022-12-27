@@ -10,8 +10,9 @@ import com.app.inails.booking.admin.databinding.ItemAppointmentBinding
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.ICustomer
+import com.app.inails.booking.admin.views.extension.LocalImage
+import com.app.inails.booking.admin.views.management.service.adapters.AppImagesAdapter
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class AppointmentAdapter(view: RecyclerView) :
     PageRecyclerAdapter<IAppointment, ItemAppointmentBinding>(view) {
@@ -29,6 +30,9 @@ class AppointmentAdapter(view: RecyclerView) :
         return parent.bindingOf(ItemAppointmentBinding::inflate)
     }
 
+    var onItemImageClick: ((list: List<LocalImage>,position: Int) -> Unit) = {_,_->}
+    private lateinit var imageAdapter: AppImagesAdapter
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindHolder(
         item: IAppointment,
@@ -38,6 +42,13 @@ class AppointmentAdapter(view: RecyclerView) :
         binding.apply {
             root.onClick {
                 onClickItemListener?.invoke(item)
+            }
+
+            imageAdapter = AppImagesAdapter(rcFeedbackImage).apply {
+                submit(item.feedbackImages)
+                onItemImageClick = {
+                    this@AppointmentAdapter.onItemImageClick.invoke(item.feedbackImages.map{LocalImage(it.path)}, it)
+                }
             }
 
             btCancel.setOnClickListener {
@@ -97,7 +108,7 @@ class AppointmentAdapter(view: RecyclerView) :
             tvNote.text = item.noteFinish
             tvReason.text = item.reasonCancel
             totalAmountLayout.show((item.status == DataConst.AppointmentStatus.APM_FINISH))
-            tvAmount.text = item.price.formatPrice()
+            tvAmount.text = item.totalAmount
             tvCreatedAt.text = item.createAt
             tvAppointmentNote.text = item.notes
 

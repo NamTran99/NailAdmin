@@ -1,25 +1,34 @@
 package com.app.inails.booking.admin.repository.auth
 
+import android.content.Context
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
+import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.StaffApi
+import com.app.inails.booking.admin.extention.buildMultipart
+import com.app.inails.booking.admin.extention.getFilePath
+import com.app.inails.booking.admin.extention.scalePhotoLibrary
+import com.app.inails.booking.admin.extention.toImagePart
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
+import com.app.inails.booking.admin.helper.RequestBodyBuilder
 import com.app.inails.booking.admin.model.ui.CreateStaffForm
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
+import okhttp3.MultipartBody
 
 @Inject(ShareScope.Fragment)
 class StaffRepo(
     private val staffApi: StaffApi,
     private val bookingFactory: BookingFactory,
     private val userLocalSource: UserLocalSource,
-    private val textFormatter: TextFormatter
+    private val textFormatter: TextFormatter,
+    val context: Context
 ) {
     val results = MutableLiveData<List<IStaff>>()
     val result = MutableLiveData<IStaff>()
@@ -50,20 +59,48 @@ class StaffRepo(
     suspend fun update(form: UpdateStaffForm) {
         form.validate()
         form.phone = textFormatter.formatPhoneNumber(form.phone)
+
+        var avatar:
+                MultipartBody.Part? = null
+        if (!form.avatar.isNullOrEmpty() && !form.avatar!!.contains("http")){
+            avatar =  context.getFilePath(form.avatar!!.toUri())!!.scalePhotoLibrary(context)
+                .toImagePart("avatar")
+        }
+
         result.post(
             bookingFactory
                 .createAStaff(
-                    staffApi.updateStaff(form).await()
+                    staffApi.updateStaff(RequestBodyBuilder()
+                        .put("first_name", form.firstName)
+                        .put("last_name", form.lastName)
+                        .put("description", form.description)
+                        .put("phone", form.phone)
+                        .put("id", form.id)
+                        .put("delete_avatar", form.is_delete_avatar)
+                        .buildMultipart(), avatar = avatar).await()
                 )
         )
     }
 
     suspend fun create(form: CreateStaffForm) {
         form.validate()
+
+        var avatar:
+                MultipartBody.Part? = null
+        if (form.avatar!= null && !form.avatar!!.contains("http")){
+            avatar =  context.getFilePath(form.avatar!!.toUri())!!.scalePhotoLibrary(context)
+                .toImagePart("avatar")
+        }
+
         result.post(
             bookingFactory
                 .createAStaff(
-                    staffApi.createStaff(form).await()
+                    staffApi.createStaff(RequestBodyBuilder()
+                        .put("first_name", form.firstName)
+                        .put("last_name", form.lastName)
+                        .put("phone", form.phone)
+                        .put("description", form.description).buildMultipart(),
+                    avatar = avatar).await()
                 )
         )
     }

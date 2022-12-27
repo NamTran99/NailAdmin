@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.views.widget
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.StateListDrawable
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -19,7 +20,7 @@ import com.app.inails.booking.admin.extention.loadAttrs
 class PasswordTextInputLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private val backgroundStateList get() = background as StateListDrawable
+    private val backgroundStateList get() = background
     private var mIconColor: Int = Color.BLACK
     private lateinit var mIcon: ImageButton
     private val mIconPadding = resources.getDimensionPixelSize(R.dimen.size_5)

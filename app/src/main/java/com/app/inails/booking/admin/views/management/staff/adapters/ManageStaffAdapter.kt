@@ -6,16 +6,20 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.DataConst
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemManageStaffBinding
 import com.app.inails.booking.admin.extention.findIndex
+import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 class ManageStaffAdapter(view: RecyclerView) :
     PageRecyclerAdapter<IStaff, ItemManageStaffBinding>(view) {
-    var onClickItemListener: ((IStaff) -> Unit)? = null
+    var onClickAvatarImage: ((String?) -> Unit)? = null
     var onUpdateStatusListener: ((Int, Int) -> Unit)? = null
     var onClickMenuListener: ((View, IStaff) -> Unit)? = null
 
@@ -25,9 +29,29 @@ class ManageStaffAdapter(view: RecyclerView) :
 
     override fun onBindHolder(item: IStaff, binding: ItemManageStaffBinding, adapterPosition: Int) {
         binding.apply {
-            root.onClick {
-                onClickItemListener?.invoke(item)
+            imgImage.onClick{
+                onClickAvatarImage?.invoke(item.avatar)
             }
+            if (item.avatar != null && item.avatar!!.isNotEmpty()) {
+                Picasso.get().load(item.avatar).into(imgImage, object : Callback {
+                    override fun onSuccess() {
+                        progress.hide()
+                    }
+
+                    override fun onError(e: Exception?) {
+                        imgImage.setImageResource(R.drawable.ic_no_image)
+                        progress.hide()
+                    }
+                })
+            } else {
+                imgImage.setImageResource(R.drawable.ic_no_image)
+                progress.hide()
+            }
+
+            tvDescription.show(
+                 item.description.isNotEmpty()
+            )
+            tvDescription.text = item.description
 
             btCheckIn.setOnClickListener {
                 onUpdateStatusListener?.invoke(item.id, DataConst.ChangeStaffStatus.CHECK_IN)
@@ -65,8 +89,8 @@ class ManageStaffAdapter(view: RecyclerView) :
     fun insertItem(staff: IStaff) {
         getData().add(0, staff)
         notifyItemInserted(0)
-
     }
+
     fun removeItem(id: Int) {
         val index = getData().findIndex { it.id == id }
         if (index > -1) {

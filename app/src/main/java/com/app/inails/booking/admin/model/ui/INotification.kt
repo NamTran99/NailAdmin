@@ -15,6 +15,7 @@ interface INotification {
     val createdDate: String get() = ""
     val color: Int @ColorRes get() = 0
     val dataId: Int get() = 0
+    val type: Int get() = 0
 }
 
 @Parcelize

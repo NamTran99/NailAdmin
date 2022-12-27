@@ -82,4 +82,13 @@
     <dimen name="size_55">55dp</dimen>
     <dimen name="size_58">58dp</dimen>
     <dimen name="text_size_8">8sp</dimen>
+    <dimen name="size_120">120dp</dimen>
+    <dimen name="size_11">11dp</dimen>
+    <dimen name="size_270">270dp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="size_90">90dp</dimen>
+    <dimen name="text_size_35">35sp</dimen>
+    <dimen name="size_250">250dp</dimen>
+    <dimen name="size_300">300dp</dimen>
+    <dimen name="size_220">220dp</dimen>
 </resources>

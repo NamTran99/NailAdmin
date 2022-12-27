@@ -14,9 +14,31 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+        <RelativeLayout
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:background="@drawable/bg_corner_white">
+
+            <ImageView
+                android:id="@+id/imgImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_corner_white"
+                android:clipToOutline="true"
+                android:scaleType="fitXY" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="@dimen/size_20"
+                android:layout_height="@dimen/size_20"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_8"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -63,7 +85,8 @@
         android:layout_marginTop="@dimen/size_12"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -97,5 +120,15 @@
             android:text="@string/btn_check_out" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
+        android:padding="0dp"
+        android:layout_marginStart="@dimen/size_5"
+        android:textColor="@color/color_848484"
+        android:background="@null"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

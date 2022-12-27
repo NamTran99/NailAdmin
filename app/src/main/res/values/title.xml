@@ -23,7 +23,7 @@
     <string name="title_update_service">Update Service</string>
     <string name="title_remove_appointment">Remove Appointment</string>
     <string name="title_cancel_appointment">Cancel Appointment</string>
-    <string name="title_customer_check_in">Client Check-in</string>
+    <string name="title_customer_check_in">Check-in Customer</string>
     <string name="title_accept_appointment">Accept Appointment</string>
     <string name="title_reject_appointment">Reject Appointment</string>
     <string name="title_delete_staff">Delete Staff</string>
@@ -40,4 +40,8 @@
     <string name="title_delete_all_notifications">Delete all notifications</string>
     <string name="title_delete_all_selected_notifications">Delete all selected notifications</string>
     <string name="title_reset_password">Reset Password</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="title_account">Account</string>
+    <string name="title_appointment_booking">Appointment Booking</string>
+    <string name="title_report">Report</string>
 </resources>

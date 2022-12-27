@@ -1,6 +1,8 @@
 package com.app.inails.booking.admin.views.management.customer
 
 import FetchListCustomerRepo
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -12,6 +14,10 @@ import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
@@ -31,6 +37,8 @@ import com.app.inails.booking.admin.views.booking.dialog_filter.SearchCustomerOw
 import com.app.inails.booking.admin.views.booking.dialog_filter.SearchStaffOwner
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.sangcomz.fishbun.FishBun
+import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -53,6 +61,31 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
     private val args by lazy { argument<CustomerListBookingArg>() }
     private lateinit var mAdapter: AppointmentAdapter
 
+    private var beforeImagePath = ArrayList<AppImage>()
+    private var afterImagePath = ArrayList<AppImage>()
+
+    private val startForResultBeforeImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                val pathImage =
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
+                beforeImagePath =
+                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                finishBookingDialog.updateBeforeImages(beforeImagePath)
+            }
+        }
+
+    private val startForResultAfterImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                val pathImage =
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
+                afterImagePath =
+                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                finishBookingDialog.updateAfterImages(afterImagePath)
+            }
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.setUpDataUI(args)
@@ -62,6 +95,45 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
 
     private fun setUpListener() {
         with(viewModel) {
+            finishBookingDialog.apply {
+                onAddBeforeImage = {
+                    FishBun.with(this@UserBookingListFragment)
+                        .setImageAdapter(GlideAdapter())
+                        .setMaxCount(5)
+                        .setMinCount(1)
+                        .setSelectedImages(ArrayList(beforeImagePath.map { it.path.toUri() }))
+                        .setActionBarColor(
+                            ContextCompat.getColor(context, R.color.colorPrimary),
+                            ContextCompat.getColor(context, R.color.colorPrimary),
+                            true
+                        )
+                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .startAlbumWithActivityResultCallback(startForResultBeforeImage)
+                }
+
+                onAddAfterImage = {
+                    FishBun.with(this@UserBookingListFragment)
+                        .setImageAdapter(GlideAdapter())
+                        .setMaxCount(5)
+                        .setMinCount(1)
+                        .setSelectedImages(ArrayList(afterImagePath.map { it.path.toUri() }))
+                        .setActionBarColor(
+                            ContextCompat.getColor(context, R.color.colorPrimary),
+                            ContextCompat.getColor(context, R.color.colorPrimary),
+                            true
+                        )
+                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .startAlbumWithActivityResultCallback(startForResultAfterImage)
+                }
+
+                onclickRemoveAfterImage = { image ->
+                    afterImagePath.removeAll { it.path == image.path }
+                }
+
+                onclickRemoveBeforeImage = { image ->
+                    beforeImagePath.removeAll { it.path == image.path }
+                }
+            }
             filterForm.apply {
                 type = null
                 searchCustomer = if (args.idType == TypeID.Customer) args.id else null
@@ -251,6 +323,8 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                             price = amount
                             note = notes
                             status = DataConst.AppointmentStatus.APM_FINISH
+                            beforeImages = beforeImagePath
+                            afterImages =  afterImagePath
                         }
                         viewModel.updateStatus()
                     }

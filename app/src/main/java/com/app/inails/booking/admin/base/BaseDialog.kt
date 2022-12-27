@@ -26,11 +26,12 @@ abstract class BaseDialog : Dialog {
 
     fun <T : ViewBinding> viewBinding(
         function: (context: LayoutInflater) -> T,
-        isAttach: Boolean = true
+        isMargin: Boolean = true
     ): T {
         val binding = function(layoutInflater)
         val container = FrameLayout(context)
         setContentView(container)
+        if (isMargin)
         container.setMargins(R.dimen.size_20)
         container.setBackgroundResource(R.drawable.bg_white_radius)
         container.addView(binding.root)

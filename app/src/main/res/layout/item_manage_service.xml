@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_70"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/size_10">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginVertical="@dimen/size_2"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:background="@drawable/bg_corner_white">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_corner_white"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                android:clipToOutline="true"
+                android:scaleType="fitXY" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="@dimen/size_20"
+                android:layout_height="@dimen/size_20"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/tvName"
             style="@style/AppTheme.TextView.SemiBold"
-            android:layout_width="match_parent"
-            android:layout_toStartOf="@id/layout"
-            android:layout_marginEnd="@dimen/size_10"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/layout"
             android:layout_alignBottom="@+id/layout"
             android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/size_13"
+            android:layout_marginEnd="@dimen/size_10"
+            android:layout_toStartOf="@id/layout"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             tools:text="Manicure" />
 
@@ -48,7 +76,7 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <View
         android:layout_width="match_parent"

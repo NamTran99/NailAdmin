@@ -15,7 +15,7 @@ interface IUser {
 }
 
 @Parcelize
-class LoginForm(
+class LoginOwnerForm(
     var phone: String = "",
     var password: String = "",
     @SerializedName("device_token")

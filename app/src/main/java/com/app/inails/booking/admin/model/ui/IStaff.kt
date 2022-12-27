@@ -28,6 +28,10 @@ interface IStaff {
     val customerName: String get() = ""
     val appointment: IAppointment? get() = null
     val orderStaffStatusList: Int? get()= 0
+    val avatar: String? get() = null
+    val description: String get() = ""
+    val is_delete_avatar: Int  get() = 0
+    val isAvatarDefault: Boolean get() = false
 }
 
 @Parcelize
@@ -56,41 +60,44 @@ class StaffImpl : IStaff, ISelector, Parcelable {
     override var isSelector: Boolean = false
 }
 
-@Parcelize
 class UpdateStaffForm(
     override var id: Int = 0,
     override var phone: String = "",
     @SerializedName("first_name")
     override var firstName: String = "",
     @SerializedName("last_name")
-    override var lastName: String = ""
-) : IStaff, Parcelable {
+    override var lastName: String = "",
+    override var description: String = "",
+    override var avatar: String? = null,
+    override var is_delete_avatar: Int = 0
+) : IStaff {
 
     fun validate() {
+        if (firstName.isBlank()) resourceError(R.string.error_blank_firstname)
+        if (lastName.isBlank()) resourceError(R.string.error_blank_lastname)
         if (phone.isBlank()) resourceError(
             R.string.error_blank_phone
         )
-        if (firstName.isBlank()) resourceError(R.string.error_blank_firstname)
-        if (lastName.isBlank()) resourceError(R.string.error_blank_lastname)
     }
 }
 
 
-@Parcelize
 class CreateStaffForm(
     override var phone: String = "",
     @SerializedName("first_name")
     override var firstName: String = "",
     @SerializedName("last_name")
-    override var lastName: String = ""
-) : IStaff, Parcelable {
+    override var lastName: String = "",
+    override var description: String=  "",
+    override var avatar: String? = null
+) : IStaff {
 
     fun validate() {
+        if (firstName.isBlank()) resourceError(R.string.error_blank_firstname)
+        if (lastName.isBlank()) resourceError(R.string.error_blank_lastname)
         if (phone.isBlank()) resourceError(
             R.string.error_blank_phone
         )
-        if (firstName.isBlank()) resourceError(R.string.error_blank_firstname)
-        if (lastName.isBlank()) resourceError(R.string.error_blank_lastname)
     }
 }
 

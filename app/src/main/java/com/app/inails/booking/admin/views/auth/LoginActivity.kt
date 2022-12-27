@@ -17,7 +17,7 @@ import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityLoginBinding
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.model.ui.LoginForm
+import com.app.inails.booking.admin.model.ui.LoginOwnerForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LoginRepo
@@ -34,6 +34,10 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
             etPhone.inputTypePhoneUS()
             tvResetPassword.onClick {
                 Router.open(this@LoginActivity, Routing.ResetPassword)
+            }
+
+            tvSignUp.onClick{
+                Router.open(this@LoginActivity, Routing.SignUpAccount)
             }
 
             binding.tvVersion.text = Utils.getDisplayBuildConfig()
@@ -60,7 +64,7 @@ class LoginViewModel(
     private val loginRepo: LoginRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
-    var form: LoginForm = LoginForm()
+    var form: LoginOwnerForm = LoginOwnerForm()
         private set
     val loginSuccess = SingleLiveEvent<Int>()
 
@@ -68,5 +72,4 @@ class LoginViewModel(
         loginRepo(form)
         loginSuccess.post(R.string.msg_login_success)
     }
-
 }

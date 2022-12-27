@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/ic_home"
+        android:title="@string/mn_home" />
+    <item
+        android:id="@+id/navCheckInBooking"
+        android:icon="@drawable/ic_for_owner"
+        android:title="@string/mn_check_in_booking" />
+    <item
+        android:id="@+id/navCheckIn"
+        android:icon="@drawable/ic_check_in_1"
+        android:title="@string/mn_check_in" />
+    <item
+        android:id="@+id/navAppointment"
+        android:icon="@drawable/ic_appointment"
+        android:title="@string/mn_appointments" />
+    <item
+        android:id="@+id/navAccount"
+        android:icon="@drawable/ic_account"
+        android:title="@string/mn_account" />
+</menu>

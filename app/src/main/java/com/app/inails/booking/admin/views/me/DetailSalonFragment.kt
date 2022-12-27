@@ -22,10 +22,12 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.model.ui.ISalonDetail
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.extension.LocalImage
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.app.inails.booking.admin.views.me.adapters.HomeBannerPager
 import com.app.inails.booking.admin.views.me.adapters.SalonScheduleAdapter
+import com.app.inails.booking.admin.views.me.adapters.VoucherAdapter
 import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -35,6 +37,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
     val viewModel by viewModel<DetailSalonViewModel>()
     val binding by viewBinding(FragmentProfileBinding::bind)
     private lateinit var adapter: HomeBannerPager
+    private lateinit var voucherAdapter: VoucherAdapter
 
     var path = ArrayList<Uri>()
 
@@ -54,16 +57,18 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
 
         with(binding) {
             tabDots.setupWithViewPager(vpImage)
+            voucherAdapter = VoucherAdapter(viewHeader.rcVoucher)
             adapter = HomeBannerPager(binding.vpImage).apply {
                 onClickItem = {
                     val listImage = viewModel.salonDetail.value?.images?.map {
                         LocalImage(it.path)
                     }
-                    if(!listImage.isNullOrEmpty()){
+                    if (!listImage.isNullOrEmpty()) {
                         Router.run { redirectToShowZoomImage(ShowZoomImageArgs(data = listImage to it)) }
                     }
                 }
             }
+
         }
 
         with(viewModel) {
@@ -73,10 +78,21 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         refreshView()
     }
 
+
     private fun displays(item: ISalonDetail) = with(binding) {
+        btnGallery.onClick {
+            Router.navigate(
+                this@DetailSalonFragment, Routing.GallerySalon(
+                    item.beforeGalleryImage.toMutableList(),
+                    item.afterGalleryImage.toMutableList()
+                )
+            )
+        }
         txtSalonName.text = item.salonName
         viewHeader.apply {
+            voucherAdapter.submit(item.vouchers)
             txtAddress.text = item.address
+            txtEmail.text = item.email
             txtPhone.text = item.phoneNumber
             labelLocalTime.text = item.tzDisplay1
             txtOwner.text = item.ownerName

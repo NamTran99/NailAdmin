@@ -160,3 +160,11 @@ fun String.decode(): String {
 fun String.lowerCaseContain(key: String): Boolean {
     return lowercase().contains(key)
 }
+
+fun String?.toPriceFormat(): String {
+    return "$${this?:"0.00"}"
+}
+
+fun String.toPriceValue(): String {
+    return this.replace("$", "")
+}

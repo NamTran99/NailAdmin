@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/size_20">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:text="@string/title_booking_accepted"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_22" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDesUpcoming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/text_notify_upcoming" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:layout_marginVertical="@dimen/size_16"
+        android:background="@color/gray_235" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelBookingID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_booking_id" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtBookingID"
+                style="@style/TextAppearance.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelBookingID"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/labelBookingID"
+                android:gravity="end"
+                android:textColor="@color/black"
+                tools:text="#ID112" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelSalonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtBookingID"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/label_salon_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtSalonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelSalonName"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/labelSalonName"
+                android:gravity="end"
+                android:paddingStart="@dimen/size_16"
+                android:paddingEnd="0dp"
+                tools:text="Healthy Nail Salon Collaborative" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelServices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSalonName"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/label_services" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelServices"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_view_service_summary" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/rcvService"
+                android:layout_gravity="bottom"
+                android:layout_marginVertical="@dimen/size_16"
+                android:background="@color/gray_235" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelStaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider1"
+                android:text="@string/label_staff" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtStaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelStaff"
+                android:layout_alignTop="@+id/labelStaff"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_toEndOf="@+id/labelStaff"
+                android:gravity="end"
+                tools:text="Amanda" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelDatetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtStaff"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/label_appointment_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDatetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelSalonName"
+                android:layout_alignTop="@+id/labelDatetime"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_marginBottom="@dimen/size_10"
+                android:layout_toEndOf="@+id/labelDatetime"
+                android:gravity="end"
+                tools:text="Aug 23 2022 - 2:58 PM" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelReason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDatetime"
+                android:text="@string/label_reason" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtReason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelReason"
+                android:layout_alignTop="@+id/labelReason"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_marginBottom="@dimen/size_10"
+                android:layout_toEndOf="@+id/labelReason"
+                android:gravity="end"
+                tools:text="Busy" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDirection"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/size_30"
+        android:text="@string/btn_direction_to_salon"
+        app:backgroundTint="@color/orange_250"
+        app:icon="@drawable/ic_direct"
+        app:iconGravity="textEnd"
+        app:iconPadding="@dimen/size_16" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewDetails"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/size_10"
+        android:text="@string/btn_view_detail"
+        app:backgroundTint="@color/colorPrimary" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        style="@style/AppTheme.Button.NoAnimator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5"
+        android:layout_marginBottom="@dimen/size_5"
+        android:text="@string/btn_close"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/colorPrimary" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

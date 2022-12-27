@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_10"
+    android:paddingVertical="@dimen/size_16">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="5dp"
+        app:cardCornerRadius="@dimen/radius_default">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/lvScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/size_10"
+                android:paddingVertical="@dimen/size_14">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/account_information"
+                    android:textColor="@color/color_BE43C3" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtAccPhone"
+                    style="@style/AppTheme.EditText.SignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:drawableStart="@drawable/ic_phone_outline"
+                    android:drawablePadding="@dimen/size_10"
+                    android:hint="@string/login_phone_number"
+                    android:inputType="phone" />
+
+
+                <com.app.inails.booking.admin.views.widget.PasswordTextInputLayout
+                    android:id="@+id/layoutPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_30"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:background="@drawable/bg_bottom_light"
+                    app:iconColor="@color/colorPrimary">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtAccPassword"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_lock_outline"
+                        android:hint="@string/hint_password"
+                        android:inputType="textPassword"
+                        android:paddingStart="@dimen/size_10" />
+
+                </com.app.inails.booking.admin.views.widget.PasswordTextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtAccName"
+                    style="@style/AppTheme.EditText.SignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:drawableStart="@drawable/ic_user_outline"
+                    android:drawablePadding="@dimen/size_10"
+                    android:hint="@string/admin_name" />
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:gravity="center"
+                    android:text="@string/salon_information"
+                    android:textColor="@color/color_BE43C3" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtSalonName"
+                    style="@style/AppTheme.EditText.SignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:drawableStart="@drawable/ic_salon"
+                    android:drawablePadding="@dimen/size_10"
+                    android:hint="@string/salon_spa_name" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtSalonAddress"
+                    style="@style/AppTheme.EditText.SignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawablePadding="@dimen/size_10"
+                    android:focusable="false"
+                    android:hint="@string/spa_salon_address"
+                    android:inputType="textMultiLine" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtSalonPhone"
+                    style="@style/AppTheme.EditText.SignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:drawableStart="@drawable/ic_phone_outline"
+                    android:drawablePadding="@dimen/size_10"
+                    android:hint="@string/contact_phone_number"
+                    android:inputType="phone" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtSalonEmail"
+                    style="@style/AppTheme.EditText.SignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="@dimen/size_10"
+                    android:hint="@string/email" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_picture_holder" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_15">
+
+                    <TextView
+                        android:id="@+id/tvBusinessHour"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/business_hour"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvEditSchedule"
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/edit"
+                        android:textColor="@color/colorPrimary"
+                        app:drawableStartCompat="@drawable/ic_edit_2" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvSchedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="7"
+                    tools:listitem="@layout/item_view_salon_schedule" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:src="@drawable/ic_edit_2" />
+
+                    <EditText
+                        android:id="@+id/edtDescription"
+                        style="@style/AppTheme.EditText.MultiLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_5"
+                        android:background="@null"
+                        android:drawablePadding="@dimen/size_10"
+                        android:hint="@string/introduction"
+                        android:includeFontPadding="false"
+                        android:paddingStart="@dimen/size_5"
+                        android:paddingTop="@dimen/size_8"
+                        android:textSize="@dimen/text_size_12" />
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:gravity="center"
+                    android:text="@string/add_service_for_salon"
+                    android:textColor="@color/color_BE43C3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/service" />
+
+                    <TextView
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_40"
+                        android:layout_weight="1"
+                        android:text="@string/price" />
+
+                    <TextView
+                        android:id="@+id/tvAddService"
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_add_blue"
+                        android:drawablePadding="@dimen/size_5"
+                        android:gravity="center"
+                        android:text="@string/add"
+                        android:textColor="@color/color_dc00a9" />
+
+                </LinearLayout>
+
+                <com.app.inails.booking.admin.views.widget.SalonServiceView
+                    android:id="@+id/salonServiceView"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/size_5"
+                    app:custom_display_type="TypeService" />
+
+                <LinearLayout
+                    android:id="@+id/layoutAddService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:orientation="vertical" />
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:gravity="center"
+                    android:text="@string/add_staff_for_salon"
+                    android:textColor="@color/color_BE43C3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/staff" />
+
+                    <TextView
+                        style="@style/AppTheme.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:layout_weight="1"
+                        android:text="@string/phone_number" />
+
+                    <TextView
+                        android:id="@+id/tvAddStaff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_add_blue"
+                        android:drawablePadding="@dimen/size_5"
+                        android:gravity="center"
+                        android:text="@string/add"
+                        android:textColor="@color/color_dc00a9" />
+
+                </LinearLayout>
+
+                <com.app.inails.booking.admin.views.widget.SalonStaffView
+                    android:id="@+id/salonStaffView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_50"
+                    android:layout_marginTop="@dimen/size_5"
+                    app:custom_display_type="TypeService" />
+
+                <LinearLayout
+                    android:id="@+id/layoutAddStaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:orientation="vertical" />
+
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_40"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@drawable/bg_button_customer_booking"
+                    android:text="@string/sign_up" />
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

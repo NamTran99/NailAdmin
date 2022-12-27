@@ -46,7 +46,7 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    private fun findFirstVisibleItem(): Int {
+     fun findFirstVisibleItem(): Int {
         return when (val layoutManager = mRecyclerView!!.layoutManager) {
             is LinearLayoutManager -> layoutManager.findFirstVisibleItemPosition()
             is GridLayoutManager -> layoutManager.findFirstVisibleItemPosition()

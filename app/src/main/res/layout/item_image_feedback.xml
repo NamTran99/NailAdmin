@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/size_8">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imvFeedback"
+        android:layout_width="@dimen/size_90"
+        android:layout_height="@dimen/size_90"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_salon_test"
+        android:visibility="visible"
+        app:shapeAppearanceOverlay="@style/rounded_corner" />
+
+    <FrameLayout
+        android:id="@+id/addLayout"
+        android:layout_width="@dimen/size_90"
+        android:layout_height="@dimen/size_90"
+        android:layout_marginEnd="@dimen/size_8"
+        android:background="@drawable/bg_stroke_primary"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imvAddImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_feather_plus"
+            app:shapeAppearanceOverlay="@style/rounded_corner" />
+    </FrameLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/btRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:layout_margin="@dimen/size_5"
+        android:background="@drawable/ic_oval_white"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/size_15"
+            android:layout_height="@dimen/size_15"
+            android:layout_gravity="end"
+            android:padding="@dimen/size_3"
+            android:src="@drawable/ic_close" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</FrameLayout>
+
+

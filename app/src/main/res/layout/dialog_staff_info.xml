@@ -35,6 +35,14 @@
     <View style="@style/AppTheme.Line.Horizontal"
         android:layout_marginTop="@dimen/size_5"/>
 
+    <com.app.inails.booking.admin.views.widget.LoadingImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="@dimen/size_100"
+        android:layout_marginTop="@dimen/size_12"
+        android:layout_height="@dimen/size_100"
+        app:custom_enable_remove_image="false"
+        android:layout_gravity="center"/>
+
     <TextView
         style="@style/AppTheme.TextView.Medium"
         android:layout_marginStart="@dimen/size_16"

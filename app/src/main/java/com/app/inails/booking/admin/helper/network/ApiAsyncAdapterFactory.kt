@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.helper.network
 
+import com.app.inails.booking.admin.exception.ApiRequestException
 import com.app.inails.booking.admin.model.api.ApiResponse
 import retrofit2.Call
 import java.lang.reflect.ParameterizedType
@@ -37,9 +38,9 @@ class ApiAsyncAdapterFactory(errorHandler: ApiCallErrorHandler) :
 
         override suspend fun awaitNullable(): Any? {
             val result = async.awaitNullable()
-//            if (result?.statusCode != null && result.statusCode >= 400) throw ApiRequestException(
-//                result.message
-//            )
+            if (result?.result == false) throw ApiRequestException(
+                result.message
+            )
             return result?.data
         }
 

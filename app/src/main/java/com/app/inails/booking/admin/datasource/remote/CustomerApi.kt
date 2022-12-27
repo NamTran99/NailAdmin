@@ -4,9 +4,13 @@ import android.support.di.InjectBy
 import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
+import com.app.inails.booking.admin.model.form.UpdateCustomerForm
+import com.app.inails.booking.admin.model.response.CustomerDTO
 import com.app.inails.booking.admin.model.response.CustomerFullInfoDTO
 import retrofit2.Retrofit
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 /**
@@ -20,6 +24,9 @@ interface CustomerApi : Injectable {
         @Query("num_per_page") perPage: Int? = null,
         @Query("page") page: Int? = null
     ): ApiAsync<List<CustomerFullInfoDTO>>
+
+    @POST("salon/update-customer")
+    fun updateCustomer(@Body updateForm: UpdateCustomerForm): ApiAsync<CustomerFullInfoDTO>
 }
 
 class CustomerApiImpl(private val retrofit: Retrofit) :

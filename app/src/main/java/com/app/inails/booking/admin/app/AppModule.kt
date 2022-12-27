@@ -10,7 +10,7 @@ import com.app.inails.booking.admin.helper.interceptor.LoggingInterceptor
 import com.app.inails.booking.admin.helper.interceptor.TokenInterceptor
 import com.app.inails.booking.admin.helper.network.ApiAsyncAdapterFactory
 import com.app.inails.booking.admin.helper.network.DefaultApiErrorHandler
-//import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Cache
@@ -84,7 +84,7 @@ val apiModule = module {
                 OkHttpClient.Builder()
                     .addInterceptor(get<TokenInterceptor>())
                     .addInterceptor(interceptor)
-//                    .addInterceptor(ChuckerInterceptor(this.get()))
+                    .addInterceptor(ChuckerInterceptor(this.get()))
                     .addInterceptor(get<LoggingInterceptor.Builder>().build())
                     .build()
             )
@@ -100,7 +100,7 @@ val apiModule = module {
             .client(  OkHttpClient.Builder()
                 .addInterceptor(get<TokenInterceptor>())
                 .addInterceptor(interceptor)
-//                .addInterceptor(ChuckerInterceptor(this.get()))
+                .addInterceptor(ChuckerInterceptor(this.get()))
                 .addInterceptor(    get<LoggingInterceptor.Builder>().build())
                 .build())
             .build()

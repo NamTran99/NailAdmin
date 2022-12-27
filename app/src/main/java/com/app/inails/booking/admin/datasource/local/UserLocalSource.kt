@@ -9,7 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.extention.displaySafe
 import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.helper.ShareIOScope
+import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.UserDTO
+import com.app.inails.booking.admin.model.response.client.SalonClientDTO
+import com.app.inails.booking.admin.model.response.client.UserClientDTO
+import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
 import kotlinx.coroutines.launch
 
 @Inject(ShareScope.Singleton)
@@ -19,17 +23,42 @@ class UserLocalSource(
     private val appCache: AppCache,
 ) {
 
+    private val caching = GsonCaching(context)
+
     private val userLive = MutableLiveData<UserDTO>()
+    private val userClientLive = MutableLiveData<UserClientDTO?>()
+    private val allUserLive = MutableLiveData<Pair<UserOwnerDTO?, UserClientDTO?>>()
+
+    private var userClient: UserClientDTO? by caching.reference(UserClientDTO::class.java.name)
+    private var userOwner: UserOwnerDTO? by caching.reference(UserOwnerDTO::class.java.name)
+    private var isOwnerMode: Boolean? by caching.reference("AppMode")
+
+    private var user: UserDTO? by caching.reference(UserDTO::class.java.name)
+    private var isFirstOpenApp: Boolean? by caching.reference("fistOpenApp")
 
     init {
-        shareIOScope.launch { userLive.post(getUserDto()) }
+        shareIOScope.launch { userLive.post(getUserDto())
+            allUserLive.post(getUserOwnerDto() to getUserClientDto())
+        }
     }
 
-    private val caching = GsonCaching(context)
-    private var user: UserDTO? by caching.reference(UserDTO::class.java.name)
+    fun setOwnerMode(isOwner: Boolean){
+        isOwnerMode = isOwner
+    }
+
+    fun getOwnerMode() = isOwnerMode?:true
+
+    fun getUserOwnerDto(): UserOwnerDTO? = userOwner
+    fun getUserClientDto(): UserClientDTO? = userClient
+
+    fun getAllUserLive(): MutableLiveData<Pair<UserOwnerDTO?, UserClientDTO?>> {
+        return allUserLive
+    }
+
+    fun getSalonPhone() = user?.admin?.phone?:""
 
     fun getToken(): String? {
-        return user?.token
+        return userClient?.token?:user?.token
     }
     fun getSalonID(): Int? {
         return user?.admin?.salon_id
@@ -40,6 +69,8 @@ class UserLocalSource(
         appCache.token = token
     }
 
+    fun isOwnerLogin() = user != null
+
     fun clearToken() {
         appCache.token = ""
     }
@@ -48,7 +79,12 @@ class UserLocalSource(
         appCache.password = ""
     }
 
+    fun clearClientAccount() {
+        userClient = null
+    }
+
     fun getUserDto(): UserDTO? = user
+    fun getSalonDto(): SalonDTO? = user?.admin?.salon
     fun getSlug(): String = user?.admin?.salon?.slug.displaySafe1()
     fun changeUserSlug(slug:String?){
         user?.admin?.salon?.slug = slug?:""
@@ -61,6 +97,10 @@ class UserLocalSource(
         return userLive
     }
 
+    fun getUserClientLive(): MutableLiveData<UserClientDTO?> {
+        return userClientLive
+    }
+
     fun saveUser(userDTO: UserDTO) {
         user = userDTO
         shareIOScope.launch {
@@ -68,12 +108,48 @@ class UserLocalSource(
         }
     }
 
+    fun saveUserClient(userDTO: UserClientDTO?) {
+        userClient = userDTO
+        shareIOScope.launch {
+            userClientLive.post(userDTO)
+            allUserLive.post(getUserOwnerDto() to getUserClientDto())
+        }
+    }
+
+    fun saveUserOwner(userOwner: UserOwnerDTO?) {
+        this.userOwner = userOwner
+        shareIOScope.launch { allUserLive.post(getUserOwnerDto() to getUserClientDto()) }
+    }
+
+
+    fun logout() {
+        saveUserClient(null)
+        saveUserOwner(null)
+    }
+
+
+    fun logoutCustomer(){
+        saveUserClient(null)
+    }
+
     fun updateEmailFeedbackUser(email: String){
         user?.admin?.salon?.email = email
+    }
+
+    // is first login
+    fun saveOpenAppAlready(){
+        isFirstOpenApp = false
+    }
+
+    fun getIsFirstOpenApp(): Boolean? {
+        return isFirstOpenApp
     }
 
     // When log out
     fun clearUser(){
         user = null
     }
+
+    // salon
+
 }

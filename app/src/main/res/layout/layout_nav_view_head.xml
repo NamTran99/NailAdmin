@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:minHeight="?actionBarSize">
 
-    <TextView
-        android:id="@+id/btMenuClose"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lvHeaderMenu"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="@dimen/size_13"
-        android:drawablePadding="@dimen/size_16"
-        android:fontFamily="@font/larken_extrabold_italic"
-        android:text="@string/title_menu"
-        android:textAllCaps="false"
-        android:gravity="start|center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_15"
-        app:drawableStartCompat="@drawable/ic_menu_close" />
-</FrameLayout>
+        android:background="@color/white"
+        android:minHeight="?actionBarSize"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_13"
+            android:src="@drawable/ic_menu_close"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSalonInfor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/larken_extrabold_italic"
+                android:text="@string/title_menu"
+                android:includeFontPadding="false"
+                android:textAllCaps="false"
+                android:gravity="start|center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_15"
+                />
+
+            <TextView
+                android:id="@+id/tvSalonType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/salon_not_approve"
+                android:textAllCaps="false"
+                style="@style/AppTheme.TextView.Medium"
+                android:gravity="start|center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_12"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/btMenuClose"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--      -->
+<!--        app:drawableStartCompat="@drawable/ic_menu_close" />-->
+
+

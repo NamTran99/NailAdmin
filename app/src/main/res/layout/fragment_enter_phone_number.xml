@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_20"
+    tools:background="@drawable/bg_app"
+ >
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/size_40"
+        android:text="@string/title_welcome_to"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSalonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelWelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/size_5"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_22" />
+
+    <com.app.inails.booking.admin.views.widget.PhoneNumberView
+        android:id="@+id/viewPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFeedback"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/size_16"
+        android:text="@string/btn_feedback"
+        android:visibility="gone"
+        app:backgroundTint="@color/orange_250" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogoutOwner"
+        style="@style/AppTheme.Button.Outline.Circle"
+        android:layout_width="@dimen/icon_size_medium"
+        android:layout_height="@dimen/icon_size_medium"
+        app:strokeColor="@color/magenta_130"
+        android:layout_marginTop="@dimen/size_10"
+        app:backgroundTint="@color/magenta_130"
+        app:icon="@drawable/ic_logout"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/magenta_195" />
+</RelativeLayout>

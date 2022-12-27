@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpgImages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/txtCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_white_opacity"
+        android:paddingHorizontal="@dimen/size_20"
+        android:backgroundTint="#99000000"
+        android:paddingVertical="@dimen/size_8"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/size_16"
+        android:textColor="@color/white"
+        tools:text="1/6" />
+</RelativeLayout>

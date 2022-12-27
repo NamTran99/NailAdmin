@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+  >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_10"
+        android:paddingVertical="@dimen/size_16">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/radius_default">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/size_20">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_name" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtPfName"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:drawableStart="@drawable/ic_user"
+                    android:hint="@string/hint_name"
+                    android:inputType="textCapSentences" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:drawablePadding="@dimen/size_10"
+                    android:text="@string/label_phone" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtPfPhone"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:drawableStart="@drawable/ic_phone_outline"
+                    android:enabled="false"
+                    android:hint="@string/hint_enter_your_phone"
+                    android:inputType="phone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:text="@string/label_dob_optional" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:text="@string/profile_des_birthday"
+                    android:textColor="@color/gray_103" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtPfDob"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:cursorVisible="false"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:drawableEnd="@drawable/ic_picker_right"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/hint_select_your_date_of_birth"
+                    android:inputType="textEmailAddress"
+                    app:drawableTint="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:text="@string/label_email_optional" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:text="@string/profile_des_email"
+                    android:textColor="@color/gray_103" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtPfEmail"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:drawableStart="@drawable/ic_email"
+                    android:hint="@string/hint_enter_your_email_optional"
+                    android:inputType="textEmailAddress" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:drawablePadding="@dimen/size_10"
+                    android:text="@string/label_address_optional" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:text="@string/profile_des_address"
+                    android:textColor="@color/gray_103" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtPfAddress"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:drawableStart="@drawable/ic_location"
+                    android:hint="@string/hint_enter_your_address_optional" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            style="@style/AppTheme.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_20"
+            android:layout_marginBottom="@dimen/size_16"
+            android:text="@string/btn_save"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="@dimen/radius_40" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

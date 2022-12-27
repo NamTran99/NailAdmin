@@ -4,6 +4,7 @@
     android:layout_height="@dimen/size_100"
     android:layout_marginTop="@dimen/size_10"
     android:background="@drawable/bg_btn_add"
+    android:backgroundTint="#27BC40C1"
     android:src="@drawable/ic_baseline_add_24"
     android:scaleType="center"
     android:orientation="horizontal">

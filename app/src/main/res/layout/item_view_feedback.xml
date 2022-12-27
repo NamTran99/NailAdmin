@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_16"
+        android:layout_toStartOf="@+id/ratingBar"
+        android:drawableStart="@drawable/ic_user"
+        android:drawablePadding="@dimen/size_10"
+        tools:text="***da" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/AppTheme.RatingBar.Small.Feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtName"
+        android:layout_alignParentEnd="true"
+        android:isIndicator="true"
+        android:rating="5"
+        android:theme="@style/AppTheme.RatingBar.Small.Feedback" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtName"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginEnd="@dimen/size_16"
+        android:layout_toStartOf="@+id/txtTime"
+        android:drawableStart="@drawable/ic_phone_outline"
+        android:drawablePadding="@dimen/size_10"
+        tools:text="*** **** 6789" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtName"
+        android:layout_alignTop="@+id/txtPhone"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/gray_145"
+        tools:text="1 week ago" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtComment"
+        style="@style/TextAppearance.Italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtPhone"
+        android:layout_gravity="top"
+        android:paddingVertical="@dimen/size_16"
+        android:textColor="@color/gray05"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvImages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtComment"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_image_feedback" />
+
+    <View
+        style="@style/AppTheme.Line.Horizontal"
+        android:layout_below="@+id/rcvImages"
+        android:layout_marginVertical="@dimen/size_16" />
+</RelativeLayout>

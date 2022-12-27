@@ -28,10 +28,68 @@
             app:tint="@color/black" />
     </RelativeLayout>
 
+    <com.app.inails.booking.admin.views.widget.LoadingImageView
+        android:id="@+id/mainImage"
+        android:layout_width="@dimen/size_100"
+        android:layout_gravity="center"
+        android:layout_height="@dimen/size_100"/>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/lvAddImage"-->
+<!--        android:layout_width="@dimen/size_100"-->
+<!--        android:layout_height="@dimen/size_100"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="@dimen/size_15"-->
+<!--        android:background="@drawable/bg_stroke_corner_f7f7f7"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imgAddImage"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:src="@drawable/ic_no_image" />-->
+
+<!--        <TextView-->
+<!--            style="@style/AppTheme.TextView.Medium"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/imgAddImage"-->
+<!--            android:layout_marginTop="@dimen/size_10"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/add_image"-->
+<!--            android:textColor="@color/color_939393"-->
+<!--            android:textSize="@dimen/text_size_10" />-->
+
+<!--    </RelativeLayout>-->
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/lvImage"-->
+<!--        android:layout_width="@dimen/size_100"-->
+<!--        android:layout_height="@dimen/size_100"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="@dimen/size_15">-->
+<!--        <com.app.inails.booking.admin.views.widget.AppImageView-->
+<!--            android:id="@+id/mainImage"-->
+<!--            android:layout_width="@dimen/size_100"-->
+<!--            android:layout_height="@dimen/size_100"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/bg_stroke_corner_f7f7f7"-->
+<!--            android:orientation="vertical" />-->
+
+<!--        <ProgressBar-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:indeterminate="true" />-->
+
+<!--    </RelativeLayout>-->
+
+
+
     <EditText
         android:id="@+id/etServiceName"
         style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_12"
+        android:layout_marginTop="@dimen/size_20"
         android:hint="@string/service_s_name"
         android:maxLength="30" />
 
@@ -39,10 +97,26 @@
         android:id="@+id/etPrice"
         style="@style/AppTheme.EditText"
         android:layout_marginTop="@dimen/size_12"
+        android:drawableEnd="@drawable/ic_dollar"
         android:hint="@string/price"
         android:inputType="numberDecimal"
-        android:drawableEnd="@drawable/ic_dollar"
         android:maxLength="14" />
+
+    <TextView
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15"
+        android:text="@string/more_photos" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvImages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        tools:listitem="@layout/item_picture_holder" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btSubmit"

@@ -32,15 +32,7 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
     private lateinit var adapter: SalonEditScheduleAdapter
     private val arg by lazy { BundleArgument.of(arguments) ?: EditScheduleArgs() }
 
-    private val schedules: List<ISchedule> = listOf(
-        ISchedule(1),
-        ISchedule(2),
-        ISchedule(3),
-        ISchedule(4),
-        ISchedule(5),
-        ISchedule(6),
-        ISchedule(0),
-    )
+    private val schedules: List<ISchedule> = ISchedule.getDefaultList()
 
     companion object {
         const val REQUEST_KEY = "EditScheduleFragment"

@@ -1,6 +1,5 @@
 package com.app.inails.booking.admin.views.extension
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import androidx.viewpager.widget.ViewPager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BasePager
 import com.app.inails.booking.admin.base.PagerHolder
-import com.app.inails.booking.admin.model.ui.SalonImage
 import com.app.inails.booking.admin.views.widget.PinchZoomImageView
 
 

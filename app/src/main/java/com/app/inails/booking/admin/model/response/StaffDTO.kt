@@ -12,5 +12,8 @@ data class StaffDTO(
     val status_name: String? = "",
     val appointment_processing: AppointmentDTO?,
     val active: Int = 0,
-    val checked_time: String? = ""
+    val checked_time: String? = "",
+    val avatar: String? = null,
+    val description: String? =null,
+    val is_avatar_default: Boolean? = false
 )

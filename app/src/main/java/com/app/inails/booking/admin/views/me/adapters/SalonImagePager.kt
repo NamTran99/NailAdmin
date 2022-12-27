@@ -31,11 +31,11 @@ class HomeBannerPager(private val view: ViewPager) : BasePager() {
     init {
         view.adapter = this
         view.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-            override fun onViewDetachedFromWindow(v: View?) {
+            override fun onViewDetachedFromWindow(v: View) {
                 mViewLooper.stop()
             }
 
-            override fun onViewAttachedToWindow(v: View?) {
+            override fun onViewAttachedToWindow(v: View) {
                 if (count > 0) mViewLooper.start()
             }
         })
@@ -59,7 +59,7 @@ class HomeBannerPager(private val view: ViewPager) : BasePager() {
 
 }
 
-private class LoopHandler(val function: () -> Unit) : Handler() {
+class LoopHandler(val function: () -> Unit) : Handler() {
     companion object {
         private const val LOOP_TIME_OUT = 3000L
     }

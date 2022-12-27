@@ -21,10 +21,25 @@
         android:textSize="@dimen/text_size_22"
         tools:text="Healthy Nail Salon Collaborative" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGallery"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSalonName"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/size_20"
+        android:background="@drawable/btn_view_stroke"
+        android:drawableStart="@drawable/ic_gallery"
+        android:paddingHorizontal="@dimen/size_30"
+        android:text="@string/photo_gallery"
+        android:textAllCaps="true"
+        android:textColor="@color/white" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txtSalonName"
+        android:layout_below="@+id/btnGallery"
         android:layout_marginTop="@dimen/size_16"
         android:background="@drawable/box_white_radius_top">
 

@@ -36,13 +36,21 @@ interface IAppointment {
     val feedbackRating: Float get() = 0f
     val noteFinish: String get() = ""
     val reasonCancel: String get() = ""
-    val price: Double get() = 0.0
+    val totalPriceService: String get() =""
     val serviceCustomObj: IService? get() = null
     val createAt: String get() = ""
     val dateSelected: String get() = ""
     val timeSelected: String get() = ""
     val dateTag: String get() = ""
     val customerID: Int get() = 0
+    val feedbackImages: List<AppImage> get() = listOf()
+    val afterImage: List<AppImage> get() = listOf()
+    val beforeImage: List<AppImage> get() = listOf()
+    val hasVoucher: Boolean get() = false
+    val percent: String get() = ""
+    val showPercent : Boolean get() =false
+    val discount: String get() = ""
+    val totalAmount: String get() = ""
 }
 
 @Parcelize
@@ -76,13 +84,14 @@ class AppointmentForm(
     }
 }
 
-@Parcelize
 class AppointmentStatusForm(
     var id: Int = 0,
     var status: Int = 0,
     var price: Double = 0.0,
-    var note: String = ""
-) : Parcelable
+    var note: String = "",
+    var beforeImages: List<AppImage>  = listOf(),
+    var afterImages: List<AppImage> = listOf()
+)
 
 @Parcelize
 class StartServiceForm(

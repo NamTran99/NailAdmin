@@ -7,11 +7,10 @@ import com.app.inails.booking.admin.app.AppConst
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.ui.ServiceForm
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Retrofit
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * http://api.booking.kendemo.com:3005/api/v1/
@@ -36,11 +35,18 @@ interface ServiceApi : Injectable {
     @POST("service/change-active")
     fun changeActiveService(@Field("id") serviceID: Int): ApiAsync<ServiceDTO>
 
+    @Multipart
     @POST("service/update-service")
-    fun updateService(@Body form: ServiceForm): ApiAsync<ServiceDTO>
+    fun updateService(  @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+                        @Part avatar: MultipartBody.Part?,
+                        @Part vararg images: MultipartBody.Part?): ApiAsync<ServiceDTO>
 
+    @Multipart
     @POST("service/create-service")
-    fun createService(@Body form: ServiceForm): ApiAsync<ServiceDTO>
+    fun createService(@PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+                      @Part avatar: MultipartBody.Part?,
+                      @Part vararg images: MultipartBody.Part?,
+    ): ApiAsync<ServiceDTO>
 }
 
 class ServiceApiImpl(private val retrofit: Retrofit) :

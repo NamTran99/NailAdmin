@@ -8,31 +8,33 @@
     android:gravity="center_vertical"
     tools:context=".views.widget.topbar.MainTopBarState">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btMenu"
-        android:layout_width="?actionBarSize"
-        android:layout_height="?actionBarSize"
-        android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_menu"
-        app:tint="@color/colorPrimary" />
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/btMenu"-->
+<!--        android:layout_width="?actionBarSize"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:background="?selectableItemBackgroundBorderless"-->
+<!--        android:scaleType="centerInside"-->
+<!--        android:src="@drawable/ic_menu"-->
+<!--        app:tint="@color/colorPrimary" />-->
 
     <TextView
         android:id="@+id/tvTitle"
-        style="@style/AppTheme.TextView.Title.Small"
+        style="@style/AppTheme.TextView.Title"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginStart="?actionBarSize"
         tools:text="Hello world" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btStaffList"
-        style="@style/AppTheme.ButtonDefault.Wrap"
-        android:layout_height="@dimen/size_40"
-        android:background="@drawable/button_primary_stroke"
-        android:drawableStart="@drawable/ic_staff_list"
-        android:text="@string/btn_staff_list"
-        android:textColor="@color/colorPrimary" />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btStaffList"-->
+<!--        style="@style/AppTheme.ButtonDefault.Wrap"-->
+<!--        android:layout_height="@dimen/size_40"-->
+<!--        android:background="@drawable/button_primary_stroke"-->
+<!--        android:drawableStart="@drawable/ic_staff_list"-->
+<!--        android:text="@string/btn_staff_list"-->
+<!--        android:textColor="@color/colorPrimary" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="?actionBarSize"

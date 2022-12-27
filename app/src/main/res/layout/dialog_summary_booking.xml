@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@drawable/bg_app"
+  >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/size_16"
+        android:background="@drawable/bg_white_dialog"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/size_16">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="@dimen/size_16"
+            android:scrollbarStyle="outsideOverlay">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBack"
+                        style="@style/AppTheme.Button.Outline.Circle"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize"
+                        android:layout_gravity="start"
+                        app:backgroundTint="@android:color/transparent"
+                        app:icon="@drawable/ic_back"
+                        app:rippleColor="@color/colorAccent"
+                        app:strokeColor="@android:color/transparent"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/title_summary"
+                        android:textSize="@dimen/text_size_15"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:text="@string/label_appointment_time" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtRsDatetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_of_edit_text"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:background="@drawable/box_grey"
+                    android:gravity="center_vertical"
+                    android:inputType="textCapSentences"
+                    android:paddingHorizontal="@dimen/size_10"
+                    tools:text="11:30 AM - Thursday 11/08/2022" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:text="@string/label_staff" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtRsStaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_of_edit_text"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:background="@drawable/box_grey"
+                    android:gravity="center_vertical"
+                    android:inputType="textCapSentences"
+                    android:paddingHorizontal="@dimen/size_10"
+                    tools:text="Anyone Available" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:text="@string/label_services" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_view_service_summary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginVertical="@dimen/size_16"
+                    android:background="@color/gray_235" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_total"
+                        android:textColor="@color/gray_08" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@drawable/box_gray"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/size_5">
+
+                    <EditText
+                        android:id="@+id/edtVoucher"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_40"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/hint_voucher_code"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:paddingHorizontal="@dimen/size_15"
+                        android:textColorHint="@color/transparency" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/btnInfo"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_5"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_info"
+                        android:layout_gravity="center"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnApplyVoucher"
+                        style="@style/AppTheme.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_40"
+                        android:layout_marginHorizontal="@dimen/size_15"
+                        android:enabled="false"
+                        android:text="@string/btn_apply"
+                        android:textAllCaps="false" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDelete"
+                        style="@style/AppTheme.Button"
+                        android:layout_width="wrap_content"
+                        android:backgroundTint="@color/gray05"
+                        android:layout_height="@dimen/size_40"
+                        android:visibility="gone"
+                        android:layout_marginHorizontal="@dimen/size_15"
+                        android:enabled="true"
+                        android:text="@string/btn_delete"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/applyVoucherLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/labelVoucher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_voucher_discount"
+                        android:textColor="@color/gray_08" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_5"
+                        android:layout_toEndOf="@+id/labelVoucher"
+                        android:textColor="@color/colorPrimary" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtPriceDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/colorPrimary" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginVertical="@dimen/size_16"
+                    android:background="@color/gray_235" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_total"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtTotalAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14" />
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            style="@style/AppTheme.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_30"
+            android:text="@string/btn_submit"
+            app:backgroundTint="@color/orange_250" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>

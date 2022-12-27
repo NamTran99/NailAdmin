@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navProfile"
+        android:title="@string/mn_profile" />
+    <item
+        android:id="@+id/navAppointment"
+        android:title="@string/mn_appointments" />
+<!--    <item-->
+<!--        android:id="@+id/navFeedback"-->
+<!--        android:title="@string/mn_send_feedback" />-->
+    <item
+        android:id="@+id/navChangePassword"
+        android:title="@string/mn_change_password" />
+    <item
+        android:id="@+id/navLogout"
+        android:title="@string/mn_logout" />
+</menu>

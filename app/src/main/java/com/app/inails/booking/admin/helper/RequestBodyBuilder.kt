@@ -17,6 +17,14 @@ class RequestBodyBuilder {
         return this
     }
 
+    fun putIf(condition: Boolean, field: String, value: Any): RequestBodyBuilder {
+        if(condition){
+            mRequest[field] = value.toString()
+            Log.e(field, value.toString())
+        }
+        return this
+    }
+
     fun put(field: String, value: Any?): RequestBodyBuilder {
         if(value==null)
             return this

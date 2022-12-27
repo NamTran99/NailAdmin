@@ -27,6 +27,7 @@ data class UserDTO(
         @SerializedName("updated_at")
         val updatedAt: String?,
         val zip: String?,
-        val salon: SalonDTO
+        val salon: SalonDTO,
+        var is_approve: Int? = 0
     )
 }

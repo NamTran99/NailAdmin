@@ -13,16 +13,15 @@ import java.util.concurrent.TimeUnit
 
 object TimeUtils {
     private val calendar = GregorianCalendar()
-    private val currentTimeZOne: TimeZone = calendar.timeZone
+    private val currentTimeZone: TimeZone = calendar.timeZone
     private val currentTime = calendar.time
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getZoneID(): String {
-        return currentTimeZOne.toZoneId().id
+        return currentTimeZone.id
     }
 
     fun getTimeOffset(): String {
-        return TimeUnit.HOURS.convert(currentTimeZOne.rawOffset.toLong(), TimeUnit.MILLISECONDS)
+        return TimeUnit.HOURS.convert(currentTimeZone.rawOffset.toLong(), TimeUnit.MILLISECONDS)
             .toNumericString()
     } // return +7
 

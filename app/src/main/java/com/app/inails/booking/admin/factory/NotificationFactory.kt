@@ -29,6 +29,8 @@ class NotificationFactory(private val textFormatter: TextFormatter) {
                 get() = textFormatter.formatColorNotification(notiDTO.is_read)
             override val dataId: Int
                 get() = notiDTO.data_id
+            override val type: Int
+                get() = notiDTO.type?:0
         }
     }
 

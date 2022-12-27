@@ -28,7 +28,7 @@ class NotificationsManager(private val mContext: Context) {
             .setColor(ContextCompat.getColor(mContext, R.color.colorPrimary))
             .setTicker(mContext.getString(R.string.app_name))
             .setAutoCancel(true)
-            .setContentTitle(cloudMessage.data.salon_name)
+            .setContentTitle(cloudMessage.data?.salon_name?:"")
             .setContentText(cloudMessage.body)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setLights(Color.MAGENTA, 3000, 3000)

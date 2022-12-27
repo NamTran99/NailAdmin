@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.extention
 
 import com.app.inails.booking.admin.helper.RequestBodyBuilder
 import com.app.inails.booking.admin.utils.FileUtils
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -28,4 +29,15 @@ fun RequestBodyBuilder.buildMultipart(): Map<String, RequestBody> {
 
 private fun createValuePart(value: String): RequestBody {
     return RequestBody.create(MultipartBody.FORM, value)
+}
+
+infix fun String.toImagePart(key: String) = buildImagePart(key, this)
+
+fun buildImagePart(name: String, photo: String): MultipartBody.Part {
+    val file = File(photo)
+    return MultipartBody.Part.createFormData(
+        name,
+        file.name,
+        file.asRequestBody("image/${file.extension}".toMediaType())
+    )
 }

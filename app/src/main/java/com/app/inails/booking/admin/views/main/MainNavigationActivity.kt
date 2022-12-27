@@ -5,7 +5,6 @@ import android.support.core.route.BundleArgument
 import android.support.core.route.argument
 import android.support.navigation.findNavigator
 import android.support.viewmodel.viewModel
-import android.util.Log
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Router
@@ -13,10 +12,14 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateUpdateAppointmentFragment
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
+import com.app.inails.booking.admin.views.clients.appointment.AppointmentDetailClientFragment
+import com.app.inails.booking.admin.views.clients.feedbacks.SubmitFeedbackFragment
+import com.app.inails.booking.admin.views.clients.profile.ProfileClientFragment
+import com.app.inails.booking.admin.views.clients.salon.SalonGalleryFragment
+import com.app.inails.booking.admin.views.extension.ShowZoomSingleImageFragment
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
-import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
 import com.app.inails.booking.admin.views.me.ChangePasswordFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordFragment
@@ -24,8 +27,10 @@ import com.app.inails.booking.admin.views.me.DetailSalonFragment
 import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
 import com.app.inails.booking.admin.views.me.reset.OTPVerifyFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordSuccessFragment
+import com.app.inails.booking.admin.views.me.reset.SignUpAccountFragment
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
+import com.app.inails.booking.admin.views.splash.IntroFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -57,7 +62,15 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ResetPassword -> ResetPasswordFragment::class
                 is Routing.OTPVerify -> OTPVerifyFragment::class
                 is Routing.ResetPasswordSuccess -> ResetPasswordSuccessFragment::class
-                else -> error("Not support")
+                is Routing.SignUpAccount -> SignUpAccountFragment::class
+                is Routing.StaffList -> StaffListFragment::class
+                is Routing.Intro -> IntroFragment::class
+                is Routing.ProfileClient -> ProfileClientFragment::class
+                is Routing.FeedBack -> SubmitFeedbackFragment::class
+                is Routing.ShowZoomSingleImage -> ShowZoomSingleImageFragment::class
+                is Routing.AppointmentDetailClient -> AppointmentDetailClientFragment::class
+                is Routing.SalonGallery -> SalonGalleryFragment::class
+                else -> error("Not Found Routing")
             }
             navigator.navigate(clazz, args = args.toBundle())
         }

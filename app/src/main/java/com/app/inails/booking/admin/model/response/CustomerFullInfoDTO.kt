@@ -15,5 +15,6 @@ data class CustomerFullInfoDTO(
     val staff_id: Int? = 0,
     val status: Int? = 0,
     val type: Int? = 0,
+    val note: String? = "",
     val birthdate: String? = ""
 )

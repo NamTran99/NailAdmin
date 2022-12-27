@@ -12,7 +12,8 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.app.inails.booking.admin.databinding.ItemPictureHolderBinding
 import com.app.inails.booking.admin.databinding.LayoutBtnAddPictureBinding
 import com.app.inails.booking.admin.extention.findIndex
-import com.app.inails.booking.admin.model.ui.SalonImage
+import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter.Companion.TYPE_ADD_IMAGE
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -25,24 +26,30 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
         const val TYPE_IMAGE = 1
     }
 
-    private var mItems = ArrayList<SalonImage>()
+    private var mItems = ArrayList<AppImage>()
 
     init {
         view.adapter = this
-        mItems.add(SalonImage())
+        mItems.add(AppImage())
     }
 
     val items get() = mItems
 
     var onAddImagesAction: (() -> Unit)? = null
-    var onRemoveImageAction: ((SalonImage) -> Unit)? = null
+    var onRemoveImageAction: ((AppImage) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun changePath(listImage: List<SalonImage>?){
+    fun changePath(listImage: List<AppImage>?){
         if(listImage.isNullOrEmpty()) return
         mItems.clear()
-        mItems.add(SalonImage())
+        mItems.add(AppImage())
         mItems.addAll(listImage)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clear(){
+        mItems = ArrayList(mItems.dropLast(mItems.size - 1))
         notifyDataSetChanged()
     }
 
@@ -61,14 +68,14 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as IHolder<SalonImage>).bind(items[position])
+        (holder as IHolder<AppImage>).bind(items[position])
     }
 
     override fun getItemCount(): Int = mItems.size
 
     inner class AddImageViewHolder(val binding: LayoutBtnAddPictureBinding) :
-        RecyclerHolder<SalonImage>(binding.root) {
-        override fun bind(item: SalonImage) {
+        RecyclerHolder<AppImage>(binding.root) {
+        override fun bind(item: AppImage) {
             binding.root.setOnClickListener {
                 onAddImagesAction?.invoke()
             }
@@ -76,10 +83,10 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
     }
 
     inner class ImageViewHolder(val binding: ItemPictureHolderBinding) :
-        RecyclerHolder<SalonImage>(binding.root) {
+        RecyclerHolder<AppImage>(binding.root) {
         @RequiresApi(Build.VERSION_CODES.Q)
         @SuppressLint("CheckResult", "ResourceAsColor")
-        override fun bind(item: SalonImage) {
+        override fun bind(item: AppImage) {
             binding.apply {
 
                 val circleProgressDrawable = CircularProgressDrawable(view.context)
@@ -105,7 +112,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
         }
     }
 
-    fun removeItem(path: SalonImage) {
+    fun removeItem(path: AppImage) {
         val index = mItems.findIndex { it == path }
         if (index > -1) {
             mItems.removeAt(index)

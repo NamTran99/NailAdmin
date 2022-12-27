@@ -10,6 +10,8 @@ import com.app.inails.booking.admin.model.response.AppointmentUpdateDTO
 import com.app.inails.booking.admin.model.response.ReportDTO
 import com.app.inails.booking.admin.model.response.ServiceDTO
 import com.app.inails.booking.admin.model.ui.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.http.*
 
@@ -79,8 +81,13 @@ interface BookingApi : Injectable {
         @Query("page") page: Int = 1,
     ): ApiAsync<ReportDTO>
 
+    @Multipart
     @POST("appointment/update-status-appointment")
-    fun updateStatusAppointment(@Body body: AppointmentStatusForm): ApiAsync<AppointmentUpdateDTO>
+    fun updateStatusAppointment(@PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+                                @Part beforeImages: Array<MultipartBody.Part?>,
+                                @Part afterImages:  Array<MultipartBody.Part?>,
+
+    ): ApiAsync<AppointmentUpdateDTO>
 
     @FormUrlEncoded
     @POST("appointment/customer-walk-in")

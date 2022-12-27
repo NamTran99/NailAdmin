@@ -4,8 +4,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.databinding.TopBarMainBinding
-import com.app.inails.booking.admin.databinding.TopBarSimpleBinding
+import com.app.inails.booking.admin.databinding.*
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 
@@ -14,6 +13,49 @@ data class ExtensionButton(
     var content: String = "Edit",
     val onclick: (() -> Unit)? = null
 )
+
+class SimpleTopBarClientState(
+    @StringRes
+    private val title: Int,
+    @DrawableRes
+    private val iconBack: Int = R.drawable.ic_ab_back,
+    private val hasDivider: Boolean = false,
+    private val onBackClick: () -> Unit = {}
+) : TopBarState() {
+    override val stateBinding by bindingOf(TopBarSimpleClientBinding::inflate)
+
+    override fun doApply() {
+        with(stateBinding) {
+            txtABTitle.setText(title)
+            btnBack.setImageResource(iconBack)
+            btnBack.setOnClickListener { onBackClick() }
+            divider.visibility = if (hasDivider) View.VISIBLE else View.GONE
+        }
+    }
+}
+
+class SimpleWithMoreTopBarState(
+    @StringRes
+    private val title: Int,
+    private val onBackClick: () -> Unit = {},
+    private val onMoreClick: () -> Unit = {}
+) : TopBarState() {
+    override val stateBinding by bindingOf(TopBarSimpleWithMoreBinding::inflate)
+
+    override fun doApply() {
+        with(stateBinding) {
+            txtABTitle.setText(title)
+            btnBack.setOnClickListener { onBackClick() }
+            btnMore.setOnClickListener { onMoreClick() }
+        }
+    }
+
+    fun setTitle(title: String) = with(stateBinding) {
+        txtABTitle.text = title
+    }
+
+    fun getViewMore() = stateBinding.btnMore
+}
 
 class SimpleTopBarState(
     @StringRes
@@ -57,14 +99,18 @@ class MainTopBarState(
     override fun doApply() {
         with(stateBinding) {
             tvTitle.setText(title)
-            btMenu.setOnClickListener { onMenuClick() }
-            btStaffList.setOnClickListener {
-                onStaffListClick()
-            }
+//            btMenu.setOnClickListener { onMenuClick() }
+//            btStaffList.setOnClickListener {
+//                onStaffListClick()
+//            }
             btNotification.setOnClickListener {
                 onNotificationClick()
             }
         }
+    }
+
+    fun setTitle(  @StringRes title: Int){
+        stateBinding.tvTitle.setText(title)
     }
 
     fun setNotificationUnreadCount(count: Int) {
@@ -72,5 +118,48 @@ class MainTopBarState(
             tvCountNoti.show(count > 0)
             tvCountNoti.text = if (count > 100) "99+" else "$count"
         }
+    }
+}
+
+class ServiceTopBarState(
+    @StringRes
+    private val title: Int,
+    private val onMenuClick: () -> Unit = {},
+    private val onChangeSalonClick: () -> Unit = {},
+    private val onLogoutClick: () -> Unit = {},
+    private val onNotifyClick: () -> Unit = {}
+) : TopBarState() {
+    override val stateBinding by bindingOf(TopBarServiceBinding::inflate)
+
+    override fun doApply() {
+        with(stateBinding) {
+            txtABTitle.setText(title)
+            btnMenu.setOnClickListener { onMenuClick() }
+            btnChangeSalon.setOnClickListener { onChangeSalonClick() }
+            btnLogoutCustomer.setOnClickListener { onLogoutClick() }
+            viewNotify.setOnClickListener { onNotifyClick() }
+        }
+    }
+
+    fun setTitle(name: String?) {
+        if (!name.isNullOrEmpty())
+            stateBinding.txtABTitle.text = name
+        else stateBinding.txtABTitle.setText(R.string.title_welcome_guest)
+    }
+
+    fun showMenu(isShow: Boolean) {
+        stateBinding.btnMenu.show(isShow)
+    }
+
+    fun showLogoutCustomer(isShow: Boolean) {
+        with(stateBinding) {
+//            btnLogoutCustomer.show(isShow)
+            btnChangeSalon.show(!isShow)
+        }
+    }
+
+    fun showBadge(it: Int) = with(stateBinding) {
+        txtCountNotify.text = if (it > 99) "99+" else it.toString()
+        txtCountNotify.show(it > 0)
     }
 }

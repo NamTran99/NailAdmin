@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/size_16"
+    app:cardCornerRadius="@dimen/radius_default">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/itemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:orientation="horizontal"
+        android:paddingTop="16dp">
+
+        <ImageView
+            android:id="@+id/viewUnread"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:padding="9dp"
+            android:src="@drawable/ic_oval_def"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Your booking #123 of salon “name” has been accepted !" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtContent"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginBottom="@dimen/size_16"
+                android:textColor="@color/gray_145"
+                android:textSize="@dimen/text_size_12"
+                tools:text="Aug 23 2022 - 2:58 PM" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <ImageButton
+            android:id="@+id/btnMore"
+            style="@style/AppTheme.ImageButton"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/size_10"
+            android:src="@drawable/ic_more_grey" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

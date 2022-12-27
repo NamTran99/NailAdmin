@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemManageServiceBinding
 import com.app.inails.booking.admin.extention.findIndex
 import com.app.inails.booking.admin.extention.formatPrice
+import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 
 class ManageServiceAdapter(view: RecyclerView) :
@@ -32,6 +37,22 @@ class ManageServiceAdapter(view: RecyclerView) :
         binding.run {
             root.setOnClickListener {
                 onClickItemListener?.invoke(item)
+            }
+
+            if(item.avatar!= null && item.avatar!!.isNotEmpty()){
+                Picasso.get().load(item.avatar).into(imgImage,object :Callback{
+                    override fun onSuccess() {
+                        progress.hide()
+                    }
+
+                    override fun onError(e: Exception?) {
+                        imgImage.setImageResource(R.drawable.ic_launcher)
+                        progress.hide()
+                    }
+                })
+            }else{
+                imgImage.setImageResource(R.drawable.ic_launcher)
+                progress.hide()
             }
 
             btMenu.setOnClickListener {

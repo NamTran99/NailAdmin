@@ -20,3 +20,18 @@ fun BaseFragment.copyText(text: String) {
     clipboard?.setPrimaryClip(clip)
     this.success("Copied!")
 }
+
+fun Context.vibrate(value: Long = 50) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        (this.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager)
+            .defaultVibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    value,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+                )
+            )
+    } else {
+        (this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(value)
+    }
+}
+

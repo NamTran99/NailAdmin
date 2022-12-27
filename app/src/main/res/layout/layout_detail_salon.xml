@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_23"
+    android:paddingTop="@dimen/size_24"
+    android:paddingBottom="@dimen/size_15">
+
+    <TextView
+        android:id="@+id/tvAccountName"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_14"
+        tools:text="Welcome, Hoang anh" />
+
+    <TextView
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvApproveAccount"
+        android:text="@string/your_salon_is_waiting_for_approval"
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_12" />
+
+    <View
+        style="@style/AppTheme.Line.Horizontal"
+        android:layout_marginTop="@dimen/size_10" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_12"
+            android:text="@string/salon_name_1"
+            android:textColor="@color/color_898989" />
+
+        <TextView
+            android:id="@+id/tvSalonName"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_12"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/color_898989"
+            tools:text="SALON NAME" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="@string/joined_date"
+            android:textColor="@color/color_898989" />
+
+        <TextView
+            android:id="@+id/tvSalonJoinDate"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/color_898989"
+            tools:text="Joined Date: Dec 6 2022" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogOut"
+        style="@style/AppTheme.ButtonDefault.Wrap"
+        android:layout_width="@dimen/size_120"
+        android:layout_height="@dimen/size_30"
+        android:layout_marginTop="@dimen/size_15"
+        android:background="@drawable/button_pink_corner"
+        android:text="@string/logout" />
+
+</LinearLayout>

@@ -1,7 +1,10 @@
 package com.app.inails.booking.admin.app
 
+import android.Manifest
+import android.os.Build
 import android.support.core.permission.*
 import android.support.core.view.ViewScopeOwner
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import java.util.concurrent.atomic.AtomicInteger
@@ -24,6 +27,11 @@ class AppPermission {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
+
+        @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+        val PERMISSION_NOTIFICATION = arrayOf(
+            android.Manifest.permission.POST_NOTIFICATIONS)
+
         val PERMISSION_WRITE_STORAGE = arrayOf(
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
@@ -56,6 +64,15 @@ class AppPermission {
         return mChecker.access(
             mNextLocalRequestCode.getAndIncrement(),
             *PERMISSION_CAMERA,
+            onPermission = function
+        )
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun accessNotification(function: () -> Unit): PermissionRequest {
+        return mChecker.access(
+            mNextLocalRequestCode.getAndIncrement(),
+            *PERMISSION_NOTIFICATION,
             onPermission = function
         )
     }
@@ -112,6 +129,14 @@ class AppPermission {
         return mChecker.access(
             mNextLocalRequestCode.getAndIncrement(),
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            onPermission = function
+        )
+    }
+
+    fun accessPhoneCall(function: () -> Unit): PermissionRequest {
+        return mChecker.access(
+            mNextLocalRequestCode.getAndIncrement(),
+            Manifest.permission.CALL_PHONE,
             onPermission = function
         )
     }

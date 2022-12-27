@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_AVAILABLE
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_BREAK
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_WORKING
@@ -26,6 +27,12 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = serviceDTO.active.safe()
             override val textColor: Int
                 get() = textFormatter.formatTextColorStaffColor(serviceDTO.active.safe())
+            override val detailImages: List<AppImage>
+                get() = serviceDTO.images.map { AppImage(it.id,it.image) }.toMutableList().apply { if(serviceDTO.image != null) add(AppImage(path = serviceDTO.image)) }
+            override val avatar: String?
+                get() = serviceDTO.image
+            override val moreImage: List<AppImage>
+                get() = serviceDTO.images.map { AppImage(it.id,it.image) }
         }
     }
 
@@ -77,6 +84,12 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 )
             override val orderStaffStatusList: Int
                 get() = getOrderPriorityForStaffStatus(staffDTO.status.safe())
+            override val avatar: String?
+                get() = staffDTO.avatar
+            override val description: String
+                get() = staffDTO.description?:""
+            override val isAvatarDefault: Boolean
+                get() = staffDTO.is_avatar_default?:false
         }
     }
 
@@ -158,8 +171,8 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.feedback?.rating.safe()
             override val noteFinish: String
                 get() = appointmentDTO.notes.safe()
-            override val price: Double
-                get() = appointmentDTO.price.safe()
+            override val totalPriceService: String
+                get() = appointmentDTO.total_price_service_format.toPriceFormat()
             override val workTime: Int
                 get() = appointmentDTO.work_time.safe()
             override val serviceCustomObj: IService?
@@ -174,6 +187,22 @@ class BookingFactory(private val textFormatter: TextFormatter) {
                 get() = appointmentDTO.date_appointment!!.toTimeAppointment()
             override val customerID: Int
                 get() = appointmentDTO.customer_id.safe()
+            override val feedbackImages: List<AppImage>
+                get() = appointmentDTO.feedback?.images?.map { AppImage(path = it.image) }?: listOf()
+            override val afterImage: List<AppImage>
+                get() = appointmentDTO.images.filter { it.type_name == "after" }.map { AppImage(path=it.image?:"") }
+            override val beforeImage: List<AppImage>
+                get() = appointmentDTO.images.filter { it.type_name == "before" }.map { AppImage(path=it.image?:"") }
+            override val totalAmount: String
+                get() = textFormatter.formatPrice(appointmentDTO.price).safe()
+            override val discount: String
+                get() = appointmentDTO.total_discount_format.toPriceFormat()
+            override val hasVoucher: Boolean
+                get() = appointmentDTO.voucher != null
+            override val percent: String
+                get() = appointmentDTO.voucher?.value?.let { textFormatter.formatPercent(it) }.safe()
+            override val showPercent: Boolean
+                get() = appointmentDTO.voucher?.type == DataConst.VoucherType.TYPE_PERCENT
         }
     }
 
@@ -190,13 +219,13 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val id: Int
                 get() = customerDTO.id.safe()
             override val name: String
-                get() = customerDTO.name.safe()
+                get() = customerDTO.name.displaySafe1()
             override val phone: String
-                get() = customerDTO.phone_format.safe()
+                get() = customerDTO.phone_format.displaySafe1()
             override val email: String
-                get() = customerDTO.email.safe("No Information")
+                get() = customerDTO.email.displaySafe1()
             override val address: String
-                get() = textFormatter.fullAddress(customerDTO)
+                get() = textFormatter.fullAddress(customerDTO).displaySafe1()
             override val birthDay: String
                 get() = customerDTO.birthdate.displaySafe1()
         }

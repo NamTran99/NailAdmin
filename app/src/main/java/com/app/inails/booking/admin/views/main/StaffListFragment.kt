@@ -16,6 +16,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentStaffListBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.StaffRepo
@@ -35,12 +36,15 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list), Sta
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             viewRefresh.colorSchemeDefault()
+            btClose.onClick{
+                activity?.onBackPressed()
+            }
             mAdapter = StaffStatusAdapter(binding.rvStaff).apply {
                 onLoadMoreListener = { nexPage, _ ->
                     viewModel.refresh(nexPage)
                 }
                 onClickAppointmentListener = {
-                    Router.redirectToAppointmentDetail(this@StaffListFragment, it!!.id)
+                    Router.redirectToAppointmentDetail(this@StaffListFragment, it?.id?:0)
                 }
                 onClickShowStaffInfor = {
                     it?.let {
@@ -59,10 +63,6 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list), Sta
                     LinearLayoutManager.VERTICAL
                 )
             )
-
-            btClose.setOnClickListener {
-                findNavigator().navigateUp()
-            }
         }
 
         with(viewModel) {

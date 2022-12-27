@@ -15,6 +15,7 @@ import android.support.viewmodel.viewModel
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentNotificationBinding
@@ -30,11 +31,12 @@ import com.app.inails.booking.admin.model.ui.NotificationIDForm
 import com.app.inails.booking.admin.model.ui.NotificationIDsForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupNotiItemMoreOwner
+import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class NotificationFragment : BaseFragment(R.layout.fragment_notification), TopBarOwner,
-    PopupNotiItemMoreOwner {
+    PopupNotiItemMoreOwner, MessageDialogOwner {
     val viewModel by viewModel<NotificationViewModel>()
     val binding by viewBinding(FragmentNotificationBinding::bind)
     private lateinit var mAdapter: NotificationAdapter
@@ -158,7 +160,11 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification), TopBa
 
                 onClickItemListener = {
                     if (it.isRead)
-                        Router.redirectToAppointmentDetail(this@NotificationFragment, it.dataId)
+                        if(it.type == DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE){
+                            messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
+                        }else{
+                            Router.redirectToAppointmentDetail(this@NotificationFragment, it.dataId)
+                        }
                     else {
                         viewModel.idForm.id = it.id
                         viewModel.idForm.dataId = it.dataId

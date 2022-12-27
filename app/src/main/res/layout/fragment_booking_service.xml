@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/viewRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:background="@drawable/bg_app">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:context=".views.booking.BookingServiceFragment">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/size_16">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtSalonNameCurrent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="?selectableItemBackground"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/size_10"
+                    android:paddingHorizontal="@dimen/size_16"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_22"
+                    android:textStyle="bold"
+                    tools:text="Healthy Nail Salon Collaborative" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:paddingHorizontal="@dimen/size_16"
+                    android:text="@string/label_what_do_you_want_get_done"
+                    android:textColor="@color/white" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingHorizontal="14dp"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_view_service" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtNote"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_14"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@drawable/edit_text_primary"
+                    android:gravity="top"
+                    android:hint="@string/hint_note"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="3"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/white" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/dateTimeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/size_16"
+                            android:layout_weight="1"
+                            android:paddingHorizontal="@dimen/size_16"
+                            android:text="@string/label_appointment_datetime"
+                            android:textColor="@color/white" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/btnSchedule"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/size_16"
+                            android:background="?selectableItemBackground"
+                            android:padding="@dimen/size_10"
+                            android:text="@string/btn_business_hour"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_12" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivArrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_marginEnd="@dimen/size_24"
+                            app:srcCompat="@drawable/ic_dropdown" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvSchedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/size_16"
+                        android:layout_marginBottom="@dimen/size_10"
+                        android:background="@color/magenta_160"
+                        android:nestedScrollingEnabled="false"
+                        android:padding="@dimen/size_10"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="7"
+                        tools:listitem="@layout/item_view_salon_schedule"
+                        tools:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/size_14"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnDate"
+                            style="@style/AppTheme.Button.NoAnimator"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="start|center_vertical"
+                            android:lines="1"
+                            android:paddingHorizontal="@dimen/size_14"
+                            android:textColor="@color/white"
+                            app:backgroundTint="@color/colorAccent"
+                            app:icon="@drawable/ic_calendar"
+                            app:iconGravity="end"
+                            app:rippleColor="@color/colorPrimary"
+                            tools:text="11/08 (Thursday)" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTime"
+                            style="@style/AppTheme.Button.NoAnimator"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="start|center_vertical"
+                            android:hint="@string/hint_select_time"
+                            android:lines="1"
+                            android:paddingHorizontal="@dimen/size_10"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/gray_200"
+                            app:backgroundTint="@color/colorAccent"
+                            app:icon="@drawable/ic_time"
+                            app:iconGravity="end"
+                            app:rippleColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingHorizontal="9dp"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        tools:itemCount="8"
+                        tools:listitem="@layout/item_view_time" />
+
+                    <TextView
+                        style="@style/TextAppearance.Italic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size_16"
+                        android:text="@string/tips_booking"
+                        android:textColor="@color/gray" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNext"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_20"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:layout_marginBottom="@dimen/size_16"
+                    android:layout_weight="1"
+                    android:text="@string/btn_next"
+                    app:backgroundTint="@color/orange_250" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.app.inails.booking.admin.views.widget.SpannedTextView
+            android:id="@+id/btnAuth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/size_16"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:spannedAnchorColor="@color/white"
+            app:spannedText="@string/label_auth_to_booking"
+            app:underlineSpannedText="true" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

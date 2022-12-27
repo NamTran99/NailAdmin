@@ -131,11 +131,32 @@ fun String?.convertTime(
 
 fun String.toCreatedAt(
 ): String {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'", Locale.getDefault())
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
     val simpleDateFormat = SimpleDateFormat("MMMM dd yyyy - hh:mm a", Locale.getDefault())
+    return simpleDateFormat.format(date)
+}
+
+fun String.toJoinedDate(
+): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val date =
+        dateFormat.parse(this)
+    val simpleDateFormat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
+    return simpleDateFormat.format(date)
+}
+
+fun String?.toVoucherTIme(
+): String {
+    if(this == null) return "No Information"
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val date =
+        dateFormat.parse(this)
+    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
     return simpleDateFormat.format(date)
 }
 

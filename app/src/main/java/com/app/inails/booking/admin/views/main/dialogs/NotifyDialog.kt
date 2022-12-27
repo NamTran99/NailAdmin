@@ -39,7 +39,7 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
         adjustViewVisibility(fireBaseCloudMessage.type.toInt())
         setUpListener()
 
-        appointment = fireBaseCloudMessage.data
+        appointment = fireBaseCloudMessage.data?: Data()
         with(binding) {
             tvBookingID.text = "#${appointment.id}"
             tvCustomerName.text = appointment.customer_name?.displaySafe()

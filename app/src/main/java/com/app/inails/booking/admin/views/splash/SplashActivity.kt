@@ -9,11 +9,14 @@ import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
+import android.support.core.route.clear
+import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.BuildConfig
 import com.app.inails.booking.admin.R
@@ -23,9 +26,10 @@ import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.MeApi
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.model.response.VersionDTO
-import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.utils.Utils
+import com.app.inails.booking.admin.views.clients.ClientHomeActivity
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.*
@@ -41,9 +45,14 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
         binding.tvVersion.text = Utils.getDisplayBuildConfig()
 
         viewModel.apply {
-            versionResult.bind{
-                if(!BuildConfig.VERSION_NAME.contains(it.version)){
-                    confirmDialog.show(title = R.string.title_new_version_update, message = R.string.text_pls_new_version_update, buttonConfirm = R.string.btn_update, isShowCancel = false){
+            versionResult.bind {
+                if (!BuildConfig.VERSION_NAME.contains(it.version)) {
+                    confirmDialog.show(
+                        title = R.string.title_new_version_update,
+                        message = R.string.text_pls_new_version_update,
+                        buttonConfirm = R.string.btn_update,
+                        isShowCancel = false
+                    ) {
                         val uri = Uri.parse("market://details?id=$packageName")
                         val myAppLinkToMarket = Intent(Intent.ACTION_VIEW, uri)
                         try {
@@ -51,14 +60,23 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
                         } catch (e: ActivityNotFoundException) {
                         }
                     }
-                }else{
+                } else {
                     CoroutineScope(Dispatchers.IO).launch {
                         delay(TimeUnit.SECONDS.toMillis(3))
                         withContext(Dispatchers.Main) {
-                            if (viewModel.user != null) {
-                                Router.run { redirectToMain() }
-                            } else {
+                            Log.d("TAG", "onCreate:${viewModel.isFirstOpenApp} ")
+                            if (viewModel.isFirstOpenApp) {
+                                Router.open(this@SplashActivity, Routing.Intro)
+                                return@withContext
+                            }
+                            if (viewModel.userOwner == null) {
                                 Router.run { redirectToLogin() }
+                            } else if (!viewModel.isOwnerMode) {
+                                Router.run {
+                                    open<ClientHomeActivity>().clear()
+                                }
+                            } else if (viewModel.isOwnerMode) {
+                                Router.run { redirectToMain() }
                             }
                         }
                     }
@@ -77,10 +95,13 @@ class SplashViewModel(
     private val userLocalSource: UserLocalSource,
     private val checkVersionApp: CheckVersionApp
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-    val user = userLocalSource.getUserDto()
+    val isFirstOpenApp = userLocalSource.getIsFirstOpenApp() ?: true
+    val userOwner = userLocalSource.getUserDto()
+    val userClient = userLocalSource.getUserClientDto()
+    val isOwnerMode = userLocalSource.getOwnerMode()
     val versionResult = checkVersionApp.result
 
-    fun getVersion() = launch(null, error){
+    fun getVersion() = launch(null, error) {
         checkVersionApp()
     }
 }

@@ -5,21 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
-    android:paddingHorizontal="@dimen/size_10"
-    tools:context=".views.booking.BookingFragment">
+    tools:context=".views.booking.BookingFragmentAllType">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/appointTab"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginBottom="@dimen/size_10"
-        android:layout_marginTop="@dimen/size_13"
-        app:tabBackground="@drawable/tab_selector"
-        app:tabIndicatorHeight="0dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@style/TextAppearance.Bold"
-        app:tabTextColor="@color/gray14" />
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/appointTab"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:layout_marginBottom="@dimen/size_10"-->
+<!--        app:tabBackground="@drawable/tab_selector"-->
+<!--        app:tabIndicatorHeight="0dp"-->
+<!--        app:tabMode="fixed"-->
+<!--        app:tabSelectedTextColor="@color/white"-->
+<!--        app:tabTextAppearance="@style/TextAppearance.Bold"-->
+<!--        app:tabTextColor="@color/gray14" />-->
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -54,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
-                    android:paddingBottom="@dimen/size_50"
+                    android:paddingBottom="@dimen/size_70"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_appointment" />

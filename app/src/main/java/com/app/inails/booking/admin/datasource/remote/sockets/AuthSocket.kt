@@ -7,6 +7,10 @@ import io.socket.emitter.Emitter
 @Inject(ShareScope.FragmentOrActivity)
 class AuthSocket(private val client: SocketClient) {
 
+    fun observeCustomerDeleteAccount(fn: Emitter.Listener) {
+        client.mSocket?.on(CUSTOMER_DELETE_ACCOUNT, fn)
+    }
+
     fun observeSalonDeleteAccount(fn: Emitter.Listener) {
         client.mSocket?.on(SALON_DELETE_ACCOUNT, fn)
     }

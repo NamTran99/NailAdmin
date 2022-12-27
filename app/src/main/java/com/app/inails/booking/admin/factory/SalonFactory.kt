@@ -2,10 +2,13 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.DataConst.VoucherType.TYPE_VALUE
+import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
+import com.app.inails.booking.admin.model.response.VoucherDTO
 import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
@@ -63,8 +66,8 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = salonDTO.lat
             override val lng: Float
                 get() = salonDTO.lng
-            override val images: List<SalonImage>
-                get() = salonDTO.images?.map { SalonImage(it.id.toInt(), it.image) } ?: listOf()
+            override val images: List<AppImage>
+                get() = salonDTO.images?.map { AppImage(it.id.toInt(), it.image) } ?: listOf()
             override val schedules: List<ISchedule>?
                 get() = createSchedule(salonDTO.schedules)
             override val tzDisplay1: String
@@ -75,6 +78,40 @@ class SalonFactory(private val textFormatter: TextFormatter) {
                 get() = salonDTO.timezone.safe()
             override val zoneOffSet: String
                 get() = salonDTO.tz.safe()
+            override val vouchers: List<IVoucher>
+                get() = salonDTO.vouchers.map(::createVoucher)
+            override val afterGalleryImage: List<AppImage>
+                get() = salonDTO.gallery.filter { it.type == 2 }.map { AppImage(id = it.id, path = it.image?:"") }
+            override val beforeGalleryImage: List<AppImage>
+                get() = salonDTO.gallery.filter { it.type == 1 }.map { AppImage(id = it.id, path = it.image?:"") }
+
         }
     }
+
+    fun createVoucher(voucherDto: VoucherDTO): IVoucher{
+        return object : IVoucher{
+            override val code: String
+                get() = voucherDto.code.safe()
+            override val type: VoucherType
+                get() =
+                    when(voucherDto.type){
+                        1 -> VoucherType.PERCENT
+                        else -> VoucherType.VALUE
+                    }
+            override val endDate: String
+                get() = voucherDto.expiration_date.toVoucherTIme()
+            override val startDate: String
+                get() = voucherDto.start_date.toVoucherTIme()
+            override val typeCustomer: String
+                get() = when(voucherDto.type_customer){
+                    1 ->  "All"
+                    2 -> "Normal"
+                    else -> "Vip"
+                }
+            override val value: Double
+                get() = voucherDto.value
+        }
+    }
+
+
 }

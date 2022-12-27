@@ -314,7 +314,7 @@
             android:text="@string/label_status"
             android:textColor="@color/gray08" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btRemove"
             android:layout_width="@dimen/size_30"
             android:layout_height="@dimen/size_30"
@@ -374,7 +374,7 @@
             android:gravity="center"
             android:text="@string/title_feed_back"
             android:textColor="@color/black"
-            android:theme="@style/AppTheme.RatingBar" />
+          />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFeedbackContent"
@@ -384,6 +384,16 @@
             android:maxLines="@null"
             android:textColor="@color/gray08"
             tools:text="Waiting" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcFeedbackImage"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_5"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_service_images"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvFeedbackContent"/>
 
     </RelativeLayout>
 

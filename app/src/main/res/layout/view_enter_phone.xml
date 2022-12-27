@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/box_white_radius"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_20"
+    android:paddingTop="@dimen/size_20"
+    android:paddingBottom="@dimen/size_30">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_enter_your_phone"
+        android:textAllCaps="true"
+        android:gravity="center_horizontal"
+        android:textColor="@color/gray" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/size_16"
+        android:background="@null"
+        android:focusableInTouchMode="true"
+        android:cursorVisible="false"
+        android:hint="(000) 000 0000"
+        android:focusable="false"
+        android:inputType="none"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/text_size_28" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOne"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="1"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTwo"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="2"
+            android:layout_marginHorizontal="@dimen/size_25"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnThree"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="3"
+            tools:ignore="HardcodedText" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFour"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="4"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFive"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="5"
+            android:layout_marginHorizontal="@dimen/size_25"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSix"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="6"
+            tools:ignore="HardcodedText" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSeven"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="7"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEight"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="8"
+            android:layout_marginHorizontal="@dimen/size_25"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNine"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="9"
+            tools:ignore="HardcodedText" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnZero"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="0"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOk"
+            style="@style/AppTheme.Button.Outline.Circle"
+            android:text="@string/btn_ok"
+            android:textColor="@color/white"
+            app:rippleColor="@color/colorAccent"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_marginHorizontal="@dimen/size_25"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            style="@style/AppTheme.Button.Outline.Circle"
+            app:icon="@drawable/ic_keyboard_delete"
+            app:iconTint="@color/gray05"
+            app:iconGravity="textStart"
+            tools:ignore="HardcodedText" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

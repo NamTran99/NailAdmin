@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.core.app.ActivityCompat
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.views.dialog.ConfirmNoticeDialog
 
 
 object DriverUtils {
@@ -35,6 +36,22 @@ object DriverUtils {
         openIntent(context, mapIntent)
     }
 
+    @SuppressLint("MissingPermission")
+    fun call(context: Context, phoneNumber: String) {
+        val confirmDialog = ConfirmNoticeDialog(context)
+        confirmDialog.showCallPhone(
+            context.getString(R.string.title_confirm_call),
+            context.getString(R.string.msg_sure_call_phone, phoneNumber)
+        ) {
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:$phoneNumber")
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                context.startActivity(intent)
+            }
+        }
+    }
 }
 
 

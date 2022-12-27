@@ -4,9 +4,12 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.support.core.R
+import android.support.core.route.RouteDispatcher
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import kotlinx.coroutines.Dispatchers
 
 interface ViewScopeOwner {
     val viewScope: ViewScope
@@ -22,6 +25,16 @@ interface ViewScopeOwner {
             if (tag == null) tag = ViewScope(view).also { view.setTag(R.id.view_scope, it) }
             return tag
         }
+    val owner: LifecycleOwner?
+        get() {
+            return when (this) {
+                is Activity -> this.application as LifecycleOwner
+                is Fragment -> viewLifecycleOwner
+                else -> null
+            }
+        }
+    val routerDispatcher : RouteDispatcher?
+        get(){ return if(this is RouteDispatcher) this else null}
 }
 
 class ViewScope(private val view: ViewGroup) {
@@ -31,9 +44,9 @@ class ViewScope(private val view: ViewGroup) {
 
     init {
         view.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-            override fun onViewAttachedToWindow(p0: View?) {}
+            override fun onViewAttachedToWindow(p0: View) {}
 
-            override fun onViewDetachedFromWindow(p0: View?) {
+            override fun onViewDetachedFromWindow(p0: View) {
                 mCache.forEach { (_, v) ->
                     if (v is AutoCloseable) {
                         v.close()

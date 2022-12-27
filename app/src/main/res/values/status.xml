@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Staff-->
+    <string name="status_staff_available">Available</string>
+    <string name="status_staff_busy">Busy</string>
+    <string name="status_staff_break">Break</string>
+    <string name="status_staff_offline">Offline</string>
+    <!--Appointment-->
+    <string name="status_appointment_pending">Waiting for approval</string>
+    <string name="status_appointment_waiting">Waiting for service</string>
+    <string name="status_appointment_accepted">Accepted </string>
+    <string name="status_appointment_in_processing">Serving</string>
+    <string name="status_appointment_unknown">Unknown</string>
+    <string name="status_appointment_finished">Finished</string>
+    <string name="status_appointment_cancelled">Cancelled</string>
+    <string name="status_appointment_deleted">Deleted</string>
+</resources>

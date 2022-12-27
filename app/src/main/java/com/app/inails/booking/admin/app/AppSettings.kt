@@ -22,6 +22,8 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import java.util.*
 
 
+private const val SELECT_MULTIPLE_IMAGE = 2
+private const val CAMERA_REQUEST = 3
 class AppSettings(private val context: Context) {
 
     val activityContext = context as AppCompatActivity
@@ -32,6 +34,10 @@ class AppSettings(private val context: Context) {
 
     fun navigateMyLocationWithGoogleMap(latitude: Float, longitude: Float) {
         DriverUtils.navigateMyLocationWithGoogleMap(context, latitude, longitude)
+    }
+
+    fun callPhone(phoneNumber: String) {
+        DriverUtils.call(context,phoneNumber)
     }
 
     fun openPlaceAutoComplete(placeOriginal: String, function: (Place) -> Unit) {

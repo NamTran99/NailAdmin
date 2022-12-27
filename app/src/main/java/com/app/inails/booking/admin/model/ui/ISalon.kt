@@ -24,7 +24,7 @@ interface ISalonDTOOwner {
 interface ISalonDetail : ISalon {
     val ownerName: String get() = ""
     val des: String? get() = ""
-    val images: List<SalonImage> get() = listOf()
+    val images: List<AppImage> get() = listOf()
     val lat: Float get() = 0f
     val email: String get() = ""
     val state: String get() = ""
@@ -37,6 +37,22 @@ interface ISalonDetail : ISalon {
     val zoneOffSet: String get() = ""
     val tzDisplay1: String get() = "" // display at Update Salon Information (include Business Hour)
     val tzDisplay2: String get() = "" // display at Business Hour (not include Business Hour)
+    val vouchers: List<IVoucher> get() = listOf()
+    val afterGalleryImage: List<AppImage> get() = listOf()
+    val beforeGalleryImage: List<AppImage> get() = listOf()
+}
+
+interface IVoucher {
+    val code: String get() = ""
+    val type: VoucherType get() = VoucherType.PERCENT // 1 : %  || 2 : value
+    val startDate: String get() = ""
+    val endDate: String get() = ""
+    val typeCustomer: String get() = "All" // 1 : all || 2 : normal || 3 : vip
+    val value: Double get() = 0.0 // 1 : all || 2 : normal || 3 : vip
+}
+
+enum class VoucherType {
+    PERCENT, VALUE
 }
 
 class ISchedule(
@@ -47,12 +63,31 @@ class ISchedule(
     var startTime: String? = null,      // format 24H
     var endTime: String? = null,        // format 24H
     var timeFormat: String? = null,
-): Serializable
+) : Serializable {
+    override fun toString(): String {
+        return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace(
+            "\"null\"",
+            "null"
+        )
+    }
+
+    companion object {
+        fun getDefaultList() = listOf(
+            ISchedule(1, timeFormat = "Not open", dayFormat = "Monday"),
+            ISchedule(2, timeFormat = "Not open", dayFormat = "Tuesday"),
+            ISchedule(3, timeFormat = "Not open", dayFormat = "Wednesday"),
+            ISchedule(4, timeFormat = "Not open", dayFormat = "Thursday"),
+            ISchedule(5, timeFormat = "Not open", dayFormat = "Friday"),
+            ISchedule(6, timeFormat = "Not open", dayFormat = "Saturday"),
+            ISchedule(0, timeFormat = "Not open", dayFormat = "Sunday"),
+        )
+    }
+}
 
 class SalonForm(
-    var allImageCount: Int =0,
-    var fullTimeZoneDisplay1 : String = "", // display at Update Salon Information (include Business Hour)
-    var fullTimeZoneDisplay2 : String = "", // display at Business Hour (not include Business Hour)
+    var allImageCount: Int = 0,
+    var fullTimeZoneDisplay1: String = "", // display at Update Salon Information (include Business Hour)
+    var fullTimeZoneDisplay2: String = "", // display at Business Hour (not include Business Hour)
     var email: String = "",
     var id: Int = 0,
     var name: String = "",
@@ -67,19 +102,19 @@ class SalonForm(
     var offsetDisplay: String = "",
     var lat: Double = 0.0,
     var long: Double = 0.0,
-    var images: List<SalonImage> = listOf(),
+    var images: List<AppImage> = listOf(),
     val deleteImage: MutableList<Int> = mutableListOf(),
     var schedules: List<ScheduleForm> = listOf()
-){
-    fun setUpDataTimeZone(offset: String, zoneID: String){
+) {
+    fun setUpDataTimeZone(offset: String, zoneID: String) {
         offsetDisplay = "UTC $offset"
         this.zoneID = zoneID
         fullTimeZoneDisplay1 = "Business Hour (${zoneID} ${offsetDisplay})"
         fullTimeZoneDisplay2 = "${zoneID} ${offsetDisplay}"
     }
 
-    fun validate(){
-        if(allImageCount == 0){
+    fun validate() {
+        if (allImageCount == 0) {
             resourceError(R.string.error_not_enough_image_count)
         }
     }
@@ -92,13 +127,17 @@ data class ScheduleForm(
     val startTime: String? = null, // Format HH:MM:SS
     @SerializedName("end_time")
     val endTime: String? = null,    // Format HH:MM:SS
-):  Parcelable{
+) : Parcelable {
     override fun toString(): String {
-        return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace("\"null\"", "null")
+        return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace(
+            "\"null\"",
+            "null"
+        )
     }
 }
 
-data class SalonImage(
+@Parcelize
+data class AppImage(
     val id: Int? = null,
     val path: String = ""
-)
+) : Parcelable

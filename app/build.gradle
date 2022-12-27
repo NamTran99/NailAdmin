@@ -10,12 +10,12 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(rootProject.file("keystore-release.properties")))
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.app.booking.inails.admin"
-        minSdk 21
-        targetSdk 31
+        minSdk 23
+        targetSdk 33
         versionCode 1
         versionName "1.0"    // format x.x.x_dev for dev, x.x for release (must follow format)
 
@@ -55,6 +55,7 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.2'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
     def retrofitV = "2.9.0"
     def lifecycleV = "2.5.0"
     def glideV = "4.12.0"
@@ -92,6 +93,7 @@ dependencies {
     implementation project(':support-di')
     implementation project(':support-navigation')
     implementation project(':support-viewmodel')
+    implementation project(':imagepicker')
 
     //Others
     testImplementation 'junit:junit:4.+'
@@ -102,8 +104,8 @@ dependencies {
 
     implementation 'id.zelory:compressor:3.0.1'
     implementation "com.squareup.picasso:picasso:$picassoVersion"
-//    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
-//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
     implementation "com.google.android.libraries.places:places:$placeVersion"
 

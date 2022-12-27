@@ -1,7 +1,7 @@
 package com.app.inails.booking.admin.views.main
 
+//import com.github.arturogutierrez.Badges
 import android.annotation.SuppressLint
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -10,49 +10,52 @@ import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.call
+import android.support.core.route.clear
+import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
+import android.support.navigation.NavOptions
+import android.support.navigation.Navigator
 import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.util.Log
-import android.view.MenuItem
-import android.widget.TextView
-import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
+import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
+import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.sockets.AuthSocket
-import com.app.inails.booking.admin.extention.alpha
-import com.app.inails.booking.admin.extention.formatPhoneUSCustom
-import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.helper.pairLookupOf
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.NotificationIDForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
+import com.app.inails.booking.admin.notification.NotificationsManagerClient
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
-import com.app.inails.booking.admin.utils.Utils
+import com.app.inails.booking.admin.views.booking.BookingFragment
+import com.app.inails.booking.admin.views.clients.ClientHomeActivity
+import com.app.inails.booking.admin.views.home.HomeFragment
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
+import com.app.inails.booking.admin.views.me.AccountFragment
 import com.app.inails.booking.admin.views.notification.NotificationRepository
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-//import com.github.arturogutierrez.Badges
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.navigation.NavigationView
-import okhttp3.internal.notify
+import kotlin.reflect.KClass
 
 
 class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
-    NavigationView.OnNavigationItemSelectedListener, NotifyDialogOwner {
+    NotifyDialogOwner {
 
     companion object {
         const val APPOINTMENT_ID = "Appointment_id"
+        const val APPROVE_ACCOUNT = "Approve_account"
 
         fun getPendingIntent(
             context: Context,
@@ -61,7 +64,12 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             if (fireBaseMessage == null) return null
             val intent = Intent(context, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.putExtra(APPOINTMENT_ID, fireBaseMessage.data.id)
+
+            if (fireBaseMessage.type.toInt() == OWNER_ACCOUNT_APPROVE) {
+                intent.putExtra(APPROVE_ACCOUNT, true)
+            } else {
+                intent.putExtra(APPOINTMENT_ID, fireBaseMessage.data?.id ?: -1)
+            }
             return PendingIntent.getActivity(
                 context, 5, intent,
                 PendingIntent.FLAG_IMMUTABLE
@@ -75,12 +83,35 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var mainTopBarState: MainTopBarState
-    private lateinit var btnClose: TextView
+
+    //    private lateinit var btnClose: TextView
+//    private lateinit var tvSalonInfor: TextView
+//    private lateinit var tvSalonType: TextView
+    val route = pairLookupOf<Int, KClass<out BaseFragment>>(
+        R.id.navAccount to AccountFragment::class,
+        R.id.navHome to HomeFragment::class,
+    )
+
+    private fun Navigator.navigateTo(id: Int): Boolean {
+        val des = route.requireValue(id)
+        val shouldNavigate = lastDestination?.kClass != des
+        if (shouldNavigate) navigate(
+            des, navOptions = NavOptions(
+                popupTo = HomeFragment::class,
+                reuseInstance = true,
+                inclusive = false
+            )
+        )
+        return shouldNavigate
+    }
+
+    var oldScreenItemID = 0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onNewIntent(intent)
+        NotificationsManagerClient(this).cancelAll()
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
         mainTopBarState = MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
@@ -91,15 +122,62 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         })
         topBar.setState(mainTopBarState)
         with(binding) {
-            navView.alpha(230)
-            val headView = navView.getHeaderView(0)
-            headView.findViewById<MaterialButton>(R.id.btMenuClose)
-                .onClick { drawerLayout.closeDrawer(GravityCompat.START, true) }
-            navView.setNavigationItemSelectedListener(this@MainActivity)
-            btnClose = headView.findViewById(R.id.btMenuClose)
-            btnClose.text =
-                "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUSCustom()}"
-            tvVersion.text = Utils.getDisplayBuildConfig()
+            val navigator = findNavigator()
+            navigator.addDestinationChangeListener {
+                try {
+                    bottomNavigation.selectedItemId =
+                        route.requireKey(it as KClass<out BaseFragment>)
+                } catch (_: java.lang.Exception) {
+                }
+            }
+            bottomNavigation.setOnItemSelectedListener {
+                if (oldScreenItemID == it.itemId) return@setOnItemSelectedListener true
+                when (it.itemId) {
+                    R.id.navAppointment -> {
+                        navigator.navigate(
+                            BookingFragment::class,
+                            Routing.BookingFragment(Routing.BookingFragment.TypeBooking.APPOINTMENTS)
+                                .toBundle(),
+                            navOptions = NavOptions(
+                                popupTo = HomeFragment::class,
+                                inclusive = false
+                            )
+                        )
+                    }
+                    R.id.navCheckInBooking -> {
+                        navigator.navigate(
+                            BookingFragment::class,
+                            Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN)
+                                .toBundle(),
+                            navOptions = NavOptions(
+                                popupTo = HomeFragment::class,
+                                inclusive = false
+                            )
+                        )
+                    }
+                    R.id.navCheckIn -> {
+                        confirmDialog.show(
+                            R.string.title_navigate_client_mode,
+                            R.string.content_navigate_client_mode,
+                            functionSubmit = {
+                                userLocalSource.setOwnerMode(false)
+                                Router.run {
+                                    open<ClientHomeActivity>().clear()
+                                }
+                            },
+                            functionCancel = {
+                                bottomNavigation.selectedItemId = oldScreenItemID
+                            })
+                        return@setOnItemSelectedListener true
+                    }
+                    else -> {
+                        navigator.navigateTo(it.itemId)
+                    }
+                }
+                oldScreenItemID = it.itemId
+                return@setOnItemSelectedListener true
+            }
+            navigator.navigateTo(R.id.navHome)
         }
 
         appEvent.notifyCloudMessage.bind { noti ->
@@ -114,11 +192,14 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 }
             )
         }
-        Router.run { redirectToBooking() }
+
+        appEvent.notifyAccountApproved.bind { _ ->
+            messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
+        }
         viewModel.count.bind {
             mainTopBarState.setNotificationUnreadCount(it)
         }
-        viewModel.deleteAccount.bind{
+        viewModel.deleteAccount.bind {
             notificationDialog.show(R.string.auth_msg_deleted_account) {
                 Router.run {
                     redirectToLogin()
@@ -128,49 +209,20 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         }
     }
 
+    fun navigateToTab(id: Int) {
+        binding.bottomNavigation.selectedItemId = id
+    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val appointmentID = intent?.getIntExtra(APPOINTMENT_ID, -1) ?: -1
+        val approveAccount = intent?.getBooleanExtra(APPROVE_ACCOUNT, false) ?: false
+        if (approveAccount) {
+            messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
+        }
         if (appointmentID != -1) {
             Router.open(this, Routing.AppointmentDetail(appointmentID))
         }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.navManageSalon ->{
-                Router.open(this, Routing.DetailSalon)
-            }
-            R.id.navManageService -> {
-                Router.open(this, Routing.ManageService)
-            }
-            R.id.navManageStaff -> {
-                Router.open(this, Routing.ManageStaff)
-            }
-            R.id.navManageCustomer -> {
-                Router.open(this, Routing.ManageCustomer)
-            }
-            R.id.navEmailReceiveFeedback -> {
-                Router.open(this, Routing.EmailReceiveFeedBack)
-            }
-            R.id.navChangePassword -> {
-                Router.open(this, Routing.ChangePassword)
-            }
-            R.id.navReport -> {
-                Router.open(this, Routing.ReportSale)
-            }
-            else -> confirmDialog.show(
-                title = R.string.title_logout,
-                message = R.string.message_logout_app,
-                buttonConfirm = R.string.btn_yes_logout
-            ) {
-                Router.run {
-                    redirectToLogin()
-                    viewModel.logout()
-                }
-            }
-        }
-        return true
     }
 
     override fun logout() {
@@ -190,8 +242,12 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onResume() {
         super.onResume()
         viewModel.numberNotificationSalonUnread()
-        btnClose.text =
-            "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUSCustom()}"
+        with(binding) {
+//            tvSalonInfor.text =
+//                "${viewModel.user?.admin?.salon?.name}\n${viewModel.user?.admin?.phone?.formatPhoneUSCustom()}"
+//            tvVersion.text = Utils.getDisplayBuildConfig()
+//            (viewModel.user?.admin?.is_approve == 0).show(tvSalonType)
+        }
     }
 }
 

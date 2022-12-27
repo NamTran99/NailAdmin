@@ -32,7 +32,7 @@
                     <TextView
                         android:id="@+id/tvID"
                         style="@style/AppTheme.TextView.Medium"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvStatus"
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:visibility="gone"
-                    tools:visibility = "visible">
+                    tools:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btAccept"
@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:visibility="gone"
-                    tools:visibility = "visible">
+                    tools:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btWalkIn"
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone"
-                    tools:visibility = "visible">
+                    tools:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvTypeCancel"
@@ -248,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone"
-                    tools:visibility = "visible">
+                    tools:visibility="visible">
 
                     <TextView
                         style="@style/AppTheme.TextView.Medium"
@@ -336,31 +336,99 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/finishLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    tools:visibility="visible">
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/voucherLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_centerVertical="true"
+                                android:text="@string/label_total"
+                                android:textColor="@color/gray15"
+                                />
+
+                            <TextView
+                                android:id="@+id/txtTotal"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_alignParentEnd="true"
+                                />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/applyVoucherLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_16">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/labelVoucher"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:text="@string/label_voucher_discount"
+                                android:textColor="@color/gray15" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtDiscount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_5"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_toEndOf="@+id/labelVoucher"
+                                android:textColor="@color/colorPrimary" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtPriceDiscount"
+                                android:layout_width="wrap_content"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/colorPrimary" />
+                        </RelativeLayout>
+
+                        <View
+                            style="@style/AppTheme.Line.Horizontal"
+                            android:layout_marginVertical="@dimen/size_16" />
+
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_view_stroke"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/size_16">
+                        android:padding="@dimen/size_16"
+                        android:background="@drawable/bg_view_stroke"
+                        android:orientation="horizontal">
 
                         <TextView
                             style="@style/AppTheme.TextView.Medium"
                             android:layout_centerVertical="true"
                             android:text="@string/label_total_amount"
                             android:textColor="@color/gray15"
-                            android:textSize="@dimen/text_size_14" />
+                            android:textSize="@dimen/text_size_14"
+                            />
 
                         <TextView
-                            android:id="@+id/tvTotalAmount"
                             style="@style/AppTheme.TextView.Medium"
+                            android:id="@+id/txtTotalAmount"
                             android:layout_alignParentEnd="true"
-                            android:textSize="@dimen/text_size_14" />
+                            android:textSize="@dimen/text_size_14"
+                            />
                     </RelativeLayout>
 
                     <TextView
@@ -374,47 +442,6 @@
                         tools:visibility="visible" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <RelativeLayout
-                    android:id="@+id/feedbackLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/noteLayout"
-                    android:layout_marginTop="@dimen/size_16"
-                    android:visibility="gone">
-
-                    <View style="@style/AppTheme.Line.Horizontal" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_marginTop="@dimen/size_10"
-                        android:gravity="center"
-                        android:text="@string/title_feed_back"
-                        android:textColor="@color/black" />
-
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/size_10"
-                        android:clickable="false"
-                        android:gravity="center"
-                        android:text="@string/title_feed_back"
-                        android:textColor="@color/black"
-                        android:theme="@style/AppTheme.RatingBar" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvFeedbackContent"
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_below="@+id/ratingBar"
-                        android:layout_marginTop="@dimen/size_10"
-                        android:maxLines="@null"
-                        android:textColor="@color/gray08"
-                        tools:text="Waiting" />
-
-                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -434,6 +461,100 @@
                 </LinearLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <RelativeLayout
+                android:id="@+id/feedbackLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/noteLayout"
+                android:layout_marginTop="@dimen/size_16"
+                android:background="@drawable/bg_white_radius"
+                android:paddingHorizontal="@dimen/size_13"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <View style="@style/AppTheme.Line.Horizontal" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:gravity="center"
+                    android:text="@string/title_feed_back"
+                    android:textColor="@color/black" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:clickable="false"
+                    android:gravity="center"
+                    android:text="@string/title_feed_back"
+                    android:textColor="@color/black"
+                    android:theme="@style/AppTheme.RatingBar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFeedbackContent"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_below="@+id/ratingBar"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:maxLines="@null"
+                    android:textColor="@color/gray08"
+                    tools:text="Waiting" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcFeedbackImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvFeedbackContent"
+                    android:layout_marginBottom="@dimen/size_10"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lvBeforeAfterImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16"
+                android:background="@drawable/bg_white_radius"
+                android:orientation="vertical"
+                android:padding="@dimen/size_13"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvBeforeImg"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/before_photos" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcBeforePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    android:id="@+id/tvAfterImg"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/after_photos" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcAfterphoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btDelete"
                 style="@style/AppTheme.ButtonDefault"
@@ -442,7 +563,9 @@
                 android:background="@drawable/button_red_corner_25"
                 android:drawableStart="@drawable/ic_delete_outline"
                 android:text="@string/btn_delete_appointment"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

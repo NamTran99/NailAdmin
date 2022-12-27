@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#BC40C1</color>
     <color name="colorPrimaryDark">#BC40C1</color>
-    <color name="colorAccent">#03a1e4</color>
+    <color name="colorAccent">#d559da</color>
 
     <!--GRAY-->
     <color name="gray">#CFCFCF</color>
@@ -13,6 +13,7 @@
     <color name="gray05">#888888</color>
     <color name="gray06">#EAEAEA</color>
     <color name="gray07">#F4F4F4</color>
+    <color name="color_bg_common">#F4F4F4</color>
     <color name="gray08">#B1B1B1</color>
     <color name="gray09">#C9C9C9</color>
     <color name="gray10">#DEDEDE</color>
@@ -74,4 +75,44 @@
     <color name="red_240">#F24747</color>
     <color name="colorTransparencyWhite50">#80FFFFFF</color>
     <color name="magenta_130">#80148E</color>
+    <color name="color_BE43C3">#BE43C3</color>
+    <color name="color_adadad">#AdADAD</color>
+    <color name="color_eaeaea">#EAEAEA</color>
+    <color name="color_dc00a9">#dc00a9</color>
+    <color name="color_838383">#838383</color>
+    <color name="color_898989">#898989</color>
+    <color name="color_826ad1">#826AD1</color>
+    <color name="color_9784d6">#9784D6</color>
+    <color name="color_edb883">#EDB883</color>
+    <color name="color_efcaa6">#EFCAA6</color>
+    <color name="color_7cd3b2">#7CD3B2</color>
+    <color name="color_aad6c5">#AAD6C5</color>
+    <color name="color_c242c7">#C242C7</color>
+    <color name="color_d190d4">#D190D4</color>
+    <color name="color_939393">#939393</color>
+    <color name="color_f7f7f7">#F7F7F7</color>
+    <color name="color_848484">#848484</color>
+    <color name="color_f26563">#F26563</color>
+    <color name="color_333333">#333333</color>
+    <color name="gray_235">#EBEBEB</color>
+    <string name="label_booking_id">Booking ID</string>
+    <string name="label_salon_name">Salon Name</string>
+    <string name="label_reason">Reason</string>
+    <string name="btn_direction_to_salon">Directions to salon</string>
+    <string name="btn_view_detail">View Detail</string>
+    <color name="gray_145">#909090</color>
+
+    <color name="orange_250">#EFA860</color>
+    <color name="magenta_195">#c353c7</color>
+    <color name="gray_103">#676767</color>
+    <color name="grayish_magenta_246">#f6cef6</color>
+    <color name="gray_200">#C9C9C9</color>
+    <color name="magenta_160">#a329a7</color>
+    <color name="grayish_magenta_240">#f2d9f3</color>
+    <color name="blue_70">#4768F2</color>
+    <color name="orange_255">#FF9300</color>
+    <color name="gray_188">#BCBCBC</color>
+    <color name="gray_08">#777777</color>
+    <color name="color_f5f5f5">#F5F5F5</color>
+
 </resources>
