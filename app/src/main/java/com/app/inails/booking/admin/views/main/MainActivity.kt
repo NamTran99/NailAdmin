@@ -6,6 +6,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
@@ -21,6 +23,7 @@ import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.util.Log
+import android.view.MotionEvent
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE
@@ -275,6 +278,7 @@ class MainViewModel(
         notificationRepo.read(idForm)
         numberNotificationSalonUnread()
     }
+
 }
 
 @Inject(ShareScope.FragmentOrActivity)

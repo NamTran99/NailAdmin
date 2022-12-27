@@ -16,11 +16,13 @@
             android:layout_height="match_parent"
             app:shapeAppearanceOverlay="@style/roundedImageView"
             android:scaleType="fitXY"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            />
 
         <ImageView
             android:id="@+id/imgYoutube"
             android:layout_width="@dimen/size_60"
+            android:visibility="gone"
             android:layout_height="@dimen/size_60"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_youtube"/>

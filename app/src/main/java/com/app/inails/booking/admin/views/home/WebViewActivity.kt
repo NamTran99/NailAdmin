@@ -5,22 +5,18 @@ import android.os.Bundle
 import android.support.core.route.BundleArgument
 import android.support.core.route.argument
 import android.support.core.view.viewBinding
-import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.viewpager.widget.ViewPager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityWebViewBinding
-import com.app.inails.booking.admin.views.extension.ImageViewerAdapter
-import com.app.inails.booking.admin.views.extension.LocalImage
-import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import kotlinx.parcelize.Parcelize
-import kotlin.properties.Delegates
 
 @Parcelize
 data class WebViewArgs(
-    val path: String
+    val path: String,
+    val content: String ="",
+    val isHtml: Boolean = false
 ) : BundleArgument
 
 
@@ -36,7 +32,10 @@ class WebViewActivity : BaseActivity(R.layout.activity_web_view), TopBarOwner {
             webView.webViewClient = WebViewClient()
             webView.settings.javaScriptEnabled = true
             webView.settings.setSupportZoom(true)
-            webView.loadUrl(args.path)
+            if (!args.isHtml)
+                webView.loadUrl(args.path)
+            else
+                webView.loadData(args.content, "text/html", "UTF-8")
         }
     }
 

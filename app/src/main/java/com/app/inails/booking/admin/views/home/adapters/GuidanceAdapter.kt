@@ -44,7 +44,7 @@ class GuidanceAdapter(recyclerView: ViewPager2) :
     ) {
         binding.apply {
             val context = root.context
-            imgYoutube.show(item.fileType == FileType.Video)
+//            imgYoutube.show(item.fileType == FileType.Video)
             root.setOnClickListener {
                 onItemClick.invoke(item)
             }

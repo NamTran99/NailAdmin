@@ -1,18 +1,17 @@
 package com.app.inails.booking.admin.views.home
 
-import android.content.Intent
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
-import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.core.view.doOnLayout
 import androidx.lifecycle.ViewModel
+import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentHomeBinding
@@ -21,20 +20,14 @@ import com.app.inails.booking.admin.model.ui.FileType
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.aboutapp.BannerIntroGuidanceRepo
-import com.app.inails.booking.admin.repository.auth.StaffRepo
 import com.app.inails.booking.admin.views.booking.CustomerInfoOwner
 import com.app.inails.booking.admin.views.booking.StaffInfoDialogOwner
 import com.app.inails.booking.admin.views.home.adapters.AdsAdapter
 import com.app.inails.booking.admin.views.home.adapters.GuidanceAdapter
-import com.app.inails.booking.admin.views.main.StaffStatusAdapter
-import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
+import com.app.inails.booking.admin.views.main.MainActivity
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
-import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import com.app.inails.booking.admin.views.youtube.YoutubeActivity
-import com.app.inails.booking.admin.views.youtube.YoutubeActivityArgs
 import com.google.android.material.tabs.TabLayoutMediator
-import okhttp3.internal.cache2.Relay.Companion.edit
 
 class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialogOwner,
     CustomerInfoOwner, TopBarOwner {
@@ -50,30 +43,31 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            topBar.state<MainTopBarState>().setTitle(   R.string.title_dashboard)
-            appPermission.accessNotification {  }.request()
+            topBar.state<MainTopBarState>().setTitle(R.string.title_dashboard)
+            appPermission.accessNotification { }.request()
+            viewRefresh.isEnabled= false
             btnManageSalon.onClick {
                 Router.open(this@HomeFragment, Routing.DetailSalon)
             }
-            btnManageStaff.onClick{
+            btnManageStaff.onClick {
                 Router.open(this@HomeFragment, Routing.ManageStaff)
             }
-            btnManageService.onClick{
+            btnManageService.onClick {
                 Router.open(this@HomeFragment, Routing.ManageService)
             }
-            btnReport.onClick{
+            btnReport.onClick {
                 Router.open(this@HomeFragment, Routing.ReportSale)
             }
-            btnStaffListToday.onClick{
+            btnStaffListToday.onClick {
                 Router.open(this@HomeFragment, Routing.StaffList)
             }
-            btnManageCustomer.onClick{
+            btnManageCustomer.onClick {
                 Router.open(this@HomeFragment, Routing.ManageCustomer)
             }
 
             adsAdapter = AdsAdapter(viewPagerAds).apply {
                 onItemClick = {
-                    if(it.url.isNotEmpty()){
+                    if (it.url.isNotEmpty()) {
                         Router.run { redirectToWebView(WebViewArgs(it.url)) }
                     }
                 }
@@ -81,36 +75,41 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
 
             guidanceAdapter = GuidanceAdapter(viewPagerGuidance).apply {
                 onItemClick = {
-                 if(it.fileType == FileType.Image){
-                     Router.open(this@HomeFragment, Routing.ShowZoomSingleImage(it.file))
-                 }else
-                     startActivity(Intent(requireContext(), YoutubeActivity::class.java).apply {
-                         putExtras(YoutubeActivityArgs(it.file).toBundle())
-                     })
+                    if (it.fileType == FileType.Image) {
+//                        Router.open(this@HomeFragment, Routing.ShowZoomSingleImage(it.file))
+                        Router.run { redirectToWebView(WebViewArgs("", it.content, true)) }
+                    } else {
+//                     startActivity(Intent(requireContext(), YoutubeActivity::class.java).apply {
+//                         putExtras(YoutubeActivityArgs(it.file).toBundle())
+//                     })
+                        Router.run { redirectToWebView(WebViewArgs(it.url)) }
+                    }
+
                 }
             }
-            TabLayoutMediator(tabDotsAds, viewPagerAds){_,_->
+            TabLayoutMediator(tabDotsAds, viewPagerAds) { _, _ ->
             }.attach()
-            TabLayoutMediator(tabDotsGuidance, viewPagerGuidance){_,_->
+            TabLayoutMediator(tabDotsGuidance, viewPagerGuidance) { _, _ ->
             }.attach()
             viewRefresh.setOnRefreshListener { refreshView() }
         }
 
         with(viewModel) {
-            adsResult.bind{
+            adsResult.bind {
                 adsAdapter.submit(it)
             }
-            guidanceResult.bind{
+            guidanceResult.bind {
                 guidanceAdapter.submit(it)
             }
 
-            refreshLoading.bind{
+            refreshLoading.bind {
                 binding.viewRefresh.isRefreshing = it
             }
         }
     }
 
-    fun refreshView(){
+
+    fun refreshView() {
         viewModel.refresh()
     }
 
@@ -124,11 +123,11 @@ class ManageStaffViewModel(
     private val bannerIntroGuidanceRepo: BannerIntroGuidanceRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
-    init{
+    init {
         refresh()
     }
 
-    fun refresh(){
+    fun refresh() {
         getAdsList()
         getGuidanceList()
     }
