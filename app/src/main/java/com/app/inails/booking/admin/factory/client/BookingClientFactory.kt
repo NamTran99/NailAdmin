@@ -9,6 +9,7 @@ import com.app.inails.booking.admin.DataConst.AppointmentStatus.APM_FINISH
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_AVAILABLE
 import com.app.inails.booking.admin.DataConst.VoucherType.TYPE_PERCENT
 import com.app.inails.booking.admin.exception.toDateLocal
+import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.extention.isCurrentDate
 import com.app.inails.booking.admin.extention.noInfo
 import com.app.inails.booking.admin.extention.safe
@@ -103,7 +104,7 @@ class BookingClientFactory(private val textFormatter: TextFormatter) {
             override val totalAmount: String
                 get() = textFormatter.formatPrice(booking?.price).safe()
             override val discount: String
-                get() = textFormatter.formatPrice(booking?.totalDiscount)
+                get() = "-${textFormatter.formatPrice(booking?.totalDiscount)}"
             override val percent: String
                 get() = booking?.voucher?.value?.let { textFormatter.formatPercent(it) }.safe()
             override val totalPrice: String
@@ -112,7 +113,8 @@ class BookingClientFactory(private val textFormatter: TextFormatter) {
                 get() = booking?.voucher?.type == TYPE_PERCENT
             override val voucherInfo: String
                 get() =  "${booking?.voucher?.description}\nStart date: ${booking?.voucher?.startDate}\nExpiration date: ${booking?.voucher?.expirationDate}"
-
+            override val voucherCode: String
+                get() = booking?.voucher?.code.displaySafe1()
         }
     }
 
@@ -181,7 +183,7 @@ class BookingClientFactory(private val textFormatter: TextFormatter) {
                 get() = bookingDTO.voucher != null
 
             override val discount: String
-                get() = textFormatter.formatPrice(bookingDTO.totalDiscount)
+                get() = "-${textFormatter.formatPrice(bookingDTO.totalDiscount)}"
             override val percent: String
                 get() = bookingDTO.voucher?.value?.let { textFormatter.formatPercent(it) }.safe()
             override val totalPrice: String
@@ -242,7 +244,7 @@ class BookingClientFactory(private val textFormatter: TextFormatter) {
             override val code: String
                 get() = voucherDTO.code
             override val discount: String
-                get() = textFormatter.formatPriceDiscount(total, voucherDTO)
+                get() =  "-${textFormatter.formatPriceDiscount(total, voucherDTO)}"
             override val percent: String
                 get() = textFormatter.formatPercent(voucherDTO.value)
             override val totalAmount: String

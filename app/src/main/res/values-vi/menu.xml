@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mn_manage_service">Quản lý dịch vụ</string>
+    <string name="mn_manage_staff">Quản lý nhân viên</string>
+    <string name="mn_manage_customer">Quản lý khách hàng</string>
+    <string name="mn_home">Trang chủ</string>
+    <string name="mn_account">Tài khoản</string>
+    <string name="mn_report">Thống kê thu nhập</string>
+    <string name="mn_manage_salon">Quản Lý Salon</string>
+    <string name="mn_change_password">Đổi mật khẩu</string>
+</resources>

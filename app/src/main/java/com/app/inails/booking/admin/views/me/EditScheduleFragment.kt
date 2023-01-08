@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.core.route.BundleArgument
 import android.support.core.view.viewBinding
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
@@ -14,6 +15,7 @@ import com.app.inails.booking.admin.databinding.FragmentUpdateScheduleBinding
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.utils.TimeUtils
+import com.app.inails.booking.admin.views.me.adapters.ChooseOneForAllDateDialogOwner
 import com.app.inails.booking.admin.views.me.adapters.SalonEditScheduleAdapter
 import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
@@ -27,7 +29,7 @@ data class EditScheduleArgs(
     val timeZoneDisplay: String = ""
 ) : BundleArgument
 
-class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), TopBarOwner {
+class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), TopBarOwner, ChooseOneForAllDateDialogOwner {
     val binding by viewBinding(FragmentUpdateScheduleBinding::bind)
     private lateinit var adapter: SalonEditScheduleAdapter
     private val arg by lazy { BundleArgument.of(arguments) ?: EditScheduleArgs() }
@@ -50,7 +52,7 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                 },
                 extensionButton = ExtensionButton(
                     isShow = true,
-                    content = "Save",
+                    content = R.string.btn_save,
                     onclick = {
                         val schedule = adapter.items?.find {
                             (it.startTime != null && it.endTime == null) ||
@@ -58,11 +60,11 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                         }
                         if (schedule != null) {
                             if (schedule.startTime == null) {
-                                toast("Please select the Start Time of ${schedule.dayFormat}")
+                                toast(requireContext().getString(R.string.error_blank_start_time, requireContext().getString(schedule.dayFormat)))
                             }
 
                             if (schedule.endTime == null) {
-                                toast("Please select the End Time of ${schedule.dayFormat}")
+                                toast(requireContext().getString(R.string.error_blank_end_time, requireContext().getString(schedule.dayFormat)))
                             }
 
                             return@ExtensionButton
@@ -82,7 +84,18 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                 submit(schedules)
                 updateItem(arg.schedules)
             }
-            tvTimeZone.setText(arg.timeZoneDisplay)
+            btChooseOneForAll.onClick{
+                chooseOneForAllDateDialog.show{}
+            }
+            tvTimeZone.text = arg.timeZoneDisplay
+            chooseOneForAllDateDialog.onSaveClick = { list ->
+                adapter.updateItem(list)
+            }
         }
+    }
+
+    override fun onResume() {
+        adapter.notifyDataSetChanged()
+        super.onResume()
     }
 }

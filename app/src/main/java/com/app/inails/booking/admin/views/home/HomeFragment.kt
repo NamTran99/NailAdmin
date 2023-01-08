@@ -64,6 +64,12 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
             btnManageCustomer.onClick {
                 Router.open(this@HomeFragment, Routing.ManageCustomer)
             }
+            btnBookingList.onClick{
+                Router.open(this@HomeFragment,    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN))
+            }
+            btnApmList.onClick{
+                Router.open(this@HomeFragment,    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.APPOINTMENTS))
+            }
 
             adsAdapter = AdsAdapter(viewPagerAds).apply {
                 onItemClick = {
@@ -114,11 +120,12 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
     }
 
 
-    fun refreshView() {
+    private fun refreshView() {
         viewModel.refresh()
     }
 
     override fun onResume() {
+        refreshView()
         super.onResume()
     }
 }

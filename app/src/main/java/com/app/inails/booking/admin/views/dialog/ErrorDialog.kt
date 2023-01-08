@@ -2,10 +2,11 @@ package com.app.inails.booking.admin.views.dialog
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
+import com.app.inails.booking.admin.R
 
 class ErrorDialog(context: Context) : MessageDialog(context) {
     fun show(e: Throwable) {
-        show("Error", e.message ?: "Unknown")
+        show(context.getString(R.string.error), e.message ?: context.getString(R.string.unknown))
     }
 }
 

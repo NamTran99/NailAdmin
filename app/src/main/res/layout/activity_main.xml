@@ -9,8 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@id/topBar"
@@ -22,25 +21,64 @@
             android:name="android.support.navigation.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/bottomNavigation"
             android:layout_below="@+id/topBar"
             android:background="@color/color_bg_common"
-            android:padding="@dimen/size_10"
-            tools:layout="@layout/activity_main" />
+            android:paddingHorizontal="@dimen/size_10"
+            android:paddingTop="@dimen/size_10"
+            android:paddingBottom="@dimen/size_100"/>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/lvCor"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_60"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            android:scrollIndicators="left"
-            app:labelVisibilityMode="labeled"
-            app:itemIconTint="@drawable/bg_bottom_icon_navigation"
-            app:itemTextAppearanceActive="@style/MyBottomNavigationView.TextAppearance"
-            app:itemTextAppearanceInactive="@style/MyBottomNavigationView.TextAppearance"
-            app:itemTextColor="@drawable/bg_bottom_icon_navigation"
-            app:menu="@menu/menu_bottom" />
+            android:background="@color/transparency"
+            android:orientation="vertical">
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottomAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp"
+                app:fabCradleMargin="10dp"
+                app:fabCradleRoundedCornerRadius="10dp"
+                app:fabCradleVerticalOffset="0dp">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNavigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    app:elevation="0dp"
+                    app:itemIconTint="@drawable/bg_bottom_icon_navigation"
+                    app:itemTextAppearanceActive="@style/MyBottomNavigationView.TextAppearance"
+                    app:itemTextAppearanceInactive="@style/MyBottomNavigationView.TextAppearance"
+                    app:itemTextColor="@drawable/bg_bottom_icon_navigation"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/menu_bottom" />
+
+            </com.google.android.material.bottomappbar.BottomAppBar>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fabClientCheckIn"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:lines="2"
+                android:textAllCaps="false"
+                android:text="@string/customer_check_in"
+                android:textColor="@color/white"
+                android:theme="@style/AppTheme"
+                app:layout_anchor="@id/bottomAppBar"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </RelativeLayout>
 

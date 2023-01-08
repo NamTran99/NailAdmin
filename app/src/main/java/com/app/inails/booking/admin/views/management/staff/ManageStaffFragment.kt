@@ -148,7 +148,7 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
             success.bind {
                 createUpdateStaffDialog.dismiss()
                 refresh(binding.searchView.text)
-                success("Success")
+                success(R.string.success)
             }
 
             staff.bind {

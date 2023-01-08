@@ -9,13 +9,14 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.LayoutManicuristServiceBinding
 import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.loadAttrs
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.ISalonService
 
 
 enum class DisplayType(val index: Int) {
     TypeService(0),
-    ShowOneService(1);
+    DisplayService(1);
 
     companion object {
         fun getTypeByIndex(index: Int): DisplayType {
@@ -38,15 +39,27 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     private val binding = viewBinding(LayoutManicuristServiceBinding::inflate)
 
+    var onCLickImage : ((String) -> Unit) = {}
+    var onCLickRemoveImage : (() -> Unit) = {}
+
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
-            binding.tvService.show(value == DisplayType.ShowOneService)
+            binding.tvService.show(value == DisplayType.DisplayService)
             binding.etService.show(value == DisplayType.TypeService)
             binding.etPrice.isFocusable = value == DisplayType.TypeService
             if (value == DisplayType.TypeService) {
                 binding.btnDelete.hide()
             } else {
+                binding.imgAvatar.hideClearImage()
                 binding.btnDelete.show()
+            }
+            field = value
+        }
+
+    var url: String = ""
+        set(value){
+            binding.apply {
+                imgAvatar.setImageUrl(value)
             }
             field = value
         }
@@ -72,10 +85,12 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     var service: ISalonService = ISalonService()
         get() = ISalonService(
+            imageUri= url,
             name = binding.etService.text.toString(),
             price = binding.etPrice.text.toString().toDouble()
         )
         set(value) {
+            url = value.imageUri
             binding.tvService.text = value.name
             binding.etPrice.setText(value.price.toString())
             field = value
@@ -126,6 +141,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     fun resetView() {
         binding.apply {
+            imgAvatar.removePhoto()
             etService.setText("")
             etPrice.setText("")
             tag = null
@@ -135,8 +151,21 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     private fun setUpView() {
         binding.apply {
             etPrice.filters = arrayOf(DecimalDigitsInputFilter(3, 2))
+            imgAvatar.onClick{
+                onCLickImage.invoke(url)
+            }
+            imgAvatar.onClickClearImage = {
+                onCLickRemoveImage.invoke()
+            }
         }
     }
+
+    fun updateAvatar(image: String?) {
+        image?.let{
+            url = it
+        }
+    }
+
 
     private fun setUpListener() {
         binding.apply {

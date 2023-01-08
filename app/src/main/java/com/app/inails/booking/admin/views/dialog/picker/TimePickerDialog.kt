@@ -17,6 +17,10 @@ class TimePickerDialog(private val activity: BaseActivity) :
     TimePickerDialog(activity, null, 0, 0, true) {
     var onTimePickedListener: ((display: String, hours: Int) -> Unit)? = null
 
+    companion object {
+        private const val TIME_PICKER_INTERVAL = 5
+    }
+
     init {
         activity.lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onDestroy(owner: LifecycleOwner) {
@@ -36,6 +40,9 @@ class TimePickerDialog(private val activity: BaseActivity) :
         view.setOnClickListener {
             this@TimePickerDialog.handleChooseTime(getViewValue())
         }
+    }
+
+    override fun updateTime(hourOfDay: Int, minuteOfHour: Int) {
     }
 
     private fun getViewValue(): String {
@@ -59,7 +66,6 @@ class TimePickerDialog(private val activity: BaseActivity) :
     }
 
     private fun handleChooseTime(timeNow: String) {
-        var timeNowL = timeNow
         val calendar = Calendar.getInstance()
         val timePickerDialog = TimePickerDialog(
             ContextThemeWrapper(activity, android.R.style.Theme_Holo_Light_Dialog_NoActionBar),

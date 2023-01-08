@@ -84,33 +84,35 @@
         tools:itemCount="7"
         tools:listitem="@layout/item_view_salon_schedule" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvVoucher"
-        style="@style/AppTheme.TextViewResponsive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lvVoucher"
         android:layout_below="@+id/rcvSchedule"
-        android:layout_marginTop="@dimen/size_10"
-        android:drawableStart="@drawable/ic_voucher"
-        android:drawablePadding="@dimen/size_15"
-        android:text="Salon voucher" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcVoucher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvVoucher"
-        android:layout_alignStart="@+id/labelLocalTime"
         android:layout_marginTop="@dimen/size_10"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="7"
-        tools:listitem="@layout/item_voucher" />
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvVoucher"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_voucher"
+            android:drawablePadding="@dimen/size_15"
+            android:text="@string/salon_voucher" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvVoucher"
+            android:layout_alignStart="@+id/labelLocalTime"
+            android:layout_marginTop="@dimen/size_10"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="7"
+            tools:listitem="@layout/item_voucher" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </RelativeLayout>

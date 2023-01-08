@@ -21,7 +21,8 @@ class LoginOwnerForm(
     @SerializedName("device_token")
     var deviceToken: String = "",
     @SerializedName("device_type")
-    val deviceType: String = "android"
+    val deviceType: String = "android",
+    var lang: String = "en"
 ) : Parcelable {
 
     fun validate() {

@@ -6,8 +6,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
@@ -23,7 +21,6 @@ import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.util.Log
-import android.view.MotionEvent
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE
@@ -33,6 +30,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.sockets.AuthSocket
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.helper.pairLookupOf
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.NotificationIDForm
@@ -50,6 +48,7 @@ import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.esafirm.imagepicker.helper.LocaleManager
 import kotlin.reflect.KClass
 
 
@@ -125,6 +124,20 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         })
         topBar.setState(mainTopBarState)
         with(binding) {
+            fabClientCheckIn.onClick {
+                confirmDialog.show(
+                    R.string.title_navigate_client_mode,
+                    R.string.content_navigate_client_mode,
+                    functionSubmit = {
+                        userLocalSource.setOwnerMode(false)
+                        Router.run {
+                            open<ClientHomeActivity>().clear()
+                        }
+                    },
+                    functionCancel = {
+                        bottomNavigation.selectedItemId = oldScreenItemID
+                    })
+            }
             val navigator = findNavigator()
             navigator.addDestinationChangeListener {
                 try {
@@ -133,6 +146,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 } catch (_: java.lang.Exception) {
                 }
             }
+            bottomNavigation.menu.findItem(R.id.placeHolder).isEnabled = false
             bottomNavigation.setOnItemSelectedListener {
                 if (oldScreenItemID == it.itemId) return@setOnItemSelectedListener true
                 when (it.itemId) {
@@ -147,32 +161,35 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                             )
                         )
                     }
-                    R.id.navCheckInBooking -> {
-                        navigator.navigate(
-                            BookingFragment::class,
-                            Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN)
-                                .toBundle(),
-                            navOptions = NavOptions(
-                                popupTo = HomeFragment::class,
-                                inclusive = false
-                            )
-                        )
-                    }
-                    R.id.navCheckIn -> {
-                        confirmDialog.show(
-                            R.string.title_navigate_client_mode,
-                            R.string.content_navigate_client_mode,
-                            functionSubmit = {
-                                userLocalSource.setOwnerMode(false)
-                                Router.run {
-                                    open<ClientHomeActivity>().clear()
-                                }
-                            },
-                            functionCancel = {
-                                bottomNavigation.selectedItemId = oldScreenItemID
-                            })
+                    R.id.placeHolder -> {
                         return@setOnItemSelectedListener true
                     }
+//                    R.id.navCheckInBooking -> {
+//                        navigator.navigate(
+//                            BookingFragment::class,
+//                            Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN)
+//                                .toBundle(),
+//                            navOptions = NavOptions(
+//                                popupTo = HomeFragment::class,
+//                                inclusive = false
+//                            )
+//                        )
+//                    }
+//                    R.id.navCheckIn -> {
+//                        confirmDialog.show(
+//                            R.string.title_navigate_client_mode,
+//                            R.string.content_navigate_client_mode,
+//                            functionSubmit = {
+//                                userLocalSource.setOwnerMode(false)
+//                                Router.run {
+//                                    open<ClientHomeActivity>().clear()
+//                                }
+//                            },
+//                            functionCancel = {
+//                                bottomNavigation.selectedItemId = oldScreenItemID
+//                            })
+//                        return@setOnItemSelectedListener true
+//                    }
                     else -> {
                         navigator.navigateTo(it.itemId)
                     }
@@ -240,6 +257,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onBackPressed() {
         if (!findNavigator().navigateUp()) super.onBackPressed()
     }
+
 
     @SuppressLint("SetTextI18n")
     override fun onResume() {

@@ -115,7 +115,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                             viewModel.updateSalon()
                         }
                     },
-                    content = "Save"
+                    content = R.string.btn_save
                 )
             )
         )
@@ -182,7 +182,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
             scheduleAdapter.submit(listSchedules)
             salonDetail.bind(::displays)
             updateSalonStatus.bind {
-                success("Update Successfully")
+                success(R.string.update_success)
                 activity?.onBackPressed()
             }
         }
@@ -234,7 +234,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
     }
 
     private fun formatSalonSchedule(it: ISchedule): String {
-        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) "Not open"
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) requireContext().getString(R.string.not_open)
         else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 

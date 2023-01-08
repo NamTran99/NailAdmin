@@ -42,7 +42,7 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val appointmentID = intent.extras?.getInt(MainActivity.APPOINTMENT_ID, 0)
-        binding.tvVersion.text = Utils.getDisplayBuildConfig()
+        binding.tvVersion.text = Utils.getDisplayBuildConfig(this)
 
         viewModel.apply {
             versionResult.bind {
@@ -64,9 +64,9 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
                     CoroutineScope(Dispatchers.IO).launch {
                         delay(TimeUnit.SECONDS.toMillis(3))
                         withContext(Dispatchers.Main) {
-                            Log.d("TAG", "onCreate:${viewModel.isFirstOpenApp} ")
+
                             if (viewModel.isFirstOpenApp) {
-                                Router.open(this@SplashActivity, Routing.Intro)
+                                Router.open(this@SplashActivity, Routing.SelectLanguage)
                                 return@withContext
                             }
                             if (viewModel.userOwner == null) {
@@ -97,7 +97,7 @@ class SplashViewModel(
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val isFirstOpenApp = userLocalSource.getIsFirstOpenApp() ?: true
     val userOwner = userLocalSource.getUserDto()
-    val userClient = userLocalSource.getUserClientDto()
+    val language = userLocalSource.getLanguage()
     val isOwnerMode = userLocalSource.getOwnerMode()
     val versionResult = checkVersionApp.result
 

@@ -26,7 +26,7 @@ class VoucherDetailDialog(context: Context) : BaseDialog(context), ConfirmDialog
     ) {
         with(binding) {
             tvCode.text = item.code
-            tvCustomerType.text = item.typeCustomer
+            tvCustomerType.setText(item.typeCustomer)
             if(item.type == VoucherType.PERCENT){
                 tvValue.text = "-${item.value}%"
             }else{

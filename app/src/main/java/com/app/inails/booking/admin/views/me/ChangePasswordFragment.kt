@@ -47,7 +47,7 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password), 
 
         with(viewModel){
             success.bind {
-                success("Success")
+                success(R.string.change_pass_success)
                 activity?.onBackPressed()
             }
         }

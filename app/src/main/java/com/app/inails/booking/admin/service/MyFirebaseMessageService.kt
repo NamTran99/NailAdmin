@@ -34,7 +34,6 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         try {
-            Log.d("TAG", "onMessageReceived: NamTD8 Nhan data")
             val params = remoteMessage.data
             val `object` = JSONObject(params as Map<*, *>)
             val objectFilter =
@@ -50,7 +49,7 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
                 }
                 OWNER_ACCOUNT_ACTIVE, OWNER_ACCOUNT_INACTIVE -> return
                 CUSTOMER_CREATE_APPOINTMENT,CUSTOMER_CANCEL_APPOINTMENT, CUSTOMER_FEEDBACK ->{
-                    if(cloudMessage.data == null || appCache.token.isEmpty() || cloudMessage.data.salon_id != userLocalSource.getSalonID()) {
+                    if(cloudMessage.data == null || appCache.token.isEmpty() || cloudMessage.data.salon_id != userLocalSource.getSalonID() || userLocalSource.getUserClientDto() != null) {
                         return
                     }
                     NotificationsManager(applicationContext).defaultNotify(cloudMessage)
@@ -60,8 +59,8 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
                     if(userLocalSource.getUserClientDto() != null){
                         NotificationsManagerClient(applicationContext).defaultNotify(cloudMessageClient)
                         with(appEvent){
-                            notifyCloudMessage.post(cloudMessage)
-                            notifyForAppointment.post(cloudMessage)
+                            notifyCloudMessageClient.post(cloudMessageClient)
+                            notifyForAppointment.post(cloudMessageClient)
                             notifyFetchTotal.call()
                         }
                     }

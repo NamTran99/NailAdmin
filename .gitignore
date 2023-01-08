@@ -2,14 +2,15 @@
 # You should customize this list as applicable to your project.
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
-support-core/build/
-app/build/
-app/build.gradle/
-support-di/build/
-
+/app/build/
+/app/build.gradle/
 # Node artifact files
 node_modules/
 dist/
+/.gradle/*
+/local.properties
+/imagepicker/build/*
+
 
 # Compiled Java class files
 *.class

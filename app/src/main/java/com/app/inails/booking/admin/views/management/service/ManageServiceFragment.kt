@@ -162,7 +162,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
             success.bind {
                 createUpdateServiceDialog.dismiss()
                 refreshView(binding.searchView.text)
-                success("Success")
+                success(R.string.success)
             }
 
             listService.bind(mAdapter::submit)

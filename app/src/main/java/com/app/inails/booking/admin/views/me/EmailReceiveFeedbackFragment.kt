@@ -70,7 +70,7 @@ class EmailReceiveFeedbackFragment : BaseFragment(R.layout.fragment_email_receiv
             checkForVisibleView(email)
 
             success.bind {
-                success("Success")
+                success(R.string.change_email_success)
             }
         }
     }

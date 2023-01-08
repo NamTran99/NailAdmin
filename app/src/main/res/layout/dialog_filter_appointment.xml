@@ -9,9 +9,11 @@
     android:padding="@dimen/size_16"
     tools:context=".views.dialog.ConfirmNoticeDialog">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:background="@drawable/bg_white_radius">
 
         <ImageButton
@@ -26,13 +28,14 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/btClose"
             android:text="@string/title_filter"
+            android:layout_weight="1"
             android:textSize="@dimen/text_size_14" />
 
         <TextView
             android:id="@+id/tvReset"
             style="@style/AppTheme.TextView.Medium"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/size_8"
@@ -41,7 +44,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_14" />
 
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Staff-->
+    <string name="status_staff_available">Đang rảnh</string>
+    <string name="status_staff_busy">Đang bận</string>
+    <string name="status_staff_break">Đang nghỉ ngơi</string>
+    <string name="status_staff_offline">Chưa làm việc</string>
+    <!--Appointment-->
+    <string name="status_appointment_pending">Chờ để chấp nhận</string>
+    <string name="status_appointment_waiting">Chờ để phục vụ</string>
+    <string name="status_appointment_accepted">Đã chấp nhận </string>
+    <string name="status_appointment_in_processing">Đang phục vụ</string>
+    <string name="status_appointment_unknown">Unknown</string>
+    <string name="status_appointment_finished">Đã hoàn thành</string>
+    <string name="status_appointment_cancelled">Đã hủy</string>
+    <string name="status_appointment_deleted">Đã xóa</string>
+</resources>

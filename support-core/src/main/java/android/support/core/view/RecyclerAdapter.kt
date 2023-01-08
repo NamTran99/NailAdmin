@@ -38,6 +38,7 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged()
     }
 
+
     private fun findLastVisibleItem(): Int {
         return when (val layoutManager = mRecyclerView!!.layoutManager) {
             is LinearLayoutManager -> layoutManager.findLastVisibleItemPosition()

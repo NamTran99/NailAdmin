@@ -38,6 +38,7 @@ import com.app.inails.booking.admin.views.booking.dialog_filter.SearchStaffOwner
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
 import com.app.inails.booking.admin.views.main.MainActivity
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
+import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
@@ -268,9 +269,10 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             }
 
             checkInSuccess.bind {
-                success("Client check-in success")
+                success(R.string.client_check_in_success)
                 refreshData(1)
-                (activity as MainActivity).navigateToTab(R.id.navCheckInBooking)
+                Router.open(this@BookingFragment,    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN))
+//                (activity as MainActivity).navigateToTab(R.id.navCheckInBooking)
 //                val tab: TabLayout.Tab? = binding.appointTab.getTabAt(0)
 //                tab?.select()
             }
@@ -332,7 +334,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             acceptAppointmentDialog.updateStaff(it)
         }
 
-        appActivity.appEvent.notifyCloudMessage.observe(viewLifecycleOwner) {
+        appActivity.appEvent.notifyCloudMessageClient.observe(viewLifecycleOwner) {
             viewModel.refresh(mType)
         }
         appEvent.refreshData.observe(viewLifecycleOwner) {
@@ -344,7 +346,13 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
     private fun setUpData() {
         mType = args?.type?.ordinal?.plus(1) ?: 1
-        topBar.state<MainTopBarState>().setTitle(if(mType == 1) R.string.title_customer_check_in else R.string.title_appointment_customer)
+        topBar.setState( SimpleTopBarState(
+            if(mType == 1) R.string.title_customer_check_in else R.string.title_appointment_customer,
+            onBackClick = {
+                activity?.onBackPressed()
+            },
+        )
+        )
         refreshData(mType)
     }
 

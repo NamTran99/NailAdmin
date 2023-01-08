@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".views.management.service.ManageServiceFragment">
 
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/introSliderViewPager"
         android:layout_width="match_parent"
@@ -36,5 +38,14 @@
         android:drawableEnd="@drawable/ic_arrow_right"
         android:textColor="@color/black"
         android:text="@string/skip" />
+    <TextView
+        android:id="@+id/tvSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/size_20"
+        android:text="@string/skip_1"/>
 
 </RelativeLayout>

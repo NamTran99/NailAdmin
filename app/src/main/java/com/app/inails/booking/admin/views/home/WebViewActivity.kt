@@ -35,7 +35,7 @@ class WebViewActivity : BaseActivity(R.layout.activity_web_view), TopBarOwner {
             if (!args.isHtml)
                 webView.loadUrl(args.path)
             else
-                webView.loadData(args.content, "text/html", "UTF-8")
+                webView.loadDataWithBaseURL(null,args.content, "text/html", "UTF-8", null)
         }
     }
 

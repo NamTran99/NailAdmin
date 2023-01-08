@@ -19,6 +19,7 @@ class AppCache(context: Context) : Caching(context, ParserImpl()) {
     var clientTokenPush: String by string("token", "")
     var bookingCurrent: BookingClientDTO? by reference(BookingClientDTO::class.java.name)
     var servicesSelected: List<IServiceClient>? by reference(IServiceClient::class.java.name)
+    var language: String? by reference("language")
 }
 
 class ParserImpl : Parser {

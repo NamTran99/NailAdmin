@@ -27,10 +27,12 @@ import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
 import com.app.inails.booking.admin.views.me.DetailSalonFragment
 import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
 import com.app.inails.booking.admin.views.me.GalleryImageFragment
+import com.app.inails.booking.admin.views.me.SelectLanguageAccountFragment
 import com.app.inails.booking.admin.views.me.reset.*
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import com.app.inails.booking.admin.views.splash.IntroFragment
+import com.app.inails.booking.admin.views.splash.SelectLanguageFragment
 import kotlinx.parcelize.Parcelize
 import kotlin.reflect.KClass
 
@@ -85,6 +87,12 @@ interface Routing : BundleArgument {
     object ReportSale: Routing{
         override val fragmentClass: KClass<out Fragment>
             get() = ReportFragment::class
+    }
+
+    @Parcelize
+    object SelectLanguageAccount: Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = SelectLanguageAccountFragment::class
     }
 
     @Parcelize
@@ -175,6 +183,13 @@ interface Routing : BundleArgument {
         override val fragmentClass: KClass<out Fragment>
             get() = IntroFragment::class
     }
+
+    @Parcelize
+    object SelectLanguage : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = SelectLanguageFragment::class
+    }
+
 
     @Parcelize
     class GallerySalon(    val listBeforeImages: MutableList<AppImage>,

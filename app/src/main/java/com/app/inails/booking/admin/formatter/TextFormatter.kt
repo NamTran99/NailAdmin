@@ -37,7 +37,7 @@ class TextFormatter(private val cxt:Context) {
     }
 
     fun formatDisplayTimeZone(salonDTO: SalonDTO): String {
-        return "Business hour (${salonDTO.timezone} ${salonDTO.tz})"
+        return cxt.getString(R.string.business_hour_format, salonDTO.timezone, salonDTO.tz)
     }
 
     fun formatPhoneUS(phone: String?): String {
@@ -181,7 +181,7 @@ class TextFormatter(private val cxt:Context) {
     }
 
     fun formatSalonSchedule(it: Schedule): String {
-        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) "Not open"
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) cxt.getString(R.string.not_open)
         else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 
@@ -207,7 +207,7 @@ class TextFormatter(private val cxt:Context) {
         if (customerDTO.address.isNullOrEmpty() && customerDTO.city.isNullOrEmpty()
             && customerDTO.state.isNullOrEmpty() && customerDTO.zip.isNullOrEmpty()
         )
-            "No Information"
+            cxt.getString(R.string.no_information)
         else
             "${customerDTO.address ?: ""}, ${customerDTO.city ?: ""}, ${customerDTO.state ?: ""}, ${customerDTO.zip ?: ""}"
 

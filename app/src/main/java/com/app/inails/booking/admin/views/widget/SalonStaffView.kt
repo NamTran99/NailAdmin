@@ -23,10 +23,14 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
 
     private val binding = viewBinding(LayoutSalonStaffBinding::inflate)
 
+    var onCLickImage : ((String) -> Unit) = {}
+    var onCLickRemoveImage : (() -> Unit) = {}
+
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
-            binding.tvStaffFullName.show(value == DisplayType.ShowOneService)
-            binding.lvEdtName.show(value == DisplayType.TypeService)
+            binding.imgAvatar.hideClearImage()
+            binding.tvStaffFullName.show(value == DisplayType.DisplayService)
+            binding.etFullName.show(value == DisplayType.TypeService)
             binding.etPhone.isFocusable = value == DisplayType.TypeService
             if (value == DisplayType.TypeService) {
                 binding.btnDelete.hide()
@@ -43,19 +47,27 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
             field = value
         }
 
-    var staffData: ISalonStaff = ISalonStaff()
-        get() =
-            ISalonStaff(
-                first_name = binding.etStaffFirstName.text.toString(),
-                last_name = binding.etStaffLastName.text.toString(),
-                phone =  binding.etPhone.text.toString().convertPhoneToNormalFormat()
-            )
+    var url: String = ""
         set(value){
-            binding.tvStaffFullName.text  = "${value.last_name} ${value.first_name}"
-            binding.etPhone.setText(value.phone)
+            binding.apply {
+                imgAvatar.setImageUrl(value)
+            }
             field = value
         }
 
+    var staffData: ISalonStaff = ISalonStaff()
+        get() =
+            ISalonStaff(
+                imageUri= url,
+                name = binding.etFullName.text.toString(),
+                phone =  binding.etPhone.text.toString().convertPhoneToNormalFormat()
+            )
+        set(value){
+            url = value.imageUri
+            binding.tvStaffFullName.text  = value.name
+            binding.etPhone.setText(value.phone)
+            field = value
+        }
 
     var fullName: String = ""
         set(value) {
@@ -63,14 +75,7 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
             field = value
         }
 
-    var lastName:String = ""
-        get() = binding.etStaffLastName.text.toString()
-
-    var firstName:String = ""
-        get() = binding.etStaffFirstName.text.toString()
-
     var onClickDelete: ((View) -> Unit)? = null
-    val etPrice = binding.etPhone
 
     init {
         context.loadAttrs(attributeSet, R.styleable.SalonServiceView) {
@@ -92,38 +97,38 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
 
     fun resetView() {
         binding.apply {
-            etStaffLastName.setText("")
-            etStaffFirstName.setText("")
+            imgAvatar.removePhoto()
+            etFullName.setText("")
             etPhone.setText("")
             tag = null
+        }
+    }
+
+    fun updateAvatar(image: String?) {
+        image?.let{
+            url = it
         }
     }
     
     fun checkValidate():Boolean{
         binding.apply {
-            if(etStaffLastName.text.trim().isEmpty()){
-                binding.etStaffLastName.error = "You must type last name"
-                binding.etStaffLastName.setText("")
-                binding.etStaffLastName.requestFocus()
-                return false
-            }
 
-            if(etStaffFirstName.text.trim().isEmpty()){
-                binding.etStaffFirstName.error = "You must type first name"
-                binding.etStaffFirstName.setText("")
-                binding.etStaffFirstName.requestFocus()
+            if(etFullName.text.isBlank()){
+                binding.etFullName.error = context.getString(R.string.error_full_name_blank)
+                binding.etFullName.setText("")
+                binding.etFullName.requestFocus()
                 return false
             }
 
             if(etPhone.text.trim().isEmpty()){
-                binding.etPhone.error = "You must type phone number"
+                binding.etPhone.error = context.getString(R.string.error_blank_phone)
                 binding.etPhone.setText("")
                 binding.etPhone.requestFocus()
                 return false
             }
 
             if(etPhone.text.trim().toString().convertPhoneToNormalFormat().length < 10){
-                binding.etPhone.error = "Phone must be 10 characters long"
+                binding.etPhone.error =context.getString(R.string.error_type_phone_not_enough)
                 binding.etPhone.requestFocus()
                 return false
             }
@@ -134,6 +139,12 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
     private fun setUpView() {
         binding.apply {
             etPhone.inputTypePhoneUS()
+            imgAvatar.onClickClearImage = {
+                onCLickRemoveImage.invoke()
+            }
+            imgAvatar.onClick{
+                onCLickImage.invoke(url)
+            }
         }
     }
 

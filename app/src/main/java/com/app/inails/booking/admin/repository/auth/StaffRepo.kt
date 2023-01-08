@@ -154,7 +154,7 @@ class FetchAllStaffRepo(
                 .createStaffList(
                     staffApi.search(userLocalSource.getSalonID().toString(), keyword, page)
                         .await()
-                )
+                ).sortedWith(compareByDescending<IStaff> { it.active }.thenBy { it.status })
         )
     }
 }

@@ -69,7 +69,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                     "Your salon doesn't have any reports yet" else "There are no results matching your search keyword."
 
                 it.second.totalAppointment.let { size ->
-                    binding.tvTotalApm.text = if(size <=1) "( $size booking )" else "( $size bookings )"
+                    binding.tvTotalApm.text =  requireContext().getString(if(size <=1)R.string.number_booking else R.string.number_bookings, size.toString())
                 }
                 binding.tvTotal.text = "$${it.second.totalPrice}"
             }

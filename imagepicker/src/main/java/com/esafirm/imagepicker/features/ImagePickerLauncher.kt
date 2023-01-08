@@ -47,7 +47,7 @@ fun createImagePickerIntent(context: Context, config: BaseConfig): Intent {
     val intent = Intent(context, ImagePickerActivity::class.java)
     when (config) {
         is ImagePickerConfig -> {
-            config.language?.run { LocaleManager.language = this }
+            config.language?.run { LocaleManager.mLanguage = this }
             intent.putExtra(ImagePickerConfig::class.java.simpleName, config)
         }
         is CameraOnlyConfig -> {

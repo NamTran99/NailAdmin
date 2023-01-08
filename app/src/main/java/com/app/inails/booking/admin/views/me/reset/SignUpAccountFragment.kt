@@ -16,6 +16,8 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,8 +41,10 @@ import com.app.inails.booking.admin.model.response.TimeZoneForm
 import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.utils.TimeUtils
 import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
+import com.app.inails.booking.admin.views.extension.ShowZoomSingleImageActivity
 import com.app.inails.booking.admin.views.main.MainActivity
 import com.app.inails.booking.admin.views.me.EditScheduleArgs
 import com.app.inails.booking.admin.views.me.EditScheduleFragment
@@ -68,14 +72,40 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
     val signUpForm: SignUpForm
         get() = viewModel.salonForm
 
+    var staffImage =  ArrayList<String>()
+    var serviceImage =  ArrayList<String>()
+
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == AppCompatActivity.RESULT_OK) {
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
-                imageAdapter.changePath(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) }.apply {
-                    signUpForm.images = this.toMutableList()
-                })
+                imageAdapter.changePath(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) }
+                    .apply {
+                        signUpForm.images = this.toMutableList()
+                    })
+            }
+        }
+
+    private val staffImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                val pathImage =
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
+                staffImage =
+                    ArrayList(pathImage.map { pathUri -> pathUri.toString() })
+                binding.salonStaffView.updateAvatar(staffImage.getOrNull(0))
+            }
+        }
+
+    private val serviceImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                val pathImage =
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
+                serviceImage =
+                    ArrayList(pathImage.map { pathUri -> pathUri.toString() })
+                binding.salonServiceView.updateAvatar(serviceImage.getOrNull(0))
             }
         }
 
@@ -92,6 +122,55 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
         )
 
         binding.apply {
+            salonStaffView.apply {
+                onCLickImage = {
+                    if(staffImage.isEmpty()){
+                        FishBun.with(this@SignUpAccountFragment)
+                            .setImageAdapter(GlideAdapter())
+                            .setMaxCount(1)
+                            .setSelectedImages(ArrayList(staffImage.map{it.toUri()}))
+                            .setActionBarColor(
+                                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                                true
+                            )
+                            .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                            .startAlbumWithActivityResultCallback(staffImageResult)
+                    }else{
+                        open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage(staffImage[0]))
+                    }
+                }
+                onCLickRemoveImage = {
+                    staffImage.clear()
+                }
+            }
+
+            salonServiceView.apply {
+                salonServiceView.apply {
+                    onCLickImage = {
+                        if(serviceImage.isEmpty()){
+                            FishBun.with(this@SignUpAccountFragment)
+                                .setImageAdapter(GlideAdapter())
+                                .setMaxCount(1)
+                                .setSelectedImages(ArrayList(serviceImage.map{it.toUri()}))
+                                .setActionBarColor(
+                                    ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                                    ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                                    true
+                                )
+                                .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                                .startAlbumWithActivityResultCallback(serviceImageResult)
+                        }else{
+                            open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage(serviceImage[0]))
+                        }
+                    }
+                    onCLickRemoveImage = {
+                        serviceImage.clear()
+                    }
+                }
+
+            }
+
             edtAccPhone.inputTypePhoneUS()
             edtSalonPhone.inputTypePhoneUS()
             scheduleAdapter = SalonScheduleAdapter(rcvSchedule).apply {
@@ -99,18 +178,18 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
             }
             imageAdapter = UploadPhotoAdapter(rvImages).apply {
                 onAddImagesAction = {
-                        FishBun.with(this@SignUpAccountFragment)
-                            .setImageAdapter(GlideAdapter())
-                            .setMaxCount(20)
-                            .setMinCount(1)
-                            .setSelectedImages(ArrayList(signUpForm.images.map { it.path.toUri() }))
-                            .setActionBarColor(
-                                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                                true
-                            )
-                            .setActionBarTitleColor(Color.parseColor("#ffffff"))
-                            .startAlbumWithActivityResultCallback(startForResult)
+                    FishBun.with(this@SignUpAccountFragment)
+                        .setImageAdapter(GlideAdapter())
+                        .setMaxCount(20)
+                        .setMinCount(1)
+                        .setSelectedImages(ArrayList(signUpForm.images.map { it.path.toUri() }))
+                        .setActionBarColor(
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                            true
+                        )
+                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .startAlbumWithActivityResultCallback(startForResult)
                 }
 
                 onRemoveImageAction = {
@@ -162,6 +241,11 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
         viewModel.apply {
             //set up data
 
+            servicePriceDefaultResult.bind {
+                binding.tvLink.text = Html.fromHtml(requireContext().getString(R.string.test_link, it), Html.FROM_HTML_MODE_COMPACT)
+                binding.tvLink.movementMethod = LinkMovementMethod.getInstance()
+            }
+
             salonForm.services.forEach {
                 addService(it)
             }
@@ -187,11 +271,11 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
                     )
                 }
             }
-            signUpResult.bind{
-                signupDialog.show{
+            signUpResult.bind {
+                signupDialog.show {
                     open<MainActivity>().clear()
                 }
-        }
+            }
         }
 
         parentFragmentManager.setFragmentResultListener(
@@ -201,7 +285,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
             listSchedule.forEach {
                 it.startTimeFormat = it.startTime.toTimeDisplay()
                 it.endTimeFormat = it.endTime.toTimeDisplay()
-                it.timeFormat = formatSalonSchedule(it)
+                it.timeFormat = formatSalonSchedule(requireContext(), it)
             }
             signUpForm.schedules = listSchedule.toMutableList()
             scheduleAdapter.submit(listSchedule)
@@ -250,9 +334,12 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
         )
         params.setMargins(0, 35, 0, 0)
         binding.layoutAddService.addView(manicuristService, params)
-        manicuristService.displayType = DisplayType.ShowOneService
+        manicuristService.displayType = DisplayType.DisplayService
         manicuristService.service = service
         manicuristService.tag = service
+        manicuristService.onCLickImage = {
+            open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage(it))
+        }
         manicuristService.onClickDelete = { view: View? ->
             if (manicuristService.parent != null) {
                 (manicuristService.parent as LinearLayout).removeView(manicuristService)
@@ -270,7 +357,10 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
         )
         params.setMargins(0, 15, 0, 0)
         binding.layoutAddStaff.addView(staffView, params)
-        staffView.displayType = DisplayType.ShowOneService
+        staffView.displayType = DisplayType.DisplayService
+        staffView.onCLickImage = {
+            open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage(it))
+        }
         staffView.staffData = staff
         staffView.tag = staff
         staffView.onClickDelete = { view: View? ->
@@ -283,8 +373,10 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
     }
 }
 
-private fun formatSalonSchedule(it: ISchedule): String {
-    return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) "Not open"
+private fun formatSalonSchedule(context: Context, it: ISchedule): String {
+    return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) context.getString(
+        R.string.not_open
+    )
     else "${it.startTimeFormat} - ${it.endTimeFormat}"
 }
 
@@ -292,17 +384,32 @@ class SignUpVM(
     private val signUpRepo: SignUpRepo,
     private val fetchTimeZone: FetchTimeZone
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
+    init {
+        getValueServiceDefault()
+    }
+
     val salonForm = SignUpForm()
     val timeZoneForm = TimeZoneForm()
 
     val timeZoneResult = fetchTimeZone.result
     val signUpResult = signUpRepo.result
+    val servicePriceDefaultResult = signUpRepo.resultServicePriceDefault
 
     fun getTimeZone() = launch(loading, error) {
         fetchTimeZone(timeZoneForm)
     }
 
+    private fun getValueServiceDefault() = launch(loading, error) {
+        signUpRepo.getValueServiceDefault()
+    }
+
     fun submit() = launch(loading, error) {
+        signUpRepo.uploadServiceImages(salonForm.services).forEachIndexed { index, s ->
+            salonForm.services[index].avatar = s
+        }
+        signUpRepo.uploadStaffImages(salonForm.staffs).forEachIndexed { index, s ->
+            salonForm.staffs[index].avatar = s
+        }
         signUpRepo(salonForm)
     }
 }
@@ -312,11 +419,39 @@ class SignUpRepo(
     val context: Context,
     private val meApi: MeApi,
     private val userLocalSource: UserLocalSource,
-    private val authenticateApi: AuthenticateApi,
-    private val textFormatter: TextFormatter,
     private val appCache: AppCache
 ) {
     val result = MutableLiveData<UserDTO>()
+    val resultServicePriceDefault = MutableLiveData<String>()
+
+    suspend fun uploadServiceImages(list: List<ISalonService>): ArrayList<String> {
+        val imageParts =
+            list.filter { !it.imageUri.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.imageUri.toUri())!!.scalePhotoLibrary(context)
+                    .toImagePart("images[$index]")
+            }.toTypedArray()
+
+        return meApi.uploadMultipleImage(
+            RequestBodyBuilder()
+                .put("type", 2).buildMultipart(),
+            images = imageParts
+        ).await()
+    }
+
+    suspend fun uploadStaffImages(list: List<ISalonStaff>): ArrayList<String> {
+        val imageParts =
+            list.filter { !it.imageUri.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.imageUri.toUri())!!.scalePhotoLibrary(context)
+                    .toImagePart("images[$index]")
+            }.toTypedArray()
+
+        return meApi.uploadMultipleImage(
+            RequestBodyBuilder()
+                .put("type", 1).buildMultipart(),
+            images = imageParts
+        ).await()
+    }
+
     suspend operator fun invoke(form: SignUpForm) {
         form.validate()
         val imageParts =
@@ -348,7 +483,7 @@ class SignUpRepo(
                     .put("device_token", appCache.deviceToken)
                     .put("device_type", "android")
                     .put("name", form.admin_name)
-                    .put("name", form.admin_name)
+                    .put("lang", userLocalSource.getLanguageWithDefault())
                     .buildMultipart(),
                 images = imageParts
             ).await().apply {
@@ -356,5 +491,11 @@ class SignUpRepo(
                 userLocalSource.saveToken(this.token)
             })
 
+    }
+
+    suspend fun getValueServiceDefault() {
+        resultServicePriceDefault.post(
+            meApi.getValueServiceDefault().await().value
+        )
     }
 }

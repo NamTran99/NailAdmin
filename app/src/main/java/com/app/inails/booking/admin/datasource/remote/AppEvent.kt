@@ -16,7 +16,7 @@ class AppEvent {
     val chooseStaffInDetailAppointment = SingleLiveEvent<IStaff>()
     val notifyCloudMessage = SingleLiveEvent<FireBaseCloudMessage>()
     val notifyCloudMessageClient = SingleLiveEvent<FireBaseCloudMessageClient>()
-    val notifyForAppointment = SingleLiveEvent<FireBaseCloudMessage>()
+    val notifyForAppointment = SingleLiveEvent<FireBaseCloudMessageClient>()
     val notifyAccountApproved = SingleLiveEvent<Boolean>()
     val refreshData = SingleLiveEvent<Any>()
     val openDrawer = MutableLiveData<Any>()

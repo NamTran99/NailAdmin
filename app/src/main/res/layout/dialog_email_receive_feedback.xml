@@ -1,66 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray07"
-    tools:context=".views.me.reset.ResetPasswordFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_15"
+    android:paddingTop="@dimen/size_24"
+    android:paddingBottom="@dimen/size_16">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="@dimen/size_10"
-        android:background="@drawable/bg_white_radius"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/size_15"
-        android:paddingTop="@dimen/size_24"
-        android:paddingBottom="@dimen/size_16">
+        android:layout_marginBottom="@dimen/size_28"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_28"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+            android:text="@string/enter_your_email" />
 
-            <TextView
-                style="@style/AppTheme.TextView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/enter_your_email" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/size_10"
+            android:layout_marginEnd="@dimen/size_12"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnClose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/size_12"
-                android:background="?selectableItemBackgroundBorderless"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_close" />
+    </RelativeLayout>
 
-        </RelativeLayout>
+    <EditText
+        android:id="@+id/etEnterEmail"
+        style="@style/AppTheme.EditText"
+        android:layout_marginBottom="@dimen/size_12"
+        android:drawableStart="@drawable/ic_email"
+        android:hint="@string/email"
+        android:imeOptions="actionDone"
+        android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/etEnterEmail"
-            style="@style/AppTheme.EditText"
-            android:layout_marginBottom="@dimen/size_12"
-            android:hint="@string/email"
-            android:drawableStart="@drawable/ic_email"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionDone"
-            />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSave"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/button_blue_corner"
+        android:text="@string/btn_save" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btSave"
-            style="@style/AppTheme.ButtonDefault"
-            android:layout_width="match_parent"
-            android:layout_gravity="bottom|center"
-            android:background="@drawable/button_blue_corner"
-            android:text="@string/btn_save" />
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</FrameLayout>

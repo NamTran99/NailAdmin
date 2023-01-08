@@ -4,10 +4,7 @@ import android.support.di.InjectBy
 import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
-import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.StaffDTO
-import com.app.inails.booking.admin.model.response.UserDTO
-import com.app.inails.booking.admin.model.response.VersionDTO
+import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -43,24 +40,28 @@ interface MeApi : Injectable {
         @Part vararg images: MultipartBody.Part?
     ): ApiAsync<UserDTO>
 
+    @FormUrlEncoded
+    @POST("setting/get-value-default")
+    fun getValueServiceDefault(@Field("key") key: String = "fee_update_info_salon"): ApiAsync<ServiceValueDTO>
+
     @GET("check-version")
     fun checkVersion(@Query("platform") platform:String = "android", @Query("app_type") appType: String = "owner"): ApiAsync<VersionDTO>
 
     @FormUrlEncoded
     @POST("salon/delete-salon-gallery")
     fun deleteSalonGallery(@Field("delete_images") listImageID: String): ApiAsync<Any>
+
+    @Multipart
+    @POST("upload/upload-multiple-image")
+    fun uploadMultipleImage(
+        @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part vararg images: MultipartBody.Part?
+    ): ApiAsync<ArrayList<String>>
+
+    @FormUrlEncoded
+    @POST("salon/change-language")
+    fun changeLanguage(@Field("device_token") deviceToken: String, @Field("language") language: String ): ApiAsync<Any>
 }
 
 class MeApiImpl(private val retrofit: Retrofit) :
     MeApi by retrofit.create(MeApi::class.java)
-
-//@Part("id") id: RequestBody = "11",
-//@Part("name") name: String = "Healthy Nail Salon Collaborative",
-//@Part("phone") phone: String = "0918780192",
-//@Part("email") email: String = "anhtran.it.dev@gmail.com",
-//@Part("state") state: String = "NJ",
-//@Part("city") city: String = "Sayreville",
-//@Part("address") address: String = "194 Lakewood Drive",
-//@Part("zipcode") zipcode: String = "80526",
-//@Part("country") country: String = "US",
-//@Part("schedules") schedules: String = "[{\"day\" : 0 , \"start_time\": null, \"end_time\": null}]",

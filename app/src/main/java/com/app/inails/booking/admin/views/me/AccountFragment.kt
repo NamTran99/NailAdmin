@@ -33,7 +33,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
             adapter = AccountMultyOptionAdapter(rvLayout).apply {
                 onClickLogOut = {
                     confirmDialog.show(
-                        title = R.string.title_logout,
+                        title = R.string.title_logout_owner,
                         message = R.string.message_logout_app,
                         buttonConfirm = R.string.btn_yes_logout
                     ) {
@@ -48,6 +48,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
                     AccountOption(R.string.title_change_password) {   Router.open(this@AccountFragment, Routing.ChangePassword)},
                     AccountOption(R.string.title_email_receive_feedback) {   Router.open(this@AccountFragment, Routing.EmailReceiveFeedBack)},
                     AccountOption(R.string.title_report) {   Router.open(this@AccountFragment, Routing.ReportSale)},
+                    AccountOption(R.string.title_language) {   Router.open(this@AccountFragment, Routing.SelectLanguageAccount)},
                 ))
             }
         }

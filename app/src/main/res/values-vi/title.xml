@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_order_history">Lịch sử đặt</string>
+    <string name="title_account">Tài khoản</string>
+    <string name="title_email_receive_feedback">Email Nhận Phản Hồi</string>
+    <string name="title_change_password">Đổi Mật Khẩu</string>
+    <string name="title_report">Thông Kê Thu Nhập</string>
+    <string name="title_create_new_service">Thêm dịch vụ</string>
+    <string name="title_create_new_staff">Thêm nhân viên</string>
+    <string name="title_feed_back">Phản Hồi</string>
+    <string name="title_estimate">Ước lượng</string>
+    <string name="title_update_service">Cập nhật Dịch vụ</string>
+    <string name="title_update_salon_information">Cập Nhật Thông Tin Salon</string>
+    <string name="title_update_appointment">Cập nhật Cuộc hẹn</string>
+    <string name="title_appointment_detail">Chi Tiết Cuộc Hẹn</string>
+    <string name="title_customer_check_in">Quản lý danh sách booking</string>
+    <string name="title_appointment_customer">Quản lý lịch đặt hẹn</string>
+    <string name="title_filter">Bộ lọc</string>
+    <string name="title_sign_up">Đăng Ký Tài Khoản</string>
+    <string name="title_service_staff">Cung cấp thông tin dịch vụ và thợ</string>
+    <string name="title_reset_password">Thiết Lập Lại Mật Khẩu</string>
+    <string name="title_business_hour">Cập Nhật Giờ Mở Cửa</string>
+    <string name="title_language">Ngôn ngữ</string>
+    <string name="title_notification">Thông Báo</string>
+</resources>

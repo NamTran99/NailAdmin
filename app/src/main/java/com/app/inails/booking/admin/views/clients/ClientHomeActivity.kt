@@ -50,6 +50,7 @@ import com.app.inails.booking.admin.views.clients.dialog.booking.BookingNotifica
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.esafirm.imagepicker.helper.LocaleManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import kotlinx.parcelize.Parcelize
@@ -117,7 +118,7 @@ class ClientHomeActivity : BaseActivity(R.layout.activity_client_home), TopBarOw
             headView.findViewById<MaterialButton>(R.id.btnMenuClose)
                 .onClick { drawerLayout.closeDrawer(GravityCompat.START, true) }
             navView.setNavigationItemSelectedListener(this@ClientHomeActivity)
-            tvVersion.text = Utils.getDisplayBuildConfig()
+            tvVersion.text = Utils.getDisplayBuildConfig(this@ClientHomeActivity)
         }
         with(viewModel) {
             deletedCustomerAccount.bind {
@@ -169,6 +170,7 @@ class ClientHomeActivity : BaseActivity(R.layout.activity_client_home), TopBarOw
         appEvent.notifyCloudMessageClient.bind { viewModel.notification(it) }
     }
 
+
     private fun logoutSuccess() {
         binding.drawerLayout.openDrawerLayout(false)
         notificationsManager.cancelAll()
@@ -218,7 +220,7 @@ class ClientHomeActivity : BaseActivity(R.layout.activity_client_home), TopBarOw
                 Router.run { redirectToChangePassword() }
             }
             else -> confirmDialog.show(
-                title = R.string.title_logout,
+                title = R.string.title_logout_client,
                 message = R.string.message_logout_app,
                 buttonConfirm = R.string.btn_yes_logout
             ) {

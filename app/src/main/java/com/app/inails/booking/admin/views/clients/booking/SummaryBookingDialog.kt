@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import androidx.core.widget.addTextChangedListener
 import com.app.inails.booking.admin.DataConst.VoucherType.TYPE_PERCENT
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogSummaryBookingBinding
@@ -55,7 +56,7 @@ class SummaryBookingDialog(context: Context) : BaseDialog(context) {
         onVoucherInfo: (String) -> Unit
     ) = with(binding) {
         mVoucher = null
-        txtRsStaff.text = staffName ?: "Anyone Available"
+        txtRsStaff.text = staffName ?: context.getString(R.string.label_anyone_available)
         edtVoucher.setText("")
         txtDiscount.text = ""
         txtRsDatetime.text =

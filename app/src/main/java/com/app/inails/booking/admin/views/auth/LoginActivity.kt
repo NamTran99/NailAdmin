@@ -10,11 +10,13 @@ import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityLoginBinding
+import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.LoginOwnerForm
@@ -30,17 +32,23 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
     private val viewModel by viewModel<LoginViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         with(binding) {
             etPhone.inputTypePhoneUS()
             tvResetPassword.onClick {
                 Router.open(this@LoginActivity, Routing.ResetPassword)
             }
 
-            tvSignUp.onClick{
+            btSignUp.onClick {
                 Router.open(this@LoginActivity, Routing.SignUpAccount)
             }
 
-            binding.tvVersion.text = Utils.getDisplayBuildConfig()
+            switchLan.setOnCheckedChangeListener { _, isChecked ->
+                setLanguage(if (isChecked) "vi" else "en")
+            }
+
+            switchLan.isChecked = viewModel.isVnLanguage
+            binding.tvVersion.text = Utils.getDisplayBuildConfig(this@LoginActivity)
         }
 
         binding.btLogin.setOnClickListener {
@@ -61,12 +69,14 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 }
 
 class LoginViewModel(
-    private val loginRepo: LoginRepo
+    private val loginRepo: LoginRepo,
+    private val userLocalSource: UserLocalSource
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     var form: LoginOwnerForm = LoginOwnerForm()
         private set
     val loginSuccess = SingleLiveEvent<Int>()
+    val isVnLanguage = userLocalSource.getLanguage() == "vi"
 
     fun login() = launch(loading, error) {
         loginRepo(form)

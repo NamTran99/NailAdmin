@@ -67,4 +67,8 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
         super.onCreate(savedInstanceState)
         Log.d("Fragment Tracer", "Go into ${this.javaClass.name}")
     }
+
+    fun setLanguage(lan: String, isRestart: Boolean = true){
+        (activity as BaseActivity).setLanguage(lan, isRestart)
+    }
 }

@@ -84,6 +84,10 @@
                 app:spanCount="3"
                 tools:listitem="@layout/item_picture_holder" />
 
+            <View
+                android:layout_marginTop="@dimen/size_20"
+                style="@style/AppTheme.Line.Horizontal"/>
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,15 +102,7 @@
                     style="@style/AppTheme.TextViewResponsive"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvEditSchedule"
-                    style="@style/AppTheme.TextView.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/edit"
-                    android:textColor="@color/colorPrimary"
-                    app:drawableStartCompat="@drawable/ic_edit_2" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -118,6 +114,23 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="7"
                 tools:listitem="@layout/item_view_salon_schedule" />
+
+            <TextView
+                android:id="@+id/tvEditSchedule"
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_gravity="end"
+                android:text="@string/edit"
+                android:textColor="@color/colorPrimary"
+                android:drawableTint="@color/colorPrimary"
+                app:drawableStartCompat="@drawable/ic_edit_2" />
+
+            <View
+                android:layout_marginTop="@dimen/size_20"
+                style="@style/AppTheme.Line.Horizontal"/>
+
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etDescription"

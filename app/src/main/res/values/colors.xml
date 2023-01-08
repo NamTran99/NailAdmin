@@ -3,6 +3,7 @@
     <color name="colorPrimary">#BC40C1</color>
     <color name="colorPrimaryDark">#BC40C1</color>
     <color name="colorAccent">#d559da</color>
+    <color name="colorAccent1">#4768F2</color>
 
     <!--GRAY-->
     <color name="gray">#CFCFCF</color>
@@ -32,7 +33,7 @@
     <color name="orange01">#FF9300</color>
 
     <!--TRANSPARENCY-->
-    <color name="transparency">#30000000</color>
+    <color name="transparency">#00000000</color>
 
     <!--BLUE-->
     <color name="lightBlue">#7f8bf4</color>
@@ -95,11 +96,7 @@
     <color name="color_f26563">#F26563</color>
     <color name="color_333333">#333333</color>
     <color name="gray_235">#EBEBEB</color>
-    <string name="label_booking_id">Booking ID</string>
-    <string name="label_salon_name">Salon Name</string>
-    <string name="label_reason">Reason</string>
-    <string name="btn_direction_to_salon">Directions to salon</string>
-    <string name="btn_view_detail">View Detail</string>
+
     <color name="gray_145">#909090</color>
 
     <color name="orange_250">#EFA860</color>
@@ -114,5 +111,7 @@
     <color name="gray_188">#BCBCBC</color>
     <color name="gray_08">#777777</color>
     <color name="color_f5f5f5">#F5F5F5</color>
+    <color name="color_7c7c7c">#7C7C7C</color>
+    <color name="color_f5e2f6">#F5E2F6</color>
 
 </resources>

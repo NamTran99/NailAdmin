@@ -91,4 +91,7 @@
     <dimen name="size_250">250dp</dimen>
     <dimen name="size_300">300dp</dimen>
     <dimen name="size_220">220dp</dimen>
+    <dimen name="switch_padding">-2dp</dimen>
+    <dimen name="switch_radius">50dp</dimen>
+    <dimen name="switch_height">30dp</dimen>
 </resources>

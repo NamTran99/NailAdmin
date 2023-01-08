@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
 import android.util.Log
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.databinding.ItemGalleryImageBinding
@@ -47,7 +48,9 @@ class GalleryImagePagerAdapter(view: ViewPager2) :
                 if(adapterPosition == 0){
                     oldBeforePosition = adapter.findFirstVisibleItem()
                 }else oldAfterPosition = adapter.findFirstVisibleItem()
-                onClickDeleteImage.invoke(item[vpImage.currentItem])
+                if(vpImage.size != 0){
+                    onClickDeleteImage.invoke(item[vpImage.currentItem])
+                }
             }
 
             vpImage.reduceDragSensitivity(4)

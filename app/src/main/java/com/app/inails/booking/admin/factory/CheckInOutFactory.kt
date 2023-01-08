@@ -1,21 +1,25 @@
 package com.app.inails.booking.admin.factory
 
+import android.content.Context
 import android.support.di.Inject
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
-class CheckInOutFactory(private val textFormatter: TextFormatter) {
+class CheckInOutFactory(private val textFormatter: TextFormatter,
+    val context: Context
+) {
 
     private fun createCheckInOutDetail(item: CheckInOutDetailDTO): ICheckInOutDetail {
         return object : ICheckInOutDetail {
             override val dateTimeFormat: String
                 get() = item.date_time.toTimeCheckIn()
             override val typeInOut: String
-                get() = if(item.status == 1) "Check in" else "Check out"
+                get() = context.getString(if(item.status == 1) R.string.btn_check_in else R.string.btn_check_out)
         }
     }
 

@@ -7,6 +7,7 @@
     <string name="btn_feedback">Feedback</string>
     <string name="btn_sign_in">Sign in</string>
     <string name="btn_sign_up">Sign up</string>
+    <string name="btn_sign_up_salon">Sign Up Salon</string>
     <string name="btn_send_feedback">Send feedback</string>
     <string name="btn_close">Close</string>
     <string name="msg_login_success">Login success</string>
@@ -41,7 +42,8 @@
     <string name="error_blank_email">Email should not be blank</string>
     <string name="error_blank_content">Content should not be blank</string>
     <string name="message_logout_app">Are you sure you want to logout?</string>
-    <string name="title_logout">Logout Client</string>
+    <string name="title_logout_owner">Logout Owner</string>
+    <string name="title_logout_client">Logout Client</string>
     <string name="btn_yes_logout">Yes, logout</string>
     <string name="btn_edit_profile">Edit Profile</string>
     <string name="btn_save">Save</string>
@@ -87,7 +89,7 @@
     <string name="message_customer_check_in">Do you confirm that this client checked-in at the salon?</string>
     <string name="message_delete_staff" formatted="true">Do you want to delete the "%s" staff?</string>
     <string name="error_empty_reason">Please enter a reason</string>
-    <string name="error_empty_service_time">Please enter the service time</string>
+    <string name="error_empty_service_time">Please select the service time</string>
     <string name="error_service_time_greater_than">Service time must be greater than 0</string>
     <string name="error_empty_duration_time_to_service">Please select the duration time to service</string>
     <string name="btn_finish">Finish</string>
@@ -104,7 +106,7 @@
     <string name="create">Create</string>
     <string name="time_and_date">Time and Date</string>
     <string name="booking_id">Booking ID</string>
-    <string name="service">Service</string>
+    <string name="service">Service Name</string>
     <string name="request">Request</string>
     <string name="anyone">Anyone</string>
     <string name="total_amount">Total Amount</string>
@@ -168,9 +170,9 @@
     <string name="enter_salon_address">Enter salon address</string>
     <string name="images">Images</string>
     <string name="business_hour">Business hour</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="forgot_password">Forgot Password ?</string>
     <string name="dont_have_account">Don\'t have account?</string>
-    <string name="reset_here"><u>Reset Here</u></string>
+    <string name="click_here"><u>Click Here</u></string>
     <string name="sign_up_here"><u>Sign Up Here</u></string>
     <string name="enter_your_registered_phone_number_to_reset_password">Enter your registered phone number to reset password:</string>
     <string name="auth_otp_verify">You need to verify this phone number is yours. We have sent you an OTP via SMS.\n\nPlease enter verification to receive a new password.</string>
@@ -219,6 +221,7 @@
     <string name="join_date">Joined date: </string>
     <string name="start">START TO EXPLORE</string>
     <string name="skip">SKIP</string>
+    <string name="skip_1">Skip</string>
     <string name="staff_list_today">Staff List Today</string>
     <string name="add_image">Add Image</string>
     <string name="more_photos">More Photos</string>
@@ -361,6 +364,69 @@
     <string name="title_salon_gallery">Salon\'s Gallery</string>
     <string name="your_salon_is_waiting_for_approval">(Your salon is waiting for approval)</string>
     <string name="voucher_information">Voucher Information</string>
+    <string name="salon_voucher">Salon voucher</string>
+    <string name="code">CODE: </string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="not_open">Not open</string>
+    <string name="salon_open">Open</string>
+    <string name="error_blank_start_time">Please select the Start Time of %s</string>
+    <string name="error_blank_start_time_1">Please select the Start Time</string>
+    <string name="error_blank_end_time">Please select the End Time of %s</string>
+    <string name="error_blank_end_time_1">Please select the End Time</string>
+    <string name="business_hour_format">Business hour (%s %s)</string>
+    <string name="gallery_before_format">Before (%s)</string>
+    <string name="gallery_after_format">After (%s)</string>
+    <string name="choose_your_preferred_language">Choose Your Preferred Language</string>
+    <string name="please_select_your_language">Please select your language</string>
+    <string name="vietnamese">Vietnamese</string>
+    <string name="english">English</string>
+    <string name="version_format">Version %s</string>
+    <string name="appointment_list">Appointment List</string>
+    <string name="customer_check_in">Customer Check-in</string>
+    <string name="welcome_account">Welcome, %s</string>
+    <string name="update_success">Update Successfully</string>
+    <string name="staff_not_have_attendance">This staff doesn\'t have any attendance records yet</string>
+    <string name="number_booking">( %s booking )</string>
+    <string name="number_bookings">( %s bookings )</string>
+    <string name="error">Error</string>
+    <string name="unknown">Unknown</string>
+    <string name="delete_image_success">Delete Image Successfully</string>
+    <string name="customer_type_all">All</string>
+    <string name="customer_type_vip">Vip</string>
+    <string name="customer_type_normal">Normal</string>
+    <string name="feedback_string">Normal</string>
+    <string name="staff_not_have_order">This staff doesn\'t have any orders yet.</string>
+    <string name="customer_not_have_apm">This customer doesn\'t booking any appointments yet.</string>
+    <string name="no_result_order_found">There are no results matching your search keyword.</string>
+    <string name="change_pass_success">Password changed successfully!</string>
+    <string name="change_email_success">Email changed successfully!</string>
+    <string name="success">Success!</string>
+    <string name="no_information">No Information</string>
+    <string name="update_customer_success">Update customer information success</string>
+    <string name="client_check_in_success">Client check-in success</string>
+    <string name="not_require_field">(Optional, you can add later)</string>
+    <string name="not_require_email">(Optional, email used to receive notifications from 123 best solutions and customer feedback)</string>
+    <string name="salon_images_des">Salon image (salon space, signboard, menu, ...)</string>
+    <string name="sign_up_des">After registering, you need to wait for 123 Best Solutions to check Salon information. Approval time within 8 hours.</string>
+    <string name="not_filled_in_yet">Not setting yet</string>
+    <string name="test_link">If you do not have time to enter, Please send a list of Function, Service and Machine Information. We will import it for you for a fee of $%s. &lt;a href="http://www.google.com">Click here&lt;/a></string>
+    <string name="image">Image</string>
+    <string name="error_full_name_blank">Full name should not be blank</string>
+    <string name="copy_day_title">Choose business hours for all days</string>
+    <string name="set_up">Set up</string>
+    <string name="choose_time">Choose time</string>
+    <string name="choose_dates_to_apply">Choose dates to apply</string>
+    <string name="label_booking_id">Booking ID</string>
+    <string name="label_salon_name">Salon Name</string>
+    <string name="label_reason">Reason</string>
+    <string name="btn_direction_to_salon">Directions to salon</string>
+    <string name="btn_view_detail">View Detail</string>
 </resources>
 
 

@@ -27,6 +27,7 @@ class TokenInterceptor(private val userLocalSource: UserLocalSource) : Intercept
             Log.e("Token", bearer)
             request = request.newBuilder()
                 .addHeader("Authorization", bearer)
+                .addHeader("lang", userLocalSource.getLanguage()?:"en")
                 .build()
         }
         return chain.proceed(request)

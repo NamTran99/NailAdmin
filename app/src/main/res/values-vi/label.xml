@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_admin_login">Chủ Tiệm Đăng Nhập</string>
+    <string name="hint_search">Tìm kiếm</string>
+    <string name="label_phone">Số Điện Thoại</string>
+    <string name="label_appointment_time">Lịch Hẹn</string>
+    <string name="label_services">Các Dịch Vụ</string>
+    <string name="label_status">Trạng Thái</string>
+    <string name="label_total_amount">Tổng Tiền</string>
+    <string name="search_by_name_phone">Tìm bằng Tên, Số điện thoại</string>
+    <string name="label_customer_name">Tên Khách Hàng</string>
+    <string name="label_staff_name">Tên Nhân Viên</string>
+    <string name="label_waiting">Đang chờ</string>
+    <string name="label_info_waiting_status">Khách đang chờ để phục vụ</string>
+    <string name="label_info_service_status">Nhấn để bắt đầu phục vụ</string>
+    <string name="label_info_finish_status">Nhấn vào đây khi hoàn tất</string>
+    <string name="label_staff">Nhân viên</string>
+    <string name="label_choose_staff">Chọn Nhân Viên</string>
+    <string name="label_select_duration_time_to_service">Khoảng thời gian hoàn thành</string>
+    <string name="label_hours">Giờ</string>
+    <string name="label_minute">Phút</string>
+    <string name="label_status_finished">Đã hoàn thành</string>
+    <string name="label_empty_data">Không có dữ liệu!</string>
+    <string name="label_name">Tên nhân viên</string>
+    <string name="label_customer">Khách hàng</string>
+    <string name="label_time_and_date">Ngày giờ</string>
+    <string name="label_customer_information">Thông tin Khách hàng</string>
+    <string name="label_request_information">Thông tin Yêu cầu</string>
+    <string name="label_select_date">Chọn ngày</string>
+    <string name="label_to">Đến</string>
+    <string name="label_by_status">Theo Trạng thái</string>
+    <string name="label_by_staff">Theo Nhân viên</string>
+    <string name="label_by_customer">Theo Khách hàng</string>
+    <string name="label_by_date">Theo Ngày</string>
+    <string name="label_status_waiting_for_approval">Đang chờ chấp nhận</string>
+    <string name="label_accepted">Đã được chấp nhận</string>
+    <string name="label_canceled">Đã bị hủy</string>
+    <string name="label_select_customer">Chọn Khách hàng</string>
+    <string name="label_status_waiting_for_service">Đang chờ để phục vụ</string>
+    <string name="label_status_serving">Đang phục vụ</string>
+    <string name="label_full_name">Họ và tên</string>
+    <string name="label_note">Ghi chú</string>
+</resources>

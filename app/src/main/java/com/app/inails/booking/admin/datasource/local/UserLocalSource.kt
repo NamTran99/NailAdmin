@@ -6,12 +6,10 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.persistent.cache.GsonCaching
 import androidx.lifecycle.MutableLiveData
-import com.app.inails.booking.admin.extention.displaySafe
 import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.helper.ShareIOScope
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.UserDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
 import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
 import kotlinx.coroutines.launch
@@ -37,16 +35,17 @@ class UserLocalSource(
     private var isFirstOpenApp: Boolean? by caching.reference("fistOpenApp")
 
     init {
-        shareIOScope.launch { userLive.post(getUserDto())
+        shareIOScope.launch {
+            userLive.post(getUserDto())
             allUserLive.post(getUserOwnerDto() to getUserClientDto())
         }
     }
 
-    fun setOwnerMode(isOwner: Boolean){
+    fun setOwnerMode(isOwner: Boolean) {
         isOwnerMode = isOwner
     }
 
-    fun getOwnerMode() = isOwnerMode?:true
+    fun getOwnerMode() = isOwnerMode ?: true
 
     fun getUserOwnerDto(): UserOwnerDTO? = userOwner
     fun getUserClientDto(): UserClientDTO? = userClient
@@ -55,11 +54,12 @@ class UserLocalSource(
         return allUserLive
     }
 
-    fun getSalonPhone() = user?.admin?.phone?:""
+    fun getSalonPhone() = user?.admin?.phone ?: ""
 
     fun getToken(): String? {
-        return userClient?.token?:user?.token
+        return userClient?.token ?: user?.token
     }
+
     fun getSalonID(): Int? {
         return user?.admin?.salon_id
     }
@@ -74,6 +74,7 @@ class UserLocalSource(
     fun clearToken() {
         appCache.token = ""
     }
+
     fun clearAccount() {
         appCache.email = ""
         appCache.password = ""
@@ -86,10 +87,11 @@ class UserLocalSource(
     fun getUserDto(): UserDTO? = user
     fun getSalonDto(): SalonDTO? = user?.admin?.salon
     fun getSlug(): String = user?.admin?.salon?.slug.displaySafe1()
-    fun changeUserSlug(slug:String?){
-        user?.admin?.salon?.slug = slug?:""
+    fun changeUserSlug(slug: String?) {
+        user?.admin?.salon?.slug = slug ?: ""
     }
-    fun changeSalonName(salonName:String?){
+
+    fun changeSalonName(salonName: String?) {
         user?.admin?.salon?.name = salonName
     }
 
@@ -128,16 +130,16 @@ class UserLocalSource(
     }
 
 
-    fun logoutCustomer(){
+    fun logoutCustomer() {
         saveUserClient(null)
     }
 
-    fun updateEmailFeedbackUser(email: String){
+    fun updateEmailFeedbackUser(email: String) {
         user?.admin?.salon?.email = email
     }
 
     // is first login
-    fun saveOpenAppAlready(){
+    fun saveOpenAppAlready() {
         isFirstOpenApp = false
     }
 
@@ -145,8 +147,20 @@ class UserLocalSource(
         return isFirstOpenApp
     }
 
+    // set language
+
+
+    fun setLanguage(mLanguage: String): Boolean {
+        val isChangeSuccess = mLanguage != appCache.language
+        appCache.language = mLanguage
+        return isChangeSuccess
+    }
+
+    fun getLanguage() = if(isOwnerMode != false) appCache.language else "en"
+    fun getLanguageWithDefault() = if(isOwnerMode != false) appCache.language?:"en" else "en"
+
     // When log out
-    fun clearUser(){
+    fun clearUser() {
         user = null
     }
 

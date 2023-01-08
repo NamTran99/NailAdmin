@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentSalonImageBinding
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.views.clients.dialog.view_image.ImagesViewPagerAdapter
 
 class SalonImageFragment(val images:List<String>) : BaseFragment(R.layout.fragment_salon_image) {
@@ -19,6 +20,8 @@ class SalonImageFragment(val images:List<String>) : BaseFragment(R.layout.fragme
             }
 
             txtCount.text = "1/${images.size}"
+            txtCount.show(images.isNotEmpty())
+            lvNoImage.show(images.isEmpty())
             binding.vpgImages.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrolled(
                     position: Int,

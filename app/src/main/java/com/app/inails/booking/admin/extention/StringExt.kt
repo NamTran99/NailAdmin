@@ -3,6 +3,8 @@ package com.app.inails.booking.admin.extention
 import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.SpannableStringBuilder
+import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.base.MainApplication
 import java.net.URLDecoder
 
 fun Int.formatTime(): String {
@@ -145,7 +147,7 @@ fun String.formatUsNumberCustom(): String {
 }
 
 fun String.displaySafe(): String {
-    return this.ifEmpty { "No Information" }
+    return this.ifEmpty {MainApplication.applicationContext().getString(R.string.no_information) }
 }
 
 fun String?.displaySafe1(): String {

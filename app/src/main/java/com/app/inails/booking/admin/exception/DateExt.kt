@@ -1,13 +1,10 @@
 package com.app.inails.booking.admin.exception
 
-import android.content.Context
-import android.net.Uri
 import com.app.inails.booking.admin.exception.Format.DATE_PICKER
 import com.app.inails.booking.admin.exception.Format.FORMAT_DATE_MONTH
 import com.app.inails.booking.admin.exception.Format.FORMAT_DATE_MONTH_TIME
 import com.app.inails.booking.admin.exception.Format.FORMAT_DATE_TIME_API
 import com.app.inails.booking.admin.exception.Format.FORMAT_DATE_UTC
-import com.app.inails.booking.admin.utils.FileUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -87,3 +84,16 @@ fun String.toDateLocal(format: String = FORMAT_DATE_UTC): String {
     val parser = SimpleDateFormat(FORMAT_DATE_MONTH)
     return parser.format(date)
 }
+
+fun String.convert24hTo12hFormat(): String {
+    val  sdf = SimpleDateFormat("HH:mm", Locale.getDefault());
+    val dateObj = sdf.parse(this);
+    return SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(dateObj!!);
+}
+
+fun String.convert12hTo24hFormat(): String {
+    val  sdf = SimpleDateFormat("hh:mm aa", Locale.getDefault());
+    val dateObj = sdf.parse(this);
+    return SimpleDateFormat("HH:mm", Locale.getDefault()).format(dateObj!!);
+}
+

@@ -175,21 +175,58 @@
                             android:layout_marginTop="@dimen/size_16"
                             android:orientation="horizontal">
 
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/labelVoucher"
-                                style="@style/AppTheme.TextView.Medium"
+                            <androidx.appcompat.widget.LinearLayoutCompat
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/label_voucher_discount"
-                                android:textColor="@color/gray15" />
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/labelVoucher"
+                                    style="@style/AppTheme.TextView.Medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/label_voucher_discount"
+                                    android:textColor="@color/gray15" />
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/AppTheme.TextView.Medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/code"
+                                       />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvCode"
+                                        style="@style/AppTheme.TextView.Medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/size_5"
+                                        tools:text="vip"
+                                        android:textColor="@color/colorPrimary" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvPercent"
+                                        style="@style/AppTheme.TextView.Medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/size_5"
+                                        tools:text="vip"
+                                        android:textColor="#9CB859DA" />
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
 
                             <androidx.appcompat.widget.AppCompatImageButton
                                 android:id="@+id/btnInfo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/size_5"
+                                android:layout_marginStart="@dimen/size_10"
                                 android:layout_toEndOf="@+id/txtDiscount"
                                 android:background="?selectableItemBackgroundBorderless"
                                 android:src="@drawable/ic_info" />
@@ -200,6 +237,7 @@
                                 style="@style/AppTheme.TextView.Medium"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:layout_alignParentEnd="true"
                                 android:layout_weight="1"
                                 android:gravity="end"
@@ -361,6 +399,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="@dimen/size_5"
                     android:visibility="gone"
                     tools:visibility="visible">
 

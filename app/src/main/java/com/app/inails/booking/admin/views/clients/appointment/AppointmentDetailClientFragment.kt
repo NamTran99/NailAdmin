@@ -95,9 +95,9 @@ class AppointmentDetailClientFragment :
     }
 
     private fun displays(item: IAppointmentClient) = with(binding) {
-        Log.d("TAG", "displays: NamTD8 -1")
         viewNoData.hide()
         viewContents.run {
+            tvCode.text = item.voucherCode
             txtBookingID.text = item.idDisplay
             txtSalonName.text = item.salonName
             txtDatetime.text = item.dateTime

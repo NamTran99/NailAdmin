@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -57,16 +58,7 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btCheckIn"
-            style="@style/AppTheme.ButtonDefault.Wrap"
-            android:layout_height="@dimen/size_40"
-            android:layout_marginHorizontal="@dimen/size_12"
-            android:background="@drawable/button_red_corner_20"
-            android:drawableStart="@drawable/ic_check_in"
-            android:text="@string/btn_check_in"
-            android:visibility="gone"
-            tools:visibility="visible" />
+
 
         <ImageButton
             android:id="@+id/btMenu"
@@ -78,24 +70,41 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btCheckIn"
+        style="@style/AppTheme.ButtonDefault.Wrap"
+        android:layout_height="@dimen/size_40"
+        android:layout_marginHorizontal="@dimen/size_12"
+        android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/button_red_corner_20"
+        android:drawableStart="@drawable/ic_check_in"
+        android:text="@string/btn_check_in"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/checkOutLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_12"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:visibility="gone"
         tools:visibility="visible">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_gray_radius_20"
-            android:gravity="center"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/size_20"
             android:paddingVertical="@dimen/size_6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btCheckOut"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible">
 
             <TextView
@@ -114,21 +123,25 @@
             android:id="@+id/btCheckOut"
             style="@style/AppTheme.ButtonDefault.Wrap"
             android:layout_height="@dimen/size_40"
-            android:layout_marginStart="@dimen/size_12"
             android:background="@drawable/button_blue_corner_20"
             android:drawableStart="@drawable/ic_check_out"
-            android:text="@string/btn_check_out" />
+            android:text="@string/btn_check_out"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         style="@style/AppTheme.TextViewResponsive"
-        android:padding="0dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_5"
-        android:textColor="@color/color_848484"
-        android:background="@null"/>
+        android:background="@null"
+        android:padding="0dp"
+        android:textColor="@color/color_848484" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

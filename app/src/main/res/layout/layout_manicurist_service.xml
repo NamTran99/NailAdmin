@@ -1,69 +1,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/size_50"
-    android:background="@drawable/bg_border_edittext_2"
     android:gravity="center"
     android:orientation="horizontal">
 
-     <TextView             style="@style/AppTheme.TextView.MultiLine"
-        android:id="@+id/tvService"
-         android:paddingHorizontal="@dimen/size_5"
-        android:layout_width="@dimen/size_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-         android:minLines="0"
-        android:textColor="@color/black"
-         android:visibility="gone"/>
-
-    <EditText           style="@style/AppTheme.EditText"
-        android:background="@null"
-        android:paddingHorizontal="@dimen/size_5"
-        android:id="@+id/etService"
-        android:hint="@string/service_name_1"
-        android:layout_width="@dimen/size_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/black"/>
-
-    <View
-        android:layout_width="@dimen/size_1"
-        android:layout_height="@dimen/size_30"
-        android:layout_marginHorizontal="@dimen/size_5"
-        android:background="@color/color_eaeaea" />
+    <com.app.inails.booking.admin.views.widget.LoadingImageView1
+        android:id="@+id/imgAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="@dimen/size_5" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="1"
+        android:background="@drawable/bg_border_edittext_2"
+        android:gravity="center"
         android:orientation="horizontal">
 
-         <TextView            style="@style/AppTheme.TextView.Medium"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvService"
+            style="@style/AppTheme.TextView.MultiLine"
+            android:layout_width="@dimen/size_0"
             android:layout_height="wrap_content"
-            android:text="$" />
+            android:layout_weight="1"
+            android:minLines="0"
+            android:paddingHorizontal="@dimen/size_5"
+            android:textColor="@color/black"
+            android:visibility="gone" />
 
         <EditText
+            android:id="@+id/etService"
             style="@style/AppTheme.EditText"
-            android:textSize="@dimen/text_size_14"
-            android:paddingHorizontal="@dimen/size_0"
-            android:background="@null"
-            android:id="@+id/etPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/size_0"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_8"
             android:layout_weight="1"
-            android:hint="@string/price"
-            android:inputType="numberDecimal" />
+            android:background="@null"
+            android:hint="@string/service_name_1"
+            android:paddingHorizontal="@dimen/size_5"
+            android:textColor="@color/black" />
 
-         <TextView              style="@style/AppTheme.TextView.Medium"
-            android:textSize="@dimen/text_size_14"
-            android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
+        <View
+            android:layout_width="@dimen/size_1"
+            android:layout_height="@dimen/size_30"
+            android:layout_marginHorizontal="@dimen/size_5"
+            android:background="@color/color_eaeaea" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_8"
-            android:paddingEnd="@dimen/size_5"
-            android:text="@string/btn_delete"
-            android:textColor="@color/red" />
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$" />
+
+            <EditText
+                android:id="@+id/etPrice"
+                style="@style/AppTheme.EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/price"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="@dimen/size_0"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/btnDelete"
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:paddingEnd="@dimen/size_5"
+                android:text="@string/btn_delete"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_14" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

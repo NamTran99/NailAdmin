@@ -124,7 +124,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 R.string.title_appointment_detail,
                 extensionButton = ExtensionButton(isShow =  false, onclick = {
                     Router.redirectToCreateAppointment(self, arg.id)
-                }, content = "Edit"),
+                }),
                 onBackClick = {
                     activity?.onBackPressed()
                 },
@@ -193,7 +193,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             }
 
             checkInSuccess.bind {
-                success("Client check-in success")
+                success(R.string.client_check_in_success)
             }
 
             appointment.bind {
@@ -234,6 +234,9 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                     voucherDetailDialog.show(it)
                 }
             }
+            tvCode.text = item.voucherCode
+            tvPercent.text = item.percent
+            tvPercent.show(item.showPercent)
 //            txtVoucherCode.text = item.voucherCode
 //            txtDiscount.show(item.showPercent)
 //            txtDiscount.text = item.percent
@@ -307,7 +310,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                     extensionButton = ExtensionButton(isShow = item.status != DataConst.AppointmentStatus.APM_FINISH && item.status != DataConst.AppointmentStatus.APM_CANCEL && item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING,
                     onclick = {
                         Router.redirectToCreateAppointment(self, arg.id)
-                    }, content = "Edit"
+                    }
                         )
                     ,
                     onBackClick = {

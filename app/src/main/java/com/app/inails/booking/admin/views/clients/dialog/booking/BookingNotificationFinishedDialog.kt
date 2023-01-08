@@ -14,8 +14,8 @@ class BookingNotificationFinishedDialog(context: Context) : BaseDialog(context) 
     private val binding = viewBinding(DialogBookingFinishedBinding::inflate)
 
     init {
-        setCancelable(false)
-        setCanceledOnTouchOutside(false)
+//        setCancelable(false)
+//        setCanceledOnTouchOutside(false)
     }
 
     fun show(

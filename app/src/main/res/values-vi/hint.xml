@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_phone">Số điện thoại</string>
+    <string name="hint_password">Mật khẩu</string>
+    <string name="hint_enter_first_name">Điền tên</string>
+    <string name="hint_enter_last_name">Diền họ</string>
+    <string name="hint_enter_phone_number">Điền số điện thoại</string>
+    <string name="hint_search_by_booking_id_customer_name_staff_name"><font size = "9">Tìm bằng Booking ID, Tên khách hàng, Tên nhân viên</font></string>
+    <string name="hint_search_booking_list"><font size = "12">Tìm bằng Booking ID, Tên nhân viên</font></string>
+    <string name="hint_search_order_history"><font size = "12">Tìm bằng Booking ID, Tên khách hàng</font></string>
+    <string name="hint_enter_full_name">Điền đầy đủ họ tên</string>
+    <string name="hint_from">Từ</string>
+    <string name="hint_enter_your_phone">Điền số điện thoại của bạn</string>
+    <string name="label_select_time">Chọn thời gian</string>
+</resources>

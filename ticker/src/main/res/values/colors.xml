@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#BC40C1</color>
+    <color name="grey">#4FBC40C1</color>
+
+
+
+    <color name="time_unit_selected_color">#BC40C1</color>
+    <color name="time_unit_unselected_color">#4FBC40C1</color>
+</resources>

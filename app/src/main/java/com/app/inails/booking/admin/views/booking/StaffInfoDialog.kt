@@ -30,7 +30,6 @@ class StaffInfoDialog(context: Context) : BaseDialog(context) {
         staff: IStaff
     ) {
         with(binding) {
-            Log.d("TAG", " NamTD8 show: ${context is BaseActivity}")
             tvStaffName.text = staff.name
             tvPhone.text = staff.phone
             imgAvatar.setImageUrl(staff.avatar)

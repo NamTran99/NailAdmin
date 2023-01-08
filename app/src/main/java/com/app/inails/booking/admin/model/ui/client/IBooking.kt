@@ -20,6 +20,7 @@ interface IBooking : ISalonClient {
     val percent: String get() = ""
     val showPercent : Boolean get() =false
     val voucherInfo : String get() = ""
+    val voucherCode: String get() = ""
 }
 
 interface IBookingNotification : IBooking, ISalonDetailClient {

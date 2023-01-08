@@ -18,19 +18,22 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
-import com.app.inails.booking.admin.app.AppPermissionOwner
 import com.app.inails.booking.admin.app.AppSettingsOwner
 import com.app.inails.booking.admin.app.ResultsLifecycleOwner
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
 import com.app.inails.booking.admin.exception.ErrorHandlerImpl
-import com.app.inails.booking.admin.notification.NotificationsManager
 import com.app.inails.booking.admin.notification.NotificationsManagerClient
 import com.app.inails.booking.admin.views.clients.dialog.view_image.ViewImageDialogOwner
-import com.app.inails.booking.admin.views.dialog.*
+import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
+import com.app.inails.booking.admin.views.dialog.ErrorDialogOwner
+import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
+import com.app.inails.booking.admin.views.dialog.NotificationDialogOwner
 import com.app.inails.booking.admin.views.dialog.loading.LoadingDialog
+import com.esafirm.imagepicker.helper.LocaleManager
 import es.dmoral.toasty.Toasty
+import java.util.Locale
 
 abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutId),
     NotificationDialogOwner,
@@ -94,6 +97,28 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    private fun restartActivity(){
+        finish()
+        startActivity(intent)
+    }
+
+    fun setLanguage(lan: String, isRestart: Boolean = true){
+        if(userLocalSource.setLanguage(lan) && isRestart){
+            restartActivity()
+        }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleManager.updateResources(newBase, userLocalSource.getLanguageWithDefault()))
+    }
+
+    override fun onResume() {
+        if(this.resources.configuration.locale.toString() != userLocalSource.getLanguageWithDefault()){
+            restartActivity()
+        }
+        super.onResume()
     }
 
     open fun logout(){

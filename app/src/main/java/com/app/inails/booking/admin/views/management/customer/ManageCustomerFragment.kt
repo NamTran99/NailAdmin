@@ -38,7 +38,7 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
     private fun setUpListener() {
         with(viewModel) {
             updateCustomerResult.bind{
-                success("Update customer information success")
+                success(R.string.update_customer_success)
                 mAdapter.updateItem(it)
             }
             refreshLoading.bind {

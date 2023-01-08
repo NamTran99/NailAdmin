@@ -17,6 +17,7 @@ import com.app.inails.booking.admin.databinding.FragmentIntroBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.getAppResourceId
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.popups.PopupUserMoreOwner
 import com.app.inails.booking.admin.repository.aboutapp.BannerIntroGuidanceRepo
@@ -35,6 +36,10 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro), TopBarOwner,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            tvSkip.onClick{
+                viewModel.setFirstOpenAppAlready()
+                Router.run { redirectToLogin() }
+            }
             introSliderAdapter = IntroSliderAdapter(introSliderViewPager)
             TabLayoutMediator(tabLayout, introSliderViewPager, true, true) { tab, position ->
 
@@ -43,6 +48,15 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro), TopBarOwner,
                 ViewPager2.OnPageChangeCallback() {
                 @SuppressLint("UseCompatLoadingForDrawables")
                 override fun onPageSelected(position: Int) {
+                    tvSkip.show(position != introSliderAdapter.itemCount - 1)
+                    btnSkipStart.onClick {
+                        if(position == introSliderAdapter.itemCount - 1){
+                            viewModel.setFirstOpenAppAlready()
+                            Router.run { redirectToLogin() }
+                        }else{
+                            introSliderViewPager.setCurrentItem(position + 1, true)
+                        }
+                    }
                    if(position == introSliderAdapter.itemCount - 1){
                        btnSkipStart.setCompoundDrawables(null,null,null,null)
                        btnSkipStart.setBackgroundColor(requireContext().getColor(R.color.colorPrimary))
@@ -54,16 +68,10 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro), TopBarOwner,
                        btnSkipStart.setCompoundDrawablesWithIntrinsicBounds(null,null,requireContext().getDrawable(R.drawable.ic_arrow_right), null)
                        btnSkipStart.background = requireContext().getDrawable(R.drawable.button_f5f5f5_corner)
                        btnSkipStart.setTextColor(requireContext().getColor(R.color.black))
-                       btnSkipStart.text = requireContext().getString(R.string.skip)
+                       btnSkipStart.text = requireContext().getString(R.string.btn_next)
                    }
                 }
-
             })
-
-            btnSkipStart.onClick {
-                viewModel.setFirstOpenAppAlready()
-                Router.run { redirectToLogin() }
-            }
         }
 
         viewModel.apply {

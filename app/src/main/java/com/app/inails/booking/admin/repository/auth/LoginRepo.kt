@@ -23,6 +23,7 @@ class LoginRepo(
 ) {
     suspend operator fun invoke(form: LoginOwnerForm) {
         form.validate()
+        form.lang = userLocalSource.getLanguage()?:"en"
         form.phone = textFormatter.formatPhoneNumber(form.phone)
 		form.deviceToken = appCache.deviceToken
         val user = authenticateApi.login(form).await()

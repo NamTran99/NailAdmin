@@ -63,39 +63,26 @@ data class SignUpForm constructor(
         if(salon_phone.trim().convertPhoneToNormalFormat().length < 10){
             viewError(R.id.edtSalonPhone, R.string.error_type_phone_not_enough)
         }
-        if(salon_email.isBlank()){
-            viewError(R.id.edtSalonEmail, R.string.error_blank_admin_email)
-        }
 
-        if (!salon_email.isEmail()) viewError(
+        if (!salon_email.isEmail() && salon_email.isNotEmpty()) viewError(
             R.id.edtSalonEmail,
             R.string.error_not_correct_email
         )
-
-        if(images.size == 0){
-            resourceError(R.string.error_not_enough_image_count)
-        }
-        if(salon_description.trim().isEmpty()){
-            viewError(R.id.edtDescription, R.string.error_blank_salon_description)
-        }
-        if(services.size == 0){
-            resourceError(R.string.error_not_enough_service)
-        }
-        if(staffs.size == 0){
-            resourceError(R.string.error_not_enough_staff)
-        }
     }
 }
 
 data class ISalonStaff(
-    val first_name: String = "",
-    val last_name: String = "",
-    val phone: String = "",
+    var avatar: String = "",
     @Transient
-    val fullName: String = ""
+    val imageUri: String = "",
+    val phone: String = "",
+    val name: String = ""
 )
 
 data class ISalonService(
+    @Transient
+    val imageUri: String = "",
     val name: String = "",
-    val price: Double = 0.0
+    val price: Double = 0.0,
+    var avatar: String = ""
 )

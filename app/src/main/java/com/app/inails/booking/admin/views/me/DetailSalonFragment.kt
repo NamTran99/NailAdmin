@@ -19,6 +19,7 @@ import com.app.inails.booking.admin.databinding.FragmentProfileBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.MeApi
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.model.ui.ISalonDetail
 import com.app.inails.booking.admin.navigate.Router
@@ -50,7 +51,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
                 R.string.mn_manage_salon,
                 extensionButton = ExtensionButton(isShow = true, onclick = {
                     Router.run { redirectToUpdateSalon() }
-                }, content = "Edit"),
+                }),
                 onBackClick = {
                     activity?.onBackPressed()
                 },
@@ -96,6 +97,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         }
         txtSalonName.text = item.salonName
         viewHeader.apply {
+            lvVoucher.show(item.vouchers.isNotEmpty())
             voucherAdapter.submit(item.vouchers)
             txtAddress.text = item.address
             txtEmail.text = item.email

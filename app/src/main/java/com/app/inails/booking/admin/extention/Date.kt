@@ -1,6 +1,8 @@
 package com.app.inails.booking.admin.extention
 
+import android.content.Context
 import android.text.format.DateUtils
+import com.app.inails.booking.admin.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -149,9 +151,9 @@ fun String.toJoinedDate(
     return simpleDateFormat.format(date)
 }
 
-fun String?.toVoucherTIme(
+fun String?.toVoucherTime( context: Context
 ): String {
-    if(this == null) return "No Information"
+    if(this == null) return context.getString(R.string.no_information)
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =

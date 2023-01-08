@@ -1,9 +1,13 @@
 package com.app.inails.booking.admin.model.ui
 
 import android.os.Parcelable
+import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
+import com.app.inails.booking.admin.exception.viewError
+import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.app.inails.booking.admin.model.response.SalonDTO
+import com.app.inails.booking.admin.model.support.ISelector
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
@@ -47,7 +51,7 @@ interface IVoucher {
     val type: VoucherType get() = VoucherType.PERCENT // 1 : %  || 2 : value
     val startDate: String get() = ""
     val endDate: String get() = ""
-    val typeCustomer: String get() = "All" // 1 : all || 2 : normal || 3 : vip
+    val typeCustomer: Int get() = R.string.customer_type_all // 1 : all || 2 : normal || 3 : vip
     val value: Double get() = 0.0 // 1 : all || 2 : normal || 3 : vip
     val description: String get() = ""
 }
@@ -58,13 +62,14 @@ enum class VoucherType {
 
 class ISchedule(
     var day: Int = 0,
-    var dayFormat: String = "",
+    @StringRes var dayFormat: Int = 0,
     var startTimeFormat: String? = null,// format 12H with AM/PM
     var endTimeFormat: String? = null,  // format 12H with AM/PM
     var startTime: String? = null,      // format 24H
     var endTime: String? = null,        // format 24H
     var timeFormat: String? = null,
-) : Serializable {
+    override var isSelector: Boolean = false
+) : Serializable, ISelector {
     override fun toString(): String {
         return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace(
             "\"null\"",
@@ -74,13 +79,13 @@ class ISchedule(
 
     companion object {
         fun getDefaultList() = listOf(
-            ISchedule(1, timeFormat = "Not open", dayFormat = "Monday"),
-            ISchedule(2, timeFormat = "Not open", dayFormat = "Tuesday"),
-            ISchedule(3, timeFormat = "Not open", dayFormat = "Wednesday"),
-            ISchedule(4, timeFormat = "Not open", dayFormat = "Thursday"),
-            ISchedule(5, timeFormat = "Not open", dayFormat = "Friday"),
-            ISchedule(6, timeFormat = "Not open", dayFormat = "Saturday"),
-            ISchedule(0, timeFormat = "Not open", dayFormat = "Sunday"),
+            ISchedule(1, dayFormat = R.string.monday),
+            ISchedule(2, dayFormat = R.string.tuesday),
+            ISchedule(3, dayFormat = R.string.wednesday),
+            ISchedule(4, dayFormat = R.string.thursday),
+            ISchedule(5, dayFormat = R.string.friday),
+            ISchedule(6, dayFormat = R.string.saturday),
+            ISchedule(0, dayFormat = R.string.sunday),
         )
     }
 }
@@ -115,6 +120,18 @@ class SalonForm(
     }
 
     fun validate() {
+        if (name.isBlank()) {
+            viewError(
+                R.id.etSalonName,
+                R.string.error_blank_salon_name
+            )
+        }
+        if(phone.trim().isEmpty()){
+            viewError(R.id.etPhone, R.string.error_blank_phone)
+        }
+        if(phone.trim().convertPhoneToNormalFormat().length < 10){
+            viewError(R.id.etPhone, R.string.error_type_phone_not_enough)
+        }
         if (allImageCount == 0) {
             resourceError(R.string.error_not_enough_image_count)
         }

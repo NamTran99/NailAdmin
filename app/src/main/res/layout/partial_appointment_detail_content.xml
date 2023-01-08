@@ -183,8 +183,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/line"
             android:orientation="vertical"
-            tools:visibility="visible"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -210,36 +210,79 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/labelVoucher"
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_voucher_discount"
-                    android:textColor="@color/gray_08" />
+                    android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtDiscount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_5"
-                    android:layout_toEndOf="@+id/labelVoucher"
-                    android:textColor="@color/colorPrimary" />
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btnInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_toEndOf="@+id/txtDiscount"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_5"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_info"
-                    android:layout_gravity="center"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtPriceDiscount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textColor="@color/colorPrimary" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/labelVoucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_voucher_discount"
+                            android:textColor="@color/gray_08" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/code" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvCode"
+                                style="@style/AppTheme.TextView.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_5"
+                                android:textColor="@color/colorPrimary"
+                                tools:text="vip" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtDiscount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_5"
+                                tools:text="vip"
+                                android:textColor="#9CB859DA" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/btnInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/size_5"
+                        android:layout_toEndOf="@+id/txtDiscount"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_info" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtPriceDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="end"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/colorPrimary" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
             </RelativeLayout>
 
             <View
@@ -409,6 +452,7 @@
                 tools:listitem="@layout/item_image_feedback" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/imageAfterLayout"
             android:layout_width="match_parent"

@@ -48,9 +48,6 @@ class GalleryImageFragment : BaseFragment(R.layout.fragment_gallery_image), TopB
             topBar.setState(
                 SimpleTopBarState(
                     R.string.salon_s_gallery,
-                    extensionButton = ExtensionButton(isShow = true, onclick = {
-                        Router.run { redirectToUpdateSalon() }
-                    }, content = "Edit"),
                     onBackClick = {
                         activity?.onBackPressed()
                     },
@@ -63,8 +60,8 @@ class GalleryImageFragment : BaseFragment(R.layout.fragment_gallery_image), TopB
             }
             TabLayoutMediator(tabLayout, vpLayoutImages) { tab, position ->
                 when (position) {
-                    0 -> tab.text = "Before (${args.listBeforeImages.size})"
-                    else -> tab.text = "After (${args.listAfterImages.size})"
+                    0 -> tab.text = requireContext().getString(R.string.gallery_before_format, args.listBeforeImages.size.toString())
+                    else -> tab.text =  requireContext().getString(R.string.gallery_after_format, args.listAfterImages.size.toString())
                 }
             }.attach()
             vpLayoutImages.isUserInputEnabled = false
@@ -84,7 +81,7 @@ class GalleryImageFragment : BaseFragment(R.layout.fragment_gallery_image), TopB
 //                    }
 //                    submit(listOf(args.listBeforeImages, args.listAfterImages))
 //                }
-                success("Delete Image Successfully")
+                success(R.string.delete_image_success)
             }
         }
 

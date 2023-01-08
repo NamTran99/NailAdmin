@@ -4,6 +4,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import com.app.inails.booking.admin.BuildConfig
+import com.app.inails.booking.admin.R
 
 object Utils {
 
@@ -31,10 +32,10 @@ object Utils {
         return isInBackground
     }
 
-    fun getDisplayBuildConfig(): String {
+    fun getDisplayBuildConfig(context: Context): String {
         val listItems = BuildConfig.VERSION_NAME.split("_")
 
-        val display = "Version ${listItems[0]}"
+        val display = context.getString(R.string.version_format,listItems[0] )
         return if(listItems.size > 1) "${display}\n(${listItems[1]})" else display
     }
 }

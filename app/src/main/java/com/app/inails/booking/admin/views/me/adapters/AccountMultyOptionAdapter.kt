@@ -77,8 +77,9 @@ class AccountMultyOptionAdapter(view: RecyclerView) :
     internal inner class DetailSalonVH(view: LayoutDetailSalonBinding) : BaseViewHolder<LayoutDetailSalonBinding>(view) {
         @SuppressLint("SetTextI18n")
         fun bind(user: UserDTO?) {
+            val context = binding.root.context
             binding.apply {
-                tvAccountName.text = "Welcome, ${user?.admin?.name}"
+                tvAccountName.text = context.getString(R.string.welcome_account, user?.admin?.name)
                 tvSalonName.text = user?.admin?.salon?.name
                 tvSalonJoinDate.text = user?.admin?.salon?.created_at?.toJoinedDate()
                 btnLogOut.onClick{

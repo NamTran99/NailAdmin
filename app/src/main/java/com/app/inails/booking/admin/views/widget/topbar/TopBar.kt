@@ -10,7 +10,7 @@ import com.app.inails.booking.admin.extention.show
 
 data class ExtensionButton(
     var isShow: Boolean = false,
-    var content: String = "Edit",
+    @StringRes var content: Int = R.string.edit,
     val onclick: (() -> Unit)? = null
 )
 
@@ -77,7 +77,7 @@ class SimpleTopBarState(
             btExtension.setOnClickListener {
                 extensionButton.onclick?.let { it1 -> it1() }
             }
-            btExtension.text = extensionButton.content
+            btExtension.setText(extensionButton.content)
 
             btSetting.show(onSettingClick != null)
             btSetting.onClick {

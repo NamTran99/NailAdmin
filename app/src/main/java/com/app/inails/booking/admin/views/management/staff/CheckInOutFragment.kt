@@ -62,7 +62,7 @@ class CheckInOutFragment : BaseFragment(R.layout.fragment_manage_check_in_staff)
         with(viewModel) {
            results.bind{
                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
-               binding.emptyLayout.tvEmptyData.text =  "This staff doesn't have any attendance records yet"
+               binding.emptyLayout.tvEmptyData.setText(R.string.staff_not_have_attendance)
                mAdapter.submit(it)
            }
             loading.bind{

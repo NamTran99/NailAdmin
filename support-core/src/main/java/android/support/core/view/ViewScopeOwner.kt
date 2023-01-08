@@ -15,7 +15,9 @@ interface ViewScopeOwner {
     val viewScope: ViewScope
         get() {
             val view = when (this) {
-                is Activity -> this.findViewById(android.R.id.content)
+                is Activity -> {
+                    this.findViewById(android.R.id.content)
+                }
                 is ViewGroup -> this
                 is Fragment -> requireView() as ViewGroup
                 is Dialog -> this.findViewById(android.R.id.content)

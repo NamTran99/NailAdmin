@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.factory
 
+import android.content.Context
 import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.DataConst
@@ -14,7 +15,10 @@ import com.app.inails.booking.admin.model.support.ISelector
 import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
-class BookingFactory(private val textFormatter: TextFormatter) {
+class BookingFactory(
+    private val textFormatter: TextFormatter,
+    val context: Context
+) {
 
     private fun createService(serviceDTO: ServiceDTO): IService {
         return object : IService, ISelector by ServiceImpl() {
@@ -29,11 +33,12 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val textColor: Int
                 get() = textFormatter.formatTextColorStaffColor(serviceDTO.active.safe())
             override val detailImages: List<AppImage>
-                get() = serviceDTO.images.map { AppImage(it.id,it.image) }.toMutableList().apply { if(serviceDTO.image != null) add(AppImage(path = serviceDTO.image)) }
+                get() = serviceDTO.images.map { AppImage(it.id, it.image) }.toMutableList()
+                    .apply { if (serviceDTO.image != null) add(AppImage(path = serviceDTO.image)) }
             override val avatar: String?
                 get() = serviceDTO.image
             override val moreImage: List<AppImage>
-                get() = serviceDTO.images.map { AppImage(it.id,it.image) }
+                get() = serviceDTO.images.map { AppImage(it.id, it.image) }
         }
     }
 
@@ -88,9 +93,9 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val avatar: String?
                 get() = staffDTO.avatar
             override val description: String
-                get() = staffDTO.description?:""
+                get() = staffDTO.description ?: ""
             override val isAvatarDefault: Boolean
-                get() = staffDTO.is_avatar_default?:false
+                get() = staffDTO.is_avatar_default ?: false
         }
     }
 
@@ -102,8 +107,8 @@ class BookingFactory(private val textFormatter: TextFormatter) {
         return createStaff(staffsDTO)
     }
 
-    fun createReportAppointment(reportDTO: ReportDTO):IReport{
-        return object :IReport{
+    fun createReportAppointment(reportDTO: ReportDTO): IReport {
+        return object : IReport {
             override val appointment: List<IAppointment>
                 get() = createAppointmentList(reportDTO.appointments)
             override val totalAppointment: Int
@@ -189,11 +194,14 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val customerID: Int
                 get() = appointmentDTO.customer_id.safe()
             override val feedbackImages: List<AppImage>
-                get() = appointmentDTO.feedback?.images?.map { AppImage(path = it.image) }?: listOf()
+                get() = appointmentDTO.feedback?.images?.map { AppImage(path = it.image) }
+                    ?: listOf()
             override val afterImage: List<AppImage>
-                get() = appointmentDTO.images.filter { it.type_name == "after" }.map { AppImage(path=it.image?:"") }
+                get() = appointmentDTO.images.filter { it.type_name == "after" }
+                    .map { AppImage(path = it.image ?: "") }
             override val beforeImage: List<AppImage>
-                get() = appointmentDTO.images.filter { it.type_name == "before" }.map { AppImage(path=it.image?:"") }
+                get() = appointmentDTO.images.filter { it.type_name == "before" }
+                    .map { AppImage(path = it.image ?: "") }
             override val totalAmount: String
                 get() = textFormatter.formatPrice(appointmentDTO.price).safe()
             override val discount: String
@@ -201,13 +209,14 @@ class BookingFactory(private val textFormatter: TextFormatter) {
             override val hasVoucher: Boolean
                 get() = appointmentDTO.voucher != null
             override val percent: String
-                get() = appointmentDTO.voucher?.value?.let { textFormatter.formatPercent(it) }.safe()
+                get() = appointmentDTO.voucher?.value?.let { textFormatter.formatPercent(it) }
+                    .safe()
             override val showPercent: Boolean
                 get() = appointmentDTO.voucher?.type == DataConst.VoucherType.TYPE_PERCENT
             override val voucherCode: String
                 get() = appointmentDTO.voucher?.code.displaySafe1()
             override val voucher: IVoucher?
-                get() = appointmentDTO.voucher?.let{createVoucher(it)}
+                get() = appointmentDTO.voucher?.let { createVoucher(it, context) }
         }
     }
 

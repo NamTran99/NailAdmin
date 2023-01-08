@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemEditSalonScheduleBinding
 import com.app.inails.booking.admin.model.ui.ISchedule
-import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class SalonEditScheduleAdapter(view: RecyclerView, private val isTextWhite: Boolean = false) :
@@ -21,6 +20,8 @@ class SalonEditScheduleAdapter(view: RecyclerView, private val isTextWhite: Bool
         adapterPosition: Int
     ) {
         binding.apply {
+            businessHour.setUpView()
+            businessHour.setupListener()
             businessHour.setDate(item.day)
             businessHour.setStartTime(item.startTime)
             businessHour.setEndTime(item.endTime)
@@ -30,12 +31,13 @@ class SalonEditScheduleAdapter(view: RecyclerView, private val isTextWhite: Bool
         }
     }
 
-     fun updateItem(data: List<ISchedule>?) {
-         data?.forEach{ newData ->
-             items?.forEachIndexed { index, iSchedule ->
-                 if(iSchedule.day == newData.day) items!![index] = newData
-             }
-         }
-         notifyDataSetChanged()
+    fun updateItem(data: List<ISchedule>?) {
+        data?.forEach { newData ->
+            items?.forEachIndexed { index, iSchedule ->
+                if (iSchedule.day == newData.day) items!![index] = newData
+            }
+        }
+
+        notifyDataSetChanged()
     }
 }

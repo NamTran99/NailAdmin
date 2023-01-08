@@ -12,6 +12,10 @@ keystoreProperties.load(new FileInputStream(rootProject.file("keystore-release.p
 android {
     compileSdk 33
 
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
     defaultConfig {
         applicationId "com.app.booking.inails.admin"
         minSdk 23
@@ -94,6 +98,7 @@ dependencies {
     implementation project(':support-navigation')
     implementation project(':support-viewmodel')
     implementation project(':imagepicker')
+    implementation project(':ticker')
 
     //Others
     testImplementation 'junit:junit:4.+'
@@ -110,6 +115,8 @@ dependencies {
     implementation "com.google.android.libraries.places:places:$placeVersion"
 
     implementation "com.google.android.play:app-update-ktx:$ktx_app_update_v"
+
+//    implementation 'com.github.kshitijskumar:Ticker:1.0.0'
 
     //Socket IO
     implementation ('io.socket:socket.io-client:2.0.1') {

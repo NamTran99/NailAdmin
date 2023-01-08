@@ -20,27 +20,45 @@
             android:orientation="vertical"
             android:padding="@dimen/size_17">
 
-            <TextView
-                style="@style/AppTheme.TextView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/time_zone" />
-
-            <EditText
-                android:id="@+id/tvTimeZone"
-                style="@style/AppTheme.EditText"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_50"
-                android:focusable="false"
-                android:layout_marginTop="@dimen/size_19"
-                tools:text="Viet nam" />
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_zone" />
+
+                <TextView
+                    android:id="@+id/tvTimeZone"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    tools:text="Viet nam" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <Button
+                android:id="@+id/btChooseOneForAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.Button"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@drawable/button_accent_corner"
+                android:textAllCaps="false"
+                android:text="@string/copy_day_title"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSchedule"
+                android:layout_marginTop="@dimen/size_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="" />
+                tools:listitem="@layout/item_edit_salon_schedule" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -140,12 +140,14 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                 searchStaff = if (args.idType == TypeID.Staff) args.id else null
             }
             listAppointment.bind {
-                if(it.first == 1){
+                if (it.first == 1) {
                     mAdapter.clear()
                 }
                 mAdapter.submit(it.second)
-                binding.emptyLayout.tvEmptyData.text = if (binding.searchView.text.isEmpty())
-                    customerListBookingUI.emptyData else "There are no results matching your search keyword."
+                binding.emptyLayout.tvEmptyData.setText(
+                    if (binding.searchView.text.isEmpty())
+                        customerListBookingUI.emptyData else R.string.no_result_order_found
+                )
                 (mAdapter.itemCount == 0) show binding.emptyLayout.tvEmptyData
                 (mAdapter.itemCount > 0) show binding.rvAppointment
             }
@@ -159,7 +161,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                 refreshView()
             }
             checkInSuccess.bind {
-                success("Client check-in success")
+                success(R.string.client_check_in_success)
                 refreshView()
             }
             appointment.bind {
@@ -324,7 +326,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                             note = notes
                             status = DataConst.AppointmentStatus.APM_FINISH
                             beforeImages = beforeImagePath
-                            afterImages =  afterImagePath
+                            afterImages = afterImagePath
                         }
                         viewModel.updateStatus()
                     }
@@ -473,7 +475,7 @@ data class CustomerBookingListUI(
     var staffId: Int? = null,
     var idType: TypeID = TypeID.Customer,
     var searchHint: Int = 0,
-    var emptyData: String = "",
+    var emptyData: Int = 0,
     var titleTopBar: Int = 0,
 ) {
 
@@ -482,12 +484,12 @@ data class CustomerBookingListUI(
         if (customerListBookingArg.idType == TypeID.Customer) {
             customerId = customerListBookingArg.id
             searchHint = R.string.hint_search_booking_list
-            emptyData = "This customer doesn't booking any appointments yet"
+            emptyData = R.string.customer_not_have_apm
             titleTopBar = R.string.title_booking_list
         } else {
             staffId = customerListBookingArg.id
             searchHint = R.string.hint_search_order_history
-            emptyData = "This staff doesn't have any orders yet"
+            emptyData = R.string.staff_not_have_order
             titleTopBar = R.string.title_order_history
         }
     }

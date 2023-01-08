@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
+import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -78,6 +79,9 @@ class AppointmentForm(
             R.id.etPhone,
             R.string.error_blank_phone
         )
+        if(phone.trim().convertPhoneToNormalFormat().length < 10){
+            viewError(R.id.etPhone, R.string.error_type_phone_not_enough)
+        }
         if (name.isBlank()) viewError(R.id.etFullName, R.string.error_blank_name)
         if (staffID == 0 && hasStaff) resourceError(R.string.error_blank_staff_id)
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
