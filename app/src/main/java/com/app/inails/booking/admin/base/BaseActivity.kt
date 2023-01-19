@@ -111,7 +111,7 @@ abstract class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLay
     }
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleManager.updateResources(newBase, userLocalSource.getLanguageWithDefault()))
+        super.attachBaseContext(LocaleManager.updateResources(newBase, userLocalSource.getLanguage()))
     }
 
     override fun onResume() {

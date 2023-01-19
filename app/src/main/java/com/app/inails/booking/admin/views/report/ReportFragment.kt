@@ -65,8 +65,10 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                 (mAdapter.itemCount == 0) show binding.emptyLayout.tvEmptyData
                 (mAdapter.itemCount > 0) show binding.rvReport
 
-                binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isEmpty())
-                    "Your salon doesn't have any reports yet" else "There are no results matching your search keyword."
+                binding.emptyLayout.tvEmptyData.setText(
+                    if(binding.searchView.text.isEmpty())
+                        R.string.label_empty_data else R.string.no_result_order_found
+                )
 
                 it.second.totalAppointment.let { size ->
                     binding.tvTotalApm.text =  requireContext().getString(if(size <=1)R.string.number_booking else R.string.number_bookings, size.toString())

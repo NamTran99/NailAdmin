@@ -270,20 +270,10 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             (ServicePriceAdapter(rvServices)).apply {
                 submit(list)
             }
-            btService.isEnabled = item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING
-            btService.drawableStart(if (item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING) R.drawable.circle_blue else R.drawable.ic_check_white)
-            if (item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING) {
-                btFinish.setBackgroundResource(R.drawable.button_gray_green_corner_20)
-                btFinish.isEnabled = true
-                btFinish.setTextColor(
-                    ContextCompat.getColorStateList(
-                        appActivity,
-                        R.color.color_button_status
-                    )
-                )
-            } else {
-                btFinish.isEnabled = false
-            }
+            btService.show(item.status == DataConst.AppointmentStatus.APM_WAITING)
+            btFinish.show(item.status == DataConst.AppointmentStatus.APM_IN_PROCESSING)
+//            btService.drawableStart(if (item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING) R.drawable.ic_uncheck_white else R.drawable.ic_check_blue )
+//            btFinish.drawableStart(if (item.status != DataConst.AppointmentStatus.APM_FINISH) R.drawable.ic_uncheck_white else R.drawable.ic_check_green )
 
             tvTypeCancel.text = item.canceledBy
             tvReason.text = item.reasonCancel
@@ -426,7 +416,7 @@ class AppointmentDetailViewModel(
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
     val formStartService = StartServiceForm()
-    val success = SingleLiveEvent<String>()
+    val success = SingleLiveEvent<Int>()
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
 
@@ -440,17 +430,17 @@ class AppointmentDetailViewModel(
 
     fun updateStatus() = launch(loading, error) {
         appointmentRepo.updateStatusAppointment(form)
-        success.post("Finish appointment success")
+        success.post(R.string.success_finish_appointment)
     }
 
     fun cancel() = launch(loading, error) {
         appointmentRepo.cancelAppointment(formCancel)
-        success.post("Cancel appointment success")
+        success.post(R.string.success_cancel_appointment)
     }
 
     fun remove(id: Int) = launch(loading, error) {
         appointmentRepo.removeAppointment(id)
-        success.post("Remove appointment success")
+        success.post(R.string.success_remove_appointment)
     }
 
     fun customerWalkIn(id: Int) = launch(loading, error) {
@@ -460,13 +450,13 @@ class AppointmentDetailViewModel(
     fun handle() = launch(loading, error) {
         appointmentRepo.adminHandleAppointment(formHandle)
         if (formHandle.isAccepted == 1)
-            success.post("Accept appointment success")
+            success.post(R.string.success_accept_appointment)
         else
-            success.post("Reject appointment success")
+            success.post(R.string.success_reject_appointment)
     }
 
     fun startService() = launch(loading, error) {
         appointmentRepo.startServiceAppointment(formStartService)
-        success.post("Start service success")
+        success.post(R.string.success_start_service)
     }
 }

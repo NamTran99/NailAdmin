@@ -75,4 +75,6 @@ class ServiceAdapter(view: RecyclerView) :
                 imvService.strokeWidth = 0f
         }
     }
+
+
 }

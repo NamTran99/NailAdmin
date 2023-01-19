@@ -8,19 +8,19 @@ import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
-import android.support.core.livedata.post
+import android.support.core.livedata.*
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -37,11 +37,15 @@ import com.app.inails.booking.admin.helper.RequestBodyBuilder
 import com.app.inails.booking.admin.model.response.TimeZoneForm
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToApplyVoucherSalon
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.utils.TimeUtils
+import com.app.inails.booking.admin.views.booking.dialog.VoucherDetailDialogOwner
 import com.app.inails.booking.admin.views.dialog.MessageDialogOwner
 import com.app.inails.booking.admin.views.me.EditScheduleFragment.Companion.REQUEST_KEY
 import com.app.inails.booking.admin.views.me.adapters.SalonScheduleAdapter
 import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter
+import com.app.inails.booking.admin.views.me.adapters.VoucherAdapter
 import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
@@ -52,11 +56,12 @@ import retrofit2.await
 
 
 class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBarOwner,
-    MessageDialogOwner {
+    MessageDialogOwner, VoucherDetailDialogOwner {
     val viewModel by viewModel<UpdateSalonViewModel>()
     val binding by viewBinding(FragmentUpdateSalonBinding::bind)
     private lateinit var imageAdapter: UploadPhotoAdapter
     private lateinit var scheduleAdapter: SalonScheduleAdapter
+    private lateinit var voucherAdapter: VoucherAdapter
 
     var pathServerImage = ArrayList<AppImage>()
     var pathLocalImage = ArrayList<AppImage>()
@@ -70,7 +75,8 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 pathLocalImage.clear()
-                pathLocalImage.addAll(pathImage.filter { !it.toString().contains("http") }.map { pathUri -> AppImage(path = pathUri.toString()) })
+                pathLocalImage.addAll(pathImage.filter { !it.toString().contains("http") }
+                    .map { pathUri -> AppImage(path = pathUri.toString()) })
                 allImage.clear()
                 allImage.addAll(pathServerImage)
                 allImage.addAll(pathLocalImage)
@@ -121,6 +127,19 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
         )
 
         with(binding) {
+            voucherDetailDialog.onClickDeleteVoucher = {
+                viewModel.deleteVoucher(it)
+            }
+            voucherAdapter = VoucherAdapter(rcVoucher).apply {
+                onItemCLick = {
+                    voucherDetailDialog.show(it, true)
+                }
+            }
+            btnAddVoucher.onClick {
+                redirectToApplyVoucherSalon(Routing.VoucherApply.apply {
+                    listOfCode = listCode
+                })
+            }
             tvBusinessHour.text = viewModel.salonForm.fullTimeZoneDisplay1
             etPhone.inputTypePhoneUS()
             scheduleAdapter = SalonScheduleAdapter(rcvSchedule)
@@ -174,8 +193,12 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
 
                 if (oldTimezone != salonForm.fullTimeZoneDisplay2) {
                     messageDialog.show(
-                        "Notice",
-                        "Your timezone has changed from $oldTimezone to ${salonForm.fullTimeZoneDisplay2}\nPlease check your business hour before saving information!"
+                        R.string.notice,
+                        getString(
+                            R.string.change_time_zone,
+                            oldTimezone,
+                            salonForm.fullTimeZoneDisplay2
+                        )
                     )
                 }
             }
@@ -185,6 +208,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                 success(R.string.update_success)
                 activity?.onBackPressed()
             }
+
         }
 
         parentFragmentManager.setFragmentResultListener(
@@ -234,7 +258,9 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
     }
 
     private fun formatSalonSchedule(it: ISchedule): String {
-        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) requireContext().getString(R.string.not_open)
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) requireContext().getString(
+            R.string.not_open
+        )
         else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 
@@ -271,27 +297,78 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
 
     private fun refreshView() {
         viewModel.getDetailSalon()
+        viewModel.getListVoucher()
+    }
+
+    var listCode = listOf<String>()
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.voucherResult.bind {
+            listCode = it.map { voucher -> voucher.code }
+            voucherAdapter.submit(it)
+        }
+        appEvent.voucherApply.bind {
+            it?.let {
+                viewModel.addVoucher(it)
+            }
+        }
     }
 }
 
 class UpdateSalonViewModel(
     private val profileRepository: ProfileRepository,
     private val updateSalonRepository: UpdateSalonRepository,
-    private val fetchTimeZone: FetchTimeZone
+    private val fetchTimeZone: FetchTimeZone,
+    val addVoucherRepo: VoucherRepo,
+    val context: Context
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val salonForm = SalonForm()
     val timeZoneForm = TimeZoneForm()
-
     val timeZoneResult = fetchTimeZone.result
     val salonDetail = profileRepository.result
     val updateSalonStatus = updateSalonRepository.result
-    var listSchedules = listOf<ISchedule>() /// user for send to EditSchedules Fragment
+    val listVoucherDeleteID = mutableListOf<Int>()
+    var listSchedules = listOf<ISchedule>() /// use for send to EditSchedules Fragment
+    private val voucherAdd = MutableLiveData<MutableList<VoucherForm>>(mutableListOf())
+
+    val voucherResult: LiveData<List<IVoucher>> =
+        combine(updateSalonRepository.voucherResult, voucherAdd) { list1, list2 ->
+            val listVoucher = mutableListOf<IVoucher>()
+            listVoucher.addAll(list2)
+            listVoucher.addAll(list1)
+            listVoucher.toList()
+        }
+
+    fun deleteVoucher(voucher: IVoucher) {
+        if (voucher.id == -1) {
+            voucherAdd.value?.remove(voucher)
+            voucherAdd.forceRefresh()
+        } else {
+            updateSalonRepository.voucherResult.value?.remove(voucher)
+            updateSalonRepository.voucherResult.forceRefresh()
+            listVoucherDeleteID.add(voucher.id)
+        }
+    }
+
+    fun addVoucher(voucher: VoucherForm) {
+        voucherAdd.value?.add(voucher)
+        voucherAdd.forceRefresh()
+    }
+
+    fun getListVoucher() = launch(loading, error) {
+        updateSalonRepository.getListVoucher()
+    }
 
     fun getDetailSalon() = launch(loading, error) {
         profileRepository()
     }
 
     fun updateSalon() = launch(loading, error) {
+        voucherAdd.value?.forEach {
+            addVoucherRepo(it)
+        }
+        addVoucherRepo.deleteMultiVoucher(listVoucherDeleteID.toString())
         updateSalonRepository(salonForm)
     }
 
@@ -309,6 +386,16 @@ class UpdateSalonRepository(
     val context: Context
 ) {
     val result = MutableLiveData<Any>()
+    val voucherResult = MutableLiveData<MutableList<IVoucher>>()
+
+    suspend fun getListVoucher() {
+        voucherResult.post(
+            meApi.getListVoucher().await().map {
+                SalonFactory.createVoucher(it, context)
+            }.toMutableList()
+        )
+    }
+
     suspend operator fun invoke(salonForm: SalonForm) {
         salonForm.validate()
         val imageParts =
@@ -359,6 +446,26 @@ class FetchTimeZone(
                     key = timeZone.key
                 ).await()
             )
+        )
+    }
+}
+
+@Inject(ShareScope.Fragment)
+class VoucherRepo(
+    private val meApi: MeApi,
+) {
+    val addVoucherResult = SingleLiveEvent<Any>()
+    val deleteVoucherResult = SingleLiveEvent<Any>()
+    suspend operator fun invoke(voucherForm: VoucherForm) {
+        voucherForm.validate()
+        addVoucherResult.post(
+            meApi.addVoucher(voucherForm).await()
+        )
+    }
+
+    suspend fun deleteMultiVoucher(listID: String) {
+        deleteVoucherResult.post(
+            meApi.deleteMultiVoucher(listID).await()
         )
     }
 }

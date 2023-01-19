@@ -142,11 +142,12 @@
                         android:layout_height="@dimen/size_40"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:hint="@string/hint_voucher_code"
+                        style="@style/AppTheme.EditText"
+                        android:hint="@string/enter_voucher"
                         android:maxLength="20"
                         android:maxLines="1"
                         android:paddingHorizontal="@dimen/size_15"
-                        android:textColorHint="@color/transparency" />
+                       />
 
 
                     <androidx.appcompat.widget.AppCompatImageButton

@@ -30,6 +30,16 @@ open class MessageDialog(context: Context) : BaseDialog(context) {
         super.show()
     }
 
+    fun show(title: Int, message: String, onDismiss: () -> Unit = {}) {
+        mOnDismiss = onDismiss
+        binding.txtBody.show(message.isNotBlank()) {
+            text = message
+        }
+        binding.txtTitle.setText(title)
+        super.show()
+    }
+
+
     fun show(title: String, resMsg: Int, onDismiss: () -> Unit = {}) {
         mOnDismiss = onDismiss
         binding.txtBody.setText(resMsg)

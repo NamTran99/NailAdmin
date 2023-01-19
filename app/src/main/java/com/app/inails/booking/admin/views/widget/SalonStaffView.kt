@@ -28,13 +28,13 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
 
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
-            binding.imgAvatar.hideClearImage()
             binding.tvStaffFullName.show(value == DisplayType.DisplayService)
             binding.etFullName.show(value == DisplayType.TypeService)
             binding.etPhone.isFocusable = value == DisplayType.TypeService
             if (value == DisplayType.TypeService) {
                 binding.btnDelete.hide()
             } else {
+                binding.imgAvatar.hideClearImage()
                 binding.btnDelete.show()
             }
             field = value

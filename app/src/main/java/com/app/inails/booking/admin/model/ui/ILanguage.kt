@@ -21,3 +21,11 @@ fun getListDefaultLanguage(currentLanguage: String) = listOf<Language>(
     it
 }
 
+fun getListDefaultLanguage1(currentLanguage: String) = listOf<Language>(
+    Language(R.string.vietnamese1, R.drawable.ic_vietnam, "vi"),
+    Language(R.string.english1, R.drawable.ic_englan,"en")
+).map {
+    it.isSelector = it.code == currentLanguage
+    it
+}
+

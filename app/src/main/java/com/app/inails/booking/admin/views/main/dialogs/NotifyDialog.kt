@@ -42,10 +42,10 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
         appointment = fireBaseCloudMessage.data?: Data()
         with(binding) {
             tvBookingID.text = "#${appointment.id}"
-            tvCustomerName.text = appointment.customer_name?.displaySafe()
-            tvPhone.text = appointment.customer_phone?.formatPhoneUS().displaySafe1()
-            tvStaffName.text = appointment.staff_name.displaySafe1()
-            tvDateTime.text = appointment.date_appointment?.formatDateAppointment().displaySafe1()
+            tvCustomerName.text = appointment.customer_name?.displaySafe(context)
+            tvPhone.text = appointment.customer_phone?.formatPhoneUS().displaySafe1(context)
+            tvStaffName.text = appointment.staff_name.displaySafe1(context)
+            tvDateTime.text = appointment.date_appointment?.formatDateAppointment().displaySafe1(context)
             tvReason.text = appointment.reason_cancel.safe().replace("\\n", "\n").trim()
             tvFeedbackContent.text = appointment.content_feedback.safe().replace("\\n", "\n").trim()
             tvFeedbackContent.show(tvFeedbackContent.text.isNotEmpty())

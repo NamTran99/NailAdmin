@@ -11,6 +11,7 @@ import java.util.*
 object Format {
     const val DATE_PICKER = "MM/dd/yyyy"
     const val FORMAT_DATE_TIME_API = "yyyy-MM-dd HH:mm"
+    const val FORMAT_DATE_TIME_API_2 = "yyyy-MM-dd HH:mm:ss"
     const val FORMAT_DATE_MONTH_TIME = "MMMM dd, yyyy hh:mm a"
     const val FORMAT_DATE_MONTH = "MMMM dd, yyyy"
     const val FORMAT_DATE_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -55,6 +56,7 @@ fun String.toDateUTC(
     return outputFormat.format(dateInput ?: getDateCurrent(formatOutput))
 }
 
+
 fun getDateCurrent(format: String = FORMAT_DATE_TIME_API): String {
     val timeCurrent = Calendar.getInstance().time
     val outputFormat = SimpleDateFormat(format, Locale.getDefault())
@@ -92,7 +94,7 @@ fun String.convert24hTo12hFormat(): String {
 }
 
 fun String.convert12hTo24hFormat(): String {
-    val  sdf = SimpleDateFormat("hh:mm aa", Locale.getDefault());
+    val  sdf = SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
     val dateObj = sdf.parse(this);
     return SimpleDateFormat("HH:mm", Locale.getDefault()).format(dateObj!!);
 }

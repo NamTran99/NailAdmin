@@ -41,8 +41,10 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
     private val viewModel by viewModel<SplashViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val appointmentID = intent.extras?.getInt(MainActivity.APPOINTMENT_ID, 0)
-        binding.tvVersion.text = Utils.getDisplayBuildConfig(this)
+        if(userLocalSource.getIsFirstOpenApp() != false){
+            userLocalSource.clearLanguage()
+        }
+        binding.tvVersion.text = Utils.getDisplayBuildConfig(this, userLocalSource.getLanguageWithDefault())
 
         viewModel.apply {
             versionResult.bind {
@@ -64,7 +66,6 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
                     CoroutineScope(Dispatchers.IO).launch {
                         delay(TimeUnit.SECONDS.toMillis(3))
                         withContext(Dispatchers.Main) {
-
                             if (viewModel.isFirstOpenApp) {
                                 Router.open(this@SplashActivity, Routing.SelectLanguage)
                                 return@withContext

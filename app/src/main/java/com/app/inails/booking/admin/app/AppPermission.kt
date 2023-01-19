@@ -43,6 +43,11 @@ class AppPermission {
             android.Manifest.permission.READ_CONTACTS,
             android.Manifest.permission.CALL_PHONE
         )
+
+        val PERMISSION_ACCESS_STORAGE = arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        )
     }
 
     private var mChecker: PermissionAccessible
@@ -120,7 +125,7 @@ class AppPermission {
     fun accessReadStorage(function: () -> Unit): PermissionRequest {
         return mChecker.access(
             mNextLocalRequestCode.getAndIncrement(),
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+           *PERMISSION_ACCESS_STORAGE,
             onPermission = function
         )
     }

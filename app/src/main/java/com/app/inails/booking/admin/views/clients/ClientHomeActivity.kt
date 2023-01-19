@@ -118,7 +118,7 @@ class ClientHomeActivity : BaseActivity(R.layout.activity_client_home), TopBarOw
             headView.findViewById<MaterialButton>(R.id.btnMenuClose)
                 .onClick { drawerLayout.closeDrawer(GravityCompat.START, true) }
             navView.setNavigationItemSelectedListener(this@ClientHomeActivity)
-            tvVersion.text = Utils.getDisplayBuildConfig(this@ClientHomeActivity)
+            tvVersion.text = Utils.getDisplayBuildConfig(this@ClientHomeActivity, userLocalSource.getLanguageWithDefault())
         }
         with(viewModel) {
             deletedCustomerAccount.bind {

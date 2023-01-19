@@ -6,6 +6,7 @@ import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
+import com.app.inails.booking.admin.model.ui.VoucherForm
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
@@ -37,7 +38,7 @@ interface MeApi : Injectable {
     @POST("salon/sign-up")
     fun signUp(
         @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
-        @Part vararg images: MultipartBody.Part?
+        @Part vararg images: MultipartBody.Part?,
     ): ApiAsync<UserDTO>
 
     @FormUrlEncoded
@@ -61,6 +62,16 @@ interface MeApi : Injectable {
     @FormUrlEncoded
     @POST("salon/change-language")
     fun changeLanguage(@Field("device_token") deviceToken: String, @Field("language") language: String ): ApiAsync<Any>
+
+    @POST("voucher/add-voucher")
+    fun addVoucher(@Body voucherForm: VoucherForm): ApiAsync<Any>
+
+    @GET("voucher/list-vouchers")
+    fun getListVoucher(@Query("num_per_page") platform:Int = 100,@Query("page") page:Int = 1): ApiAsync<List<VoucherDTO>>
+
+    @FormUrlEncoded
+    @POST("voucher/delete-vouchers")
+    fun deleteMultiVoucher(@Field("ids") listID: String): ApiAsync<Any>
 }
 
 class MeApiImpl(private val retrofit: Retrofit) :

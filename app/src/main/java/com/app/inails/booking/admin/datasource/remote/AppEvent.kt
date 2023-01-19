@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessageClient
 import com.app.inails.booking.admin.model.ui.IStaff
+import com.app.inails.booking.admin.model.ui.VoucherForm
 
 @Inject(ShareScope.Singleton)
 class AppEvent {
@@ -25,4 +26,6 @@ class AppEvent {
     val notifyFetchTotal = SingleLiveEvent<Any>()
     val refreshServices = SingleLiveEvent<Any>()
     val refreshNotifications = SingleLiveEvent<Any>()
+
+    val voucherApply = SingleLiveEvent<VoucherForm>()
 }

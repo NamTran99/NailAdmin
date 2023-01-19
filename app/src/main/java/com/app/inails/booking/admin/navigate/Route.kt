@@ -24,10 +24,7 @@ import com.app.inails.booking.admin.views.main.StaffListFragment
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
 import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
-import com.app.inails.booking.admin.views.me.DetailSalonFragment
-import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
-import com.app.inails.booking.admin.views.me.GalleryImageFragment
-import com.app.inails.booking.admin.views.me.SelectLanguageAccountFragment
+import com.app.inails.booking.admin.views.me.*
 import com.app.inails.booking.admin.views.me.reset.*
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
@@ -218,12 +215,20 @@ interface Routing : BundleArgument {
         override val fragmentClass: KClass<out Fragment>
             get() = ShowZoomSingleImageFragment::class
     }
+
+    @Parcelize
+    object VoucherApply: Routing{
+        var listOfCode = listOf<String>()
+        override val fragmentClass: KClass<out Fragment>
+            get() = VoucherApplyFragment::class
+    }
 }
 
 interface Router : SplashRoute,BookingRouteClient, SettingRoute, BookingRoute,ClientRoute,
     ManageStaffRoute, ManageCustomerRoute, ManageSalonRoute, ProfileRoute, SalonRoute, NotificationRouter {
     fun open(dispatcher: RouteDispatcher, route: Routing)
     fun navigate(dispatcher: RouteDispatcher, route: Routing)
+//    fun finish
 
     companion object : Router by ProdRoute()
 }

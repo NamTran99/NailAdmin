@@ -46,7 +46,7 @@
                 android:id="@+id/btChooseOneForAll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/AppTheme.Button"
+                style="@style/AppTheme.Button.Responsive"
                 android:layout_marginTop="@dimen/size_10"
                 android:background="@drawable/button_accent_corner"
                 android:textAllCaps="false"

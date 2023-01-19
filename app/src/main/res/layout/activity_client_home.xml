@@ -38,6 +38,7 @@
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/partial_nav_view_head"
+        app:itemTextAppearance="@style/AppTheme.TextView.Medium"
         app:itemTextColor="@color/white"
         app:menu="@menu/menu_left_client" >
         <LinearLayout
@@ -49,7 +50,7 @@
 
             <TextView
                 android:id="@+id/tvVersion"
-                style="TextView"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#EBABAB"

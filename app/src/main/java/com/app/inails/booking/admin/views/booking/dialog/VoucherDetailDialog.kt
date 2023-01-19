@@ -4,30 +4,40 @@ import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogVoucherDetailBinding
+import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.model.ui.VoucherType
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
-import com.app.inails.booking.admin.views.me.adapters.CreateUpdateEmailDialog
 
 
 class VoucherDetailDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
     private val binding = viewBinding(DialogVoucherDetailBinding::inflate)
 
+    var onClickDeleteVoucher :((id: IVoucher) -> Unit) = {}
     init {
         setCancelable(false)
-        binding.btClose.setOnClickListener {
-            dismiss()
+        binding.apply {
+
+            btClose.setOnClickListener {
+                dismiss()
+            }
         }
     }
 
     fun show(
-        item: IVoucher
+        item: IVoucher,
+        isEnableDeleteVoucher:Boolean = false
     ) {
         with(binding) {
+            btnDelete.show(isEnableDeleteVoucher)
+            btnDelete.onClick{
+                onClickDeleteVoucher.invoke(item)
+                dismiss()
+            }
             tvCode.text = item.code
             tvCustomerType.setText(item.typeCustomer)
-            if(item.type == VoucherType.PERCENT){
+            if(item.typeName == VoucherType.PERCENT){
                 tvValue.text = "-${item.value}%"
             }else{
                 tvValue.text = "-${item.value}$"

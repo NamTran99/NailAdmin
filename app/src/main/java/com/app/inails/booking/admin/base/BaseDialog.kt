@@ -10,13 +10,20 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ListPopupWindow
 import androidx.annotation.StyleRes
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.viewbinding.ViewBinding
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.extention.setMargins
+import com.google.android.youtube.player.internal.ac
 
-abstract class BaseDialog : Dialog {
-    constructor(context: Context) : super(context)
-    constructor(context: Context, @StyleRes theme: Int) : super(context, theme)
+abstract class BaseDialog(context: Context) : Dialog(context) {
+
+
+    var activityContext:Context = context
+
+
+    @JvmName("getActivityContext1")
+    fun getActivityContext() = context
 
     var isSlideShow: Boolean = false
         set(value) {

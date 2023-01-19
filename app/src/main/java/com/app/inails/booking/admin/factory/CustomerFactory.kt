@@ -17,21 +17,23 @@ class CustomerFactory(private val textFormatter: TextFormatter) {
     fun createCustomer(customer: CustomerFullInfoDTO): ICustomer {
         return object : ICustomer by CustomerImpl() {
             override val address: String
-                get() = customer.address.safe()
+                get() = displaySafe(customer.address)
             override val email: String
-                get() = customer.email.safe()
+                get() = displaySafe(customer.email)
             override val phone: String
                 get() = textFormatter.formatPhoneUS(customer.phone)
             override val id: Int
                 get() = customer.id.safe()
             override val name: String
-                get() = customer.name.safe()
+                get() = displaySafe(customer.name)
             override val birthDay: String
-                get() = customer.birthdate.safe()
+                get() =  displaySafe(customer.birthdate)
             override val type: Int
                 get() = customer.type?: 2
             override val note: String
-                get() = customer.note.safe()
+                get() = displaySafe(customer.note)
+            override val isShowNote: Boolean
+                get() = !customer.note.isNullOrBlank()
         }
     }
 
@@ -48,14 +50,18 @@ class CustomerFactory(private val textFormatter: TextFormatter) {
             override val id: Int
                 get() = serviceDTO.id.safe()
             override val name: String
-                get() = serviceDTO.name.safe()
+                get() = displaySafe(serviceDTO.name)
             override val price: Double
-                get() = serviceDTO.price.safe()
+                get() =  serviceDTO.price.safe()
             override val isActive: Int
                 get() = serviceDTO.active.safe()
             override val textColor: Int
                 get() = textFormatter.formatTextColorStaffColor(serviceDTO.active.safe())
         }
+    }
+
+    fun displaySafe(text: String?): String{
+        return textFormatter.displaySafe(text)
     }
 
 //    fun createServiceList(servicesDTO: List<ServiceDTO>): List<IService> {

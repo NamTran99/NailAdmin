@@ -35,12 +35,15 @@ import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToApmList
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToMain
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.google.android.youtube.player.internal.i
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -96,7 +99,10 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                     name = etFullName.text.toString()
                     note = etNote.text.toString()
                     workTime = workingTime
-                    services = mServiceAdapter.selectedItems.toString()
+                    if(mServiceAdapter.selectedItems.isNotEmpty()){
+                        services = mServiceAdapter.selectedItems.toString()
+                    }else
+                        services = ""
                     dateAppointment = if (tvSelectTime.text.toString()
                             .isEmpty()
                     ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}".toServerUTC()
@@ -122,6 +128,10 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                 success(it)
                 activity?.onBackPressed()
             }
+            createApmSuccess.bind{
+                success(it)
+                redirectToApmList()
+            }
             appointment.bind(::display)
         }
 
@@ -132,13 +142,6 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                 viewModel.form.staffID = it.id
             }
         }
-
-//        binding.etFullName.bind {
-//            viewModel.form.name = it }
-//        binding.etPhone.bind { viewModel.form.phone = it }
-//        // save state
-//        binding.etFullName.setText(viewModel.form.name)
-//        binding.etPhone.setText(viewModel.form.phone)
 
     }
 
@@ -198,7 +201,8 @@ class CreateAppointmentViewModel(
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val services = serviceRepo.results
     val form = AppointmentForm()
-    val success = SingleLiveEvent<String>()
+    val createApmSuccess = SingleLiveEvent<Int>()
+    val success = SingleLiveEvent<Int>()
     val appointment = appointmentDetailRepo.result
 
     init {
@@ -211,12 +215,12 @@ class CreateAppointmentViewModel(
 
     fun submit() = launch(loading, error) {
         createAppointmentRepo(form)
-        success.post("Create appointment for customer success!")
+        createApmSuccess.post(R.string.success_create_appointment)
     }
 
     fun update() = launch(loading, error) {
         createAppointmentRepo.update(form)
-        success.post("Update appointment success")
+        success.post(R.string.success_update_appointment)
     }
 
     fun detail(id: Int) = launch(loading, error) {

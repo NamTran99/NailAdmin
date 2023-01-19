@@ -122,7 +122,7 @@
             style="@style/AppTheme.TextView.Medium"
             android:textStyle="normal"
             android:textSize="@dimen/text_size_13"
-            android:text="@string/note"/>
+            android:text="@string/label_note"/>
         <TextView
             android:id="@+id/tvNote"
             style="@style/AppTheme.TextViewResponsive"

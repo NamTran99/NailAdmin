@@ -39,6 +39,7 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
         with(viewModel) {
             updateCustomerResult.bind{
                 success(R.string.update_customer_success)
+                updateCustomerDialog.dismiss()
                 mAdapter.updateItem(it)
             }
             refreshLoading.bind {
@@ -50,8 +51,10 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
                 it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
                 !it.isNullOrEmpty() show binding.rvCustomers
 
-                 binding.emptyLayout.tvEmptyData.text = if(binding.searchView.text.isNullOrEmpty())
-                     "There are no results matching your search keyword." else "Your salon doesn't have any customers yet"
+                 binding.emptyLayout.tvEmptyData.setText(
+                     if(binding.searchView.text.isNullOrEmpty())
+                         R.string.label_empty_data else R.string.no_result_order_found
+                 )
             }
         }
     }
@@ -74,8 +77,8 @@ class ManageCustomerFragment : BaseFragment(R.layout.fragment_manage_customer), 
                     Router.run { redirectToCustomerBookingList(it.id) }
                 }
                 onClickEditCustomer = {
-                    updateCustomerDialog.show(it){ id, note, type ->
-                        viewModel.updateCustomer(UpdateCustomerForm(id,type, note))
+                    updateCustomerDialog.show(it){ customer ->
+                        viewModel.updateCustomer(customer)
                     }
                 }
             }

@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtBookingID"
             android:layout_marginTop="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/label_salon_name"
             android:textColor="@color/gray_145" />
 
@@ -41,6 +42,7 @@
             android:gravity="end"
             android:paddingStart="@dimen/size_16"
             android:paddingEnd="0dp"
+            style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/colorAccent"
             tools:text="Healthy Nail Salon Collaborative" />
 
@@ -51,12 +53,14 @@
             android:layout_below="@+id/txtSalonName"
             android:layout_marginTop="@dimen/size_10"
             android:text="@string/label_appointment_time"
+            style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/gray_145" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtDatetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_below="@+id/labelSalonName"
             android:layout_alignTop="@+id/labelDatetime"
             android:layout_alignParentEnd="true"
@@ -71,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtDatetime"
             android:layout_marginTop="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/label_services"
             android:textColor="@color/gray_145" />
 
@@ -81,6 +86,7 @@
             android:layout_alignTop="@+id/labelService"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/labelService"
+            style="@style/AppTheme.TextViewResponsive"
             android:gravity="end"
             android:paddingStart="@dimen/size_16"
             android:paddingEnd="0dp"
@@ -92,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtService"
             android:layout_marginTop="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/label_request"
             android:textColor="@color/gray_145" />
 
@@ -100,6 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/labelRequest"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/labelRequest"
             android:gravity="end"
@@ -113,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtRequest"
             android:layout_marginTop="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/hint_note"
             android:textColor="@color/gray_145" />
 
@@ -124,6 +133,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/size_16"
             android:layout_toEndOf="@+id/labelSomethingElse"
+            style="@style/AppTheme.TextViewResponsive"
             android:gravity="end"
             tools:text="@string/hint_note" />
 
@@ -131,6 +141,7 @@
             android:id="@+id/labelStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_below="@+id/txtSomethingElse"
             android:layout_marginTop="@dimen/size_10"
             android:text="@string/label_status"
@@ -143,6 +154,7 @@
             android:layout_alignTop="@+id/labelStatus"
             android:layout_alignParentEnd="true"
             android:drawablePadding="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             tools:text="Waiting"
             tools:textColor="@color/yellow" />
 
@@ -157,12 +169,14 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
                 android:text="@string/label_total_amount"
                 android:textColor="@color/gray_145" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtAmount"
                 android:layout_width="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 tools:text="$150.00" />
@@ -175,6 +189,7 @@
             android:layout_below="@+id/totalAmountLayout"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/size_5"
+            style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/gray_145"
             android:textSize="@dimen/text_size_12"
             android:textStyle="italic"
@@ -204,6 +219,7 @@
                 android:id="@+id/txtReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_below="@+id/txtCancelBy"
                 android:layout_marginTop="@dimen/size_4"
                 android:gravity="center"
@@ -225,6 +241,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtNote"
                 android:layout_width="match_parent"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
                 android:textColor="@color/gray_145"
@@ -247,6 +264,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
                 android:gravity="center"
+                style="@style/AppTheme.TextViewResponsive"
                 android:text="@string/title_feed_back"
                 android:textColor="@color/black" />
 
@@ -267,6 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ratingBar"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_marginTop="@dimen/size_10"
                 android:textColor="@color/gray_145"
                 tools:text="Waiting" />

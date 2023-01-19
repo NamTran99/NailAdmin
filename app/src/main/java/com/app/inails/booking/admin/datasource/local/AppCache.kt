@@ -20,6 +20,7 @@ class AppCache(context: Context) : Caching(context, ParserImpl()) {
     var bookingCurrent: BookingClientDTO? by reference(BookingClientDTO::class.java.name)
     var servicesSelected: List<IServiceClient>? by reference(IServiceClient::class.java.name)
     var language: String? by reference("language")
+    var isCloseAllMainNavigationActivity: Boolean? by reference("isCloseNavigate")
 }
 
 class ParserImpl : Parser {

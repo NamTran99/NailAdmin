@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_order_history">Lịch sử đặt</string>
-    <string name="title_account">Tài khoản</string>
+    <string name="title_order_history">Lịch sử làm việc</string>
+    <string name="title_account">Tài khoản</string>
     <string name="title_email_receive_feedback">Email Nhận Phản Hồi</string>
     <string name="title_change_password">Đổi Mật Khẩu</string>
-    <string name="title_report">Thông Kê Thu Nhập</string>
+    <string name="title_report">Thống Kê Thu Nhập</string>
     <string name="title_create_new_service">Thêm dịch vụ</string>
     <string name="title_create_new_staff">Thêm nhân viên</string>
     <string name="title_feed_back">Phản Hồi</string>
@@ -22,4 +22,27 @@
     <string name="title_business_hour">Cập Nhật Giờ Mở Cửa</string>
     <string name="title_language">Ngôn ngữ</string>
     <string name="title_notification">Thông Báo</string>
+    <string name="title_dashboard">Chung</string>
+    <string name="title_create_new_appointment">Tạo Lịch Hẹn Mới</string>
+    <string name="btn_unread">Đánh dấu chưa đọc</string>
+    <string name="btn_read">Đánh dấu là đã đọc</string>
+    <string name="title_delete_notification">Xóa Thông Báo</string>
+    <string name="message_delete_notification">Bạn có muốn xóa thông báo này?</string>
+    <string name="title_remove_appointment">Xóa Lịch Hẹn</string>
+    <string name="title_cancel_appointment">Hủy Lịch Hẹn</string>
+    <string name="title_accept_appointment">Chấp Nhận Lịch Hẹn</string>
+    <string name="title_reject_appointment">Từ Chối Lịch Hẹn</string>
+    <string name="content_delete_service">Khi bạn xóa dịch vụ này, nó sẽ bị ẩn đi và bạn sẽ không thấy dịch vụ này nữa. Bạn có chắc chẵn muốn xóa?</string>
+    <string name="hint_enter_reason">Điền Lý Do</string>
+    <string name="error_empty_reason">Hãy điền lý do</string>
+    <string name="message_delete_staff" formatted="true">Bạn có muốn xóa nhân viên "%s"?</string>
+    <string name="title_delete_staff">Xóa Nhân Viên</string>
+    <string name="title_delete_service">Xóa Dịch Vụ</string>
+    <string name="title_update_staff">Cập Nhật Nhân Viên</string>
+    <string name="title_apm_cancellation">Hủy Lịch Hẹn</string>
+    <string name="hint_reason">Hãy nói tôi lý do của bạn…</string>
+    <string name="birthday">Ngày Sinh</string>
+    <string name="title_finish_booking">Hoàn Tất Phục Vụ</string>
+    <string name="title_booking_list">Danh Sách Booking</string>
+
 </resources>

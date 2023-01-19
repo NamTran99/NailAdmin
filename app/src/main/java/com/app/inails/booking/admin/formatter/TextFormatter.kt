@@ -17,18 +17,23 @@ import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_WORKING
 import com.app.inails.booking.admin.DataConst.TypeAppointment.TYPE_APPOINTMENT
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.app.AppConfig
-import com.app.inails.booking.admin.extention.formatDateAppointment
-import com.app.inails.booking.admin.extention.toCreatedAt
-import com.app.inails.booking.admin.extention.toDate
+import com.app.inails.booking.admin.base.MainApplication
+import com.app.inails.booking.admin.datasource.local.UserLocalSource
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.response.VoucherDTO
 import com.app.inails.booking.admin.model.response.client.*
+import com.esafirm.imagepicker.helper.LocaleManager
+import com.google.android.youtube.player.internal.c
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @Inject(ShareScope.Singleton)
-class TextFormatter(private val cxt:Context) {
+class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSource) {
+
+    fun getLanguageContext() = LocaleManager.updateResources(cxt, userLocalSource.getLanguageWithDefault())
+
     fun formatPhoneNumber(phoneNumber: String): String {
         return phoneNumber.replace("-", "")
             .replace("(", "")
@@ -37,7 +42,11 @@ class TextFormatter(private val cxt:Context) {
     }
 
     fun formatDisplayTimeZone(salonDTO: SalonDTO): String {
-        return cxt.getString(R.string.business_hour_format, salonDTO.timezone, salonDTO.tz)
+        return getLanguageContext().getString(R.string.business_hour_format, salonDTO.timezone, salonDTO.tz)
+    }
+
+    fun displaySafe(text: String?): String{
+        return (text ?: "").ifBlank { getLanguageContext().getString(R.string.no_information) }
     }
 
     fun formatPhoneUS(phone: String?): String {
@@ -51,8 +60,8 @@ class TextFormatter(private val cxt:Context) {
     fun colorTextNotification(isRead: Int?) = if (isRead == 0) R.color.black else R.color.gray_188
 
     fun titleNotificationWithUnread(totalUnread: Int): String {
-        return if (totalUnread == 0) cxt.getString(R.string.title_notifications)
-        else cxt.getString(R.string.title_notifications_with_total, totalUnread.toString())
+        return if (totalUnread == 0) getLanguageContext().getString(R.string.title_notifications)
+        else getLanguageContext().getString(R.string.title_notifications_with_total, totalUnread.toString())
     }
 
     fun statusStaff(status: Int?): Pair<Int, Int> {
@@ -181,7 +190,7 @@ class TextFormatter(private val cxt:Context) {
     }
 
     fun formatSalonSchedule(it: Schedule): String {
-        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) cxt.getString(R.string.not_open)
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) getLanguageContext().getString(R.string.not_open)
         else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 
@@ -207,7 +216,7 @@ class TextFormatter(private val cxt:Context) {
         if (customerDTO.address.isNullOrEmpty() && customerDTO.city.isNullOrEmpty()
             && customerDTO.state.isNullOrEmpty() && customerDTO.zip.isNullOrEmpty()
         )
-            cxt.getString(R.string.no_information)
+            getLanguageContext().getString(R.string.no_information)
         else
             "${customerDTO.address ?: ""}, ${customerDTO.city ?: ""}, ${customerDTO.state ?: ""}, ${customerDTO.zip ?: ""}"
 
@@ -241,7 +250,7 @@ class TextFormatter(private val cxt:Context) {
     }
 
     fun formatTotalFeedback(it: FeedbackClientDTO) =
-        cxt.getString(R.string.label_count_rating, it.average_rating ?: "0", it.total ?: "0")
+        getLanguageContext().getString(R.string.label_count_rating, it.average_rating ?: "0", it.total ?: "0")
 
     fun formatWelcomeUser(user: UserClientDTO.Data?): String {
         return if (user == null) cxt.getString(R.string.title_welcome_guest)

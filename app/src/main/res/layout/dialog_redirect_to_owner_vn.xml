@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/size_20">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_marginEnd="@dimen/size_120"
+            android:text="@string/redirect_to_owner_function_vn"
+            android:textSize="@dimen/text_size_14" />
+
+        <ImageButton
+            android:id="@+id/btClose"
+            style="@style/AppTheme.ImageButton"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu_close"
+            app:tint="@color/black" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
+        android:textColor="@color/color_838383"
+        android:text="@string/content_redirect_to_owner_vn"/>
+
+    <com.app.inails.booking.admin.views.widget.PasswordTextInputLayout
+        android:id="@+id/layoutPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@drawable/edit_text_default"
+        app:iconColor="@color/colorPrimary">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPassword"
+            style="@style/AppTheme.EditText"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_lock_outline"
+            android:hint="@string/hint_password_vn"
+            android:inputType="textPassword" />
+
+    </com.app.inails.booking.admin.views.widget.PasswordTextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/btn_submit_vn"
+        android:layout_marginBottom="@dimen/size_16"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="@dimen/radius_default" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -32,22 +32,7 @@ class ManageStaffAdapter(view: RecyclerView) :
             imgImage.onClick{
                 onClickAvatarImage?.invoke(item.avatar)
             }
-            if (item.avatar != null && item.avatar!!.isNotEmpty()) {
-                Picasso.get().load(item.avatar).into(imgImage, object : Callback {
-                    override fun onSuccess() {
-                        progress.hide()
-                    }
-
-                    override fun onError(e: Exception?) {
-                        imgImage.setImageResource(R.drawable.ic_no_image)
-                        progress.hide()
-                    }
-                })
-            } else {
-                imgImage.setImageResource(R.drawable.ic_no_image)
-                progress.hide()
-            }
-
+                imgImage.setImageUrl(item.avatar)
             tvDescription.show(
                  item.description.isNotEmpty()
             )

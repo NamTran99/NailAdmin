@@ -36,14 +36,14 @@ class ManageCustomerAdapter(view: RecyclerView) :
                 onClickEditCustomer.invoke(item)
             }
             lvVip.visible(item.type == 3)
-            lvNote.show(item.note.isNotEmpty())
+            lvNote.show(item.isShowNote)
             tvNote.text = item.note
             // init view
-            tvAddress.text = item.address.displaySafe()
-            tvCustomerName.text = item.name.displaySafe()
-            tvEmail.text = item.email.displaySafe()
-            tvPhone.text = item.phone.formatPhoneUSCustom().displaySafe()
-            tvBirthday.text = item.birthDay.displaySafe()
+            tvAddress.text = item.address
+            tvCustomerName.text = item.name
+            tvEmail.text = item.email
+            tvPhone.text = item.phone.formatPhoneUSCustom()
+            tvBirthday.text = item.birthDay
 
             btBookingList.setOnClickListener {
                 onClickOpenBookingList?.invoke(item)

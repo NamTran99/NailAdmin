@@ -1,6 +1,7 @@
 package com.app.inails.booking.admin.app
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.ComponentCallbacks
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.app.inails.booking.admin.base.BaseActivity
+import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.helper.DriverUtils
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
@@ -83,6 +85,7 @@ interface AppSettingsOwner : ViewScopeOwner {
             when (this) {
                 is Fragment -> AppSettings(this.requireContext())
                 is FragmentActivity -> AppSettings(this)
+                is BaseDialog -> AppSettings(this.activityContext)
                 else -> error("Not support get permission for ${this.javaClass.name} ")
             }
         }

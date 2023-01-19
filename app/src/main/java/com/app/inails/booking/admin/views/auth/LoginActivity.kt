@@ -19,6 +19,7 @@ import com.app.inails.booking.admin.databinding.ActivityLoginBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.showPopUp
 import com.app.inails.booking.admin.model.ui.LoginOwnerForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
@@ -42,13 +43,18 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
             btSignUp.onClick {
                 Router.open(this@LoginActivity, Routing.SignUpAccount)
             }
+            switchLan.showPopUp(R.menu.menu_language) { id ->
+                    val lan = when (id) {
+                        R.id.lanVi -> "vi"
+                        R.id.lanEn -> "en"
+                        else -> "vi"
+                    }
 
-            switchLan.setOnCheckedChangeListener { _, isChecked ->
-                setLanguage(if (isChecked) "vi" else "en")
-            }
+                    setLanguage(lan)
+                }
 
-            switchLan.isChecked = viewModel.isVnLanguage
-            binding.tvVersion.text = Utils.getDisplayBuildConfig(this@LoginActivity)
+            switchLan.setText(if(viewModel.isVnLanguage)R.string.vietnamese_1 else R.string.english)
+            binding.tvVersion.text = Utils.getDisplayBuildConfig(this@LoginActivity, userLocalSource.getLanguageWithDefault())
         }
 
         binding.btLogin.setOnClickListener {
@@ -65,6 +71,11 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
             loading.bind(binding.btLogin::setEnabled) { !this }
             loginSuccess.bind { open<MainActivity>().clear() }
         }
+    }
+
+    override fun onResume() {
+        binding.switchLan.setText(if(viewModel.isVnLanguage)R.string.vietnamese_1 else R.string.english)
+        super.onResume()
     }
 }
 

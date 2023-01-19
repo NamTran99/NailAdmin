@@ -83,6 +83,4 @@
                 android:textSize="@dimen/text_size_14" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 </LinearLayout>

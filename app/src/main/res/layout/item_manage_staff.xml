@@ -15,26 +15,11 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <RelativeLayout
+        <com.app.inails.booking.admin.views.widget.LoadingImageView
+            android:id="@+id/imgImage"
             android:layout_width="@dimen/size_60"
-            android:layout_height="@dimen/size_60"
-            android:background="@drawable/bg_corner_white">
-
-            <ImageView
-                android:id="@+id/imgImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:background="@drawable/bg_corner_white"
-                android:clipToOutline="true"
-                android:scaleType="fitXY" />
-
-            <ProgressBar
-                android:id="@+id/progress"
-                android:layout_width="@dimen/size_20"
-                android:layout_height="@dimen/size_20"
-                android:layout_centerInParent="true" />
-        </RelativeLayout>
+            app:custom_enable_remove_image="false"
+            android:layout_height="@dimen/size_60"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"

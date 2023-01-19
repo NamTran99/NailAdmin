@@ -33,12 +33,14 @@ import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.LoginRepo
 import com.app.inails.booking.admin.repository.client.AuthenticateRepository
 import com.app.inails.booking.admin.views.clients.dialog.RedirectToOwnerDialogOwner
+import com.app.inails.booking.admin.views.clients.dialog.RedirectToOwnerDialogVn
+import com.app.inails.booking.admin.views.clients.dialog.RedirectToOwnerDialogVnOwner
 import com.app.inails.booking.admin.views.clients.profile.EditProfileRepository
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import okhttp3.Route
 
 class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopBarOwner,
-    RedirectToOwnerDialogOwner {
+    RedirectToOwnerDialogOwner, RedirectToOwnerDialogVnOwner {
 
     private val binding by viewBinding(FragmentEnterPhoneNumberBinding::bind)
     private val viewModel by viewModel<CheckInVM>()
@@ -56,9 +58,8 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
             btnLogoutOwner.onClick { logoutApp() }
             with(viewModel) {
                 loginOwnerSuccess.bind{
-                    userLocalSource.setOwnerMode(true)
                     Router.run { redirectToMain() }
-                    success("Redirect To Owner Function Successfully")
+                    success(R.string.success_redirect_owner)
                 }
                 showUpdateProfile.bind(updateInFoDialog::show)
                 updateSuccess.bind {
@@ -71,6 +72,8 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
                 }
                 checkInSuccess.bind {
                     success(it)
+                    userLocalSource.setOwnerMode(false)
+
                     open<ClientHomeActivity>().close()
                 }
                 newMember.bind {
@@ -99,9 +102,16 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
     }
 
     private fun logoutApp() {
-        redirectToOwnerDialog.show {
-            viewModel.loginOwner(it)
+        if(userLocalSource.isVietNamLanguage()){
+            redirectToOwnerDialogVn.show {
+                viewModel.loginOwner(it)
+            }
+        }else{
+            redirectToOwnerDialog.show {
+                viewModel.loginOwner(it)
+            }
         }
+
     }
 }
 

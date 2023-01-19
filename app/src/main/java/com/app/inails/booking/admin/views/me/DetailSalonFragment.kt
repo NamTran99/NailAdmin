@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.me
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
@@ -22,6 +23,7 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.model.ui.ISalonDetail
+import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.dialog.VoucherDetailDialogOwner
@@ -61,7 +63,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         with(binding) {
             tabDots.setupWithViewPager(vpImage)
             voucherAdapter = VoucherAdapter(viewHeader.rcVoucher).apply {
-                onItemCLick ={
+                onItemCLick = {
                     voucherDetailDialog.show(it)
                 }
             }

@@ -13,11 +13,12 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/text_size_14"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/size_120"
             android:text="@string/redirect_to_owner_function"
-            />
+            android:textSize="@dimen/text_size_14" />
 
         <ImageButton
             android:id="@+id/btClose"

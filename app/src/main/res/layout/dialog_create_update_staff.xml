@@ -28,70 +28,90 @@
             app:tint="@color/black" />
     </RelativeLayout>
 
-    <com.app.inails.booking.admin.views.widget.LoadingImageView
-        android:id="@+id/mainImage"
-        android:layout_width="@dimen/size_100"
-        android:layout_height="@dimen/size_100"
-        android:layout_gravity="center" />
-
-    <EditText
-        android:id="@+id/etStaffFirstName"
-        style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_20"
-        android:drawableStart="@drawable/ic_user_outline"
-        android:hint="@string/hint_enter_first_name"
-        android:maxLength="30" />
-
-    <EditText
-        android:id="@+id/etStaffLastName"
-        style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_12"
-        android:drawableStart="@drawable/ic_user_outline"
-        android:hint="@string/hint_enter_last_name"
-        android:maxLength="30" />
-
-    <EditText
-        android:id="@+id/etStaffPhone"
-        style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_12"
-        android:drawableStart="@drawable/ic_phone_outline"
-        android:hint="@string/hint_enter_phone_number"
-        android:inputType="phone"
-        android:maxLength="14" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_12"
-        android:background="@drawable/bg_view_stroke"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/size_8"
-            android:layout_marginStart="@dimen/size_15"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_note" />
-
-        <EditText
-            android:id="@+id/etNote"
-            style="@style/AppTheme.EditText.MultiLine"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/size_8"
-            android:background="@null"
-            android:gravity="start"
-            android:hint="@string/note"
-            android:inputType="textMultiLine"
-            android:maxLines="10"
-            android:minLines="5"
-            android:textAlignment="textStart" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btSubmit"
-        style="@style/AppTheme.ButtonDefault"
-        android:layout_marginTop="@dimen/size_12"
-        android:background="@drawable/button_primary_corner"
-        android:text="@string/btn_submit" />
+            <com.app.inails.booking.admin.views.widget.LoadingImageView
+                android:id="@+id/mainImage"
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_100"
+                android:layout_gravity="center" />
+
+            <EditText
+                android:id="@+id/etStaffFirstName"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_20"
+                android:drawableStart="@drawable/ic_user"
+                android:hint="@string/hint_enter_first_name"
+                android:maxLength="30" />
+
+            <EditText
+                android:id="@+id/etStaffLastName"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:drawableStart="@drawable/ic_user_outline"
+                android:hint="@string/hint_enter_last_name"
+                android:maxLength="30" />
+
+            <EditText
+                android:id="@+id/etStaffPhone"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:drawableStart="@drawable/ic_phone_outline"
+                android:drawablePadding="@dimen/size_7"
+                android:hint="@string/hint_enter_phone_number"
+                android:inputType="phone"
+                android:maxLength="14" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_12"
+                android:background="@drawable/bg_view_stroke"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:src="@drawable/ic_note" />
+
+                <EditText
+                    android:id="@+id/etNote"
+                    style="@style/AppTheme.EditText.MultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:bufferType="spannable"
+                    android:gravity="start"
+                    android:hint="@string/note"
+                    android:maxLines="10"
+                    android:minLines="5"
+                    android:overScrollMode="always"
+                    android:paddingStart="@dimen/size_8"
+                    android:scrollbarStyle="insideInset"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="textStart"
+                    android:textIsSelectable="true" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                style="@style/AppTheme.ButtonDefault"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/button_primary_corner"
+                android:scrollbarStyle="insideInset"
+                android:text="@string/btn_submit" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+
 </LinearLayout>

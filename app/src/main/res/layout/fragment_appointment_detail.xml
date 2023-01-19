@@ -308,13 +308,13 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:id="@+id/waitingLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:visibility="gone"
+                    android:layout_marginTop="@dimen/size_10"
                     tools:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -403,86 +403,33 @@
                     android:visibility="gone"
                     tools:visibility="visible">
 
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:text="@string/label_status" />
-
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:layout_marginTop="@dimen/size_12"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btWaiting"
-                            style="@style/AppTheme.ButtonDefault.Small"
-                            android:layout_width="wrap_content"
-                            android:background="@drawable/button_gray_yellow_corner_20"
-                            android:drawableStart="@drawable/ic_check_white"
-                            android:enabled="false"
-                            android:minWidth="@dimen/size_150"
-                            android:text="@string/label_waiting"
-                            android:textColor="@color/color_button_status" />
-
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:layout_marginStart="@dimen/size_13"
-                            android:maxLines="@null"
-                            android:text="@string/label_info_waiting_status" />
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size_12"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btService"
-                            style="@style/AppTheme.ButtonDefault.Small"
-                            android:layout_width="wrap_content"
+                            style="@style/AppTheme.ButtonDefault.Responsive"
+                            android:layout_width="match_parent"
                             android:background="@drawable/button_gray_blue3_corner_20"
-                            android:drawableStart="@drawable/circle_blue3"
-                            android:minWidth="@dimen/size_150"
                             android:text="@string/btn_service"
-                            android:textColor="@color/color_button_status" />
-
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:layout_marginStart="@dimen/size_13"
-                            android:maxLines="@null"
-                            android:text="@string/label_info_service_status" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size_12"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                            android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btFinish"
-                            style="@style/AppTheme.ButtonDefault.Small"
-                            android:layout_width="wrap_content"
+                            style="@style/AppTheme.ButtonDefault.Responsive"
+                            android:layout_width="match_parent"
                             android:background="@drawable/button_green_corner_20"
-                            android:drawableStart="@drawable/circle_green"
-                            android:enabled="false"
                             android:minWidth="@dimen/size_150"
+                            android:textColor="@color/white"
                             android:text="@string/btn_finish" />
 
-                        <TextView
-                            style="@style/AppTheme.TextView.Medium"
-                            android:layout_marginStart="@dimen/size_13"
-                            android:maxLines="@null"
-                            android:text="@string/label_info_finish_status" />
-
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

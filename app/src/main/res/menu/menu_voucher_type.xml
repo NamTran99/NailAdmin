@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/typePercent"
+        android:title="@string/percent" />
+    <item
+        android:id="@+id/typeValue"
+        android:title="@string/value_1" />
+</menu>

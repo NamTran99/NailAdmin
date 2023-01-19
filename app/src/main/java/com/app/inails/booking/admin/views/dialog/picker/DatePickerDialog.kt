@@ -1,6 +1,8 @@
 package com.app.inails.booking.admin.views.dialog.picker
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
+import android.view.Display
 import android.view.View
 import android.view.WindowManager
 import android.widget.DatePicker
@@ -46,6 +48,11 @@ class DatePickerDialog(private val activity: BaseActivity) :
      * Disable future date
      * default: true
      */
+
+    var disPlayFormat = FORMAT_DATE_DISPLAY
+    fun setDisplayFormat(form: String){
+        disPlayFormat = form
+    }
     fun setDisableFutureDates(disableFutureDates: Boolean) {
         mDisableFutureDate = disableFutureDates
     }
@@ -54,7 +61,10 @@ class DatePickerDialog(private val activity: BaseActivity) :
         mDisablePastDate = disablePastDates
     }
 
-    fun setupClickWithView(view: View) {
+    var mEnableDisplay = true
+
+    fun setupClickWithView(view: View, enableDisplay: Boolean = false) {
+        mEnableDisplay = enableDisplay
         mView = view
         view.setOnClickListener {
             this@DatePickerDialog.handleChooseDate(getViewValue())
@@ -73,6 +83,11 @@ class DatePickerDialog(private val activity: BaseActivity) :
                     Locale.getDefault()
                 ).format(Calendar.getInstance().time)
             )
+    }
+
+    private var positiveText: Int? = null
+    fun setPositiveButtonText(text: Int){
+        positiveText = text
     }
 
     private fun handleChooseDate(timeNow: String) {
@@ -102,7 +117,7 @@ class DatePickerDialog(private val activity: BaseActivity) :
             R.style.AppDatePickerCalendarDialog, { _, year1, monthOfYear, dayOfMonth ->
                 calendar.clear()
                 calendar.set(year1, monthOfYear, dayOfMonth, 0, 0, 0)
-                val simpleDateFormat = SimpleDateFormat(FORMAT_DATE_DISPLAY, Locale.getDefault())
+                val simpleDateFormat = SimpleDateFormat(disPlayFormat, Locale.getDefault())
                 val simpleDateTagFormat = SimpleDateFormat(FORMAT_DATE_API, Locale.getDefault())
                 display(
                     simpleDateFormat.format(calendar.time),
@@ -126,12 +141,17 @@ class DatePickerDialog(private val activity: BaseActivity) :
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+        positiveText?.let{
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setText(it)
+        }
     }
 
     private fun display(date: String, dateTag: String = "") {
         when (mView) {
             is TextView -> {
-                (mView as TextView).text = date
+                if(mEnableDisplay){
+                    (mView as TextView).text = date
+                }
                 (mView as TextView).tag = dateTag
             }
         }

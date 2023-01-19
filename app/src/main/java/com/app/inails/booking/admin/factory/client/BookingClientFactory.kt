@@ -13,6 +13,7 @@ import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.extention.isCurrentDate
 import com.app.inails.booking.admin.extention.noInfo
 import com.app.inails.booking.admin.extention.safe
+import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.firebase.NotificationBookingDTO
 import com.app.inails.booking.admin.model.response.client.BookingClientDTO
@@ -25,7 +26,7 @@ import com.app.inails.booking.admin.model.ui.ServiceImpl
 import com.app.inails.booking.admin.model.ui.client.*
 
 @Inject(ShareScope.Singleton)
-class BookingClientFactory(private val textFormatter: TextFormatter) {
+class BookingClientFactory(textFormatter: TextFormatter): FactoryHelper(textFormatter) {
 
     private fun createService(serviceDTO: ServiceClientDTO?): IServiceClient {
         return object : IServiceClient, ISelector by ServiceImpl() {
@@ -114,7 +115,7 @@ class BookingClientFactory(private val textFormatter: TextFormatter) {
             override val voucherInfo: String
                 get() =  "${booking?.voucher?.description}\nStart date: ${booking?.voucher?.startDate}\nExpiration date: ${booking?.voucher?.expirationDate}"
             override val voucherCode: String
-                get() = booking?.voucher?.code.displaySafe1()
+                get() =  displaySafe(booking?.voucher?.code)
         }
     }
 
@@ -244,7 +245,7 @@ class BookingClientFactory(private val textFormatter: TextFormatter) {
             override val code: String
                 get() = voucherDTO.code
             override val discount: String
-                get() =  "-${textFormatter.formatPriceDiscount(total, voucherDTO)}"
+                get() = textFormatter.formatPriceDiscount(total, voucherDTO)
             override val percent: String
                 get() = textFormatter.formatPercent(voucherDTO.value)
             override val totalAmount: String

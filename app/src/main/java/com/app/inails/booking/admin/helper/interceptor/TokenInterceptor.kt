@@ -21,13 +21,13 @@ class TokenInterceptor(private val userLocalSource: UserLocalSource) : Intercept
         if (isNoTokenRequired) return chain.proceed(originRequest)
 
         var request = originRequest
+        request = request.newBuilder()   .addHeader("lang", userLocalSource.getLanguage()?:"en").build()
         val token = userLocalSource.getToken()
         if (!token.isNullOrEmpty()) {
             val bearer = "Bearer $token"
-            Log.e("Token", bearer)
             request = request.newBuilder()
                 .addHeader("Authorization", bearer)
-                .addHeader("lang", userLocalSource.getLanguage()?:"en")
+//                .addHeader("lang", userLocalSource.getLanguage()?:"en")
                 .build()
         }
         return chain.proceed(request)

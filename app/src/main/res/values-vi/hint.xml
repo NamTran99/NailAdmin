@@ -3,7 +3,7 @@
     <string name="hint_phone">Số điện thoại</string>
     <string name="hint_password">Mật khẩu</string>
     <string name="hint_enter_first_name">Điền tên</string>
-    <string name="hint_enter_last_name">Diền họ</string>
+    <string name="hint_enter_last_name">Điền họ</string>
     <string name="hint_enter_phone_number">Điền số điện thoại</string>
     <string name="hint_search_by_booking_id_customer_name_staff_name"><font size = "9">Tìm bằng Booking ID, Tên khách hàng, Tên nhân viên</font></string>
     <string name="hint_search_booking_list"><font size = "12">Tìm bằng Booking ID, Tên nhân viên</font></string>

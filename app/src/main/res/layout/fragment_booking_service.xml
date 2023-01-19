@@ -32,6 +32,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="?selectableItemBackground"
                     android:gravity="center_horizontal"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:padding="@dimen/size_10"
                     android:paddingHorizontal="@dimen/size_16"
                     android:textColor="@color/white"
@@ -43,6 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_20"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:paddingHorizontal="@dimen/size_16"
                     android:text="@string/label_what_do_you_want_get_done"
                     android:textColor="@color/white" />

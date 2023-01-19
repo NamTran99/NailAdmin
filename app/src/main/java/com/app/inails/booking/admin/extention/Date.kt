@@ -1,11 +1,25 @@
 package com.app.inails.booking.admin.extention
 
 import android.content.Context
+import android.os.Build
 import android.text.format.DateUtils
+import android.util.Log
+import androidx.annotation.RequiresApi
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.extention.DateTimeFormat.format1
+import com.app.inails.booking.admin.extention.DateTimeFormat.format2_en
+import com.app.inails.booking.admin.extention.DateTimeFormat.format2_vn
+import com.app.inails.booking.admin.extention.DateTimeFormat.format3
 import java.text.SimpleDateFormat
 import java.util.*
 
+object DateTimeFormat{
+    val format1 = "yyyy-MM-dd HH:mm:ss"
+    val format3 = "yyyy-MM-dd HH:mm"
+    val format2_en = "EEEE, MMMM d, yyyy 'at' hh:mm a"
+    val format2_vn = "EEEE, MMMM d, yyyy 'lúc' hh:mm a"
+
+}
 
 fun String?.isCurrentDate(): Boolean {
     if (this.isNullOrEmpty()) return true
@@ -50,6 +64,12 @@ fun String.toDate(
     return dateFormat.parse(this)
 }
 
+fun String.toTime(
+    format: String = "yyyy-MM-dd'T'HH:mm:ss"
+): Long {
+    return this.toDate(format).time
+}
+
 fun String.toDateAppointment(
     format: String = "yyyy-MM-dd'T'HH:mm:ss",
     parseFormat: String = "MMM dd (EEEE)",
@@ -86,6 +106,7 @@ fun String.toTimeAppointment(
     return simpleDateFormat.format(date)
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 fun String?.toTimeCheckIn(
     format: String = "yyyy-MM-dd'T'HH:mm:ssXXX"
 ): String {
@@ -131,6 +152,19 @@ fun String?.convertTime(
     return dateWithTime.toServerUTC(outFormat = toFormat, format = "yyyy-MM-dd HH:mm", fromTimeZoneID = fromZoneID)
 } /// this must format "HH:mm"
 
+fun String?.convertAllTimeType(
+    toFormat: String = format2_en,
+    fromFormat : String = format3
+): String? {
+    if (this.isNullOrEmpty()) return null
+    val fromTimeFormat = SimpleDateFormat(fromFormat, Locale.getDefault())
+    val dateTime = fromTimeFormat.parse(this)
+    val toTimeFormat = SimpleDateFormat(toFormat, Locale.getDefault())
+    Log.d("NamTD8", "convertAllTimeType: ${toTimeFormat.format(dateTime)}")
+    return toTimeFormat.format(dateTime)
+} /// this must format "HH:mm"
+
+
 fun String.toCreatedAt(
 ): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'", Locale.getDefault())
@@ -151,14 +185,15 @@ fun String.toJoinedDate(
     return simpleDateFormat.format(date)
 }
 
-fun String?.toVoucherTime( context: Context
+fun String?.toVoucherTime( context: Context, isAlreadyFormatDate: Boolean = false
 ): String {
+    if(isAlreadyFormatDate) return this.safe()
     if(this == null) return context.getString(R.string.no_information)
+    val simpleDateFormat = SimpleDateFormat(format3, Locale.getDefault())
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
-    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
     return simpleDateFormat.format(date)
 }
 

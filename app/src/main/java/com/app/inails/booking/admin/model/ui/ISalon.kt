@@ -3,11 +3,16 @@ package com.app.inails.booking.admin.model.ui
 import android.os.Parcelable
 import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.base.MainApplication
 import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
+import com.app.inails.booking.admin.extention.DateTimeFormat
 import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
+import com.app.inails.booking.admin.extention.toDate
+import com.app.inails.booking.admin.extention.toTime
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.support.ISelector
+import com.google.android.youtube.player.internal.i
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
@@ -47,13 +52,15 @@ interface ISalonDetail : ISalon {
 }
 
 interface IVoucher {
+    val id: Int get() = 0
     val code: String get() = ""
-    val type: VoucherType get() = VoucherType.PERCENT // 1 : %  || 2 : value
+    val typeName: VoucherType get() = VoucherType.PERCENT // 1 : %  || 2 : value
     val startDate: String get() = ""
     val endDate: String get() = ""
     val typeCustomer: Int get() = R.string.customer_type_all // 1 : all || 2 : normal || 3 : vip
     val value: Double get() = 0.0 // 1 : all || 2 : normal || 3 : vip
     val description: String get() = ""
+    val isAlreadyFormatDate: Boolean get() = false
 }
 
 enum class VoucherType {
@@ -68,7 +75,8 @@ class ISchedule(
     var startTime: String? = null,      // format 24H
     var endTime: String? = null,        // format 24H
     var timeFormat: String? = null,
-    override var isSelector: Boolean = false
+    override var isSelector: Boolean = false,
+    var isOpenDay : Boolean = false
 ) : Serializable, ISelector {
     override fun toString(): String {
         return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace(
@@ -87,6 +95,65 @@ class ISchedule(
             ISchedule(6, dayFormat = R.string.saturday),
             ISchedule(0, dayFormat = R.string.sunday),
         )
+    }
+}
+
+@Parcelize
+class VoucherForm(
+    override var code: String = "",
+    override var id: Int = -1,
+    @SerializedName("start_date")
+    override var startDate: String = "",
+    @SerializedName("expiration_date")
+    override var endDate: String = "",
+    override var value: Double = 0.0,
+    var salon_id : Int = 0,
+    var type_customer: Int = 0, //1 : all || 2 : normal || 3 : vip
+    override var description: String = "",
+    override var typeName: VoucherType = VoucherType.PERCENT,
+    override var typeCustomer: Int = R.string.customer_type_all,
+    var type: Int = 1, //1  : %  || 2 : value
+    var title: String = "a",
+    var listExistCode: List<String> = listOf(),
+    override var isAlreadyFormatDate: Boolean = true
+): IVoucher, Parcelable{
+    fun convertToVoucher(){
+        typeName =   when (type) {
+            1 -> VoucherType.PERCENT
+            else -> VoucherType.VALUE
+        }
+        typeCustomer= when (type_customer) {
+            1 -> R.string.customer_type_all
+            2 -> R.string.customer_type_normal
+            else -> R.string.customer_type_vip
+        }
+    }
+
+    fun validate(){
+        if(code.isBlank()){
+            viewError(R.id.etCode, R.string.error_code_blank)
+        }
+        if(code.trim().length < 3){
+            viewError(R.id.etCode, R.string.error_code_not_enough)
+        }
+        if(code in listExistCode){
+            viewError(R.id.etCode, R.string.error_code_already_exist)
+        }
+        if(value == -1.0){
+            viewError(R.id.etValue, R.string.error_empty_value)
+        }
+        if(startDate.isBlank()){
+            resourceError(R.string.error_blank_start_time_1)
+        }
+        if(endDate.isBlank()){
+            resourceError(R.string.error_blank_end_time_1)
+        }
+        if(startDate.toTime(DateTimeFormat.format3) >= endDate.toTime(DateTimeFormat.format3)){
+            resourceError(R.string.message_end_time_greather_than_start_time_2)
+        }
+        if(type_customer == 0){
+            resourceError(R.string.error_not_select_customer_type)
+        }
     }
 }
 
@@ -115,7 +182,7 @@ class SalonForm(
     fun setUpDataTimeZone(offset: String, zoneID: String) {
         offsetDisplay = "UTC $offset"
         this.zoneID = zoneID
-        fullTimeZoneDisplay1 = "Business Hour (${zoneID} ${offsetDisplay})"
+        fullTimeZoneDisplay1 = MainApplication.applicationContext().getString(R.string.business_hour_format, zoneID, offsetDisplay)
         fullTimeZoneDisplay2 = "${zoneID} ${offsetDisplay}"
     }
 

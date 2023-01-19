@@ -27,9 +27,9 @@ class ReportFragmentAdapter(view: RecyclerView) :
         var isShow = true
 
         binding.run {
-            tvCustomerName.text = item.customerName.displaySafe()
-            tvStaffName.text = item.staffName.displaySafe()
-            tvDateTime.text = item.dateTime.displaySafe()
+            tvCustomerName.text = item.customerName
+            tvStaffName.text = item.staffName
+            tvDateTime.text = item.dateTime
             tvTotalAmount.text = item.totalPrice.formatPrice()
 
             ReportServiceAdapter(rvServices).apply {

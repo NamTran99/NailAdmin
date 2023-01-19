@@ -1,68 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:layout_marginHorizontal="@dimen/size_10"
-    android:background="@drawable/bg_white_radius"
-    android:orientation="vertical"
-    android:paddingHorizontal="@dimen/size_15"
-    android:paddingTop="@dimen/size_24"
-    android:paddingBottom="@dimen/size_16">
+    android:background="@drawable/bg_white_radius">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/AppTheme.TextView.Medium"
-        android:textSize="@dimen/text_size_14"
-        android:text="@string/choose_time"/>
 
-    <com.app.inails.booking.admin.views.widget.OpenSalonTime
-        android:id="@+id/businessHour"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_17"/>
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_15"
+        android:paddingTop="@dimen/size_24"
+        android:paddingBottom="@dimen/size_16">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_marginTop="@dimen/size_20"
-        android:textSize="@dimen/text_size_14"
-        android:text="@string/choose_dates_to_apply"/>
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_time"
+            android:textSize="@dimen/text_size_14" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
+        <com.app.inails.booking.admin.views.widget.OpenSalonTime
+            android:id="@+id/businessHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_17" />
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/size_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:text="@string/choose_dates_to_apply"
+            android:textSize="@dimen/text_size_14" />
 
-        <Button
-            android:id="@+id/btCancel"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_50"
-            android:background="@drawable/button_primary_stroke_1"
-            android:text="@string/btn_cancel"
-            android:textColor="@color/colorPrimary"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/btSetUp"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_50"
-            android:background="@drawable/button_primary_corner"
-            android:text="@string/set_up"
-            android:layout_marginStart="@dimen/size_10"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_50"
+                android:layout_weight="1"
+                android:background="@drawable/button_primary_stroke_1"
+                android:text="@string/btn_cancel"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btSetUp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_50"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:background="@drawable/button_primary_corner"
+                android:text="@string/set_up" />
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.core.widget.NestedScrollView>
 

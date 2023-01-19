@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.databinding.ItemStaffStatusBinding
 import com.app.inails.booking.admin.extention.drawableStart
+import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.ICustomer
@@ -49,9 +50,9 @@ class StaffStatusAdapter(view: RecyclerView) :
                 tvAppointmentID.text = "#${item.appointment?.id}"
                 tvDateTime.text = "(${item.timeCheckInAppointment} - ${item.timeEndAppointment})"
             } else {
-                tvDateTime.text = ""
-                tvAppointmentID.text = ""
-                tvCustomerName.text = ""
+                tvDateTime.hide()
+                tvAppointmentID.hide()
+                tvCustomerName.hide()
             }
         }
     }

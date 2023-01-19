@@ -15,8 +15,7 @@
         <TextView
             android:id="@+id/tvStaffName"
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="@dimen/size_0"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             tools:text="Staff Name" />
 
         <TextView

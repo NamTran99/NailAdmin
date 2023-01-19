@@ -2,18 +2,14 @@ package com.app.inails.booking.admin.views.management.staff
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
+import android.view.MotionEvent
 import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateStaffBinding
-import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
-import com.app.inails.booking.admin.extention.formatPhoneUS
-import com.app.inails.booking.admin.extention.inputTypePhoneUS
-import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IStaff
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
-import com.bumptech.glide.Glide.init
 
 
 class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
@@ -25,6 +21,7 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDi
     init {
         setCancelable(false)
         binding.apply {
+            etNote.scrollContentVertical()
             etStaffPhone.inputTypePhoneUS()
             btClose.onClick {
                 confirmDialog.show(
@@ -68,6 +65,10 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDi
             etNote.setText("")
             isDeleteAvatar = 0
 
+            mainImage.onClick{_ ->
+                onAvatarClick.invoke(true)
+            }
+
             staff?.let {
                 etStaffFirstName.setText(it.firstName)
                 etStaffLastName.setText(it.lastName)
@@ -79,13 +80,7 @@ class CreateUpdateStaffDialog(context: Context) : BaseDialog(context), ConfirmDi
                     onAvatarClick.invoke(it.isAvatarDefault)
                 }
 
-                val hasCountryCode = it.phone.indexOf("1") == 0
-                var phone = it.phone.replace("-", "")
-                    .replace("(", "")
-                    .replace(")", "")
-                    .replace(" ", "").replace("+1", "").trim()
-                if (hasCountryCode) phone = phone.substring(1)
-                etStaffPhone.setText(phone)
+                etStaffPhone.setText(it.phone.formatPhoneUSCustom())
             }
 
             btSubmit.onClick {

@@ -403,7 +403,7 @@ class CustomerBookingListViewModel(
     val appointment = appointmentRepo.result
     val formHandle = HandleAppointmentForm()
     val formStartService = StartServiceForm()
-    val success = SingleLiveEvent<String>()
+    val success = SingleLiveEvent<Int>()
     val checkInSuccess = SingleLiveEvent<Any>()
     val form = AppointmentStatusForm()
     val formCancel = CancelAppointmentForm()
@@ -425,40 +425,40 @@ class CustomerBookingListViewModel(
 
     fun updateStatus() = launch(loading, error) {
         appointmentRepo.updateStatusAppointment(form)
-        success.post("Finish booking success")
+        success.post(R.string.success_finish_appointment)
     }
 
     fun cancel() = launch(loading, error) {
         appointmentRepo.cancelAppointment(formCancel)
-        success.post("Cancel success")
+        success.post(R.string.success_cancel_appointment)
     }
 
     fun remove(id: Int) = launch(loading, error) {
         appointmentRepo.removeAppointment(id)
-        success.post("Remove booking success")
+        success.post(R.string.success_remove_appointment)
     }
 
     fun handle() = launch(loading, error) {
         appointmentRepo.adminHandleAppointment(formHandle)
         if (formHandle.isAccepted == 1)
-            success.post("Accept booking success")
+            success.post(R.string.success_accept_appointment)
         else
-            success.post("Reject booking success")
+            success.post(R.string.success_reject_appointment)
     }
 
     fun startService() = launch(loading, error) {
         appointmentRepo.startServiceAppointment(formStartService)
-        success.post("Start service success")
+        success.post(R.string.success_start_service)
     }
 
     fun remind(id: Int) = launch(loading, error) {
         remindAppointmentRepo(id)
-        success.post("Remind customer success")
+        success.post(R.string.success_remind_customer)
     }
 
     fun customerWalkIn(id: Int) = launch(loading, error) {
         checkInSuccess.post(appointmentRepo.customerWalkIn(id))
-        success.post("Remind customer success")
+        success.post(R.string.success_remind_customer)
     }
 
     fun loadCustomer(keyword: String, page: Int) = launch(if (page == 1) loading else null, error) {

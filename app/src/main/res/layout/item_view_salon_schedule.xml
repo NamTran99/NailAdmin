@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="100dp"
+        style="@style/AppTheme.TextViewResponsive"
         android:minWidth="100dp"
         android:singleLine="true"
         tools:text="Monday" />
@@ -19,6 +20,7 @@
         android:id="@+id/txtTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
         android:textAlignment="textEnd"
         tools:text="10:00 AM - 07:00 PM" />
 </androidx.appcompat.widget.LinearLayoutCompat>

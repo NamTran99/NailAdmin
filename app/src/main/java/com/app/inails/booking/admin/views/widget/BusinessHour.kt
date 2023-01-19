@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.support.core.view.viewBinding
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ViewBusinessHourBinding
 import com.app.inails.booking.admin.exception.convert24hTo12hFormat
+import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.loadAttrs
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerWithIntervalDialogOwner
 import com.app.inails.booking.admin.views.dialog.picker.TimeType
@@ -37,8 +38,7 @@ enum class Day(val index: Int) {
 
 interface BusinessHourViewInf {
     fun setDate(index: Int)
-    fun setStartTime(text: String?)
-    fun setEndTime(text: String?)
+    fun setTime(startTime: String?, endTime: String?)
     fun setOnTimeChange(callBack: (ISchedule) -> Unit)
 }
 
@@ -49,6 +49,60 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
     private var date: Day = Day.Monday
     private var onTimeChange: ((ISchedule) -> Unit)? = null
     private val data = ISchedule()
+
+    var mStartTime : String? = null //format 24
+        get() = data.startTime
+        set(value){
+            mStartHours = value?.substring(0, 2)?.toIntOrNull() ?: 0
+            data.startTime = value
+            binding.tvFromTime.text =
+                value?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
+            checkShowReset()
+            field = value
+        }
+
+    var mEndTime : String? = null //format 24
+        get() = data.endTime
+        set(value){
+            mEndHours = value?.substring(0, 2)?.toIntOrNull() ?: 0
+            data.endTime = value
+            binding.tvTotime.text =
+                value?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
+            checkShowReset()
+            field = value
+        }
+
+    var isShowReset: Boolean = true
+        set(value) {
+            field =value
+            binding.btnReset.show(value)
+        }
+
+    var isOpen: Boolean = false
+        set(value) {
+            binding.apply {
+                if(value){
+                    tvTotime.isEnabled = true
+                    tvFromTime.isEnabled = true
+                    btnReset.isEnabled = true
+                    tvStatus.setText(R.string.not_open)
+                    lvMain.alpha = 1f
+                    tvStatus.setTextColor(context.getColor(R.color.colorAccent1))
+                }else{
+                    tvTotime.isEnabled = false
+                    tvFromTime.isEnabled = false
+                    btnReset.isEnabled = false
+                    lvMain.alpha = 0.3f
+                    tvStatus.setText(R.string.salon_open)
+                    tvStatus.setTextColor(
+                        context.getColor(R.color.colorPrimary)
+                    )
+                }
+                data.isOpenDay = value
+                field  = value
+            }
+        }
+
     private var mStartHours = 0
     private var mEndHours = 0
 
@@ -60,18 +114,22 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         setupListener()
     }
 
+    fun checkShowReset(){
+        binding.btnReset.show(mStartTime != null || mEndTime != null)
+    }
+
     @SuppressLint("ResourceAsColor")
     fun setUpView() {
         binding.apply {
-            tvStatus.setText(R.string.not_open)
-            tvStatus.setTextColor(
-                context.getColor(R.color.colorPrimary)
-            )
+            isOpen = true
         }
     }
 
     fun setupListener() {
         with(binding) {
+            tvStatus.onClick{
+                isOpen = !isOpen
+            }
             tvTotime.onClick {
                 timePickerDialog.show(tvTotime.text.toString(), TimeType.End)
             }
@@ -89,11 +147,10 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
                                 R.string.message_end_time_greather_than_start_time,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            setStartTime(null)
+                            mStartTime = null
                         } else {
                             mStartHours = hours
-                            data.startTime = time
-                            tvFromTime.text = time.convert24hTo12hFormat()
+                            mStartTime = time
                         }
 
                         onTimeChange?.invoke(data)
@@ -105,11 +162,10 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
                                 R.string.message_end_time_greather_than_start_time,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            setEndTime(null)
+                            mEndTime = null
                         } else {
                             mEndHours = hours
-                            data.endTime = time
-                            tvTotime.text = time.convert24hTo12hFormat()
+                            mEndTime = time
                         }
                         onTimeChange?.invoke(data)
                     }
@@ -117,12 +173,9 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
             }
 
             btnReset.onClick {
-                tvStatus.setText(R.string.not_open)
-                tvStatus.setTextColor(
-                    context.getColor(R.color.colorPrimary)
-                )
                 tvTotime.text = context.getString(R.string.label_select_time)
                 tvFromTime.text = context.getString(R.string.label_select_time)
+                btnReset.hide()
                 data.endTime = null
                 data.startTime = null
                 onTimeChange?.invoke(data)
@@ -148,31 +201,18 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         )
     }
 
-    override fun setStartTime(text: String?) {
-        mStartHours = text?.substring(0, 2)?.toIntOrNull() ?: 0
-        data.startTime = text
-        binding.tvFromTime.text =
-            text?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
-        if (data.startTime != null && data.endTime != null) {
-            binding.tvStatus.setText(R.string.salon_open)
-            binding.tvStatus.setTextColor(context.getColor(R.color.colorAccent1))
-        }
-    }
 
-    override fun setEndTime(text: String?) {
-        mEndHours = text?.substring(0, 2)?.toIntOrNull() ?: 0
-        data.endTime = text
-        binding.tvTotime.text =
-            text?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
-        if (data.startTime != null && data.endTime != null) {
-            binding.tvStatus.setText(R.string.salon_open)
-            binding.tvStatus.setTextColor(context.getColor(R.color.colorAccent1))
-        }
+    override fun setTime(startTime: String?, endTime:String?){
+        mStartTime = startTime
+        mEndTime = endTime
+
+        binding.btnReset.show(data.startTime != null || data.endTime != null)
+        isOpen = !(data.startTime == null && data.endTime == null)
+        onTimeChange?.invoke(data)
     }
 
     override fun setOnTimeChange(callBack: (ISchedule) -> Unit) {
         onTimeChange = callBack
     }
-
-
 }
+

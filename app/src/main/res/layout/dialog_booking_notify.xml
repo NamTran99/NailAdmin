@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginVertical="@dimen/size_16"
+        style="@style/AppTheme.TextViewResponsive"
         android:gravity="center_horizontal"
         android:text="@string/title_booking_accepted"
         android:textColor="@color/colorPrimary"
@@ -22,6 +23,7 @@
         android:id="@+id/txtDesUpcoming"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
         android:gravity="center_horizontal"
         android:text="@string/text_notify_upcoming" />
 
@@ -45,6 +47,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelBookingID"
                 android:layout_width="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_height="wrap_content"
                 android:text="@string/label_booking_id" />
 
@@ -55,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/labelBookingID"
                 android:layout_alignParentEnd="true"
+
                 android:layout_toEndOf="@+id/labelBookingID"
                 android:gravity="end"
                 android:textColor="@color/black"
@@ -65,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtBookingID"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_marginTop="@dimen/size_10"
                 android:text="@string/label_salon_name" />
 
@@ -73,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/labelSalonName"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@+id/labelSalonName"
                 android:gravity="end"
@@ -84,6 +90,7 @@
                 android:id="@+id/labelServices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_below="@+id/txtSalonName"
                 android:layout_marginTop="@dimen/size_10"
                 android:text="@string/label_services" />
@@ -112,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/divider1"
+                style="@style/AppTheme.TextViewResponsive"
                 android:text="@string/label_staff" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -121,6 +129,7 @@
                 android:layout_below="@+id/labelStaff"
                 android:layout_alignTop="@+id/labelStaff"
                 android:layout_alignParentEnd="true"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_marginStart="@dimen/size_10"
                 android:layout_toEndOf="@+id/labelStaff"
                 android:gravity="end"
@@ -130,6 +139,7 @@
                 android:id="@+id/labelDatetime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_below="@+id/txtStaff"
                 android:layout_marginTop="@dimen/size_10"
                 android:text="@string/label_appointment_time" />
@@ -141,6 +151,7 @@
                 android:layout_below="@+id/labelSalonName"
                 android:layout_alignTop="@+id/labelDatetime"
                 android:layout_alignParentEnd="true"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_marginStart="@dimen/size_10"
                 android:layout_marginBottom="@dimen/size_10"
                 android:layout_toEndOf="@+id/labelDatetime"
@@ -152,6 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtDatetime"
+                style="@style/AppTheme.TextViewResponsive"
                 android:text="@string/label_reason" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -159,6 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/labelReason"
+                style="@style/AppTheme.TextViewResponsive"
                 android:layout_alignTop="@+id/labelReason"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/size_10"

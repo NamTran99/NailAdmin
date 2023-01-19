@@ -17,13 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_booking_id"
+            style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/gray_145" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtBookingID"
-            style="@style/TextAppearance.Bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_alignTop="@+id/labelBookingID"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/size_16"
@@ -39,6 +40,7 @@
             android:layout_below="@+id/txtBookingID"
             android:layout_marginTop="@dimen/size_10"
             android:text="@string/label_salon_name"
+            style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/gray_145" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -48,6 +50,7 @@
             android:layout_alignTop="@+id/labelSalonName"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/size_16"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_toEndOf="@+id/labelSalonName"
             android:background="?selectableItemBackground"
             android:gravity="end"
@@ -60,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtSalonName"
             android:layout_marginTop="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/label_appointment_time"
             android:textColor="@color/gray_145" />
 
@@ -72,6 +76,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/size_16"
             android:layout_toEndOf="@+id/labelDatetime"
+            style="@style/AppTheme.TextViewResponsive"
             android:gravity="end"
             tools:text="Aug 23 2022 - 2:58 PM" />
 
@@ -82,6 +87,7 @@
             android:layout_below="@+id/txtDatetime"
             android:layout_marginTop="@dimen/size_10"
             android:text="@string/label_request"
+            style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/gray_145" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -93,6 +99,7 @@
             android:layout_marginStart="@dimen/size_16"
             android:layout_toEndOf="@+id/labelRequest"
             android:gravity="end"
+            style="@style/AppTheme.TextViewResponsive"
             tools:text="Johnson Champlin" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -101,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtRequest"
             android:layout_marginTop="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/hint_note"
             android:textColor="@color/gray_145" />
 
@@ -108,6 +116,7 @@
             android:id="@+id/txtSomethingElse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_alignTop="@+id/labelSomethingElse"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/size_16"
@@ -118,6 +127,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/labelStatus"
             android:layout_width="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtSomethingElse"
             android:layout_marginTop="@dimen/size_10"
@@ -131,6 +141,7 @@
             android:layout_alignTop="@+id/labelStatus"
             android:layout_alignParentEnd="true"
             android:drawablePadding="@dimen/size_10"
+            style="@style/AppTheme.TextViewResponsive"
             tools:text="Waiting"
             tools:textColor="@color/yellow" />
 
@@ -142,6 +153,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/size_5"
             android:textColor="@color/gray_145"
+            style="@style/AppTheme.TextViewResponsive"
             android:textSize="@dimen/text_size_12"
             android:textStyle="italic"
             tools:text="Aug 23 2022 - 2:58 PM" />
@@ -157,6 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider"
+            style="@style/AppTheme.TextViewResponsive"
             android:text="@string/label_services" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -194,12 +207,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_total"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:textColor="@color/gray_08" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:layout_alignParentEnd="true"
                     android:textColor="@color/black" />
             </RelativeLayout>
@@ -225,6 +240,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/label_voucher_discount"
+                            style="@style/AppTheme.TextViewResponsive"
                             android:textColor="@color/gray_08" />
 
                         <androidx.appcompat.widget.LinearLayoutCompat
@@ -251,6 +267,7 @@
                                 android:id="@+id/txtDiscount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                style="@style/AppTheme.TextViewResponsive"
                                 android:layout_marginStart="@dimen/size_5"
                                 tools:text="vip"
                                 android:textColor="#9CB859DA" />
@@ -276,6 +293,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="end"
+                        style="@style/AppTheme.TextViewResponsive"
                         android:layout_alignParentEnd="true"
                         android:textColor="@color/colorPrimary" />
 
@@ -303,6 +321,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_total"
+                style="@style/AppTheme.TextViewResponsive"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14" />
 
@@ -311,6 +330,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                style="@style/AppTheme.TextViewResponsive"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14" />
         </RelativeLayout>
@@ -333,6 +353,7 @@
                 style="@style/TextAppearance.Italic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginTop="@dimen/size_10"
                 tools:text="Cancelled by Ken" />
 
@@ -342,6 +363,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtCancelBy"
                 android:layout_marginTop="@dimen/size_4"
+                style="@style/AppTheme.TextViewResponsive"
                 android:gravity="center"
                 android:textColor="@color/gray_145"
                 tools:text="Reason" />
@@ -363,6 +385,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
+                style="@style/AppTheme.TextViewResponsive"
                 android:textColor="@color/gray_145"
                 tools:text="Note..." />
 
@@ -383,6 +406,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
+                style="@style/AppTheme.TextViewResponsive"
                 android:gravity="center"
                 android:text="@string/title_feed_back"
                 android:textColor="@color/black" />
@@ -406,6 +430,7 @@
                 android:layout_below="@+id/ratingBar"
                 android:layout_marginTop="@dimen/size_10"
                 android:textColor="@color/gray_145"
+                style="@style/AppTheme.TextViewResponsive"
                 tools:text="Waiting" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -437,6 +462,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
                 android:gravity="center"
+                style="@style/AppTheme.TextViewResponsive"
                 android:text="@string/label_before_service_image"
                 android:textColor="@color/black" />
 
@@ -467,6 +493,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
                 android:gravity="center"
+                style="@style/AppTheme.TextViewResponsive"
                 android:text="@string/label_after_service_image"
                 android:textColor="@color/black" />
 

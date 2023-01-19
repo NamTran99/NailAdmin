@@ -15,6 +15,7 @@ import com.app.inails.booking.admin.views.main.MainActivity
 interface SplashRoute {
     fun RouteDispatcher.redirectToMain()
     fun RouteDispatcher.redirectToLogin()
+    fun RouteDispatcher.redirectToApmList()
     fun RouteDispatcher.redirectToShowZoomImage1(showZoomImageArgs: ShowZoomImageArgs1)
     fun RouteDispatcher.redirectToWebView(webViewArgs: WebViewArgs)
 }
@@ -27,6 +28,15 @@ open class SplashRouteImpl : SplashRoute {
     override fun RouteDispatcher.redirectToLogin() {
         open<LoginActivity>().clear()
     }
+
+    override fun RouteDispatcher.redirectToApmList() {
+        open<MainActivity>().clear()
+        Router.open(
+            this,
+            Routing.BookingFragment(Routing.BookingFragment.TypeBooking.APPOINTMENTS)
+        )
+    }
+
     override fun RouteDispatcher.redirectToShowZoomImage1(showZoomImageArgs: ShowZoomImageArgs1) {
         open<ShowZoomImageActivity>(showZoomImageArgs)
     }

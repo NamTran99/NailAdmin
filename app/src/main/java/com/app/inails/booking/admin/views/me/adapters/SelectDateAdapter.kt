@@ -5,6 +5,7 @@ import android.support.core.view.bindingOf
 import android.util.Log
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.databinding.adapters.ImageViewBindingAdapter.setImageDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemDateSelectBinding

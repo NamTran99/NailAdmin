@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/size_10">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/size_15">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etCode"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:hint="@string/enter_code" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15"
+                android:background="@drawable/bg_view_stroke"
+                android:gravity="center"
+                android:minHeight="@dimen/size_50"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/size_16">
+
+                <EditText
+                    android:id="@+id/etValue"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    android:background="@null"
+                    android:hint="@string/enter_value" />
+
+                <ImageView
+                    android:id="@+id/imgSymbol"
+                    android:src="@drawable/ic_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/size_10"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    style="@style/AppTheme.Line.Vertical"
+                    android:layout_marginVertical="@dimen/size_5" />
+
+                <TextView
+                    android:id="@+id/tvVoucherTypeAction"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:minWidth="@dimen/size_90"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:paddingVertical="@dimen/size_10"
+                    android:paddingStart="@dimen/size_10"
+                    android:text="@string/percent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:layout_marginTop="@dimen/size_15"
+                android:background="@drawable/bg_view_stroke"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/size_18">
+
+                <TextView
+                    android:id="@+id/tvStartTime"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time"
+                    app:drawableStartCompat="@drawable/ic_calendar"
+                    app:drawableTint="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:layout_marginTop="@dimen/size_15"
+                android:background="@drawable/bg_view_stroke"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/size_18">
+
+                <TextView
+                    android:id="@+id/tvEndTime"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/end_time"
+                    app:drawableStartCompat="@drawable/ic_calendar"
+                    app:drawableTint="@color/black" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_view_stroke"
+                android:layout_marginTop="@dimen/size_15"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:id="@+id/spCustomerType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/size_50" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <EditText
+                android:id="@+id/etDescription"
+                style="@style/AppTheme.EditText.MultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15"
+                android:bufferType="spannable"
+                android:gravity="start"
+                android:hint="@string/note"
+                android:minLines="5"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:selectAllOnFocus="true"
+                android:textAlignment="textStart"
+                android:textIsSelectable="true" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                style="@style/AppTheme.ButtonDefault"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/button_primary_corner"
+                android:scrollbarStyle="insideInset"
+                android:text="@string/btn_apply" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

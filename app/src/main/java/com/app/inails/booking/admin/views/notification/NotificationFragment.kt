@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.notification
 
+import android.content.Context
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.LoadingEvent
@@ -217,9 +218,9 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification), TopBa
 }
 
 class NotificationViewModel(
-    private val notificationRepo: NotificationRepository
+    private val notificationRepo: NotificationRepository,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-    val success = SingleLiveEvent<String>()
+    val success = SingleLiveEvent<Int>()
     val goToDetail = SingleLiveEvent<Int?>()
     val listForm = NotificationForm()
     val idForm = NotificationIDForm()
@@ -244,19 +245,19 @@ class NotificationViewModel(
 
     fun delete() = launch(loading, error) {
         notificationRepo.delete(idsForm)
-        success.post("Delete selected notification successfully")
+        success.post(R.string.success_delete_one_notification)
     }
 
     fun deleteAll() = launch(loading, error) {
         notificationRepo.deleteAll()
-        success.post("Delete all notifications successfully")
+        success.post( R.string.success_delete_all_notification)
         listForm.page = 1
         refresh()
     }
 
     fun readAll() = launch(loading, error) {
         notificationRepo.readAll()
-        success.post("Read all notifications successfully")
+        success.post(R.string.success_read_all_notification)
         listForm.page = 1
         refresh()
     }
@@ -265,7 +266,7 @@ class NotificationViewModel(
 @Inject(ShareScope.Fragment)
 class NotificationRepository(
     private val notificationApi: NotificationApi,
-    private val notificationFactory: NotificationFactory
+    private val notificationFactory: NotificationFactory,
 ) {
     val results = MutableLiveData<Pair<Int, List<INotification>>>()
     val result = MutableLiveData<INotification>()

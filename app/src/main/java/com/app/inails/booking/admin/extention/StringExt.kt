@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.extention
 
+import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.SpannableStringBuilder
@@ -146,12 +147,12 @@ fun String.formatUsNumberCustom(): String {
     return formattedString.toString()
 }
 
-fun String.displaySafe(): String {
-    return this.ifEmpty {MainApplication.applicationContext().getString(R.string.no_information) }
+fun String.displaySafe(context: Context): String {
+    return this.ifEmpty {context.getString(R.string.no_information) }
 }
 
-fun String?.displaySafe1(): String {
-    return this ?: "".displaySafe()
+fun String?.displaySafe1(context: Context): String {
+    return this ?: "".displaySafe(context)
 }
 
 

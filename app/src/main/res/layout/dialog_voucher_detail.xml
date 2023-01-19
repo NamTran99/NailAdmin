@@ -57,7 +57,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_3"
+        android:layout_marginTop="@dimen/size_10"
         android:orientation="horizontal">
 
         <TextView
@@ -81,7 +81,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_3"
+        android:layout_marginTop="@dimen/size_10"
         android:orientation="horizontal">
 
         <TextView
@@ -105,7 +105,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_3"
+        android:layout_marginTop="@dimen/size_10"
         android:orientation="horizontal">
 
         <TextView
@@ -129,7 +129,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_3"
+        android:layout_marginTop="@dimen/size_10"
         android:orientation="horizontal">
 
         <TextView
@@ -153,8 +153,8 @@
         android:id="@+id/lvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_3"
-        android:orientation="horizontal">
+        android:layout_marginTop="@dimen/size_10"
+        android:orientation="vertical">
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -167,11 +167,11 @@
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_10"
             android:layout_weight="@integer/material_motion_duration_long_1"
+            android:layout_marginTop="@dimen/size_5"
             android:gravity="end"
             android:text="@string/voucher_code"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="#727272" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -180,6 +180,21 @@
         android:layout_marginTop="@dimen/size_12"
         android:background="@drawable/button_primary_corner"
         android:text="@string/btn_close" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_height="@dimen/size_50"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/size_5"
+        android:background="@drawable/btn_view_stroke_2"
+        android:drawableStart="@drawable/ic_delete_outline"
+        android:drawableTint="#EB3E0B"
+        android:paddingHorizontal="@dimen/size_20"
+        android:textAllCaps="false"
+        android:text="@string/btn_delete"
+        android:textColor="#EB3E0B" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

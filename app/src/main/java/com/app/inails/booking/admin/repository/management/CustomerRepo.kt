@@ -42,6 +42,7 @@ class FetchListCustomerRepo(
     }
 
     suspend fun updateCustomer(form: UpdateCustomerForm) {
+        form.validate()
         updateCustomerResult.post(
             customerFactory.createCustomer(
                 CustomerApi.updateCustomer(form)

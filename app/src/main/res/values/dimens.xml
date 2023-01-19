@@ -94,4 +94,5 @@
     <dimen name="switch_padding">-2dp</dimen>
     <dimen name="switch_radius">50dp</dimen>
     <dimen name="switch_height">30dp</dimen>
+    <dimen name="size_280">280dp</dimen>
 </resources>

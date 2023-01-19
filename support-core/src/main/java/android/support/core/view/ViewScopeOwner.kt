@@ -74,3 +74,4 @@ class ViewScope(private val view: ViewGroup) {
         return mCache[key] as? T ?: factory().also { mCache[key] = it!! }
     }
 }
+

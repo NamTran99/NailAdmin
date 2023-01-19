@@ -1,139 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray07"
+    android:orientation="vertical"
     tools:context=".views.main.StaffListFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_60"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnManageSalon"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_blue_corner_1"
-                android:drawableStart="@drawable/ic_salon_2"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/manage_salon" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnManageService"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/size_11"
-                android:layout_weight="1"
-                android:background="@drawable/button_green_corner_1"
-                android:drawableStart="@drawable/ic_window"
-                android:singleLine="false"
-                android:text="@string/mn_manage_service" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_60"
-            android:layout_marginTop="@dimen/size_5"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnManageStaff"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_f26563_corner"
-                android:drawableStart="@drawable/ic_many_person"
-                android:singleLine="false"
-                android:text="@string/mn_manage_staff" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnManageCustomer"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/size_11"
-                android:layout_weight="1"
-                android:background="@drawable/button_orange_corner_1"
-                android:drawableStart="@drawable/ic_many_person"
-                android:singleLine="false"
-                android:text="@string/mn_manage_customer" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50"
-            android:layout_marginTop="@dimen/size_5">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnReport"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_blue_corner_2"
-                android:drawableStart="@drawable/ic_information"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/sale_report" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnStaffListToday"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/size_9"
-                android:layout_weight="1"
-                android:background="@drawable/button_blue_corner_1"
-                android:drawableStart="@drawable/ic_menu_1"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/staff_list_today" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50"
-            android:layout_marginTop="@dimen/size_5">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnBookingList"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_e5c043_corner"
-                android:drawableStart="@drawable/ic_menu_1"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/booking_list" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnApmList"
-                style="@style/AppTheme.ButtonDefault.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/size_9"
-                android:layout_weight="1"
-                android:background="@drawable/button_72c73c_corner"
-                android:drawableStart="@drawable/ic_menu_1"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/appointment_list" />
-        </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/viewRefresh"
@@ -142,50 +15,150 @@
             android:layout_marginTop="@dimen/size_10"
             android:layout_weight="1">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_130">
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/viewPagerAds"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabDotsAds"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/size_5"
-                        android:background="@null"
-                        android:clipToPadding="false"
-                        app:tabBackground="@drawable/tab_selector_2"
-                        app:tabGravity="center"
-                        app:tabIndicatorHeight="0dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
+                android:layout_height="match_parent">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10">
+                    android:orientation="vertical">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/size_60"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnManageSalon"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_blue_corner_1"
+                            android:drawableStart="@drawable/ic_salon_2"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="@string/manage_salon" />
+
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnManageService"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/size_11"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_green_corner_1"
+                            android:drawableStart="@drawable/ic_window"
+                            android:singleLine="false"
+                            android:text="@string/mn_manage_service" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_60"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnManageStaff"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_f26563_corner"
+                            android:drawableStart="@drawable/ic_many_person"
+                            android:singleLine="false"
+                            android:text="@string/mn_manage_staff" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnManageCustomer"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/size_11"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_orange_corner_1"
+                            android:drawableStart="@drawable/ic_many_person"
+                            android:singleLine="false"
+                            android:text="@string/mn_manage_customer" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50"
+                        android:layout_marginTop="@dimen/size_5">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnReport"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_blue_corner_2"
+                            android:drawableStart="@drawable/ic_information"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="@string/sale_report" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnStaffListToday"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/size_9"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_blue_corner_1"
+                            android:drawableStart="@drawable/ic_menu_1"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="@string/staff_list_today" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50"
+                        android:layout_marginTop="@dimen/size_5">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnBookingList"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_e5c043_corner"
+                            android:drawableStart="@drawable/ic_menu_1"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="@string/booking_list" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnApmList"
+                            style="@style/AppTheme.ButtonDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/size_9"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_72c73c_corner"
+                            android:drawableStart="@drawable/ic_menu_1"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="@string/appointment_list" />
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:layout_height="@dimen/size_280">
 
                         <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/viewPagerGuidance"
+                            android:id="@+id/viewPagerAds"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="H,484:403"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:layout_height="match_parent" />
+
                         <com.google.android.material.tabs.TabLayout
-                            android:id="@+id/tabDotsGuidance"
+                            android:id="@+id/tabDotsAds"
                             android:layout_width="match_parent"
                             android:layout_height="10dp"
                             android:layout_alignParentBottom="true"
@@ -194,18 +167,50 @@
                             android:clipToPadding="false"
                             app:tabBackground="@drawable/tab_selector_2"
                             app:tabGravity="center"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:tabIndicatorHeight="0dp" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_200"
+                        android:layout_marginTop="@dimen/size_10">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.viewpager2.widget.ViewPager2
+                                android:id="@+id/viewPagerGuidance"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                app:layout_constraintDimensionRatio="H,484:403"
+                                app:layout_constraintTop_toTopOf="parent" />
+                            <com.google.android.material.tabs.TabLayout
+                                android:id="@+id/tabDotsGuidance"
+                                android:layout_width="match_parent"
+                                android:layout_height="10dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="@dimen/size_5"
+                                android:background="@null"
+                                android:clipToPadding="false"
+                                app:tabBackground="@drawable/tab_selector_2"
+                                app:tabGravity="center"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:tabIndicatorHeight="0dp" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@android:color/transparent"/>
+
+                </LinearLayout>
 
 
+            </androidx.core.widget.NestedScrollView>
 
-                </RelativeLayout>
-
-            </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

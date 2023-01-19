@@ -98,6 +98,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/gray07"
                 android:gravity="center"
+                style="@style/AppTheme.TextViewResponsive"
                 tools:visibility="gone"
                 android:text="@string/msg_no_data" />
         </FrameLayout>

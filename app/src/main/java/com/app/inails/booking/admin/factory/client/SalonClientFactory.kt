@@ -2,19 +2,16 @@ package com.app.inails.booking.admin.factory.client
 
 import android.support.di.Inject
 import android.support.di.ShareScope
-import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.extention.safe
+import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
-import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.client.SalonClientDTO
-import com.app.inails.booking.admin.model.ui.ISalon
-import com.app.inails.booking.admin.model.ui.ISalonDetail
 import com.app.inails.booking.admin.model.ui.client.ISalonClient
 import com.app.inails.booking.admin.model.ui.client.ISalonDTOOwner
 import com.app.inails.booking.admin.model.ui.client.ISalonDetailClient
 
 @Inject(ShareScope.Singleton)
-class SalonClientFactory(private val textFormatter: TextFormatter) {
+class SalonClientFactory(textFormatter: TextFormatter) : FactoryHelper(textFormatter) {
 
     private fun create(salonDTO: SalonClientDTO): ISalonClient {
         return object : ISalonClient, ISalonDTOOwner {
@@ -55,7 +52,7 @@ class SalonClientFactory(private val textFormatter: TextFormatter) {
             override val imagesAfter: List<String>?
                 get() = salonDTO.gallery?.filter { it.typeName == "after" }?.map { it.image }
             override val email: String
-                get() = salonDTO.email.displaySafe1()
+                get() = displaySafe(salonDTO.email)
         }
     }
 

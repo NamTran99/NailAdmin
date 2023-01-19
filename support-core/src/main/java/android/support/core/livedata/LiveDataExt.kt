@@ -101,7 +101,7 @@ fun <T> LiveData<T>.toSingle(): LiveData<T> {
 fun <A, B, C> combine(
     aLive: LiveData<A>,
     bLive: LiveData<B>,
-    function: (A?, B?) -> C?,
+    function: (A, B) -> C,
 ): LiveData<C> {
     val composeData = ComposeDataImpl(2)
     val liveData = MediatorLiveData<C>()
@@ -255,4 +255,32 @@ fun <T : Any> Flow<T>.distributeBy(live: DistributionLiveData<T>) {
 
 fun <T> LiveData<T>.launchBy(products: LiveData<out Any>) {
     (products as MediatorLiveData).addSource(this) {}
+}
+
+inline fun <T1, T2, R> MutableLiveData<T1>.combine1(
+    liveData2: MutableLiveData<T2>,
+    crossinline transform: (T1, T2) -> R
+): MutableLiveData<R> = combineLiveData(this, liveData2) { args: Array<*> ->
+    transform(
+        args[0] as T1,
+        args[1] as T2
+    )
+}
+
+inline fun <R> combineLiveData(
+    vararg varargLiveData: LiveData<*>,
+    crossinline transform: (Array<*>) -> R
+) = MediatorLiveData<R>().apply {
+    varargLiveData.forEach { liveData ->
+        addSource(liveData) {
+            val listDataCallback = varargLiveData.map {
+                it.value ?: return@addSource
+            }.toTypedArray()
+            value = transform(listDataCallback)
+        }
+    }
+}
+
+fun <T> MutableLiveData<T>.forceRefresh() {
+    this.value = this.value
 }

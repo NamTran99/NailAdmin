@@ -20,6 +20,10 @@ class BookingFactory(
     val context: Context
 ) {
 
+    fun displaySafe(text: String?): String{
+        return textFormatter.displaySafe(text)
+    }
+
     private fun createService(serviceDTO: ServiceDTO): IService {
         return object : IService, ISelector by ServiceImpl() {
             override val id: Int
@@ -214,7 +218,7 @@ class BookingFactory(
             override val showPercent: Boolean
                 get() = appointmentDTO.voucher?.type == DataConst.VoucherType.TYPE_PERCENT
             override val voucherCode: String
-                get() = appointmentDTO.voucher?.code.displaySafe1()
+                get() = displaySafe(appointmentDTO.voucher?.code)
             override val voucher: IVoucher?
                 get() = appointmentDTO.voucher?.let { createVoucher(it, context) }
         }
@@ -233,15 +237,15 @@ class BookingFactory(
             override val id: Int
                 get() = customerDTO.id.safe()
             override val name: String
-                get() = customerDTO.name.displaySafe1()
+                get() = displaySafe(customerDTO.name)
             override val phone: String
-                get() = customerDTO.phone_format.displaySafe1()
+                get() = displaySafe(customerDTO.phone_format)
             override val email: String
-                get() = customerDTO.email.displaySafe1()
+                get() = displaySafe(customerDTO.email)
             override val address: String
-                get() = textFormatter.fullAddress(customerDTO).displaySafe1()
+                get() = displaySafe(textFormatter.fullAddress(customerDTO))
             override val birthDay: String
-                get() = customerDTO.birthdate.displaySafe1()
+                get() = displaySafe(customerDTO.birthdate)
         }
     }
 

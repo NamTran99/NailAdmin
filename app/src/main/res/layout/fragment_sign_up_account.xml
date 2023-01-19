@@ -14,18 +14,9 @@
         android:paddingHorizontal="@dimen/size_10"
         android:paddingVertical="@dimen/size_16">
 
-        <TextView
-            android:id="@+id/tvLink"
-            style="@style/AppTheme.TextViewResponsive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/size_18"
-/>
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/size_20"
             android:background="@color/white"
             android:padding="@dimen/size_5"
             app:cardCornerRadius="@dimen/radius_default">
@@ -265,172 +256,259 @@
                     android:textColor="@color/color_BE43C3"
                     android:textSize="@dimen/text_size_14" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbMienPhi"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_15"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/add_service_for_salon" />
-
-                    <TextView
-                        android:id="@+id/tvAddService"
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/size_5"
-                        android:gravity="center"
-                        android:text="@string/add"
-                        android:textColor="@color/color_dc00a9"
-                        app:drawableStartCompat="@drawable/ic_add_blue" />
-                </LinearLayout>
+                    android:layout_gravity="start"
+                    android:checked="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:button="@drawable/bg_radio_button_sign_up"
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:text="@string/free_sign_up" />
 
                 <TextView
                     style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_des_1" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/lvMienPhi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_2"
-                    android:layout_marginTop="@dimen/size_5"
-                    android:text="@string/not_require_field"
-                    android:textColor="@color/color_7c7c7c"
-                    android:textSize="@dimen/text_size_10"
-                    android:textStyle="italic" />
+                    android:orientation="vertical">
 
+                    <View
+                        style="@style/AppTheme.Line.Horizontal"
+                        android:layout_marginTop="@dimen/size_20"
+                        android:background="@color/color_eaeaea" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_15"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/add_service_for_salon" />
+
+                        <TextView
+                            android:id="@+id/tvAddService"
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/size_5"
+                            android:gravity="center"
+                            android:text="@string/add"
+                            android:textColor="@color/color_dc00a9"
+                            app:drawableStartCompat="@drawable/ic_add_blue" />
+                    </LinearLayout>
 
                     <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_marginStart="@dimen/size_5"
-                        android:layout_width="55dp"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/image" />
+                        android:layout_marginStart="@dimen/size_2"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:text="@string/not_require_field"
+                        android:textColor="@color/color_7c7c7c"
+                        android:textSize="@dimen/text_size_10"
+                        android:textStyle="italic" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="55dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_5"
+                            android:text="@string/image" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/service_name" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/price" />
+
+
+                    </LinearLayout>
+
+
+                    <com.app.inails.booking.admin.views.widget.SalonServiceView
+                        android:id="@+id/salonServiceView"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="@dimen/size_5"
+                        app:custom_display_type="TypeService" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutAddService"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_15"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/add_staff_for_salon" />
+
+                        <TextView
+                            android:id="@+id/tvAddStaff"
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/size_5"
+                            android:gravity="center"
+                            android:text="@string/add"
+                            android:textColor="@color/color_dc00a9"
+                            app:drawableStartCompat="@drawable/ic_add_blue" />
+                    </LinearLayout>
 
                     <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="0dp"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/service_name" />
+                        android:layout_marginStart="@dimen/size_2"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:text="@string/not_require_field"
+                        android:textColor="@color/color_7c7c7c"
+                        android:textSize="@dimen/text_size_10"
+                        android:textStyle="italic" />
 
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/price" />
+                        android:layout_marginTop="@dimen/size_10"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="55dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_5"
+                            android:text="@string/image" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/label_full_name" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Medium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/phone_number" />
 
 
-                </LinearLayout>
+                    </LinearLayout>
+
+                    <com.app.inails.booking.admin.views.widget.SalonStaffView
+                        android:id="@+id/salonStaffView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50"
+                        android:layout_marginTop="@dimen/size_5"
+                        app:custom_display_type="TypeService" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutAddStaff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:orientation="vertical" />
 
 
-                <com.app.inails.booking.admin.views.widget.SalonServiceView
-                    android:id="@+id/salonServiceView"
-                    android:layout_width="match_parent"
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    style="@style/AppTheme.Line.Horizontal"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:background="@color/color_eaeaea" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbTraPhi"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/size_5"
-                    app:custom_display_type="TypeService" />
+                    android:layout_gravity="start"
+                    android:background="@null"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:button="@drawable/bg_radio_button_sign_up"
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:text="@string/tra_phi" />
 
-                <LinearLayout
-                    android:id="@+id/layoutAddService"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_5"
-                    android:orientation="vertical" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_15"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/add_staff_for_salon" />
-
-                    <TextView
-                        android:id="@+id/tvAddStaff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/size_5"
-                        android:gravity="center"
-                        android:text="@string/add"
-                        android:textColor="@color/color_dc00a9"
-                        app:drawableStartCompat="@drawable/ic_add_blue" />
-                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvLink"
                     style="@style/AppTheme.TextViewResponsive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_2"
-                    android:layout_marginTop="@dimen/size_5"
-                    android:text="@string/not_require_field"
-                    android:textColor="@color/color_7c7c7c"
-                    android:textSize="@dimen/text_size_10"
-                    android:textStyle="italic" />
+                    android:text="@string/test_link" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/lvTraPhi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_marginStart="@dimen/size_5"
-                        android:layout_width="55dp"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btAddPaidImage"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/image" />
+                        style="@style/AppTheme.Button"
+                        android:layout_marginHorizontal="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_20"
+                        android:background="@drawable/button_primary_stroke_1"
+                        android:text="@string/button_add_menu"
+                        android:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="0dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcPaidImage"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/label_full_name" />
+                        android:layout_marginTop="@dimen/size_10"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="3"
+                        tools:listitem="@layout/item_picture_holder" />
 
-                    <TextView
-                        style="@style/AppTheme.TextView.Medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/phone_number" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-                </LinearLayout>
-
-                <com.app.inails.booking.admin.views.widget.SalonStaffView
-                    android:id="@+id/salonStaffView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_50"
-                    android:layout_marginTop="@dimen/size_5"
-                    app:custom_display_type="TypeService" />
-
-                <LinearLayout
-                    android:id="@+id/layoutAddStaff"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_5"
-                    android:orientation="vertical" />
 
                 <Button
                     android:id="@+id/btnSignUp"
+                    style="@style/AppTheme.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/size_15"

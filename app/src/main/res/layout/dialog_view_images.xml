@@ -31,6 +31,7 @@
             android:background="@drawable/box_white_opacity"
             android:paddingHorizontal="@dimen/size_20"
             android:paddingVertical="@dimen/size_8"
+            style="@style/AppTheme.TextView.Medium"
             android:textColor="@color/white"
             tools:text="1/6" />
     </RelativeLayout>

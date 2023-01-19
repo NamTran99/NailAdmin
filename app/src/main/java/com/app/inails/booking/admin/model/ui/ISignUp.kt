@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.model.ui
 
+import android.content.Context
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
@@ -27,14 +28,16 @@ data class SignUpForm constructor(
     var salon_email: String = "",
     var salon_state: String = "",
     var salon_description: String = "",
+    var input_option : Int = 0, // 0: mien phi, 1 tra phi
     var schedules: MutableList<ISchedule> = ISchedule.getDefaultList().toMutableList(),
     var images: MutableList<AppImage> = mutableListOf(),
+    var paidMenuImages: MutableList<AppImage> = mutableListOf(),
     val staffs: MutableList<ISalonStaff> = mutableListOf(),
     val services: MutableList<ISalonService> = mutableListOf(),
 ){
-    fun getTimeZoneDisplay(showFull: Boolean): String{
+    fun getTimeZoneDisplay(context: Context, showFull: Boolean): String{
         return if(showFull){
-             "Business Hour (${zoneID} ${offsetDisplay})"
+            context.getString(R.string.business_hour_format, zoneID, offsetDisplay)
         }else "${zoneID} ${offsetDisplay}"
     }
 

@@ -35,14 +35,16 @@ data class GalleryImage(
     val type: Int? = 1, //1: before, 2 after
 )
 
-data class VoucherDTO(
-    val code: String? = "",
-    val type: Int? = 1, // 1 : %  || 2 : value
-    val start_date: String? = "",
-    val expiration_date: String? = "",
-    val type_customer: Int? = 1, // 1 : all || 2 : normal || 3 : vip
-    val value: Double = 0.0, // 1 : all || 2 : normal || 3 : vip
-    val description: String? = ""
+open class VoucherDTO(
+    open val id: Int = 0,
+    open val code: String? = "",
+    open val type: Int? = 1, // 1 : %  || 2 : value
+    open val start_date: String? = "",
+    open val expiration_date: String? = "",
+    open val type_customer: Int? = 1, // 1 : all || 2 : normal || 3 : vip
+    open val value: Double = 0.0, // 1 : all || 2 : normal || 3 : vip
+    open val description: String? = "",
+    open val isAlreadyFormatDate : Boolean = false
 )
 
 data class Image(

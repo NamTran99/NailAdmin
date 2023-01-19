@@ -15,6 +15,7 @@ import com.app.inails.booking.admin.views.booking.create_appointment.CreateUpdat
 import com.app.inails.booking.admin.views.booking.detail.AppointmentDetailFragment
 import com.app.inails.booking.admin.views.clients.appointment.AppointmentDetailClientFragment
 import com.app.inails.booking.admin.views.clients.feedbacks.SubmitFeedbackFragment
+import com.app.inails.booking.admin.views.clients.media.PhotoViewerFragment
 import com.app.inails.booking.admin.views.clients.profile.ProfileClientFragment
 import com.app.inails.booking.admin.views.clients.salon.SalonDetailClientFragment
 import com.app.inails.booking.admin.views.clients.salon.SalonGalleryFragment
@@ -23,11 +24,8 @@ import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
 import com.app.inails.booking.admin.views.management.staff.ManageStaffFragment
-import com.app.inails.booking.admin.views.me.ChangePasswordFragment
+import com.app.inails.booking.admin.views.me.*
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordFragment
-import com.app.inails.booking.admin.views.me.DetailSalonFragment
-import com.app.inails.booking.admin.views.me.EmailReceiveFeedbackFragment
-import com.app.inails.booking.admin.views.me.SelectLanguageAccountFragment
 import com.app.inails.booking.admin.views.me.reset.OTPVerifyFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordSuccessFragment
 import com.app.inails.booking.admin.views.me.reset.SignUpAccountFragment
@@ -38,6 +36,7 @@ import com.app.inails.booking.admin.views.splash.SelectLanguageFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
+import com.google.android.youtube.player.internal.u
 
 class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), TopBarOwner,
      NotifyDialogOwner {
@@ -78,6 +77,8 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.SelectLanguage -> SelectLanguageFragment::class
                 is Routing.BookingFragment -> BookingFragment::class
                 is Routing.SelectLanguageAccount -> SelectLanguageAccountFragment::class
+                is Routing.PhotoViewer -> PhotoViewerFragment::class
+                is Routing.VoucherApply -> VoucherApplyFragment::class
                 else -> error("Not Found Routing ${args.javaClass.name}")
             }
             navigator.navigate(clazz, args = args.toBundle())
@@ -98,6 +99,8 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
     override fun onBackPressed() {
         if (!findNavigator().navigateUp()) super.onBackPressed()
     }
+
+
 
     override fun logout() {
         notificationDialog.show(R.string.auth_msg_deleted_account) {

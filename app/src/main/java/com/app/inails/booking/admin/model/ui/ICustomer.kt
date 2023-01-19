@@ -12,6 +12,7 @@ interface ICustomer {
     val birthDay: String get()  = ""
     val type: Int get() = 2 // 2 : normal || 3 : vip
     val note: String get() = ""
+    val isShowNote: Boolean get() = false
 }
 @Parcelize
 class CustomerImpl: ICustomer,Parcelable

@@ -85,5 +85,12 @@
         <attr name="iconColorr" format="color" />
     </declare-styleable>
 
+    <string-array name="voucher_customer_type">
+        <item>@string/select_customer_type</item>
+        <item>@string/voucher_customer_all</item>
+        <item>@string/voucher_customer_normal</item>
+        <item>@string/voucher_customer_vip</item>
+    </string-array>
+
 
 </resources>

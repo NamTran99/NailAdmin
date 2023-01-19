@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.views.management.service
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import android.text.InputFilter
+import android.view.MotionEvent
 import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
@@ -14,6 +15,7 @@ import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter
 import com.app.inails.booking.admin.views.widget.DecimalDigitsInputFilter
+import com.google.android.youtube.player.internal.v
 
 
 class CreateUpdateServiceDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {

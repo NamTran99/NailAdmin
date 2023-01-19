@@ -10,6 +10,7 @@ import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.LoadingLiveData
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
+import android.support.core.route.argument
 import android.support.core.route.nullableArguments
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
@@ -52,7 +53,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
     private val viewModel by viewModel<BookingViewModel>()
     private var mType = 1
     private lateinit var mAdapter: AppointmentAdapter
-    private val args by lazy { nullableArguments<Routing.BookingFragment>() }
+    private val args by lazy { argument<Routing.BookingFragment>() }
 
     private var beforeImagePath = ArrayList<AppImage>()
     private var afterImagePath = ArrayList<AppImage>()
@@ -82,6 +83,7 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btAddAppointment.show(args.type  == Routing.BookingFragment.TypeBooking.APPOINTMENTS)
         finishBookingDialog.apply {
             onAddBeforeImage = {
                 FishBun.with(this@BookingFragment)
@@ -469,7 +471,7 @@ class BookingViewModel(
     val formCancel = CancelAppointmentForm()
     val formHandle = HandleAppointmentForm()
     val formStartService = StartServiceForm()
-    val success = SingleLiveEvent<String>()
+    val success = SingleLiveEvent<Int>()
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
 
@@ -479,17 +481,17 @@ class BookingViewModel(
 
     fun updateStatus() = launch(loading, error) {
         appointmentRepo.updateStatusAppointment(form)
-        success.post("Finish appointment success")
+        success.post(R.string.success_finish_appointment)
     }
 
     fun cancel() = launch(loading, error) {
         appointmentRepo.cancelAppointment(formCancel)
-        success.post("Cancel appointment success")
+        success.post(R.string.success_cancel_appointment)
     }
 
     fun remove(id: Int) = launch(loading, error) {
         appointmentRepo.removeAppointment(id)
-        success.post("Remove appointment success")
+        success.post(R.string.success_remove_appointment)
     }
 
     fun customerWalkIn(id: Int) = launch(loading, error) {
@@ -499,19 +501,19 @@ class BookingViewModel(
     fun handle() = launch(loading, error) {
         appointmentRepo.adminHandleAppointment(formHandle)
         if (formHandle.isAccepted == 1)
-            success.post("Accept appointment success")
+            success.post(R.string.success_accept_appointment)
         else
-            success.post("Reject appointment success")
+            success.post(R.string.success_reject_appointment)
     }
 
     fun startService() = launch(loading, error) {
         appointmentRepo.startServiceAppointment(formStartService)
-        success.post("Start service success")
+        success.post(R.string.success_start_service)
     }
 
     fun remind(id: Int) = launch(loading, error) {
         remindAppointmentRepo(id)
-        success.post("Remind customer success")
+        success.post(R.string.success_remind_customer)
     }
 
     fun findFilterFormByType(

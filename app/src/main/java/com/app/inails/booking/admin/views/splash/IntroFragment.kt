@@ -16,6 +16,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentIntroBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.getAppResourceId
+import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.navigate.Router
@@ -44,11 +45,12 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro), TopBarOwner,
             TabLayoutMediator(tabLayout, introSliderViewPager, true, true) { tab, position ->
 
             }.attach()
+            tvSkip.hide()
             introSliderViewPager.registerOnPageChangeCallback(object :
                 ViewPager2.OnPageChangeCallback() {
                 @SuppressLint("UseCompatLoadingForDrawables")
                 override fun onPageSelected(position: Int) {
-                    tvSkip.show(position != introSliderAdapter.itemCount - 1)
+                    tvSkip.show(position != introSliderAdapter.itemCount - 1 && position != 0)
                     btnSkipStart.onClick {
                         if(position == introSliderAdapter.itemCount - 1){
                             viewModel.setFirstOpenAppAlready()

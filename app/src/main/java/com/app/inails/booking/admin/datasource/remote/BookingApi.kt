@@ -83,11 +83,12 @@ interface BookingApi : Injectable {
 
     @Multipart
     @POST("appointment/update-status-appointment")
-    fun updateStatusAppointment(@PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
-                                @Part beforeImages: Array<MultipartBody.Part?>,
-                                @Part afterImages:  Array<MultipartBody.Part?>,
+    fun updateStatusAppointment(
+        @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part beforeImages: Array<MultipartBody.Part?>,
+        @Part afterImages: Array<MultipartBody.Part?>,
 
-    ): ApiAsync<AppointmentUpdateDTO>
+        ): ApiAsync<AppointmentUpdateDTO>
 
     @FormUrlEncoded
     @POST("appointment/customer-walk-in")
@@ -110,12 +111,12 @@ interface BookingApi : Injectable {
     fun detail(@Query("id") id: Int): ApiAsync<AppointmentDTO>
 
     @FormUrlEncoded
-@POST("appointment/remind-appointment")
+    @POST("appointment/remind-appointment")
     fun remindAppointment(@Field("id") id: Int): ApiAsync<Any>
 
     @POST("appointment/admin-update-appointment")
     fun updateAppointment(@Body body: AppointmentForm): ApiAsync<Any>
-}
+           }
 
 class BookingApiImpl(private val retrofit: Retrofit) :
     BookingApi by retrofit.create(BookingApi::class.java)

@@ -30,6 +30,7 @@
                     android:id="@+id/txtWelcome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/btnEditProfile"
                     android:textSize="@dimen/text_size_16"
@@ -44,6 +45,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/size_20"
                     android:layout_marginBottom="@dimen/size_16"
+                    android:fontFamily="@font/montserrat_medium"
                     android:minWidth="150dp"
                     android:text="@string/btn_edit_profile"
                     android:textAllCaps="false"
@@ -74,12 +76,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_30"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:drawablePadding="@dimen/size_10"
                     android:text="@string/label_phone" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtPhone"
                     android:layout_width="wrap_content"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/labelPhone"
                     android:layout_alignStart="@+id/labelPhone"
@@ -108,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_30"
                     android:drawablePadding="@dimen/size_10"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:text="@string/label_dob" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -117,6 +122,7 @@
                     android:layout_below="@+id/labelDob"
                     android:layout_alignStart="@+id/labelDob"
                     android:layout_marginTop="5dp"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:drawablePadding="@dimen/size_10"
                     tools:text="01/01/1990" />
 
@@ -140,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_30"
                     android:drawablePadding="@dimen/size_10"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:text="@string/label_email" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -150,6 +157,7 @@
                     android:layout_alignStart="@+id/labelEmail"
                     android:layout_marginTop="5dp"
                     android:drawablePadding="@dimen/size_10"
+                    style="@style/AppTheme.TextViewResponsive"
                     tools:text="Sample@gmail.com" />
 
             </RelativeLayout>
@@ -172,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_30"
                     android:drawablePadding="@dimen/size_10"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:text="@string/label_address" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -181,6 +190,7 @@
                     android:layout_below="@+id/labelAddress"
                     android:layout_alignStart="@+id/labelAddress"
                     android:layout_marginTop="5dp"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:drawablePadding="@dimen/size_10"
                     tools:text="987-654-3210" />
 

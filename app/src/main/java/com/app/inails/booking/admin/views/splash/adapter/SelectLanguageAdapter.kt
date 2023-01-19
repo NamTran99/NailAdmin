@@ -31,7 +31,6 @@ class SelectLanguageAdapter(view: RecyclerView) :
         binding.apply {
             tvLanguage.setText(item.name)
             configSelect(this, (item as ISelector).isSelector)
-            imgFlag.setImageDrawable(binding.root.context.getDrawable(item.flag))
             root.onClick {
                 unSelectAll()
                 item.isSelector = !item.isSelector
@@ -46,7 +45,7 @@ class SelectLanguageAdapter(view: RecyclerView) :
             null, null,
             if (isSelected) ContextCompat.getDrawable(
                 binding.root.context,
-                R.drawable.ic_check_outline
+                R.drawable.ic_check
             ) else null, null
         )
 

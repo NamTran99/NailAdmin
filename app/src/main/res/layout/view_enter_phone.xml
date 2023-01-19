@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/label_enter_your_phone"
         android:textAllCaps="true"
+        style="@style/AppTheme.TextView.Medium"
         android:gravity="center_horizontal"
         android:textColor="@color/gray" />
 
@@ -26,6 +27,7 @@
         android:layout_marginVertical="@dimen/size_16"
         android:background="@null"
         android:focusableInTouchMode="true"
+        style="@style/AppTheme.EditText"
         android:cursorVisible="false"
         android:hint="(000) 000 0000"
         android:focusable="false"
@@ -133,7 +135,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOk"
             style="@style/AppTheme.Button.Outline.Circle"
-            android:text="@string/btn_ok"
+            android:text="@string/btn_ok_1"
             android:textColor="@color/white"
             app:rippleColor="@color/colorAccent"
             app:backgroundTint="@color/colorPrimary"

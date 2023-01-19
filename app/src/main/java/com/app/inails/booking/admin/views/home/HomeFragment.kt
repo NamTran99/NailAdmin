@@ -1,8 +1,5 @@
 package com.app.inails.booking.admin.views.home
 
-import android.content.Intent
-import android.content.Intent.ACTION_VIEW
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
@@ -64,11 +61,17 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
             btnManageCustomer.onClick {
                 Router.open(this@HomeFragment, Routing.ManageCustomer)
             }
-            btnBookingList.onClick{
-                Router.open(this@HomeFragment,    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN))
+            btnBookingList.onClick {
+                Router.open(
+                    this@HomeFragment,
+                    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN)
+                )
             }
-            btnApmList.onClick{
-                Router.open(this@HomeFragment,    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.APPOINTMENTS))
+            btnApmList.onClick {
+                Router.open(
+                    this@HomeFragment,
+                    Routing.BookingFragment(Routing.BookingFragment.TypeBooking.APPOINTMENTS)
+                )
             }
 
             adsAdapter = AdsAdapter(viewPagerAds).apply {
@@ -85,13 +88,9 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
             guidanceAdapter = GuidanceAdapter(viewPagerGuidance).apply {
                 onItemClick = {
                     if (it.fileType != FileType.Video && it.content.isNotEmpty()) {
-//                        Router.open(this@HomeFragment, Routing.ShowZoomSingleImage(it.file))
                         Router.run { redirectToWebView(WebViewArgs("", it.content, true)) }
                     } else {
-//                     startActivity(Intent(requireContext(), YoutubeActivity::class.java).apply {
-//                         putExtras(YoutubeActivityArgs(it.file).toBundle())
-//                     })
-                        if (it.fileType == FileType.Video &&  it.file.isNotEmpty()) {
+                        if (it.fileType == FileType.Video && it.file.isNotEmpty()) {
                             Router.run { redirectToWebView(WebViewArgs(it.file)) }
                         }
                     }

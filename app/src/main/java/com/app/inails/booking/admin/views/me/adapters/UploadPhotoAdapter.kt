@@ -37,6 +37,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
 
     var onAddImagesAction: (() -> Unit)? = null
     var onRemoveImageAction: ((AppImage) -> Unit)? = null
+    var onItemClickListener: ((String) -> Unit) = {}
 
     @SuppressLint("NotifyDataSetChanged")
     fun changePath(listImage: List<AppImage>?){
@@ -88,7 +89,6 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
         @SuppressLint("CheckResult", "ResourceAsColor")
         override fun bind(item: AppImage) {
             binding.apply {
-
                 val circleProgressDrawable = CircularProgressDrawable(view.context)
                 circleProgressDrawable.strokeWidth = 5f;
                 circleProgressDrawable.centerRadius = 30f;
@@ -107,6 +107,9 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
                 btClose.setOnClickListener {
                     onRemoveImageAction?.invoke(item)
                     removeItem(item)
+                }
+                imgHolder.setOnClickListener {
+                    onItemClickListener.invoke(item.path)
                 }
             }
         }

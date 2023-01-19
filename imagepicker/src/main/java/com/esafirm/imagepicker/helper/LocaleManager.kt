@@ -32,7 +32,6 @@ object LocaleManager {
             resources.updateConfiguration(configuration, resources.displayMetrics)
         }
 
-
         return resultContext
     }
 

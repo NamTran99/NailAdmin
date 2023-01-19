@@ -13,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Looper
+import android.support.core.view.ViewScopeOwner
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
@@ -35,10 +36,12 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doOnTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -81,6 +84,29 @@ fun CompoundButton.setCustomChecked(
     setOnCheckedChangeListener(listener)
 }
 
+fun View.showPopUp(menu: Int, action: (Int) -> Unit) {
+    setOnClickListener {
+        PopupMenu(context, this).apply {
+            inflate(menu)
+            setOnMenuItemClickListener { item ->
+                (it as? TextView)?.let { textView ->
+                    textView.text = item.title
+                    action.invoke(item.itemId)
+                    return@setOnMenuItemClickListener true
+                }
+                (it as? EditText)?.let { editText ->
+                    editText.setText(item.title)
+                    action.invoke(item.itemId)
+                    return@setOnMenuItemClickListener true
+                }
+                action.invoke(item.itemId)
+                true
+            }
+            show()
+        }
+    }
+}
+
 fun EditText.focus() {
     requestFocus()
     setSelection(0, length())
@@ -104,6 +130,14 @@ fun ImageView.startAnimVector(delays: Long = 100) {
         else if (drawable is AnimatedVectorDrawable)
             drawable.start()
     }, delays)
+}
+
+fun EditText.setTextCustom(text: String){
+    if (text == this.context.getString(R.string.no_information)){
+        this.setText("")
+    }else{
+        this.setText(text)
+    }
 }
 
 
@@ -451,6 +485,9 @@ fun TextView.setDrawableStart(resIcon: Int) {
     this.setCompoundDrawablesWithIntrinsicBounds(resIcon, 0, 0, 0)
 }
 
+fun TextView.setDrawableEnd(resIcon: Int) {
+    this.setCompoundDrawablesWithIntrinsicBounds(0, 0, resIcon, 0)
+}
 
 fun ShapeableImageView.setImageUrl(url: String) {
     Glide.with(context).load(url).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.img_logo))
@@ -461,4 +498,29 @@ fun ShapeableImageView.setImageUrl(url: String) {
 fun ShapeableImageView.setImageUri(uri: Uri) {
     Glide.with(context).load(uri).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.box_grey))
         .into(this)
+}
+
+fun ViewScopeOwner.getActivityContext(): Context{
+    return  return when(this){
+        is BaseActivity -> this
+        is Fragment -> this.requireActivity()
+        else -> error("")
+    }
+}
+
+
+@SuppressLint("ClickableViewAccessibility")
+fun EditText.scrollContentVertical() {
+    this.setOnTouchListener { v, event ->
+        if (this.hasFocus()) {
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            when (event.action and android.view.MotionEvent.ACTION_MASK) {
+                android.view.MotionEvent.ACTION_SCROLL -> {
+                    v.parent.requestDisallowInterceptTouchEvent(false)
+                    return@setOnTouchListener true
+                }
+            }
+        }
+        return@setOnTouchListener false
+    }
 }

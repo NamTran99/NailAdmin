@@ -24,7 +24,7 @@ class ReportServiceAdapter(view: RecyclerView) :
         adapterPosition: Int
     ) {
         binding.run {
-            tvName.text = item.name.displaySafe()
+            tvName.text = item.name
             tvPrice.text = item.price.formatPrice()
         }
     }

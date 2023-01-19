@@ -68,6 +68,43 @@
                 android:autofillHints="emailAddress"
                 android:hint="@string/enter_salon_address" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Medium"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/voucher_apply" />
+
+                <TextView
+                    android:id="@+id/btnAddVoucher"
+                    android:background="@drawable/button_white"
+                    style="@style/AppTheme.TextView.Medium"
+                    android:layout_width="wrap_content"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:layout_gravity="end"
+                    android:text="@string/add"
+                    android:textColor="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimary"
+                    app:drawableStartCompat="@drawable/ic_plus_round" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcVoucher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"/>
+
             <TextView
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"

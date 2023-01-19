@@ -71,4 +71,8 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     fun setLanguage(lan: String, isRestart: Boolean = true){
         (activity as BaseActivity).setLanguage(lan, isRestart)
     }
+
+    fun onBackPress(){
+        activity?.onBackPressed()
+    }
 }

@@ -8,7 +8,6 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.base.GridSpacingItemDecoration
 import com.app.inails.booking.admin.databinding.DialogDetailServiceBinding
-import com.app.inails.booking.admin.extention.displaySafe
 import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IService
@@ -19,6 +18,7 @@ class DetailServiceDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogDetailServiceBinding::inflate)
     private lateinit var adapter: AppImagesAdapter
     var onClickItemImage: ((data: Pair<List<LocalImage>, Int>) -> Unit) = {}
+
     init {
         binding.btClose.onClick {
             dismiss()
@@ -26,17 +26,24 @@ class DetailServiceDialog(context: Context) : BaseDialog(context) {
     }
 
     fun show(service: IService) {
-        with(binding){
-            tvSvName.text = service.name.displaySafe()
-            tvSvPrice.text = service.price.formatPrice().displaySafe()
+        with(binding) {
+            tvSvName.text = service.name
+            tvSvPrice.text = service.price.formatPrice()
             adapter = AppImagesAdapter(rcImages).apply {
                 submit(service.detailImages)
                 onItemImageClick = { it ->
-                    onClickItemImage.invoke(adapter.items().getData().map { LocalImage(it.path) } to it)
+                    onClickItemImage.invoke(
+                        adapter.items().getData().map { LocalImage(it.path) } to it)
                 }
             }
             rcImages.layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
-            rcImages.addItemDecoration(GridSpacingItemDecoration(3, context.getDimension(R.dimen.size_5), false))
+            rcImages.addItemDecoration(
+                GridSpacingItemDecoration(
+                    3,
+                    context.getDimension(R.dimen.size_5),
+                    false
+                )
+            )
         }
         super.show()
     }

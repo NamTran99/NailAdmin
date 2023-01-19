@@ -9,6 +9,7 @@
     <string name="hint_your_name">Your name</string>
     <string name="hint_admin">Admin</string>
     <string name="hint_password">Password</string>
+    <string name="hint_password_vn">Mật khẩu</string>
     <string name="hint_phone">Phone</string>
     <string name="hint_enter_phone_number">Enter Phone Number</string>
     <string name="hint_enter_full_name">Enter Full Name</string>

@@ -1,36 +1,44 @@
 package com.app.inails.booking.admin.views.management.customer
 
 import android.content.Context
-import android.os.Build
 import android.support.core.view.ViewScopeOwner
-import androidx.annotation.RequiresApi
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.app.AppSettingsOwner
+import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogUpdateCustomerBinding
-import com.app.inails.booking.admin.extention.displaySafe
+import com.app.inails.booking.admin.extention.getActivityContext
+import com.app.inails.booking.admin.extention.getTextString
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.setTextCustom
+import com.app.inails.booking.admin.model.form.UpdateCustomerForm
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
+import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
+import com.google.android.libraries.places.api.model.Place
 
 
-class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
+class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner,
+    AppSettingsOwner {
+
     private val binding = viewBinding(DialogUpdateCustomerBinding::inflate)
     private var customerType = 2 //2 normal, 3, vip
         set(value) {
             setUINormalType(value == 2)
             field = value
         }
+    private val mDatePickerDialog by lazy { DatePickerDialog(context as BaseActivity) }
 
     init {
         setCancelable(false)
         binding.apply {
             rbGroupType.setOnCheckedChangeListener { _, checkedId ->
-                when(checkedId){
+                when (checkedId) {
                     rbNormal.id -> customerType = 2
                     rbVip.id -> customerType = 3
                 }
             }
-            btClose.onClick{
+            btClose.onClick {
                 confirmDialog.show(
                     title = context.getString(R.string.tittle_exit_update_customer),
                     message = context.getString(R.string.message_exit),
@@ -39,7 +47,18 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
                     }
                 )
             }
+            etLocation.onClick {
+                appSettings.openPlaceAutoComplete("", ::onPlaceSelected)
+            }
+            mDatePickerDialog.setupClickWithView(etBirthday)
+            mDatePickerDialog.setDisablePastDates(false)
+            mDatePickerDialog.setDisableFutureDates(true)
+            mDatePickerDialog.setDisplayFormat("MM-dd-yyyy")
         }
+    }
+
+    private fun onPlaceSelected(place: Place) {
+        binding.etLocation.setText(place.address.toString())
     }
 
     private fun setUINormalType(isNormal: Boolean) {
@@ -56,22 +75,29 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
 
     fun show(
         customer: ICustomer? = null,
-        function: ((id:Int,note: String,type: Int) -> Unit)?= null
+        function: ((UpdateCustomerForm) -> Unit) = {}
     ) {
         with(binding) {
-            customer?.let{ customer ->
+            customer?.let { customer ->
                 customerType = customer.type
-                rbGroupType.check(if(customer.type ==2)rbNormal.id else rbVip.id)
-                etNote.setText(customer.note)
+                rbGroupType.check(if (customer.type == 2) rbNormal.id else rbVip.id)
+                etNote.setTextCustom(customer.note)
 
-                etName.setText(customer.name.displaySafe())
-                etPhone.setText(customer.phone.displaySafe())
-                etBirthday.setText(customer.birthDay.displaySafe())
-                etEmail.setText(customer.email.displaySafe())
-                etLocation.setText(customer.address.displaySafe())
-                btSubmit.onClick{
-                    function?.invoke(customer.id, etNote.text.toString(), customerType)
-                    dismiss()
+                etName.setTextCustom(customer.name)
+                etPhone.setTextCustom(customer.phone)
+                etBirthday.setTextCustom(customer.birthDay)
+                etEmail.setTextCustom(customer.email)
+                etLocation.setTextCustom(customer.address)
+                btSubmit.onClick {
+                    val updateCustomerForm = UpdateCustomerForm(
+                        id = customer.id,
+                        type = customerType,
+                        note = etNote.getTextString(),
+                        birthday = etBirthday.tag.toString(),
+                        email = etEmail.getTextString(),
+                        address = etLocation.getTextString()
+                    )
+                    function.invoke(updateCustomerForm)
                 }
             }
 
@@ -96,6 +122,6 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
 interface UpdateCustomerDialogOwner : ViewScopeOwner {
     val updateCustomerDialog: UpdateCustomerDialog
         get() = with(viewScope) {
-            getOr("staff:dialog") { UpdateCustomerDialog(context) }
+            getOr("staff:dialog") { UpdateCustomerDialog(getActivityContext()) }
         }
 }

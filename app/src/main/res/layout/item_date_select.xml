@@ -18,7 +18,9 @@
 
     <ImageView
         android:id="@+id/imgTick"
+        android:padding="@dimen/size_10"
         android:layout_width="wrap_content"
+        android:background="@drawable/button_white"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_date_tick" />
 

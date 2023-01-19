@@ -22,11 +22,11 @@ class CustomerInfoDialog(context: Context) : BaseDialog(context) {
         customer: ICustomer
     ) {
         with(binding) {
-            tvStaffName.text = customer.name.displaySafe()
-            tvPhone.text = customer.phone.displaySafe()
-            tvAddress.text = customer.address.displaySafe()
-            tvEmail.text = customer.email.displaySafe()
-            tvBirthday.text = customer.birthDay.displaySafe()
+            tvStaffName.text = customer.name
+            tvPhone.text = customer.phone
+            tvAddress.text = customer.address
+            tvEmail.text = customer.email
+            tvBirthday.text = customer.birthDay
         }
         super.show()
     }

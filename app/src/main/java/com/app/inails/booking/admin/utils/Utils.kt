@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import com.app.inails.booking.admin.BuildConfig
 import com.app.inails.booking.admin.R
+import com.esafirm.imagepicker.helper.LocaleManager
 
 object Utils {
 
@@ -32,10 +33,10 @@ object Utils {
         return isInBackground
     }
 
-    fun getDisplayBuildConfig(context: Context): String {
+    fun getDisplayBuildConfig(context: Context, lan: String): String {
         val listItems = BuildConfig.VERSION_NAME.split("_")
 
-        val display = context.getString(R.string.version_format,listItems[0] )
+        val display = LocaleManager.updateResources(context, lan).getString(R.string.version_format,listItems[0] )
         return if(listItems.size > 1) "${display}\n(${listItems[1]})" else display
     }
 }

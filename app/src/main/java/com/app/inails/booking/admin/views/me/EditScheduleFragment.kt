@@ -54,6 +54,13 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
                     isShow = true,
                     content = R.string.btn_save,
                     onclick = {
+                        adapter.items?.replaceAll {
+                            if(!it.isOpenDay){
+                                it.endTime = null
+                                it.startTime = null
+                            }
+                            it
+                        }
                         val schedule = adapter.items?.find {
                             (it.startTime != null && it.endTime == null) ||
                                     (it.endTime != null && it.startTime == null)
@@ -94,8 +101,4 @@ class EditScheduleFragment : BaseFragment(R.layout.fragment_update_schedule), To
         }
     }
 
-    override fun onResume() {
-        adapter.notifyDataSetChanged()
-        super.onResume()
-    }
 }

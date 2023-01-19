@@ -96,7 +96,6 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                     else {
                         open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage(mainPath[0]))
                     }
-
                 }
                 onClickClearMainImage = {
                     mainPath.clear()

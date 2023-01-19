@@ -12,6 +12,7 @@ import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
 import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
+import com.esafirm.imagepicker.helper.LocaleManager
 import kotlinx.coroutines.launch
 
 @Inject(ShareScope.Singleton)
@@ -86,7 +87,6 @@ class UserLocalSource(
 
     fun getUserDto(): UserDTO? = user
     fun getSalonDto(): SalonDTO? = user?.admin?.salon
-    fun getSlug(): String = user?.admin?.salon?.slug.displaySafe1()
     fun changeUserSlug(slug: String?) {
         user?.admin?.salon?.slug = slug ?: ""
     }
@@ -149,6 +149,9 @@ class UserLocalSource(
 
     // set language
 
+    fun isVietNamLanguage():Boolean{
+        return appCache.language == "vi"
+    }
 
     fun setLanguage(mLanguage: String): Boolean {
         val isChangeSuccess = mLanguage != appCache.language
@@ -156,9 +159,18 @@ class UserLocalSource(
         return isChangeSuccess
     }
 
-    fun getLanguage() = if(isOwnerMode != false) appCache.language else "en"
-    fun getLanguageWithDefault() = if(isOwnerMode != false) appCache.language?:"en" else "en"
+    fun clearLanguage() {
+        appCache.language = null
+    }
 
+    fun getLanguage() = if(isOwnerMode != false) appCache.language   else "en"
+    fun getLanguageWithDefault() = if(isOwnerMode != false)  appCache.language?: LocaleManager.mLanguage else "en"
+
+    // isCloseAll instance activity
+
+    fun getIsCloseInstanceNavigateActivity()= appCache.isCloseAllMainNavigationActivity?:false
+
+//    fun setC
     // When log out
     fun clearUser() {
         user = null

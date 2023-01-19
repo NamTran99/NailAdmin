@@ -14,6 +14,7 @@ class TimePickerWithIntervalDialog(context: Context) :
     private val binding = viewBinding(DialogTimePickerBinding::inflate)
 
     var onSubmitClick: ((time: String, hour: Int, timeType: TimeType) -> Unit) = { _, _, _ ->}
+    // time: 24h format
 
     init {
         binding.apply {

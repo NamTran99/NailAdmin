@@ -28,122 +28,141 @@
             app:tint="@color/black" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/etName"
-        style="@style/AppTheme.EditText"
-        android:focusable="false"
-        android:alpha="0.4"
-        android:layout_marginTop="@dimen/size_20"
-        android:drawableStart="@drawable/ic_user_outline"
-        android:maxLength="30" />
-
-    <EditText
-        android:id="@+id/etPhone"
-        style="@style/AppTheme.EditText"
-        android:focusable="false"
-        android:alpha="0.4"
-        android:layout_marginTop="@dimen/size_12"
-        android:drawableStart="@drawable/ic_phone_outline"
-        android:inputType="phone"
-        android:maxLength="14" />
-
-    <EditText
-        android:id="@+id/etEmail"
-        style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_12"
-        android:focusable="false"
-        android:alpha="0.4"
-        android:drawableStart="@drawable/ic_email"
-        android:maxLength="30"
-        tools:ignore="TextFields" />
-
-    <EditText
-        android:id="@+id/etLocation"
-        style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_12"
-        android:focusable="false"
-        android:alpha="0.4"
-        android:drawableStart="@drawable/ic_location"
-        android:maxLength="30" />
-
-    <EditText
-        android:id="@+id/etBirthday"
-        style="@style/AppTheme.EditText"
-        android:layout_marginTop="@dimen/size_12"
-        android:focusable="false"
-        android:alpha="0.4"
-        android:drawableStart="@drawable/ic_birthday"
-        android:maxLength="30" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_12"
-        android:background="@drawable/bg_view_stroke"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_15"
-            android:layout_marginTop="@dimen/size_8"
-            android:src="@drawable/ic_note" />
-
-        <EditText
-            android:id="@+id/etNote"
-            style="@style/AppTheme.EditText.MultiLine"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:gravity="start"
-            android:hint="@string/note"
-            android:inputType="textMultiLine"
-            android:maxLines="10"
-            android:minLines="5"
-            android:paddingStart="@dimen/size_8"
-            android:textAlignment="textStart" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:orientation="vertical">
 
-    <TextView
-        style="@style/AppTheme.TextView.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_6"
-        android:text="@string/type" />
+            <EditText
+                android:id="@+id/etName"
+                style="@style/AppTheme.EditText"
+                android:focusable="false"
+                android:alpha="0.4"
+                android:layout_marginTop="@dimen/size_20"
+                android:hint="@string/hint_enter_full_name"
+                android:drawableStart="@drawable/ic_user"
+                android:maxLength="30" />
 
-    <RadioGroup
-        android:id="@+id/rbGroupType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etPhone"
+                style="@style/AppTheme.EditText"
+                android:focusable="false"
+                android:alpha="0.4"
+                android:layout_marginTop="@dimen/size_12"
+                android:drawableStart="@drawable/ic_phone_outline"
+                android:inputType="phone"
+                android:hint="@string/hint_enter_phone_number"
+                android:maxLength="14" />
 
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbNormal"
-            android:layout_width="@dimen/size_90"
-            android:layout_height="@dimen/size_35"
-            android:background="@drawable/bg_radio_button"
-            android:button="@color/transparency"
-            android:checked="true"
-            android:gravity="center"
-            android:text="@string/normal" />
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:drawableStart="@drawable/ic_email"
+                android:maxLength="30"
+                android:hint="@string/hint_enter_your_email_optional_1"
+                tools:ignore="TextFields" />
 
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbVip"
-            android:layout_width="@dimen/size_90"
-            android:layout_height="@dimen/size_35"
-            android:layout_marginStart="@dimen/size_13"
-            android:background="@drawable/bg_radio_button"
-            android:button="@color/transparency"
-            android:gravity="center"
-            android:text="@string/vip" />
+            <EditText
+                android:id="@+id/etLocation"
+                android:focusable="false"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:hint="@string/hint_enter_your_address_optional_1"
+                android:drawableStart="@drawable/ic_location"
+                android:maxLength="30" />
 
-    </RadioGroup>
+            <EditText
+                android:id="@+id/etBirthday"
+                style="@style/AppTheme.EditText"
+                android:focusable="false"
+                android:layout_marginTop="@dimen/size_12"
+                android:drawablePadding="7dp"
+                android:paddingStart="@dimen/size_15"
+                android:hint="@string/hint_enter_birthday_optional"
+                android:drawableStart="@drawable/ic_birthday"
+                android:maxLength="30" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btSubmit"
-        style="@style/AppTheme.ButtonDefault"
-        android:layout_marginTop="@dimen/size_12"
-        android:background="@drawable/button_primary_corner"
-        android:text="@string/btn_submit" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_12"
+                android:background="@drawable/bg_view_stroke"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:src="@drawable/ic_note" />
+
+                <EditText
+                    android:id="@+id/etNote"
+                    style="@style/AppTheme.EditText.MultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:hint="@string/note"
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:minLines="5"
+                    android:paddingStart="@dimen/size_8"
+                    android:textAlignment="textStart" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_6"
+                android:text="@string/type" />
+
+            <RadioGroup
+                android:id="@+id/rbGroupType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_35"
+                    android:paddingHorizontal="@dimen/size_30"
+                    android:background="@drawable/bg_radio_button"
+                    android:button="@color/transparency"
+                    android:textColor="@color/white"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/normal" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbVip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_35"
+                    android:paddingHorizontal="@dimen/size_40"
+                    android:layout_marginStart="@dimen/size_13"
+                    android:background="@drawable/bg_radio_button"
+                    android:button="@color/transparency"
+                    android:gravity="center"
+                    android:text="@string/vip" />
+
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                style="@style/AppTheme.ButtonDefault"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/button_primary_corner"
+                android:text="@string/btn_submit" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+
 </LinearLayout>

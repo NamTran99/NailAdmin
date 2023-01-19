@@ -114,6 +114,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         super.onCreate(savedInstanceState)
         onNewIntent(intent)
         NotificationsManagerClient(this).cancelAll()
+        userLocalSource.setOwnerMode(true)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
         mainTopBarState = MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
@@ -129,7 +130,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                     R.string.title_navigate_client_mode,
                     R.string.content_navigate_client_mode,
                     functionSubmit = {
-                        userLocalSource.setOwnerMode(false)
                         Router.run {
                             open<ClientHomeActivity>().clear()
                         }

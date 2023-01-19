@@ -8,6 +8,7 @@ import java.util.regex.Pattern
 
 class DecimalDigitsInputFilter(digitsBeforeZero : Int, digitsAfterZero : Int) : InputFilter {
     private  var mPattern: Pattern  = Pattern.compile("(([1-9]{1}[0-9]{0," + (digitsBeforeZero - 1) + "})?||[0]{1})((\\.[0-9]{0," + digitsAfterZero + "})?)||(\\.)?");
+    var enableDot  = digitsAfterZero != 0
 
     override fun filter(
         source: CharSequence?,
@@ -17,6 +18,7 @@ class DecimalDigitsInputFilter(digitsBeforeZero : Int, digitsAfterZero : Int) : 
         destinationStart: Int,
         destinationEnd: Int
     ): CharSequence ?{
+        if(!enableDot && source == ".") return ""
         var newString: String =
             destination.toString().substring(0, destinationStart) + destination.toString()
                 .substring(destinationEnd, destination.toString().length)

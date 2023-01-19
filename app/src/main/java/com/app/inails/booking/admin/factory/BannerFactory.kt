@@ -3,18 +3,19 @@ package com.app.inails.booking.admin.factory
 import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.displaySafe1
+import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.BannerDTO
 import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
-class BannerFactory(private val textFormatter: TextFormatter) {
-    fun createIntro(intro: BannerDTO): IIntro {
+class BannerFactory(textFormatter: TextFormatter): FactoryHelper(textFormatter) {
+    private fun createIntro(intro: BannerDTO): IIntro {
         return object : IIntro {
             override val content: String
-                get() = intro.content.displaySafe1()
+                get() =  displaySafe(intro.content)
             override val title: String
-                get() = intro.title.displaySafe1()
+                get() = displaySafe(intro.title)
             override val image: String?
                 get() = intro.image
             override val url: String
