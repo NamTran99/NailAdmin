@@ -109,8 +109,8 @@ dependencies {
 
     implementation 'id.zelory:compressor:3.0.1'
     implementation "com.squareup.picasso:picasso:$picassoVersion"
-    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+//    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
     implementation "com.google.android.libraries.places:places:$placeVersion"
 
