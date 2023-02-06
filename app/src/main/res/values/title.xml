@@ -44,6 +44,7 @@
     <string name="title_service_staff">Provide service and worker information</string>
     <string name="title_account">Account</string>
     <string name="title_appointment_booking">Appointment Booking</string>
-    <string name="title_report">Report</string>
+    <string name="title_report">Revenue Statistics</string>
+    <string name="title_voucher_apply">Create New Voucher</string>
     <string name="title_language">Language</string>
 </resources>

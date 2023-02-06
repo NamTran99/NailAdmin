@@ -2,6 +2,8 @@ package com.app.inails.booking.admin.views.dialog.picker
 
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.Display
 import android.view.View
 import android.view.WindowManager
@@ -17,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DatePickerDialog(private val activity: BaseActivity) :
-    DatePickerDialog(activity, null, 0, 0, 0),
+    DatePickerDialog(activity,R.style.DialogTheme, null, 0, 0, 0),
     DatePicker.OnDateChangedListener {
     private var mView: View? = null
     private var mDisableFutureDate = false

@@ -206,6 +206,8 @@ class BookingFragment : BaseFragment(R.layout.fragment_booking),
             }
 
             onClickFinishListener = {
+                afterImagePath.clear()
+                beforeImagePath.clear()
                 finishBookingDialog.show(it) { amount, notes ->
                     viewModel.form.run {
                         id = it.id

@@ -39,8 +39,8 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     private val binding = viewBinding(LayoutManicuristServiceBinding::inflate)
 
-    var onCLickImage : ((String) -> Unit) = {}
-    var onCLickRemoveImage : (() -> Unit) = {}
+    var onCLickImage: ((String) -> Unit) = {}
+    var onCLickRemoveImage: (() -> Unit) = {}
 
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
@@ -57,7 +57,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
         }
 
     var url: String = ""
-        set(value){
+        set(value) {
             binding.apply {
                 imgAvatar.setImageUrl(value)
             }
@@ -85,7 +85,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     var service: ISalonService = ISalonService()
         get() = ISalonService(
-            imageUri= url,
+            imageUri = url,
             name = binding.etService.text.toString(),
             price = binding.etPrice.text.toString().toDouble()
         )
@@ -119,19 +119,19 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     fun checkValidate(): Boolean {
         if (serviceName.isEmpty()) {
-            binding.etService.error = "You must type service name"
+            binding.etService.error = context.getString(R.string.error_blank_service_name)
             binding.etService.setText("")
             binding.etService.requestFocus()
             return false
         }
         if (price.isEmpty()) {
-            binding.etPrice.error = "You must type service price"
+            binding.etPrice.error = context.getString(R.string.error_blank_service_price)
             binding.etPrice.setText("")
             binding.etPrice.requestFocus()
             return false
         }
         if (price.toDouble() <= 0.0) {
-            binding.etPrice.error = "Price must greater than 0"
+            binding.etPrice.error = context.getString(R.string.error_blank_service_price)
             binding.etPrice.setText("")
             binding.etPrice.requestFocus()
             return false
@@ -141,6 +141,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     fun resetView() {
         binding.apply {
+            service = ISalonService()
             imgAvatar.removePhoto()
             etService.setText("")
             etPrice.setText("")
@@ -151,7 +152,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     private fun setUpView() {
         binding.apply {
             etPrice.filters = arrayOf(DecimalDigitsInputFilter(3, 2))
-            imgAvatar.onClick{
+            imgAvatar.onClick {
                 onCLickImage.invoke(url)
             }
             imgAvatar.onClickClearImage = {
@@ -161,7 +162,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     }
 
     fun updateAvatar(image: String?) {
-        image?.let{
+        image?.let {
             url = it
         }
     }

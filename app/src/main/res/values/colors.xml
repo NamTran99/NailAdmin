@@ -6,7 +6,9 @@
     <color name="colorAccent1">#4768F2</color>
 
     <!--GRAY-->
+
     <color name="gray">#CFCFCF</color>
+    <color name="gray20">#A0A0A0</color>
     <color name="gray01">#BABABA</color>
     <color name="gray02">#ACACAC</color>
     <color name="gray03">#F5F5F5</color>

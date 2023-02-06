@@ -163,7 +163,7 @@ class UserLocalSource(
         appCache.language = null
     }
 
-    fun getLanguage() = if(isOwnerMode != false) appCache.language   else "en"
+    fun getLanguage() = if(isOwnerMode != false) appCache.language else "en"
     fun getLanguageWithDefault() = if(isOwnerMode != false)  appCache.language?: LocaleManager.mLanguage else "en"
 
     // isCloseAll instance activity

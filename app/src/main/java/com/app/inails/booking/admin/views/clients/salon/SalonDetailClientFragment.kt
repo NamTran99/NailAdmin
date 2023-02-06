@@ -92,7 +92,6 @@ class SalonDetailVM(
         } else
             details.post(salonFactory.createDetail(salon))
     }
-
 }
 
 @Inject(ShareScope.Fragment)
@@ -105,5 +104,4 @@ class SalonDetailRepo(
         salonDAO.save(rs)
         return rs
     }
-
 }

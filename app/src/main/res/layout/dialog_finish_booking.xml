@@ -192,6 +192,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:scrollbars="horizontal"
+                app:spanCount="3"
                 android:orientation="horizontal"/>
 
             <TextView
@@ -206,6 +208,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:spanCount="3"
+                android:scrollbars="horizontal"
                 android:orientation="horizontal"/>
 
             <androidx.appcompat.widget.AppCompatButton

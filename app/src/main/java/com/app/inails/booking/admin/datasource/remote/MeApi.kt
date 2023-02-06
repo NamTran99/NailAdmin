@@ -67,7 +67,7 @@ interface MeApi : Injectable {
     fun addVoucher(@Body voucherForm: VoucherForm): ApiAsync<Any>
 
     @GET("voucher/list-vouchers")
-    fun getListVoucher(@Query("num_per_page") platform:Int = 100,@Query("page") page:Int = 1): ApiAsync<List<VoucherDTO>>
+    fun getListVoucher(@Query("num_per_page") platform:Int = 100,@Query("page") page:Int = 1, @Query("salon_id") salonID: Int): ApiAsync<List<VoucherDTO>>
 
     @FormUrlEncoded
     @POST("voucher/delete-vouchers")

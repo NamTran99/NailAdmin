@@ -62,8 +62,5 @@
             android:visibility="visible"/>
     </RelativeLayout>
 
-
-
-
 </androidx.appcompat.widget.LinearLayoutCompat>
 

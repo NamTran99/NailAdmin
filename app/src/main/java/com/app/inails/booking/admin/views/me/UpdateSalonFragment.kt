@@ -29,6 +29,9 @@ import com.app.inails.booking.admin.databinding.FragmentUpdateSalonBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.GoogleApi
 import com.app.inails.booking.admin.datasource.remote.MeApi
+import com.app.inails.booking.admin.exception.toDateLocal
+import com.app.inails.booking.admin.exception.toDateLocalCustom
+import com.app.inails.booking.admin.exception.toDateUTC
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.factory.TimeZoneFactory
@@ -352,6 +355,8 @@ class UpdateSalonViewModel(
     }
 
     fun addVoucher(voucher: VoucherForm) {
+        voucher.startDate = voucher.startDate.toDateLocalCustom()
+        voucher.endDate = voucher.endDate.toDateLocalCustom()
         voucherAdd.value?.add(voucher)
         voucherAdd.forceRefresh()
     }
@@ -390,9 +395,9 @@ class UpdateSalonRepository(
 
     suspend fun getListVoucher() {
         voucherResult.post(
-            meApi.getListVoucher().await().map {
+            meApi.getListVoucher(salonID =localSource.getSalonID()?:0).await().map {
                 SalonFactory.createVoucher(it, context)
-            }.toMutableList()
+            }.sortedByDescending { it.status }.reversed().toMutableList()
         )
     }
 
@@ -409,7 +414,6 @@ class UpdateSalonRepository(
                     .put("id", salonForm.id)
                     .put("name", salonForm.name)
                     .put("phone", textFormatter.formatPhoneNumber(salonForm.phone))
-                    .put("email", salonForm.email)
                     .put("state", salonForm.state)
                     .put("city", salonForm.city)
                     .put("address", salonForm.address)
@@ -457,6 +461,8 @@ class VoucherRepo(
     val addVoucherResult = SingleLiveEvent<Any>()
     val deleteVoucherResult = SingleLiveEvent<Any>()
     suspend operator fun invoke(voucherForm: VoucherForm) {
+        voucherForm.startDate = voucherForm.startDate.toDateUTC()
+        voucherForm.endDate = voucherForm.endDate.toDateUTC()
         voucherForm.validate()
         addVoucherResult.post(
             meApi.addVoucher(voucherForm).await()

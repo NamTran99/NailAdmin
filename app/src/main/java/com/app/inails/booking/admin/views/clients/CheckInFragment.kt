@@ -72,7 +72,6 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
                 }
                 checkInSuccess.bind {
                     success(it)
-                    userLocalSource.setOwnerMode(false)
 
                     open<ClientHomeActivity>().close()
                 }

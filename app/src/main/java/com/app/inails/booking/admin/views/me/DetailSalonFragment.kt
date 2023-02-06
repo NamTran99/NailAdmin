@@ -19,6 +19,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentProfileBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.MeApi
+import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.SalonFactory
@@ -100,6 +101,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         txtSalonName.text = item.salonName
         viewHeader.apply {
             lvVoucher.show(item.vouchers.isNotEmpty())
+            if(item.images.isEmpty()) vpImage.hide()
             voucherAdapter.submit(item.vouchers)
             txtAddress.text = item.address
             txtEmail.text = item.email

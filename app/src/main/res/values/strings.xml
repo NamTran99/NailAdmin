@@ -26,12 +26,12 @@
     <string name="error_blank_salon_phone">Please enter salon\'s phone number</string>
     <string name="error_blank_salon_description">Please enter salon\'s introduction</string>
     <string name="error_loading_photo">Error loading photo</string>
-    <string name="error_blank_service_name">Service\'s Name should not be blank</string>
+    <string name="error_blank_service_name">Service\'s Name must not be blank</string>
     <string name="error_blank_service_avatar">Please add service avatar</string>
     <string name="error_blank_staff_avatar">Please add staff avatar</string>
-    <string name="error_blank_service_price">Price should not be blank</string>
-    <string name="error_blank_firstname">First name should not be blank</string>
-    <string name="error_blank_lastname">Last name should not be blank</string>
+    <string name="error_blank_service_price">Price must not be blank</string>
+    <string name="error_blank_firstname">First name must not be blank</string>
+    <string name="error_blank_lastname">Last name must not be blank</string>
     <string name="error_not_correct_email">Please enter the correct email</string>
     <string name="msg_sent_feedback">Feedback has been sent successfully</string>
     <string name="error_blank_name">Name should not be blank</string>
@@ -55,6 +55,7 @@
     <string name="btn_login">Login</string>
     <string name="error_blank_username">Username should not be blank</string>
     <string name="error_blank_password">Password should not be blank</string>
+    <string name="error_blank_password_vn">Mật khẩu không được để trống</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_reject">Reject</string>
     <string name="btn_customer_check_in">Client Check-in</string>
@@ -100,6 +101,7 @@
     <string name="btn_finish">Finish Booking</string>
     <string name="error_empty_amount">Please enter total amount</string>
     <string name="error_empty_value">Please enter value</string>
+    <string name="error_value_discount_greater_than_0">Value must be greater than 0</string>
     <string name="error_empty_amount_greater_than">Total amount must be greater than 0</string>
     <string name="btn_delete_appointment">Delete Appointment</string>
     <string name="btn_service">Start Service</string>
@@ -108,7 +110,7 @@
     <string name="your_email">Your Email</string>
     <string name="sample_gmail_com">sample@gmail.com</string>
     <string name="edit">Edit</string>
-    <string name="create_email_feedback_content">Your email isn’t created yet. Please update your email</string>
+    <string name="create_email_feedback_content">Your email isn’t created yet, please update it</string>
     <string name="create">Create</string>
     <string name="time_and_date">Time and Date</string>
     <string name="booking_id">Booking ID</string>
@@ -481,6 +483,12 @@
     <string name="voucher_customer_vip">Vip</string>
     <string name="voucher_apply">Voucher</string>
     <string name="add_voucher">Add Voucher</string>
+    <string name="happening">Happening</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="expired">Expired</string>
+    <string name="newly_created">Newly created</string>
+    <string name="inform_save_voucher">(You\'ve just created this voucher save salon for release it)</string>
+    <string name="error_price_not_greater_than_0">Price must greater than 0</string>
 </resources>
 
 

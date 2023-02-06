@@ -30,7 +30,7 @@ class RedirectToOwnerDialogVn(context: Context) : BaseDialog(context) {
             etPassword.setText("")
             btnSubmit.onClick {
                 if(password.isBlank()){
-                    etPassword.error = context.getString(R.string.error_blank_password)
+                    etPassword.error = context.getString(R.string.error_blank_password_vn)
                     etPassword.requestFocus()
                     return@onClick
                 }
@@ -45,6 +45,6 @@ class RedirectToOwnerDialogVn(context: Context) : BaseDialog(context) {
 interface RedirectToOwnerDialogVnOwner : ViewScopeOwner {
     val redirectToOwnerDialogVn: RedirectToOwnerDialogVn
         get() = with(viewScope) {
-            getOr("notification:dialog") { RedirectToOwnerDialogVn(context) }
+            getOr("redirectToOwnerDialogVn:dialog") { RedirectToOwnerDialogVn(context) }
         }
 }

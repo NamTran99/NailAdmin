@@ -69,7 +69,7 @@
         android:layout_below="@+id/txtEmail"
         android:layout_marginTop="@dimen/size_10"
         android:drawableStart="@drawable/ic_time"
-        android:drawablePadding="@dimen/size_15"
+        android:drawablePadding="@dimen/size_14"
         android:text="@string/local_time" />
 
     <androidx.recyclerview.widget.RecyclerView

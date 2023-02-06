@@ -49,12 +49,12 @@
                     android:id="@+id/imgSymbol"
                     android:src="@drawable/ic_percent"
                     android:layout_width="wrap_content"
-                    android:layout_marginEnd="@dimen/size_10"
+                    android:padding="@dimen/size_10"
                     android:layout_height="wrap_content"/>
 
                 <View
                     style="@style/AppTheme.Line.Vertical"
-                    android:layout_marginVertical="@dimen/size_5" />
+                    android:layout_marginEnd="@dimen/size_5" />
 
                 <TextView
                     android:id="@+id/tvVoucherTypeAction"
@@ -71,6 +71,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lvStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_50"
                 android:layout_marginTop="@dimen/size_15"
@@ -80,7 +81,7 @@
 
                 <TextView
                     android:id="@+id/tvStartTime"
-                    style="@style/AppTheme.TextView.Medium"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/start_time"
@@ -89,6 +90,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lvEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_50"
                 android:layout_marginTop="@dimen/size_15"
@@ -98,7 +100,7 @@
 
                 <TextView
                     android:id="@+id/tvEndTime"
-                    style="@style/AppTheme.TextView.Medium"
+                    style="@style/AppTheme.TextViewResponsive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/end_time"

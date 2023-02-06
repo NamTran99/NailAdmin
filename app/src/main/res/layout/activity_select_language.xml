@@ -56,5 +56,5 @@
         android:drawableTint="@color/white"
         android:layout_marginBottom="@dimen/size_20"
         android:textAllCaps="true"
-        android:text="@string/btn_next" />
+        android:text="@string/btn_next_1" />
 </RelativeLayout>

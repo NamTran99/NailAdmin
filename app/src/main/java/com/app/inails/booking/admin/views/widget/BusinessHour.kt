@@ -5,10 +5,12 @@ import android.content.Context
 import android.support.core.view.viewBinding
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ViewBusinessHourBinding
 import com.app.inails.booking.admin.exception.convert24hTo12hFormat
+import com.app.inails.booking.admin.exception.is12HFormat
 import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.loadAttrs
 import com.app.inails.booking.admin.extention.onClick
@@ -55,6 +57,7 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         set(value){
             mStartHours = value?.substring(0, 2)?.toIntOrNull() ?: 0
             data.startTime = value
+            binding.tvFromTime.tag = value?.convert24hTo12hFormat()?: ""
             binding.tvFromTime.text =
                 value?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
             checkShowReset()
@@ -66,6 +69,7 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         set(value){
             mEndHours = value?.substring(0, 2)?.toIntOrNull() ?: 0
             data.endTime = value
+            binding.tvTotime.tag = value?.convert24hTo12hFormat()?:""
             binding.tvTotime.text =
                 value?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
             checkShowReset()
@@ -125,17 +129,25 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
         }
     }
 
+    private fun getTimeDefault(textView: TextView, timeType: TimeType): String{
+        val time = textView.text.toString().let{ it ->
+            if(it.is12HFormat()) it
+            else textView.tag.toString().let{tag-> tag.ifEmpty { (if(timeType == TimeType.Start) "8:00 am" else "4:00 pm") } }
+        }
+        return time
+    }
+
     fun setupListener() {
         with(binding) {
             tvStatus.onClick{
                 isOpen = !isOpen
             }
             tvTotime.onClick {
-                timePickerDialog.show(tvTotime.text.toString(), TimeType.End)
+                timePickerDialog.show(getTimeDefault(tvTotime, TimeType.End), TimeType.End)
             }
 
             tvFromTime.onClick {
-                timePickerDialog.show(tvFromTime.text.toString(), TimeType.Start)
+                timePickerDialog.show(getTimeDefault(tvFromTime, TimeType.Start), TimeType.Start)
             }
 
             timePickerDialog.onSubmitClick = { time, hours, type ->

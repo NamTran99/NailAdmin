@@ -49,11 +49,30 @@ fun String.toDateUTC(
     formatInput: String = FORMAT_DATE_TIME_API,
     formatOutput: String = FORMAT_DATE_TIME_API
 ): String {
+    if(this.isEmpty()) return ""
     val inputFormat = SimpleDateFormat(formatInput, Locale.getDefault())
     val outputFormat = SimpleDateFormat(formatOutput, Locale.getDefault())
     outputFormat.timeZone = TimeZone.getTimeZone("UTC")
     val dateInput = inputFormat.parse(this)
     return outputFormat.format(dateInput ?: getDateCurrent(formatOutput))
+}
+
+fun String.toDateLocalCustom( formatInput: String = FORMAT_DATE_TIME_API,
+                              formatOutput: String = FORMAT_DATE_TIME_API): String {
+    val inputFormat = SimpleDateFormat(formatInput, Locale.getDefault())
+    val outputFormat = SimpleDateFormat(formatOutput, Locale.getDefault())
+    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val dateInput = inputFormat.parse(this)
+    return outputFormat.format(dateInput ?: getDateCurrent(formatOutput))
+}
+
+fun String.toDateLocal(format: String = FORMAT_DATE_UTC): String {
+    val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val date =
+        dateFormat.parse(this)
+    val parser = SimpleDateFormat(FORMAT_DATE_MONTH)
+    return parser.format(date)
 }
 
 
@@ -78,14 +97,7 @@ fun String.formatDateWithFormat(
     return outputFormat.format(date ?: 0)
 }
 
-fun String.toDateLocal(format: String = FORMAT_DATE_UTC): String {
-    val dateFormat = SimpleDateFormat(format, Locale.getDefault())
-    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-    val date =
-        dateFormat.parse(this)
-    val parser = SimpleDateFormat(FORMAT_DATE_MONTH)
-    return parser.format(date)
-}
+
 
 fun String.convert24hTo12hFormat(): String {
     val  sdf = SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -97,5 +109,15 @@ fun String.convert12hTo24hFormat(): String {
     val  sdf = SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
     val dateObj = sdf.parse(this);
     return SimpleDateFormat("HH:mm", Locale.getDefault()).format(dateObj!!);
+}
+
+fun String.is12HFormat(): Boolean {
+    val  sdf = SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
+    return try {
+        sdf.parse(this)
+        true
+    }catch (e: Exception){
+        false
+    }
 }
 

@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Bitmap
-import android.graphics.BlurMaskFilter
-import android.graphics.Canvas
-import android.graphics.Paint
+import android.graphics.*
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -31,6 +28,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.MenuRes
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.GravityCompat
 import androidx.core.view.updateLayoutParams
@@ -49,6 +47,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import java.lang.ref.WeakReference
 import java.util.*
+
 
 infix fun Boolean.lockButton(button: MaterialButton) {
     button.isEnabled = this
@@ -459,7 +458,7 @@ fun EditText.onSearchListener(onClickSearchAction: (String) -> Unit) {
     }
 }
 
-fun View.showKeyboard(value: Boolean) {
+fun View.showKeyboard(value: Boolean = true) {
     val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     if (value) {
         requestFocus()
@@ -522,5 +521,17 @@ fun EditText.scrollContentVertical() {
             }
         }
         return@setOnTouchListener false
+    }
+}
+
+fun TextView.setTextViewDrawableColor(color: Int) {
+    for (drawable in this.compoundDrawablesRelative) {
+        if (drawable != null) {
+            drawable.colorFilter =
+                PorterDuffColorFilter(
+                    ContextCompat.getColor(this.context, color),
+                    PorterDuff.Mode.SRC_IN
+                )
+        }
     }
 }

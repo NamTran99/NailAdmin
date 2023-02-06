@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -23,12 +24,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/text_size_16"
-            android:text="@string/voucher_information" />
+            android:text="@string/voucher_information"
+            android:textSize="@dimen/text_size_16" />
 
     </RelativeLayout>
 
     <View style="@style/AppTheme.Line.Horizontal" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        style="@style/AppTheme.TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_10"
+        android:drawableStart="@drawable/ic_dot"
+        android:drawableTint="@color/colorAccent1"
+        android:gravity="center"
+        android:textColor="@color/colorAccent1"
+        tools:text="@string/happening" />
+
+    <TextView
+        android:id="@+id/tvInform"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5"
+        android:gravity="center"
+        android:text="@string/inform_save_voucher"
+        android:textSize="10sp"
+        android:textStyle="italic" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -149,6 +174,7 @@
             android:text="@string/voucher_code"
             android:textColor="@color/colorPrimary" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/lvDescription"
         android:layout_width="match_parent"
@@ -167,8 +193,8 @@
             style="@style/AppTheme.TextViewResponsive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="@integer/material_motion_duration_long_1"
             android:layout_marginTop="@dimen/size_5"
+            android:layout_weight="@integer/material_motion_duration_long_1"
             android:gravity="end"
             android:text="@string/voucher_code"
             android:textColor="#727272" />
@@ -177,25 +203,34 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btClose"
         style="@style/AppTheme.ButtonDefault"
-        android:layout_marginTop="@dimen/size_12"
+        android:layout_marginTop="@dimen/size_25"
         android:background="@drawable/button_primary_corner"
         android:text="@string/btn_close" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <RelativeLayout
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
-        style="@style/AppTheme.ButtonDefault"
         android:layout_height="@dimen/size_50"
-        android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/size_5"
         android:background="@drawable/btn_view_stroke_2"
-        android:drawableStart="@drawable/ic_delete_outline"
-        android:drawableTint="#EB3E0B"
-        android:paddingHorizontal="@dimen/size_20"
-        android:textAllCaps="false"
-        android:text="@string/btn_delete"
-        android:textColor="#EB3E0B" />
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/size_18">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_delete_outline"
+            app:tint="#EB3E0B" />
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/btn_delete"
+            android:textColor="#EB3E0B" />
+    </RelativeLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 

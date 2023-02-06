@@ -11,6 +11,7 @@ import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.loadAttrs
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
+import com.google.android.youtube.player.internal.i
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -66,15 +67,16 @@ class LoadingImageView @JvmOverloads constructor(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     fun setImageUrl(url: String?) {
+        binding.progressBar.show()
         if (url.isNullOrBlank()) {
             binding.apply {
                 progressBar.hide()
-                image.setImageDrawable(context.getDrawable(R.drawable.ic_launcher))
+                    image.setImageDrawable(context.getDrawable(R.drawable.ic_launcher))
             }
             return
         }
         this.url = url
-        Picasso.get().load(url).into(binding.image, object : Callback {
+        Picasso.get().load(url).fit().into(binding.image, object : Callback {
             override fun onSuccess() {
                 binding.apply {
                     lvAddImage.setBackgroundResource(0)

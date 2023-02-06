@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.LayoutSalonStaffBinding
 import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.helper.EditTextAutoSizeUtility
 import com.app.inails.booking.admin.model.ui.ISalonService
 import com.app.inails.booking.admin.model.ui.ISalonStaff
 
@@ -29,6 +30,8 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
             binding.tvStaffFullName.show(value == DisplayType.DisplayService)
+            binding.etPhone.show(value == DisplayType.TypeService)
+            binding.tvPhone.show(value == DisplayType.DisplayService)
             binding.etFullName.show(value == DisplayType.TypeService)
             binding.etPhone.isFocusable = value == DisplayType.TypeService
             if (value == DisplayType.TypeService) {
@@ -65,7 +68,11 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
         set(value){
             url = value.imageUri
             binding.tvStaffFullName.text  = value.name
-            binding.etPhone.setText(value.phone)
+            if(displayType == DisplayType.DisplayService){
+                binding.tvPhone.text = value.phone.formatPhoneUSCustom()
+            }else{
+                binding.etPhone.setText(value.phone)
+            }
             field = value
         }
 
@@ -97,6 +104,7 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
 
     fun resetView() {
         binding.apply {
+            staffData = ISalonStaff()
             imgAvatar.removePhoto()
             etFullName.setText("")
             etPhone.setText("")
@@ -139,6 +147,7 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
     private fun setUpView() {
         binding.apply {
             etPhone.inputTypePhoneUS()
+
             imgAvatar.onClickClearImage = {
                 onCLickRemoveImage.invoke()
             }

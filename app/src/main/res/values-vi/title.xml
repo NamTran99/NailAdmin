@@ -44,5 +44,5 @@
     <string name="birthday">Ngày Sinh</string>
     <string name="title_finish_booking">Hoàn Tất Phục Vụ</string>
     <string name="title_booking_list">Danh Sách Booking</string>
-
+    <string name="title_voucher_apply">Tạo Mã Giảm Giá</string>
 </resources>

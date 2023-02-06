@@ -47,8 +47,12 @@ open class AppImageView @JvmOverloads constructor(
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables", "ResourceAsColor")
     open fun setImageUrl(url: String) {
-        if (url.isBlank()) return
+        if (url.isBlank()){
+            setImageDrawable(context.getDrawable(R.drawable.ic_no_image_2))
+            return
+        }
         load {
             load(url)
         }

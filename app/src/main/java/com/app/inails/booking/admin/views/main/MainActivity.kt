@@ -86,9 +86,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var mainTopBarState: MainTopBarState
 
-    //    private lateinit var btnClose: TextView
-//    private lateinit var tvSalonInfor: TextView
-//    private lateinit var tvSalonType: TextView
     val route = pairLookupOf<Int, KClass<out BaseFragment>>(
         R.id.navAccount to AccountFragment::class,
         R.id.navHome to HomeFragment::class,
@@ -130,6 +127,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                     R.string.title_navigate_client_mode,
                     R.string.content_navigate_client_mode,
                     functionSubmit = {
+                        userLocalSource.setOwnerMode(false)
                         Router.run {
                             open<ClientHomeActivity>().clear()
                         }

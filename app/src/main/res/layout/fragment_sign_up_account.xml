@@ -53,7 +53,7 @@
                     android:id="@+id/layoutPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_30"
-                    android:layout_marginTop="@dimen/size_16"
+                    android:layout_marginTop="@dimen/size_10"
                     android:background="@drawable/bg_bottom_light"
                     app:iconColor="@color/colorPrimary">
 

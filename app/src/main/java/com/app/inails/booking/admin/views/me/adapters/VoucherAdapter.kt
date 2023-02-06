@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemEditSalonScheduleBinding
 import com.app.inails.booking.admin.databinding.ItemVoucherBinding
+import com.app.inails.booking.admin.extention.setTextViewDrawableColor
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.model.ui.VoucherType
@@ -31,6 +32,9 @@ class VoucherAdapter(view: RecyclerView) :
             root.setOnClickListener {
                 onItemCLick.invoke(item)
             }
+
+            tvStatus.setText(item.statusName)
+            tvStatus.setTextColor(root.context.getColor(item.statusColor))
 //            tvCustomerType.text = item.typeCustomer
 //            if(item.type == VoucherType.PERCENT){
 //                tvValue.text = "-${item.value}%"

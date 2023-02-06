@@ -1,5 +1,7 @@
 package com.app.inails.booking.admin.extention
 
+import java.text.DecimalFormat
+
 fun <T> lock(any: T?, function: T.() -> Unit) {
 		if (any != null) function(any)
 }
@@ -22,6 +24,12 @@ fun Int?.safe(def: Int = 0): Int {
 
 fun Double?.safe(def: Double = 0.0): Double {
 		return this ?: def
+}
+
+fun Double.showMaxNumber(num: Int = 10): String {
+	val df = DecimalFormat("#")
+	df.maximumFractionDigits = num
+	return df.format(this).toString()
 }
 
 fun Float?.safe(def: Float = 0f): Float {

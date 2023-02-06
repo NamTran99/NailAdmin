@@ -21,6 +21,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentVoucherApplyBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
+import com.app.inails.booking.admin.exception.toDateUTC
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.VoucherForm
 import com.app.inails.booking.admin.navigate.Routing
@@ -48,13 +49,13 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
     private val args by lazy { argument<Routing.VoucherApply>() }
     private val mStartTimeUTC: String
         get() {
-            if(binding.tvStartTime.tag == null) return ""
+            if (binding.tvStartTime.tag == null) return ""
             return "${binding.tvStartTime.tag} $startTime"
         }
 
     private val mEndTimeUTC: String
         get() {
-            if(binding.tvEndTime.tag == null) return ""
+            if (binding.tvEndTime.tag == null) return ""
             return "${binding.tvEndTime.tag} $endTime"
         }
 
@@ -65,9 +66,10 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
         set(value) {
             binding.apply {
                 etValue.setText("")
-                if(value == 1){
-                    etValue.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(3, 2), MinMaxFilter(0f, 100f))
-                }else{
+                if (value == 1) {
+                    etValue.filters =
+                        arrayOf<InputFilter>(DecimalDigitsInputFilter(3, 2), MinMaxFilter(0f, 100f))
+                } else {
                     etValue.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(9, 2))
                 }
                 imgSymbol.setImageResource(if (value == 1) R.drawable.ic_percent else R.drawable.ic_dollar)
@@ -80,13 +82,22 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            lvStartTime.onClick {
+                tvStartTime.callOnClick()
+            }
+            lvEndTime.onClick {
+                tvEndTime.callOnClick()
+            }
+            imgSymbol.onClick {
+                etValue.showKeyboard()
+            }
             val displayFormatType =
                 if (viewModel.isVnLanguage) DateTimeFormat.format2_vn else DateTimeFormat.format2_en
             viewModel.voucherForm.listExistCode = args.listOfCode
             voucherType = 1
             topBar.setState(
                 SimpleTopBarState(
-                    R.string.salon_s_gallery,
+                    R.string.title_voucher_apply,
                     onBackClick = {
                         activity?.onBackPressed()
                     },
@@ -130,23 +141,24 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
             }
 
             spCustomerType.apply {
-                isEnabled
                 val voucherCustomerType = resources.getStringArray(R.array.voucher_customer_type)
                 adapter = object : ArrayAdapter<String>(
                     requireContext(),
                     R.layout.layout_spinner_item, voucherCustomerType
-                ){
+                ) {
                     override fun isEnabled(position: Int): Boolean {
                         return position != 0
                     }
+
                     override fun getDropDownView(
                         position: Int,
                         convertView: View?,
                         parent: ViewGroup
                     ): View {
-                        val view: TextView = super.getDropDownView(position, convertView, parent) as TextView
+                        val view: TextView =
+                            super.getDropDownView(position, convertView, parent) as TextView
                         //set the color of first item in the drop down list to gray
-                        if(position == 0) {
+                        if (position == 0) {
                             view.setTextColor(Color.GRAY)
                         } else {
                             //here it is possible to define color for other items by
@@ -162,9 +174,9 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
                         position: Int,
                         id: Long
                     ) {
-                        if(position == 0){
+                        if (position == 0) {
                             (view as TextView).setTextColor(Color.GRAY)
-                        }else{
+                        } else {
                             (view as TextView).setTextColor(Color.BLACK)
                         }
                         viewModel.voucherForm.type_customer = position
@@ -179,9 +191,9 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
             btSubmit.onClick {
                 viewModel.voucherForm.apply {
                     code = etCode.getTextString()
-                    startDate = mStartTimeUTC
-                    endDate = mEndTimeUTC
-                    value = etValue.getTextString().toDoubleOrNull()?: -1.0
+                    startDate = mStartTimeUTC.toDateUTC()
+                    endDate = mEndTimeUTC.toDateUTC()
+                    valueDiscount = etValue.getTextString()
                     salon_id = userLocalSource.getSalonID() ?: 0
                     description = etDescription.getTextString()
                     // type : voucherType
@@ -199,12 +211,10 @@ class VoucherApplyFragment : BaseFragment(R.layout.fragment_voucher_apply), TopB
                 onBackPress()
             }
         }
-
     }
 }
 
 class AddVoucherVM(
-    private val addVoucherRepo: VoucherRepo,
     private val userLocalSource: UserLocalSource
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val voucherForm = VoucherForm()

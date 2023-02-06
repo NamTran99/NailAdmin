@@ -8,11 +8,11 @@ import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.extention.DateTimeFormat
 import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
-import com.app.inails.booking.admin.extention.toDate
 import com.app.inails.booking.admin.extention.toTime
+import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getStatusColor
+import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getStatusName
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.support.ISelector
-import com.google.android.youtube.player.internal.i
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
@@ -58,9 +58,12 @@ interface IVoucher {
     val startDate: String get() = ""
     val endDate: String get() = ""
     val typeCustomer: Int get() = R.string.customer_type_all // 1 : all || 2 : normal || 3 : vip
-    val value: Double get() = 0.0 // 1 : all || 2 : normal || 3 : vip
+    val valueDiscount: String get() = ""
     val description: String get() = ""
     val isAlreadyFormatDate: Boolean get() = false
+    val statusName: Int get() = 0
+    val statusColor: Int get() = 0
+    val status: Int get() = 0
 }
 
 enum class VoucherType {
@@ -106,12 +109,16 @@ class VoucherForm(
     override var startDate: String = "",
     @SerializedName("expiration_date")
     override var endDate: String = "",
-    override var value: Double = 0.0,
+    @SerializedName("value")
+    override var valueDiscount: String = "",
     var salon_id : Int = 0,
     var type_customer: Int = 0, //1 : all || 2 : normal || 3 : vip
     override var description: String = "",
     override var typeName: VoucherType = VoucherType.PERCENT,
     override var typeCustomer: Int = R.string.customer_type_all,
+    override var statusName: Int = 0,
+    override var statusColor: Int = 0,
+    override val status: Int = 4,
     var type: Int = 1, //1  : %  || 2 : value
     var title: String = "a",
     var listExistCode: List<String> = listOf(),
@@ -127,6 +134,8 @@ class VoucherForm(
             2 -> R.string.customer_type_normal
             else -> R.string.customer_type_vip
         }
+        statusName = getStatusName(4)
+        statusColor = getStatusColor(4)
     }
 
     fun validate(){
@@ -139,8 +148,11 @@ class VoucherForm(
         if(code in listExistCode){
             viewError(R.id.etCode, R.string.error_code_already_exist)
         }
-        if(value == -1.0){
+        if(valueDiscount.isBlank()){
             viewError(R.id.etValue, R.string.error_empty_value)
+        }
+        if(valueDiscount.toFloat() <=0 ){
+            viewError(R.id.etValue, R.string.error_value_discount_greater_than_0)
         }
         if(startDate.isBlank()){
             resourceError(R.string.error_blank_start_time_1)

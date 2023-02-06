@@ -63,6 +63,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 beforeImagePath =
                     ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
                 finishBookingDialog.updateBeforeImages(beforeImagePath)
+                finishBookingDialog.updateBeforeImages(beforeImagePath)
             }
         }
 
@@ -391,6 +392,8 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                         price = amount
                         note = notes
                         status = DataConst.AppointmentStatus.APM_FINISH
+                        beforeImages = beforeImagePath
+                        afterImages = afterImagePath
                     }
                     viewModel.updateStatus()
                 }

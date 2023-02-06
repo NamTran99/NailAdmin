@@ -55,6 +55,7 @@ import com.app.inails.booking.admin.views.widget.SalonStaffView
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.youtube.player.internal.s
 import com.google.gson.Gson
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
@@ -162,7 +163,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
             btAddPaidImage.onClick {
                 FishBun.with(requireActivity())
                     .setImageAdapter(GlideAdapter())
-                    .setMaxCount(5)
+                    .setMaxCount(10)
                     .setMinCount(1)
                     .setSelectedImages(ArrayList(signUpForm.paidMenuImages.map { it.path.toUri() }))
                     .setActionBarColor(
@@ -183,50 +184,40 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
 
             salonStaffView.apply {
                 onCLickImage = {
-                    if (staffImage.isEmpty()) {
-                        FishBun.with(requireActivity())
-                            .setImageAdapter(GlideAdapter())
-                            .setMaxCount(1)
-                            .setSelectedImages(ArrayList(staffImage.map { it.toUri() }))
-                            .setActionBarColor(
-                                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                                true
-                            )
-                            .setActionBarTitleColor(Color.parseColor("#ffffff"))
-                            .startAlbumWithActivityResultCallback(staffImageResult)
-                    } else {
-                        Router.open(self, Routing.PhotoViewer(staffImage[0]))
-//                        open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage())
-                    }
+                    FishBun.with(requireActivity())
+                        .setImageAdapter(GlideAdapter())
+                        .setMaxCount(1)
+                        .setSelectedImages(ArrayList(staffImage.map { it.toUri() }))
+                        .setActionBarColor(
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                            true
+                        )
+                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .startAlbumWithActivityResultCallback(staffImageResult)
                 }
+
                 onCLickRemoveImage = {
                     staffImage.clear()
                 }
             }
 
             salonServiceView.apply {
-                salonServiceView.apply {
-                    onCLickImage = {
-                        if (serviceImage.isEmpty()) {
-                            FishBun.with(requireActivity())
-                                .setImageAdapter(GlideAdapter())
-                                .setMaxCount(1)
-                                .setSelectedImages(ArrayList(serviceImage.map { it.toUri() }))
-                                .setActionBarColor(
-                                    ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                                    ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                                    true
-                                )
-                                .setActionBarTitleColor(Color.parseColor("#ffffff"))
-                                .startAlbumWithActivityResultCallback(serviceImageResult)
-                        } else {
-                            Router.open(self, Routing.PhotoViewer(serviceImage[0]))
-                        }
-                    }
-                    onCLickRemoveImage = {
-                        serviceImage.clear()
-                    }
+                onCLickImage = {
+                    FishBun.with(requireActivity())
+                        .setImageAdapter(GlideAdapter())
+                        .setMaxCount(1)
+                        .setSelectedImages(ArrayList(serviceImage.map { it.toUri() }))
+                        .setActionBarColor(
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                            true
+                        )
+                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .startAlbumWithActivityResultCallback(serviceImageResult)
+                }
+                onCLickRemoveImage = {
+                    serviceImage.clear()
                 }
             }
 
@@ -288,6 +279,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
                     admin_name = edtAccName.text.toString()
                     salon_email = edtSalonEmail.text.toString()
                 }
+
                 viewModel.submit()
             }
 
@@ -295,6 +287,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
                 if (salonServiceView.checkValidate()) {
                     signUpForm.services.add(salonServiceView.service)
                     addService(salonServiceView.service)
+                    serviceImage.clear()
                     salonServiceView.resetView()
                 }
             }
@@ -302,6 +295,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
                 if (salonStaffView.checkValidate()) {
                     signUpForm.staffs.add(salonStaffView.staffData)
                     addStaff(salonStaffView.staffData)
+                    staffImage.clear()
                     salonStaffView.resetView()
                 }
             }
@@ -311,8 +305,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
         }
 
         viewModel.apply {
-            //set up data
-
+            imageAdapter.changePath(signUpForm.images)
             servicePriceDefaultResult.bind {
                 binding.rbTraPhi.text = requireContext().getString(R.string.tra_phi, it)
             }
@@ -327,10 +320,9 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
             timeZoneResult.bind {
                 val oldTimezone = salonForm.getTimeZoneDisplay(requireContext(), false)
                 signUpForm.run {
-                    zoneID = it.timeZoneId
+                    salon_timezone = it.timeZoneId
                     offsetDisplay = TimeUtils.getTimeOffset(it.timeZoneId)
                     salon_tz = "UTC ${offsetDisplay}"
-
                 }
                 val newTimeZone = salonForm.getTimeZoneDisplay(requireContext(), false)
                 binding.tvBusinessHour.text = salonForm.getTimeZoneDisplay(requireContext(), true)
@@ -410,7 +402,6 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
         manicuristService.tag = service
         manicuristService.onCLickImage = {
             Router.open(self, Routing.PhotoViewer(it))
-//            open<ShowZoomSingleImageActivity>(Routing.ShowZoomSingleImage(it))
         }
         manicuristService.onClickDelete = { view: View? ->
             if (manicuristService.parent != null) {
@@ -478,11 +469,11 @@ class SignUpVM(
 
     fun submit() = launch(loading, error) {
         if (salonForm.input_option == 0) {
-            signUpRepo.uploadServiceImages(salonForm.services).forEachIndexed { index, s ->
-                salonForm.services[index].avatar = s
+            signUpRepo.uploadServiceImages(salonForm.services).forEach {
+                salonForm.services[it.first].avatar = it.second
             }
-            signUpRepo.uploadStaffImages(salonForm.staffs).forEachIndexed { index, s ->
-                salonForm.staffs[index].avatar = s
+            signUpRepo.uploadStaffImages(salonForm.staffs).forEach {
+                salonForm.staffs[it.first].avatar = it.second
             }
         }
         signUpRepo(salonForm)
@@ -499,34 +490,51 @@ class SignUpRepo(
     val result = MutableLiveData<UserDTO>()
     val resultServicePriceDefault = MutableLiveData<String>()
 
-    suspend fun uploadServiceImages(list: List<ISalonService>): ArrayList<String> {
-        if (list.isEmpty()) return arrayListOf()
-        val imageParts =
-            list.filter { !it.imageUri.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.imageUri.toUri())!!.scalePhotoLibrary(context)
-                    .toImagePart("images[$index]")
-            }.toTypedArray()
+    suspend fun uploadServiceImages(list: List<ISalonService>): List<Pair<Int, String>> {
+        var count = 0
+        val listPosition = mutableListOf<Int>()
+        if (list.none { it.imageUri.isNotEmpty() }) return arrayListOf()
+        val imageParts = mutableListOf<MultipartBody.Part?>()
+        list.mapIndexed { index, item ->
+            if(item.imageUri.isNotEmpty()){
+                listPosition.add(index)
+                imageParts.add(  context.getFilePath(item.imageUri.toUri())!!.scalePhotoLibrary(context)
+                    .toImagePart("images[${count++}]"))
+            }
+        }
 
-        return meApi.uploadMultipleImage(
+        val a = meApi.uploadMultipleImage(
             RequestBodyBuilder()
                 .put("type", 2).buildMultipart(),
-            images = imageParts
+            images = imageParts.toTypedArray()
         ).await()
+        return a.mapIndexed { index, item ->
+            listPosition[index] to item
+        }
     }
 
-    suspend fun uploadStaffImages(list: List<ISalonStaff>): ArrayList<String> {
-        if (list.isEmpty()) return arrayListOf()
-        val imageParts =
-            list.filter { !it.imageUri.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.imageUri.toUri())!!.scalePhotoLibrary(context)
-                    .toImagePart("images[$index]")
-            }.toTypedArray()
+    suspend fun uploadStaffImages(list: List<ISalonStaff>): List<Pair<Int, String>> {
+        var count = 0
+        val listPosition = mutableListOf<Int>()
+        val imageParts = mutableListOf<MultipartBody.Part?>()
+        if (list.none { it.imageUri.isNotEmpty() }) return arrayListOf()
 
-        return meApi.uploadMultipleImage(
+        list.mapIndexed { index, item ->
+            if(item.imageUri.isNotEmpty()){
+                listPosition.add(index)
+                imageParts.add(  context.getFilePath(item.imageUri.toUri())!!.scalePhotoLibrary(context)
+                    .toImagePart("images[${count++}]"))
+            }
+        }
+
+        val a = meApi.uploadMultipleImage(
             RequestBodyBuilder()
-                .put("type", 1).buildMultipart(),
-            images = imageParts
+                .put("type", 2).buildMultipart(),
+            images = imageParts.toTypedArray()
         ).await()
+        return a.mapIndexed { index, item ->
+            listPosition[index] to item
+        }
     }
 
     suspend operator fun invoke(form: SignUpForm) {
@@ -565,7 +573,7 @@ class SignUpRepo(
                     .putIf(form.input_option == 0, "staffs", Gson().toJson(form.staffs))
                     .putIf(form.input_option == 0, "services", Gson().toJson(form.services))
                     .put("salon_tz", form.salon_tz)
-                    .put("salon_timezone", "UTC")
+                    .put("salon_timezone", form.salon_timezone)
                     .put("salon_lat", form.salon_lat)
                     .put("salon_lng", form.salon_lng)
                     .put("salon_description", form.salon_description)

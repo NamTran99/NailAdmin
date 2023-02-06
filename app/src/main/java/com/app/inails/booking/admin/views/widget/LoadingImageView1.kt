@@ -70,15 +70,18 @@ class LoadingImageView1 @JvmOverloads constructor(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     fun setImageUrl(url: String?) {
+        binding.progressBar.show()
         if (url.isNullOrBlank()) {
             binding.apply {
                 progressBar.hide()
+                imgNoImage.hide()
+                lvAddImage.show()
                 image.setImageDrawable(context.getDrawable(R.drawable.ic_launcher))
             }
             return
         }
         this.url = url
-        Picasso.get().load(url).into(binding.image, object : Callback {
+        Picasso.get().load(url).fit().into(binding.image, object : Callback {
             override fun onSuccess() {
                 binding.apply {
                     lvAddImage.setBackgroundResource(0)

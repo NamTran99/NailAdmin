@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
 import com.bumptech.glide.request.RequestOptions
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
 import id.zelory.compressor.constraint.size
 import java.io.File
 import java.io.FileOutputStream
@@ -17,16 +18,16 @@ suspend fun String.scalePhotoLibrary(context: Context): File {
     val mimeType = FileUtils.getMimeType(this)
     if (mimeType!!.contains("image")) {
         val extension = this.substring(this.lastIndexOf("."))
-        return if (extension == ".jpg" || extension == ".jpeg") {
+        return if (extension == ".jpg" || extension == ".jpeg" || extension == ".heic") {
             Compressor.compress(context, File(this)) {
-                //        resolution(720, 1280)
-                quality(60)
+                        resolution(720, 1280)
+                quality(30)
                 format(Bitmap.CompressFormat.JPEG)
                 size(2_097_152) // 2 MB
             }
         } else {
             Compressor.compress(context, File(this)) {
-                //        resolution(720, 1280)
+                        resolution(720, 1280)
                 quality(60)
                 format(Bitmap.CompressFormat.WEBP)
                 size(2_097_152) // 2 MB

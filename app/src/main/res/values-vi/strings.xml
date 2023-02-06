@@ -46,7 +46,7 @@
     <string name="address">Địa chỉ</string>
     <string name="enter_salon_address">Nhập địa chỉ salon</string>
     <string name="images">Hình ảnh</string>
-    <string name="description">Miêu tả (điền thông tín về salon)</string>
+    <string name="description">Miêu tả (điền thông tin về salon)</string>
     <string name="btn_add_new_service">Thêm dịch vụ mới</string>
     <string name="btn_edit">Sửa</string>
     <string name="btn_inactive">Dừng hoạt động</string>
@@ -57,6 +57,7 @@
     <string name="btn_active">Hoạt động</string>
     <string name="btn_save">Lưu</string>
     <string name="skip">Bỏ qua</string>
+    <string name="error_value_discount_greater_than_0">Giá trị phải lớn hơn 0</string>
     <string name="version_format">Phiên bản %s</string>
     <string name="btn_sign_up_salon">Đăng Ký Salon</string>
     <string name="appointment_list">Quản lý lịch đặt hẹn</string>
@@ -107,12 +108,12 @@
     <string name="detail_service">Thông tin Dịch vụ</string>
     <string name="service_name">Tên Dịch vụ</string>
     <string name="service_name_1">Tên Dịch vụ</string>
-    <string name="error_blank_service_price">Giá không dược để trống</string>
+    <string name="error_blank_service_price">Giá không được để trống</string>
     <string name="close">Đóng</string>
     <string name="service_s_name">Tên Dịch vụ</string>
     <string name="price">Giá</string>
     <string name="error_loading_photo">Error loading photo</string>
-    <string name="error_blank_service_name">Tên service không được để trống</string>
+    <string name="error_blank_service_name">Tên dịch vụ không được để trống</string>
     <string name="error_blank_service_avatar">Hãy thêm ảnh đại diện cho Dịch vụ</string>
     <string name="error_blank_staff_avatar">Hãy thêm ảnh đại diện cho nhân viên</string>
     <string name="error_blank_firstname">Tên không được để trống</string>
@@ -297,9 +298,18 @@
     <string name="voucher_customer_vip">Vip</string>
     <string name="error_code_already_exist">Code này đã tồn tại!</string>
     <string name="error_empty_value">Hãy điền giá trị</string>
-    <string name="error_code_blank">Hãy điền Mã giảm giá!</string>
+    <string name="error_code_blank">Hãy điền Mã giảm giá</string>
     <string name="voucher_apply">Mã giảm giá</string>
     <string name="add_voucher">Thêm Mã giảm giá</string>
     <string name="error_not_select_customer_type">Hãy chọn loại khách hàng</string>
     <string name="error_code_not_enough">Mã giảm giá phải có ít nhất 3 ký tự!</string>
+    <string name="happening">Đang diễn ra</string>
+    <string name="upcoming">Sắp tới</string>
+    <string name="expired">Đã hết hạn</string>
+    <string name="newly_created">Vừa mới tạo</string>
+    <string name="inform_save_voucher">(Bạn vừa mới tạo Mã giảm giá này hãy lưu Thông tin tiệm để phát hành nó)</string>
+    <string name="create_email_feedback_content">Email của bạn chưa được tạo, xin hãy cập nhật thêm</string>
+    <string name="create">Tạo</string>
+    <string name="error_price_not_greater_than_0">Giá phải lớn hơn 0</string>
+    <string name="your_salon_is_waiting_for_approval">(Tiệm của bạn đang chờ được xác nhận)</string>
 </resources>

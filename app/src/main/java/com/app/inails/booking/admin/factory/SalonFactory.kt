@@ -6,12 +6,16 @@ import android.support.di.ShareScope
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getStatusColor
+import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getStatusName
+import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getTypeCustomer
 import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
 import com.app.inails.booking.admin.model.response.VoucherDTO
 import com.app.inails.booking.admin.model.ui.*
+import java.text.DecimalFormat
 
 @Inject(ShareScope.Singleton)
 class SalonFactory(
@@ -56,7 +60,7 @@ class SalonFactory(
             override val salonID: Long
                 get() = salonDTO.id
             override val email: String
-                get() = salonDTO.email.safe()
+                get() = textFormatter.displaySafe(salonDTO.email)
             override val state: String
                 get() = salonDTO.state.safe()
             override val city: String
@@ -86,18 +90,46 @@ class SalonFactory(
             override val zoneOffSet: String
                 get() = salonDTO.tz.safe()
             override val vouchers: List<IVoucher>
-                get() = salonDTO.vouchers.map { createVoucher(it, context) }
+                get() = salonDTO.vouchers.map { createVoucher(it, context) }.sortedByDescending { it.status }.reversed()
             override val afterGalleryImage: List<AppImage>
                 get() = salonDTO.gallery.filter { it.type == 2 }
                     .map { AppImage(id = it.id, path = it.image ?: "") }
             override val beforeGalleryImage: List<AppImage>
                 get() = salonDTO.gallery.filter { it.type == 1 }
                     .map { AppImage(id = it.id, path = it.image ?: "") }
-
         }
     }
 
     companion object {
+
+        object VoucherHelper{
+            fun getTypeCustomer(type: Int?): Int {
+                return when (type) {
+                    1 -> R.string.customer_type_all
+                    2 -> R.string.customer_type_normal
+                    else -> R.string.customer_type_vip
+                }
+            }
+
+            fun getStatusName(status: Int): Int{
+                return when (status) {
+                    1 -> R.string.happening
+                    2 -> R.string.upcoming
+                    3 -> R.string.expired
+                    else -> R.string.newly_created
+                }
+            }
+
+            fun getStatusColor(status: Int): Int{
+                return when(status){
+                    1 -> R.color.colorAccent1
+                    2 -> R.color.green
+                    3 -> R.color.gray20
+                    else -> R.color.red
+                }
+            }
+
+        }
         fun createVoucher(voucherDto: VoucherDTO, context: Context): IVoucher {
             return object : IVoucher {
                 override val code: String
@@ -119,17 +151,19 @@ class SalonFactory(
                         voucherDto.isAlreadyFormatDate
                     )
                 override val typeCustomer: Int
-                    get() = when (voucherDto.type_customer) {
-                        1 -> R.string.customer_type_all
-                        2 -> R.string.customer_type_normal
-                        else -> R.string.customer_type_vip
-                    }
-                override val value: Double
-                    get() = voucherDto.value
+                    get() = getTypeCustomer(voucherDto.type_customer)
+                override val valueDiscount: String
+                    get() = voucherDto.value.showMaxNumber()
                 override val description: String
                     get() = voucherDto.description.safe()
                 override val id: Int
                     get() = voucherDto.id
+                override val statusName: Int
+                    get() = getStatusName(voucherDto.status)
+                override val statusColor: Int
+                    get() = getStatusColor(voucherDto.status)
+                override val status: Int
+                    get() = voucherDto.status
             }
         }
     }

@@ -61,9 +61,9 @@ val networkModule = module {
             .sslSocketFactory(tlsSocketFactory, tlsSocketFactory.systemDefaultTrustManager())
             .cache(cache)
             .addInterceptor(get<LoggingInterceptor.Builder>().build())
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(90, TimeUnit.SECONDS)
+            .writeTimeout(90, TimeUnit.SECONDS)
+            .readTimeout(90, TimeUnit.SECONDS)
             .build()
     }
 

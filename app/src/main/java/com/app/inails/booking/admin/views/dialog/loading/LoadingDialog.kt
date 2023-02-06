@@ -19,6 +19,7 @@ class LoadingDialog(context: Context, owner: LifecycleOwner? = null) : BaseDialo
 
     init {
         setContentView(R.layout.dialog_loading)
+        setCancelable(false)
         mView = findViewById(R.id.spin_loading)
         val window = window!!
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
