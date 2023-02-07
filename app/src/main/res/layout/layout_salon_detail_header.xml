@@ -100,6 +100,17 @@
             android:drawablePadding="@dimen/size_15"
             android:text="@string/salon_voucher" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEmptyVoucher"
+            android:layout_marginTop="@dimen/size_5"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:textColor="@color/gray02"
+            android:textStyle="italic"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/size_15"
+            android:text="@string/empty_voucher" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcVoucher"
             android:layout_width="match_parent"

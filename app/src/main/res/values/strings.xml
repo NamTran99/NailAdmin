@@ -383,6 +383,7 @@
     <string name="your_salon_is_waiting_for_approval">(Your salon is waiting for approval)</string>
     <string name="voucher_information">Voucher Information</string>
     <string name="salon_voucher">Salon voucher</string>
+    <string name="empty_voucher">No information, click “Update” to add voucher.</string>
     <string name="code">CODE: </string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>

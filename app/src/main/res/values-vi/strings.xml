@@ -294,6 +294,7 @@
     <string name="success_add_voucher">Thêm mã giảm giá thành công!</string>
     <string name="value_1">Giá tiền</string>
     <string name="voucher_customer_all">Tất cả</string>
+    <string name="empty_voucher">Không có, nhấn “Cập nhật” để thêm mã.</string>
     <string name="voucher_customer_normal">Thông thường</string>
     <string name="voucher_customer_vip">Vip</string>
     <string name="error_code_already_exist">Code này đã tồn tại!</string>

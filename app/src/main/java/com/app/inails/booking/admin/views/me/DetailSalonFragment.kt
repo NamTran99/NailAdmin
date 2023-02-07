@@ -100,7 +100,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
         }
         txtSalonName.text = item.salonName
         viewHeader.apply {
-            lvVoucher.show(item.vouchers.isNotEmpty())
+            tvEmptyVoucher.show(item.vouchers.isEmpty())
             if(item.images.isEmpty()) vpImage.hide()
             voucherAdapter.submit(item.vouchers)
             txtAddress.text = item.address
