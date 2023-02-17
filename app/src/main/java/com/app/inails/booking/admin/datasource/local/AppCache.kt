@@ -5,6 +5,7 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.persistent.Parser
 import android.support.persistent.cache.Caching
+import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.BookingClientDTO
 import com.app.inails.booking.admin.model.ui.client.IServiceClient
 import com.google.gson.Gson

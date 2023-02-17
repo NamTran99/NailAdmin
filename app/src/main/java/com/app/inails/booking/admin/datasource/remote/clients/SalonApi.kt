@@ -7,7 +7,7 @@ import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.app.AppConst
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
+ 
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,12 +23,12 @@ interface SalonApi : Injectable {
         @Query("txt_search") key: String,
         @Query("page") page: Int,
         @Query("num_per_page") itemsPerPage: Int = AppConst.perPage
-    ): ApiAsync<List<SalonClientDTO>>
+    ): ApiAsync<List<SalonDTO>>
 
     @GET("salon/{id}")
     fun details(
         @Path("id") id: Long,
-    ): ApiAsync<SalonClientDTO>
+    ): ApiAsync<SalonDTO>
 }
 
 class SalonApiImpl(private val retrofit: Retrofit) :

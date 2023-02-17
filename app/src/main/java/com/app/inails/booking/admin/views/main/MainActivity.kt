@@ -123,18 +123,23 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         topBar.setState(mainTopBarState)
         with(binding) {
             fabClientCheckIn.onClick {
-                confirmDialog.show(
-                    R.string.title_navigate_client_mode,
-                    R.string.content_navigate_client_mode,
-                    functionSubmit = {
-                        userLocalSource.setOwnerMode(false)
-                        Router.run {
-                            open<ClientHomeActivity>().clear()
-                        }
-                    },
-                    functionCancel = {
-                        bottomNavigation.selectedItemId = oldScreenItemID
-                    })
+                if (userLocalSource.getUserDto()?.admin?.is_approve == 1){
+                    confirmDialog.show(
+                        R.string.title_navigate_client_mode,
+                        R.string.content_navigate_client_mode,
+                        functionSubmit = {
+                            userLocalSource.setOwnerMode(false)
+                            Router.run {
+                                open<ClientHomeActivity>().clear()
+                            }
+                        },
+                        functionCancel = {
+                            bottomNavigation.selectedItemId = oldScreenItemID
+                        })
+                }else{
+                    notificationDialog.show(R.string.content_noty_salon_not_approve_check_in)
+                }
+
             }
             val navigator = findNavigator()
             navigator.addDestinationChangeListener {
@@ -211,8 +216,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             )
         }
 
-        appEvent.notifyAccountApproved.bind { _ ->
-            messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
+        appEvent.notifyAccountApproved.bind { isTrue ->
+            if(isTrue){
+                viewModel.user?.admin?.is_approve = 1
+                messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
+            }
         }
         viewModel.count.bind {
             mainTopBarState.setNotificationUnreadCount(it)

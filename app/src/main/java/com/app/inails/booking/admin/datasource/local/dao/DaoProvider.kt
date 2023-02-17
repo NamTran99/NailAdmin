@@ -7,7 +7,6 @@ import android.support.persistent.disk.DiskStorageFactory
 import android.support.persistent.disk.SearchStrategy
 import android.support.persistent.disk.StorageOptions
 import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
 
 @Inject(ShareScope.Singleton)
 class DaoProvider(private val context: Context) {
@@ -16,7 +15,7 @@ class DaoProvider(private val context: Context) {
     val salonDAO by lazy {
         factory.create(
             StorageOptions(
-                "salons", SalonClientDTO::class,
+                "salons", SalonDTO::class,
                 keyOf = { id.toString() },
                 searchStrategy = SearchStrategy.Text()
             )

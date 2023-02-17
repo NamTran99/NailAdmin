@@ -459,12 +459,16 @@ fun EditText.onSearchListener(onClickSearchAction: (String) -> Unit) {
 }
 
 fun View.showKeyboard(value: Boolean = true) {
-    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    if (value) {
-        requestFocus()
-        (this as? EditText)?.setSelection(text.length)
-        imm.showSoftInput(this, 0)
-    } else imm.hideSoftInputFromWindow(windowToken, 0)
+    this.postDelayed(
+        Runnable {
+            val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            if (value) {
+                requestFocus()
+                (this as? EditText)?.setSelection(text.length)
+                imm.showSoftInput(this, 0)
+            } else imm.hideSoftInputFromWindow(windowToken, 0)
+        }, 100
+    )
 }
 
 infix fun DrawerLayout.openDrawerLayout(isOpen: Boolean) {

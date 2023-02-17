@@ -68,7 +68,8 @@ class AppointmentClientAdapter(view: RecyclerView) :
             btnDelete.onClick { onDeleteClickListener?.invoke(item to adapterPosition) }
             txtSalonName.onClick { onSalonClickListener?.invoke(item.salonID) }
             btnDirect.onClick { onDirectSalonClickListener?.invoke(item.lat to item.lng) }
-            itemView.onClick { onItemClickListener?.invoke(item.id to item.salonID) }
+            itemView.onClick {
+                onItemClickListener?.invoke(item.id to item.salonID) }
         }
     }
 

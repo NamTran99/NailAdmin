@@ -29,6 +29,6 @@ data class UserOwnerDTO(
         @SerializedName("updated_at")
         val updatedAt: String?,
         val zip: String?,
-        val salon: SalonClientDTO? = null
+        val salon: SalonDTO? = null
     )
 }

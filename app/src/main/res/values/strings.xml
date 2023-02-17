@@ -490,6 +490,8 @@
     <string name="newly_created">Newly created</string>
     <string name="inform_save_voucher">(You\'ve just created this voucher save salon for release it)</string>
     <string name="error_price_not_greater_than_0">Price must greater than 0</string>
+    <string name="content_noty_salon_not_approve_check_in">Salon has not been approved so cannot use this feature. Please wait until the salon is approved.</string>
+    <string name="notification">Notification</string>
 </resources>
 
 

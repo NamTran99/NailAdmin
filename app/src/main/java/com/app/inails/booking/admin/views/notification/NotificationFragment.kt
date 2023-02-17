@@ -1,6 +1,5 @@
 package com.app.inails.booking.admin.views.notification
 
-import android.content.Context
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.LoadingEvent
@@ -160,16 +159,16 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification), TopBa
                 }
 
                 onClickItemListener = {
-                    if (it.isRead)
-                        if(it.type == DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE){
-                            messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
-                        }else{
+                    if(it.type == DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE){
+                        messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
+                    }
+
+                    if (it.isRead && it.type != DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE)
                             Router.redirectToAppointmentDetail(this@NotificationFragment, it.dataId)
-                        }
                     else {
                         viewModel.idForm.id = it.id
                         viewModel.idForm.dataId = it.dataId
-                        viewModel.read(true)
+                        viewModel.read(true, it.type == DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE)
                     }
                 }
 
@@ -234,9 +233,9 @@ class NotificationViewModel(
         notificationRepo(listForm)
     }
 
-    fun read(viewDetail: Boolean = false) = launch(loading, error) {
+    fun read(viewDetail: Boolean = false, isAprroved: Boolean = false) = launch(loading, error) {
         notificationRepo.read(idForm)
-        if (viewDetail) goToDetail.post(idForm.dataId)
+        if (viewDetail && !isAprroved) goToDetail.post(idForm.dataId)
     }
 
     fun markAsUnread() = launch(loading, error) {

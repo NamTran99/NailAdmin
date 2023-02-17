@@ -6,12 +6,12 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.persistent.cache.GsonCaching
 import androidx.lifecycle.MutableLiveData
-import com.app.inails.booking.admin.extention.displaySafe1
 import com.app.inails.booking.admin.helper.ShareIOScope
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
 import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
+import com.bumptech.glide.Glide.init
 import com.esafirm.imagepicker.helper.LocaleManager
 import kotlinx.coroutines.launch
 
@@ -30,9 +30,8 @@ class UserLocalSource(
 
     private var userClient: UserClientDTO? by caching.reference(UserClientDTO::class.java.name)
     private var userOwner: UserOwnerDTO? by caching.reference(UserOwnerDTO::class.java.name)
-    private var isOwnerMode: Boolean? by caching.reference("AppMode")
-
     private var user: UserDTO? by caching.reference(UserDTO::class.java.name)
+    private var isOwnerMode: Boolean? by caching.reference("AppMode")
     private var isFirstOpenApp: Boolean? by caching.reference("fistOpenApp")
 
     init {
@@ -55,22 +54,22 @@ class UserLocalSource(
         return allUserLive
     }
 
-    fun getSalonPhone() = user?.admin?.phone ?: ""
+    fun getSalonPhone() = this.user?.admin?.phone ?: ""
 
     fun getToken(): String? {
-        return userClient?.token ?: user?.token
+        return userClient?.token ?: this.user?.token
     }
 
     fun getSalonID(): Int? {
-        return user?.admin?.salon_id
+        return this.user?.admin?.salon_id
     }
 
-    fun isLogin() = user != null
+    fun isLogin() = this.user != null
     fun saveToken(token: String) {
         appCache.token = token
     }
 
-    fun isOwnerLogin() = user != null
+    fun isOwnerLogin() = this.user != null
 
     fun clearToken() {
         appCache.token = ""
@@ -85,14 +84,20 @@ class UserLocalSource(
         userClient = null
     }
 
-    fun getUserDto(): UserDTO? = user
-    fun getSalonDto(): SalonDTO? = user?.admin?.salon
+    fun getUserDto(): UserDTO? = this.user
+    fun getSalonDto(): SalonDTO? = this.user?.admin?.salon
     fun changeUserSlug(slug: String?) {
-        user?.admin?.salon?.slug = slug ?: ""
+        this.user?.admin?.salon?.slug = slug ?: ""
     }
 
     fun changeSalonName(salonName: String?) {
-        user?.admin?.salon?.name = salonName
+        this.user?.admin?.salon?.name = salonName
+    }
+
+    fun approveUser(){
+        user = user?.apply {
+            admin?.is_approve = 1
+        }
     }
 
     fun getUserLive(): MutableLiveData<UserDTO> {
@@ -125,6 +130,7 @@ class UserLocalSource(
 
 
     fun logout() {
+        this.user = null
         saveUserClient(null)
         saveUserOwner(null)
     }
@@ -135,7 +141,7 @@ class UserLocalSource(
     }
 
     fun updateEmailFeedbackUser(email: String) {
-        user?.admin?.salon?.email = email
+        this.user?.admin?.salon?.email = email
     }
 
     // is first login
@@ -173,9 +179,7 @@ class UserLocalSource(
 //    fun setC
     // When log out
     fun clearUser() {
-        user = null
+        this.user = null
     }
-
-    // salon
 
 }

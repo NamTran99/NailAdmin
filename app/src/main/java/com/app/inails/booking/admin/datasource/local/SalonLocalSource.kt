@@ -7,8 +7,8 @@ import android.support.di.ShareScope
 import android.support.persistent.cache.GsonCaching
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.helper.ShareIOScope
+import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.client.BookingClientDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
 import kotlinx.coroutines.launch
 
 @Inject(ShareScope.Singleton)
@@ -18,8 +18,8 @@ class SalonLocalSource(
     private val shareIOScope: ShareIOScope
 ) {
     private val caching = GsonCaching(context)
-    private var salonSelected: SalonClientDTO? by caching.reference(SalonClientDTO::class.java.name)
-    private val salonLive = MutableLiveData<SalonClientDTO?>()
+    private var salonSelected: SalonDTO? by caching.reference(SalonDTO::class.java.name)
+    private val salonLive = MutableLiveData<SalonDTO?>()
 
     fun getSalonSlug() = salonSelected?.slug ?: ""
     fun getSalonId() = salonSelected?.id ?: ""
@@ -31,13 +31,13 @@ class SalonLocalSource(
         }
     }
 
-    private fun getSalonDto(): SalonClientDTO? =salonSelected
+    private fun getSalonDto(): SalonDTO? =salonSelected
 
     fun clear() {
         setSalon(null)
     }
 
-    fun setSalon(salon: SalonClientDTO?) {
+    fun setSalon(salon: SalonDTO?) {
         this.salonSelected = salon
         shareIOScope.launch {
             salonLive.post(salon)
@@ -50,7 +50,7 @@ class SalonLocalSource(
         appCache.bookingCurrent = appointment
     }
 
-    fun getSalonLive(): MutableLiveData<SalonClientDTO?> {
+    fun getSalonLive(): MutableLiveData<SalonDTO?> {
         return salonLive
     }
 }

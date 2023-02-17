@@ -19,12 +19,14 @@ class AppEvent {
     val notifyCloudMessageClient = SingleLiveEvent<FireBaseCloudMessageClient>()
     val notifyForAppointment = SingleLiveEvent<FireBaseCloudMessageClient>()
     val notifyAccountApproved = SingleLiveEvent<Boolean>()
+    val notifyAccountApprovedAccount = SingleLiveEvent<Boolean>()
     val refreshData = SingleLiveEvent<Any>()
     val openDrawer = MutableLiveData<Any>()
     val enableMenuLeft = MutableLiveData<Boolean>()
     val resetBooking = SingleLiveEvent<Any>()
     val notifyFetchTotal = SingleLiveEvent<Any>()
     val refreshServices = SingleLiveEvent<Any>()
+
     val refreshNotifications = SingleLiveEvent<Any>()
 
     val voucherApply = SingleLiveEvent<VoucherForm>()

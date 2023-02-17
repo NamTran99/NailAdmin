@@ -23,7 +23,7 @@ import com.app.inails.booking.admin.datasource.remote.clients.SalonApi
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.factory.client.SalonClientFactory
 import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
+ 
 import com.app.inails.booking.admin.model.ui.ISalonDetail
 import com.app.inails.booking.admin.model.ui.client.ISalonDetailClient
 import com.app.inails.booking.admin.navigate.Routing
@@ -106,7 +106,7 @@ class SalonGalleryVM(
 class SalonGalleryRepo(
     private val salonApi: SalonApi
 ) {
-    suspend operator fun invoke(id: Long): SalonClientDTO {
+    suspend operator fun invoke(id: Long): SalonDTO {
         return salonApi.details(id).await()
     }
 

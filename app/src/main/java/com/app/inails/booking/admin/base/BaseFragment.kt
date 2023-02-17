@@ -40,7 +40,7 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     ErrorHandler by ErrorHandlerImpl() {
     val self get() = this
     val appActivity get() = activity as BaseActivity
-    val appEvent: AppEvent by inject()
+    val appEvent by inject<AppEvent>()
     val userLocalSource by inject<UserLocalSource>()
     private val loadingDialog by lazy { LoadingDialog(requireContext(), this) }
 

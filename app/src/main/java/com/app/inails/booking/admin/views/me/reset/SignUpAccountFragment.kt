@@ -30,9 +30,12 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentSignUpAccountBinding
 import com.app.inails.booking.admin.datasource.local.AppCache
+import com.app.inails.booking.admin.datasource.local.SalonLocalSource
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
+import com.app.inails.booking.admin.datasource.remote.AuthenticateApi
 import com.app.inails.booking.admin.datasource.remote.MeApi
 import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.helper.RequestBodyBuilder
 import com.app.inails.booking.admin.model.response.TimeZoneForm
 import com.app.inails.booking.admin.model.response.UserDTO
@@ -55,7 +58,6 @@ import com.app.inails.booking.admin.views.widget.SalonStaffView
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.youtube.player.internal.s
 import com.google.gson.Gson
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
@@ -240,6 +242,7 @@ class SignUpAccountFragment : BaseFragment(R.layout.fragment_sign_up_account), T
                 onItemClickListener = {
                     Router.open(self, Routing.PhotoViewer(it))
                 }
+
                 onAddImagesAction = {
                     FishBun.with(requireActivity())
                         .setImageAdapter(GlideAdapter())
@@ -485,7 +488,10 @@ class SignUpRepo(
     val context: Context,
     private val meApi: MeApi,
     private val userLocalSource: UserLocalSource,
-    private val appCache: AppCache
+    private val appCache: AppCache,
+    private val salonLocalSource: SalonLocalSource,
+    private val authenticateApi: AuthenticateApi,
+    private val textFormatter: TextFormatter,
 ) {
     val result = MutableLiveData<UserDTO>()
     val resultServicePriceDefault = MutableLiveData<String>()
@@ -496,10 +502,12 @@ class SignUpRepo(
         if (list.none { it.imageUri.isNotEmpty() }) return arrayListOf()
         val imageParts = mutableListOf<MultipartBody.Part?>()
         list.mapIndexed { index, item ->
-            if(item.imageUri.isNotEmpty()){
+            if (item.imageUri.isNotEmpty()) {
                 listPosition.add(index)
-                imageParts.add(  context.getFilePath(item.imageUri.toUri())!!.scalePhotoLibrary(context)
-                    .toImagePart("images[${count++}]"))
+                imageParts.add(
+                    context.getFilePath(item.imageUri.toUri())!!.scalePhotoLibrary(context)
+                        .toImagePart("images[${count++}]")
+                )
             }
         }
 
@@ -520,10 +528,12 @@ class SignUpRepo(
         if (list.none { it.imageUri.isNotEmpty() }) return arrayListOf()
 
         list.mapIndexed { index, item ->
-            if(item.imageUri.isNotEmpty()){
+            if (item.imageUri.isNotEmpty()) {
                 listPosition.add(index)
-                imageParts.add(  context.getFilePath(item.imageUri.toUri())!!.scalePhotoLibrary(context)
-                    .toImagePart("images[${count++}]"))
+                imageParts.add(
+                    context.getFilePath(item.imageUri.toUri())!!.scalePhotoLibrary(context)
+                        .toImagePart("images[${count++}]")
+                )
             }
         }
 
@@ -587,6 +597,7 @@ class SignUpRepo(
             ).await().apply {
                 userLocalSource.saveUser(this)
                 userLocalSource.saveToken(this.token)
+                salonLocalSource.setSalon(this.admin?.salon)
             })
 
     }

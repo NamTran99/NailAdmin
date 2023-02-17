@@ -1,6 +1,10 @@
 package com.app.inails.booking.admin.model.response.client
 
+import com.app.inails.booking.admin.model.response.GalleryImage
+import com.app.inails.booking.admin.model.response.Image
+import com.app.inails.booking.admin.model.response.Partner
 import com.app.inails.booking.admin.model.response.Schedule
+import com.app.inails.booking.admin.model.response.VoucherDTO
 import com.google.gson.annotations.SerializedName
 
 data class SalonClientDTO(

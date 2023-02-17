@@ -69,6 +69,12 @@ class SubmitFeedbackFragment : BaseFragment(R.layout.fragment_submit_feedback) {
             val list = arrayListOf<Uri>()
             list.add(Uri.parse(""))
             mAdapter.submit(list)
+
+            val abc = appPermission.accessReadStorage {
+                //save sagdsajhdg
+            }
+
+
             val permissionCamera = appPermission.accessCamera {
                 val config = ImagePickerConfig {
                     mode = ImagePickerMode.MULTIPLE // default is multi image mode

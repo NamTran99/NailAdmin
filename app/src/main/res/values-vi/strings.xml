@@ -31,7 +31,7 @@
     <string name="staff_list_today">Giám sát nhân viên</string>
     <string name="photo_gallery">Thư viện ảnh</string>
     <string name="business_hour_format">Giờ mở cửa (%s %s)</string>
-    <string name="salon_voucher">Dánh sách mã giảm giá</string>
+    <string name="salon_voucher">Danh sách mã giảm giá</string>
     <string name="owner">Chủ tiệm</string>
     <string name="btn_delete">Xóa</string>
     <string name="salon_s_gallery">Bộ thư viện ảnh của salon</string>
@@ -131,7 +131,7 @@
     <string name="error_empty_total_duration_services">Please enter the total duration service</string>
     <string name="error_blank_email">Email không được để trống</string>
     <string name="error_blank_content">Nội dung không được để trống</string>
-    <string name="message_logout_app">Bạn có thất sự muốn đăng xuất không?</string>
+    <string name="message_logout_app">Bạn có thật sự muốn đăng xuất không?</string>
     <string name="title_logout_owner">Đăng xuất tài khoản</string>
     <string name="title_logout_client">Đăng xuất tài khoản</string>
     <string name="btn_yes_logout">Đăng xuất</string>
@@ -179,7 +179,7 @@
     <string name="btn_update">Cập nhật</string>
     <string name="error_empty_service_time">Hãy chọn khoảng thời gian hoàn thành dịch vụ</string>
     <string name="error_service_time_greater_than">Thời gian hoàn thành dịch vụ phải lớn hơn 0 </string>
-    <string name="btn_reset">Thiệt lập lại</string>
+    <string name="btn_reset">Thiết lập lại</string>
     <string name="to_date_must_be_greater_or_equal_than_from_date">(*) Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu</string>
     <string name="label_select_staff">Chọn Nhân viên</string>
     <string name="title_select_staff">Chọn Nhân viên</string>
@@ -196,7 +196,7 @@
     <string name="salon_images_des">Hình ảnh Salon (Không gian tiệm, biển hiệu, menu, …)</string>
     <string name="enter_your_registered_phone_number_to_reset_password">Hãy điền số điện thoại bạn đã đăng ký để lấy lại mật khẩu</string>
     <string name="msg_sign_up_success">Đăng ký thành công</string>
-    <string name="title_signup_success">Đăng ký thành công! Hãy chờ quản trị viên chập thuận tài khoản của bạn.</string>
+    <string name="title_signup_success">Đăng ký thành công! Hãy chờ quản trị viên chấp thuận tài khoản của bạn.</string>
     <string name="content_sign_up_success">Trong thời gian xét duyệt, bạn vẫn có thể đăng nhập để chỉnh sửa thông tin tiệm, thêm dịch vụ, thêm nhân viên và nhận thông báo phê duyệt từ quản trị viên. Tuy nhiên, tiệm của bạn sẽ không xuất hiện trong danh sách 123 best solutions mà khách hàng có thể nhìn thấy và sẽ không nhận được lịch hẹn từ khách hàng.</string>
     <string name="start">BẮT ĐẦU THÔI</string>
     <string name="skip_1">Bỏ qua</string>
@@ -296,6 +296,8 @@
     <string name="voucher_customer_all">Tất cả</string>
     <string name="empty_voucher">Không có, nhấn “Cập nhật” để thêm mã.</string>
     <string name="voucher_customer_normal">Thông thường</string>
+    <string name="title_approve_account">Chúc mừng</string>
+    <string name="content_approve_account">Tiệm của bạn đã được chấp thuận và sẽ được hiển thị cho khách hàng</string>
     <string name="voucher_customer_vip">Vip</string>
     <string name="error_code_already_exist">Code này đã tồn tại!</string>
     <string name="error_empty_value">Hãy điền giá trị</string>
@@ -313,4 +315,6 @@
     <string name="create">Tạo</string>
     <string name="error_price_not_greater_than_0">Giá phải lớn hơn 0</string>
     <string name="your_salon_is_waiting_for_approval">(Tiệm của bạn đang chờ được xác nhận)</string>
+    <string name="content_noty_salon_not_approve_check_in">Salon chưa được phê duyệt nên không thể sử dụng tính năng này. Vui lòng chờ đến khi salon được phê duyệt.</string>
+    <string name="notification">Thông báo</string>
 </resources>

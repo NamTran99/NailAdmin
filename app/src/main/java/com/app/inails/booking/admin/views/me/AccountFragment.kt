@@ -6,6 +6,7 @@ import android.support.core.event.WindowStatusOwner
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -53,7 +54,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
             }
         }
 
-        appEvent.notifyAccountApproved.bind { _ ->
+        appEvent.notifyAccountApprovedAccount.bind { _ ->
             adapter.updateDetailSalon(viewModel.user)
         }
     }

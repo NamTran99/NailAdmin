@@ -17,10 +17,7 @@ import com.app.inails.booking.admin.extention.setMargins
 import com.google.android.youtube.player.internal.ac
 
 abstract class BaseDialog(context: Context) : Dialog(context) {
-
-
     var activityContext:Context = context
-
 
     @JvmName("getActivityContext1")
     fun getActivityContext() = context

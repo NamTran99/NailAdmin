@@ -24,15 +24,17 @@ data class SalonDTO(
     val schedules: List<Schedule>? = null,
     val timezone: String? = "",
     val tz: String? = "",
-    val vouchers: List<VoucherDTO>,
-    val gallery: List<GalleryImage>,
+    val vouchers: List<VoucherDTO> = listOf(),
+    val gallery: List<GalleryImage> = listOf(),
     val created_at: String? = null
 )
 
 data class GalleryImage(
     val id: Int? = 0,
     val image: String? = "",
-    val type: Int? = 1, //1: before, 2 after
+    val type: Int? = 1, //1: before, 2 after,
+    @SerializedName("type_name")
+    val typeName : String = ""
 )
 
 class VoucherDTO(

@@ -34,38 +34,4 @@ object LocaleManager {
 
         return resultContext
     }
-
-    fun setNewLocale(c: Context, language: String): Context {
-        return updateResources(c, language)
-    }
-
-    private fun normalizeLocale(localeLanguage: Locale): Locale {
-        val ZH = "zh"
-        val TW = "TW"
-        val CN = "CN"
-        val locale: Locale
-        val newLocaleLanguage = localeLanguage.toString()
-        return when {
-            newLocaleLanguage.length == 5 -> {
-                locale = Locale(
-                    newLocaleLanguage.substring(0, 2),
-                    newLocaleLanguage.substring(3, 5).toUpperCase(Locale.getDefault())
-                )
-                locale
-            }
-
-            newLocaleLanguage == ZH -> {
-                locale = if (Locale.getDefault().country == TW) {
-                    Locale(ZH, TW)
-                } else {
-                    Locale(ZH, CN)
-                }
-                locale
-            }
-
-            else -> {
-                localeLanguage
-            }
-        }
-    }
 }

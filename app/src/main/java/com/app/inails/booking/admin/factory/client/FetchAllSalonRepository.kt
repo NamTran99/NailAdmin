@@ -11,7 +11,7 @@ import com.app.inails.booking.admin.datasource.local.dao.SalonDAO
 import com.app.inails.booking.admin.datasource.remote.clients.SalonApi
 import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
+ 
 import com.app.inails.booking.admin.model.ui.ISalon
 import com.app.inails.booking.admin.model.ui.client.ISalonClient
 
@@ -32,7 +32,7 @@ class FetchAllSalonRepository(
         results.post(Pair(salonFactory.createSalons(salons), page > 1))
     }
 
-    fun saveSalonSelected(salon: SalonClientDTO?) {
+    fun saveSalonSelected(salon: SalonDTO?) {
         salonLocalSource.setSalon(salon)
     }
 

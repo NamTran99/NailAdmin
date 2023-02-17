@@ -199,7 +199,7 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
         else "${it.startTime} - ${it.endTime}"
     }
 
-    fun formatBusinessHours(salonDTO: SalonClientDTO?, isDownLine: Boolean = false): String {
+    fun formatBusinessHours(salonDTO: SalonDTO?, isDownLine: Boolean = false): String {
         val timezone = "${if (isDownLine) "\n" else ""}(${salonDTO?.timezone} ${salonDTO?.tz})"
         return cxt.getString(R.string.btn_business_hour, timezone)
     }

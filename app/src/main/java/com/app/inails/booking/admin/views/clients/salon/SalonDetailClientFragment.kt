@@ -21,7 +21,8 @@ import com.app.inails.booking.admin.datasource.local.dao.SalonDAO
 import com.app.inails.booking.admin.datasource.remote.clients.SalonApi
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.factory.client.SalonClientFactory
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
+import com.app.inails.booking.admin.model.response.SalonDTO
+
 import com.app.inails.booking.admin.model.ui.client.ISalonDetailClient
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
@@ -99,7 +100,7 @@ class SalonDetailRepo(
     private val salonApi: SalonApi,
     private val salonDAO: SalonDAO
 ) {
-    suspend operator fun invoke(id: Long): SalonClientDTO {
+    suspend operator fun invoke(id: Long): SalonDTO {
         val rs = salonApi.details(id).await()
         salonDAO.save(rs)
         return rs

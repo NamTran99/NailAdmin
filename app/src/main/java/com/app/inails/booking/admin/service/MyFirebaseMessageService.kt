@@ -41,11 +41,13 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
             val cloudMessage =
                 Gson().fromJson(objectFilter, FireBaseCloudMessage::class.java)
             val cloudMessageClient = `object`.toString().toObject<FireBaseCloudMessageClient>()
+            Log.d("TAG", "onMessageReceived: namtd8 ${cloudMessage.type}")
             when(cloudMessage.type.toInt()){
                 OWNER_ACCOUNT_APPROVE ->{
                     NotificationsManager(applicationContext).defaultNotify(cloudMessage)
-                    userLocalSource.getUserDto()?.admin?.is_approve = 1
+                    userLocalSource.approveUser()
                     appEvent.notifyAccountApproved.post(true)
+                    appEvent.notifyAccountApprovedAccount.post(true)
                 }
                 OWNER_ACCOUNT_ACTIVE, OWNER_ACCOUNT_INACTIVE -> return
                 CUSTOMER_CREATE_APPOINTMENT,CUSTOMER_CANCEL_APPOINTMENT, CUSTOMER_FEEDBACK ->{

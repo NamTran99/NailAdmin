@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Build
 import android.support.core.permission.*
 import android.support.core.view.ViewScopeOwner
+import androidx.activity.result.ActivityResultCaller
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -19,7 +20,6 @@ interface AppPermissionOwner : ViewScopeOwner {
             }
         }
 }
-
 class AppPermission {
     companion object {
         val PERMISSION_CAMERA = arrayOf(

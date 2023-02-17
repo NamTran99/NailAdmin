@@ -27,7 +27,7 @@ data class BookingClientDTO(
     val rating: Any?,
     val reason_cancel: String?,
     val reviews: Any?,
-    val salon: SalonClientDTO?,
+    val salon: SalonDTO?,
     @SerializedName("salon_id")
     val salonId: Long?,
     val service_custom: Any?,

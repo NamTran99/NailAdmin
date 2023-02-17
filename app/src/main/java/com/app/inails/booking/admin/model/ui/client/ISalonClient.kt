@@ -1,7 +1,7 @@
 package com.app.inails.booking.admin.model.ui.client
 
 import com.app.inails.booking.admin.model.response.SalonDTO
-import com.app.inails.booking.admin.model.response.client.SalonClientDTO
+ 
 import com.app.inails.booking.admin.model.ui.ISalon
 
 interface ISalonClient {
@@ -15,7 +15,7 @@ interface ISalonClient {
 }
 
 interface ISalonDTOOwner {
-    val value: SalonClientDTO? get() = null
+    val value: SalonDTO? get() = null
 }
 
 interface ISalonDetailClient : ISalonClient {
