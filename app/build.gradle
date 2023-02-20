@@ -22,7 +22,7 @@ android {
         minSdk 23
         targetSdk 33
         versionCode 3
-        versionName "1.2"    // format x.x.x_dev for dev, x.x for release (must follow format)
+        versionName "2.1"    // format x.x.x_dev for dev, x.x for release (must follow format)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
