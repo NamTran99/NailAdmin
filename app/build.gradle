@@ -21,8 +21,8 @@ android {
         applicationId "com.app.booking.inails.admin"
         minSdk 23
         targetSdk 33
-        versionCode 2
-        versionName "1.0"    // format x.x.x_dev for dev, x.x for release (must follow format)
+        versionCode 3
+        versionName "1.2"    // format x.x.x_dev for dev, x.x for release (must follow format)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
