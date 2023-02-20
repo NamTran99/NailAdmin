@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCwOQ91CXuzh44-d5iFOHGET66pP2sB3JE"
+          "current_key": "AIzaSyAmQ1nyMFX1V20iJ6xdB2nt0A6IEaNK_l4"
         }
       ],
       "services": {
@@ -29,6 +29,13 @@
             {
               "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "660811193562-37h148ds7q9bogaplvdavom4034k43ro.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.booking.solution.owner"
+              }
             }
           ]
         }
@@ -73,7 +80,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCwOQ91CXuzh44-d5iFOHGET66pP2sB3JE"
+          "current_key": "AIzaSyAmQ1nyMFX1V20iJ6xdB2nt0A6IEaNK_l4"
         }
       ],
       "services": {
@@ -82,6 +89,13 @@
             {
               "client_id": "660811193562-p4ip57ppn70d8esamfm1hqqufivta8l0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "660811193562-37h148ds7q9bogaplvdavom4034k43ro.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.booking.solution.owner"
+              }
             }
           ]
         }
