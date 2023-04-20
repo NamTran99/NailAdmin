@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/bg_corner_white"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_15"
+        android:paddingVertical="@dimen/size_16">
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_BE43C3"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size_16"
+            android:text="@string/salon_information"
+          />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSalonName"
+            style="@style/AppTheme.EditText.SignUp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:drawableStart="@drawable/ic_salon"
+            android:drawablePadding="@dimen/size_10"
+            android:hint="@string/salon_spa_name" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSalonAddress"
+            style="@style/AppTheme.EditText.SignUp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="@dimen/size_10"
+            android:focusable="false"
+            android:hint="@string/spa_salon_address"
+            android:inputType="textMultiLine" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSalonPhone"
+            style="@style/AppTheme.EditText.SignUp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:drawableStart="@drawable/ic_phone_outline"
+            android:drawablePadding="@dimen/size_10"
+            android:hint="@string/contact_phone_number"
+            android:inputType="phone" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSalonEmail"
+            style="@style/AppTheme.EditText.SignUp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="@dimen/size_10"
+            android:hint="@string/label_email_optional" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_2"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="@string/not_require_email"
+            android:textColor="@color/hint_text_color"
+            android:textSize="@dimen/text_size_10"
+            android:textStyle="italic" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBack"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/size_40"
+                android:background="@drawable/button_ebebeb_corner"
+                android:drawableStart="@drawable/ic_back"
+                android:drawablePadding="@dimen/size_3"
+                android:textColor="@color/black"
+                android:drawableTint="@color/black"
+                android:textSize="@dimen/text_size_12"
+                android:text="@string/button_back" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinue"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_height="@dimen/size_40"
+                android:paddingStart="@dimen/size_20"
+                android:textSize="@dimen/text_size_12"
+                android:background="@drawable/button_primary_corner_10"
+                android:drawableEnd="@drawable/ic_arrow_right_1"
+                android:drawableTint="@color/white"
+                android:text="@string/btn_next"
+             />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

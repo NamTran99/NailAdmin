@@ -62,7 +62,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                 }
                 mAdapter.submit(it.second.appointment)
 
-                (mAdapter.itemCount == 0) show binding.emptyLayout.tvEmptyData
+                (mAdapter.itemCount == 0) show binding.emptyLayout.lvEmpty
                 (mAdapter.itemCount > 0) show binding.rvReport
 
                 binding.emptyLayout.tvEmptyData.setText(
@@ -150,7 +150,7 @@ class ReportFragment : BaseFragment(R.layout.fragment_report), TopBarOwner,
                         }
                     ) { form ->
                         viewModel.filterCustomerForm.setDataFromDialog(form)
-                        searchView.showHideImgFilter(viewModel.filterCustomerForm)
+                        searchView.showHideImgFilter(viewModel.filterCustomerForm.isHaveDataForFilter())
                         refreshView()
                     }
                 }

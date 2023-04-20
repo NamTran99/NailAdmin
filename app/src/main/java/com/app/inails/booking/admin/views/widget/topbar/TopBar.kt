@@ -19,7 +19,7 @@ class SimpleTopBarClientState(
     private val title: Int,
     @DrawableRes
     private val iconBack: Int = R.drawable.ic_ab_back,
-    private val hasDivider: Boolean = false,
+    private val hasDivider: Boolean = true,
     private val onBackClick: () -> Unit = {}
 ) : TopBarState() {
     override val stateBinding by bindingOf(TopBarSimpleClientBinding::inflate)
@@ -82,6 +82,28 @@ class SimpleTopBarState(
             btSetting.show(onSettingClick != null)
             btSetting.onClick {
                 onSettingClick!!(it)
+            }
+        }
+    }
+}
+
+class StaffTopBarState(
+    @StringRes
+    private val title: Int,
+    @DrawableRes
+    private val iconBack: Int = R.drawable.ic_ab_back,
+    private val onBackClick: () -> Unit = {},
+    private val onNoteClick: () -> Unit = {}
+) : TopBarState() {
+    override val stateBinding by bindingOf(StaffTopBarSimpleBinding::inflate)
+
+    override fun doApply() {
+        with(stateBinding) {
+            tvTitle.setText(title)
+            btBack.setImageResource(iconBack)
+            btBack.setOnClickListener { onBackClick() }
+            btNote.setOnClickListener {
+                onNoteClick.invoke()
             }
         }
     }

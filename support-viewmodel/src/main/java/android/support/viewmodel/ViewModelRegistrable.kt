@@ -1,5 +1,6 @@
 package android.support.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment

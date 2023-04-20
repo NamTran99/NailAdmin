@@ -3,12 +3,9 @@ package com.app.inails.booking.admin.extention
 import android.content.Context
 import android.os.Build
 import android.text.format.DateUtils
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.extention.DateTimeFormat.format1
 import com.app.inails.booking.admin.extention.DateTimeFormat.format2_en
-import com.app.inails.booking.admin.extention.DateTimeFormat.format2_vn
 import com.app.inails.booking.admin.extention.DateTimeFormat.format3
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,6 +15,11 @@ object DateTimeFormat{
     val format3 = "yyyy-MM-dd HH:mm"
     val format2_en = "EEEE, MMMM d, yyyy 'at' hh:mm a"
     val format2_vn = "EEEE, MMMM d, yyyy 'lúc' hh:mm a"
+    val format4 = "MMMM dd yyyy - hh:mm a"
+    val format6 = "MMMM dd yyyy"
+    val format5 = "MM-dd-yyyy"
+    val server_type_1 = "yyyy-MM-dd'T'HH:mm:sss'Z'"
+    val server_type_2 = "yyyy-MM-dd'T'HH:mm:ss"
 
 }
 
@@ -33,7 +35,7 @@ fun Long.toDate(
     return Date(this)
 }
 
-fun Long.toCreatedAt(
+fun Long.convertFromServerToLocalTime(
 ): String {
     val parser = SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault())
     return parser.format(this.toDate())
@@ -160,18 +162,19 @@ fun String?.convertAllTimeType(
     val fromTimeFormat = SimpleDateFormat(fromFormat, Locale.getDefault())
     val dateTime = fromTimeFormat.parse(this)
     val toTimeFormat = SimpleDateFormat(toFormat, Locale.getDefault())
-    Log.d("NamTD8", "convertAllTimeType: ${toTimeFormat.format(dateTime)}")
     return toTimeFormat.format(dateTime)
 } /// this must format "HH:mm"
 
 
-fun String.toCreatedAt(
+fun String.convertFromServerToLocalTime(
+    toFormat: String =DateTimeFormat.server_type_1,
+    outFormat: String = DateTimeFormat.format4
 ): String {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'", Locale.getDefault())
+    val dateFormat = SimpleDateFormat(toFormat, Locale.getDefault())
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date =
         dateFormat.parse(this)
-    val simpleDateFormat = SimpleDateFormat("MMMM dd yyyy - hh:mm a", Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat(outFormat, Locale.getDefault())
     return simpleDateFormat.format(date)
 }
 

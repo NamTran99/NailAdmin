@@ -7,15 +7,22 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.base.MainApplication
 import com.app.inails.booking.admin.databinding.ItemManageServiceBinding
 import com.app.inails.booking.admin.extention.findIndex
 import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.extention.hide
+import com.app.inails.booking.admin.helper.factory.TLSSocketFactory
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.squareup.picasso.Callback
+import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
-import java.lang.Exception
+import okhttp3.Cache
+import okhttp3.OkHttpClient
+import java.io.File
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class ManageServiceAdapter(view: RecyclerView) :
@@ -46,12 +53,12 @@ class ManageServiceAdapter(view: RecyclerView) :
                     }
 
                     override fun onError(e: Exception?) {
-                        imgImage.setImageResource(R.drawable.ic_launcher)
+                        imgImage.setImageResource(R.drawable.img_logo)
                         progress.hide()
                     }
                 })
-            }else{
-                imgImage.setImageResource(R.drawable.ic_launcher)
+            } else {
+                imgImage.setImageResource(R.drawable.img_logo)
                 progress.hide()
             }
 
@@ -60,7 +67,7 @@ class ManageServiceAdapter(view: RecyclerView) :
             }
 
             tvName.text = item.name
-            tvPrice.text = "${item.price.formatPrice()}"
+            tvPrice.text = item.price.formatPrice()
 
             tvPrice.setTextColor(ContextCompat.getColor(view.context, item.textColor))
             tvName.setTextColor(ContextCompat.getColor(view.context, item.textColor))

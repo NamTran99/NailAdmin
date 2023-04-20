@@ -14,7 +14,6 @@
             android:id="@+id/rcvAppointment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray07"
             android:clipToPadding="false"
             android:padding="@dimen/size_16"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

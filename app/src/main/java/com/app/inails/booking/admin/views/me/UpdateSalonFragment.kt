@@ -29,7 +29,6 @@ import com.app.inails.booking.admin.databinding.FragmentUpdateSalonBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.GoogleApi
 import com.app.inails.booking.admin.datasource.remote.MeApi
-import com.app.inails.booking.admin.exception.toDateLocal
 import com.app.inails.booking.admin.exception.toDateLocalCustom
 import com.app.inails.booking.admin.exception.toDateUTC
 import com.app.inails.booking.admin.extention.*
@@ -37,6 +36,7 @@ import com.app.inails.booking.admin.factory.SalonFactory
 import com.app.inails.booking.admin.factory.TimeZoneFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.helper.RequestBodyBuilder
+import com.app.inails.booking.admin.model.response.AppImage
 import com.app.inails.booking.admin.model.response.TimeZoneForm
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
@@ -79,7 +79,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 pathLocalImage.clear()
                 pathLocalImage.addAll(pathImage.filter { !it.toString().contains("http") }
-                    .map { pathUri -> AppImage(path = pathUri.toString()) })
+                    .map { pathUri -> AppImage(image = pathUri.toString()) })
                 allImage.clear()
                 allImage.addAll(pathServerImage)
                 allImage.addAll(pathLocalImage)
@@ -152,7 +152,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                         .setImageAdapter(GlideAdapter())
                         .setMaxCount(20)
                         .setMinCount(1)
-                        .setSelectedImages(ArrayList(allImage.map { it.path.toUri() }))
+                        .setSelectedImages(ArrayList(allImage.map { it.image.toUri() }))
                         .setActionBarColor(
                             ContextCompat.getColor(requireContext(), R.color.colorPrimary),
                             ContextCompat.getColor(requireContext(), R.color.colorPrimary),
@@ -404,8 +404,8 @@ class UpdateSalonRepository(
     suspend operator fun invoke(salonForm: SalonForm) {
         salonForm.validate()
         val imageParts =
-            salonForm.images.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)
+            salonForm.images.filter { !it.image.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.image.toUri())!!.scalePhotoLibrary(context)
                     .toImagePart("images")
             }.toTypedArray()
         result.post(

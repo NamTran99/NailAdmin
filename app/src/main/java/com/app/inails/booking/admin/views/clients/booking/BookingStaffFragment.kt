@@ -166,6 +166,7 @@ class CreateAppointmentRepository(
         form.type = if (userLocalSource.isOwnerLogin()) BookingForm.TYPE_WALK_IN
         else BookingForm.TYPE_APPOINTMENT
         form.salonSlug = salonLocalSource.getSalonSlug()
+        form.salonID = salonLocalSource.getSalonId().toString().toInt()
         salonLocalSource.setAppointmentCurrent(bookingApi.create(form).await())
     }
 

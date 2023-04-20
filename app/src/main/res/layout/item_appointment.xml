@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/size_6"
     android:background="@drawable/bg_white_radius"
     android:orientation="vertical"
-    android:padding="@dimen/size_16">
+    android:elevation="@dimen/size_5"
+    android:paddingHorizontal="@dimen/size_16"
+    android:layout_marginHorizontal="@dimen/size_5"
+    android:layout_marginBottom="@dimen/size_10"
+    android:paddingVertical="@dimen/size_16">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,8 +53,8 @@
         <TextView
             android:id="@+id/tvFullName"
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_marginStart="@dimen/size_13"
             android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/size_13"
             android:gravity="end"
             android:textColor="@color/lightBlue02"
             tools:text="Yen Yen" />
@@ -71,8 +74,8 @@
 
         <TextView
             android:id="@+id/tvPhone"
-            android:layout_width="match_parent"
             style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
             android:layout_marginStart="@dimen/size_13"
             android:autoLink="phone"
             android:gravity="end"
@@ -201,6 +204,16 @@
             style="@style/AppTheme.TextViewResponsive"
             android:layout_gravity="end"
             tools:text="$10.00" />
+
+        <TextView
+            android:id="@+id/tvFree"
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_gravity="end"
+            android:text="@string/free"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:textColor="@color/red"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <LinearLayout
@@ -274,7 +287,7 @@
             android:layout_marginStart="@dimen/size_13"
             android:layout_weight="1"
             android:background="@drawable/button_gray_corner"
-            android:text="@string/btn_cancel" />
+            android:text="@string/btn_cancel_apm" />
 
     </LinearLayout>
 
@@ -373,8 +386,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="@string/title_feed_back"
-            android:textColor="@color/black"
-          />
+            android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFeedbackContent"
@@ -388,12 +400,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcFeedbackImage"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/size_5"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_service_images"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvFeedbackContent"/>
+            android:layout_below="@id/tvFeedbackContent"
+            android:layout_marginTop="@dimen/size_5"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_service_images" />
 
     </RelativeLayout>
 
@@ -416,4 +428,17 @@
         android:text="@string/btn_finish"
         android:visibility="gone"
         tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/btViewDetail"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_12"
+        android:elevation="@dimen/size_1"
+        android:text="@string/view_detail_under_line"
+        android:layout_marginBottom="@dimen/size_3"
+        android:textColor="@color/colorPrimary"
+   />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

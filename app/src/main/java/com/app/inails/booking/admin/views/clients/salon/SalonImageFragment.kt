@@ -8,7 +8,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentSalonImageBinding
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.views.clients.dialog.view_image.ImagesViewPagerAdapter
+import com.app.inails.booking.admin.views.base.ImagesViewPagerAdapter
 
 class SalonImageFragment(val images:List<String>) : BaseFragment(R.layout.fragment_salon_image) {
     private val binding by viewBinding(FragmentSalonImageBinding::bind)

@@ -69,12 +69,6 @@ class ServiceAdapter(view: RecyclerView) :
                     setBackgroundResource(R.drawable.box_radius_def)
                 }
             }
-            if (isSelected)
-                imvService.setStrokeWidthResource(R.dimen.size_1)
-            else
-                imvService.strokeWidth = 0f
         }
     }
-
-
 }

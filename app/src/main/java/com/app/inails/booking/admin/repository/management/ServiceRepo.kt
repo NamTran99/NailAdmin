@@ -26,8 +26,8 @@ class CreateServiceRepository(
     suspend operator fun invoke(form: ServiceForm) {
         form.validate()
         val imageParts =
-            form.moreImage.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)
+            form.moreImage.filter { !it.image.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.image.toUri())!!.scalePhotoLibrary(context)
                     .toImagePart("images")
             }.toTypedArray()
 
@@ -64,8 +64,8 @@ class UpdateServiceRepository(
     suspend operator fun invoke(form: ServiceForm) {
         form.validate()
         val imageParts =
-            form.moreImage.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)
+            form.moreImage.filter { !it.image.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.image.toUri())!!.scalePhotoLibrary(context)
                     .toImagePart("images")
             }.toTypedArray()
 
@@ -76,9 +76,9 @@ class UpdateServiceRepository(
                 .toImagePart("avatar")
         }
 
-        val currentServerImage = form.moreImage.filter { it.path.contains("http") }
+        val currentServerImage = form.moreImage.filter { it.image.contains("http") }
         val deleteID = form.oldServerImages.filterNot {image ->
-            currentServerImage.any { it.path == image.path }
+            currentServerImage.any { it.image == image.image }
         }.map { it.id }
         results.post(
             bookingFactory

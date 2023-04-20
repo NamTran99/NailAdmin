@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">123 Best Solution- Store Owner</string>
+    <string name="app_name">Việt Nails Owner</string>
     <string name="btn_ok">OK</string>
     <string name="btn_ok_1">OK</string>
     <string name="btn_cancel">Cancel</string>
@@ -36,7 +36,12 @@
     <string name="msg_sent_feedback">Feedback has been sent successfully</string>
     <string name="error_blank_name">Name should not be blank</string>
     <string name="error_blank_staff_id">Please select a staff</string>
+    <string name="error_blank_customer_id">Please select a customer</string>
+    <string name="error_pls_select_working_time">Please select working time type!</string>
+    <string name="error_pls_select_gender">Please select gender!</string>
+    <string name="error_pls_select_position">Please select position!</string>
     <string name="error_not_enough_image_count">Please select at least one image</string>
+    <string name="error_data_signup_support_not_valid">Please select at least one image or leave us your contact</string>
     <string name="error_not_enough_service">Please select at least one service</string>
     <string name="error_not_enough_staff">Please select at least one staff</string>
     <string name="error_blank_date_time">Please select date and time</string>
@@ -58,7 +63,7 @@
     <string name="error_blank_password_vn">Mật khẩu không được để trống</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_reject">Reject</string>
-    <string name="btn_customer_check_in">Client Check-in</string>
+    <string name="btn_customer_check_in">Client Walk-in</string>
     <string name="btn_add_new_appointment">Add New Appointment</string>
     <string name="btn_add_appointment">Add Appointment</string>
     <string name="btn_staff_list">Staff List</string>
@@ -69,6 +74,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="enter_your_email">Enter your Email</string>
+    <string name="enter_your_email_optional">Enter your Email (Optional)</string>
     <string name="email_receive_feedback_description">MANAGE THE EMAIL THAT RECEIVE FEEDBACK FROM CUSTOMER</string>
     <string name="email">Email</string>
     <string name="show">Show</string>
@@ -78,10 +84,12 @@
     <string name="btn_check_in">Check in</string>
     <string name="btn_check_out">Check out</string>
     <string name="btn_edit">Edit</string>
+    <string name="btn_edit_1">Edit</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_order_list">Order List</string>
     <string name="btn_active">Active</string>
     <string name="btn_update">Update</string>
+    <string name="btn_update_2">Update</string>
     <string name="btn_submit">Submit</string>
     <string name="btn_submit_vn">Hoàn Tất</string>
     <string name="btn_inactive">Inactive</string>
@@ -106,7 +114,14 @@
     <string name="btn_delete_appointment">Delete Appointment</string>
     <string name="btn_service">Start Service</string>
     <string name="booking_list">Booking List</string>
-    <string name="message_start_service_success">Start service success!</string>
+    <string name="hide_recruitment">Hide post</string>
+    <string name="delete_recruitment">Delete post</string>
+    <string name="success_delete_recruitment">Delete post successfully!</string>
+    <string name="success_hide_recruitment">Hide post successfully!</string>
+    <string name="success_show_recruitment">Public post successfully!</string>
+    <string name="show_recruitment">Public post</string>
+    <string name="create_appointment">Create Appointment</string>
+    <string name="message_start_service_success">Start service successfully!</string>
     <string name="your_email">Your Email</string>
     <string name="sample_gmail_com">sample@gmail.com</string>
     <string name="edit">Edit</string>
@@ -129,6 +144,7 @@
     <string name="time">Time</string>
     <string name="rating">Rating</string>
     <string name="view_detail">View detail</string>
+    <string name="view_detail_under_line"><u>View detail</u></string>
     <string name="close">Close</string>
     <string name="service_name">Service Name</string>
     <string name="service_name_1">Service name</string>
@@ -164,6 +180,8 @@
     <string name="you_want_to_say_something">Write down your note</string>
     <string name="appointment_s_note">Appointment Note</string>
     <string name="search_by_booking_id">Search by booking id</string>
+    <string name="search_by_zipcode">Search by name</string>
+    <string name="search_in_list_recruitment"><font size="10">Search by title, city, state</font></string>
     <string name="to_date_must_be_greater_or_equal_than_from_date">(*) To date must be greater or equal than From date</string>
     <string name="client_name">Client Name</string>
     <string name="something_else_note">Something else (note)</string>
@@ -174,6 +192,7 @@
     <string name="local_time">Local time</string>
     <string name="salon_name">Salon name</string>
     <string name="enter_salon_name">Enter salon name</string>
+    <string name="enter_owner_name">Enter your name</string>
     <string name="enter_salon_phone_number">Enter salon phone number</string>
     <string name="address">Address</string>
     <string name="enter_salon_address">Enter salon address</string>
@@ -182,6 +201,7 @@
     <string name="forgot_password">Forgot Password ?</string>
     <string name="dont_have_account">Don\'t have account?</string>
     <string name="click_here"><u>Click Here</u></string>
+    <string name="click_here_3">Click Here</string>
     <string name="click_here_1"><u>Click Here</u></string>
     <string name="sign_up_here"><u>Sign Up Here</u></string>
     <string name="enter_your_registered_phone_number_to_reset_password">Enter your registered phone number to reset password:</string>
@@ -193,6 +213,7 @@
     <string name="btn_to_login">To Login</string>
     <string name="description">Description (Enter your salon information)</string>
     <string name="description_1">Description</string>
+    <string name="description_2">Candidate details</string>
     <string name="time_zone">Time Zone</string>
     <string name="message_end_time_greather_than_start_time">The end time must be greater than the start time</string>
     <string name="message_end_time_greather_than_start_time_2">The end time must be greater than the start time</string>
@@ -202,36 +223,40 @@
     <string name="auth_otp_resend">Resend verification code</string>
     <string name="auth_otp_sending">Resending verification code</string>
     <string name="tittle_exit_update_salon">Update Salon Information</string>
+    <string name="tittle_exit_update_recruitment">Recruitment Information</string>
     <string name="tittle_exit_update_service">Update Service Information</string>
     <string name="tittle_exit_update_staff">Update Staff Information</string>
     <string name="tittle_exit_update_customer">Update Customer Information</string>
     <string name="tittle_exit_update_email">Update Email Information</string>
     <string name="message_exit">All the data you entered will not be saved. Are you sure you want to exit?</string>
     <string name="title_new_version_update">Update New Version</string>
-    <string name="text_pls_new_version_update">123 Best Solution updated to the new version. Please update the version for a better app experience. Thank you!!</string>
+    <string name="text_pls_new_version_update">123 Viet Nails just updated their version ( ver %s ). Please update to the most recent version to continue using the app. We appreciate your assistance!</string>
     <string name="birthday">Birthday</string>
     <string name="auth_msg_deleted_account">Login session expired. Please login again.</string>
     <string name="account_information">Account Information</string>
     <string name="sign_up">Sign Up</string>
-    <string name="salon_information">Salon Information</string>
+    <string name="salon_information">Provide your salon information</string>
+    <string name="salon_information_2">Information about recruitment and salon</string>
     <string name="salon_spa_name">Spa/Salon name</string>
     <string name="spa_salon_address">Address</string>
     <string name="contact_phone_number">Contact phone number</string>
     <string name="login_phone_number">Login phone number</string>
-    <string name="introduction">Introduction</string>
+    <string name="introduction">Enter your Salon\'s description</string>
     <string name="type_price">Type price</string>
     <string name="add">Add</string>
+    <string name="add_2">+ Add</string>
     <string name="type_phone_number">Type phone number</string>
     <string name="add_staff_for_salon">Add Staff For Salon</string>
     <string name="add_service_for_salon">Add Service For Salon</string>
-    <string name="title_signup_success">Sign Up Success! Please wait for administrator approval.</string>
+    <string name="title_signup_success">Sign Up successfully! Please wait for administrator approval.</string>
     <string name="content_sign_up_success_1">Once your account is approved, we’ll notify you via the app</string>
-    <string name="content_sign_up_success">During the review period, you can still log in to edit salon information, add services and add staff, and receive approval notifications from the admin. However, your salon will not appear in the list of 123 best solutions that customers can see, and will not receive bookings from customers.</string>
+    <string name="content_sign_up_success">During the review period, you can still log in to edit salon information, add services and add staff, and receive approval notifications from the admin. However, your salon will not appear in the list of 123 Viet Nails that customers can see, and will not receive bookings from customers.</string>
     <string name="salon_not_approve">(Salon has not been approved)</string>
     <string name="logout">Logout</string>
     <string name="join_date">Joined date: </string>
     <string name="start">START TO EXPLORE</string>
     <string name="skip">SKIP</string>
+    <string name="go_now">Go now</string>
     <string name="skip_1">Skip</string>
     <string name="staff_list_today">Staff List Today</string>
     <string name="add_image">Add Image</string>
@@ -263,7 +288,7 @@
     <string name="label_address_optional">Address (Optional)</string>
     <string name="profile_des_address">Please give us an address so we can send you a promotion and gift.</string>
     <string name="btn_back">Back</string>
-    <string name="title_booking_accepted">Your booking has been accepted!</string>
+    <string name="title_booking_accepted">Your booking has been confirmed!</string>
     <string name="text_notify_upcoming">Please come to the salon for service. Thank you!</string>
     <string name="title_booking_cancelled">Your booking has been cancelled!</string>
     <string name="title_booking_new_service_from">You have just received a new service appointment from %s</string>
@@ -284,6 +309,7 @@
     <string name="tips_booking">Please make an appointment 30 minutes after the current time so that we are ready to serve you.</string>
     <string name="btn_next">Next</string>
     <string name="btn_next_1">Next / Tiếp tục</string>
+    <string name="btn_next_2">Skip this step</string>
     <string name="label_auth_to_booking">Sign in or Sign up to create appointment</string>
     <string name="btn_change_salon">Change Salon</string>
     <string name="btn_logout">Logout</string>
@@ -297,6 +323,7 @@
     <string name="hint_enter_birthday_optional">Enter Birthday (Optional)</string>
     <string name="hint_enter_your_address_optional">Enter your Address (Optional)</string>
     <string name="hint_enter_your_email_optional_1">Enter Email (Optional)</string>
+    <string name="hint_enter_your_email_or_phone">Enter your Email or Phone number (Optional)</string>
     <string name="hint_enter_your_address_optional_1">Enter Address (Optional)</string>
     <string name="msg_no_data">No Data</string>
     <string name="title_appointment">Appointments</string>
@@ -357,6 +384,7 @@
     <string name="error_blank_voucher_code">Please enter a voucher code</string>
     <string name="error_image_empty">No images</string>
     <string name="label_total">Total</string>
+    <string name="init_price">Initial estimated price</string>
     <string name="hint_voucher_code">Voucher code</string>
     <string name="label_voucher_discount">Voucher Discount</string>
     <string name="label_add_photo">Add Photo</string>
@@ -383,7 +411,7 @@
     <string name="your_salon_is_waiting_for_approval">(Your salon is waiting for approval)</string>
     <string name="voucher_information">Voucher Information</string>
     <string name="salon_voucher">Salon voucher</string>
-    <string name="empty_voucher">No information, click “Update” to add voucher.</string>
+    <string name="empty_voucher">No information, click “Edit” to add voucher.</string>
     <string name="code">CODE: </string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
@@ -410,7 +438,7 @@
     <string name="english1">English / Tiếng Anh</string>
     <string name="version_format">Version %s</string>
     <string name="appointment_list">Appointment List</string>
-    <string name="customer_check_in">Customer Check-in</string>
+    <string name="customer_check_in">Customer Walk-in</string>
     <string name="welcome_account">Welcome, %s</string>
     <string name="update_success">Update Successfully</string>
     <string name="staff_not_have_attendance">This staff doesn\'t have any attendance records yet</string>
@@ -430,19 +458,20 @@
     <string name="change_email_success">Email changed successfully!</string>
     <string name="success">Success!</string>
     <string name="no_information">No Information</string>
+    <string name="no_information_en">No Information</string>
     <string name="update_customer_success">Update customer information success</string>
     <string name="client_check_in_success">Client check-in success</string>
     <string name="not_require_field">(Optional, you can add later)</string>
-    <string name="not_require_email">(Optional, email used to receive notifications from 123 best solutions and customer feedback)</string>
-    <string name="salon_images_des">Salon image (salon space, signboard, menu, ...)</string>
-    <string name="sign_up_des">After registering, you need to wait for 123 Best Solutions to check Salon information. Approval time within 8 hours.</string>
+    <string name="not_require_email">Email used to receive notifications from 123 Viet Nails and customer feedback</string>
+    <string name="salon_images_des">Please provide photos of the salon (maximum 20 photos)</string>
+    <string name="sign_up_des">After registering, you need to wait for 123 Viet Nails to check Salon information. Approval time within 8 hours.</string>
     <string name="not_filled_in_yet">Not setting yet</string>
-    <string name="test_link">If you don\'t have time to add each service and each mechanic. 123 Best Solution will add for you, you just need to provide image of the list of workers and shop\'s service menu</string>
+    <string name="test_link">If you don\'t have time to add each service and each mechanic. 123 Viet Nails will add for you, you just need to provide image of the list of workers and shop\'s service menu</string>
     <string name="image">Image</string>
     <string name="error_full_name_blank">Full name should not be blank</string>
     <string name="copy_day_title">Choose business hours for all days</string>
     <string name="set_up">Set up</string>
-    <string name="choose_time">Choose time</string>
+    <string name="choose_time">Choose date time you want to copy</string>
     <string name="choose_dates_to_apply">Choose dates to apply</string>
     <string name="label_booking_id">Booking ID</string>
     <string name="label_salon_name">Salon Name</string>
@@ -454,23 +483,25 @@
     <string name="success_read_all_notification">Read all notifications successfully!</string>
     <string name="success_redirect_owner">Redirect To Owner Function Successfully!</string>
     <string name="vietnamese_1">Tiếng Việt</string>
-    <string name="success_remind_customer">Remind customer success!</string>
-    <string name="success_start_service">Start service success!</string>
-    <string name="success_reject_appointment">Reject appointment success!</string>
-    <string name="success_accept_appointment">Accept appointment success!</string>
-    <string name="success_remove_appointment">Remove appointment success!</string>
-    <string name="success_cancel_appointment">Cancel appointment success!</string>
-    <string name="success_finish_appointment">Finish appointment success!</string>
-    <string name="success_update_appointment">Update appointment success!</string>
-    <string name="success_create_appointment">Create appointment for customer success!</string>
-    <string name="success_add_voucher">Add voucher success!</string>
+    <string name="success_remind_customer">Remind customer successfully!</string>
+    <string name="success_start_service">Start service successfully!</string>
+    <string name="success_reject_appointment">Reject appointment successfully!</string>
+    <string name="success_accept_appointment">Accept appointment successfully!</string>
+    <string name="success_remove_appointment">Remove appointment successfully!</string>
+    <string name="success_cancel_appointment">Cancel appointment successfully!</string>
+    <string name="success_finish_appointment">Finish appointment successfully!</string>
+    <string name="success_update_appointment">Update appointment successfully!</string>
+    <string name="success_create_appointment">Create appointment for customer successfully!</string>
+    <string name="success_add_voucher">Add voucher successfully!</string>
     <string name="to_register_your_salon">TO REGISTER YOUR NEW SALON</string>
     <string name="notice">Notice</string>
     <string name="change_time_zone">Your timezone has changed from %s to %s Please check your business hour before saving information!</string>
+    <string name="change_time_zone_2">Your salon is in the time zone %s based on your Salon Address.\nPlease check your business hour before saving information!</string>
     <string name="tra_phi">Pay %s$</string>
     <string name="free_sign_up">Free</string>
     <string name="sign_up_des_1">The shop owner manually adds the shop\'s service and staff information</string>
     <string name="button_add_menu">Add service and staff photos</string>
+    <string name="button_add_salon_photo">Add your salon photos</string>
     <string name="salon_not_have_service">Your salon doesn\'t have any services yet</string>
     <string name="salon_not_have_report">Your salon doesn\'t have any reports yet</string>
     <string name="salon_not_have_customer">Your salon doesn\'t have any customer yet</string>
@@ -492,6 +523,255 @@
     <string name="error_price_not_greater_than_0">Price must greater than 0</string>
     <string name="content_noty_salon_not_approve_check_in">Salon has not been approved so cannot use this feature. Please wait until the salon is approved.</string>
     <string name="notification">Notification</string>
+    <string name="step_1_option_1">If you do not have time to register or do not know how to register, please click here to send a picture of your "Business card", our customer service representative will contact you to help you register quickly</string>
+    <string name="sign_up_support">Please send us your business card (if you do not have it, please let us know your email or phone number, a staff member will contact you to support and register to help you quickly.</string>
+    <string name="sign_up_support_2">If you do not have a business card, please leave your phone number or email so we can contact you.</string>
+    <string name="sign_up_support_1">Add your business card images</string>
+    <string name="step_1_option_2">Take 5 minutes to register yourself in just <font color="#BC40C1">5 easy steps</font> by</string>
+    <string name="button_support">Click here to let us help you</string>
+    <string name="or">Or</string>
+    <string name="click_here_2">Click here to sign up</string>
+    <string name="step_1_sign_up">Create Login\nInformation</string>
+    <string name="step_2_sign_up">Add Salon\nInformation</string>
+    <string name="step_3_sign_up">Add Detail\nInformation (more)</string>
+    <string name="step_4_sign_up">Add Business\nHours</string>
+    <string name="step_5_sign_up">Add Services And\nStaff</string>
+    <string name="title_step_general">Easy sign up with only <font color="#BC40C1">5 steps</font></string>
+    <string name="step_1_title">Create login information</string>
+    <string name="step_3_title">Provide more information of the salon</string>
+    <string name="step_4_title">Provide salon business hour</string>
+    <string name="step_3_des">If there is no input time, you can press the skip button and add later</string>
+    <string name="step_3_des_2">Please provide a description of the salon</string>
+    <string name="step_3_des_3">The more detailed the description, the more information customers will have about your salon and the easier it will be for customers to book services at your salon.</string>
+    <string name="step_3_des_4">Adding more pictures helps the salon become more attractive to attract more customers to order services at the salon.</string>
+    <string name="step_4_des">The salon owner needs to provide the salon business hour for customers to consult and book an appointment.</string>
+    <string name="step_5_title">Provide service and worker information</string>
+    <string name="step_5_des">Salon owners need to provide information about available services and worker information for customers to consult and order salon services.</string>
+    <string name="step_5_des_2">You can add your own by \n<u><font color="#BC40C1">clicking here</font></u></string>
+    <string name="step_5_des_3">To add a service please enter the service name, enter the price ($), select the service image and press the add button.</string>
+    <string name="step_5_des_4">To add a staff, please enter the staff name, enter the phone number, select the staff photo and press the add button.</string>
+    <string name="staff_notice_1">Staffs need to check-in before the Salon can receive service orders and serve customers</string>
+    <string name="staff_notice_2">Staffs can check-in during the salon\'s operating hours</string>
+    <string name="staff_notice_3">Staffs will automatically check-out when the salon\'s operating hours are over</string>
+    <string name="contact_des">If you have any questions or would like assistance don\’t hesitate to get in touch with us for help</string>
+    <string name="hotline">Hotline</string>
+    <string name="support">support</string>
+    <string name="button_complete_sign_up">Submit</string>
+    <string name="button_complete_sign_up_sp">Submit a request for registration support</string>
+    <string name="button_back">Back</string>
+    <string name="step_5_des_5">Click to select photo</string>
+    <string name="select_service_image">Click to select service photo</string>
+    <string name="select_staff_image">Click to select staff avatar</string>
+    <string name="upload_business_card">Click here to upload your business card</string>
+    <string name="service_name_type">Enter service name (example: Full set)</string>
+    <string name="enter_price">Enter price</string>
+    <string name="enter_staff_name">Enter staff name</string>
+    <string name="support_signup_success">Thank you for submitting your registration request, our staff will contact you to assist you with registration as soon as possible.</string>
+    <string name="copy">Copy to other day</string>
+    <string name="step5_manually_method"><i><font color="#7C7C7C">Now you can add service and staff manually</font></i></string>
+    <string name="search">Search</string>
+    <string name="developed_by">Developed by</string>
+    <string name="add_new_customer">Add New Customer</string>
+    <string name="create_new_customer">Create New Customer</string>
+    <string name="btn_cancel_apm">Cancel</string>
+    <string name="btn_navigate_login">to navigate immediately</string>
+    <string name="des_1">Automatically redirect to customer login page in</string>
+    <string name="des_search_worker">List of job seekers</string>
+    <string name="finish_apm">Additional services ( if any )</string>
+    <string name="my_recruitment_ads">My recruitment ads</string>
+    <string name="text_title_job_time">Choose working time</string>
+    <string name="part_time">Part time</string>
+    <string name="full_time">Full time</string>
+    <string name="textWeeks1">Weeks</string>
+    <string name="text_input_week_amount">Enter the number of weeks</string>
+    <string name="text_input_year_amount"><font size="10">Enter the number of years</font></string>
+    <string name="choose_position">Choose position</string>
+    <string name="manager">Manager</string>
+    <string name="main_manicurist">Master</string>
+    <string name="assistant_manicurist">Assistant manicurist</string>
+    <string name="average_income">Average income</string>
+    <string name="average_income_1">Average income</string>
+    <string name="hint_choose_salary">Enter salary</string>
+    <string name="per_week">/ Week</string>
+    <string name="other_positions">Other positions</string>
+    <string name="text_content_ads">Ads content</string>
+    <string name="hint_content_ads">In addition to the above information, owners can enter other requirements, such as: "The shop needs to recruit talented, honest, hardworking, can OT, .."</string>
+    <string name="text_title_ads">Advertising title</string>
+    <string name="hint_title_ads"><font size="10">Ex: Newly opened shop, urgently need workers</font></string>
+    <string name="hint_experience">Enter experience</string>
+    <string name="text_add_image">Add images</string>
+    <string name="post_recruitment_ads">Post recruitment ads</string>
+    <string name="text_loading">Loading…</string>
+    <string name="text_new">New</string>
+    <string name="text_detail"><u>Details</u></string>
+    <string name="status_boi_unpaid">Unpaid</string>
+    <string name="error_pls_type_week">Please enter number of week!</string>
+    <string name="error_type_week_greater_than_0">Please type week greater than 0!</string>
+    <string name="error_pls_select_job_position">Please select job position!</string>
+    <string name="error_pls_type_price">Please enter price!</string>
+    <string name="error_pls_type_exist">Please enter number of years!</string>
+    <string name="error_type_price_greater_than_0">Please type price greater than 0!</string>
+    <string name="error_pls_advertising_title">Please enter recruitment title!</string>
+    <string name="error_pls_advertising_content">Please enter recruitment content!</string>
+    <string name="success_create_recruitment">Create recruitment successfully!</string>
+    <string name="success_update_recruitment">Update recruitment successfully!</string>
+    <string name="staff_infor">RECRUITMENT INFORMATION</string>
+    <string name="salary">Salary</string>
+    <string name="working_time">Working time</string>
+    <string name="position">Position</string>
+    <string name="salary_format">$%s/Week</string>
+    <string name="negotiate_salary">Negotiate later</string>
+    <string name="working_time_format">Part time ( %d Week )</string>
+    <string name="working_time_format_2">Part time ( %d Weeks )</string>
+    <string name="format_gender_male">Gender: Male</string>
+    <string name="format_gender_female">Gender: Female</string>
+    <string name="format_gender_other">Gender: Other</string>
+    <string name="experience">Experience: </string>
+    <string name="experience_1">Experience</string>
+    <string name="curriculum_vitae">Curriculum vitae</string>
+    <string name="working_area">Workplace</string>
+    <string name="gender">Gender</string>
+    <string name="desired_salary">Desired salary</string>
+    <string name="public_1">Public</string>
+    <string name="public_2">Public the post</string>
+    <string name="unpublic">Unpublic</string>
+    <string name="unpublic_2">Unpublic the post</string>
+    <string name="choose_gender">Choose gender</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_all">All</string>
+    <string name="gender_all_2">Both male and female</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_other">Other</string>
+    <string name="choose_salary">Choose salary</string>
+    <string name="choose_salary_1">From 0$ to 1000$</string>
+    <string name="choose_salary_2">From 1000$ to 5000$</string>
+    <string name="choose_salary_3">Over 5000$</string>
+    <string name="choose_salary_4">Over 10000$</string>
+    <string name="choose_experience">Choose experience</string>
+    <string name="choose_experience_1">From 0 to 1 year</string>
+    <string name="choose_experience_2">Over 2 years</string>
+    <string name="choose_experience_3">Over 5 years</string>
+    <string name="format_experience">%s year</string>
+    <string name="format_experience_en">%s year</string>
+    <string name="format_experience_2">+ %s year</string>
+    <string name="format_experience_plural">%s years</string>
+    <string name="format_experience_plural_1">%s years</string>
+    <string name="no_experience">No experience</string>
+    <string name="no_experience_en">No experience</string>
+    <string name="format_experience_plural_2">+ %s years</string>
+    <string name="distance_format_1">%s miles</string>
+    <string name="des_find_1">Choose from available customers</string>
+    <string name="free"><u>FREE</u></string>
+    <string name="salon_sender_format">
+        123VietNails - Application for booking nail appointments online\n
+        --- SALON INFORMATION ---\n\n
+        Salon Name: %s.\n
+        Address: %s.\n
+        Phone number: %s.\n
+        Description: %s.\n
+        Reserve your spot for a nail session now by clicking on this link!:\n
+        %s\n\n
+        Furthermore, the applications presents numerous trendy nail spas located in the United States for your consultation and reservation.
+    </string>
+    <string name="recruitment_sender_format">
+        123VietNails - A platform that facilities job connections between nail technicians and nail salon proprietors\n
+        --- RECRUITMENT INFORMATION ---\n\n
+        Salon Name: %s.\n
+        Title: %s.\n
+        Description: %s.\n
+        Salary: %s.\n
+        Workplace: %s.\n
+        Please click on the link provided to access the details of job.\n
+        %s\n\n
+        Furthermore, there are numerous exciting opportunities available for nail professionals like you.
+    </string>
+    <string name="job_profile_sender_format">
+        123VietNails - A platform that facilities job connections between nail technicians and nail salon proprietors\n
+        --- CANDIDATE\'s JOB PROFILE ---\n\n
+        Name: %s.\n
+        Experience: %s.\n
+        Skill Set: %s.\n
+        Description: %s.\n
+        Additional details can be accessed by clicking on this link:\n
+        %s\n\n
+        Moreover, the applications provides more than one manicurist your salon maybe looking for.
+    </string>
+    <string name="des_3">Leave the amount blank if you want to negotiate later</string>
+    <string name="title_delete_post">Delete post</string>
+    <string name="message_delete_post">Are you sure you want to delete this recruitment ?</string>
+    <string name="empty_data_recruitment">You haven\'t post any recruitment yet!</string>
+    <string name="btn_call">Call</string>
+    <string name="btn_sms">Sms</string>
+    <string name="enter_experience_optional">Enter experience (optional)</string>
+    <string name="year">Year</string>
+    <string name="not_required">Not required</string>
+    <string name="notice_title">Maximum input up to 100 characters</string>
+    <string name="notice_content">Optional, maximum input up to 1000 characters</string>
+    <string name="notice_week_part_time">Maximum input up to 52 weeks</string>
+    <string name="notice_add_image">Optional, up to 5 pictures</string>
+    <string name="per_week_1"> / week</string>
+    <string name="per_week_en"> / week</string>
+    <string name="per_month"> / month</string>
+    <string name="per_month_en"> / month</string>
+    <string name="per_year"> / year</string>
+    <string name="per_year_en"> / year</string>
+    <string name="salon_address">Salon address</string>
+    <string name="salon_phone">Salon phone</string>
+    <string name="owner_phone">Owner phone</string>
+    <string name="create_recruitment_des1">Your are looking forward to …</string>
+    <string name="create_recruitment_des2">1. Finding staffs conveniently and quickly</string>
+    <string name="create_recruitment_des3">2. Finding staffs who meet your criteria</string>
+    <string name="create_recruitment_des4">3. Accessing to a large number of job seekers at the same time</string>
+    <string name="create_recruitment_des5">Let\'s build your first recruitment for us can help you connect to job seekers</string>
+    <string name="so">so</string>
+    <string name="nails_job">Create your recruitment to access job seekers immediately</string>
+    <string name="nails_job_des_1">The recruitment will be visible to everyone after posting, you can share it or hide it if you want</string>
+    <string name="city_and_state_of_residence">City and State of Residence</string>
+    <string name="ethnicity_customer">Which ethnicity are the customers?</string>
+    <string name="hint_enter_salary">Enter price</string>
+    <string name="payroll_method">Salary form</string>
+    <string name="full_salary">Full pay</string>
+    <string name="split46">Percent\nsplit 6/4</string>
+    <string name="negotiate">Negotiation</string>
+    <string name="shuttle_worker">Is there a service of transporting staff?</string>
+    <string name="relocate_worker">Is there housing available for out-of-state workers?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="skillset_title">Recruiting workers with the following work experience</string>
+    <string name="add_skillset">Enter skill set</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="error_blank_add_skill_set">Skill set should not be blank</string>
+    <string name="shop_exist">How long has the Salon been established?</string>
+    <string name="skin_white">White</string>
+    <string name="skin_black">Black</string>
+    <string name="skin_xi">Spanish</string>
+    <string name="skin_all">All</string>
+    <string name="operation">Establishment</string>
+    <string name="service_of_transporting_staff">Service of transporting staff</string>
+    <string name="housing_for_worker">Housing for out-of-state workers</string>
+    <string name="detail_recruitment_des_1">Looking for a worker with the following skills</string>
+    <string name="contact_phone">Contact number</string>
+    <string name="customer_classification">Customer classification</string>
+    <string name="able_to_work_out_of_sate">Able to work out-of-sate</string>
+    <string name="error_blank_state">State should be selected</string>
+    <string name="error_blank_city">City should be selected</string>
+    <string name="error_choose_customer_skin">You should choose ethnicity of guest</string>
+    <string name="error_choose_payroll_method">You should choose payroll method</string>
+    <string name="error_skill_at_least_1">You should add at least 1 skill</string>
+    <string name="error_choose_shuttle">You should choose payroll method</string>
+    <string name="city_state_residence">City and State of Residence</string>
+    <string name="skillset">Skill set</string>
+    <string name="willing_to_relocate">Willing to relocate</string>
+    <string name="local_position">Local Position</string>
+    <string name="create_re_1">Are you seeking a male or female employee?</string>
+    <string name="staff_gender_requirements">Staff gender requirements</string>
+    <string name="select_working_place">Select working place</string>
+    <string name="share">Share</string>
+    <string name="error_not_connect_network">There is no network connection or the connection is unreliable. Please check your network connection and retry.</string>
+    <string name="retry">Try</string>
+    <string name="noti_job_profile_not_available">Sorry! This resume does not exist or has been hidden.</string>
+    <string name="noti_please_login">Please login to see this content. If you don\'t already have an account, create one now to take advantage of many of our free services. The signup process is quick and easy.</string>
 </resources>
 
 

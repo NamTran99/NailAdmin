@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_10"
+    android:paddingVertical="@dimen/size_16"
+    tools:context=".views.splash.SplashActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/size_20"
+        android:background="@drawable/bg_corner_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextViewResponsive"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_12"
+            android:layout_marginBottom="@dimen/size_20"
+            android:layout_marginHorizontal="@dimen/size_40"
+            android:text="@string/contact_des"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginVertical="@dimen/size_15"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_40"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
+                android:drawableStart="@drawable/ic_email"
+                android:text="@string/email"/>
+
+            <TextView
+                android:layout_marginStart="@dimen/size_5"
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:autoLink="email"
+                style="@style/AppTheme.TextViewResponsive"
+                android:textColor="@color/blue_40"
+                tools:text="sample@gmail.com"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            style="@style/AppTheme.Line.Horizontal"
+            android:layout_marginHorizontal="@dimen/size_40"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginVertical="@dimen/size_15"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_40"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
+                android:text="@string/hotline"
+                app:drawableStartCompat="@drawable/ic_phone_outline" />
+
+            <TextView
+                android:layout_marginStart="@dimen/size_5"
+                android:id="@+id/tvPhone"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:autoLink="phone"
+                android:gravity="end"
+                style="@style/AppTheme.TextViewResponsive"
+                android:textColor="@color/blue_40"
+                tools:text="987 321 1234"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            style="@style/AppTheme.Line.Horizontal"
+            android:layout_marginHorizontal="@dimen/size_40"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginVertical="@dimen/size_15"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_40"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
+                android:text="Fanpage"
+                app:drawableStartCompat="@drawable/ic_global" />
+
+            <TextView
+                android:layout_marginStart="@dimen/size_5"
+                android:id="@+id/tvFanpage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:autoLink="web"
+                style="@style/AppTheme.TextViewResponsive"
+                android:textColor="@color/blue_40"
+                tools:text="www.nailsbooking@gmail.com"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>

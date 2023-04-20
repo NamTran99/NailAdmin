@@ -48,7 +48,7 @@
             android:layout_height="@dimen/size_100"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:src="@drawable/ic_no_image_2" />
+            android:src="@drawable/ic_no_image" />
 
         <TextView
             style="@style/AppTheme.TextView.Medium"
@@ -58,7 +58,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="@string/no_image_found"
-            android:textColor="@color/black"
+            android:textColor="@color/gray15"
             android:textSize="@dimen/size_16" />
 
     </RelativeLayout>

@@ -5,8 +5,7 @@ import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
-import android.support.core.route.clear
-import android.support.core.route.open
+import android.support.core.route.*
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
@@ -27,10 +26,16 @@ import com.app.inails.booking.admin.repository.auth.LoginRepo
 import com.app.inails.booking.admin.utils.Utils
 import com.app.inails.booking.admin.views.main.MainActivity
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+class OptionLogin(var isEnableBackToPre: Boolean = false) : BundleArgument
 
 class LoginActivity : BaseActivity(R.layout.activity_login) {
     private val binding by viewBinding(ActivityLoginBinding::bind)
     private val viewModel by viewModel<LoginViewModel>()
+    private val argument by lazy { nullableArguments<OptionLogin>() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,22 +44,27 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
             tvResetPassword.onClick {
                 Router.open(this@LoginActivity, Routing.ResetPassword)
             }
-
             btSignUp.onClick {
-                Router.open(this@LoginActivity, Routing.SignUpAccount)
+                Router.open(this@LoginActivity, Routing.SignUpGeneral)
             }
+            btSupport.onClick {
+                Router.open(this@LoginActivity, Routing.ContactAccount)
+            }
+
             switchLan.showPopUp(R.menu.menu_language) { id ->
-                    val lan = when (id) {
-                        R.id.lanVi -> "vi"
-                        R.id.lanEn -> "en"
-                        else -> "vi"
-                    }
-
-                    setLanguage(lan)
+                val lan = when (id) {
+                    R.id.lanVi -> "vi"
+                    R.id.lanEn -> "en"
+                    else -> "vi"
                 }
+                setLanguage(lan)
+            }
 
-            switchLan.setText(if(viewModel.isVnLanguage)R.string.vietnamese_1 else R.string.english)
-            binding.tvVersion.text = Utils.getDisplayBuildConfig(this@LoginActivity, userLocalSource.getLanguageWithDefault())
+            switchLan.setText(if (viewModel.isVnLanguage) R.string.vietnamese_1 else R.string.english)
+            binding.tvVersion.text = Utils.getDisplayBuildConfig(
+                this@LoginActivity,
+                userLocalSource.getLanguageWithDefault()
+            )
         }
 
         binding.btLogin.setOnClickListener {
@@ -69,12 +79,19 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
         with(viewModel) {
             loading.bind(binding.btLogin::setEnabled) { !this }
-            loginSuccess.bind { open<MainActivity>().clear() }
+            loginSuccess.bind {
+                if (argument != null) {
+                    Log.d("TAG", "onCreate:Namtd88 login close")
+                    close()
+                } else {
+                    open<MainActivity>().clear()
+                }
+            }
         }
     }
 
     override fun onResume() {
-        binding.switchLan.setText(if(viewModel.isVnLanguage)R.string.vietnamese_1 else R.string.english)
+        binding.switchLan.setText(if (viewModel.isVnLanguage) R.string.vietnamese_1 else R.string.english)
         super.onResume()
     }
 }

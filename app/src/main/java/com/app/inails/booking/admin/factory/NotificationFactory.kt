@@ -3,7 +3,7 @@ package com.app.inails.booking.admin.factory
 import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.safe
-import com.app.inails.booking.admin.extention.toCreatedAt
+import com.app.inails.booking.admin.extention.convertFromServerToLocalTime
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.NotificationDTO
 import com.app.inails.booking.admin.model.support.ISelector
@@ -24,7 +24,7 @@ class NotificationFactory(private val textFormatter: TextFormatter) {
             override val isRead: Boolean
                 get() = notiDTO.is_read == 1
             override val createdDate: String
-                get() = notiDTO.created_at.toCreatedAt()
+                get() = notiDTO.created_at.convertFromServerToLocalTime()
             override val color: Int
                 get() = textFormatter.formatColorNotification(notiDTO.is_read)
             override val dataId: Int

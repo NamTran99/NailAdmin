@@ -2,6 +2,7 @@ package android.support.core.livedata
 
 import android.annotation.SuppressLint
 import android.support.core.event.LoadingEvent
+import android.util.Log
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.lifecycle.MutableLiveData
 
@@ -26,7 +27,11 @@ class LoadingLiveData : MutableLiveData<Boolean>(), LoadingEvent {
     @SuppressLint("RestrictedApi")
     override fun post(value: Boolean) {
         if (ArchTaskExecutor.getInstance().isMainThread)
+        {
             this.value = value
-        else postValue(value)
+        }
+        else{
+            postValue(value)
+        }
     }
 }

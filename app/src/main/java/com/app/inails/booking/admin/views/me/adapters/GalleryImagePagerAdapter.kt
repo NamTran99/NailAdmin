@@ -10,7 +10,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.databinding.ItemGalleryImageBinding
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
 
 class GalleryImagePagerAdapter(view: ViewPager2) :

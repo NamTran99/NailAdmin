@@ -19,6 +19,7 @@
     <string name="title_update_staff">Update Staff</string>
     <string name="title_business_hour">Update Business Hour</string>
     <string name="title_salon_image">Salon\'s images</string>
+    <string name="title_image">Images</string>
     <string name="title_update_salon_information">Update Salon Information</string>
     <string name="title_update_service">Update Service</string>
     <string name="title_remove_appointment">Remove Appointment</string>
@@ -41,10 +42,12 @@
     <string name="title_delete_all_selected_notifications">Delete all selected notifications</string>
     <string name="title_reset_password">Reset Password</string>
     <string name="title_sign_up">Sign Up</string>
+    <string name="title_sign_up_support">Registration support</string>
     <string name="title_service_staff">Provide service and worker information</string>
     <string name="title_account">Account</string>
     <string name="title_appointment_booking">Appointment Booking</string>
     <string name="title_report">Revenue Statistics</string>
     <string name="title_voucher_apply">Create New Voucher</string>
     <string name="title_language">Language</string>
+    <string name="title_contact">Contact</string>
 </resources>

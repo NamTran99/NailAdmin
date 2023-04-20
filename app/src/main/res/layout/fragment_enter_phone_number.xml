@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/labelWelcome"
         android:layout_centerHorizontal="true"
-        style="@style/AppTheme.TextView.Medium"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_marginTop="@dimen/size_5"
         android:text="@string/app_name"
         android:textColor="@color/white"

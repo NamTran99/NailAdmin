@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#BC40C1</color>
     <color name="colorAccent">#d559da</color>
     <color name="colorAccent1">#4768F2</color>
+    <color name="green_100">#65DA8E</color>
 
     <!--GRAY-->
-
     <color name="gray">#CFCFCF</color>
     <color name="gray20">#A0A0A0</color>
     <color name="gray01">#BABABA</color>
@@ -29,6 +29,7 @@
     <color name="gray17">#D0D0D0</color>
     <color name="gray18">#BEBEBE</color>
     <color name="gray19">#BCBCBC</color>
+    <color name="line_divider">#CECECE</color>
 
     <!--ORANGE-->
     <color name="orange">#EFA860</color>
@@ -113,7 +114,7 @@
     <color name="gray_188">#BCBCBC</color>
     <color name="gray_08">#777777</color>
     <color name="color_f5f5f5">#F5F5F5</color>
-    <color name="color_7c7c7c">#7C7C7C</color>
+    <color name="hint_text_color">#7C7C7C</color>
     <color name="color_f5e2f6">#F5E2F6</color>
 
 </resources>

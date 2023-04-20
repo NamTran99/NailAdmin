@@ -6,27 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/gray07"
         android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@id/topBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <View
+            android:id="@id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/topBar"
+            android:background="#EDEBEB" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@id/navHostFragment"
             android:name="android.support.navigation.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/topBar"
-            android:background="@color/color_bg_common"
+            android:layout_below="@+id/divider"
             android:paddingHorizontal="@dimen/size_10"
-            android:paddingTop="@dimen/size_10"
            />
-
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/lvCor"
@@ -69,11 +72,11 @@
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
                 android:lines="2"
-                android:textAllCaps="false"
-                android:fontFamily="@font/montserrat_medium"
                 android:text="@string/customer_check_in"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:theme="@style/AppTheme"
                 app:layout_anchor="@id/bottomAppBar"

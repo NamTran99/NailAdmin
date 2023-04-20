@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lvScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/bg_corner_white"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_15"
+        android:paddingVertical="@dimen/size_16">
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_BE43C3"
+            android:layout_gravity="center"
+            android:text="@string/step_4_title"
+            android:textSize="@dimen/text_size_16" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive.Hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:textStyle="normal"
+            android:text="@string/step_4_des"
+            android:textColor="@color/hint_text_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/bg_white_radius"
+            android:orientation="vertical"
+         >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_white_radius"
+                android:orientation="vertical"
+               >
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_zone" />
+
+                    <TextView
+                        android:id="@+id/tvTimeZone"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:layout_marginStart="@dimen/size_5"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        tools:text="Viet nam" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSchedule"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_edit_salon_schedule" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBack"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_ebebeb_corner"
+                android:drawableStart="@drawable/ic_back"
+                android:textColor="@color/black"
+                android:drawablePadding="@dimen/size_3"
+                android:drawableTint="@color/black"
+                android:text="@string/button_back"
+                android:textSize="@dimen/text_size_12" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinue"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/size_20"
+                android:background="@drawable/button_primary_corner_10"
+                android:drawableEnd="@drawable/ic_arrow_right_1"
+                android:drawableTint="@color/white"
+                android:text="@string/btn_next"
+                android:textSize="@dimen/text_size_12" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/btSkip"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_15"
+            android:layout_marginEnd="@dimen/size_10"
+            android:drawablePadding="@dimen/size_10"
+            android:gravity="center"
+            android:text="@string/btn_next_2"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/gray15"
+            android:drawableStart="@drawable/ic_close_2"
+            android:drawableTint="@color/gray15"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

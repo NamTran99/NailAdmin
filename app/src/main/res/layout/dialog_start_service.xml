@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <View style="@style/AppTheme.Line.Horizontal" />
+            <View style="@style/AppTheme.Line.Horizontal"
+                android:layout_height="@dimen/size_4"/>
 
             <TextView
                 style="@style/AppTheme.TextView.Medium"
@@ -48,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
+                android:layout_marginHorizontal="@dimen/size_5"
                 android:orientation="vertical"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -59,10 +61,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <View
-                    style="@style/AppTheme.Line.Horizontal"
-                    android:layout_marginTop="@dimen/size_13" />
 
                 <TextView
                     style="@style/AppTheme.TextView.Medium"
@@ -87,10 +85,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/durationLayout"
                 android:orientation="vertical">
-
-                <View
-                    style="@style/AppTheme.Line.Horizontal"
-                    android:layout_marginTop="@dimen/size_13" />
 
                 <TextView
                     style="@style/AppTheme.TextView.Medium"

@@ -8,9 +8,11 @@ import android.support.persistent.cache.GsonCaching
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.helper.ShareIOScope
 import com.app.inails.booking.admin.model.response.SalonDTO
+import com.app.inails.booking.admin.model.response.StateDTO
 import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
 import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
+import com.app.inails.booking.admin.model.ui.IState
 import com.bumptech.glide.Glide.init
 import com.esafirm.imagepicker.helper.LocaleManager
 import kotlinx.coroutines.launch
@@ -41,6 +43,19 @@ class UserLocalSource(
         }
     }
 
+    private var listState: List<IState>? by caching.reference(StateDTO::class.java.name)
+
+
+
+    fun isExistListState(): Boolean{
+        return !listState.isNullOrEmpty()
+    }
+
+    fun getListStateLocal(): List<IState>? {
+        return listState
+    }
+
+
     fun setOwnerMode(isOwner: Boolean) {
         isOwnerMode = isOwner
     }
@@ -60,8 +75,8 @@ class UserLocalSource(
         return userClient?.token ?: this.user?.token
     }
 
-    fun getSalonID(): Int? {
-        return this.user?.admin?.salon_id
+    fun getSalonID(): Int {
+        return this.user?.admin?.salon_id?: 0
     }
 
     fun isLogin() = this.user != null

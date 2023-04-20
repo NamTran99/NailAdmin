@@ -2,14 +2,19 @@ package com.app.inails.booking.admin.views.me.adapters
 
 import android.support.core.view.bindingOf
 import android.view.ViewGroup
+import androidx.databinding.adapters.CalendarViewBindingAdapter.setDate
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemEditSalonScheduleBinding
+import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 import com.google.android.youtube.player.internal.i
 
 class SalonEditScheduleAdapter(view: RecyclerView, private val isTextWhite: Boolean = false) :
     SimpleRecyclerAdapter<ISchedule, ItemEditSalonScheduleBinding>(view) {
+
+    var onItemCopyClick: (ISchedule)-> Unit = {}
 
     override fun onCreateBinding(parent: ViewGroup): ItemEditSalonScheduleBinding {
         return parent.bindingOf(ItemEditSalonScheduleBinding::inflate)
@@ -21,15 +26,22 @@ class SalonEditScheduleAdapter(view: RecyclerView, private val isTextWhite: Bool
         adapterPosition: Int
     ) {
         binding.apply {
-            businessHour.setUpView()
-            businessHour.setupListener()
-            businessHour.setOnTimeChange {
-                items?.set(adapterPosition, it)
-//                notifyItemChanged(adapterPosition)
+            businessHour.apply {
+                setUpView()
+                setupListener()
+//                isOpenListener = {
+//                    btCopy.show(it)
+//                }
+                setOnTimeChange {
+                    items?.set(adapterPosition, it)
+                    btCopy.show(it.startTime != null && it.endTime != null)
+                }
+                setDate(item.day)
+                setTime(item.startTime, item.endTime)
             }
-            businessHour.setDate(item.day)
-            businessHour.setTime(item.startTime, item.endTime)
-
+            btCopy.onClick{
+                onItemCopyClick.invoke(items!![adapterPosition])
+            }
         }
     }
 

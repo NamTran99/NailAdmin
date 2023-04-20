@@ -1,0 +1,49 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etName"
+        style="@style/AppTheme.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/service_name_type"
+        android:minHeight="@dimen/size_50" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/size_10"
+        app:layout_constraintTop_toBottomOf="@+id/etName">
+
+        <EditText
+            android:id="@+id/etPrice"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_dollar"
+            android:hint="@string/enter_price"
+            android:inputType="numberSigned"
+            android:minHeight="@dimen/size_50" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btAdd"
+            style="@style/AppTheme.Button.Responsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:background="@drawable/button_primary_stroke_corner_5"
+            android:elevation="@dimen/size_5"
+            android:minWidth="@dimen/size_50"
+            android:text="@string/add"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

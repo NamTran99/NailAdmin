@@ -11,7 +11,7 @@ import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.views.extension.LocalImage
-import com.app.inails.booking.admin.views.management.service.adapters.AppImagesAdapter
+import com.app.inails.booking.admin.views.base.AppImagesAdapter
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 
 class AppointmentAdapter(view: RecyclerView) :
@@ -47,7 +47,7 @@ class AppointmentAdapter(view: RecyclerView) :
             imageAdapter = AppImagesAdapter(rcFeedbackImage).apply {
                 submit(item.feedbackImages)
                 onItemImageClick = {
-                    this@AppointmentAdapter.onItemImageClick.invoke(item.feedbackImages.map{LocalImage(it.path)}, it)
+                    this@AppointmentAdapter.onItemImageClick.invoke(item.feedbackImages.map{LocalImage(it.image)}, it)
                 }
             }
 
@@ -108,7 +108,14 @@ class AppointmentAdapter(view: RecyclerView) :
             tvNote.text = item.noteFinish
             tvReason.text = item.reasonCancel
             totalAmountLayout.show((item.status == DataConst.AppointmentStatus.APM_FINISH))
-            tvAmount.text = item.totalAmount
+            if(item.totalAmount <= 0.0){
+                tvFree.show()
+                tvAmount.hide()
+            }else{
+                tvFree.hide()
+                tvAmount.show()
+                tvAmount.text = item.totalAmountDisplay
+            }
             tvCreatedAt.text = item.createAt
             tvAppointmentNote.text = item.notes
 

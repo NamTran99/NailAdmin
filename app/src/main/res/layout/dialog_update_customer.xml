@@ -40,8 +40,6 @@
             <EditText
                 android:id="@+id/etName"
                 style="@style/AppTheme.EditText"
-                android:focusable="false"
-                android:alpha="0.4"
                 android:layout_marginTop="@dimen/size_20"
                 android:hint="@string/hint_enter_full_name"
                 android:drawableStart="@drawable/ic_user"
@@ -50,8 +48,6 @@
             <EditText
                 android:id="@+id/etPhone"
                 style="@style/AppTheme.EditText"
-                android:focusable="false"
-                android:alpha="0.4"
                 android:layout_marginTop="@dimen/size_12"
                 android:drawableStart="@drawable/ic_phone_outline"
                 android:inputType="phone"

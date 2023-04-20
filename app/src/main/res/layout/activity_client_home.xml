@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorPrimary"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         app:headerLayout="@layout/partial_nav_view_head"
         app:itemTextAppearance="@style/AppTheme.TextView.Medium"
         app:itemTextColor="@color/white"

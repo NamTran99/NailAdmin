@@ -16,10 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemViewTextPopupBinding
 import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.model.popup.PopUpNotificationItemMore
-import com.app.inails.booking.admin.model.popup.PopUpNotificationMore
-import com.app.inails.booking.admin.model.popup.PopUpServiceMore
-import com.app.inails.booking.admin.model.popup.PopUpStaffMore
+import com.app.inails.booking.admin.model.popup.*
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 
@@ -207,13 +204,25 @@ class TextMenuPopup<T>(val context: Context) : PopupWindow(context) {
 
 }
 
+interface PopupRecruitmentOwner : ViewScopeOwner {
+    val popup: TextMenuPopup<PopUpRecruitmentMore>
+        get() = with(viewScope) {
+            getOr("popupRecruitment:dialog") { TextMenuPopup<PopUpRecruitmentMore>(context) }
+        }
+}
+
+interface PopupCustomerMoreOwner : ViewScopeOwner {
+    val popup: TextMenuPopup<PopUpCustomerMore>
+        get() = with(viewScope) {
+            getOr("popupCustomer:dialog") { TextMenuPopup<PopUpCustomerMore>(context) }
+        }
+}
 
 interface PopupUserMoreOwner : ViewScopeOwner {
     val popup: TextMenuPopup<PopUpStaffMore>
         get() = with(viewScope) {
             getOr("popupStaff:dialog") { TextMenuPopup<PopUpStaffMore>(context) }
         }
-
 }
 
 interface PopupServiceMoreOwner : ViewScopeOwner {

@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.core.event.WindowStatusOwner
 import android.support.core.extensions.LifecycleSubscriberExt
@@ -8,6 +9,7 @@ import android.support.core.route.RouteDispatcher
 import android.support.di.inject
 import android.support.viewmodel.ViewModelRegistrable
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -42,7 +44,8 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     val appActivity get() = activity as BaseActivity
     val appEvent by inject<AppEvent>()
     val userLocalSource by inject<UserLocalSource>()
-    private val loadingDialog by lazy { LoadingDialog(requireContext(), this) }
+    val loadingDialog by lazy { LoadingDialog(requireContext(), this) }
+    val mWindowManager: WindowManager by lazy { requireActivity().windowManager }
 
     override fun onRegistryViewModel(viewModel: ViewModel) {
         if (viewModel is WindowStatusOwner) {
@@ -74,5 +77,18 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
 
     fun onBackPress(){
         activity?.onBackPressed()
+    }
+    fun Fragment.shareDeepLink(content:String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(
+            Intent.EXTRA_SUBJECT,
+            "You have been shared an amazing meme, check it out ->"
+        )
+        intent.putExtra(Intent.EXTRA_TEXT, content)
+        if (isAdded) {
+            val shareIntent = Intent.createChooser(intent, null)
+            startActivity(shareIntent)
+        }
     }
 }

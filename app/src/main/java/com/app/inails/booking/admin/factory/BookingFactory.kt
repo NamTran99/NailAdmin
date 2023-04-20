@@ -38,7 +38,7 @@ class BookingFactory(
                 get() = textFormatter.formatTextColorStaffColor(serviceDTO.active.safe())
             override val detailImages: List<AppImage>
                 get() = serviceDTO.images.map { AppImage(it.id, it.image) }.toMutableList()
-                    .apply { if (serviceDTO.image != null) add(AppImage(path = serviceDTO.image)) }
+                    .apply { if (serviceDTO.image != null) add(AppImage(image = serviceDTO.image)) }
             override val avatar: String?
                 get() = serviceDTO.image
             override val moreImage: List<AppImage>
@@ -84,7 +84,7 @@ class BookingFactory(
                 get() = staffDTO.appointment_processing?.date_appointment.toTimeCheckIn(format = "yyyy-MM-dd'T'HH:mm:ss")
                     .safe()
             override val customerName: String
-                get() = staffDTO.appointment_processing?.customer_name.safe()
+                get() = staffDTO.appointment_processing?.customer_name?: ""
             override val appointment: IAppointment?
                 get() = staffDTO.appointment_processing?.let { createAAppointment(it) }
             override val timeEndAppointment: String
@@ -124,6 +124,12 @@ class BookingFactory(
 
     private fun createAppointment(appointmentDTO: AppointmentDTO): IAppointment {
         return object : IAppointment {
+            override val serviceListAll: List<IService>
+                get() = appointmentDTO.services.toMutableList().apply {
+                    addAll(appointmentDTO.service_custom)
+                }.map(::createService)
+            override val somethingElse: String
+                get() = appointmentDTO.something_else
             override val id: Int
                 get() = appointmentDTO.id.safe()
             override val customerName: String
@@ -185,10 +191,10 @@ class BookingFactory(
                 get() = appointmentDTO.total_price_service_format.toPriceFormat()
             override val workTime: Int
                 get() = appointmentDTO.work_time.safe()
-            override val serviceCustomObj: IService?
-                get() = appointmentDTO.service_custom?.let { createAService(it) }
+            override val serviceCustom: List<IService>
+                get() = appointmentDTO.service_custom.map { createService(it) }
             override val createAt: String
-                get() = appointmentDTO.created_at_timestamp.toCreatedAt()
+                get() = appointmentDTO.created_at_timestamp.convertFromServerToLocalTime()
             override val dateSelected: String
                 get() = appointmentDTO.date_appointment!!.toDateAppointment(formatTz = "UTC")
             override val dateTag: String
@@ -198,23 +204,27 @@ class BookingFactory(
             override val customerID: Int
                 get() = appointmentDTO.customer_id.safe()
             override val feedbackImages: List<AppImage>
-                get() = appointmentDTO.feedback?.images?.map { AppImage(path = it.image) }
+                get() = appointmentDTO.feedback?.images?.map { AppImage(image = it.image) }
                     ?: listOf()
             override val afterImage: List<AppImage>
                 get() = appointmentDTO.images.filter { it.type_name == "after" }
-                    .map { AppImage(path = it.image ?: "") }
+                    .map { AppImage(image = it.image ?: "") }
             override val beforeImage: List<AppImage>
                 get() = appointmentDTO.images.filter { it.type_name == "before" }
-                    .map { AppImage(path = it.image ?: "") }
-            override val totalAmount: String
+                    .map { AppImage(image = it.image ?: "") }
+            override val totalAmountDisplay: String
                 get() = textFormatter.formatPrice(appointmentDTO.price).safe()
+            override val totalAmount: Double
+                get() = appointmentDTO.price.safe()
             override val discount: String
                 get() = "-${appointmentDTO.total_discount_format.toPriceFormat()}"
             override val hasVoucher: Boolean
                 get() = appointmentDTO.voucher != null
-            override val percent: String
+            override val percentDisplay: String
                 get() = appointmentDTO.voucher?.value?.let { textFormatter.formatPercent(it) }
                     .safe()
+            override val percent: Double
+                get() = appointmentDTO.voucher?.value.safe()
             override val showPercent: Boolean
                 get() = appointmentDTO.voucher?.type == DataConst.VoucherType.TYPE_PERCENT
             override val voucherCode: String

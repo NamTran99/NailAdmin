@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import kotlinx.coroutines.Dispatchers
 
 interface ViewScopeOwner {
     val viewScope: ViewScope
@@ -35,8 +34,10 @@ interface ViewScopeOwner {
                 else -> null
             }
         }
-    val routerDispatcher : RouteDispatcher?
-        get(){ return if(this is RouteDispatcher) this else null}
+    val routerDispatcher: RouteDispatcher?
+        get() {
+            return if (this is RouteDispatcher) this else null
+        }
 }
 
 class ViewScope(private val view: ViewGroup) {

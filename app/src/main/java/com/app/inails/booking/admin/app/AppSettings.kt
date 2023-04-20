@@ -17,6 +17,10 @@ import com.app.inails.booking.admin.helper.DriverUtils
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
@@ -40,6 +44,28 @@ class AppSettings(private val context: Context) {
 
     fun callPhone(phoneNumber: String) {
         DriverUtils.call(context,phoneNumber)
+    }
+
+    fun enableGPS(
+        act: FragmentActivity,
+        onSuccess: () -> Unit = {},
+        OnFailure: (ResolvableApiException) -> Unit = {}
+    ) {
+        val locationRequest: LocationRequest = LocationRequest.create()
+            .setInterval(1000)
+            .setFastestInterval(100)
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+        LocationServices
+            .getSettingsClient(act)
+            .checkLocationSettings(builder.build())
+            .addOnSuccessListener(act) { onSuccess()}
+            .addOnFailureListener(act) { ex: Exception? ->
+                if (ex is ResolvableApiException) {
+                    OnFailure(ex)
+                }
+            }
     }
 
     fun openPlaceAutoComplete(placeOriginal: String, function: (Place) -> Unit) {

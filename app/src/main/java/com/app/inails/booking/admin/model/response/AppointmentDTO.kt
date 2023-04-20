@@ -35,7 +35,7 @@ data class AppointmentDTO(
     val customer: CustomerDTO,
     val list_service_names_with_price: String = "",
     val feedback: FeedbackDTO?,
-    val service_custom : ServiceDTO?,
+    val service_custom : List<ServiceDTO> = listOf(),
     val date_appointment_timestamp :Long,
     val created_at_timestamp :Long,
     val note_appointment: String? = "",
@@ -43,6 +43,7 @@ data class AppointmentDTO(
     val voucher: VoucherDTO?,
     val total_discount_format: String?,
     val total_price_service_format: String?,
+    val something_else: String = ""
 )
 
 data class AfterBeforeImages(

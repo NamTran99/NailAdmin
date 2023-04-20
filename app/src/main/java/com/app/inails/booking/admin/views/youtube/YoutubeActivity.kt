@@ -15,7 +15,6 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.FragmentActivity
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
-import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer

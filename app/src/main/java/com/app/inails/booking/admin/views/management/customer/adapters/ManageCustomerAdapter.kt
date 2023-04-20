@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
 import android.text.Editable
 import android.text.SpannableStringBuilder
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.databinding.ItemManageCustomerBinding
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.ICustomer
+import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
@@ -18,8 +20,8 @@ class ManageCustomerAdapter(view: RecyclerView) :
     PageRecyclerAdapter<ICustomer, ItemManageCustomerBinding>(view) {
 
     var onClickItemListener: ((ICustomer) -> Unit)? = null
-    var onClickOpenBookingList: ((ICustomer) -> Unit)? = null
-    var onClickEditCustomer: ((ICustomer) -> Unit) = {}
+    var onClickCreateAppointment: ((ICustomer) -> Unit) = {}
+    var onClickMenuListener: ((View, ICustomer) -> Unit)? = null
 
     override fun onCreateBinding(parent: ViewGroup): ItemManageCustomerBinding {
         return parent.bindingOf(ItemManageCustomerBinding::inflate)
@@ -32,8 +34,8 @@ class ManageCustomerAdapter(view: RecyclerView) :
         adapterPosition: Int
     ) {
         binding.run {
-            btEdit.onClick{
-                onClickEditCustomer.invoke(item)
+            btCreateAppointment.onClick{
+                onClickCreateAppointment.invoke(item)
             }
             lvVip.visible(item.type == 3)
             lvNote.show(item.isShowNote)
@@ -45,8 +47,12 @@ class ManageCustomerAdapter(view: RecyclerView) :
             tvPhone.text = item.phone.formatPhoneUSCustom()
             tvBirthday.text = item.birthDay
 
-            btBookingList.setOnClickListener {
-                onClickOpenBookingList?.invoke(item)
+            btMenu.setOnClickListener {
+                onClickMenuListener?.invoke(it, item)
+            }
+
+            btCreateAppointment.setOnClickListener {
+                onClickCreateAppointment?.invoke(item)
             }
         }
     }

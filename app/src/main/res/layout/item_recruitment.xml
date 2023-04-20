@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/size_10"
+    android:layout_marginBottom="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
+    android:elevation="@dimen/size_5"
+    android:paddingEnd="@dimen/size_10">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgBanner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#16BC40C1"
+        android:scaleType="centerInside"
+        android:src="@drawable/img_salon_test"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/round_corner_left_side" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+
+    <TextView
+        android:id="@+id/tvStatusPub"
+        style="@style/AppTheme.TextViewResponsive.Hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_5"
+        android:background="#EEA760"
+        android:paddingHorizontal="@dimen/size_10"
+        android:paddingVertical="@dimen/size_3"
+        android:text="@string/public_1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/btMenu"
+        app:layout_constraintEnd_toStartOf="@+id/btMenu"
+        app:layout_constraintStart_toEndOf="@+id/imgBanner"
+        app:layout_constraintTop_toTopOf="@+id/btMenu" />
+
+
+    <TextView
+        android:id="@+id/tvStatusUnPub"
+        style="@style/AppTheme.TextViewResponsive.Hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_5"
+        android:background="#B2B2B2"
+        android:paddingHorizontal="@dimen/size_10"
+        android:paddingVertical="@dimen/size_3"
+        android:text="@string/unpublic"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btMenu"
+        app:layout_constraintEnd_toStartOf="@+id/btMenu"
+        app:layout_constraintStart_toEndOf="@+id/imgBanner"
+        app:layout_constraintTop_toTopOf="@+id/btMenu" />
+
+    <ImageView
+        android:id="@+id/btMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_20"
+        android:layout_marginTop="@dimen/size_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_more" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="btMenu" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/AppTheme.TextView.MultiLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_5"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:minLines="1"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@id/barrier4"
+        tools:text="Cần tìm thợ tay chân nước !" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/working_area"
+                android:textSize="@dimen/text_size_10"
+                android:textColor="@color/hint_text_color" />
+
+            <TextView
+                android:id="@+id/tvWorkplace"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:textSize="@dimen/text_size_10"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/working_area" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/average_income_1"
+                android:textSize="@dimen/text_size_10"
+                android:textColor="@color/hint_text_color" />
+
+            <TextView
+                android:id="@+id/tvIncome"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_10"
+                android:gravity="end"
+                tools:text="+ 10 years" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/payroll_method"
+                android:textSize="@dimen/text_size_10"
+                android:textColor="@color/hint_text_color" />
+
+            <TextView
+                android:id="@+id/tvPayrollMethod"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="@dimen/text_size_10"
+                tools:text="100$/week" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/tvDate"
+        style="@style/AppTheme.TextViewResponsive.Hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/size_5"
+        android:textSize="@dimen/text_size_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+        tools:text="10-26-2022" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

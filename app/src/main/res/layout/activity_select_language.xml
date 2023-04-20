@@ -17,6 +17,7 @@
             android:layout_width="@dimen/size_300"
             android:layout_height="@dimen/size_300"
             android:layout_gravity="center"
+            android:paddingTop="@dimen/size_40"
             android:layout_marginHorizontal="@dimen/size_10"
             android:src="@drawable/ic_logo_2" />
 

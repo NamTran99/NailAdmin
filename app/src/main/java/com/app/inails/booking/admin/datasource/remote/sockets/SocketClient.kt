@@ -1,10 +1,10 @@
 package com.app.inails.booking.admin.datasource.remote.sockets
 
 import android.annotation.SuppressLint
-import android.support.core.CoDispatcher.Companion.io
 import android.support.di.Inject
 import android.support.di.ShareScope
 import android.util.Log
+import androidx.viewbinding.BuildConfig
 import com.app.inails.booking.admin.app.AppConfig
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -25,7 +25,7 @@ class SocketClient {
     private val TAG = SocketClient::class.java.simpleName
 
     var mSocket: Socket? = null
-    private var mServerSocket = AppConfig.serverSocket
+    private var mServerSocket = if(BuildConfig.DEBUG) AppConfig.serverSocketLive else AppConfig.serverSocketLive
 
     init {
         setupSocket()

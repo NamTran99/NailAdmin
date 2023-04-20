@@ -1,26 +1,55 @@
 package com.app.inails.booking.admin.base
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.di.inject
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ListPopupWindow
 import androidx.annotation.StyleRes
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.viewbinding.ViewBinding
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.extention.setMargins
+import com.app.inails.booking.admin.extention.showKeyboard
 import com.google.android.youtube.player.internal.ac
 
-abstract class BaseDialog(context: Context) : Dialog(context) {
+open class BaseDialog(context: Context) : Dialog(context) {
     var activityContext:Context = context
-
+    val appEvent by inject<AppEvent>()
     @JvmName("getActivityContext1")
     fun getActivityContext() = context
+    // unfocus edittext when select outside
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        dispatchTouchEventCustom(event)
+        return super.dispatchTouchEvent(event)
+    }
+
+    open fun dispatchTouchEventCustom(event:MotionEvent){
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.x.toInt(), event.y.toInt())) {
+                    v.clearFocus()
+                    v.showKeyboard(false)
+                }
+            }
+        }
+    }
 
     var isSlideShow: Boolean = false
         set(value) {
@@ -28,6 +57,7 @@ abstract class BaseDialog(context: Context) : Dialog(context) {
             if (value) window!!.attributes.windowAnimations = R.style.AppTheme_DialogAnimation
         }
 
+    @SuppressLint("SuspiciousIndentation")
     fun <T : ViewBinding> viewBinding(
         function: (context: LayoutInflater) -> T,
         isMargin: Boolean = true
@@ -50,6 +80,11 @@ abstract class BaseDialog(context: Context) : Dialog(context) {
 
     private fun requestTransparent() {
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    fun setBackGroundBLur(){
+        window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        window?.setDimAmount(0.5f)
     }
 
     fun removeDim() {

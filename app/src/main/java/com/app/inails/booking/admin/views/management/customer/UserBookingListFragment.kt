@@ -1,12 +1,14 @@
 package com.app.inails.booking.admin.views.management.customer
 
 import FetchListCustomerRepo
+import FetchListServiceRepo
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
+import android.support.core.livedata.combine1
 import android.support.core.livedata.post
 import android.support.core.route.BundleArgument
 import android.support.core.route.argument
@@ -18,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
@@ -25,6 +28,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentCustomerBookingListBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
+import com.app.inails.booking.admin.model.response.AppImage
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.FetchAllStaffRepo
@@ -39,6 +43,8 @@ import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -70,7 +76,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 beforeImagePath =
-                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                    ArrayList(pathImage.map { pathUri -> AppImage(image = pathUri.toString()) })
                 finishBookingDialog.updateBeforeImages(beforeImagePath)
             }
         }
@@ -81,7 +87,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 afterImagePath =
-                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                    ArrayList(pathImage.map { pathUri -> AppImage(image = pathUri.toString()) })
                 finishBookingDialog.updateAfterImages(afterImagePath)
             }
         }
@@ -95,13 +101,19 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
 
     private fun setUpListener() {
         with(viewModel) {
+            serviceLoadingResult.bind {
+                finishBookingDialog.updateServiceSearch(it)
+            }
             finishBookingDialog.apply {
+                onSearchService = {
+                    viewModel.searchService(it)
+                }
                 onAddBeforeImage = {
                     FishBun.with(this@UserBookingListFragment)
                         .setImageAdapter(GlideAdapter())
                         .setMaxCount(5)
                         .setMinCount(1)
-                        .setSelectedImages(ArrayList(beforeImagePath.map { it.path.toUri() }))
+                        .setSelectedImages(ArrayList(beforeImagePath.map { it.image.toUri() }))
                         .setActionBarColor(
                             ContextCompat.getColor(context, R.color.colorPrimary),
                             ContextCompat.getColor(context, R.color.colorPrimary),
@@ -116,7 +128,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                         .setImageAdapter(GlideAdapter())
                         .setMaxCount(5)
                         .setMinCount(1)
-                        .setSelectedImages(ArrayList(afterImagePath.map { it.path.toUri() }))
+                        .setSelectedImages(ArrayList(afterImagePath.map { it.image.toUri() }))
                         .setActionBarColor(
                             ContextCompat.getColor(context, R.color.colorPrimary),
                             ContextCompat.getColor(context, R.color.colorPrimary),
@@ -127,11 +139,11 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                 }
 
                 onclickRemoveAfterImage = { image ->
-                    afterImagePath.removeAll { it.path == image.path }
+                    afterImagePath.removeAll { it.image == image.image }
                 }
 
                 onclickRemoveBeforeImage = { image ->
-                    beforeImagePath.removeAll { it.path == image.path }
+                    beforeImagePath.removeAll { it.image == image.image }
                 }
             }
             filterForm.apply {
@@ -148,7 +160,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                     if (binding.searchView.text.isEmpty())
                         customerListBookingUI.emptyData else R.string.no_result_order_found
                 )
-                (mAdapter.itemCount == 0) show binding.emptyLayout.tvEmptyData
+                (mAdapter.itemCount == 0) show binding.emptyLayout.lvEmpty
                 (mAdapter.itemCount > 0) show binding.rvAppointment
             }
 
@@ -319,7 +331,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                 }
 
                 onClickFinishListener = {
-                    finishBookingDialog.show(it) { amount, notes ->
+                    finishBookingDialog.show(it) { amount, notes, listMore ->
                         viewModel.form.run {
                             id = it.id
                             price = amount
@@ -327,6 +339,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                             status = DataConst.AppointmentStatus.APM_FINISH
                             beforeImages = beforeImagePath
                             afterImages = afterImagePath
+                            moreService = listMore
                         }
                         viewModel.updateStatus()
                     }
@@ -362,7 +375,7 @@ class UserBookingListFragment : BaseFragment(R.layout.fragment_customer_booking_
                         }
                     ) { form ->
                         viewModel.filterForm.setDataFromDialog(form)
-                        searchView.showHideImgFilter(viewModel.filterForm)
+                        searchView.showHideImgFilter(viewModel.filterForm.isHaveDataForFilter())
                         refreshView()
                     }
                 }
@@ -395,6 +408,7 @@ class CustomerBookingListViewModel(
     private val customerRepo: FetchListCustomerRepo,
     private val remindAppointmentRepo: RemindAppointmentRepository,
     private val staffRepo: FetchAllStaffRepo,
+    private val fetchListServiceRepo: FetchListServiceRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val customerListBookingUI = CustomerBookingListUI()
     val idRemove = appointmentRepo.resultRemove
@@ -437,6 +451,18 @@ class CustomerBookingListViewModel(
         appointmentRepo.removeAppointment(id)
         success.post(R.string.success_remove_appointment)
     }
+
+    private val searchScope = CoroutineScope(Dispatchers.Main)
+    private val serviceListResult = fetchListServiceRepo.results
+    val serviceLoadingResult =
+        serviceListResult.combine1(refreshLoading as MutableLiveData<Boolean>) { items, loading ->
+            items to loading
+        }
+
+    fun searchService(keyword: String = "", page: Int = 1) =
+        launch(refreshLoading, error, searchScope.coroutineContext, true) {
+            fetchListServiceRepo(keyword, page)
+        }
 
     fun handle() = launch(loading, error) {
         appointmentRepo.adminHandleAppointment(formHandle)

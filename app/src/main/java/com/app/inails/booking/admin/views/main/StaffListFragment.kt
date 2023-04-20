@@ -68,7 +68,7 @@ class StaffListFragment : BaseRefreshFragment(R.layout.fragment_staff_list), Sta
         with(viewModel) {
             staffs.bind {
                 mAdapter.submit(it)
-                binding.emptyLayout.tvEmptyData.show(it.isNullOrEmpty())
+                binding.emptyLayout.lvEmpty.show(it.isNullOrEmpty())
                 binding.rvStaff.show(!it.isNullOrEmpty())
             }
         }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_10"
+    android:layout_marginEnd="@dimen/size_5"
+    android:background="@drawable/box_radius_def_2"
+    android:drawableEnd="@drawable/ic_remove"
+    android:drawablePadding="@dimen/size_10"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/size_10"
+    android:paddingVertical="5dp">
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/AppTheme.TextViewResponsive"
+        android:textColor="@color/colorPrimary"
+        tools:text="Massage" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_1"
+        android:src="@drawable/ic_remove_2" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -11,25 +11,21 @@ import androidx.viewpager.widget.ViewPager
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentShowMultyImageBinding
+import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import kotlinx.parcelize.Parcelize
 
-
-@Parcelize
-data class ShowZoomImageArgs(
-    val data: Pair<List<LocalImage>, Int>
-) : BundleArgument
 @Parcelize
 data class LocalImage(
     val path: String = ""
-): Parcelable
+) : Parcelable
 
 class ShowZoomListImageFragment : BaseFragment(R.layout.fragment_show_multy_image), TopBarOwner {
 
     private lateinit var mImageViewerAdapter: ImageViewerAdapter
     private val binding by viewBinding(FragmentShowMultyImageBinding::bind)
-    private val args by lazy { argument<ShowZoomImageArgs>() }
+    private val args by lazy { argument<Routing.ShowListZoomImage>() }
     private lateinit var data: Pair<List<LocalImage>, Int>
 
     @SuppressLint("SetTextI18n")
@@ -37,14 +33,14 @@ class ShowZoomListImageFragment : BaseFragment(R.layout.fragment_show_multy_imag
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.title_salon_image,
+                R.string.images,
                 onBackClick = {
                     activity?.onBackPressed()
                 },
             )
         )
 
-        data = args.data
+        data = args.listImage to args.position
 
         with(binding) {
             mImageViewerAdapter = ImageViewerAdapter(vpPhoto).apply {

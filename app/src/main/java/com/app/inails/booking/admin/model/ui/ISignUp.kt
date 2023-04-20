@@ -2,10 +2,10 @@ package com.app.inails.booking.admin.model.ui
 
 import android.content.Context
 import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.app.inails.booking.admin.extention.isEmail
+import com.app.inails.booking.admin.model.response.AppImage
 import com.app.inails.booking.admin.utils.TimeUtils
 
 
@@ -28,12 +28,13 @@ data class SignUpForm constructor(
     var salon_email: String = "",
     var salon_state: String = "",
     var salon_description: String = "",
-    var input_option : Int = 0, // 0: mien phi, 1 tra phi
+//    var input_option : Int = 0, // 0: mien phi, 1 tra phi
     var schedules: MutableList<ISchedule> = ISchedule.getDefaultList().toMutableList(),
     var images: MutableList<AppImage> = mutableListOf(),
     var paidMenuImages: MutableList<AppImage> = mutableListOf(),
-    val staffs: MutableList<ISalonStaff> = mutableListOf(),
-    val services: MutableList<ISalonService> = mutableListOf(),
+    val staffs: MutableList<SalonStaff> = mutableListOf(),
+    val services: MutableList<SalonService> = mutableListOf(),
+    var type: String = "" // salon or partner
 ){
     fun getTimeZoneDisplay(context: Context, showFull: Boolean): String{
         return if(showFull){
@@ -41,7 +42,10 @@ data class SignUpForm constructor(
         }else "${zoneID} ${offsetDisplay}"
     }
 
-    fun validate(){
+    fun validateStep1(){
+        if(admin_name.isBlank()){
+            viewError(R.id.edtAccName, R.string.error_blank_admin_name)
+        }
         if(phone.trim().isEmpty()){
             viewError(R.id.edtAccPhone, R.string.error_blank_phone)
         }
@@ -51,9 +55,9 @@ data class SignUpForm constructor(
         if(password.trim().isEmpty()){
             viewError(R.id.edtAccPassword, R.string.error_blank_password_2)
         }
-        if(admin_name.isBlank()){
-            viewError(R.id.edtAccName, R.string.error_blank_admin_name)
-        }
+    }
+
+    fun validateStep2(){
         if(salon_name.trim().isEmpty()){
             viewError(R.id.edtSalonName, R.string.error_blank_salon_name)
         }
@@ -74,7 +78,7 @@ data class SignUpForm constructor(
     }
 }
 
-data class ISalonStaff(
+data class SalonStaff(
     var avatar: String = "",
     @Transient
     val imageUri: String = "",
@@ -82,7 +86,7 @@ data class ISalonStaff(
     val name: String = ""
 )
 
-data class ISalonService(
+data class SalonService(
     @Transient
     val imageUri: String = "",
     val name: String = "",

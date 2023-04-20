@@ -3,7 +3,7 @@ package com.app.inails.booking.admin.formatter
 import android.content.Context
 import android.support.di.Inject
 import android.support.di.ShareScope
-import android.telephony.PhoneNumberUtils
+import androidx.annotation.StringRes
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.DataConst.AppointmentStatus.APM_ACCEPTED
 import com.app.inails.booking.admin.DataConst.AppointmentStatus.APM_CANCEL
@@ -16,23 +16,178 @@ import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_AVAILABLE
 import com.app.inails.booking.admin.DataConst.StaffStatus.STAFF_WORKING
 import com.app.inails.booking.admin.DataConst.TypeAppointment.TYPE_APPOINTMENT
 import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.app.AppConfig
-import com.app.inails.booking.admin.base.MainApplication
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.response.*
-import com.app.inails.booking.admin.model.response.VoucherDTO
 import com.app.inails.booking.admin.model.response.client.*
 import com.esafirm.imagepicker.helper.LocaleManager
-import com.google.android.youtube.player.internal.c
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @Inject(ShareScope.Singleton)
-class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSource) {
+class TextFormatter(private val cxt: Context, val userLocalSource: UserLocalSource) {
 
-    fun getLanguageContext() = LocaleManager.updateResources(cxt, userLocalSource.getLanguageWithDefault())
+    private fun getLanguageContext() =
+        LocaleManager.updateResources(cxt, userLocalSource.getLanguageWithDefault())
+
+    private fun getString(@StringRes id: Int) = getLanguageContext().getString(id)
+    private fun getString(@StringRes id: Int, vararg format: Any) =
+        getLanguageContext().getString(id, *format)
+
+    fun yesNoFormat(indx: Int): String {
+        return when (indx) {
+            0 -> getString(R.string.no)
+            1 -> getString(R.string.yes)
+            else -> getString(R.string.no)
+        }
+    }
+
+
+    //Job Profile
+    fun formatDistance(distance: Double): String {
+        return getLanguageContext().getString(R.string.distance_format_1, distance.showMaxNumber(2))
+    }
+
+    fun formatWorkplaceType(indx: Int): String {
+        return getString(
+            when (indx) {
+                1 -> R.string.local_position
+                2 -> R.string.willing_to_relocate
+                else -> R.string.local_position
+            }
+        )
+    }
+
+    fun formatExperienceJob(number: Double): String {
+        val numDis = displayNumber(number)
+        return if (number > 1) getLanguageContext().getString(
+            R.string.format_experience_plural,
+            numDis
+        ) else if (number == 0.0) getLanguageContext().getString(
+            R.string.no_experience
+        )
+        else getLanguageContext().getString(R.string.format_experience, numDis)
+    }
+
+    fun formatExperienceJobEn(number: Double): String {
+        val numDis = displayNumber(number)
+        return if (number > 1) getLanguageContext().getString(
+            R.string.format_experience_plural_1,
+            numDis
+        ) else if (number == 0.0) getLanguageContext().getString(
+            R.string.no_experience_en
+        )
+        else getLanguageContext().getString(R.string.format_experience_en, numDis)
+    }
+
+    fun formatExperienceRecruitment(number: Double): String {
+        val numDis = displayNumber(number)
+        return if (number > 1) getLanguageContext().getString(
+            R.string.format_experience_plural_2,
+            numDis
+        ) else if (number == 0.0) getLanguageContext().getString(R.string.not_required)
+        else getLanguageContext().getString(R.string.format_experience_2, numDis)
+    }
+
+    fun formatPayrollType(indx: Int): String {
+        return getString(
+            when (indx) {
+                1 -> R.string.full_salary
+                2 -> R.string.split46
+                3 -> R.string.negotiate
+                else -> R.string.full_salary
+            }
+        )
+    }
+
+    private fun displayNumber(number: Double): String {
+        return if (number % 1 == 0.0) {
+            String.format("%.0f", number)
+        } else {
+            number.toString()
+        }
+    }
+
+    fun formatSalary(salary: String): String {
+        return cxt.getString(R.string.salary_format, salary)
+    }
+
+    fun formatGender(gender: Int): String {
+        return when (gender) {
+            1 -> getLanguageContext().getString(R.string.gender_male)
+            2 -> getLanguageContext().getString(R.string.gender_female)
+            else -> getLanguageContext().getString(R.string.gender_all_2)
+        }
+    }
+
+    fun formatGender2(gender: Int): String {
+        return when (gender) {
+            1 -> getLanguageContext().getString(R.string.format_gender_male)
+            2 -> getLanguageContext().getString(R.string.format_gender_female)
+            else -> getLanguageContext().getString(R.string.format_gender_other)
+        }
+    }
+
+    //recruitment
+    private fun getLocalString(@StringRes id: Int): String {
+        return getLanguageContext().getString(id)
+    }
+
+    fun customerSkinColorFormat(indx: Int): String {
+        return getString(
+            when (indx) {
+                1 -> R.string.skin_white
+                2 -> R.string.skin_black
+                3 -> R.string.skin_xi
+                4 -> R.string.skin_all
+                else -> R.string.skin_white
+            }
+        )
+    }
+
+    fun formatWorkingTime(workingForm: Int, workingTerm: Int): String {
+        val format = if (workingForm == 2) {
+            getLocalString(R.string.full_time)
+        } else {
+            if (workingTerm > 1) {
+                getLanguageContext().getString(R.string.working_time_format_2, workingTerm)
+            } else {
+                getLanguageContext().getString(R.string.working_time_format, workingTerm)
+            }
+        }
+        return format
+    }
+
+    fun formatPositionRecruitment(position: Int, other: String): String {
+        if (other.isNotEmpty()) return other
+        return when (position) {
+            1 -> getLocalString(R.string.manager)
+            2 -> getLocalString(R.string.main_manicurist)
+            3 -> getLocalString(R.string.assistant_manicurist)
+            else -> getLocalString(R.string.manager)
+        }
+    }
+
+    fun formatSalaryRecruitment(salary: Double, type: Int): String {
+           val value = salary.display()
+        val suffix = when (type) {
+            1 -> getLanguageContext().getString(R.string.per_week_1)
+            2 -> getLanguageContext().getString(R.string.per_month)
+            else -> getLanguageContext().getString(R.string.per_year)
+        }
+        return "$$value $suffix"
+    }
+
+    fun formatSalaryRecruitmentEn(salary: Double, type: Int): String {
+        val value = salary.display()
+        val suffix = when (type) {
+            1 -> getLanguageContext().getString(R.string.per_week_en)
+            2 -> getLanguageContext().getString(R.string.per_month_en)
+            else -> getLanguageContext().getString(R.string.per_year_en)
+        }
+        return "$$value $suffix"
+    }
 
     fun formatPhoneNumber(phoneNumber: String): String {
         return phoneNumber.replace("-", "")
@@ -42,16 +197,20 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
     }
 
     fun formatDisplayTimeZone(salonDTO: SalonDTO): String {
-        return getLanguageContext().getString(R.string.business_hour_format, salonDTO.timezone, salonDTO.tz)
+        return getLanguageContext().getString(
+            R.string.business_hour_format,
+            salonDTO.timezone,
+            salonDTO.tz
+        )
     }
 
-    fun displaySafe(text: String?): String{
+    fun displaySafe(text: String?): String {
         return (text ?: "").ifBlank { getLanguageContext().getString(R.string.no_information) }
     }
 
     fun formatPhoneUS(phone: String?): String {
         return if (phone.isNullOrEmpty()) ""
-        else PhoneNumberUtils.formatNumber(phone, "US")
+        else phone.formatPhoneUSCustom()
     }
 
     fun fullName(staffDTO: StaffDTO) = "${staffDTO.first_name} ${staffDTO.last_name}"
@@ -61,7 +220,10 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
 
     fun titleNotificationWithUnread(totalUnread: Int): String {
         return if (totalUnread == 0) getLanguageContext().getString(R.string.title_notifications)
-        else getLanguageContext().getString(R.string.title_notifications_with_total, totalUnread.toString())
+        else getLanguageContext().getString(
+            R.string.title_notifications_with_total,
+            totalUnread.toString()
+        )
     }
 
     fun statusStaff(status: Int?): Pair<Int, Int> {
@@ -121,7 +283,7 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
     }
 
     fun isCancelAppointment(booking: BookingClientDTO) =
-            booking.status == APM_PENDING && booking.type == TYPE_APPOINTMENT
+        booking.status == APM_PENDING && booking.type == TYPE_APPOINTMENT
 
 
     fun formatStatusStaffIcon(status: Int?): Int {
@@ -190,7 +352,9 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
     }
 
     fun formatSalonSchedule(it: Schedule): String {
-        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) getLanguageContext().getString(R.string.not_open)
+        return if (it.startTimeFormat.isNullOrEmpty() || it.startTimeFormat.isNullOrEmpty()) getLanguageContext().getString(
+            R.string.not_open
+        )
         else "${it.startTimeFormat} - ${it.endTimeFormat}"
     }
 
@@ -242,7 +406,7 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
         val timePlus = date.time + (workTime * 60 * 1000)
         date.time = timePlus
 
-        return "${dateTime.toDate().time.toCreatedAt()}-${date.formatDateAppointment()}"
+        return "${dateTime.toDate().time.convertFromServerToLocalTime()}-${date.formatDateAppointment()}"
     }
 
     fun formatColorNotification(isRead: Int): Int {
@@ -250,7 +414,11 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
     }
 
     fun formatTotalFeedback(it: FeedbackClientDTO) =
-        getLanguageContext().getString(R.string.label_count_rating, it.average_rating ?: "0", it.total ?: "0")
+        getLanguageContext().getString(
+            R.string.label_count_rating,
+            it.average_rating ?: "0",
+            it.total ?: "0"
+        )
 
     fun formatWelcomeUser(user: UserClientDTO.Data?): String {
         return if (user == null) cxt.getString(R.string.title_welcome_guest)
@@ -275,7 +443,7 @@ class TextFormatter(private val cxt:Context, val userLocalSource: UserLocalSourc
     fun canceledBy(cancelledBy: String? = "", isGuest: Boolean = false): String {
         if (isGuest) return cxt.getString(R.string.text_cancelled_by_guest)
         if (!cancelledBy.isNullOrEmpty()) {
-                return cxt.getString(R.string.text_cancelled_by, cancelledBy)
+            return cxt.getString(R.string.text_cancelled_by, cancelledBy)
         }
         return ""
     }

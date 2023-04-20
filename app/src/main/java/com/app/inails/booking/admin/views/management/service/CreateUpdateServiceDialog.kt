@@ -3,19 +3,19 @@ package com.app.inails.booking.admin.views.management.service
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
 import android.text.InputFilter
-import android.view.MotionEvent
+import android.text.method.DigitsKeyListener
 import androidx.annotation.StringRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogCreateUpdateServiceBinding
 import com.app.inails.booking.admin.extention.formatAmount
 import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.app.inails.booking.admin.model.ui.IService
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter
 import com.app.inails.booking.admin.views.widget.DecimalDigitsInputFilter
-import com.google.android.youtube.player.internal.v
 
 
 class CreateUpdateServiceDialog(context: Context) : BaseDialog(context), ConfirmDialogOwner {
@@ -25,6 +25,7 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context), Confirm
     init {
         setCancelable(false)
         binding.apply {
+            etPrice.keyListener = DigitsKeyListener.getInstance("-01234a56789.");
             imageAdapter = UploadPhotoAdapter(rvImages).apply {
                 onAddImagesAction = {
                     onAddMultyImage.invoke()
@@ -60,7 +61,7 @@ class CreateUpdateServiceDialog(context: Context) : BaseDialog(context), Confirm
     fun updateMainImage(image: AppImage?) {
         image?.let{
             binding.apply {
-                mainImage.setImageUrl(it.path)
+                mainImage.setImageUrl(it.image)
             }
         }
     }

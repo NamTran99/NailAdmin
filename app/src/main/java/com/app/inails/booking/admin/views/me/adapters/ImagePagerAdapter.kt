@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.viewpager2.widget.ViewPager2
-import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.databinding.ItemGalleryImageBinding
 import com.app.inails.booking.admin.databinding.ItemViewImageViewerBinding
-import com.app.inails.booking.admin.model.ui.AppImage
-import com.app.inails.booking.admin.views.extension.LocalImage
+import com.app.inails.booking.admin.model.response.AppImage
+ 
 import com.app.inails.booking.admin.views.widget.PinchZoomImageView
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
 
@@ -23,7 +21,7 @@ class ImagePagerAdapter(view: ViewPager2) :
 
     private fun loadImage(imageView: PinchZoomImageView, loading: ProgressBar, image: AppImage) {
         showLoading(imageView, loading)
-        imageView.setImageUrl(image.path) { showImage(imageView, loading) }
+        imageView.setImageUrl(image.image) { showImage(imageView, loading) }
     }
 
     private fun showImage(imageView: ImageView, loading: ProgressBar) {

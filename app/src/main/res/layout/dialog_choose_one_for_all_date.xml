@@ -24,6 +24,21 @@
             android:text="@string/choose_time"
             android:textSize="@dimen/text_size_14" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_view_stroke"
+            android:layout_marginTop="@dimen/size_15"
+            android:layout_height="wrap_content">
+            <Spinner
+                android:paddingHorizontal="@dimen/size_10"
+                android:id="@+id/spDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/size_50" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
         <com.app.inails.booking.admin.views.widget.OpenSalonTime
             android:id="@+id/businessHour"
             android:layout_width="match_parent"

@@ -170,7 +170,6 @@ class ClientHomeActivity : BaseActivity(R.layout.activity_client_home), TopBarOw
         appEvent.notifyCloudMessageClient.bind { viewModel.notification(it) }
     }
 
-
     private fun logoutSuccess() {
         binding.drawerLayout.openDrawerLayout(false)
         notificationsManager.cancelAll()

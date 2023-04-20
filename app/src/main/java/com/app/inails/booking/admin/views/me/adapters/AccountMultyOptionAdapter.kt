@@ -3,30 +3,21 @@ package com.app.inails.booking.admin.views.me.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.core.view.bindingOf
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.databinding.ItemEditSalonScheduleBinding
 import com.app.inails.booking.admin.databinding.LayoutAccountOptionBinding
 import com.app.inails.booking.admin.databinding.LayoutDetailSalonBinding
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.response.UserDTO
-import com.app.inails.booking.admin.model.ui.ISchedule
-import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 
 class AccountMultyOptionAdapter(view: RecyclerView) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     init{
         view.adapter = this
     }
-
-
     var detailUser: UserDTO?=null
     var listOption: List<AccountOption> = listOf()
     var onClickLogOut: (() -> Unit) = {}

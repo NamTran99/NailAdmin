@@ -31,7 +31,7 @@ import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.popup.PopUpStaffMore
-import com.app.inails.booking.admin.model.ui.AppImage
+ 
 import com.app.inails.booking.admin.model.ui.CreateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStaffForm
 import com.app.inails.booking.admin.model.ui.UpdateStatusStaffForm
@@ -43,12 +43,13 @@ import com.app.inails.booking.admin.repository.auth.StaffRepo
 import com.app.inails.booking.admin.views.extension.ShowZoomSingleImageActivity
 import com.app.inails.booking.admin.views.management.staff.adapters.ManageStaffAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
+import com.app.inails.booking.admin.views.widget.topbar.StaffTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 
 class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBarOwner,
-    CreateUpdateStaffOwner, PopupUserMoreOwner {
+    CreateUpdateStaffOwner, PopupUserMoreOwner, StaffNoticeDialogOwner {
     private val binding by viewBinding(FragmentManageStaffBinding::bind)
     private val viewModel by viewModel<ManageStaffViewModel>()
     private lateinit var mAdapter: ManageStaffAdapter
@@ -68,11 +69,13 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
-            SimpleTopBarState(
+            StaffTopBarState(
                 R.string.mn_manage_staff,
                 onBackClick = {
                     activity?.onBackPressed()
-                },
+                }, onNoteClick = {
+                    staffNoticeDialog.show()
+                }
             ) )
 
         with(binding) {
@@ -141,7 +144,11 @@ class ManageStaffFragment : BaseFragment(R.layout.fragment_manage_staff), TopBar
                     mAdapter.clear()
                 }
                 mAdapter.submit(it.second)
-                binding.emptyLayout.tvEmptyData.show(it.second.isEmpty() && it.first == 1)
+                binding.emptyLayout.lvEmpty.show(it.second.isEmpty() && it.first == 1)
+                binding.emptyLayout.tvEmptyData.setText(
+                    if (binding.searchView.text.isEmpty())
+                        R.string.label_empty_staff else R.string.no_result_order_found
+                )
             }
 
             success.bind {

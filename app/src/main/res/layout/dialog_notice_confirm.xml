@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/size_20"
     tools:context=".views.dialog.ConfirmNoticeDialog">
@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_20"
@@ -38,21 +38,24 @@
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/offset_horizontal"
             android:background="?selectableItemBackground"
             android:text="@string/btn_cancel"
             android:textAllCaps="false"
+            android:layout_centerVertical="true"
             style="@style/AppTheme.TextViewResponsive"
             android:textColor="@color/gray05" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDismiss"
             style="@style/AppTheme.Button.Responsive"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btnCancel"
             android:drawableEnd="@drawable/ic_button_check_filled"
             android:drawablePadding="@dimen/size_10"
             android:text="@string/btn_confirm" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

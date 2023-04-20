@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray07"
     tools:context=".views.me.reset.ResetPasswordFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLayout"
+        android:layout_marginTop="@dimen/size_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

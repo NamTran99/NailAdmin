@@ -14,7 +14,7 @@ import androidx.viewbinding.ViewBinding
 abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
-    private var mItems: ArrayList<T>? = null
+    private var mItems: ArrayList<T> = arrayListOf()
 
     val items get() = mItems
 
@@ -36,6 +36,24 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         mItems = arrayListOf()
         mItems!!.addAll(newItems?: listOf())
         notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    open fun add(item: T){
+        mItems?.add(item)
+        mItems = ArrayList(mItems ?: listOf())
+        notifyDataSetChanged()
+    }
+
+    open fun addData(item: T){
+        mItems.add(item)
+        notifyItemInserted((mItems?.size?:1) - 1)
+    }
+
+    open fun removeData(item: T){
+        val pos = mItems?.indexOf(item)
+        mItems?.remove(item)
+        notifyItemRemoved(pos?:-1)
     }
 
 
@@ -74,7 +92,7 @@ abstract class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if (!payloads.isNullOrEmpty()) (holder as? IHolder<T>)?.onChangedWith(payloads)
+        if (payloads.isNotEmpty()) (holder as? IHolder<T>)?.onChangedWith(payloads)
         else super.onBindViewHolder(holder, position, payloads)
     }
 

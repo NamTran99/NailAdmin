@@ -14,9 +14,11 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/AppTheme.TextViewResponsive"
-            android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/size_120"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btClose"
+            android:gravity="center"
             android:text="@string/redirect_to_owner_function"
             android:textSize="@dimen/text_size_14" />
 

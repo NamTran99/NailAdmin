@@ -73,7 +73,17 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
                     Routing.BookingFragment(Routing.BookingFragment.TypeBooking.APPOINTMENTS)
                 )
             }
-
+            btRecruitment.onClick{
+                Router.open(
+                    self, Routing.MyRecruitment
+                )
+            }
+            btSearchingWorker.onClick{
+                Router.open(
+                    self,
+                    Routing.ListJobProfile
+                )
+            }
             adsAdapter = AdsAdapter(viewPagerAds).apply {
                 onItemClick = {
                     if (it.content.isNotEmpty()) {
@@ -131,7 +141,7 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
 
 
 class ManageStaffViewModel(
-    private val bannerIntroGuidanceRepo: BannerIntroGuidanceRepo
+    private val bannerIntroGuidanceRepo: BannerIntroGuidanceRepo,
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
 
     init {

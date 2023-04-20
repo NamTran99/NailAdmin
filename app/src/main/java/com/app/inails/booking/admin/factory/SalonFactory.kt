@@ -11,11 +11,11 @@ import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper
 import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getTypeCustomer
 import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
+import com.app.inails.booking.admin.model.response.AppImage
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.Schedule
 import com.app.inails.booking.admin.model.response.VoucherDTO
 import com.app.inails.booking.admin.model.ui.*
-import java.text.DecimalFormat
 
 @Inject(ShareScope.Singleton)
 class SalonFactory(
@@ -70,7 +70,7 @@ class SalonFactory(
             override val country: String
                 get() = salonDTO.country.safe()
             override val ownerName: String
-                get() = salonDTO.partner?.name.safe()
+                get() = (salonDTO.partner?.name?:salonDTO.owner_name).safe()
             override val des: String
                 get() = salonDTO.description.safe()
             override val lat: Float
@@ -93,10 +93,14 @@ class SalonFactory(
                 get() = salonDTO.vouchers.map { createVoucher(it, context) }.sortedByDescending { it.status }.reversed()
             override val afterGalleryImage: List<AppImage>
                 get() = salonDTO.gallery.filter { it.type == 2 }
-                    .map { AppImage(id = it.id, path = it.image ?: "") }
+                    .map { AppImage(id = it.id, image = it.image ?: "") }
             override val beforeGalleryImage: List<AppImage>
                 get() = salonDTO.gallery.filter { it.type == 1 }
-                    .map { AppImage(id = it.id, path = it.image ?: "") }
+                    .map { AppImage(id = it.id, image = it.image ?: "") }
+            override val ownerEmail: String
+                get() =  textFormatter.displaySafe(salonDTO.partner?.email)
+            override val ownerPhone: String
+                get() = textFormatter.displaySafe(salonDTO.partner?.phone?.formatPhoneUSCustom())
         }
     }
 

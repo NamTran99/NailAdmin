@@ -7,6 +7,7 @@ import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogViewImagesBinding
 import com.app.inails.booking.admin.extention.lock
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.views.base.ImagesViewPagerAdapter
 
 
 class ViewImageDialog(context: Context) : BaseDialog(context) {

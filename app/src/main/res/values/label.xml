@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_enter_your_phone">PLEASE ENTER YOUR PHONE NUMBER</string>
-    <string name="label_what_do_you_want_get_done">What do you want to get done ?</string>
+    <string name="label_what_do_you_want_get_done">What service would you like to have ?</string>
     <string name="label_time_and_date">Time and Date</string>
     <string name="label_phone">Phone</string>
+    <string name="label_phone_1">Phone</string>
     <string name="label_email">Email</string>
     <string name="label_address">Address</string>
     <string name="label_admin_login">Owner Login</string>
     <string name="label_empty_data">No data available!</string>
+    <string name="label_empty_service">Salon has no service. Please update your services for customers to book!</string>
+    <string name="label_empty_staff">Salon has no staffs. Please update your staffs for customers to order services!</string>
     <string name="label_full_name">Full Name</string>
     <string name="label_services">Services</string>
     <string name="label_request">Request</string>
@@ -17,6 +20,7 @@
     <string name="label_staff">Staff</string>
     <string name="label_every_available">Everyone Available</string>
     <string name="label_choose_staff">Choose Staff</string>
+    <string name="label_choose_customer">Choose Customer</string>
     <string name="label_select_date">Select Date</string>
     <string name="label_total_duration_service">Total Duration Service</string>
     <string name="label_name">Name</string>
@@ -49,12 +53,14 @@
     <string name="label_filter">Filter</string>
     <string name="label_by_status">By Status</string>
     <string name="label_status_waiting_for_approval">Waiting for approval</string>
-    <string name="label_accepted">Accepted</string>
+    <string name="label_accepted">Confirmed</string>
     <string name="label_canceled">Canceled</string>
     <string name="label_status_waiting_for_service">Waiting for service</string>
     <string name="label_status_serving">Serving</string>
     <string name="label_status_finished">Finished</string>
     <string name="search_by_name_phone">Search by Name, Phone</string>
+    <string name="search_by_state">Search by State</string>
+    <string name="search_by_city">Search by City</string>
     <string name="label_select_customer">Select Customer</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.app.inails.booking.admin.views.me
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
@@ -13,6 +12,7 @@ import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
@@ -23,13 +23,13 @@ import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.factory.SalonFactory
+import com.app.inails.booking.admin.helper.firebase.FirebaseType
+import com.app.inails.booking.admin.helper.firebase.generateSharingLink
 import com.app.inails.booking.admin.model.ui.ISalonDetail
-import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.dialog.VoucherDetailDialogOwner
 import com.app.inails.booking.admin.views.extension.LocalImage
-import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.app.inails.booking.admin.views.me.adapters.HomeBannerPager
 import com.app.inails.booking.admin.views.me.adapters.SalonScheduleAdapter
 import com.app.inails.booking.admin.views.me.adapters.VoucherAdapter
@@ -71,10 +71,10 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
             adapter = HomeBannerPager(binding.vpImage).apply {
                 onClickItem = {
                     val listImage = viewModel.salonDetail.value?.images?.map {
-                        LocalImage(it.path)
+                        LocalImage(it.image)
                     }
                     if (!listImage.isNullOrEmpty()) {
-                        Router.run { redirectToShowZoomImage(ShowZoomImageArgs(data = listImage to it)) }
+                        Router.run {open(self, Routing.ShowListZoomImage(listImage, it))  }
                     }
                 }
             }
@@ -98,6 +98,23 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
                 )
             )
         }
+        btnShare.onClick{
+            generateSharingLink(
+                type = FirebaseType.salon,
+                id = item.salonID.toString(),
+                imageLink = (if (item.images.isEmpty()) null else item.images!![0])?.image?.toUri()
+            ) {
+                shareDeepLink(
+                    requireContext().getString(
+                        R.string.salon_sender_format,
+                        item.salonName,
+                        item.address,
+                        item.phoneNumber,
+                        item.des, it
+                    )
+                )
+            }
+        }
         txtSalonName.text = item.salonName
         viewHeader.apply {
             tvEmptyVoucher.show(item.vouchers.isEmpty())
@@ -110,7 +127,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
             txtOwner.text = item.ownerName
             txtDescription.text = item.des
             SalonScheduleAdapter(rcvSchedule).submit(item.schedules)
-            adapter.items = item.images.map { it.path }
+            adapter.items = item.images.map { it.image }
             btnDirection.onClick { appSettings.navigateMyLocationWithGoogleMap(item.lat, item.lng) }
         }
     }

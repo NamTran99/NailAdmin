@@ -5,17 +5,11 @@ import android.support.core.view.ViewScopeOwner
 import androidx.core.widget.addTextChangedListener
 import com.app.inails.booking.admin.DataConst.VoucherType.TYPE_PERCENT
 import com.app.inails.booking.admin.R
-import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogSummaryBookingBinding
-import com.app.inails.booking.admin.exception.Format.FORMAT_DATE_MONTH_TIME
-import com.app.inails.booking.admin.exception.Format.FORMAT_DATE_TIME_API
-import com.app.inails.booking.admin.exception.formatDateWithFormat
 import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.model.ui.IService
-import com.app.inails.booking.admin.model.ui.IVoucher
 import com.app.inails.booking.admin.model.ui.client.IServiceClient
 import com.app.inails.booking.admin.model.ui.client.IVoucherClient
 
@@ -30,7 +24,6 @@ class SummaryBookingDialog(context: Context) : BaseDialog(context) {
         binding.edtVoucher.addTextChangedListener {
             binding.btnApplyVoucher.isEnabled = it!!.isNotEmpty()
         }
-
 
         binding.btnBack.onClick {
             dismiss()
@@ -59,8 +52,6 @@ class SummaryBookingDialog(context: Context) : BaseDialog(context) {
         txtRsStaff.text = staffName ?: context.getString(R.string.label_anyone_available)
         edtVoucher.setText("")
         txtDiscount.text = ""
-        txtRsDatetime.text =
-            dateTime.formatDateWithFormat(FORMAT_DATE_TIME_API, FORMAT_DATE_MONTH_TIME)
         ServiceSummaryAdapter(rcvService).submit(services)
         txtTotal.text = String.format("$%.2f", totalPrice(services)).replace(",", ".")
         txtTotalAmount.text = String.format("$%.2f", totalPrice(services)).replace(",", ".")

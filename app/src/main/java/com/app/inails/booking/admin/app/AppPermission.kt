@@ -1,11 +1,14 @@
 package com.app.inails.booking.admin.app
 
 import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import android.support.core.permission.*
 import android.support.core.view.ViewScopeOwner
 import androidx.activity.result.ActivityResultCaller
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import java.util.concurrent.atomic.AtomicInteger
@@ -99,6 +102,25 @@ class AppPermission {
     }
 
     fun accessLocation(function: (Boolean) -> Unit): PermissionRequest {
+        return mChecker.check(
+            mNextLocalRequestCode.getAndIncrement(),
+            *PERMISSION_LOCATION,
+            onPermission = function
+        )
+    }
+
+    fun allowLocation(context: Context): Boolean {
+        return (ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )) == PackageManager.PERMISSION_GRANTED
+                && (ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun checkLocation(function: (Boolean) -> Unit): PermissionRequest {
         return mChecker.check(
             mNextLocalRequestCode.getAndIncrement(),
             *PERMISSION_LOCATION,

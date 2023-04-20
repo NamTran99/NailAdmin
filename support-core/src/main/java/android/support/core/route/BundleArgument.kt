@@ -53,6 +53,13 @@ fun <T : BundleArgument> Activity.argument(def: (() -> T)? = null): T {
     return BundleArgument.of(intent) ?: def()
 }
 
+fun <T : BundleArgument?> Activity.nullableArguments(def: (() -> T)? = null): T? {
+    if (def == null) {
+            return BundleArgument.of(intent)
+    }
+    return BundleArgument.of(intent) ?: def()
+}
+
 fun <T : BundleArgument> Fragment.argument(def: (() -> T)? = null): T {
     if (def == null) {
         return BundleArgument[arguments]
@@ -70,6 +77,10 @@ fun <T : BundleArgument?> Fragment.nullableArguments(def: (() -> T)? = null): T?
 
 
 fun <T : BundleArgument> Activity.lazyArgument(def: (() -> T)? = null) =
+    lazy(LazyThreadSafetyMode.NONE) {
+        argument(def)
+    }
+fun <T : BundleArgument> Activity.lazyNullableArgument(def: (() -> T)? = null) =
     lazy(LazyThreadSafetyMode.NONE) {
         argument(def)
     }

@@ -10,6 +10,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelBookingID"
         android:layout_width="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_height="wrap_content"
         android:text="@string/label_booking_id"
         android:textColor="@color/gray_145" />
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/labelBookingID"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_alignParentEnd="true"
         tools:text="#123456" />
 
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtBookingID"
         android:layout_marginTop="@dimen/size_10"
+        style="@style/AppTheme.TextViewResponsive"
         android:text="@string/label_salon_name"
         android:textColor="@color/gray_145" />
 
@@ -36,6 +39,7 @@
         android:background="?selectableItemBackground"
         android:textColor="@color/colorAccent"
         android:layout_width="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/labelSalonName"
         android:layout_alignParentEnd="true"
@@ -49,6 +53,7 @@
         android:id="@+id/labelClientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_below="@+id/txtSalonName"
         android:layout_marginTop="@dimen/size_10"
         android:text="@string/label_client_name"
@@ -59,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/labelClientName"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_alignParentEnd="true"
         tools:text="John Doe" />
 
@@ -67,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/labelClientName"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_marginTop="@dimen/size_10"
         android:text="@string/label_phone_number"
         android:textColor="@color/gray_145" />
@@ -76,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/labelPhoneNumber"
+        style="@style/AppTheme.TextViewResponsive"
         android:layout_alignParentEnd="true"
         tools:text="987-654-3210" />
 

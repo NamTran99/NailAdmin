@@ -54,6 +54,24 @@ class ConfirmNoticeDialog(context: Context) : BaseDialog(context) {
 
     fun show(
         @StringRes title: Int,
+        message: String,
+        @StringRes buttonConfirm: Int = R.string.btn_confirm,
+        isShowCancel: Boolean = true,
+        function: () -> Unit = {}
+    ) {
+        isShowCancel.show(binding.btnCancel)
+        binding.txtTitle.setText(title)
+        binding.txtBody.text = message
+        binding.btnDismiss.setText(buttonConfirm)
+        binding.btnDismiss.onClick {
+            function()
+            dismiss()
+        }
+        super.show()
+    }
+
+    fun show(
+        @StringRes title: Int,
         @StringRes message: Int,
         @StringRes buttonConfirm: Int = R.string.btn_confirm,
         isShowCancel: Boolean = true,

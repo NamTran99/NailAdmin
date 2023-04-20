@@ -1,14 +1,11 @@
 package com.app.inails.booking.admin.views.widget
 
+
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Matrix
-import android.graphics.PointF
-import android.graphics.RectF
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
@@ -28,9 +25,6 @@ import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-
-
-import java.lang.Exception
 
 @SuppressLint("AppCompatCustomView")
 class PinchZoomImageView : ImageView {
@@ -52,7 +46,7 @@ class PinchZoomImageView : ImageView {
     // MTRANS_X and MTRANS_Y are the other values used. prevMatrix is the matrix
     // saved prior to the screen rotating.
     //
-    private var mMatrix : Matrix? = null
+    private var mMatrix: Matrix? = null
     private var prevMatrix: Matrix? = null
     private var state: State? = null
 
@@ -65,7 +59,7 @@ class PinchZoomImageView : ImageView {
     private var mContext: Context? = null
     private var fling: Fling? = null
 
-    private var mScaleType:ScaleType? = null
+    private var mScaleType: ScaleType? = null
 
     private var imageRenderedAtLeastOnce: Boolean = false
     private var onDrawReady: Boolean = false
@@ -111,7 +105,8 @@ class PinchZoomImageView : ImageView {
                 throw UnsupportedOperationException("getZoomedRect() not supported with FIT_XY")
             }
             val topLeft = transformCoordTouchToBitmap(0f, 0f, true)
-            val bottomRight = transformCoordTouchToBitmap(viewWidth.toFloat(), viewHeight.toFloat(), true)
+            val bottomRight =
+                transformCoordTouchToBitmap(viewWidth.toFloat(), viewHeight.toFloat(), true)
 
             val w = drawable.intrinsicWidth.toFloat()
             val h = drawable.intrinsicHeight.toFloat()
@@ -161,7 +156,11 @@ class PinchZoomImageView : ImageView {
             val drawableWidth = drawable.intrinsicWidth
             val drawableHeight = drawable.intrinsicHeight
 
-            val point = transformCoordTouchToBitmap((viewWidth / 2).toFloat(), (viewHeight / 2).toFloat(), true)
+            val point = transformCoordTouchToBitmap(
+                (viewWidth / 2).toFloat(),
+                (viewHeight / 2).toFloat(),
+                true
+            )
             point.x /= drawableWidth.toFloat()
             point.y /= drawableHeight.toFloat()
             return point
@@ -185,7 +184,11 @@ class PinchZoomImageView : ImageView {
         sharedConstructing(context)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         sharedConstructing(context)
     }
 
@@ -248,27 +251,31 @@ class PinchZoomImageView : ImageView {
         fitImageToView()
     }
 
-    fun setImageUrl(url: String?,callBack: (Boolean) -> Unit) {
+    fun setImageUrl(url: String?, callBack: (Boolean) -> Unit) {
         if (url == null || url.isEmpty()) {
-            setImageResource(R.drawable.ic_launcher)
+            setImageResource(R.drawable.img_logo)
             callBack.invoke(false)
             return
         }
         //        if (!url.startsWith("https://") && !url.startsWith("http://"))
         //            url = BuildConfig.ROOT_PHOTO + url;
         Picasso.get()
-                .load(url)
-                .into(this, object : Callback {
-                    override fun onSuccess() {
-                        callBack.invoke(true)
-                    }
+            .load(url)
+            .into(this, object : Callback {
+                override fun onSuccess() {
+                    callBack.invoke(true)
+                }
 
-                    override fun onError(e: Exception?) {
-                        setImageResource(R.drawable.ic_launcher)
-                        Toast.makeText(mContext, context!!.getString(R.string.error_loading_photo), Toast.LENGTH_SHORT).show()
-                        callBack.invoke(false)
-                    }
-                })
+                override fun onError(e: Exception?) {
+                    setImageResource(R.drawable.img_logo)
+                    Toast.makeText(
+                        mContext,
+                        context!!.getString(R.string.error_loading_photo),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    callBack.invoke(false)
+                }
+            })
     }
 
 
@@ -346,7 +353,12 @@ class PinchZoomImageView : ImageView {
         onDrawReady = true
         imageRenderedAtLeastOnce = true
         if (delayedZoomVariables != null) {
-            setZoom(delayedZoomVariables!!.scale, delayedZoomVariables!!.focusX, delayedZoomVariables!!.focusY, delayedZoomVariables!!.scaleType)
+            setZoom(
+                delayedZoomVariables!!.scale,
+                delayedZoomVariables!!.focusX,
+                delayedZoomVariables!!.focusY,
+                delayedZoomVariables!!.scaleType
+            )
             delayedZoomVariables = null
         }
         super.onDraw(canvas)
@@ -376,7 +388,12 @@ class PinchZoomImageView : ImageView {
      * @param scaleType
      */
     @JvmOverloads
-    fun setZoom(scale: Float, focusX: Float = 0.5f, focusY: Float = 0.5f, scaleType: ImageView.ScaleType? = mScaleType) {
+    fun setZoom(
+        scale: Float,
+        focusX: Float = 0.5f,
+        focusY: Float = 0.5f,
+        scaleType: ImageView.ScaleType? = mScaleType
+    ) {
         //
         // setZoom can be called before the image is on the screen, but at this point,
         // image and view sizes have not yet been calculated in onMeasure. Thus, we should
@@ -596,14 +613,30 @@ class PinchZoomImageView : ImageView {
             //
             val prevActualWidth = prevMatchViewWidth * currentZoom
             val actualWidth = imageWidth
-            translateMatrixAfterRotate(Matrix.MTRANS_X, transX, prevActualWidth, actualWidth, prevViewWidth, viewWidth, drawableWidth)
+            translateMatrixAfterRotate(
+                Matrix.MTRANS_X,
+                transX,
+                prevActualWidth,
+                actualWidth,
+                prevViewWidth,
+                viewWidth,
+                drawableWidth
+            )
 
             //
             // Height
             //
             val prevActualHeight = prevMatchViewHeight * currentZoom
             val actualHeight = imageHeight
-            translateMatrixAfterRotate(Matrix.MTRANS_Y, transY, prevActualHeight, actualHeight, prevViewHeight, viewHeight, drawableHeight)
+            translateMatrixAfterRotate(
+                Matrix.MTRANS_Y,
+                transY,
+                prevActualHeight,
+                actualHeight,
+                prevViewHeight,
+                viewHeight,
+                drawableHeight
+            )
 
             //
             // Set the matrix to the adjusted scale and translate values.
@@ -648,7 +681,15 @@ class PinchZoomImageView : ImageView {
      * @param viewSize width/height of view after rotation
      * @param drawableSize width/height of drawable
      */
-    private fun translateMatrixAfterRotate(axis: Int, trans: Float, prevImageSize: Float, imageSize: Float, prevViewSize: Int, viewSize: Int, drawableSize: Int) {
+    private fun translateMatrixAfterRotate(
+        axis: Int,
+        trans: Float,
+        prevImageSize: Float,
+        imageSize: Float,
+        prevViewSize: Int,
+        viewSize: Int,
+        drawableSize: Int
+    ) {
         if (imageSize < viewSize) {
             //
             // The width/height of image is less than the view's width/height. Center it.
@@ -714,7 +755,12 @@ class PinchZoomImageView : ImageView {
             performLongClick()
         }
 
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+        override fun onFling(
+            e1: MotionEvent,
+            e2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
             if (fling != null) {
                 //
                 // If a previous fling is still active, it should be cancelled so that two flings
@@ -852,13 +898,23 @@ class PinchZoomImageView : ImageView {
             }
 
             if (animateToZoomBoundary) {
-                val doubleTap = DoubleTapZoom(targetZoom, (viewWidth / 2).toFloat(), (viewHeight / 2).toFloat(), true)
+                val doubleTap = DoubleTapZoom(
+                    targetZoom,
+                    (viewWidth / 2).toFloat(),
+                    (viewHeight / 2).toFloat(),
+                    true
+                )
                 compatPostOnAnimation(doubleTap)
             }
         }
     }
 
-    private fun scaleImage(deltaScale: Double, focusX: Float, focusY: Float, stretchImageToSuper: Boolean) {
+    private fun scaleImage(
+        deltaScale: Double,
+        focusX: Float,
+        focusY: Float,
+        stretchImageToSuper: Boolean
+    ) {
         var deltaScaleLocal = deltaScale
 
         val lowerScale: Float
@@ -891,7 +947,12 @@ class PinchZoomImageView : ImageView {
      * an animated zoom in/out graphic to the image.
      * @author Ortiz
      */
-    private inner class DoubleTapZoom internal constructor(private val targetZoom: Float, focusX: Float, focusY: Float, private val stretchImageToSuper: Boolean) : Runnable {
+    private inner class DoubleTapZoom internal constructor(
+        private val targetZoom: Float,
+        focusX: Float,
+        focusY: Float,
+        private val stretchImageToSuper: Boolean
+    ) : Runnable {
 
         private val startTime: Long
         private val startZoom: Float
@@ -1070,8 +1131,10 @@ class PinchZoomImageView : ImageView {
                 minY = maxY
             }
 
-            scroller!!.fling(startX, startY, velocityX, velocityY, minX,
-                    maxX, minY, maxY)
+            scroller!!.fling(
+                startX, startY, velocityX, velocityY, minX,
+                maxX, minY, maxY
+            )
             currX = startX
             currY = startY
         }
@@ -1151,7 +1214,16 @@ class PinchZoomImageView : ImageView {
             }
         }
 
-        fun fling(startX: Int, startY: Int, velocityX: Int, velocityY: Int, minX: Int, maxX: Int, minY: Int, maxY: Int) {
+        fun fling(
+            startX: Int,
+            startY: Int,
+            velocityX: Int,
+            velocityY: Int,
+            minX: Int,
+            maxX: Int,
+            minY: Int,
+            maxY: Int
+        ) {
             if (isPreGingerbread) {
                 scroller.fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY)
             } else {
@@ -1187,12 +1259,20 @@ class PinchZoomImageView : ImageView {
         }
     }
 
-    private inner class ZoomVariables(var scale: Float, var focusX: Float, var focusY: Float, var scaleType: ImageView.ScaleType)
+    private inner class ZoomVariables(
+        var scale: Float,
+        var focusX: Float,
+        var focusY: Float,
+        var scaleType: ImageView.ScaleType
+    )
 
     private fun printMatrixInfo() {
         val n = FloatArray(9)
         mMatrix!!.getValues(n)
-        Log.d(DEBUG, "Scale: " + n[Matrix.MSCALE_X] + " TransX: " + n[Matrix.MTRANS_X] + " TransY: " + n[Matrix.MTRANS_Y])
+        Log.d(
+            DEBUG,
+            "Scale: " + n[Matrix.MSCALE_X] + " TransX: " + n[Matrix.MTRANS_X] + " TransY: " + n[Matrix.MTRANS_Y]
+        )
     }
 
     companion object {

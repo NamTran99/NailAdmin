@@ -11,6 +11,7 @@ import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.app.inails.booking.admin.extention.toTime
 import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getStatusColor
 import com.app.inails.booking.admin.factory.SalonFactory.Companion.VoucherHelper.getStatusName
+import com.app.inails.booking.admin.model.response.AppImage
 import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.support.ISelector
 import com.google.gson.annotations.SerializedName
@@ -32,6 +33,8 @@ interface ISalonDTOOwner {
 
 interface ISalonDetail : ISalon {
     val ownerName: String get() = ""
+    val ownerPhone: String get() = ""
+    val ownerEmail: String get() = ""
     val des: String? get() = ""
     val images: List<AppImage> get() = listOf()
     val lat: Float get() = 0f
@@ -72,7 +75,7 @@ enum class VoucherType {
 
 class ISchedule(
     var day: Int = 0,
-    @StringRes var dayFormat: Int = 0,
+    @StringRes var dayFormat: Int = 0,  // day name
     var startTimeFormat: String? = null,// format 12H with AM/PM
     var endTimeFormat: String? = null,  // format 12H with AM/PM
     var startTime: String? = null,      // format 24H
@@ -232,9 +235,3 @@ data class ScheduleForm(
         )
     }
 }
-
-@Parcelize
-data class AppImage(
-    val id: Int? = null,
-    val path: String = ""
-) : Parcelable

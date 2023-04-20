@@ -3,16 +3,20 @@ package com.app.inails.booking.admin.views.me.adapters
 import android.app.Activity
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogChooseOneForAllDateBinding
+import com.app.inails.booking.admin.extention.configSpinner
+import com.app.inails.booking.admin.extention.findIndex
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.bumptech.glide.Glide.init
+import com.google.android.youtube.player.internal.s
 
 
 class ChooseOneForAllDateDialog(context: Context,
@@ -22,7 +26,7 @@ class ChooseOneForAllDateDialog(context: Context,
 
     var onSaveClick : ((List<ISchedule>) -> Unit) = {}
 
-    var isFirstOpen = true
+//    var isFirstOpen = true
     private var commonTimeSchedule = ISchedule(startTime = START_TIME, endTime = END_TIME)
     init {
         setCancelable(false)
@@ -49,7 +53,9 @@ class ChooseOneForAllDateDialog(context: Context,
                 }
 
                 onSaveClick.invoke(
-                    selectDateAdapter.selectedItems.map {
+                    selectDateAdapter.selectedItems.let {
+                        it.toMutableList().apply { add(currentSelectedDay.day) }
+                    }.map {
                         ISchedule(startTime = commonTimeSchedule.startTime, endTime = commonTimeSchedule.endTime, day = it, dayFormat = getDayFormat(it))
                     }
                 )
@@ -59,15 +65,30 @@ class ChooseOneForAllDateDialog(context: Context,
         }
     }
 
+    var currentSelectedDay = ISchedule()
     fun show(
-        function: (String) -> Unit
+        currentDate: ISchedule,
+        listSchedule: List<ISchedule>
     ) {
         with(binding) {
-            if(isFirstOpen){
-                businessHour.setStartTime(START_TIME)
-                businessHour.setEndTime(END_TIME)
-                isFirstOpen  = false
+            val openDay =  listSchedule.filter { it.isOpenDay }
+            //config spinner
+            val voucherCustomerType = openDay.map { context.getString(it.dayFormat)}.toTypedArray()
+            val currentPos = openDay.findIndex { it.day == currentDate.day }
+            spDate.configSpinner(false,voucherCustomerType){position ->
+                currentSelectedDay = openDay[position].apply { isSelector = true }
+                businessHour.setStartTime(openDay[position].startTime)
+                businessHour.setEndTime(openDay[position].endTime)
+                selectDateAdapter.submit(
+                    listSchedule.filter {
+                        it.day != currentSelectedDay.day
+                    }.map {
+                        it.isSelector = (it.startTime == currentSelectedDay.startTime) && (it.endTime == currentSelectedDay.endTime)
+                        it
+                    }
+                )
             }
+            spDate.setSelection(currentPos)
             businessHour.setupListener()
         }
         super.show()

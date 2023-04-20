@@ -8,7 +8,7 @@
     <!--Appointment-->
     <string name="status_appointment_pending">Waiting for approval</string>
     <string name="status_appointment_waiting">Waiting for service</string>
-    <string name="status_appointment_accepted">Accepted </string>
+    <string name="status_appointment_accepted">Confirmed</string>
     <string name="status_appointment_in_processing">Serving</string>
     <string name="status_appointment_unknown">Unknown</string>
     <string name="status_appointment_finished">Finished</string>

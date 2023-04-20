@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RadioButtonApp">
+        <item name="android:autoSizeMaxTextSize">@dimen/text_size_12</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:autoSizeMinTextSize">@dimen/text_size_8</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:button">@drawable/bg_radio_button_find_staff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+</resources>

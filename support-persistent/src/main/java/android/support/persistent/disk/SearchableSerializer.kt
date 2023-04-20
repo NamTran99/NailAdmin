@@ -52,14 +52,15 @@ class SearchableSerializerImpl(private val adapter: Adapter = EmptyAdapter) : Se
                     append(obj.toString()).append(" ")
                     return this
                 }
-                fields.forEach {
-                    it.isAccessible = true
-                    val value = it.get(obj)
-                    if (value != null) {
-                        appendSearchable(value)
-                    }
-                    it.isAccessible = false
-                }
+                return this
+//                fields.forEach {
+//                    it.isAccessible = true
+//                    val value = it.get(obj)
+//                    if (value != null) {
+//                        appendSearchable(value)
+//                    }
+//                    it.isAccessible = false
+//                }
             }
         }
         return this

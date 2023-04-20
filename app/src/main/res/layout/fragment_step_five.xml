@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lvScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/bg_corner_white"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_15"
+        android:paddingVertical="@dimen/size_16">
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size_16"
+            android:text="@string/step_5_title"
+            android:textColor="@color/color_BE43C3" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive.Hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:gravity="center"
+            android:text="@string/step_5_des"
+            android:textStyle="normal" />
+
+
+        <TextView
+            android:id="@+id/tvLink"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:text="@string/test_link" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lvTraPhi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/size_25"
+                    android:src="@drawable/ic_camera" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btAddPaidImage"
+                    style="@style/AppTheme.Button.OneLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_primary_stroke_1"
+                    android:drawableTint="@color/black"
+                    android:text="@string/button_add_menu"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcPaidImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_picture_holder" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/size_10"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_weight="1"
+                style="@style/AppTheme.Line.Horizontal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:layout_marginHorizontal="@dimen/size_10"
+                style="@style/AppTheme.TextViewResponsive"/>
+            <View
+                android:layout_weight="1"
+                style="@style/AppTheme.Line.Horizontal"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvShowMethod2"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/size_15"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:text="@string/step_5_des_2"
+          />
+
+        <TextView
+            android:id="@+id/tvShowMethod2Hint"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/size_15"
+            android:gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="@string/step5_manually_method"
+            />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/lvMethod2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/add_service_for_salon" />
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_2"
+                android:layout_marginTop="@dimen/size_5"
+                android:text="@string/step_5_des_3"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/text_size_10"
+                android:textStyle="italic" />
+
+            <com.app.inails.booking.admin.views.widget.SalonServiceView
+                android:id="@+id/salonServiceView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                app:custom_display_type="TypeService" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btAddService"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:layout_marginTop="@dimen/size_10"
+                style="@style/AppTheme.Button.Responsive"
+                android:background="@drawable/button_f5e2f6_corner"
+                android:drawableStart="@drawable/ic_plus_round"
+                android:paddingStart="@dimen/size_15"
+                android:paddingEnd="@dimen/size_40"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary" />
+
+            <LinearLayout
+                android:id="@+id/layoutAddService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                android:orientation="vertical" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/add_staff_for_salon" />
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_2"
+                android:layout_marginTop="@dimen/size_5"
+                android:text="@string/step_5_des_4"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/text_size_10"
+                android:textStyle="italic" />
+
+            <com.app.inails.booking.admin.views.widget.SalonStaffView
+                android:id="@+id/salonStaffView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                app:custom_display_type="TypeService" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btAddStaff"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@drawable/button_f5e2f6_corner"
+                android:drawableStart="@drawable/ic_plus_round"
+                android:paddingStart="@dimen/size_15"
+                android:paddingEnd="@dimen/size_40"
+                style="@style/AppTheme.Button.Responsive"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary" />
+
+            <LinearLayout
+                android:id="@+id/layoutAddStaff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                android:orientation="vertical" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBack"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_ebebeb_corner"
+                android:drawableStart="@drawable/ic_back"
+                android:drawableTint="@color/black"
+                android:text="@string/button_back"
+                android:drawablePadding="@dimen/size_3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_12" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_green_corner_2"
+                android:drawableStart="@drawable/ic_tick_2"
+                android:drawableTint="#8ce590"
+                android:textColor="#c5f2c7"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/button_complete_sign_up"
+                android:textSize="@dimen/text_size_12" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive.Hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/sign_up_des"
+            android:textColor="@color/hint_text_color" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

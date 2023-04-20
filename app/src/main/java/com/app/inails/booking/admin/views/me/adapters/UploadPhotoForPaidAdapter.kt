@@ -1,13 +1,13 @@
 package com.app.inails.booking.admin.views.me.adapters
 
-import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.app.inails.booking.admin.databinding.ItemPictureHolderBinding
 import com.app.inails.booking.admin.extention.findIndex
-import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -41,7 +41,7 @@ class UploadPhotoForPaidAdapter(view: RecyclerView) :
             requestOptions.fitCenter()
 
             Glide.with(view.context)
-                .load(item.path)
+                .load(item.image)
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imgHolder)
@@ -51,7 +51,7 @@ class UploadPhotoForPaidAdapter(view: RecyclerView) :
             }
 
             imgHolder.setOnClickListener {
-                onItemClickListener.invoke(item.path)
+                onItemClickListener.invoke(item.image)
             }
         }
     }

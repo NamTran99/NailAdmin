@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/size_10"
+    android:layout_marginBottom="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
+    android:elevation="@dimen/size_5"
+    android:paddingEnd="@dimen/size_10">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#16BC40C1"
+        android:padding="@dimen/size_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.app.inails.booking.admin.views.widget.LoadingCircleImage
+            android:id="@+id/imgBanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.27" />
+
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginEnd="@dimen/size_10"
+        android:textSize="@dimen/text_size_14"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Kim Nguyen" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginBottom="@dimen/size_10"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/text_size_10" />
+
+            <TextView
+                android:id="@+id/tvGender"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="@dimen/text_size_10"
+                android:textStyle="normal"
+                tools:text="Nữ" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/experience_1"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/text_size_10" />
+
+            <TextView
+                android:id="@+id/tvExperience"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="@dimen/text_size_10"
+                android:textStyle="normal"
+                tools:text="5 năm" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/working_area"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/text_size_10" />
+
+            <TextView
+                android:id="@+id/tvWorkplace"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="@dimen/text_size_10"
+                android:textStyle="normal"
+                tools:text="5 năm" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/able_to_work_out_of_sate"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/text_size_10" />
+
+            <TextView
+                android:id="@+id/tvWorkOutState"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="@dimen/text_size_10"
+                android:textStyle="normal"
+                tools:text="5 năm" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

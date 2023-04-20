@@ -41,7 +41,6 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
             val cloudMessage =
                 Gson().fromJson(objectFilter, FireBaseCloudMessage::class.java)
             val cloudMessageClient = `object`.toString().toObject<FireBaseCloudMessageClient>()
-            Log.d("TAG", "onMessageReceived: namtd8 ${cloudMessage.type}")
             when(cloudMessage.type.toInt()){
                 OWNER_ACCOUNT_APPROVE ->{
                     NotificationsManager(applicationContext).defaultNotify(cloudMessage)

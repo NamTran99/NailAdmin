@@ -13,6 +13,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -45,18 +46,12 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btEdit"
-            style="@style/AppTheme.ButtonDefault.Wrap"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_30"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/bg_button_customer_booking"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:text="@string/edit"
-            android:textColor="@color/color_btn_booking"
-            android:textSize="@dimen/text_size_10" />
+        <ImageButton
+            android:id="@+id/btMenu"
+            style="@style/AppTheme.ImageButton"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_more" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -136,7 +131,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btBookingList"
+        android:id="@+id/btCreateAppointment"
         style="@style/AppTheme.ButtonDefault.Wrap"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/size_10"
@@ -144,7 +139,7 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/bg_button_customer_booking"
         android:fontFamily="@font/montserrat_semi_bold"
-        android:text="@string/booking_list"
+        android:text="@string/create_appointment"
         android:textColor="@color/color_btn_booking"
         android:textSize="@dimen/text_size_10" />
 

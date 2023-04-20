@@ -168,8 +168,12 @@ class OTPView @JvmOverloads constructor(
 }
 
 fun EditText.setEnable(enable: Boolean) {
+    isEnabled = enable
     isFocusable = enable
     isFocusableInTouchMode = enable
+    alpha = if(enable){
+        1f
+    }else 0.6f
 }
 
 class OTPEditText @JvmOverloads constructor(

@@ -5,17 +5,14 @@ import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
-import android.support.core.route.BundleArgument
 import android.support.core.route.nullableArguments
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -23,33 +20,22 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentCreateAppointmentBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.BookingApi
-import com.app.inails.booking.admin.extention.bind
-import com.app.inails.booking.admin.extention.inputTypePhoneUS
-import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.extention.toServerUTC
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.support.ISelector
-import com.app.inails.booking.admin.model.ui.AppointmentForm
-import com.app.inails.booking.admin.model.ui.IAppointment
-import com.app.inails.booking.admin.model.ui.IService
-import com.app.inails.booking.admin.model.ui.IStaff
+import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Router.Companion.redirectToApmList
-import com.app.inails.booking.admin.navigate.Router.Companion.redirectToMain
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToFindCustomer
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.booking.AppointmentDetailRepository
+import com.app.inails.booking.admin.views.booking.create_appointment.adapter.SelectServiceAdapter
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
+import com.app.inails.booking.admin.views.widget.setEnable
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import com.google.android.youtube.player.internal.i
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
-data class AppointmentArg(
-    val id: Int? = 0
-) : BundleArgument
 
 class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment),
     TopBarOwner {
@@ -66,6 +52,7 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
     private var mStaff: IStaff? = null
     private var mHour = 0
     private var mMinute = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
@@ -78,8 +65,23 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
         )
         mServiceAdapter = SelectServiceAdapter(binding.rvServices)
         with(binding) {
-            etPhone.inputTypePhoneUS()
-            mDatePickerDialog.setupClickWithView(tvSelectDate)
+            etPhone.onClick {
+                redirectToFindCustomer(self)
+            }
+
+            etFullName.onClick {
+                redirectToFindCustomer(self)
+            }
+            appEvent.findingCustomer.bind {
+                viewModel.form.customer_id = it.first.id
+                etPhone.setText(it.first.phone)
+                etFullName.setTextCustom(it.first.name)
+                if(it.second){
+                    etPhone.setEnable(false)
+                    etFullName.setEnable(false)
+                }
+            }
+            mDatePickerDialog.setupClickWithView(tvSelectDate, true)
             mTimePickerDialog.setupClickWithView(tvSelectTime)
             tvChooseStaff.setOnClickListener {
                 Router.run { redirectToChooseStaff() }
@@ -99,10 +101,10 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                     name = etFullName.text.toString()
                     note = etNote.text.toString()
                     workTime = workingTime
-                    if(mServiceAdapter.selectedItems.isNotEmpty()){
-                        services = mServiceAdapter.selectedItems.toString()
-                    }else
-                        services = ""
+                    services = if (mServiceAdapter.selectedItems.isNotEmpty()) {
+                        mServiceAdapter.selectedItems.toString()
+                    } else
+                        ""
                     dateAppointment = if (tvSelectTime.text.toString()
                             .isEmpty()
                     ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}".toServerUTC()
@@ -113,7 +115,6 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                     viewModel.submit()
             }
             btAddAppointment.setText(if (arg?.id == null) R.string.btn_add_appointment else R.string.btn_update)
-
         }
 
         with(viewModel) {
@@ -128,7 +129,7 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                 success(it)
                 activity?.onBackPressed()
             }
-            createApmSuccess.bind{
+            createApmSuccess.bind {
                 success(it)
                 redirectToApmList()
             }
@@ -170,7 +171,7 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
         with(binding) {
             viewModel.form.id = apm.id
             etPhone.setText(apm.phone)
-            etFullName.setText(apm.customerName)
+            etFullName.setTextCustom(apm.customerName)
             if (apm.staffID > 0 && mStaff == null) {
                 viewModel.form.staffID = apm.staffID
                 tvChooseStaff.text = apm.staffName
@@ -178,21 +179,19 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
             tvSelectDate.text = apm.dateSelected
             tvSelectDate.tag = apm.dateTag
             tvSelectTime.text = apm.timeSelected
+
             val minute = apm.workTime % 60 / 10
             val hour = apm.workTime / 60
             spHour.setSelection(hour)
             spMinute.setSelection(minute)
-            if (apm.serviceCustomObj != null) {
-                etNote.setText(apm.serviceCustomObj!!.name)
-                etNote.show()
-                (mServiceAdapter.items?.last() as ISelector).isSelector = true
-            }
+            etNote.setText(apm.somethingElse)
+            etNote.show()
+            (mServiceAdapter.items?.last() as ISelector).isSelector = true
             mServiceAdapter.setSelected(apm.serviceList)
         }
     }
 
 }
-
 
 class CreateAppointmentViewModel(
     private val serviceRepo: ServiceRepository,

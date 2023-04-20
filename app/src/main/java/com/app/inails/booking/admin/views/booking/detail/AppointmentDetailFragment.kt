@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.booking.detail
 
+import FetchListServiceRepo
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.support.core.event.LoadingEvent
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.LoadingLiveData
 import android.support.core.livedata.SingleLiveEvent
+import android.support.core.livedata.combine1
 import android.support.core.livedata.post
 import android.support.core.route.argument
 import android.support.core.view.viewBinding
@@ -18,12 +20,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentAppointmentDetailBinding
 import com.app.inails.booking.admin.extention.*
+import com.app.inails.booking.admin.model.response.AppImage
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
@@ -33,16 +37,19 @@ import com.app.inails.booking.admin.views.booking.*
 import com.app.inails.booking.admin.views.booking.dialog.VoucherDetailDialogOwner
 import com.app.inails.booking.admin.views.extension.LocalImage
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
-import com.app.inails.booking.admin.views.management.service.adapters.AppImagesAdapter
+import com.app.inails.booking.admin.views.base.AppImagesAdapter
 import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_detail),
     TopBarOwner, AcceptAppointmentOwner, RejectAppointmentOwner,
-    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, StaffInfoDialogOwner, VoucherDetailDialogOwner {
+    StartServicesOwner, FinishBookingOwner, CustomerInfoOwner, StaffInfoDialogOwner,
+    VoucherDetailDialogOwner {
     private val binding by viewBinding(FragmentAppointmentDetailBinding::bind)
     private val viewModel by viewModel<AppointmentDetailViewModel>()
     private val arg by lazy { argument<Routing.AppointmentDetail>() }
@@ -51,9 +58,10 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
     private var beforeImagePath = ArrayList<AppImage>()
     private var afterImagePath = ArrayList<AppImage>()
 
-    private lateinit var mFeebackImageAdapter: AppImagesAdapter
+    private lateinit var mFeedbackImageAdapter: AppImagesAdapter
     private lateinit var mBeforeImagesAdapter: AppImagesAdapter
     private lateinit var mAfterImagesAdapter: AppImagesAdapter
+//    private lateinit var mMoreServiceAdapter: ServicePriceAdapter
 
     private val startForResultBeforeImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -61,8 +69,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 beforeImagePath =
-                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
-                finishBookingDialog.updateBeforeImages(beforeImagePath)
+                    ArrayList(pathImage.map { pathUri -> AppImage(image = pathUri.toString()) })
                 finishBookingDialog.updateBeforeImages(beforeImagePath)
             }
         }
@@ -73,7 +80,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 afterImagePath =
-                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                    ArrayList(pathImage.map { pathUri -> AppImage(image = pathUri.toString()) })
                 finishBookingDialog.updateAfterImages(afterImagePath)
             }
         }
@@ -87,7 +94,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                     .setImageAdapter(GlideAdapter())
                     .setMaxCount(5)
                     .setMinCount(1)
-                    .setSelectedImages(ArrayList(beforeImagePath.map { it.path.toUri() }))
+                    .setSelectedImages(ArrayList(beforeImagePath.map { it.image.toUri() }))
                     .setActionBarColor(
                         ContextCompat.getColor(context, R.color.colorPrimary),
                         ContextCompat.getColor(context, R.color.colorPrimary),
@@ -102,7 +109,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                     .setImageAdapter(GlideAdapter())
                     .setMaxCount(5)
                     .setMinCount(1)
-                    .setSelectedImages(ArrayList(afterImagePath.map { it.path.toUri() }))
+                    .setSelectedImages(ArrayList(afterImagePath.map { it.image.toUri() }))
                     .setActionBarColor(
                         ContextCompat.getColor(context, R.color.colorPrimary),
                         ContextCompat.getColor(context, R.color.colorPrimary),
@@ -113,40 +120,63 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             }
 
             onclickRemoveAfterImage = { image ->
-                afterImagePath.removeAll { it.path == image.path }
+                afterImagePath.removeAll { it.image == image.image }
             }
 
             onclickRemoveBeforeImage = { image ->
-                beforeImagePath.removeAll { it.path == image.path }
+                beforeImagePath.removeAll { it.image == image.image }
+            }
+            onSearchService = {
+                viewModel.searchService(it)
             }
         }
         topBar.setState(
             SimpleTopBarState(
                 R.string.title_appointment_detail,
-                extensionButton = ExtensionButton(isShow =  false, onclick = {
+                extensionButton = ExtensionButton(isShow = false, onclick = {
                     Router.redirectToCreateAppointment(self, arg.id)
                 }),
                 onBackClick = {
                     activity?.onBackPressed()
                 },
-            ))
+            )
+        )
 
         with(binding) {
             viewRefresh.colorSchemeDefault()
             viewRefresh.setOnRefreshListener { viewModel.refresh(arg.id) }
-            mFeebackImageAdapter = AppImagesAdapter(rcFeedbackImage).apply {
-                onItemImageClick  = {
-                    Router.run { redirectToShowZoomImage1(ShowZoomImageArgs1(this@apply.items().getData().map{ LocalImage(it.path) }, it)) }
+//            mMoreServiceAdapter = ServicePriceAdapter(rvMoreServices, isShowBottom = true)
+            mFeedbackImageAdapter = AppImagesAdapter(rcFeedbackImage).apply {
+                onItemImageClick = {
+                    Router.run {
+                        redirectToShowZoomImage1(
+                            ShowZoomImageArgs1(
+                                this@apply.items().getData().map { LocalImage(it.image) }, it
+                            )
+                        )
+                    }
                 }
             }
             mBeforeImagesAdapter = AppImagesAdapter(rcBeforePhoto).apply {
-                onItemImageClick  = {
-                    Router.run { redirectToShowZoomImage1(ShowZoomImageArgs1(this@apply.items().getData().map{ LocalImage(it.path) }, it)) }
+                onItemImageClick = {
+                    Router.run {
+                        redirectToShowZoomImage1(
+                            ShowZoomImageArgs1(
+                                this@apply.items().getData().map { LocalImage(it.image) }, it
+                            )
+                        )
+                    }
                 }
             }
             mAfterImagesAdapter = AppImagesAdapter(rcAfterphoto).apply {
-                onItemImageClick  = {
-                    Router.run { redirectToShowZoomImage1(ShowZoomImageArgs1(this@apply.items().getData().map{ LocalImage(it.path) }, it)) }
+                onItemImageClick = {
+                    Router.run {
+                        redirectToShowZoomImage1(
+                            ShowZoomImageArgs1(
+                                this@apply.items().getData().map { LocalImage(it.image) }, it
+                            )
+                        )
+                    }
                 }
             }
             btDelete.setOnClickListener {
@@ -173,6 +203,10 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             }
         }
         with(viewModel) {
+            serviceLoadingResult.bind {
+                finishBookingDialog.updateServiceSearch(it)
+            }
+
             loadingCustom.bind {
                 binding.viewRefresh.isRefreshing = it
             }
@@ -204,8 +238,6 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             appointmentCheckIn.bind {
                 displays(it)
             }
-
-
             idRemove.bind {
                 appActivity.onBackPressed()
             }
@@ -224,33 +256,41 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
     }
 
     private fun displays(item: IAppointment) {
-        mFeebackImageAdapter.clear()
+        mFeedbackImageAdapter.clear()
         mBeforeImagesAdapter.clear()
         mAfterImagesAdapter.clear()
 
         mAppointment = item
         with(binding) {
-            btnInfo.onClick{
-                item.voucher?.let{
+            btnInfo.onClick {
+                item.voucher?.let {
                     voucherDetailDialog.show(it)
                 }
             }
+//            mMoreServiceAdapter.submit(item.serviceCustom)
             tvCode.text = item.voucherCode
-            tvPercent.text = item.percent
+            tvPercent.text = item.percentDisplay
             tvPercent.show(item.showPercent)
 //            txtVoucherCode.text = item.voucherCode
 //            txtDiscount.show(item.showPercent)
 //            txtDiscount.text = item.percent
             txtPriceDiscount.text = item.discount
-            txtTotalAmount.text = item.totalAmount
+            if(item.totalAmount <= 0.0){
+                tvFree.show()
+                txtTotalAmount.hide()
+            }else{
+                tvFree.hide()
+                txtTotalAmount.show()
+                txtTotalAmount.text = item.totalAmountDisplay
+            }
             voucherLayout.show(item.hasVoucher)
             lvBeforeAfterImg.hide(item.beforeImage.isEmpty() && item.afterImage.isEmpty())
             tvBeforeImg.hide(item.beforeImage.isEmpty())
             tvAfterImg.hide(item.afterImage.isEmpty())
-            mFeebackImageAdapter.submit(item.feedbackImages)
+            mFeedbackImageAdapter.submit(item.feedbackImages)
             mBeforeImagesAdapter.submit(item.beforeImage)
             mAfterImagesAdapter.submit(item.afterImage)
-            txtTotal.text = item.totalPriceService
+//            txtTotal.text = item.totalPriceService
             tvCustomerName.text = item.customerName
             tvTimeAndDate.text = item.dateAppointment
             tvStaffName.text = item.staffName
@@ -266,8 +306,9 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             (item.status == DataConst.AppointmentStatus.APM_PENDING && item.type == 2) show waitingLayout
 //            (item.status == DataConst.AppointmentStatus.APM_FINISH) show finishLayout
             (item.status == DataConst.AppointmentStatus.APM_CANCEL) show cancelLayout
-            val list = item.serviceList.toMutableList()
-            item.serviceCustomObj?.let { list.add(it) }
+            val list = item.serviceListAll.toMutableList()
+//            item.serviceCustomObj?.let { list.add(it) }
+            // NamTD8: note
             (ServicePriceAdapter(rvServices)).apply {
                 submit(list)
             }
@@ -281,7 +322,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
             feedbackLayout.show(item.hasFeedback)
             tvFeedbackContent.text = item.feedbackContent
             ratingBar.rating = item.feedbackRating.toFloat()
-            tvPhone.text = item.phone.formatPhoneUS()
+            tvPhone.text = item.phone.formatPhoneUSCustom()
             tvCreatedAt.text = item.createAt
             tvAppointmentNote.text = item.notes
 
@@ -299,15 +340,15 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                 SimpleTopBarState(
                     R.string.title_appointment_detail,
                     extensionButton = ExtensionButton(isShow = item.status != DataConst.AppointmentStatus.APM_FINISH && item.status != DataConst.AppointmentStatus.APM_CANCEL && item.status != DataConst.AppointmentStatus.APM_IN_PROCESSING,
-                    onclick = {
-                        Router.redirectToCreateAppointment(self, arg.id)
-                    }
-                        )
-                    ,
+                        onclick = {
+                            Router.redirectToCreateAppointment(self, arg.id)
+                        }
+                    ),
                     onBackClick = {
                         activity?.onBackPressed()
                     },
-                ))
+                )
+            )
         }
 
     }
@@ -386,7 +427,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
 
         binding.btFinish.onClick {
             if (mAppointment != null)
-                finishBookingDialog.show( mAppointment!!) { amount, notes ->
+                finishBookingDialog.show(mAppointment!!) { amount, notes, listMore ->
                     viewModel.form.run {
                         id = mAppointment!!.id
                         price = amount
@@ -394,6 +435,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
                         status = DataConst.AppointmentStatus.APM_FINISH
                         beforeImages = beforeImagePath
                         afterImages = afterImagePath
+                        moreService = listMore
                     }
                     viewModel.updateStatus()
                 }
@@ -410,6 +452,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
 class AppointmentDetailViewModel(
     private val appointmentDetailRepo: AppointmentDetailRepository,
     private val appointmentRepo: AppointmentRepository,
+    private val fetchListServiceRepo: FetchListServiceRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val appointment = appointmentDetailRepo.result
     val appointmentAction = appointmentRepo.result
@@ -422,10 +465,6 @@ class AppointmentDetailViewModel(
     val success = SingleLiveEvent<Int>()
     val checkInSuccess = SingleLiveEvent<Any>()
     val loadingCustom: LoadingEvent = LoadingLiveData()
-
-    init {
-//        refresh()
-    }
 
     fun refresh(id: Int) = launch(loadingCustom, error) {
         appointmentDetailRepo(id)
@@ -462,4 +501,16 @@ class AppointmentDetailViewModel(
         appointmentRepo.startServiceAppointment(formStartService)
         success.post(R.string.success_start_service)
     }
+
+    val searchScope = CoroutineScope(Dispatchers.Main)
+    val serviceListResult = fetchListServiceRepo.results
+    val serviceLoadingResult =
+        serviceListResult.combine1(refreshLoading as MutableLiveData<Boolean>) { items, loading ->
+            items to loading
+        }
+
+    fun searchService(keyword: String = "", page: Int = 1) =
+        launch(refreshLoading, error, searchScope.coroutineContext, true) {
+            fetchListServiceRepo(keyword, page)
+        }
 }

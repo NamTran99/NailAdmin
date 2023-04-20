@@ -103,7 +103,7 @@
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
-    <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
+    <style name="AppTheme.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
@@ -117,14 +117,20 @@
         <item name="android:insetLeft">0dp</item>
         <item name="android:insetRight">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="android:singleLine">true</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="cornerRadius">@dimen/radius_default</item>
     </style>
 
     <style name="AppTheme.Button.Responsive">
         <item name="android:singleLine">false</item>
-        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="AppTheme.Button.OneLine">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:autoSizeMaxTextSize">@dimen/text_size_12</item>
+        <item name="android:autoSizeMinTextSize">@dimen/text_size_8</item>
+        <item name="android:autoSizeTextType">uniform</item>
     </style>
 
     <style name="AppTheme.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -203,7 +209,7 @@
     <style name="AppTheme.TextView.MultiLine" parent="AppTheme.TextView">
         <item name="android:maxLines">5</item>
         <item name="android:minLines">3</item>
-        <item name="android:ellipsize">@null</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="AppTheme.TextViewResponsive">
@@ -215,6 +221,12 @@
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:drawablePadding">@dimen/size_8</item>
     </style>
+    <style name="AppTheme.TextViewResponsive.Hint">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/text_size_10</item>
+        <item name="android:textColor">@color/hint_text_color</item>
+        <item name="android:layout_marginStart">@dimen/size_3</item>
+    </style>
 
     <style name="AppTheme.TextView.SemiBold">
         <item name="fontFamily">@font/montserrat_semi_bold</item>
@@ -222,7 +234,11 @@
     </style>
 
     <style name="AppTheme.TextView.Title.Small">
+        <item name="android:autoSizeMaxTextSize">@dimen/text_size_15</item>
+        <item name="android:autoSizeMinTextSize">@dimen/text_size_8</item>
+        <item name="android:autoSizeTextType">uniform</item>
         <item name="android:textSize">@dimen/text_size_15</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="AppTheme.TextView.Italic">
@@ -330,6 +346,11 @@
 
     <style name="rounded_corner">
         <item name="cornerSize">5dp</item>
+    </style>
+
+    <style name="round_corner_left_side">
+        <item name="cornerSizeBottomLeft">5dp</item>
+        <item name="cornerSizeTopLeft">5dp</item>
     </style>
 
     <style name="AppTheme.RatingBar.Grey" parent="AppTheme.RatingBar">

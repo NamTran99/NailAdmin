@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.model.response
 
+ 
 import com.google.gson.annotations.SerializedName
 
 data class SalonDTO(
@@ -26,7 +27,9 @@ data class SalonDTO(
     val tz: String? = "",
     val vouchers: List<VoucherDTO> = listOf(),
     val gallery: List<GalleryImage> = listOf(),
-    val created_at: String? = null
+    val created_at: String? = null,
+    val owner_name: String? = "",
+    val workplace: String? = ""
 )
 
 data class GalleryImage(
@@ -50,7 +53,7 @@ class VoucherDTO(
     val status: Int = 1
     )
 
-data class Image(
+ class Image(
     val id: Long = 0,
     val image: String = ""
 )
@@ -72,5 +75,7 @@ data class Schedule(
 
 data class Partner(
     val id: Long = 0,
-    val name: String = ""
+    val name: String? = "",
+    val phone: String ? = "",
+    val email: String ? = ""
 )

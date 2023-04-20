@@ -110,7 +110,7 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification), TopBa
                     mAdapter.clear()
                 }
                 mAdapter.submit(it.second)
-                binding.emptyLayout.tvEmptyData.show(it.second.isEmpty() && it.first == 1)
+                binding.emptyLayout.lvEmpty.show(it.second.isEmpty() && it.first == 1)
             }
 
             notification.bind {

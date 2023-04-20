@@ -13,10 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.SearchFilterLayoutBinding
-import com.app.inails.booking.admin.extention.loadAttrs
-import com.app.inails.booking.admin.extention.onSearchListener
-import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.extention.visible
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.AppointmentFilterForm
 import java.util.*
 
@@ -25,7 +22,7 @@ interface SearchFilterViewInf{
     var onClickSearchAction: ((String) -> Unit)?
     fun setText(search: String)
     fun setHint(@StringRes hint: Int)
-    fun showHideImgFilter(form: AppointmentFilterForm)
+    fun showHideImgFilter(isShow: Boolean)
 }
 
 class SearchFilterView(context: Context, attributeSet: AttributeSet) :
@@ -54,8 +51,8 @@ class SearchFilterView(context: Context, attributeSet: AttributeSet) :
         setUpListener()
     }
 
-    override fun showHideImgFilter(form: AppointmentFilterForm){
-        form.isHaveDataForFilter().show(binding.imgFilter)
+    override fun showHideImgFilter(isShow: Boolean){
+        isShow.show(binding.imgFilter)
     }
 
     override fun setText(search: String){
@@ -115,10 +112,12 @@ class SearchFilterView(context: Context, attributeSet: AttributeSet) :
             }
             
             searchView.onSearchListener {
+                searchView.showKeyboard(false)
                 onClickSearchAction?.invoke(it)
             }
 
             btClear.setOnClickListener {
+                searchView.showKeyboard(false)
                 searchView.text?.clear()
             }
         }

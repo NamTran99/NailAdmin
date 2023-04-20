@@ -50,7 +50,7 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
             etLocation.onClick {
                 appSettings.openPlaceAutoComplete("", ::onPlaceSelected)
             }
-            mDatePickerDialog.setupClickWithView(etBirthday)
+            mDatePickerDialog.setupClickWithView(etBirthday, true)
             mDatePickerDialog.setDisablePastDates(false)
             mDatePickerDialog.setDisableFutureDates(true)
             mDatePickerDialog.setDisplayFormat("MM-dd-yyyy")
@@ -95,7 +95,9 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
                         note = etNote.getTextString(),
                         birthday = etBirthday.tag.toString(),
                         email = etEmail.getTextString(),
-                        address = etLocation.getTextString()
+                        address = etLocation.getTextString(),
+                        name = etName.getTextString(),
+                        phone = etPhone.getTextString()
                     )
                     function.invoke(updateCustomerForm)
                 }

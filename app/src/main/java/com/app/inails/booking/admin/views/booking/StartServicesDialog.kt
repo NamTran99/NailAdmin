@@ -2,7 +2,6 @@ package com.app.inails.booking.admin.views.booking
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
-import android.util.Log
 import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
@@ -36,8 +35,8 @@ class StartServicesDialog(context: Context) : BaseDialog(context) {
         with(binding) {
             tvChooseStaff.setText(R.string.label_choose_staff)
             val list = apm.serviceList.toMutableList()
-            apm.serviceCustomObj?.let { list.add(it) }
-            (ServicePriceAdapter(rvServices)).apply {
+            apm.serviceCustom.let { list.addAll(it) }
+            (ServicePriceAdapter(rvServices, isShowBottom = true)).apply {
                 submit(list)
             }
             val minute = apm.workTime % 60 / 10

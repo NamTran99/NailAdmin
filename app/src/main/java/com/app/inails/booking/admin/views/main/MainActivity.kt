@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -31,6 +32,7 @@ import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.sockets.AuthSocket
 import com.app.inails.booking.admin.extention.onClick
+import com.app.inails.booking.admin.helper.firebase.FirebaseType
 import com.app.inails.booking.admin.helper.pairLookupOf
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.NotificationIDForm
@@ -41,6 +43,7 @@ import com.app.inails.booking.admin.repository.auth.LogoutRepo
 import com.app.inails.booking.admin.views.booking.BookingFragment
 import com.app.inails.booking.admin.views.clients.ClientHomeActivity
 import com.app.inails.booking.admin.views.home.HomeFragment
+import com.app.inails.booking.admin.views.main.MainActivity.Companion.APPOINTMENT_ID
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.me.AccountFragment
 import com.app.inails.booking.admin.views.notification.NotificationRepository
@@ -49,6 +52,8 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.esafirm.imagepicker.helper.LocaleManager
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import kotlin.reflect.KClass
 
 
@@ -110,6 +115,30 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onNewIntent(intent)
+
+//        config firebase
+//        FirebaseDynamicLinks.getInstance()
+//            .getDynamicLink(intent)
+//            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+//                var deepLink: Uri? = null
+//
+//                if (pendingDynamicLinkData != null) {
+//                    deepLink = pendingDynamicLinkData.link
+//                }
+//                val type = deepLink?.getQueryParameter("type")
+//                val id = deepLink?.getQueryParameter("id")
+//                Log.d("TAG", "onCreate:NamTD88 Vao day ")
+//                    when (type) {
+//                        FirebaseType.staff -> {
+//                            Router.open(this, Routing.DetailCandidate(id?.toInt() ?: 0))
+//                        }
+//                    }
+//            }.addOnFailureListener {
+//                // This lambda will be triggered when there is a failure.
+//                // Handle
+//                Log.d("TAG", "handleIncomingDeepLinks: ${it.message}")
+//            }
+
         NotificationsManagerClient(this).cancelAll()
         userLocalSource.setOwnerMode(true)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))

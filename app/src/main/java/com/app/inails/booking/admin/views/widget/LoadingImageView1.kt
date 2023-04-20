@@ -81,7 +81,7 @@ class LoadingImageView1 @JvmOverloads constructor(
             return
         }
         this.url = url
-        Picasso.get().load(url).fit().into(binding.image, object : Callback {
+        Picasso.get().load(url).resize(2048,2048).centerInside().into(binding.image, object : Callback {
             override fun onSuccess() {
                 binding.apply {
                     lvAddImage.setBackgroundResource(0)

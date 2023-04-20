@@ -2,16 +2,20 @@ package com.app.inails.booking.admin.views.clients.dialog
 
 import android.content.Context
 import android.support.core.view.ViewScopeOwner
+import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.views.dialog.MessageDialog
 
 class NotificationDialog(context: Context) : MessageDialog(context) {
+    init {
+        setCancelable(false)
+    }
 
     fun show(resString: Int, function: () -> Unit) {
-        show("Notification", resString, function)
+        show(R.string.notification, resString, function)
     }
 
     fun show(msg: String) {
-        show("Notification", msg)
+        show(R.string.notification, msg)
     }
 }
 

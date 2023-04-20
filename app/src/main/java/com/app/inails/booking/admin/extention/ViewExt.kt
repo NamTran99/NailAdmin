@@ -2,22 +2,29 @@ package com.app.inails.booking.admin.extention
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.res.TypedArray
+import android.database.Cursor
 import android.graphics.*
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
+import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.support.core.view.ViewScopeOwner
-import android.text.Spannable
-import android.text.SpannableString
+import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.CharacterStyle
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -26,25 +33,32 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.DimenRes
 import androidx.annotation.MenuRes
+import androidx.annotation.StringRes
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doOnTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.functional.UsPhoneNumberFormatter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.app.inails.booking.admin.views.widget.DecimalDigitsInputFilter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.tabs.TabLayout
+import com.sangcomz.fishbun.util.getDimension
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -131,14 +145,22 @@ fun ImageView.startAnimVector(delays: Long = 100) {
     }, delays)
 }
 
-fun EditText.setTextCustom(text: String){
-    if (text == this.context.getString(R.string.no_information)){
+fun EditText.setTextCustom(text: String) {
+    if (text == this.context.getString(R.string.no_information)) {
         this.setText("")
-    }else{
+    } else {
         this.setText(text)
     }
 }
 
+fun EditText.clearText() {
+    setText("")
+}
+
+fun EditText.displayErrorAndFocus(@StringRes errorID: Int) {
+    error = context.getString(errorID)
+    showKeyboard()
+}
 
 fun View.disableAlpha() {
     this.background.alpha = 255//max
@@ -241,9 +263,9 @@ fun <T : View> T.visible(b: Boolean = true, function: T.() -> Unit = {}) {
 }
 
 fun View.hide(b: Boolean) {
-    if(b){
+    if (b) {
         visibility = View.GONE
-    }else{
+    } else {
         visibility = View.VISIBLE
     }
 }
@@ -267,6 +289,10 @@ infix fun Boolean.visible(view: View) {
 
 infix fun Boolean.show(view: View) {
     view.visibility = if (this) View.VISIBLE else View.GONE
+}
+
+infix fun Boolean.hide(view: View) {
+    view.visibility = if (this) View.GONE else View.VISIBLE
 }
 
 fun List<View>.show(b: Boolean = true, callback: () -> Unit = {}) {
@@ -362,7 +388,6 @@ fun Context.getAppResourceId(attr: Int): Int {
     theme.resolveAttribute(attr, typedValue, true)
     return typedValue.resourceId
 }
-
 
 
 fun AttributeSet?.load(
@@ -493,18 +518,20 @@ fun TextView.setDrawableEnd(resIcon: Int) {
 }
 
 fun ShapeableImageView.setImageUrl(url: String) {
-    Glide.with(context).load(url).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.img_logo))
+    if (url.isBlank()) return
+    Picasso.get().load(url).placeholder(R.drawable.img_logo).error(R.drawable.img_logo)
         .into(this)
 }
 
 
 fun ShapeableImageView.setImageUri(uri: Uri) {
-    Glide.with(context).load(uri).apply(RequestOptions().placeholder(R.drawable.box_grey).error(R.drawable.box_grey))
+    if (uri.toString().isBlank()) return
+    Picasso.get().load(uri).placeholder(R.drawable.img_logo).error(R.drawable.img_logo)
         .into(this)
 }
 
-fun ViewScopeOwner.getActivityContext(): Context{
-    return  return when(this){
+fun ViewScopeOwner.getActivityContext(): Context {
+    return return when (this) {
         is BaseActivity -> this
         is Fragment -> this.requireActivity()
         else -> error("")
@@ -538,4 +565,207 @@ fun TextView.setTextViewDrawableColor(color: Int) {
                 )
         }
     }
+}
+
+fun Spinner.configSpinner(
+    isHaveHintFistItem: Boolean,
+    content: Array<String>,
+    onItemSelected: (position: Int) -> Unit ={}
+) {
+    adapter = object : ArrayAdapter<String>(
+        context,
+        R.layout.layout_spinner_item, content
+    ) {
+        override fun isEnabled(position: Int): Boolean {
+            return if (isHaveHintFistItem) position != 0 else true
+        }
+
+        override fun getDropDownView(
+            position: Int,
+            convertView: View?,
+            parent: ViewGroup
+        ): View {
+            val view: TextView =
+                super.getDropDownView(position, convertView, parent) as TextView
+            //set the color of first item in the drop down list to gray
+            if (position == 0 && isHaveHintFistItem) {
+                view.setTextColor(Color.GRAY)
+            } else {
+                //here it is possible to define color for other items by
+                //view.setTextColor(Color.RED)
+            }
+            return view
+        }
+    }
+
+    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            if (position == 0 && isHaveHintFistItem) {
+                (view as TextView).setTextColor(Color.GRAY)
+            } else {
+                (view as TextView).setTextColor(Color.BLACK)
+            }
+            onItemSelected.invoke(position)
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            //
+        }
+    }
+}
+
+fun Context.getLoadingCircleDrawable(): CircularProgressDrawable {
+    val circularProgressDrawable = CircularProgressDrawable(this)
+    circularProgressDrawable.strokeWidth = 10f
+    circularProgressDrawable.centerRadius = 50f
+    circularProgressDrawable.setColorSchemeColors(Color.GREEN, getColor(R.color.colorPrimary))
+    circularProgressDrawable.start()
+    return circularProgressDrawable
+}
+
+fun EditText.setInputSignedDecimal(digitsBeforeZero: Int = 4, digitsAfterZero: Int = 2) {
+    filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(digitsBeforeZero, digitsAfterZero))
+}
+
+fun TabLayout.setDivider() {
+    val root = getChildAt(0)
+    if (root is LinearLayout) {
+        root.apply {
+            showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
+            val drawable = GradientDrawable()
+            drawable.setColor(context.getColor(R.color.line_divider))
+            drawable.setSize(
+                context.getDimension(R.dimen.size_1),
+                context.getDimension(R.dimen.size_15)
+            )
+            dividerPadding = context.getDimension(R.dimen.size_10)
+            dividerDrawable = drawable
+        }
+    }
+}
+
+fun AppCompatImageView.setImageURICustom(link: String, onLoadFinish: (()-> Unit) = {}) {
+    if (link.isEmpty()) return
+    if (link.contains("http")) {
+        Picasso.get().load(link)
+            .resize(1024,1024)
+            .centerInside()
+            .placeholder(context.getLoadingCircleDrawable())
+            .error(R.drawable.img_logo)
+            .into(this, object : Callback {
+                override fun onSuccess() {
+                    onLoadFinish.invoke()
+                }
+
+                override fun onError(e: Exception) {
+                    onLoadFinish.invoke()
+                }
+            })
+    } else {
+        Picasso.get().load(link)
+            .resize(1024, 1024)
+            .centerInside()
+            .transform(
+                RotateTransformation(
+                    getRotateDegree(context, link)
+                )
+            )
+            .error(R.drawable.img_logo)
+            .into(this, object : Callback {
+                override fun onSuccess() {
+                    onLoadFinish.invoke()
+                }
+
+                override fun onError(e: Exception) {
+                    onLoadFinish.invoke()
+                }
+            })
+    }
+
+}
+
+
+fun getFilePathFromContentUri(inContext: Context,contentUri: Uri?): String? {
+    var filePath: String? = null
+    val projection = arrayOf(MediaStore.Images.Media.DATA)
+    val resolver: ContentResolver = inContext.contentResolver
+    val cursor: Cursor? = resolver.query(contentUri!!, projection, null, null, null)
+    if (cursor != null && cursor.moveToFirst()) {
+        val columnIndex: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        filePath = cursor.getString(columnIndex)
+        cursor.close()
+    }
+    return filePath
+}
+
+
+fun EditText.addFilterLimitMaxNumber(max: Double){
+    addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            // Không cần thiết phải xử lý
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            try {
+                val input = s.toString().toDouble()
+
+                if (input > max) {
+                    setText(max.display())
+                    setSelection(max.display().length)
+                }
+            } catch (e: NumberFormatException) {
+                // Xử lý ngoại lệ
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            // Không cần thiết phải xử lý
+        }
+    })
+}
+
+fun View.moveViewFromLeft(windowManager: WindowManager, distance: Float = 100f) {
+    val displayMetrics = DisplayMetrics()
+    windowManager.getDefaultDisplay().getMetrics(displayMetrics)
+    val screenWidth = displayMetrics.widthPixels
+    translationX = -screenWidth.toFloat()
+    animate().translationX(0f).setDuration(1000).start()
+}
+
+fun Handler.postDelayedLatest( runnable: Runnable,delayMillis: Long) {
+    removeCallbacksAndMessages(null)
+    postDelayed(runnable, delayMillis)
+}
+
+fun List<View>.moveViewFromRight(windowManager: WindowManager, duration: Long = 1000, delay: Long = 100) {
+    val displayMetrics = DisplayMetrics()
+    windowManager.getDefaultDisplay().getMetrics(displayMetrics)
+    val screenWidth = displayMetrics.widthPixels
+    var delayStep : Long= 0
+    forEach{
+        it.translationX = screenWidth.toFloat()
+        it.animate().translationX(0f).setDuration(duration).setStartDelay(delayStep).start()
+        delayStep+= delay
+    }
+}
+
+fun View.moveViewFromBottom(windowManager: WindowManager, duration: Long = 1000) {
+    val displayMetrics = DisplayMetrics()
+    windowManager.getDefaultDisplay().getMetrics(displayMetrics)
+    val screenHeight = displayMetrics.heightPixels
+    translationY = screenHeight.toFloat()
+    animate().translationY(0f).setDuration(duration).start()
+}
+
+fun View.moveViewFromTop(windowManager: WindowManager, duration: Long = 1000) {
+    val displayMetrics = DisplayMetrics()
+    windowManager.getDefaultDisplay().getMetrics(displayMetrics)
+    val screenHeight = displayMetrics.heightPixels
+    translationY = -200f
+    animate().translationY(0f).setDuration(duration).start()
 }

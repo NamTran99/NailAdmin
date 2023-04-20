@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_radius"
@@ -86,8 +87,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogOut"
-        style="@style/AppTheme.ButtonDefault.Wrap"
-        android:layout_width="@dimen/size_120"
+        style="@style/AppTheme.ButtonDefault.Responsive"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/size_30"
         android:layout_marginTop="@dimen/size_15"
         android:background="@drawable/button_pink_corner"

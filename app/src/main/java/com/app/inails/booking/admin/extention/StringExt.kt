@@ -4,8 +4,11 @@ import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.SpannableStringBuilder
+import androidx.annotation.StringRes
+import androidx.core.net.toUri
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.MainApplication
+import okhttp3.MultipartBody
 import java.net.URLDecoder
 
 fun Int.formatTime(): String {
@@ -147,12 +150,12 @@ fun String.formatUsNumberCustom(): String {
     return formattedString.toString()
 }
 
-fun String.displaySafe(context: Context): String {
-    return this.ifEmpty {context.getString(R.string.no_information) }
+fun String.displaySafe(context: Context,@StringRes textId: Int= R.string.no_information): String {
+    return this.ifEmpty {context.getString(textId) }
 }
 
 fun String?.displaySafe1(context: Context): String {
-    return this ?: "".displaySafe(context)
+    return this ?: "".displaySafe(context, textId = R.string.no_information)
 }
 
 
@@ -170,4 +173,12 @@ fun String?.toPriceFormat(): String {
 
 fun String.toPriceValue(): String {
     return this.replace("$", "")
+}
+
+suspend fun List<String>.toImageMultiPartArray(): Array< MultipartBody.Part?>{
+    return filter { !it.contains("http") }.mapIndexed { index, uriLink ->
+        val context = MainApplication.applicationContext()
+        context.getFilePath(uriLink.toUri())!!.scalePhotoLibrary(context)
+            .toImagePart("images")
+    }.toTypedArray()
 }

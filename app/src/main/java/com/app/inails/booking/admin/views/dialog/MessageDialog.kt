@@ -13,6 +13,7 @@ open class MessageDialog(context: Context) : BaseDialog(context) {
     private val binding = viewBinding(DialogMessageBinding::inflate)
 
     init {
+
         binding.btnDismiss.onClick {
             dismiss()
             mOnDismiss()
@@ -52,6 +53,14 @@ open class MessageDialog(context: Context) : BaseDialog(context) {
     fun show(title: Int, resMsg: Int, onDismiss: () -> Unit = {}) {
         mOnDismiss = onDismiss
         binding.txtBody.setText(resMsg)
+        binding.txtTitle.setText(title)
+        super.show()
+    }
+
+    fun show(title: Int, resMsg: Int, dismissText: Int,onDismiss: () -> Unit = {}) {
+        mOnDismiss = onDismiss
+        binding.txtBody.setText(resMsg)
+        binding.btnDismiss.setText(dismissText)
         binding.txtTitle.setText(title)
         super.show()
     }

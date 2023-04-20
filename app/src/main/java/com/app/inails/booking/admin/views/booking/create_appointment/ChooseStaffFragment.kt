@@ -24,6 +24,7 @@ import com.app.inails.booking.admin.model.ui.StaffForm
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.StaffCheckInRepo
 import com.app.inails.booking.admin.repository.auth.StaffRepo
+import com.app.inails.booking.admin.views.booking.create_appointment.adapter.SelectStaffAdapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
@@ -87,13 +88,13 @@ class ChooseStaffFragment : BaseFragment(R.layout.fragment_choose_staff), TopBar
         with(viewModel) {
             staffs.bind {
                 mAdapter.submit(it)
-                binding.emptyLayout.tvEmptyData.show(it.isNullOrEmpty())
+                binding.emptyLayout.lvEmpty.show(it.isNullOrEmpty())
                 binding.rvStaff.show(!it.isNullOrEmpty())
             }
 
             staffCheckInList.bind {
                 mAdapter.submit(it)
-                binding.emptyLayout.tvEmptyData.show(it.isNullOrEmpty())
+                binding.emptyLayout.lvEmpty.show(it.isNullOrEmpty())
                 binding.rvStaff.show(!it.isNullOrEmpty())
             }
             loadingCustom.bind {

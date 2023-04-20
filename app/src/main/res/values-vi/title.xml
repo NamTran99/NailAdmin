@@ -9,9 +9,9 @@
     <string name="title_create_new_staff">Thêm nhân viên</string>
     <string name="title_feed_back">Phản Hồi</string>
     <string name="title_estimate">Ước lượng</string>
-    <string name="title_update_service">Cập nhật Dịch vụ</string>
-    <string name="title_update_salon_information">Cập Nhật Thông Tin Salon</string>
-    <string name="title_update_appointment">Cập nhật Cuộc hẹn</string>
+    <string name="title_update_service">Điều chỉnh Dịch vụ</string>
+    <string name="title_update_salon_information">Điều chỉnh Thông Tin Salon</string>
+    <string name="title_update_appointment">Điều chỉnh Cuộc hẹn</string>
     <string name="title_appointment_detail">Chi Tiết Cuộc Hẹn</string>
     <string name="title_customer_check_in">Quản lý danh sách booking</string>
     <string name="title_appointment_customer">Quản lý lịch đặt hẹn</string>
@@ -19,7 +19,7 @@
     <string name="title_sign_up">Đăng Ký Tài Khoản</string>
     <string name="title_service_staff">Cung cấp thông tin dịch vụ và thợ</string>
     <string name="title_reset_password">Thiết Lập Lại Mật Khẩu</string>
-    <string name="title_business_hour">Cập Nhật Giờ Mở Cửa</string>
+    <string name="title_business_hour">Điều chỉnh Giờ Mở Cửa</string>
     <string name="title_language">Ngôn Ngữ</string>
     <string name="title_notification">Thông Báo</string>
     <string name="title_dashboard">Chung</string>
@@ -45,4 +45,7 @@
     <string name="title_finish_booking">Hoàn Tất Phục Vụ</string>
     <string name="title_booking_list">Danh Sách Booking</string>
     <string name="title_voucher_apply">Tạo Mã Giảm Giá</string>
+    <string name="title_contact">Liên Hệ</string>
+    <string name="title_sign_up_support">Hỗ Trợ Đăng Ký</string>
+    <string name="title_image">Hình ảnh</string>
 </resources>

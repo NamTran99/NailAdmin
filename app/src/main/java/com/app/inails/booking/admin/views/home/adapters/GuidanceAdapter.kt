@@ -1,20 +1,16 @@
 package com.app.inails.booking.admin.views.home.adapters
 
 import android.annotation.SuppressLint
-import android.os.Handler
 import android.support.core.view.bindingOf
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemGuidanceSliderBinding
-import com.app.inails.booking.admin.extention.hide
-import com.app.inails.booking.admin.extention.show
+import com.app.inails.booking.admin.extention.setImageURICustom
 import com.app.inails.booking.admin.model.ui.FileType
 import com.app.inails.booking.admin.model.ui.IIntro
 import com.app.inails.booking.admin.views.me.adapters.LoopHandler
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 
 class GuidanceAdapter(recyclerView: ViewPager2) :
     SimpleRecyclerAdapter2<IIntro, ItemGuidanceSliderBinding>(recyclerView) {
@@ -49,30 +45,15 @@ class GuidanceAdapter(recyclerView: ViewPager2) :
                 onItemClick.invoke(item)
             }
             if (item.fileType == FileType.Video) {
-                if(item.thumbNail == ""){
+                if (item.thumbNail == "") {
                     image.setImageDrawable(context.getDrawable(R.drawable.ic_default_guidance))
-                }else{
-                    Picasso.get().load(item.thumbNail).into(image, object : Callback {
-                        override fun onSuccess() {
-                            progressBar.hide()
-                        }
-
-                        override fun onError(e: Exception?) {
-                            progressBar.hide()
-                        }
-                    })
+                } else {
+                    image.setImageURICustom(item.thumbNail)
                 }
             } else {
 //                image.setImageDrawable(context.getDrawable(R.drawable.ic_default_guidance))
-                Picasso.get().load(item.file).into(image, object : Callback {
-                    override fun onSuccess() {
-                        progressBar.hide()
-                    }
-
-                    override fun onError(e: Exception?) {
-                        progressBar.hide()
-                    }
-                })
+                if (item.file.isEmpty()) return
+                image.setImageURICustom(item.file)
             }
 
         }

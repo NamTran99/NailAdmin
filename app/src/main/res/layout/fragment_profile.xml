@@ -6,27 +6,45 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:gravity="center_horizontal">
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtSalonName"
-        style="@style/AppTheme.TextViewResponsive"
+    
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="?actionBarSize"
+        android:id="@+id/lv1"
         android:layout_marginTop="@dimen/size_10"
-        android:ellipsize="end"
-        android:gravity="top|center_horizontal"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_22"
-        tools:text="Healthy Nail Salon Collaborative" />
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtSalonName"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="?actionBarSize"
+            android:layout_marginTop="@dimen/size_10"
+            android:ellipsize="end"
+            android:gravity="top|center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_22"
+            tools:text="Healthy Nail Salon Collaborative" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/size_10"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_share" />
+    </RelativeLayout>
+
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGallery"
         style="@style/AppTheme.TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtSalonName"
+        android:layout_below="@id/lv1"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/size_20"
         android:background="@drawable/btn_view_stroke"

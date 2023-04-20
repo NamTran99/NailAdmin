@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.management.staff.CheckInOutFragment">
+
+    <com.app.inails.booking.admin.views.widget.SearchFilterView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_13"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableEnd="@null"
+        android:hint="@string/search_by_zipcode"
+        android:imeOptions="actionSearch"
+        android:longClickable="false"
+        app:isEnableFilter="true" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/viewRefresh"
+        android:layout_width="match_parent"
+        android:layout_below="@id/searchView"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCandidates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:elevation="@dimen/size_3"
+                android:orientation="vertical"
+                android:paddingBottom="140dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_job_profile" />
+
+            <include
+                android:id="@+id/emptyLayout"
+                layout="@layout/layout_empty"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/lvButton"
+        android:layout_height="@dimen/size_120"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/size_10"
+        android:layout_marginHorizontal="@dimen/size_16"
+        android:orientation="vertical"
+        app:cardCornerRadius="@dimen/size_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_find_jobs">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#6F80148E" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFindJob"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:autoSizeMaxTextSize="@dimen/text_size_16"
+                android:autoSizeMinTextSize="@dimen/text_size_8"
+                android:autoSizeTextType="uniform"
+                android:layout_marginHorizontal="@dimen/size_20"
+                android:gravity="center"
+                android:lines="2"
+                android:text="@string/nails_job"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btAddAds"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvFindJob"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/size_50"
+                android:layout_marginTop="@dimen/size_10"
+                android:paddingVertical="@dimen/size_10"
+                android:text="@string/click_here_3"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="#EFA860"
+                app:cornerRadius="@dimen/size_30" />
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lvScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_10"
+        android:paddingVertical="@dimen/size_16">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/radius_default">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/size_15"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/step_1_option_1"
+                    android:gravity="center"
+                    style="@style/AppTheme.TextViewResponsive"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMethod1"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:layout_width="match_parent"
+                    style="@style/AppTheme.Button.Responsive"
+                    android:layout_height="@dimen/size_50"
+                    android:layout_marginHorizontal="@dimen/size_20"
+                    android:background="@drawable/button_primary_stroke_1"
+                    android:drawableStart="@drawable/ic_info"
+                    android:textSize="@dimen/size_12"
+                    android:textAllCaps="false"
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="@string/button_support"
+                    android:textColor="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:orientation="horizontal">
+                    
+                    <View
+                        android:layout_weight="1"
+                        style="@style/AppTheme.Line.Horizontal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/or"
+                        android:layout_marginHorizontal="@dimen/size_10"
+                        style="@style/AppTheme.TextViewResponsive"/>
+                    <View
+                        android:layout_weight="1"
+                        style="@style/AppTheme.Line.Horizontal"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/step_1_option_2"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:layout_marginHorizontal="@dimen/size_30"
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    style="@style/AppTheme.TextViewResponsive"
+                    tools:ignore="AllCaps" />
+
+                <Button
+                    android:id="@+id/btnFiveStep"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:textSize="@dimen/text_size_12"
+                    android:background="@drawable/button_primary_corner"
+                    android:text="@string/click_here_2" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

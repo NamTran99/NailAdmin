@@ -6,7 +6,6 @@ import android.support.core.route.close
 import android.support.core.route.open
 import com.app.inails.booking.admin.views.auth.LoginActivity
 import com.app.inails.booking.admin.views.extension.ShowZoomImageActivity
-import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
 import com.app.inails.booking.admin.views.home.WebViewActivity
 import com.app.inails.booking.admin.views.home.WebViewArgs

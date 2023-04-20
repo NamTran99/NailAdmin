@@ -32,7 +32,7 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.app.inails.booking.admin.views.widget.ViewPager2Adapter
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarClientState
 import com.google.android.material.tabs.TabLayout
-
+// for client
 class SalonGalleryFragment : BaseFragment(R.layout.fragment_salon_gallery), TopBarOwner {
     companion object {
         var beforeSize = 0
@@ -64,8 +64,6 @@ class SalonGalleryFragment : BaseFragment(R.layout.fragment_salon_gallery), TopB
 
             setID(args.id)
         }
-
-
     }
 
     class Adapter(viewPager: ViewPager2, private val fragment: Fragment) :

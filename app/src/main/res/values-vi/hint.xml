@@ -12,4 +12,6 @@
     <string name="hint_from">Từ</string>
     <string name="hint_enter_your_phone">Điền số điện thoại của bạn</string>
     <string name="label_select_time">Chọn thời gian</string>
+    <string name="hint_enter_phone_number_2">Nhập số điện thoại</string>
+    <string name="hint_enter_phone_number_3">Nhập Email hoặc Số điện thoại của bạn</string>
 </resources>

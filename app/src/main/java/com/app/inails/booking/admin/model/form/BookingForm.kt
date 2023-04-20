@@ -9,6 +9,8 @@ class BookingForm(
     var salonSlug: String = "",
     @SerializedName("staff_id")
     var staffId: Int? = 0,
+    @SerializedName("salon_id")
+    var salonID: Int = 0,
     var services: String = "",
     var note: String = "",
     @SerializedName("date_appointment")

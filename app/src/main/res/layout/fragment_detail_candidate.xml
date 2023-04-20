@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.management.staff.CheckInOutFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:id="@+id/lv1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_10"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:background="@drawable/bg_white_radius"
+                    android:elevation="@dimen/size_3"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/size_10">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.app.inails.booking.admin.views.widget.LoadingCircleImage
+                            android:id="@+id/imgAvatar"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_centerInParent="true" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/btShare"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingVertical="@dimen/size_8"
+                            android:layout_alignParentEnd="true"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:background="@drawable/button_share"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_share_2" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/share"
+                                style="@style/AppTheme.TextViewResponsive"/>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </RelativeLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textSize="@dimen/text_size_18"
+                        android:textStyle="bold"
+                        tools:text="Kim Nguyen" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_10"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:id="@+id/lv2"
+                    android:elevation="@dimen/size_3"
+                    android:layout_marginBottom="@dimen/size_80"
+                    android:background="@drawable/bg_white_radius"
+                    android:orientation="vertical"
+                    android:padding="@dimen/size_10">
+
+                    <TextView
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_20"
+                        android:text="@string/curriculum_vitae"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent1"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_15">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/contact_phone" />
+
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:autoLink="phone"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="@string/label_phone" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/city_state_residence" />
+
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:autoLink="phone"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="@string/label_phone" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/working_area" />
+
+                        <TextView
+                            android:id="@+id/tvWorkplaceType"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="@string/label_phone" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender" />
+
+                        <TextView
+                            android:id="@+id/tvGender"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="@string/label_phone" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/experience_1" />
+
+                        <TextView
+                            android:id="@+id/tvExperience"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="@string/label_phone" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/lvSkillSet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/skillset"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="@dimen/size_20"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent1" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvSkillSet"
+                            android:layout_marginTop="@dimen/size_15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/lvDes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_20"
+                            android:text="@string/description_2"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent1"
+                            android:textSize="@dimen/text_size_14"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvDescription"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="@string/description" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/lv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="@dimen/size_10"
+            android:layout_marginBottom="@dimen/size_20"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCall"
+                style="@style/AppTheme.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTint="@color/white"
+                android:elevation="@dimen/size_3"
+                android:text="@string/btn_call"
+                app:icon="@drawable/ic_call" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSms"
+                style="@style/AppTheme.Button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_of_edit_text"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:elevation="@dimen/size_3"
+                android:text="@string/btn_sms"
+                app:backgroundTint="@color/green_100"
+                app:icon="@drawable/ic_sms" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

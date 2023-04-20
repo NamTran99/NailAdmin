@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.extention.formatPhoneUSCustom
 import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.CustomerFullInfoDTO
@@ -21,7 +22,7 @@ class CustomerFactory(private val textFormatter: TextFormatter) {
             override val email: String
                 get() = displaySafe(customer.email)
             override val phone: String
-                get() = textFormatter.formatPhoneUS(customer.phone)
+                get() = customer.phone.safe().formatPhoneUSCustom()
             override val id: Int
                 get() = customer.id.safe()
             override val name: String

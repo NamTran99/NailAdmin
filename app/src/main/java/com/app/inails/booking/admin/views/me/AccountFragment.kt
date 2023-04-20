@@ -6,7 +6,6 @@ import android.support.core.event.WindowStatusOwner
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -49,6 +48,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
                     AccountOption(R.string.title_change_password) {   Router.open(this@AccountFragment, Routing.ChangePassword)},
                     AccountOption(R.string.title_email_receive_feedback) {   Router.open(this@AccountFragment, Routing.EmailReceiveFeedBack)},
                     AccountOption(R.string.title_report) {   Router.open(this@AccountFragment, Routing.ReportSale)},
+                    AccountOption(R.string.title_contact) {   Router.open(this@AccountFragment, Routing.ContactAccount)},
                     AccountOption(R.string.title_language) {   Router.open(this@AccountFragment, Routing.SelectLanguageAccount)},
                 ))
             }

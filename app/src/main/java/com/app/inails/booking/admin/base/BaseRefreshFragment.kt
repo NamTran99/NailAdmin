@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.extention.colorResource
+import com.app.inails.booking.admin.extention.colorSchemeDefault
 
 abstract class BaseRefreshFragment(contentLayoutId: Int) : BaseFragment(contentLayoutId) {
     protected abstract fun onRefreshListener()
@@ -21,11 +22,11 @@ abstract class BaseRefreshFragment(contentLayoutId: Int) : BaseFragment(contentL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mLoadingRefreshView = view.findViewById(R.id.viewRefresh)
-        mLoadingRefreshView?.setColorSchemeColors(requireContext().colorResource(R.color.purple_500))
+        mLoadingRefreshView?.colorSchemeDefault()
         mLoadingRefreshView?.setOnRefreshListener { onRefreshListener() }
     }
 
-    private fun showLoadingRefresh(it: Boolean?) {
+    fun showLoadingRefresh(it: Boolean?) {
         mLoadingRefreshView?.isRefreshing = it!!
     }
 }

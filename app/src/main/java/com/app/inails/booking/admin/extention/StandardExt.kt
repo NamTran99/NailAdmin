@@ -1,5 +1,8 @@
 package com.app.inails.booking.admin.extention
 
+import com.app.inails.booking.admin.model.response.AppImage
+ 
+import com.app.inails.booking.admin.views.extension.LocalImage
 import java.text.DecimalFormat
 
 fun <T> lock(any: T?, function: T.() -> Unit) {
@@ -81,4 +84,42 @@ fun <E> List<E>.toMap(keyOf: (E) -> String): Map<String, E> {
 						hMap[keyOf(it)] = it
 				}
 		}
+}
+
+fun ArrayList<AppImage>.toListStringImage(): List<String> {
+	return map {
+		it.image
+	}
+}
+
+fun ArrayList<String>.toLocalImage(): List<LocalImage>{
+	return map {
+		LocalImage(path = it)
+	}
+}
+
+fun List<String>.toLocalImage(): List<LocalImage>{
+	return map {
+		LocalImage(path = it)
+	}
+}
+
+fun List<String>.toAppImage(): List<AppImage>{
+	return map {
+		AppImage(image = it)
+	}
+}
+
+fun List<AppImage>.toLocalImage1(): List<LocalImage>{
+	return map {
+		LocalImage(path = it.image)
+	}
+}
+
+fun Double.display(): String{
+	return if (this % 1 == 0.0) {
+		String.format("%.0f", this)
+	} else {
+		this.showMaxNumber(2)
+	}
 }

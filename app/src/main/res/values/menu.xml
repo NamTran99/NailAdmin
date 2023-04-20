@@ -8,6 +8,11 @@
     <string name="mn_change_password">Change Password</string>
     <string name="mn_manage_service">Manage Service</string>
     <string name="mn_manage_staff">Manage Staff</string>
+    <string name="mn_create_recruitment">Create Recruitment Post</string>
+    <string name="mn_update_recruitment">Update Recruitment Post</string>
+    <string name="mn_detail_candidate">Detail Candidate</string>
+    <string name="mn_my_recruitment">My Recruitment</string>
+    <string name="mn_detail_recruitment">Recruitment Information</string>
     <string name="mn_manage_customer">Manage Customer</string>
     <string name="mn_email_receive_feedback">Email Receive Feedback</string>
     <string name="mn_report">Report</string>

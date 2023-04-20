@@ -5,18 +5,21 @@ import android.os.Build
 import android.support.core.view.IHolder
 import android.support.core.view.RecyclerHolder
 import android.support.core.view.bindingOf
+import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.app.inails.booking.admin.databinding.ItemPictureHolderBinding
 import com.app.inails.booking.admin.databinding.LayoutBtnAddPictureBinding
 import com.app.inails.booking.admin.extention.findIndex
-import com.app.inails.booking.admin.model.ui.AppImage
-import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter.Companion.TYPE_ADD_IMAGE
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.app.inails.booking.admin.extention.getLoadingCircleDrawable
+import com.app.inails.booking.admin.extention.setImageURICustom
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.bumptech.glide.request.RequestOptions
+import com.squareup.picasso.Picasso
 
 
 class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -89,27 +92,25 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
         @SuppressLint("CheckResult", "ResourceAsColor")
         override fun bind(item: AppImage) {
             binding.apply {
+                val context = view.context
                 val circleProgressDrawable = CircularProgressDrawable(view.context)
                 circleProgressDrawable.strokeWidth = 5f;
                 circleProgressDrawable.centerRadius = 30f;
                 circleProgressDrawable.start();
 
-                val requestOptions = RequestOptions()
-                requestOptions.placeholder(circleProgressDrawable)
-                requestOptions.skipMemoryCache(true)
-                requestOptions.fitCenter()
-
-                Glide.with(view.context)
-                    .load(item.path)
-                    .apply(requestOptions)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imgHolder)
+                imgHolder.setImageURICustom(item.image)
+//                Picasso.get()
+//                    .load()
+//                    .resize(2048,2048)
+//                    .centerInside()
+//                    .placeholder(context.getLoadingCircleDrawable())
+//                    .into(imgHolder)
                 btClose.setOnClickListener {
                     onRemoveImageAction?.invoke(item)
                     removeItem(item)
                 }
                 imgHolder.setOnClickListener {
-                    onItemClickListener.invoke(item.path)
+                    onItemClickListener.invoke(item.image)
                 }
             }
         }
@@ -123,4 +124,3 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
         }
     }
 }
-

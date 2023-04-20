@@ -5,7 +5,6 @@ import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
 import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
-import android.support.core.route.BundleArgument
 import android.support.core.route.argument
 import android.support.core.view.viewBinding
 import android.support.di.Inject
@@ -18,15 +17,14 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentGalleryImageBinding
 import com.app.inails.booking.admin.datasource.remote.MeApi
-import com.app.inails.booking.admin.model.ui.AppImage
-import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.extention.setDivider
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.me.adapters.GalleryImagePagerAdapter
-import com.app.inails.booking.admin.views.widget.topbar.ExtensionButton
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.parcelize.Parcelize
 
 
 class GalleryImageFragment : BaseFragment(R.layout.fragment_gallery_image), TopBarOwner {
@@ -40,7 +38,6 @@ class GalleryImageFragment : BaseFragment(R.layout.fragment_gallery_image), TopB
     private val listAfterImages: MutableList<AppImage>
         get() = args.listAfterImages
     private lateinit var galleryImageAdapter: GalleryImagePagerAdapter
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,27 +57,29 @@ class GalleryImageFragment : BaseFragment(R.layout.fragment_gallery_image), TopB
             }
             TabLayoutMediator(tabLayout, vpLayoutImages) { tab, position ->
                 when (position) {
-                    0 -> tab.text = requireContext().getString(R.string.gallery_before_format, args.listBeforeImages.size.toString())
-                    else -> tab.text =  requireContext().getString(R.string.gallery_after_format, args.listAfterImages.size.toString())
+                    0 -> tab.text = requireContext().getString(
+                        R.string.gallery_before_format,
+                        args.listBeforeImages.size.toString()
+                    )
+                    else -> tab.text = requireContext().getString(
+                        R.string.gallery_after_format,
+                        args.listAfterImages.size.toString()
+                    )
                 }
             }.attach()
+            tabLayout.setDivider()
             vpLayoutImages.isUserInputEnabled = false
             galleryImageAdapter.submit(listOf(args.listBeforeImages, args.listAfterImages))
         }
         viewModel.apply {
             result.bind {
                 listAfterImages.remove(currentDeleteImage).apply {
-                    if(this) galleryImageAdapter.updateList(args.listAfterImages, 1)
+                    if (this) galleryImageAdapter.updateList(args.listAfterImages, 1)
                 }
                 listBeforeImages.remove(currentDeleteImage).apply {
-                    if(this) galleryImageAdapter.updateList(args.listBeforeImages, 0)
+                    if (this) galleryImageAdapter.updateList(args.listBeforeImages, 0)
                 }
-//                GalleryImagePagerAdapter(binding.vpLayoutImages).apply {
-//                    onClickDeleteImage = {
-//                        viewModel.deleteSalonGallery(it)
-//                    }
-//                    submit(listOf(args.listBeforeImages, args.listAfterImages))
-//                }
+
                 success(R.string.delete_image_success)
             }
         }

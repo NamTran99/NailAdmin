@@ -5,8 +5,10 @@ import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.*
+import com.app.inails.booking.admin.model.ui.SignUpForm
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import com.app.inails.booking.admin.model.ui.VoucherForm
+import com.app.inails.booking.admin.views.me.ContactDTO
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
@@ -41,9 +43,16 @@ interface MeApi : Injectable {
         @Part vararg images: MultipartBody.Part?,
     ): ApiAsync<UserDTO>
 
+    @Multipart
+    @POST("salon/register-support")
+    fun signUpSupport(
+        @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part vararg images: MultipartBody.Part?,
+    ): ApiAsync<UserDTO>
+
     @FormUrlEncoded
     @POST("setting/get-value-default")
-    fun getValueServiceDefault(@Field("key") key: String = "fee_update_info_salon"): ApiAsync<ServiceValueDTO>
+    fun getValueServiceDefault(@Field("type") type: String ="contact"): ApiAsync<ContactDTO>
 
     @GET("check-version")
     fun checkVersion(@Query("platform") platform:String = "android", @Query("app_type") appType: String = "owner"): ApiAsync<VersionDTO>
@@ -72,6 +81,9 @@ interface MeApi : Injectable {
     @FormUrlEncoded
     @POST("voucher/delete-vouchers")
     fun deleteMultiVoucher(@Field("ids") listID: String): ApiAsync<Any>
+
+    @POST("salon/check-data-sign-up")
+    fun checkDataSignUp(@Body signUpForm: SignUpForm): ApiAsync<Any>
 }
 
 class MeApiImpl(private val retrofit: Retrofit) :

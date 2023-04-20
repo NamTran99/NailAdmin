@@ -24,7 +24,6 @@ class NotifyDialog(context: Context) : BaseDialog(context) {
     private var appointment = Data()
     private var onClickViewDetailAppointment: ((Int) -> Unit)? = null
     var onReadNotiListener: ((Int) -> Unit)? = null
-    private val appEvent by inject<AppEvent>()
 
     init {
         setCancelable(false)

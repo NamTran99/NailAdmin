@@ -12,7 +12,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/img_salon_test"
         android:visibility="visible"
-        app:shapeAppearanceOverlay="@style/rounded_corner" />
+        app:shapeAppearanceOverlay="@style/round_corner_left_side" />
 
     <FrameLayout
         android:id="@+id/addLayout"

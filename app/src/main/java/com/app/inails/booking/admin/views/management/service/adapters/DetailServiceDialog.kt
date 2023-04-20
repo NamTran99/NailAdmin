@@ -11,6 +11,7 @@ import com.app.inails.booking.admin.databinding.DialogDetailServiceBinding
 import com.app.inails.booking.admin.extention.formatPrice
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.IService
+import com.app.inails.booking.admin.views.base.AppImagesAdapter
 import com.app.inails.booking.admin.views.extension.LocalImage
 import com.sangcomz.fishbun.util.getDimension
 
@@ -33,7 +34,7 @@ class DetailServiceDialog(context: Context) : BaseDialog(context) {
                 submit(service.detailImages)
                 onItemImageClick = { it ->
                     onClickItemImage.invoke(
-                        adapter.items().getData().map { LocalImage(it.path) } to it)
+                        adapter.items().getData().map { LocalImage(it.image) } to it)
                 }
             }
             rcImages.layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)

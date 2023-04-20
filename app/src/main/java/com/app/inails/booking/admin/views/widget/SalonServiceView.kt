@@ -11,7 +11,7 @@ import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.loadAttrs
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
-import com.app.inails.booking.admin.model.ui.ISalonService
+import com.app.inails.booking.admin.model.ui.SalonService
 
 
 enum class DisplayType(val index: Int) {
@@ -34,7 +34,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     constructor(context: Context) : this(context, null)
 
     companion object {
-        val listService = listOf<ISalonService>()
+        val listService = listOf<SalonService>()
     }
 
     private val binding = viewBinding(LayoutManicuristServiceBinding::inflate)
@@ -44,13 +44,15 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
-            binding.tvService.show(value == DisplayType.DisplayService)
-            binding.etService.show(value == DisplayType.TypeService)
             binding.etPrice.isFocusable = value == DisplayType.TypeService
             if (value == DisplayType.TypeService) {
+                binding.lvTypeService.show()
+                binding.lvDisplay.hide()
                 binding.btnDelete.hide()
             } else {
-                binding.imgAvatar.hideClearImage()
+                binding.lvDisplay.show()
+                binding.lvTypeService.hide()
+                binding.imgDisplayAvatar.hideClearImage()
                 binding.btnDelete.show()
             }
             field = value
@@ -59,7 +61,8 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     var url: String = ""
         set(value) {
             binding.apply {
-                imgAvatar.setImageUrl(value)
+                imgEditImage.setImageUrl(value)
+                imgDisplayAvatar.setImageUrl(value)
             }
             field = value
         }
@@ -67,6 +70,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     var price: String = ""
         get() = binding.etPrice.text.toString().trim()
         set(value) {
+            binding.tvService.text = value
             binding.etPrice.setText(value)
             field = value
         }
@@ -83,8 +87,8 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
                 binding.tvService.text.toString().trim()
             }
 
-    var service: ISalonService = ISalonService()
-        get() = ISalonService(
+    var service: SalonService = SalonService()
+        get() = SalonService(
             imageUri = url,
             name = binding.etService.text.toString(),
             price = binding.etPrice.text.toString().toDouble()
@@ -92,7 +96,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
         set(value) {
             url = value.imageUri
             binding.tvService.text = value.name
-            binding.etPrice.setText(value.price.toString())
+            binding.tvPrice.text = value.price.toString()
             field = value
         }
 
@@ -131,7 +135,7 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
             return false
         }
         if (price.toDouble() <= 0.0) {
-            binding.etPrice.error = context.getString(R.string.error_blank_service_price)
+            binding.etPrice.error = context.getString(R.string.error_price_not_greater_than_0)
             binding.etPrice.setText("")
             binding.etPrice.requestFocus()
             return false
@@ -141,8 +145,8 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
 
     fun resetView() {
         binding.apply {
-            service = ISalonService()
-            imgAvatar.removePhoto()
+            service = SalonService()
+            imgEditImage.removePhoto()
             etService.setText("")
             etPrice.setText("")
             tag = null
@@ -152,10 +156,13 @@ class SalonServiceView(context: Context, attributeSet: AttributeSet? = null) : F
     private fun setUpView() {
         binding.apply {
             etPrice.filters = arrayOf(DecimalDigitsInputFilter(3, 2))
-            imgAvatar.onClick {
+            lvAddImage.onClick {
                 onCLickImage.invoke(url)
             }
-            imgAvatar.onClickClearImage = {
+            imgDisplayAvatar.onClick{
+                onCLickImage.invoke(url)
+            }
+            imgEditImage.onClickClearImage = {
                 onCLickRemoveImage.invoke()
             }
         }

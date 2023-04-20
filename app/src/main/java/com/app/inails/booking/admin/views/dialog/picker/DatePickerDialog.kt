@@ -65,7 +65,7 @@ class DatePickerDialog(private val activity: BaseActivity) :
 
     var mEnableDisplay = true
 
-    fun setupClickWithView(view: View, enableDisplay: Boolean = false) {
+    fun setupClickWithView(view: View, enableDisplay: Boolean = true) {
         mEnableDisplay = enableDisplay
         mView = view
         view.setOnClickListener {

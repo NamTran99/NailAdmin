@@ -5,17 +5,16 @@ import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.post
 import android.support.di.Inject
 import android.support.di.ShareScope
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.remote.BookingApi
-import com.app.inails.booking.admin.extention.buildMultipart
-import com.app.inails.booking.admin.extention.getFilePath
-import com.app.inails.booking.admin.extention.scalePhotoLibrary
-import com.app.inails.booking.admin.extention.toImagePart
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.helper.RequestBodyBuilder
 import com.app.inails.booking.admin.model.ui.*
 import com.app.inails.booking.admin.utils.TimeUtils
+import com.google.gson.Gson
 import kotlinx.coroutines.*
 
 
@@ -137,16 +136,18 @@ class AppointmentRepository(
 
     suspend fun updateStatusAppointment(form: AppointmentStatusForm) {
         val beforeImagePart =
-            form.beforeImages.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)
+            form.beforeImages.filter { !it.image.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.image.toUri())!!.scalePhotoLibrary(context)
                     .toImagePart("images_before")
             }.toTypedArray()
 
         val afterImagePart =
-            form.afterImages.filter { !it.path.contains("http") }.mapIndexed { index, uriLink ->
-                context.getFilePath(uriLink.path.toUri())!!.scalePhotoLibrary(context)
+            form.afterImages.filter { !it.image.contains("http") }.mapIndexed { index, uriLink ->
+                context.getFilePath(uriLink.image.toUri())!!.scalePhotoLibrary(context)
                     .toImagePart("images_after")
             }.toTypedArray()
+
+        Log.d("TAG", "updateStatusAppointment: NamTD8: ${Gson().toJson(form.moreService)}" )
         result.post(
             bookingFactory
                 .createAAppointment(
@@ -154,8 +155,9 @@ class AppointmentRepository(
                         RequestBodyBuilder()
                             .put("id", form.id)
                             .put("status", form.status)
-                            .put("price", form.price)
-                            .put("note", form.note)
+//                            .put("price", form.price)
+                            .putIf(form.note.isNotEmpty(),"note", form.note)
+                            .put("service_custom", Gson().toJson(form.moreService))
                             .buildMultipart(),
                         beforeImages = beforeImagePart,
                         afterImages = afterImagePart

@@ -55,9 +55,10 @@
         android:layout_height="match_parent">
         <ImageView
             android:layout_centerInParent="true"
-            android:layout_width="@dimen/size_10"
-            android:layout_height="@dimen/size_10"
-            android:src="@drawable/ic_baseline_add_24"
+            android:layout_width="@dimen/size_15"
+            android:layout_height="@dimen/size_12"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/ic_no_image"
             android:scaleType="fitXY"
             android:visibility="visible"/>
     </RelativeLayout>

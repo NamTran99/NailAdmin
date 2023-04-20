@@ -92,5 +92,15 @@
         <item>@string/voucher_customer_vip</item>
     </string-array>
 
+    <declare-styleable name="CustomEditText">
+        <attr name="android:hint" format="string"/>
+        <attr name="custom_end_text" format="string"/>
+        <attr name="custom_start_text" format="string"/>
+        <attr name="max_number_input" format="float"/>
+        <attr name="input_type" format="enum">
+            <enum name="number" value="0"/>
+            <enum name="decimal" value="1"/>
+        </attr>
+    </declare-styleable>
 
 </resources>

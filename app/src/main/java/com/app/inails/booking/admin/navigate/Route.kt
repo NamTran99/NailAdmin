@@ -7,7 +7,8 @@ import android.support.navigation.NavOptions
 import android.support.navigation.findNavigator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.app.inails.booking.admin.navigate.clients.*
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.CreateUpdateAppointmentFragment
@@ -18,14 +19,18 @@ import com.app.inails.booking.admin.views.clients.media.PhotoViewerFragment
 import com.app.inails.booking.admin.views.clients.profile.ProfileClientFragment
 import com.app.inails.booking.admin.views.clients.salon.SalonDetailClientFragment
 import com.app.inails.booking.admin.views.clients.salon.SalonGalleryFragment
+import com.app.inails.booking.admin.views.extension.LocalImage
+import com.app.inails.booking.admin.views.extension.ShowZoomListImageFragment
 import com.app.inails.booking.admin.views.extension.ShowZoomSingleImageFragment
 import com.app.inails.booking.admin.views.main.MainNavigationActivity
 import com.app.inails.booking.admin.views.main.StaffListFragment
 import com.app.inails.booking.admin.views.management.customer.ManageCustomerFragment
+import com.app.inails.booking.admin.views.management.findstaff.*
 import com.app.inails.booking.admin.views.management.service.ManageServiceFragment
 import com.app.inails.booking.admin.views.management.staff.CheckInOutFragment
 import com.app.inails.booking.admin.views.me.*
 import com.app.inails.booking.admin.views.me.reset.*
+import com.app.inails.booking.admin.views.me.signup.*
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import com.app.inails.booking.admin.views.splash.IntroFragment
@@ -37,6 +42,12 @@ import kotlin.reflect.KClass
 interface Routing : BundleArgument {
     val fragmentClass: KClass<out Fragment>
     val options: NavOptions? get() = null
+
+    @Parcelize
+    class DetailRecruitment(val id : Int) : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = DetailRecruitmentFragment::class
+    }
 
     @Parcelize
     object ManageStaff : Routing {
@@ -90,6 +101,12 @@ interface Routing : BundleArgument {
     object SelectLanguageAccount: Routing{
         override val fragmentClass: KClass<out Fragment>
             get() = SelectLanguageAccountFragment::class
+    }
+
+    @Parcelize
+    object ContactAccount: Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = ContactFragment::class
     }
 
     @Parcelize
@@ -158,6 +175,24 @@ interface Routing : BundleArgument {
     }
 
     @Parcelize
+    object SignUpGeneral : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = SignUpGeneralOptionFragment::class
+    }
+
+    @Parcelize
+    object SignUp5Step : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = SignUp5StepFragment::class
+    }
+
+    @Parcelize
+    object SignUpSupport : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = SignUpSupportFragment::class
+    }
+
+    @Parcelize
     class OTPVerify(val phoneNumber: String) : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = OTPVerifyFragment::class
@@ -187,10 +222,18 @@ interface Routing : BundleArgument {
             get() = SelectLanguageFragment::class
     }
 
+    @Parcelize
+    class ShowListZoomImage(
+        val listImage: List<LocalImage>,
+        val position: Int
+    ) : Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = ShowZoomListImageFragment::class
+    }
 
     @Parcelize
-    class GallerySalon(    val listBeforeImages: MutableList<AppImage>,
-                            val listAfterImages: MutableList<AppImage>) : Routing {
+    class GallerySalon(val listBeforeImages: MutableList<AppImage>,
+                       val listAfterImages: MutableList<AppImage>) : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = GalleryImageFragment::class
     }
@@ -222,10 +265,41 @@ interface Routing : BundleArgument {
         override val fragmentClass: KClass<out Fragment>
             get() = VoucherApplyFragment::class
     }
+
+    @Parcelize
+    class UpdateRecruitment(val id: Int) : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = CreateUpdatePostRecruitmentFragment::class
+    }
+
+    @Parcelize
+    class DetailCandidate(val id: Int, val dynamic: Boolean = false) : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = DetailCandidateFragment::class
+    }
+
+    @Parcelize
+    object ListJobProfile : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = ListJobProfileFragment::class
+    }
+
+
+    @Parcelize
+    object CreateRecruitment : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = CreateUpdatePostRecruitmentFragment::class
+    }
+
+    @Parcelize
+    object MyRecruitment : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = MyRecruitmentFragment::class
+    }
 }
 
 interface Router : SplashRoute,BookingRouteClient, SettingRoute, BookingRoute,ClientRoute,
-    ManageStaffRoute, ManageCustomerRoute, ManageSalonRoute, ProfileRoute, SalonRoute, NotificationRouter {
+    ManageStaffRoute, ManageCustomerRoute, ManageSalonRoute, ProfileRoute, SalonRoute, NotificationRouter, RecruitmentRoute {
     fun open(dispatcher: RouteDispatcher, route: Routing)
     fun navigate(dispatcher: RouteDispatcher, route: Routing)
 //    fun finish
@@ -244,7 +318,9 @@ class ProdRoute : Router,
     BookingRoute by BookingRouteImpl(),
     ManageCustomerRoute by ManageCustomerRouteImpl(),
     ManageStaffRoute by ManageStaffRouteImpl(),
-    ManageSalonRoute by ManageSalonRouteImpl(){
+    ManageSalonRoute by ManageSalonRouteImpl(),
+        RecruitmentRoute by RecruitmentRouteImpl()
+    {
     override fun open(dispatcher: RouteDispatcher, route: Routing) {
         dispatcher.open<MainNavigationActivity>(route)
     }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lvScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/bg_corner_white"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/size_15"
+        android:paddingVertical="@dimen/size_16">
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/step_3_title"
+            android:textColor="@color/color_BE43C3"
+            android:textSize="@dimen/text_size_16" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive.Hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="@string/step_3_des"
+            android:textColor="@color/hint_text_color"
+            android:textStyle="normal" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10"
+            android:text="@string/step_3_des_2" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive.Hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="@string/step_3_des_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_15"
+            android:background="@drawable/bg_corner_f4f4f4"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/size_11">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:src="@drawable/ic_edit_2" />
+
+            <EditText
+                android:id="@+id/edtDescription"
+                style="@style/AppTheme.EditText.MultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_5"
+                android:background="@null"
+                android:minLines="5"
+                android:drawablePadding="@dimen/size_10"
+                android:hint="@string/introduction"
+                android:includeFontPadding="false"
+                android:paddingStart="@dimen/size_5"
+                android:paddingTop="@dimen/size_8"
+                android:textSize="@dimen/text_size_12" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_15"
+            android:text="@string/salon_images_des" />
+
+        <TextView
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_2"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="@string/step_3_des_4"
+            android:textColor="@color/hint_text_color"
+            android:textSize="@dimen/text_size_10"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/button_primary_stroke_1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/size_25"
+                android:src="@drawable/ic_camera" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btAddSalonImage"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_marginEnd="@dimen/size_25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTint="@color/black"
+                android:text="@string/button_add_salon_photo"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_picture_holder" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:elevation="@dimen/size_3"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBack"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/size_3"
+                android:background="@drawable/button_ebebeb_corner"
+                android:drawableStart="@drawable/ic_back"
+                android:textColor="@color/black"
+                android:drawableTint="@color/black"
+                android:text="@string/button_back"
+                android:textSize="@dimen/text_size_12" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinue"
+                style="@style/AppTheme.Button.OneLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/size_20"
+                android:background="@drawable/button_primary_corner_10"
+                android:drawableEnd="@drawable/ic_arrow_right_1"
+                android:drawableTint="@color/white"
+                android:text="@string/btn_next"
+                android:textSize="@dimen/text_size_12" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/btSkip"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_15"
+            android:layout_marginEnd="@dimen/size_10"
+            android:drawablePadding="@dimen/size_10"
+            android:gravity="center"
+            android:text="@string/btn_next_2"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/gray15"
+            android:drawableStart="@drawable/ic_close_2"
+            android:drawableTint="@color/gray15" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

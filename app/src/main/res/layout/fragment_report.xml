@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray07"
     android:orientation="vertical"
     android:paddingBottom="@dimen/size_12">
 
@@ -78,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/size_10"
-        android:layout_marginTop="@dimen/size_4">
+        android:layout_marginTop="@dimen/size_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -88,7 +87,6 @@
                 android:id="@+id/rvReport"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
                 android:clipToPadding="false"
                 android:paddingBottom="@dimen/size_70"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

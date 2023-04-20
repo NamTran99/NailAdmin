@@ -3,6 +3,7 @@ package com.app.inails.booking.admin.factory
 import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.displaySafe1
+import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
 import com.app.inails.booking.admin.model.response.BannerDTO
@@ -16,8 +17,8 @@ class BannerFactory(textFormatter: TextFormatter): FactoryHelper(textFormatter) 
                 get() =  displaySafe(intro.content)
             override val title: String
                 get() = displaySafe(intro.title)
-            override val image: String?
-                get() = intro.image
+            override val image: String
+                get() = intro.image.safe()
             override val url: String
                 get() = intro.url?:""
             override val file: String

@@ -85,12 +85,14 @@ class OpenSalonTime(context: Context, attributeSet: AttributeSet) :
         mStartHours = text?.substring(0,2)?.toIntOrNull()?:0
         data.startTime = text
         binding.tvFromTime.text = text?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
+         onTimeChange?.invoke(data)
     }
 
      fun setEndTime(text: String?) {
         mEndHours = text?.substring(0,2)?.toIntOrNull()?:0
         data.endTime = text
         binding.tvTotime.text = text?.convert24hTo12hFormat() ?: context.getString(R.string.label_select_time)
+         onTimeChange?.invoke(data)
     }
 
      fun setOnTimeChange(callBack: (ISchedule) -> Unit) {

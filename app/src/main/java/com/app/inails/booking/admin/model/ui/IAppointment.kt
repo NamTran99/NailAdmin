@@ -5,8 +5,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.resourceError
-import com.app.inails.booking.admin.exception.viewError
-import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
+import com.app.inails.booking.admin.model.response.AppImage
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -17,7 +16,6 @@ interface IAppointment {
     val dateAppointment: String get() = ""
     val staffID: Int get() = 0
     val servicesName: String get() = ""
-    val serviceCustom: String get() = ""
     val workTime: Int get() = 0
     val status: Int get() = 0
     val resIconStatus: Int @DrawableRes get() = R.drawable.circle_yellow
@@ -27,6 +25,7 @@ interface IAppointment {
     val type: Int get() = 0
     val canceledBy: String get() = ""
     val serviceList: List<IService> get() = listOf()
+    val serviceListAll: List<IService> get() = listOf()
     val totalPrice: Double get() = 0.0 // là total price service
     val customer: ICustomer? get() = null
     val staff: IStaff? get() = null
@@ -38,7 +37,7 @@ interface IAppointment {
     val noteFinish: String get() = ""
     val reasonCancel: String get() = ""
     val totalPriceService: String get() =""
-    val serviceCustomObj: IService? get() = null
+    val serviceCustom: List<IService> get() = listOf()
     val createAt: String get() = ""
     val dateSelected: String get() = ""
     val timeSelected: String get() = ""
@@ -48,16 +47,20 @@ interface IAppointment {
     val afterImage: List<AppImage> get() = listOf()
     val beforeImage: List<AppImage> get() = listOf()
     val hasVoucher: Boolean get() = false
-    val percent: String get() = ""
+    val percentDisplay: String get() = "" //vd: %12
+    val percent: Double get() = 0.0
     val showPercent : Boolean get() =false
     val discount: String get() = ""
-    val totalAmount: String get() = ""
+    val totalAmountDisplay: String get() = "" // co theem $
+    val totalAmount: Double get() =  0.0
     val voucherCode: String get() = ""
     val voucher: IVoucher? get() = null
+    val somethingElse: String get() = ""
 }
 
 @Parcelize
 class AppointmentForm(
+    var customer_id: Int = 0,
     var id: Int? = null,
     var phone: String = "",
     var name: String = "",
@@ -75,14 +78,7 @@ class AppointmentForm(
 ) : Parcelable {
 
     fun validate() {
-        if (phone.isBlank()) viewError(
-            R.id.etPhone,
-            R.string.error_blank_phone
-        )
-        if(phone.trim().convertPhoneToNormalFormat().length < 10){
-            viewError(R.id.etPhone, R.string.error_type_phone_not_enough)
-        }
-        if (name.isBlank()) viewError(R.id.etFullName, R.string.error_blank_name)
+        if (phone.isBlank())  resourceError(R.string.error_blank_customer_id)
         if (staffID == 0 && hasStaff) resourceError(R.string.error_blank_staff_id)
         if (dateAppointment.isBlank()) resourceError(R.string.error_blank_date_time)
         if (services.isBlank() || services.isEmpty()) resourceError(R.string.error_empty_services)
@@ -96,7 +92,8 @@ class AppointmentStatusForm(
     var price: Double = 0.0,
     var note: String = "",
     var beforeImages: List<AppImage>  = listOf(),
-    var afterImages: List<AppImage> = listOf()
+    var afterImages: List<AppImage> = listOf(),
+    var moreService: List<IService> = listOf()
 )
 
 @Parcelize

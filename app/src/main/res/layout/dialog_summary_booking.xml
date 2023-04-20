@@ -58,23 +58,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_16"
-                    android:text="@string/label_appointment_time" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtRsDatetime"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_of_edit_text"
-                    android:layout_marginTop="@dimen/size_16"
-                    android:background="@drawable/box_grey"
-                    android:gravity="center_vertical"
-                    android:inputType="textCapSentences"
-                    android:paddingHorizontal="@dimen/size_10"
-                    tools:text="11:30 AM - Thursday 11/08/2022" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_16"
                     android:text="@string/label_staff" />
 
                 <androidx.appcompat.widget.AppCompatTextView

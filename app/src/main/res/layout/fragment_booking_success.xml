@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/bg_app"
-   >
+    tools:background="@drawable/bg_app">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,40 +15,74 @@
         android:orientation="vertical"
         android:paddingVertical="@dimen/size_16">
 
-        <FrameLayout
-            android:layout_width="@dimen/icon_size_large"
-            android:layout_height="@dimen/icon_size_large"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/size_20"
-            android:background="@drawable/bg_circle_def">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivDone"
-                android:layout_width="@dimen/icon_size_normal"
-                android:layout_height="@dimen/icon_size_normal"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_anim_vector_done" />
-        </FrameLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lvSuccess"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="@dimen/size_16"
-            android:text="@string/title_thank_booking"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_22" />
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="@dimen/icon_size_large"
+                android:layout_height="@dimen/icon_size_large"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/bg_circle_def">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDone"
+                    android:layout_width="@dimen/icon_size_normal"
+                    android:layout_height="@dimen/icon_size_normal"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_anim_vector_done" />
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/size_16"
+                android:text="@string/title_thank_booking"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_22" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical">-->
+        <!--            <FrameLayout-->
+        <!--                android:layout_width="@dimen/icon_size_large"-->
+        <!--                android:layout_height="@dimen/icon_size_large"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:layout_marginTop="@dimen/size_20"-->
+        <!--                android:background="@drawable/bg_circle_def">-->
+        <!--                <-->
+        <!--            </FrameLayout>-->
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:layout_marginVertical="@dimen/size_16"-->
+        <!--                android:text="@string/title_thank_booking"-->
+        <!--                android:textColor="@color/colorPrimary"-->
+        <!--                android:textSize="@dimen/text_size_22" />-->
+
+        <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
+            android:layout_marginHorizontal="@dimen/size_15"
             android:layout_marginTop="@dimen/size_10"
             android:background="@color/gray_235" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/size_10"
             android:layout_weight="1"
             android:paddingHorizontal="@dimen/size_16"
             android:scrollbarStyle="outsideOverlay">
@@ -63,8 +96,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/size_16"
-                    android:text="@string/title_summary" />
+                    android:text="@string/title_summary"
+                    android:textColor="#4435CF"
+                    android:textSize="@dimen/text_size_20"
+                    android:textStyle="bold" />
 
                 <include
                     android:id="@+id/viewBooking"
@@ -131,8 +166,8 @@
                     android:id="@+id/voucherLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -176,12 +211,12 @@
                         <androidx.appcompat.widget.AppCompatImageButton
                             android:id="@+id/btnInfo"
                             android:layout_width="wrap_content"
-                            android:layout_toEndOf="@+id/txtDiscount"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginStart="@dimen/size_5"
+                            android:layout_toEndOf="@+id/txtDiscount"
                             android:background="?selectableItemBackgroundBorderless"
-                            android:src="@drawable/ic_info"
-                            android:layout_gravity="center"/>
+                            android:src="@drawable/ic_info" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtPriceDiscount"
@@ -224,6 +259,64 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@drawable/bg_common_radius_5"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/size_10"
+                android:autoSizeMaxTextSize="@dimen/text_size_12"
+                android:autoSizeMinTextSize="6sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="2"
+                android:layout_marginStart="@dimen/size_10"
+                android:text="@string/des_1"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tvTimer"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/size_10"
+                android:gravity="center"
+                android:lines="1"
+                android:minWidth="@dimen/size_35"
+                android:text="10"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tvLogout"
+                style="@style/AppTheme.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/size_10"
+                android:layout_marginVertical="@dimen/size_10"
+                android:background="@drawable/button_solid_primary_stroke_white_corner"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/white"
+                android:drawablePadding="@dimen/size_5"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="@string/go_now" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAppointments"
             style="@style/AppTheme.Button"
@@ -231,7 +324,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="@dimen/size_16"
-            android:layout_marginTop="@dimen/size_30"
+            android:layout_marginTop="@dimen/size_10"
             android:text="@string/btn_view_appointments"
             app:backgroundTint="@color/orange_250" />
 

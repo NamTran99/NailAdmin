@@ -36,4 +36,40 @@
         <item>50</item>
     </string-array>
 
+    <string-array name="arr_gender_filter">
+        <item>@string/choose_gender</item>
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+        <item>@string/gender_all</item>
+    </string-array>
+
+    <string-array name="arr_gender">
+        <item>@string/choose_gender</item>
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+        <item>@string/gender_other</item>
+        <item>@string/gender_all</item>
+    </string-array>
+
+    <string-array name="arr_salary_filter">
+        <item>@string/choose_salary</item>
+        <item>@string/choose_salary_1</item>
+        <item>@string/choose_salary_2</item>
+        <item>@string/choose_salary_3</item>
+        <item>@string/choose_salary_4</item>
+    </string-array>
+
+    <string-array name="arr_experience_filter">
+        <item>@string/choose_experience</item>
+        <item>@string/choose_experience_1</item>
+        <item>@string/choose_experience_2</item>
+        <item>@string/choose_experience_3</item>
+    </string-array>
+
+    <string-array name="arr_salary_type">
+        <item>@string/per_week_1</item>
+        <item>@string/per_month</item>
+        <item>@string/per_year</item>
+    </string-array>
+
 </resources>

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:gravity="center_horizontal"
-  >
+    android:gravity="center_horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
@@ -69,10 +68,10 @@
             android:text="@string/btn_view_feedback"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            app:icon="@drawable/icon_ionic_md_star"
-            app:rippleColor="@color/gray07"
-            app:iconTint="@color/white"
             android:textSize="11sp"
+            app:icon="@drawable/icon_ionic_md_star"
+            app:iconTint="@color/white"
+            app:rippleColor="@color/gray07"
             app:strokeColor="@color/white" />
 
         <com.google.android.material.button.MaterialButton
@@ -84,11 +83,11 @@
             android:text="@string/btn_photo_gallery"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:textSize="11sp"
             app:icon="@drawable/icon_awesome_images"
             app:iconTint="@color/white"
             app:rippleColor="@color/gray07"
-            app:strokeColor="@color/white"
-            android:textSize="11sp"/>
+            app:strokeColor="@color/white" />
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView

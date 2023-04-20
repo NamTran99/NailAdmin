@@ -42,6 +42,6 @@ class RedirectToOwnerDialog(context: Context) : BaseDialog(context) {
 interface RedirectToOwnerDialogOwner : ViewScopeOwner {
     val redirectToOwnerDialog: RedirectToOwnerDialog
         get() = with(viewScope) {
-            getOr("notification:dialog") { RedirectToOwnerDialog(context) }
+            getOr("redirectToOwner      :dialog") { RedirectToOwnerDialog(context) }
         }
 }

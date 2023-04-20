@@ -8,9 +8,8 @@ import android.widget.FrameLayout
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.LayoutSalonStaffBinding
 import com.app.inails.booking.admin.extention.*
-import com.app.inails.booking.admin.helper.EditTextAutoSizeUtility
-import com.app.inails.booking.admin.model.ui.ISalonService
-import com.app.inails.booking.admin.model.ui.ISalonStaff
+import com.app.inails.booking.admin.model.ui.SalonService
+import com.app.inails.booking.admin.model.ui.SalonStaff
 
 
 class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : FrameLayout
@@ -19,7 +18,7 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
     constructor(context: Context) : this(context, null)
 
     companion object {
-        val listService = listOf<ISalonService>()
+        val listService = listOf<SalonService>()
     }
 
     private val binding = viewBinding(LayoutSalonStaffBinding::inflate)
@@ -29,15 +28,13 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
 
     var displayType: DisplayType = DisplayType.TypeService
         set(value) {
-            binding.tvStaffFullName.show(value == DisplayType.DisplayService)
-            binding.etPhone.show(value == DisplayType.TypeService)
-            binding.tvPhone.show(value == DisplayType.DisplayService)
-            binding.etFullName.show(value == DisplayType.TypeService)
             binding.etPhone.isFocusable = value == DisplayType.TypeService
+            binding.lvTypeStaff.show(value == DisplayType.TypeService)
+            binding.lvDisplayStaff.show(value == DisplayType.DisplayService)
             if (value == DisplayType.TypeService) {
                 binding.btnDelete.hide()
             } else {
-                binding.imgAvatar.hideClearImage()
+                binding.imgDisplayAvatar.hideClearImage()
                 binding.btnDelete.show()
             }
             field = value
@@ -53,14 +50,15 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
     var url: String = ""
         set(value){
             binding.apply {
-                imgAvatar.setImageUrl(value)
+                imgDisplayAvatar.setImageUrl(value)
+                imgEditAvatar.setImageUrl(value)
             }
             field = value
         }
 
-    var staffData: ISalonStaff = ISalonStaff()
+    var staffData: SalonStaff = SalonStaff()
         get() =
-            ISalonStaff(
+            SalonStaff(
                 imageUri= url,
                 name = binding.etFullName.text.toString(),
                 phone =  binding.etPhone.text.toString().convertPhoneToNormalFormat()
@@ -104,8 +102,8 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
 
     fun resetView() {
         binding.apply {
-            staffData = ISalonStaff()
-            imgAvatar.removePhoto()
+            staffData = SalonStaff()
+            imgEditAvatar.removePhoto()
             etFullName.setText("")
             etPhone.setText("")
             tag = null
@@ -147,12 +145,14 @@ class SalonStaffView(context: Context, attributeSet: AttributeSet? = null) : Fra
     private fun setUpView() {
         binding.apply {
             etPhone.inputTypePhoneUS()
-
-            imgAvatar.onClickClearImage = {
-                onCLickRemoveImage.invoke()
-            }
-            imgAvatar.onClick{
+            lvAddImage.onClick{
                 onCLickImage.invoke(url)
+            }
+            imgDisplayAvatar.onClick{
+                onCLickImage.invoke(url)
+            }
+            imgDisplayAvatar.onClickClearImage = {
+                onCLickRemoveImage.invoke()
             }
         }
     }

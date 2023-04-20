@@ -27,13 +27,11 @@ import com.app.inails.booking.admin.databinding.FragmentManageServiceBinding
 import com.app.inails.booking.admin.extention.colorSchemeDefault
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.popup.PopUpServiceMore
-import com.app.inails.booking.admin.model.ui.AppImage
+import com.app.inails.booking.admin.model.response.AppImage
+
 import com.app.inails.booking.admin.model.ui.ServiceForm
 import com.app.inails.booking.admin.navigate.Router
-import com.app.inails.booking.admin.navigate.Router.Companion.redirectToShowZoomImage
 import com.app.inails.booking.admin.popups.PopupServiceMoreOwner
-import com.app.inails.booking.admin.views.extension.LocalImage
-import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs
 import com.app.inails.booking.admin.views.extension.ShowZoomImageArgs1
 import com.app.inails.booking.admin.views.management.service.adapters.DetailServiceDialogOwner
 import com.app.inails.booking.admin.views.management.service.adapters.ManageServiceAdapter
@@ -41,7 +39,6 @@ import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
-import java.util.Collections.addAll
 
 class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), TopBarOwner,
     CreateUpdateServiceOwner, PopupServiceMoreOwner, DetailServiceDialogOwner {
@@ -55,7 +52,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 mainPath =
-                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                    ArrayList(pathImage.map { pathUri -> AppImage(image = pathUri.toString()) })
                 createUpdateServiceDialog.updateMainImage(mainPath.getOrNull(0))
             }
         }
@@ -66,7 +63,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                 val pathImage =
                     it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf<Uri>()
                 morePath =
-                    ArrayList(pathImage.map { pathUri -> AppImage(path = pathUri.toString()) })
+                    ArrayList(pathImage.map { pathUri -> AppImage(image = pathUri.toString()) })
                 createUpdateServiceDialog.updateMoreImage(morePath)
             }
         }
@@ -102,7 +99,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                         .setImageAdapter(GlideAdapter())
                         .setMaxCount(5)
                         .setMinCount(1)
-                        .setSelectedImages(ArrayList(morePath.map { it.path.toUri() }))
+                        .setSelectedImages(ArrayList(morePath.map { it.image.toUri() }))
                         .setActionBarColor(
                             ContextCompat.getColor(requireContext(), R.color.colorPrimary),
                             ContextCompat.getColor(requireContext(), R.color.colorPrimary),
@@ -113,7 +110,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                 }
                 onClickClearMainImage = { mainPath.clear() }
                 onClickRemoveOneImage = { image ->
-                    morePath.removeAll { it.path == image.path }
+                    morePath.removeAll { it.image == image.image }
                 }
                 onAddOneImage = {
                     FishBun.with(this@ManageServiceFragment)
@@ -140,7 +137,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                         moreImage = mutableListOf<AppImage>().apply {
                             addAll(morePath)
                         }
-                        avatar = mainPath.getOrNull(0)?.path
+                        avatar = mainPath.getOrNull(0)?.image
                     }
                     viewModel.create()
                 }
@@ -167,12 +164,12 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
 
             listService.bind(mAdapter::submit)
             listService.bind {
-                it.isNullOrEmpty() show binding.emptyLayout.tvEmptyData
+                it.isNullOrEmpty() show binding.emptyLayout.lvEmpty
                 !it.isNullOrEmpty() show binding.rvServices
 
                 binding.emptyLayout.tvEmptyData.setText(
                     if (binding.searchView.text.isEmpty())
-                       R.string.label_empty_data else R.string.no_result_order_found
+                       R.string.label_empty_service else R.string.no_result_order_found
                 )
             }
             serviceCreated.bind(mAdapter::insertItem)
@@ -215,7 +212,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                             mainPath = ArrayList<AppImage>().apply {
                                 item.avatar?.let { it1 ->
                                     add(
-                                        AppImage(path = it1)
+                                        AppImage(image = it1)
                                     )
                                 }
                             }
@@ -230,7 +227,7 @@ class ManageServiceFragment : BaseFragment(R.layout.fragment_manage_service), To
                                         addAll(morePath)
                                     }
                                     oldServerImages = item.moreImage
-                                    avatar = mainPath.getOrNull(0)?.path
+                                    avatar = mainPath.getOrNull(0)?.image
                                 }
                                 viewModel.update()
                             }

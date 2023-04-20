@@ -11,6 +11,11 @@ fun String.isEmail(): Boolean {
     return matcher.matches()
 }
 
+fun String.isNumber(): Boolean{
+        val numericRegex = Regex("^[0-9]+$")
+        return this.matches(numericRegex)
+}
+
 fun String.isURL(): Boolean {
     return this.toHttpUrlOrNull() != null
 }
