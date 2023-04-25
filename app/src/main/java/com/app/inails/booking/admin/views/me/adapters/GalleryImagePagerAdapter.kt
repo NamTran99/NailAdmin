@@ -2,7 +2,6 @@ package com.app.inails.booking.admin.views.me.adapters
 
 import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
-import android.util.Log
 import android.view.ViewGroup
 import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +11,10 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.response.AppImage
 
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
+import com.app.inails.booking.admin.views.widget.SimpleViewPagerAdapter
 
 class GalleryImagePagerAdapter(view: ViewPager2) :
-    SimpleRecyclerAdapter2<List<AppImage>, ItemGalleryImageBinding>(view) {
+    SimpleViewPagerAdapter<List<AppImage>, ItemGalleryImageBinding>(view) {
 
     var onClickDeleteImage : ((AppImage) -> Unit)= {}
 

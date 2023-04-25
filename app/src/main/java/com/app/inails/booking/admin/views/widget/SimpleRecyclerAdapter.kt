@@ -38,7 +38,7 @@ abstract class SimpleRecyclerAdapter<T, V : ViewBinding>(protected val view: Rec
     protected abstract fun onBindHolder(item: T, binding: V, adapterPosition: Int)
 }
 
-abstract class SimpleRecyclerAdapter2<T, V : ViewBinding>(protected val view: ViewPager2) :
+abstract class SimpleViewPagerAdapter<T, V : ViewBinding>(protected val view: ViewPager2) :
     RecyclerAdapter<T>() {
     init {
         view.adapter = this

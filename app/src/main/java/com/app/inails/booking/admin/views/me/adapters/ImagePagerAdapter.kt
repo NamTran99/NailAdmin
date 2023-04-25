@@ -10,10 +10,10 @@ import com.app.inails.booking.admin.databinding.ItemViewImageViewerBinding
 import com.app.inails.booking.admin.model.response.AppImage
  
 import com.app.inails.booking.admin.views.widget.PinchZoomImageView
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
+import com.app.inails.booking.admin.views.widget.SimpleViewPagerAdapter
 
 class ImagePagerAdapter(view: ViewPager2) :
-    SimpleRecyclerAdapter2<AppImage, ItemViewImageViewerBinding>(view) {
+    SimpleViewPagerAdapter<AppImage, ItemViewImageViewerBinding>(view) {
 
     override fun onCreateBinding(parent: ViewGroup): ItemViewImageViewerBinding {
         return parent.bindingOf(ItemViewImageViewerBinding::inflate)

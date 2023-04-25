@@ -2,7 +2,11 @@ package com.app.inails.booking.admin.views.home.adapters
 
 import android.annotation.SuppressLint
 import android.support.core.view.bindingOf
+import android.util.Log
+import android.view.MotionEvent
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet.Motion
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemGuidanceSliderBinding
@@ -10,10 +14,11 @@ import com.app.inails.booking.admin.extention.setImageURICustom
 import com.app.inails.booking.admin.model.ui.FileType
 import com.app.inails.booking.admin.model.ui.IIntro
 import com.app.inails.booking.admin.views.me.adapters.LoopHandler
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
+import com.app.inails.booking.admin.views.widget.SimpleViewPagerAdapter
+import kotlinx.coroutines.NonCancellable.start
 
 class GuidanceAdapter(recyclerView: ViewPager2) :
-    SimpleRecyclerAdapter2<IIntro, ItemGuidanceSliderBinding>(recyclerView) {
+    SimpleViewPagerAdapter<IIntro, ItemGuidanceSliderBinding>(recyclerView) {
 
     var onItemClick: ((IIntro) -> Unit) = {}
 
@@ -26,8 +31,19 @@ class GuidanceAdapter(recyclerView: ViewPager2) :
         view.setCurrentItem(next, true)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun submit(newItems: List<IIntro>?) {
         super.submit(newItems)
+        view.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    mViewLooper.start()
+                } else if (state == ViewPager.SCROLL_STATE_DRAGGING) {
+                    mViewLooper.stop()
+                }
+            }
+        })
         if (itemCount > 0) mViewLooper.start()
         else mViewLooper.stop()
     }

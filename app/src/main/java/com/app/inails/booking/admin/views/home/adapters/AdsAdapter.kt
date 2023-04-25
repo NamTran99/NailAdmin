@@ -1,21 +1,16 @@
 package com.app.inails.booking.admin.views.home.adapters
 
-import android.os.Handler
 import android.support.core.view.bindingOf
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.databinding.ItemAdsSliderBinding
-import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.setImageURICustom
 import com.app.inails.booking.admin.model.ui.IIntro
 import com.app.inails.booking.admin.views.me.adapters.LoopHandler
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import java.lang.Exception
+import com.app.inails.booking.admin.views.widget.SimpleViewPagerAdapter
 
 class AdsAdapter(recyclerView: ViewPager2) :
-    SimpleRecyclerAdapter2<IIntro, ItemAdsSliderBinding>(recyclerView) {
+    SimpleViewPagerAdapter<IIntro, ItemAdsSliderBinding>(recyclerView) {
 
     var onItemClick :((IIntro) -> Unit) = {}
 

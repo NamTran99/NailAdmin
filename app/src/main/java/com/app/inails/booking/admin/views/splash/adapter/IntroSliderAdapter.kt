@@ -7,13 +7,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.app.inails.booking.admin.databinding.ItemIntroSliderBinding
 import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.model.ui.IIntro
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
+import com.app.inails.booking.admin.views.widget.SimpleViewPagerAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
 class IntroSliderAdapter(recyclerView: ViewPager2) :
-    SimpleRecyclerAdapter2<IIntro, ItemIntroSliderBinding>(recyclerView) {
+    SimpleViewPagerAdapter<IIntro, ItemIntroSliderBinding>(recyclerView) {
     override fun onCreateBinding(parent: ViewGroup): ItemIntroSliderBinding {
        return parent.bindingOf(ItemIntroSliderBinding::inflate)
     }

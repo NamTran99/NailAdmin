@@ -10,10 +10,10 @@ import com.app.inails.booking.admin.databinding.ItemViewImageViewerBinding
 import com.app.inails.booking.admin.model.response.AppImage
 
 import com.app.inails.booking.admin.views.widget.PinchZoomImageView
-import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter2
+import com.app.inails.booking.admin.views.widget.SimpleViewPagerAdapter
 
 class ImageViewerPagerAdapter(view: ViewPager2) :
-    SimpleRecyclerAdapter2<AppImage, ItemViewImageViewerBinding>(view) {
+    SimpleViewPagerAdapter<AppImage, ItemViewImageViewerBinding>(view) {
 
     val onClickDeleteImage : ((AppImage) -> Unit)= {}
 

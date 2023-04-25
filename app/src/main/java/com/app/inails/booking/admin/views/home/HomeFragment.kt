@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.home
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
@@ -7,6 +8,7 @@ import android.support.core.event.WindowStatusOwner
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
@@ -34,8 +36,10 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
     private lateinit var guidanceAdapter: GuidanceAdapter
 
     override fun onRefreshListener() {
+        refreshView()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -111,7 +115,6 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
             }.attach()
             TabLayoutMediator(tabDotsGuidance, viewPagerGuidance) { _, _ ->
             }.attach()
-            viewRefresh.setOnRefreshListener { refreshView() }
         }
 
         with(viewModel) {

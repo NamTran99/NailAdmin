@@ -18,7 +18,7 @@ abstract class ViewState(private val removeContent: ViewGroup.() -> Unit = { rem
     @Suppress("unchecked_cast")
     protected fun <T> bindingOf(factory: (LayoutInflater, ViewGroup, Boolean) -> T): Lazy<T> =
         lazy(LazyThreadSafetyMode.NONE) {
-            if (!::mViewGroup.isInitialized) error("Not call apply yet")
+            if (!::mViewGroup.isInitialized) error("Not call fun apply to yet")
             if (mReuseBinding != null) mReuseBinding!! as T
             else factory(mInflater, mViewGroup, false)
         }
