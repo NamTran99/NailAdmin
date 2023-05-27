@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.exception.viewPassInputError
+import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -12,6 +13,31 @@ interface IUser {
     val email: String get() = ""
     val address: String get() = ""
     val name: String get() = ""
+}
+
+@Parcelize
+class SignUpManicuristForm(
+    var name: String = "",
+    var phone: String = "",
+    var password: String = ""
+): Parcelable{
+
+    fun validate() {
+        if (name.isBlank()) {
+            viewError(R.id.etName, R.string.error_blank_name)
+        }
+
+        if (phone.isBlank()) viewError(
+            R.id.etPhone,
+            R.string.error_blank_phone
+        )
+
+        if (phone.trim().convertPhoneToNormalFormat().length < 10) {
+            viewError(R.id.etPhone, R.string.error_type_phone_not_enough)
+        }
+
+        if (password.isBlank()) viewError(R.id.etPassword, R.string.error_blank_password)
+    }
 }
 
 @Parcelize

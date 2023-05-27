@@ -6,14 +6,12 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.persistent.cache.GsonCaching
 import androidx.lifecycle.MutableLiveData
+import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.helper.ShareIOScope
-import com.app.inails.booking.admin.model.response.SalonDTO
 import com.app.inails.booking.admin.model.response.StateDTO
-import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
 import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
 import com.app.inails.booking.admin.model.ui.IState
-import com.bumptech.glide.Glide.init
 import com.esafirm.imagepicker.helper.LocaleManager
 import kotlinx.coroutines.launch
 
@@ -26,15 +24,21 @@ class UserLocalSource(
 
     private val caching = GsonCaching(context)
 
-    private val userLive = MutableLiveData<UserDTO>()
+    private val userLive = MutableLiveData<UserOwnerDTO>()
     private val userClientLive = MutableLiveData<UserClientDTO?>()
     private val allUserLive = MutableLiveData<Pair<UserOwnerDTO?, UserClientDTO?>>()
 
     private var userClient: UserClientDTO? by caching.reference(UserClientDTO::class.java.name)
     private var userOwner: UserOwnerDTO? by caching.reference(UserOwnerDTO::class.java.name)
-    private var user: UserDTO? by caching.reference(UserDTO::class.java.name)
-    private var isOwnerMode: Boolean? by caching.reference("AppMode")
+
+    //    private var ownerUser: OwnerDTO? by caching.reference(OwnerDTO::class.java.name)
+    private var manicuristUser: UserClientDTO? by caching.reference("mani")
+    private var appMode: AppMode? by caching.reference("AppMode")
     private var isFirstOpenApp: Boolean? by caching.reference("fistOpenApp")
+
+    enum class AppMode {
+        Owner, Manicurist, Client
+    }
 
     init {
         shareIOScope.launch {
@@ -46,8 +50,7 @@ class UserLocalSource(
     private var listState: List<IState>? by caching.reference(StateDTO::class.java.name)
 
 
-
-    fun isExistListState(): Boolean{
+    fun isExistListState(): Boolean {
         return !listState.isNullOrEmpty()
     }
 
@@ -55,12 +58,21 @@ class UserLocalSource(
         return listState
     }
 
+//    fun getUserId() = ownerUser?.?.id?: 0
 
-    fun setOwnerMode(isOwner: Boolean) {
-        isOwnerMode = isOwner
+    @JvmName("setOwnerMode1")
+    fun setAppMode(mode: AppMode) {
+        appMode = mode
     }
 
-    fun getOwnerMode() = isOwnerMode ?: true
+    @JvmName("getAppMode1")
+    fun getAppMode() = appMode
+
+    fun getUserId() =
+        manicuristUser?.user?.id.safe()
+
+
+    fun isOwnerMode() = appMode == AppMode.Owner
 
     fun getUserOwnerDto(): UserOwnerDTO? = userOwner
     fun getUserClientDto(): UserClientDTO? = userClient
@@ -69,94 +81,76 @@ class UserLocalSource(
         return allUserLive
     }
 
-    fun getSalonPhone() = this.user?.admin?.phone ?: ""
+    fun getSalonPhone() = this.userOwner?.admin?.phone ?: ""
 
-    fun getToken(): String? {
-        return userClient?.token ?: this.user?.token
+    fun getToken(): String {
+        return appCache.token
     }
 
     fun getSalonID(): Int {
-        return this.user?.admin?.salon_id?: 0
+        return this.userOwner?.admin?.salon_id ?: 0
     }
 
-    fun isLogin() = this.user != null
+    fun isLogin() = appCache.token != ""
     fun saveToken(token: String) {
         appCache.token = token
     }
 
-    fun isOwnerLogin() = this.user != null
+    fun isOwnerLogin() = this.userOwner != null
 
     fun clearToken() {
         appCache.token = ""
-    }
-
-    fun clearAccount() {
-        appCache.email = ""
-        appCache.password = ""
     }
 
     fun clearClientAccount() {
         userClient = null
     }
 
-    fun getUserDto(): UserDTO? = this.user
-    fun getSalonDto(): SalonDTO? = this.user?.admin?.salon
-    fun changeUserSlug(slug: String?) {
-        this.user?.admin?.salon?.slug = slug ?: ""
-    }
+    @JvmName("getManicuristUser1")
+    fun getManicuristUser() = this.manicuristUser
+
+    fun getUserDto(): UserOwnerDTO? = this.userOwner
 
     fun changeSalonName(salonName: String?) {
-        this.user?.admin?.salon?.name = salonName
+        this.userOwner?.admin?.salon?.name = salonName
     }
 
-    fun approveUser(){
-        user = user?.apply {
+    fun approveUser() {
+        userOwner = userOwner?.apply {
             admin?.is_approve = 1
         }
     }
 
-    fun getUserLive(): MutableLiveData<UserDTO> {
-        return userLive
+    fun saveManicuristAccount(manicuristDTO: UserClientDTO) {
+        manicuristUser = manicuristDTO
+        appMode= AppMode.Manicurist
+        saveToken(manicuristDTO.token)
     }
 
-    fun getUserClientLive(): MutableLiveData<UserClientDTO?> {
-        return userClientLive
-    }
+    fun getManicuristID() = manicuristUser?.user?.id.safe()
 
-    fun saveUser(userDTO: UserDTO) {
-        user = userDTO
-        shareIOScope.launch {
-            userLive.post(userDTO)
-        }
-    }
-
-    fun saveUserClient(userDTO: UserClientDTO?) {
+    fun saveUserClient(userDTO: UserClientDTO) {
         userClient = userDTO
+        saveToken(userDTO.token)
         shareIOScope.launch {
             userClientLive.post(userDTO)
             allUserLive.post(getUserOwnerDto() to getUserClientDto())
         }
     }
 
-    fun saveUserOwner(userOwner: UserOwnerDTO?) {
+    fun saveUserOwner(userOwner: UserOwnerDTO) {
         this.userOwner = userOwner
+        appMode= AppMode.Owner
+        saveToken(userOwner.token)
         shareIOScope.launch { allUserLive.post(getUserOwnerDto() to getUserClientDto()) }
     }
 
-
-    fun logout() {
-        this.user = null
-        saveUserClient(null)
-        saveUserOwner(null)
-    }
-
-
-    fun logoutCustomer() {
-        saveUserClient(null)
+    fun changeNameManicurist(name: String) {
+        this.manicuristUser?.user?.name = name
     }
 
     fun updateEmailFeedbackUser(email: String) {
-        this.user?.admin?.salon?.email = email
+        this.userOwner?.admin?.salon?.email = email
     }
 
     // is first login
@@ -170,7 +164,7 @@ class UserLocalSource(
 
     // set language
 
-    fun isVietNamLanguage():Boolean{
+    fun isVietNamLanguage(): Boolean {
         return appCache.language == "vi"
     }
 
@@ -184,17 +178,28 @@ class UserLocalSource(
         appCache.language = null
     }
 
-    fun getLanguage() = if(isOwnerMode != false) appCache.language else "en"
-    fun getLanguageWithDefault() = if(isOwnerMode != false)  appCache.language?: LocaleManager.mLanguage else "en"
+    fun getLanguage() = if (appMode != AppMode.Client) appCache.language else "en"
+    fun getLanguageWithDefault() =
+        if (appMode != AppMode.Client) appCache.language ?: LocaleManager.mLanguage else "en"
 
     // isCloseAll instance activity
 
-    fun getIsCloseInstanceNavigateActivity()= appCache.isCloseAllMainNavigationActivity?:false
+    fun getIsCloseInstanceNavigateActivity() = appCache.isCloseAllMainNavigationActivity ?: false
 
-//    fun setC
+    //    fun setC
     // When log out
+
+    fun logOutClient(){
+        this.userClient = null
+        this.clearToken()
+    }
+
     fun clearUser() {
-        this.user = null
+        this.clearToken()
+        this.appMode = null
+        this.userOwner = null
+        this.manicuristUser = null
+        this.userClient = null
     }
 
 }

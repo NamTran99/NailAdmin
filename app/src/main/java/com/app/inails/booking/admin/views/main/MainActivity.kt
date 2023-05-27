@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -22,6 +21,7 @@ import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.util.Log
+import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE
@@ -32,28 +32,25 @@ import com.app.inails.booking.admin.databinding.ActivityMainBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.sockets.AuthSocket
 import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.helper.firebase.FirebaseType
 import com.app.inails.booking.admin.helper.pairLookupOf
 import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.NotificationIDForm
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToListRecruitment
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.notification.NotificationsManagerClient
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
 import com.app.inails.booking.admin.views.booking.BookingFragment
 import com.app.inails.booking.admin.views.clients.ClientHomeActivity
 import com.app.inails.booking.admin.views.home.HomeFragment
-import com.app.inails.booking.admin.views.main.MainActivity.Companion.APPOINTMENT_ID
 import com.app.inails.booking.admin.views.main.dialogs.NotifyDialogOwner
 import com.app.inails.booking.admin.views.me.AccountFragment
+import com.app.inails.booking.admin.views.me.JobProfileFragment
 import com.app.inails.booking.admin.views.notification.NotificationRepository
 import com.app.inails.booking.admin.views.widget.topbar.MainTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import com.esafirm.imagepicker.helper.LocaleManager
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import kotlin.reflect.KClass
 
 
@@ -92,6 +89,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     private lateinit var mainTopBarState: MainTopBarState
 
     val route = pairLookupOf<Int, KClass<out BaseFragment>>(
+        R.id.navMyCV to JobProfileFragment::class,
         R.id.navAccount to AccountFragment::class,
         R.id.navHome to HomeFragment::class,
     )
@@ -116,31 +114,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         super.onCreate(savedInstanceState)
         onNewIntent(intent)
 
-//        config firebase
-//        FirebaseDynamicLinks.getInstance()
-//            .getDynamicLink(intent)
-//            .addOnSuccessListener(this) { pendingDynamicLinkData ->
-//                var deepLink: Uri? = null
-//
-//                if (pendingDynamicLinkData != null) {
-//                    deepLink = pendingDynamicLinkData.link
-//                }
-//                val type = deepLink?.getQueryParameter("type")
-//                val id = deepLink?.getQueryParameter("id")
-//                Log.d("TAG", "onCreate:NamTD88 Vao day ")
-//                    when (type) {
-//                        FirebaseType.staff -> {
-//                            Router.open(this, Routing.DetailCandidate(id?.toInt() ?: 0))
-//                        }
-//                    }
-//            }.addOnFailureListener {
-//                // This lambda will be triggered when there is a failure.
-//                // Handle
-//                Log.d("TAG", "handleIncomingDeepLinks: ${it.message}")
-//            }
-
         NotificationsManagerClient(this).cancelAll()
-        userLocalSource.setOwnerMode(true)
         topBar = TopBarAdapterImpl(this, findViewById(R.id.topBar))
         mainTopBarState = MainTopBarState(R.string.title_dashboard, onMenuClick = {
             binding.drawerLayout.openDrawer(GravityCompat.START, true)
@@ -148,27 +122,31 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             Router.run { redirectToStaffList() }
         }, onNotificationClick = {
             Router.open(this, Routing.Notification)
-        })
+        }, isShowNoti = userLocalSource.isOwnerMode())
         topBar.setState(mainTopBarState)
         with(binding) {
+            fabClientCheckIn.setText(if(userLocalSource.isOwnerMode()) R.string.customer_check_in else R.string.recruitment)
             fabClientCheckIn.onClick {
-                if (userLocalSource.getUserDto()?.admin?.is_approve == 1){
-                    confirmDialog.show(
-                        R.string.title_navigate_client_mode,
-                        R.string.content_navigate_client_mode,
-                        functionSubmit = {
-                            userLocalSource.setOwnerMode(false)
-                            Router.run {
-                                open<ClientHomeActivity>().clear()
-                            }
-                        },
-                        functionCancel = {
-                            bottomNavigation.selectedItemId = oldScreenItemID
-                        })
+                if(userLocalSource.isOwnerMode()){
+                    if (userLocalSource.getUserDto()?.admin?.is_approve == 1) {
+                        confirmDialog.show(
+                            R.string.title_navigate_client_mode,
+                            R.string.content_navigate_client_mode,
+                            functionSubmit = {
+                                userLocalSource.setAppMode(UserLocalSource.AppMode.Client)
+                                Router.run {
+                                    open<ClientHomeActivity>().clear()
+                                }
+                            },
+                            functionCancel = {
+                                bottomNavigation.selectedItemId = oldScreenItemID
+                            })
+                    } else {
+                        notificationDialog.show(R.string.content_noty_salon_not_approve_check_in)
+                    }
                 }else{
-                    notificationDialog.show(R.string.content_noty_salon_not_approve_check_in)
+                    redirectToListRecruitment()
                 }
-
             }
             val navigator = findNavigator()
             navigator.addDestinationChangeListener {
@@ -179,6 +157,8 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 }
             }
             bottomNavigation.menu.findItem(R.id.placeHolder).isEnabled = false
+            bottomNavigation.menu.findItem(R.id.navMyCV).isVisible = !userLocalSource.isOwnerMode()
+            bottomNavigation.menu.findItem(R.id.navHome).isVisible = userLocalSource.isOwnerMode()
             bottomNavigation.setOnItemSelectedListener {
                 if (oldScreenItemID == it.itemId) return@setOnItemSelectedListener true
                 when (it.itemId) {
@@ -196,32 +176,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                     R.id.placeHolder -> {
                         return@setOnItemSelectedListener true
                     }
-//                    R.id.navCheckInBooking -> {
-//                        navigator.navigate(
-//                            BookingFragment::class,
-//                            Routing.BookingFragment(Routing.BookingFragment.TypeBooking.CHECK_IN)
-//                                .toBundle(),
-//                            navOptions = NavOptions(
-//                                popupTo = HomeFragment::class,
-//                                inclusive = false
-//                            )
-//                        )
-//                    }
-//                    R.id.navCheckIn -> {
-//                        confirmDialog.show(
-//                            R.string.title_navigate_client_mode,
-//                            R.string.content_navigate_client_mode,
-//                            functionSubmit = {
-//                                userLocalSource.setOwnerMode(false)
-//                                Router.run {
-//                                    open<ClientHomeActivity>().clear()
-//                                }
-//                            },
-//                            functionCancel = {
-//                                bottomNavigation.selectedItemId = oldScreenItemID
-//                            })
-//                        return@setOnItemSelectedListener true
-//                    }
                     else -> {
                         navigator.navigateTo(it.itemId)
                     }
@@ -229,7 +183,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                 oldScreenItemID = it.itemId
                 return@setOnItemSelectedListener true
             }
-            navigator.navigateTo(R.id.navHome)
+
+            //first navigate
+            if(userLocalSource.getAppMode() == UserLocalSource.AppMode.Owner){
+                navigator.navigateTo(R.id.navHome)
+            }else  navigator.navigateTo(R.id.navMyCV)
         }
 
         appEvent.notifyCloudMessage.bind { noti ->
@@ -246,7 +204,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         }
 
         appEvent.notifyAccountApproved.bind { isTrue ->
-            if(isTrue){
+            if (isTrue) {
                 viewModel.user?.admin?.is_approve = 1
                 messageDialog.show(R.string.title_approve_account, R.string.content_approve_account)
             }

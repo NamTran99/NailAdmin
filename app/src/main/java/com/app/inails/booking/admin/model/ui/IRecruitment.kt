@@ -53,6 +53,7 @@ interface IRecruitment {
     val contactPhone: String get() = ""
     val salonCity: String get() = ""
     val salonState: String get() = ""
+    val isMyRecruitment: Boolean get() = false
 }
 
 

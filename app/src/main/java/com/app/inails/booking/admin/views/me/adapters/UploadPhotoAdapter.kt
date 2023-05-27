@@ -37,6 +37,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
     }
 
     val items get() = mItems
+    var listImage = listOf<AppImage>()
 
     var onAddImagesAction: (() -> Unit)? = null
     var onRemoveImageAction: ((AppImage) -> Unit)? = null
@@ -46,6 +47,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
     fun changePath(listImage: List<AppImage>?){
         if(listImage.isNullOrEmpty()) return
         mItems.clear()
+        this@UploadPhotoAdapter.listImage = listImage?: listOf()
         mItems.add(AppImage())
         mItems.addAll(listImage)
         notifyDataSetChanged()
@@ -56,6 +58,7 @@ class UploadPhotoAdapter(val view: RecyclerView) : RecyclerView.Adapter<Recycler
         mItems = ArrayList(mItems.dropLast(mItems.size - 1))
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {

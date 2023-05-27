@@ -5,7 +5,10 @@ import android.support.di.Injectable
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.*
+import com.app.inails.booking.admin.model.response.client.UserClientDTO
+import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
 import com.app.inails.booking.admin.model.ui.SignUpForm
+import com.app.inails.booking.admin.model.ui.SignUpManicuristForm
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import com.app.inails.booking.admin.model.ui.VoucherForm
 import com.app.inails.booking.admin.views.me.ContactDTO
@@ -20,7 +23,13 @@ import retrofit2.http.*
 @InjectBy(MeApiImpl::class, ShareScope.Singleton)
 interface MeApi : Injectable {
     @POST("salon/change-password")
-    fun changePassword(@Body updateUserPassword: UpdateUserPasswordForm): ApiAsync<List<StaffDTO>>
+    fun changePasswordOwner(@Body updateUserPassword: UpdateUserPasswordForm): ApiAsync<Any>
+    @FormUrlEncoded
+    @POST("manicurist/update")
+    fun updateManicurist(@Field("name") name: String): ApiAsync<Any>
+
+    @POST("manicurist/change-password")
+    fun changePasswordManicurist(@Body updateUserPassword: UpdateUserPasswordForm): ApiAsync<Any>
 
     @FormUrlEncoded
     @POST("setting/setting-email-receive-feedback")
@@ -41,14 +50,19 @@ interface MeApi : Injectable {
     fun signUp(
         @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
         @Part vararg images: MultipartBody.Part?,
-    ): ApiAsync<UserDTO>
+    ): ApiAsync<UserOwnerDTO>
+
+    @POST("manicurist/sign-up")
+    fun signUpManicurist(
+        @Body signUpManicuristForm: SignUpManicuristForm
+    ): ApiAsync<UserClientDTO>
 
     @Multipart
     @POST("salon/register-support")
     fun signUpSupport(
         @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
         @Part vararg images: MultipartBody.Part?,
-    ): ApiAsync<UserDTO>
+    ): ApiAsync<UserOwnerDTO>
 
     @FormUrlEncoded
     @POST("setting/get-value-default")

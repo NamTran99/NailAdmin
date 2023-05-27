@@ -45,6 +45,7 @@
     <string name="title_sign_up_support">Registration support</string>
     <string name="title_service_staff">Provide service and worker information</string>
     <string name="title_account">Account</string>
+    <string name="title_edit_infor">Edit Information</string>
     <string name="title_appointment_booking">Appointment Booking</string>
     <string name="title_report">Revenue Statistics</string>
     <string name="title_voucher_apply">Create New Voucher</string>

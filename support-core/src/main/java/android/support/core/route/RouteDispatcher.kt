@@ -1,5 +1,6 @@
 package android.support.core.route
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
@@ -26,8 +27,29 @@ inline fun <reified T : FragmentActivity> RouteDispatcher.open(
     return this
 }
 
+inline fun <reified T : Activity> RouteDispatcher.open1(
+    args: Bundle? = null,
+    edit: Intent.() -> Unit = {}
+): RouteDispatcher {
+    when (this) {
+        is AppCompatActivity -> startActivity(Intent(this, T::class.java).apply {
+            if (args != null) putExtras(args)
+            edit()
+        })
+        is Fragment -> startActivity(Intent(requireContext(), T::class.java).apply {
+            if (args != null) putExtras(args)
+            edit()
+        })
+    }
+    return this
+}
+
 inline fun <reified T : FragmentActivity> RouteDispatcher.open(args: BundleArgument): RouteDispatcher {
     return open<T>(args.toBundle())
+}
+
+inline fun <reified T : Activity> RouteDispatcher.open1(args: BundleArgument): RouteDispatcher {
+    return open1<T>(args.toBundle())
 }
 
 inline fun <reified T : FragmentActivity> RouteDispatcher.withOpen(

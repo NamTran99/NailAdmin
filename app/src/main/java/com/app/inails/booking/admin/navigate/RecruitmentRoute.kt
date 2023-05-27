@@ -10,7 +10,7 @@ import com.app.inails.booking.admin.views.management.findstaff.MyRecruitmentFrag
 
 interface RecruitmentRoute {
     fun BaseFragment.redirectToUpdateAds(id: Int)
-    fun BaseFragment.redirectToDetailRecruitment(id: Int)
+    fun BaseFragment.redirectToDetailRecruitment(id: Int, dynamic: Boolean)
     fun BaseFragment.redirectToDetailCandidate(id: Int)
     fun BaseFragment.redirectToCreateAds()
     fun BaseFragment.redirectToMyRecruitment()
@@ -26,12 +26,19 @@ class RecruitmentRouteImpl : RecruitmentRoute {
     }
 
 
-    override fun BaseFragment.redirectToDetailRecruitment(id: Int) {
+    override fun BaseFragment.redirectToDetailRecruitment(id: Int, dynamic: Boolean) {
         findNavigator().navigate(
             DetailRecruitmentFragment::class,
-            Routing.DetailRecruitment(id).toBundle()
+            Routing.DetailRecruitment(id, dynamic).toBundle()
         )
     }
+
+//    override fun BaseFragment.redirectToDetailRecruitmentMani(id: Int) {
+//        findNavigator().navigate(
+//            DetailRecruitmentManiFragment::class,
+//            Routing.DetailRecruitment(id).toBundle()
+//        )
+//    }
 
     override fun BaseFragment.redirectToDetailCandidate(id: Int) {
         findNavigator().navigate(

@@ -5,7 +5,6 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.persistent.Parser
 import android.support.persistent.cache.Caching
-import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.BookingClientDTO
 import com.app.inails.booking.admin.model.ui.client.IServiceClient
 import com.google.gson.Gson
@@ -17,7 +16,6 @@ class AppCache(context: Context) : Caching(context, ParserImpl()) {
     var password: String by string("password", "")
     var deviceToken: String by string("device_token", "")
     var token: String by string("token", "")
-    var clientTokenPush: String by string("token", "")
     var bookingCurrent: BookingClientDTO? by reference(BookingClientDTO::class.java.name)
     var servicesSelected: List<IServiceClient>? by reference(IServiceClient::class.java.name)
     var language: String? by reference("language")

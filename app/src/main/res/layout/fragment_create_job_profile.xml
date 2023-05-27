@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray07">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lvEmptyData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/size_10"
+            android:background="@drawable/bg_white_radius"
+            android:orientation="vertical"
+            android:padding="@dimen/size_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
+                android:text="@string/avatar"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lvUploadPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+                <!--                    android:id="@+id/circleImageView"-->
+                <!--                    android:layout_width="@dimen/_100sdp"-->
+                <!--                    android:layout_height="@dimen/_100sdp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:src="@drawable/ic_upload_circle_bg"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+                <com.app.inails.booking.admin.views.widget.LoadingCircleImage
+                    android:id="@+id/circleImageView"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCamera"
+                    android:layout_width="27dp"
+                    android:layout_height="18dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_camera_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/circleImageView"
+                    app:layout_constraintStart_toStartOf="@+id/circleImageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgCamera"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:text="@string/upload"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgCamera" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:text="@string/des_2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:itemCount="3"
+                tools:listitem="@layout/layout_btn_add_picture" />
+
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:paddingEnd="@dimen/size_10"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:text="@string/des_5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/name"
+                style="@style/AppTheme.TextViewResponsive"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etName"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/size_10"
+                android:hint="@string/hint_enter_your_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                style="@style/AppTheme.TextViewResponsive"
+                android:text="@string/label_phone_2"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPhone"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/size_10"
+                android:hint="@string/hint_enter_your_phone"
+                android:inputType="phone" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/gender"
+                style="@style/AppTheme.TextViewResponsive"
+                android:textStyle="bold" />
+
+
+            <RadioGroup
+                android:id="@+id/groupGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginBottom="@dimen/size_5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdMale"
+                    style="@style/RadioButtonApp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:text="@string/gender_male" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdFemale"
+                    style="@style/RadioButtonApp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:text="@string/gender_female" />
+
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/city_and_state_of_residence_create"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@drawable/edit_text_default"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spState"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <View
+                    style="@style/AppTheme.Line.Vertical"
+                    android:layout_marginVertical="@dimen/size_5" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spCity"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewResponsive"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/local_position_or_willing_to_relocate"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/groupWorkingType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginBottom="@dimen/size_5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdLocalPos"
+                    style="@style/RadioButtonApp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:text="@string/local_position" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdRelocate"
+                    style="@style/RadioButtonApp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/size_10"
+                    android:text="@string/willing_to_relocate" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:text="@string/years_of_experience"
+                style="@style/AppTheme.TextViewResponsive"
+                android:textStyle="bold" />
+
+            <com.app.inails.booking.admin.views.widget.basic.CustomEditText
+                android:id="@+id/etExperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                android:hint="@string/hint_enter_your_experience"
+                app:custom_end_text="@string/year"
+                app:input_type="decimal"
+                app:max_number_input="99" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                style="@style/AppTheme.TextViewResponsive"
+                android:text="@string/skillset_create"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@drawable/edit_text_default"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/size_10">
+
+                <EditText
+                    android:id="@+id/etMoreSkill"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/size_3"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/add_skillset" />
+
+                <TextView
+                    android:id="@+id/btnAddSkill"
+                    style="@style/AppTheme.TextViewResponsive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/size_8"
+                    android:gravity="center"
+                    android:text="@string/add"
+                    android:textColor="@color/colorPrimary" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMoreSkillSet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="3"
+                tools:listitem="@layout/item_more_skillset" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMainSkillSet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_main_skillset" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10"
+                style="@style/AppTheme.TextViewResponsive"
+                android:text="@string/description_2"
+                android:textStyle="bold" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etDes"
+                style="@style/AppTheme.EditText.MultiLine"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/size_10"
+                android:hint="@string/des_6"
+                android:inputType="textMultiLine|textCapSentences" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/size_20"
+                android:layout_marginTop="@dimen/size_15"
+                android:layout_marginBottom="@dimen/size_5"
+                android:background="@drawable/button_primary_corner"
+                android:text="@string/upload_my_cv" />
+
+            <TextView
+                style="@style/AppTheme.TextViewResponsive.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginBottom="13dp"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:text="@string/upload_my_cv_des_1"
+                android:textColor="@color/hint_text_color" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

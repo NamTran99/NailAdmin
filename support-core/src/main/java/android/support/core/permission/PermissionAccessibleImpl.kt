@@ -57,6 +57,7 @@ class PermissionRequestImpl(
     dispatcher = dispatcher,
 ) {
     override fun onResult(): Boolean {
+
         val isAllAllowed = permissions.all {
             ContextCompat.checkSelfPermission(
                 dispatcher.activity, it

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_20"
+    tools:context=".views.me.reset.ResetPasswordFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewResponsive"
+        android:layout_marginTop="@dimen/size_20"
+        android:text="@string/label_name" />
+
+    <EditText
+        android:id="@+id/etName"
+        style="@style/AppTheme.EditText"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:hint="@string/hint_enter_full_name" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_30"
+        android:text="@string/btn_save"
+        android:background="@drawable/button_primary_corner_20"
+        style="@style/AppTheme.Button"
+        />
+
+
+</LinearLayout>

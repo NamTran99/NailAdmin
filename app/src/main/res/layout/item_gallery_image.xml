@@ -51,12 +51,13 @@
             android:src="@drawable/ic_no_image" />
 
         <TextView
-            style="@style/AppTheme.TextView.Medium"
+            style="@style/AppTheme.TextViewResponsive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/icNoImage"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
+            android:gravity="center"
             android:text="@string/no_image_found"
             android:textColor="@color/gray15"
             android:textSize="@dimen/size_16" />

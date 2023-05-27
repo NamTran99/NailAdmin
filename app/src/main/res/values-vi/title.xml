@@ -2,6 +2,7 @@
 <resources>
     <string name="title_order_history">Lịch sử làm việc</string>
     <string name="title_account">Tài khoản</string>
+    <string name="title_edit_infor">Chỉnh Sửa Thông Tin</string>
     <string name="title_email_receive_feedback">Email Nhận Phản Hồi</string>
     <string name="title_change_password">Đổi Mật Khẩu</string>
     <string name="title_report">Thống Kê Thu Nhập</string>

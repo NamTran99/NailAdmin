@@ -109,10 +109,6 @@ class TextFormatter(private val cxt: Context, val userLocalSource: UserLocalSour
         }
     }
 
-    fun formatSalary(salary: String): String {
-        return cxt.getString(R.string.salary_format, salary)
-    }
-
     fun formatGender(gender: Int): String {
         return when (gender) {
             1 -> getLanguageContext().getString(R.string.gender_male)
@@ -169,7 +165,7 @@ class TextFormatter(private val cxt: Context, val userLocalSource: UserLocalSour
         }
     }
 
-    fun formatSalaryRecruitment(salary: Double, type: Int): String {
+    fun formatSalary(salary: Double, type: Int): String {
            val value = salary.display()
         val suffix = when (type) {
             1 -> getLanguageContext().getString(R.string.per_week_1)

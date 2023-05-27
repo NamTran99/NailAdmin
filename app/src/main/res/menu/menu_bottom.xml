@@ -4,6 +4,11 @@
         android:id="@+id/navHome"
         android:icon="@drawable/ic_home"
         android:title="@string/mn_home" />
+
+    <item
+        android:id="@+id/navMyCV"
+        android:icon="@drawable/ic_home"
+        android:title="@string/mn_my_cv" />
     <item
         android:id="@+id/placeHolder"
         android:title="" />

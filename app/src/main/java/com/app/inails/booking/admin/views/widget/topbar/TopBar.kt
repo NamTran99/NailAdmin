@@ -85,6 +85,12 @@ class SimpleTopBarState(
             }
         }
     }
+
+    fun showExtensionButton(isShow: Boolean = true){
+        with(stateBinding){
+            btExtension.show(isShow)
+        }
+    }
 }
 
 class StaffTopBarState(
@@ -115,6 +121,7 @@ class MainTopBarState(
     private val onMenuClick: () -> Unit = {},
     private val onStaffListClick: () -> Unit = {},
     private val onNotificationClick: () -> Unit = {},
+    private val isShowNoti: Boolean = true
 ) : TopBarState() {
     override val stateBinding by bindingOf(TopBarMainBinding::inflate)
 
@@ -128,6 +135,7 @@ class MainTopBarState(
             btNotification.setOnClickListener {
                 onNotificationClick()
             }
+            btNotification.show(isShowNoti)
         }
     }
 

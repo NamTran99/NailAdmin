@@ -8,3 +8,4 @@ object AppConfig {
     val serverSocketDev:String get() = "https://dev.api.booking.kendemo.com:3008"
     val otpTimeout: Int get() = 60
 }
+

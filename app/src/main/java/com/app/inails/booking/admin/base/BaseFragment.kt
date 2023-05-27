@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.app.AppPermissionOwner
 import com.app.inails.booking.admin.app.AppSettingsOwner
+import com.app.inails.booking.admin.datasource.local.JobAndRecruitmentSource
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.exception.ErrorHandler
@@ -44,6 +45,7 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId),
     val appActivity get() = activity as BaseActivity
     val appEvent by inject<AppEvent>()
     val userLocalSource by inject<UserLocalSource>()
+    val jobAndRecruitmentSource by inject<JobAndRecruitmentSource>()
     val loadingDialog by lazy { LoadingDialog(requireContext(), this) }
     val mWindowManager: WindowManager by lazy { requireActivity().windowManager }
 

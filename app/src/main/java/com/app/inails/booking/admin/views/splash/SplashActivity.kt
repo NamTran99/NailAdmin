@@ -61,12 +61,14 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
                 }
                 val type = deepLink?.getQueryParameter("type")
                 val id = deepLink?.getQueryParameter("id")
-                Log.d("TAG", "onCreate:NamTD88 Vao day ")
                 if(type == null) return@addOnSuccessListener
                 functionNavigateDynamicLink = {
                     when (type) {
                         FirebaseType.staff -> {
                             Router.open(this, Routing.DetailCandidate(id?.toInt() ?: 0, true))
+                        }
+                        FirebaseType.job ->{
+                            Router.open(this, Routing.DetailRecruitment(id?.toInt() ?: 0, true))
                         }
                     }
                     functionNavigateDynamicLink = null
@@ -102,14 +104,14 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
                                     Router.open(this@SplashActivity, Routing.SelectLanguage)
                                     return@withContext
                                 }
-                                if (viewModel.userOwner == null) {
-                                    Router.run { redirectToLogin() }
-                                } else if (!viewModel.isOwnerMode) {
+                                if (viewModel.appMode == UserLocalSource.AppMode.Owner || viewModel.appMode == UserLocalSource.AppMode.Manicurist) {
+                                    Router.run { redirectToMain() }
+                                } else if (viewModel.appMode == UserLocalSource.AppMode.Client) {
                                     Router.run {
                                         open<ClientHomeActivity>().clear()
                                     }
-                                } else if (viewModel.isOwnerMode) {
-                                    Router.run { redirectToMain() }
+                                } else  {
+                                    Router.run { redirectToLogin() }
                                 }
                             }else{
                                 functionNavigateDynamicLink?.invoke()
@@ -136,7 +138,7 @@ class SplashViewModel(
     val isFirstOpenApp = userLocalSource.getIsFirstOpenApp() ?: true
     val userOwner = userLocalSource.getUserDto()
     val language = userLocalSource.getLanguage()
-    val isOwnerMode = userLocalSource.getOwnerMode()
+    val appMode = userLocalSource.getAppMode()
     val versionResult = checkVersionApp.result
 
     fun getVersion() = launch(null, error) {

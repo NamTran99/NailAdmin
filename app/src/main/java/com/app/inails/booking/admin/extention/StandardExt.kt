@@ -123,3 +123,9 @@ fun Double.display(): String{
 		this.showMaxNumber(2)
 	}
 }
+
+fun ArrayList<String>.toLocalImage1(): List<LocalImage>{
+	return map {
+		LocalImage(path = it)
+	}
+}

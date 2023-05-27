@@ -77,7 +77,9 @@ class ErrorHandlerImpl : ErrorHandler {
                 activity.toast(error.resource)
             }
             is UnauthorizedException ->{
-                activity.logout()
+                activity.errorDialog.show(R.string.error, error.message.toString()){
+                    activity.logout()
+                }
             }
             is UnknownHostException ->{
                 activity.errorDialog.show(R.string.error, R.string.error_not_connect_network, R.string.retry) {

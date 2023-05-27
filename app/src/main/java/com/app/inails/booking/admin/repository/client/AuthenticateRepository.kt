@@ -19,18 +19,11 @@ class AuthenticateRepository(
     fun isOwnerLogged() = userLocalSource.isOwnerLogin()
     
     suspend fun logout() {
-        authenticateApi.logout(appCache.clientTokenPush).await()
-//        if (userLocalSource.isOwnerLogin())
+        authenticateApi.logout(appCache.token).await()
             logoutCustomer()
-//        else logoutAll()
     }
 
     fun logoutCustomer() {
-        userLocalSource.logoutCustomer()
-    }
-
-    fun logoutAll() {
-        userLocalSource.logout()
-        salonLocalSource.clear()
+        userLocalSource.logOutClient()
     }
 }

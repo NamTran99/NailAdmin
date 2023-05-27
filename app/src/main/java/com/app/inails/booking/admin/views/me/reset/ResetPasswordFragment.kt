@@ -16,6 +16,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentResetPasswordBinding
 import com.app.inails.booking.admin.datasource.remote.AuthenticateApi
+import com.app.inails.booking.admin.exception.resourceError
 import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.extention.inputTypePhoneUS
 import com.app.inails.booking.admin.extention.onClick
@@ -44,6 +45,13 @@ class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password), To
             btnSubmit.onClick{
                 viewModel.submit(edtPhoneNumber.text.toString())
             }
+            grRole.setOnCheckedChangeListener { _, checkedId ->
+                viewModel.role = when(checkedId){
+                    rbOwner.id -> 2
+                    rbMani.id -> 3
+                    else -> 2
+                }
+            }
         }
 
         viewModel.redirectToVerifyOTP.bind {
@@ -60,12 +68,16 @@ class ResetPasswordViewModel(
     private val requestOTPRepo: RequestOTPRepo
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val redirectToVerifyOTP = SingleLiveEvent<Any>()
+    var role : Int = -1 // 2 owner, 3 mani
 
     fun submit(phoneNumber: String) = launch(loading, error) {
         if (phoneNumber.isBlank()) viewError(
             R.id.edtPhoneNumber,
             R.string.error_blank_phone
         )
+        if (role == -1){
+            resourceError(R.string.error_pls_select_role)
+        }
         redirectToVerifyOTP.post(requestOTPRepo(phoneNumber))
     }
 }
@@ -76,7 +88,7 @@ class RequestOTPRepo(
     private val textFormatter: TextFormatter,
 ) {
 
-    suspend operator fun invoke(phoneNumber: String) {
+    suspend operator fun invoke(phoneNumber: String, role: Int = 2) {
         authenticateApi.requestOTP(textFormatter.formatPhoneNumber(phoneNumber)).await()
     }
 

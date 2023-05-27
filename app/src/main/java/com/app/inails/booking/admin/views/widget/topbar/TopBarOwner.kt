@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.widget.topbar
 
+import android.os.Bundle
 import android.support.core.view.ViewSavedStateRegistry
 import android.support.core.view.ViewState
 import android.view.LayoutInflater
@@ -32,7 +33,6 @@ class TopBarAdapterImpl(
     private var mState: TopBarState = NoTopBarState()
     private val inflater = LayoutInflater.from(viewGroup.context)
     private val registry = ViewSavedStateRegistry(owner, "android.support.topbar") { mState }
-
     override fun setState(state: TopBarState) {
         mState = state.applyTo(viewGroup, mState, inflater, registry) as TopBarState
     }

@@ -14,6 +14,7 @@ import android.support.viewmodel.viewModel
 import android.view.View
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
+import com.app.inails.booking.admin.BuildConfig
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseRefreshFragment
 import com.app.inails.booking.admin.databinding.FragmentDetailCandidateBinding
@@ -122,7 +123,7 @@ class DetailCandidateFragment : BaseRefreshFragment(R.layout.fragment_detail_can
                             item.name,
                             item.experienceFormatEn,
                             item.skillsFormat,
-                            item.description.displaySafe(requireContext(), R.string.no_information_en), it
+                            item.description.displaySafe(requireContext(), R.string.no_information_en), it, BuildConfig.versionCustom
                         )
                     )
                 }

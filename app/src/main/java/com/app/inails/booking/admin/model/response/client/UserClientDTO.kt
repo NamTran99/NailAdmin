@@ -20,7 +20,7 @@ data class UserClientDTO(
         val deviceType: String? = "",
         val email: String? = "",
         val id: Int? = 0,
-        val name: String? = "",
+        var name: String? = "",
         val phone: String? = "",
         @SerializedName("salon_id")
         val salonId: Int?,

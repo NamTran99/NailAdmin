@@ -23,12 +23,12 @@ data class UserOwnerDTO(
         val id: Int? = 0,
         val name: String? = "",
         val phone: String? = "",
-        @SerializedName("salon_id")
-        val salonId: Int?,
+        var salon_id: Int?= 0,
         val state: String?,
         @SerializedName("updated_at")
         val updatedAt: String?,
         val zip: String?,
-        val salon: SalonDTO? = null
+        val salon: SalonDTO? = null,
+        var is_approve: Int = 1
     )
 }

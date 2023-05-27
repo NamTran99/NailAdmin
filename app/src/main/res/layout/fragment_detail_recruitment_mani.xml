@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/size_0"
+    android:background="@color/gray07"
+    android:paddingBottom="@dimen/size_13">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="40dp">
+
+                <RelativeLayout
+                    android:id="@+id/lvViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_centerInParent="true"
+                        android:background="#16BC40C1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabDots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginHorizontal="@dimen/size_20"
+                        android:background="@null"
+                        android:clipToPadding="false"
+                        app:tabBackground="@drawable/tab_selector_2"
+                        app:tabGravity="center"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabPadding="@dimen/size_15" />
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgDefault"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#16BC40C1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_logo"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size_10"
+                    android:id="@+id/lvRight1"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@drawable/bg_white_radius"
+                    android:orientation="vertical"
+                    android:padding="@dimen/size_10">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTitle"
+                                style="@style/AppTheme.TextViewResponsive"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/text_size_18"
+                                android:textStyle="bold"
+                                tools:text="CẦN TÌM THỢ TAY CHÂN NƯỚC!" />
+
+                            <TextView
+                                android:id="@+id/tvDate"
+                                style="@style/AppTheme.TextViewResponsive.Hint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/size_10"
+                                tools:text="09:45 Am 10-26-2022" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/btShare"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingVertical="@dimen/size_8"
+                            android:paddingHorizontal="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/button_share"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_share_2" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/share"
+                                style="@style/AppTheme.TextViewResponsive"/>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <View
+                        style="@style/AppTheme.Line.Horizontal"
+                        android:layout_marginTop="@dimen/size_20" />
+
+                    <TextView
+                        android:id="@+id/tvDescriptionTitle"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:text="@string/description_1"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent1"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tvDes"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        tools:text="@tools:sample/lorem" />
+
+                    <TextView
+                        android:id="@+id/tvSkillTittle"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:text="@string/detail_recruitment_des_1"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent1"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSkillSet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_display_skillset" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_10"
+                    android:id="@+id/lvRight2"
+                    android:background="@drawable/bg_white_radius"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="20dp">
+
+                    <TextView
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/salon_information"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent1"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_20"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/salon_name"
+                           />
+
+                        <TextView
+                            android:id="@+id/tvSalonName"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/admin_name"
+                         />
+
+                        <TextView
+                            android:id="@+id/tvOwnerName"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/salon_address"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvSalonAddress2"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_5"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/contact_phone"
+                           />
+
+                        <TextView
+                            android:id="@+id/tvSalonPhone"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_5"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/operation" />
+
+                        <TextView
+                            android:id="@+id/tvOperationTime"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:autoLink="phone"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="987-654-3210" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/customer_classification"
+                             />
+
+                        <TextView
+                            android:id="@+id/tvCustomerClass"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/average_income"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvAverageIncome"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/payroll_method"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvPayrollMethod"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/staff_gender_requirements"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvGender"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/service_of_transporting_staff"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvShuttleStaff"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/housing_for_worker"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvHousing"
+                            style="@style/AppTheme.TextViewResponsive"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimary"
+                            tools:text="Nail Salon Vip" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/lvBot1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="@dimen/size_10"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCall"
+                style="@style/AppTheme.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTint="@color/white"
+                android:text="@string/btn_call"
+                app:icon="@drawable/ic_call" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSms"
+                style="@style/AppTheme.Button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_of_edit_text"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_weight="1"
+                android:text="@string/btn_sms"
+                app:backgroundTint="@color/green_100"
+                app:icon="@drawable/ic_sms" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+

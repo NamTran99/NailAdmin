@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.auth
 
+import android.os.Build.VERSION_CODES.O
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -44,13 +45,29 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
             tvResetPassword.onClick {
                 Router.open(this@LoginActivity, Routing.ResetPassword)
             }
-            btSignUp.onClick {
+            btSignUpOwner.onClick {
                 Router.open(this@LoginActivity, Routing.SignUpGeneral)
+            }
+            btSignUpMani.onClick{
+                Router.open(this@LoginActivity, Routing.SignUpMani)
             }
             btSupport.onClick {
                 Router.open(this@LoginActivity, Routing.ContactAccount)
             }
-
+            btLoginOwner.onClick{
+                viewModel.form.run {
+                    phone = binding.etPhone.text.toString()
+                    password = binding.etPassword.text.toString()
+                }
+                viewModel.login(LoginRepo.LoginType.Owner)
+            }
+            btLoginClient.onClick{
+                viewModel.form.run {
+                    phone = binding.etPhone.text.toString()
+                    password = binding.etPassword.text.toString()
+                }
+                viewModel.login(LoginRepo.LoginType.Manicurist)
+            }
             switchLan.showPopUp(R.menu.menu_language) { id ->
                 val lan = when (id) {
                     R.id.lanVi -> "vi"
@@ -67,21 +84,20 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
             )
         }
 
-        binding.btLogin.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.form.run {
-                    phone = binding.etPhone.text.toString()
-                    password = binding.etPassword.text.toString()
-                }
-                viewModel.login()
-            }
-        }
+//        binding.btLogin.setOnClickListener {
+//            lifecycleScope.launch {
+//                viewModel.form.run {
+//                    phone = binding.etPhone.text.toString()
+//                    password = binding.etPassword.text.toString()
+//                }
+//                viewModel.login()
+//            }
+//        }
 
         with(viewModel) {
-            loading.bind(binding.btLogin::setEnabled) { !this }
+//            loading.bind(binding.btLogin::setEnabled) { !this }
             loginSuccess.bind {
                 if (argument != null) {
-                    Log.d("TAG", "onCreate:Namtd88 login close")
                     close()
                 } else {
                     open<MainActivity>().clear()
@@ -106,8 +122,8 @@ class LoginViewModel(
     val loginSuccess = SingleLiveEvent<Int>()
     val isVnLanguage = userLocalSource.getLanguage() == "vi"
 
-    fun login() = launch(loading, error) {
-        loginRepo(form)
+    fun login(type: LoginRepo.LoginType) = launch(loading, error) {
+        loginRepo(form, type)
         loginSuccess.post(R.string.msg_login_success)
     }
 }

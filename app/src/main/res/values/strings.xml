@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Việt Nails Owner</string>
+    <string name="app_name">Viet Nails - Chủ Tiệm / Thợ</string>
     <string name="btn_ok">OK</string>
     <string name="btn_ok_1">OK</string>
     <string name="btn_cancel">Cancel</string>
@@ -39,6 +39,7 @@
     <string name="error_blank_customer_id">Please select a customer</string>
     <string name="error_pls_select_working_time">Please select working time type!</string>
     <string name="error_pls_select_gender">Please select gender!</string>
+    <string name="error_pls_select_role">Please select role for reset password!</string>
     <string name="error_pls_select_position">Please select position!</string>
     <string name="error_not_enough_image_count">Please select at least one image</string>
     <string name="error_data_signup_support_not_valid">Please select at least one image or leave us your contact</string>
@@ -57,7 +58,8 @@
     <string name="btn_edit_profile">Edit Profile</string>
     <string name="btn_save">Save</string>
     <string name="msg_profile_update_success">Profile update successful</string>
-    <string name="btn_login">Login</string>
+    <string name="btn_login_owner">Login as a owner</string>
+    <string name="btn_login_client">Login as a nail worker</string>
     <string name="error_blank_username">Username should not be blank</string>
     <string name="error_blank_password">Password should not be blank</string>
     <string name="error_blank_password_vn">Mật khẩu không được để trống</string>
@@ -273,7 +275,7 @@
     <string name="customer_type">Customer Type</string>
     <string name="salon_s_gallery">Salon\'s Gallery</string>
     <string name="photo_gallery">PHOTO GALLERY</string>
-    <string name="no_image_found">No Image Found</string>
+    <string name="no_image_found">This screen will display pictures showing the difference in appearance of customers before and after using services at this salon (if any).</string>
     <string name="vip">VIP</string>
     <string name="update_customer">Update Customer</string>
     <string name="type">Type</string>
@@ -439,6 +441,7 @@
     <string name="version_format">Version %s</string>
     <string name="appointment_list">Appointment List</string>
     <string name="customer_check_in">Customer Walk-in</string>
+    <string name="recruitment">Recruitment</string>
     <string name="welcome_account">Welcome, %s</string>
     <string name="update_success">Update Successfully</string>
     <string name="staff_not_have_attendance">This staff doesn\'t have any attendance records yet</string>
@@ -457,6 +460,7 @@
     <string name="change_pass_success">Password changed successfully!</string>
     <string name="change_email_success">Email changed successfully!</string>
     <string name="success">Success!</string>
+    <string name="success_register_mani">You have registered successfully!</string>
     <string name="no_information">No Information</string>
     <string name="no_information_en">No Information</string>
     <string name="update_customer_success">Update customer information success</string>
@@ -485,6 +489,7 @@
     <string name="vietnamese_1">Tiếng Việt</string>
     <string name="success_remind_customer">Remind customer successfully!</string>
     <string name="success_start_service">Start service successfully!</string>
+    <string name="success_update_mani">You edit account information successfully!</string>
     <string name="success_reject_appointment">Reject appointment successfully!</string>
     <string name="success_accept_appointment">Accept appointment successfully!</string>
     <string name="success_remove_appointment">Remove appointment successfully!</string>
@@ -672,6 +677,7 @@
         Reserve your spot for a nail session now by clicking on this link!:\n
         %s\n\n
         Furthermore, the applications presents numerous trendy nail spas located in the United States for your consultation and reservation.
+        \n\n —> Users need to download the app and log in to their account to see the details (%s - Share from Android)
     </string>
     <string name="recruitment_sender_format">
         123VietNails - A platform that facilities job connections between nail technicians and nail salon proprietors\n
@@ -684,6 +690,7 @@
         Please click on the link provided to access the details of job.\n
         %s\n\n
         Furthermore, there are numerous exciting opportunities available for nail professionals like you.
+        \n\n—> Users need to download the app and log in to their account to see the details (%s - Share from Android)
     </string>
     <string name="job_profile_sender_format">
         123VietNails - A platform that facilities job connections between nail technicians and nail salon proprietors\n
@@ -695,6 +702,7 @@
         Additional details can be accessed by clicking on this link:\n
         %s\n\n
         Moreover, the applications provides more than one manicurist your salon maybe looking for.
+        \n\n—> Users need to download the app and log in to their account to see the details (%s - Share from Android)
     </string>
     <string name="des_3">Leave the amount blank if you want to negotiate later</string>
     <string name="title_delete_post">Delete post</string>
@@ -726,6 +734,7 @@
     <string name="so">so</string>
     <string name="nails_job">Create your recruitment to access job seekers immediately</string>
     <string name="nails_job_des_1">The recruitment will be visible to everyone after posting, you can share it or hide it if you want</string>
+    <string name="city_and_state_of_residence_create">City and State of Residence?</string>
     <string name="city_and_state_of_residence">City and State of Residence</string>
     <string name="ethnicity_customer">Which ethnicity are the customers?</string>
     <string name="hint_enter_salary">Enter price</string>
@@ -756,13 +765,16 @@
     <string name="able_to_work_out_of_sate">Able to work out-of-sate</string>
     <string name="error_blank_state">State should be selected</string>
     <string name="error_blank_city">City should be selected</string>
+    <string name="error_blank_working_place_type">You should choose Local Position or Willing to Relocate</string>
     <string name="error_choose_customer_skin">You should choose ethnicity of guest</string>
     <string name="error_choose_payroll_method">You should choose payroll method</string>
     <string name="error_skill_at_least_1">You should add at least 1 skill</string>
     <string name="error_choose_shuttle">You should choose payroll method</string>
     <string name="city_state_residence">City and State of Residence</string>
     <string name="skillset">Skill set</string>
+    <string name="skillset_create">What skill set are you capable of? (Select or add your skills)</string>
     <string name="willing_to_relocate">Willing to relocate</string>
+    <string name="avatar">Avatar</string>
     <string name="local_position">Local Position</string>
     <string name="create_re_1">Are you seeking a male or female employee?</string>
     <string name="staff_gender_requirements">Staff gender requirements</string>
@@ -772,6 +784,43 @@
     <string name="retry">Try</string>
     <string name="noti_job_profile_not_available">Sorry! This resume does not exist or has been hidden.</string>
     <string name="noti_please_login">Please login to see this content. If you don\'t already have an account, create one now to take advantage of many of our free services. The signup process is quick and easy.</string>
+    <string name="des_login_1">Are you a salon owner who wants to register to open a Salon??</string>
+    <string name="des_login_2">Are you a nail manicurist looking for a job?</string>
+    <string name="click_here_to_sign_up">Click here to register</string>
+    <string name="mn_my_cv">My CV</string>
+    <string name="create_job_des1">You are looking forward to…</string>
+    <string name="create_job_des_2">1. Getting a job quickly and conveniently</string>
+    <string name="create_job_des_3">2. Finding a job that matches your abilities</string>
+    <string name="create_job_des_4">3. Your profile is known by many salons</string>
+    <string name="create_job_des_5">Let\'s create yourself a CV with simple steps that only take a few minutes so we can help you get the most suitable job right away!</string>
+    <string name="create_now">Create CV now</string>
+    <string name="display_my_cv">Display my CV</string>
+    <string name="years_of_experience">Years of Experience</string>
+    <string name="about_me">About me</string>
+    <string name="error_select_gender">You should select your gender!</string>
+    <string name="des_2">Please upload a photo of yourself, the beautiful nail designs you have done, your certificates or degrees</string>
+    <string name="des_5">Tips: Posting as many photos as you can will help your profile stand out more and easily attract the salon owner.</string>
+    <string name="upload">Upload</string>
+    <string name="name">Name</string>
+    <string name="hint_enter_your_name">Enter your Name</string>
+    <string name="label_phone_2">Contact Number</string>
+    <string name="local_position_or_willing_to_relocate">Local Position or Willing to Relocate?</string>
+    <string name="des_6">In addition to the information above, please describe yourself in more detail here.  This will help the salon owner get to know you better, thereby increasing your chances of getting a job</string>
+    <string name="hint_enter_your_experience">Enter your experience</string>
+    <string name="upload_my_cv">Upload my cv</string>
+    <string name="upload_my_cv_des_1">Your resume will be publicly accessible. You have the option to display, share or conceal your resume as desired</string>
+    <string name="error_blank_experience">You should type your experience!</string>
+    <string name="mn_update_cv">Update My CV</string>
+    <string name="mn_create_cv">Create My CV</string>
+    <string name="success_create_job_profile">You create job profile successfully!</string>
+    <string name="success_update_job_profile">You update job profile successfully!</string>
+    <string name="success_public_job">Public your job profile successfully!</string>
+    <string name="success_unpublic_job">Hide your job profile successfully!</string>
+    <string name="manicurist_registration">Manicurist Registration</string>
+    <string name="hint_enter_pass">Enter Password</string>
+    <string name="reset_pass_des_1">Choose role to reset password</string>
+    <string name="salon_owner">Salon owner</string>
+    <string name="salon_manicurist">Salon manicurist</string>
 </resources>
 
 

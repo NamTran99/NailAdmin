@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/divider"
+            android:layout_marginBottom="@dimen/size_50"
             android:paddingHorizontal="@dimen/size_10"
            />
 
@@ -69,12 +70,12 @@
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fabClientCheckIn"
-                android:layout_width="125dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
-                android:lines="2"
+                android:maxLines="2"
                 android:text="@string/customer_check_in"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

@@ -71,30 +71,6 @@ class MainApplication : Application() {
             .build()
         Picasso.setSingletonInstance(picasso);
 
-        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-            override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-                activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT;
-            }
-
-            override fun onActivityStarted(p0: Activity) {
-            }
-
-            override fun onActivityResumed(p0: Activity) {
-            }
-
-            override fun onActivityPaused(p0: Activity) {
-            }
-
-            override fun onActivityStopped(p0: Activity) {
-            }
-
-            override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
-            }
-
-            override fun onActivityDestroyed(p0: Activity) {
-            }
-
-        })
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             StrictMode.setVmPolicy(
                 StrictMode.VmPolicy.Builder()

@@ -1,5 +1,7 @@
 package com.app.inails.booking.admin.views.management.findstaff
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.LoadingEvent
@@ -15,6 +17,7 @@ import android.view.View
 import androidx.core.net.toUri
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.app.inails.booking.admin.BuildConfig
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentDetailRecruitmentBinding
@@ -23,6 +26,8 @@ import com.app.inails.booking.admin.helper.firebase.FirebaseType
 import com.app.inails.booking.admin.helper.firebase.generateSharingLink
 import com.app.inails.booking.admin.model.ui.IRecruitment
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToLoginAndReturn
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToMain
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.popups.PopupRecruitmentOwner
 import com.app.inails.booking.admin.repository.management.RecruitmentRepo
@@ -45,13 +50,28 @@ class DetailRecruitmentFragment : BaseFragment(R.layout.fragment_detail_recruitm
     private lateinit var adapter: ImagesViewPagerAdapter2
     private lateinit var skillSetAdapter: DisplaySkillSetAdapter
 
+    override fun onResume() {
+        super.onResume()
+        if(!userLocalSource.isLogin()){
+            notificationDialog.show(R.string.noti_please_login){
+                redirectToLoginAndReturn()
+            }
+        }else{
+            vm.getDetailRecruitment(args.id)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.setState(
             SimpleTopBarState(
-                R.string.mn_my_recruitment,
+                R.string.mn_detail_recruitment,
                 onBackClick = {
-                    activity?.onBackPressed()
+                    if(args.dynamic){
+                        redirectToMain()
+                    }else{
+                        activity?.onBackPressed()
+                    }
                 },
                 extensionButton = ExtensionButton(
                     isShow = true,
@@ -74,6 +94,7 @@ class DetailRecruitmentFragment : BaseFragment(R.layout.fragment_detail_recruitm
             listOf(lv1,lv2).moveViewFromRight(mWindowManager, 500)
             lvViewPager.moveViewFromTop(mWindowManager, 500)
             imgDefault.moveViewFromTop(mWindowManager, 500)
+            lvBot1.moveViewFromBottom(mWindowManager, 500)
 
             skillSetAdapter = DisplaySkillSetAdapter(rvSkillSet.apply {
                 layoutManager = FlexboxLayoutManager(requireContext()).apply {
@@ -137,6 +158,16 @@ class DetailRecruitmentFragment : BaseFragment(R.layout.fragment_detail_recruitm
 
     private fun display(item: IRecruitment) {
         binding.apply {
+            if(!item.isPublish && !item.isMyRecruitment && args.dynamic){
+                notificationDialog.show(R.string.noti_job_profile_not_available){
+                    redirectToMain()
+                }
+                return
+            }
+
+            lvBot1.show(!item.isMyRecruitment)
+            lvBtn2.show(item.isMyRecruitment)
+            topBar.state<SimpleTopBarState>().showExtensionButton(item.isMyRecruitment)
             tvGender.text = item.genderFormat
             skillSetAdapter.submit(item.skillSet)
             item.skillSet.isNotEmpty() show listOf(rvSkillSet, tvSkillTittle)
@@ -154,6 +185,16 @@ class DetailRecruitmentFragment : BaseFragment(R.layout.fragment_detail_recruitm
             tvOwnerName.text = item.salon?.ownerName
 //            tvOwnerEmail.text = item.salon?.ownerEmail
 //            tvOwnerPhone.text = item.salon?.ownerPhone
+            btnCall.onClick {
+                val intent = Intent(Intent.ACTION_VIEW);
+                intent.data = Uri.parse("tel:${item.salon?.phoneNumber}")
+                startActivity(intent)
+            }
+            btnSms.onClick {
+                val intent = Intent(Intent.ACTION_VIEW);
+                intent.data = Uri.parse("sms:${item.salon?.phoneNumber}")
+                startActivity(intent)
+            }
             imgDefault.show(item.images.isEmpty())
             lvViewPager.show(item.images.isNotEmpty())
             adapter.submit(item.images)
@@ -179,7 +220,7 @@ class DetailRecruitmentFragment : BaseFragment(R.layout.fragment_detail_recruitm
                             item.title,
                             item.description,
                             item.salary_format_en,
-                            item.work_place, it
+                            item.work_place, it, BuildConfig.versionCustom
                         )
                     )
                 }

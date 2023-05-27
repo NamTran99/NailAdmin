@@ -4,9 +4,7 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import com.app.inails.booking.admin.extention.safe
 import com.app.inails.booking.admin.formatter.TextFormatter
-import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
-import com.app.inails.booking.admin.model.ui.IUser
 import com.app.inails.booking.admin.model.ui.client.IUserClient
 import com.app.inails.booking.admin.model.ui.client.IUserClientEdit
 
@@ -26,6 +24,8 @@ class ProfileClientFactory(private val textFormatter: TextFormatter) {
                 get() = textFormatter.noInfo(it.user?.address)
             override val dob: String
                 get() = textFormatter.noInfo(it.user?.birthdate)
+            override val fullName: String
+                get() = it.user?.name.safe()
         }
     }
 

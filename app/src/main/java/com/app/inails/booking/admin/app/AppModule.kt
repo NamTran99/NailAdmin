@@ -4,6 +4,7 @@ import android.app.Application
 import android.support.di.dependenceContext
 import android.support.di.module
 import androidx.viewbinding.BuildConfig
+import com.app.inails.booking.admin.BuildConfig.endpoint
 import com.app.inails.booking.admin.datasource.remote.GoogleApi
 import com.app.inails.booking.admin.helper.factory.TLSSocketFactory
 import com.app.inails.booking.admin.helper.interceptor.Logger
@@ -94,7 +95,7 @@ val apiModule = module {
             .client(
                 get()
             )
-            .baseUrl(if (BuildConfig.DEBUG) AppConfig.endpointLive else AppConfig.endpointLive)
+            .baseUrl(com.app.inails.booking.admin.BuildConfig.endpoint)
             .addCallAdapterFactory(ApiAsyncAdapterFactory(DefaultApiErrorHandler()))
             .build()
     }

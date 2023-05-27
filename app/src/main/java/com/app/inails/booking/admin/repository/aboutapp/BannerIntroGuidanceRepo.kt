@@ -7,7 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.AboutAppApi
 import com.app.inails.booking.admin.factory.BannerFactory
-import com.app.inails.booking.admin.model.response.UserDTO
+import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
+
 import com.app.inails.booking.admin.model.ui.IIntro
 
 @Inject(ShareScope.Activity)
@@ -48,7 +49,7 @@ class BannerIntroGuidanceRepo(
 class GetOwnerInformation(
     private val userLocalSource: UserLocalSource,
 ) {
-    operator fun invoke(): UserDTO? {
+    operator fun invoke(): UserOwnerDTO? {
         return userLocalSource.getUserDto()
     }
 }

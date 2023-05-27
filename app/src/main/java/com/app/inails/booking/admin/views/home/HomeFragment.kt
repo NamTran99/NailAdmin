@@ -105,7 +105,7 @@ class HomeFragment : BaseRefreshFragment(R.layout.fragment_home), StaffInfoDialo
                         Router.run { redirectToWebView(WebViewArgs("", it.content, true)) }
                     } else {
                         if (it.fileType == FileType.Video && it.file.isNotEmpty()) {
-                            Router.run { redirectToWebView(WebViewArgs(it.file)) }
+                            Router.run { redirectToYouTube(it.file) }
                         }
                     }
 

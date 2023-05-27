@@ -77,29 +77,11 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="26sp" />
 
-                <TextView
-                    style="@style/AppTheme.TextView.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/to_register_your_salon" />
-
-                <TextView
-                    android:id="@+id/btSignUp"
-                    style="@style/AppTheme.TextView.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:background="@drawable/button_white"
-                    android:text="@string/click_here_1"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimary" />
-
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/size_20"
                     android:layout_weight="1"
+                    android:layout_marginTop="@dimen/size_10"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -132,12 +114,22 @@
                     </com.app.inails.booking.admin.views.widget.PasswordTextInputLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btLogin"
+                        android:id="@+id/btLoginOwner"
+                        style="@style/AppTheme.ButtonDefault"
+                        android:layout_marginTop="@dimen/size_25"
+                        android:background="@drawable/button_primary_corner"
+                        android:text="@string/btn_login_owner" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btLoginClient"
                         style="@style/AppTheme.ButtonDefault"
                         android:layout_marginTop="@dimen/size_15"
                         android:background="@drawable/button_orange_corner"
-                        android:text="@string/btn_login" />
+                        android:text="@string/btn_login_client" />
 
+                    <View
+                        style="@style/AppTheme.Line.Horizontal"
+                        android:layout_marginTop="@dimen/size_20"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -163,6 +155,65 @@
                         android:layout_marginStart="@dimen/size_5"
                         android:text="@string/click_here"
                         android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:text="@string/des_login_1"/>
+                    <View
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/size_10"
+                        style="@style/AppTheme.Line.Vertical"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        style="@style/AppTheme.TextViewResponsive"
+                        android:text="@string/des_login_2"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btSignUpOwner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMinTextSize="@dimen/text_size_8"
+                        android:autoSizeTextType="uniform"
+                        android:text="@string/click_here_to_sign_up"
+                        android:background="@drawable/button_primary_corner"
+                        style="@style/AppTheme.Button.Responsive"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btSignUpMani"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_15"
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMinTextSize="@dimen/text_size_8"
+                        android:autoSizeTextType="uniform"
+                        android:text="@string/click_here_to_sign_up"
+                        android:background="@drawable/button_primary_corner"
+                        style="@style/AppTheme.Button.Responsive"/>
+
                 </LinearLayout>
 
 

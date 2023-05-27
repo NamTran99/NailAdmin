@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentChangePasswordBinding
+import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.MeApi
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
@@ -67,10 +68,15 @@ class ChangePasswordViewModel(
 
 @Inject(ShareScope.Fragment)
 class ChangePasswordRepository(
-    private val meApi: MeApi
+    private val meApi: MeApi,
+    private val userLocalSource: UserLocalSource
 ) {
     suspend operator fun invoke(form: UpdateUserPasswordForm) {
         form.validate()
-        meApi.changePassword(form).await()
+        if(userLocalSource.getAppMode() == UserLocalSource.AppMode.Owner){
+            meApi.changePasswordOwner(form).await()
+        }else{
+            meApi.changePasswordManicurist(form).await()
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.app.inails.booking.admin.factory
 
 import android.support.di.Inject
 import android.support.di.ShareScope
+import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.factory.helper.FactoryHelper
 import com.app.inails.booking.admin.formatter.TextFormatter
@@ -9,7 +10,7 @@ import com.app.inails.booking.admin.model.response.*
 import com.app.inails.booking.admin.model.ui.*
 
 @Inject(ShareScope.Singleton)
-class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFactory) :
+class RecruitmentFactory(textFormatter: TextFormatter,val userLocalSource: UserLocalSource,val salonFactory: SalonFactory) :
     FactoryHelper(textFormatter) {
     private fun createRecruitment(recruitmentDTO: RecruitmentDTO): IRecruitment {
         return object : IRecruitment {
@@ -72,7 +73,7 @@ class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFa
             override val salaryType: Int
                 get() = recruitmentDTO.type_salary.safe()
             override val salary_format: String
-                get() = textFormatter.formatSalaryRecruitment(salary, salaryType)
+                get() = textFormatter.formatSalary(salary, salaryType)
             override val salary_format_en: String
                 get() = textFormatter.formatSalaryRecruitmentEn(salary, salaryType)
             override val isShuttleId: Int
@@ -92,7 +93,7 @@ class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFa
             override val averageIncome: String
                 get() = recruitmentDTO.salary.safe().display()
             override val averageIncomeFormat: String
-                get() = textFormatter.formatSalaryRecruitment(
+                get() = textFormatter.formatSalary(
                     recruitmentDTO.salary.safe(),
                     recruitmentDTO.type_salary.safe()
                 )
@@ -112,6 +113,8 @@ class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFa
                 get() = recruitmentDTO.salon_state.safe()
             override val customerSkinColor: Int
                 get() = recruitmentDTO.customer_skin_color.safe()
+            override val isMyRecruitment: Boolean
+                get() = recruitmentDTO.salon_id == userLocalSource.getSalonID()
         }
     }
 
@@ -130,15 +133,15 @@ class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFa
             override val images: List<AppImage>
                 get() = itemDTO.images
             override val phone: String
-                get() = itemDTO.phone.formatPhoneUSCustom()
+                get() = itemDTO.phone.safe().formatPhoneUSCustom()
             override val address: String
-                get() = itemDTO.address
+                get() = itemDTO.address.safe()
             override val workingArea: String
                 get() = "${itemDTO.city}, ${itemDTO.state}"
             override val genderName: String
-                get() = textFormatter.formatGender(itemDTO.gender)
+                get() = textFormatter.formatGender(itemDTO.gender.safe())
             override val email: String
-                get() = itemDTO.email
+                get() = itemDTO.email.safe()
             override val experienceFormat: String
                 get() = textFormatter.formatExperienceJob(itemDTO.experience)
             override val experienceFormatEn: String
@@ -150,7 +153,7 @@ class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFa
             override val isStatusPublic: Boolean
                 get() = itemDTO.status == 1
             override val name: String
-                get() = itemDTO.name
+                get() = itemDTO.name.safe()
             override val gender: Int
                 get() = itemDTO.gender.safe()
             override val salary: Double
@@ -160,13 +163,13 @@ class RecruitmentFactory(textFormatter: TextFormatter, val salonFactory: SalonFa
             override val id: Int
                 get() = itemDTO.id
             override val distance_format_1: String
-                get() = textFormatter.formatDistance(itemDTO.distance)
+                get() = textFormatter.formatDistance(itemDTO.distance.safe())
             override val format_gender: String
-                get() = textFormatter.formatGender2(itemDTO.gender)
+                get() = textFormatter.formatGender2(itemDTO.gender.safe())
             override val salaryType: Int
                 get() = itemDTO.type_salary.safe()
             override val salaryDisplay: String
-                get() = textFormatter.formatSalaryRecruitment(salary, salaryType)
+                get() = textFormatter.formatSalary(salary, salaryType)
             override val workplace_type_format: String
                 get() = textFormatter.yesNoFormat(itemDTO.workplace_type.safe(1) - 1)
             override val skills: List<ISkill>

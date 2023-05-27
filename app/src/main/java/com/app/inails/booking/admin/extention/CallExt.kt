@@ -1,5 +1,7 @@
 package com.app.inails.booking.admin.extention
 
+import androidx.core.net.toUri
+import com.app.inails.booking.admin.base.MainApplication
 import com.app.inails.booking.admin.helper.RequestBodyBuilder
 import com.app.inails.booking.admin.utils.FileUtils
 import okhttp3.MediaType.Companion.toMediaType
@@ -31,13 +33,10 @@ private fun createValuePart(value: String): RequestBody {
     return RequestBody.create(MultipartBody.FORM, value)
 }
 
-infix fun String.toImagePart(key: String) = buildImagePart(key, this)
+suspend infix fun String.toImagePart(key: String) = buildImagePart(key, this)
 
-fun buildImagePart(name: String, photo: String): MultipartBody.Part {
-    val file = File(photo)
-    return MultipartBody.Part.createFormData(
-        name,
-        file.name,
-        file.asRequestBody("image/${file.extension}".toMediaType())
-    )
+suspend fun buildImagePart(name: String, photo: String): MultipartBody.Part? {
+    if(photo.contains("http") || photo.isEmpty()) return null
+    val context = MainApplication.applicationContext()
+    return context.getFilePath(photo.toUri())!!.scalePhotoLibrary(context).toImagePart(name)!!
 }

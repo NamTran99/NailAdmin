@@ -28,7 +28,8 @@
             style="@style/AppTheme.EditText.SignUp"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/size_10"
-            android:drawableStart="@drawable/ic_salon"
+            android:drawableStart="@drawable/ic_salon_3"
+            android:drawableTint="@color/black"
             android:drawablePadding="@dimen/size_10"
             android:hint="@string/salon_spa_name" />
 

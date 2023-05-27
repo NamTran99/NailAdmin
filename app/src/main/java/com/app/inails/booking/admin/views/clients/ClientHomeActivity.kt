@@ -252,12 +252,12 @@ class MainVM(
     val redirectDefault = SingleLiveEvent<Any>()
     val deletedCustomerAccount = deleteAccountRepo.deletedCustomerAccount
     val deletedSalonAccount = deleteAccountRepo.deletedSalonAccount
+    val logoutSuccess = SingleLiveEvent<Any>()
 
     init {
         client.connectIfNeed()
     }
 
-    val logoutSuccess = SingleLiveEvent<Any>()
     fun logout() = launch(loading, error) {
         logoutSuccess.post(authRepo.logout())
     }

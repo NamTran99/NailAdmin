@@ -7,10 +7,7 @@ import com.app.inails.booking.admin.app.AppSettingsOwner
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.databinding.DialogUpdateCustomerBinding
-import com.app.inails.booking.admin.extention.getActivityContext
-import com.app.inails.booking.admin.extention.getTextString
-import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.extention.setTextCustom
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.form.UpdateCustomerForm
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
@@ -82,7 +79,7 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
                 customerType = customer.type
                 rbGroupType.check(if (customer.type == 2) rbNormal.id else rbVip.id)
                 etNote.setTextCustom(customer.note)
-
+                etPhone.inputTypePhoneUS()
                 etName.setTextCustom(customer.name)
                 etPhone.setTextCustom(customer.phone)
                 etBirthday.setTextCustom(customer.birthDay)
@@ -97,7 +94,7 @@ class UpdateCustomerDialog(context: Context) : BaseDialog(context), ConfirmDialo
                         email = etEmail.getTextString(),
                         address = etLocation.getTextString(),
                         name = etName.getTextString(),
-                        phone = etPhone.getTextString()
+                        phone = etPhone.getTextString().convertPhoneToNormalFormat()
                     )
                     function.invoke(updateCustomerForm)
                 }

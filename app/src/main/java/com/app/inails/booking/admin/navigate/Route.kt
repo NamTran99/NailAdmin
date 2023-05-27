@@ -32,6 +32,7 @@ import com.app.inails.booking.admin.views.me.*
 import com.app.inails.booking.admin.views.me.reset.*
 import com.app.inails.booking.admin.views.me.signup.*
 import com.app.inails.booking.admin.views.notification.NotificationFragment
+import com.app.inails.booking.admin.views.recruitment.RecruitmentFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import com.app.inails.booking.admin.views.splash.IntroFragment
 import com.app.inails.booking.admin.views.splash.SelectLanguageFragment
@@ -44,7 +45,7 @@ interface Routing : BundleArgument {
     val options: NavOptions? get() = null
 
     @Parcelize
-    class DetailRecruitment(val id : Int) : Routing {
+    class DetailRecruitment(val id : Int,val dynamic: Boolean) : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = DetailRecruitmentFragment::class
     }
@@ -171,7 +172,7 @@ interface Routing : BundleArgument {
     @Parcelize
     object SignUpAccount : Routing {
         override val fragmentClass: KClass<out Fragment>
-            get() = SignUpAccountFragment::class
+            get() = SignUpManiAccountFragment::class
     }
 
     @Parcelize
@@ -196,6 +197,12 @@ interface Routing : BundleArgument {
     class OTPVerify(val phoneNumber: String) : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = OTPVerifyFragment::class
+    }
+
+    @Parcelize
+    object ListRecruitmentClient : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = RecruitmentFragment::class
     }
 
     @Parcelize
@@ -295,6 +302,40 @@ interface Routing : BundleArgument {
     object MyRecruitment : Routing {
         override val fragmentClass: KClass<out Fragment>
             get() = MyRecruitmentFragment::class
+    }
+
+    @Parcelize
+    class CreateEditJobProfile(val isCreate : Boolean) : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = CreateEditJobProfileFragment::class
+    }
+
+    @Parcelize
+    class ShowZoomImageArgs(
+        val listImage: List<LocalImage>,
+        val position: Int
+    ) : Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = ShowZoomListImageFragment::class
+    }
+
+    @Parcelize
+    object SignUpMani : Routing{
+        override val fragmentClass: KClass<out Fragment>
+            get() = SignUpManiAccountFragment::class
+    }
+
+    @Parcelize
+    object MyCv : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = JobProfileFragment::class
+    }
+
+
+    @Parcelize
+    object EditInforMani : Routing {
+        override val fragmentClass: KClass<out Fragment>
+            get() = EditInforManiFragment::class
     }
 }
 

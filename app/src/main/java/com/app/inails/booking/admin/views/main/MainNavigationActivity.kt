@@ -1,15 +1,12 @@
 package com.app.inails.booking.admin.views.main
 
-import android.net.Uri
 import android.os.Bundle
 import android.support.core.route.BundleArgument
 import android.support.core.route.argument
 import android.support.navigation.findNavigator
 import android.support.viewmodel.viewModel
-import android.util.Log
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
-import com.app.inails.booking.admin.helper.firebase.FirebaseType
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.BookingFragment
@@ -34,17 +31,17 @@ import com.app.inails.booking.admin.views.me.reset.OTPVerifyFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordSuccessFragment
 import com.app.inails.booking.admin.views.me.signup.SignUp5StepFragment
-import com.app.inails.booking.admin.views.me.signup.SignUpAccountFragment
+import com.app.inails.booking.admin.views.me.signup.SignUpManiAccountFragment
 import com.app.inails.booking.admin.views.me.signup.SignUpGeneralOptionFragment
 import com.app.inails.booking.admin.views.me.signup.SignUpSupportFragment
 import com.app.inails.booking.admin.views.notification.NotificationFragment
+import com.app.inails.booking.admin.views.recruitment.RecruitmentFragment
 import com.app.inails.booking.admin.views.report.ReportFragment
 import com.app.inails.booking.admin.views.splash.IntroFragment
 import com.app.inails.booking.admin.views.splash.SelectLanguageFragment
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapter
 import com.app.inails.booking.admin.views.widget.topbar.TopBarAdapterImpl
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 
 class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), TopBarOwner,
     NotifyDialogOwner {
@@ -73,7 +70,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ResetPassword -> ResetPasswordFragment::class
                 is Routing.OTPVerify -> OTPVerifyFragment::class
                 is Routing.ResetPasswordSuccess -> ResetPasswordSuccessFragment::class
-                is Routing.SignUpAccount -> SignUpAccountFragment::class
+                is Routing.SignUpAccount -> SignUpManiAccountFragment::class
                 is Routing.StaffList -> StaffListFragment::class
                 is Routing.Intro -> IntroFragment::class
                 is Routing.ProfileClient -> ProfileClientFragment::class
@@ -96,6 +93,11 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
                 is Routing.ListJobProfile -> ListJobProfileFragment::class
                 is Routing.ShowListZoomImage -> ShowZoomListImageFragment::class
                 is Routing.DetailCandidate -> DetailCandidateFragment::class
+                is Routing.CreateEditJobProfile -> CreateEditJobProfileFragment::class
+                is Routing.ListRecruitmentClient -> RecruitmentFragment::class
+                is Routing.SignUpMani -> SignUpManiAccountFragment::class
+                is Routing.EditInforMani -> EditInforManiFragment::class
+                is Routing.DetailRecruitment -> DetailRecruitmentFragment::class
                 else -> error("Not Found Routing ${args.javaClass.name}")
             }
             navigator.navigate(clazz, args = args.toBundle())

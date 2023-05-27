@@ -33,12 +33,9 @@ import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.repository.auth.LoginRepo
 import com.app.inails.booking.admin.repository.client.AuthenticateRepository
 import com.app.inails.booking.admin.views.clients.dialog.RedirectToOwnerDialogOwner
-import com.app.inails.booking.admin.views.clients.dialog.RedirectToOwnerDialogVn
 import com.app.inails.booking.admin.views.clients.dialog.RedirectToOwnerDialogVnOwner
 import com.app.inails.booking.admin.views.clients.profile.EditProfileRepository
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
-import com.google.android.youtube.player.internal.s
-import okhttp3.Route
 
 class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopBarOwner,
     RedirectToOwnerDialogOwner, RedirectToOwnerDialogVnOwner {
@@ -58,7 +55,7 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
             }
             btnLogoutOwner.onClick { logoutApp() }
             with(viewModel) {
-                loginOwnerSuccess.bind{
+                loginOwnerSuccess.bind {
                     Router.run { redirectToMain() }
                     success(R.string.success_redirect_owner)
                 }
@@ -102,11 +99,11 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
     }
 
     private fun logoutApp() {
-        if(userLocalSource.isVietNamLanguage()){
+        if (userLocalSource.isVietNamLanguage()) {
             redirectToOwnerDialogVn.show {
                 viewModel.loginOwner(it)
             }
-        }else{
+        } else {
             redirectToOwnerDialog.show {
                 viewModel.loginOwner(it)
             }
@@ -116,7 +113,7 @@ class CheckInFragment : BaseFragment(R.layout.fragment_enter_phone_number), TopB
 }
 
 class CheckInVM(
-    private val loginRepo: LoginRepository,
+    private val loginRepo: LoginClientRepository,
     private val authenticateRepository: AuthenticateRepository,
     private val salonRepository: FetchAllSalonRepository,
     private val editProfileRepo: EditProfileRepository,
@@ -134,7 +131,6 @@ class CheckInVM(
 
     val checkInSuccess = SingleLiveEvent<Int>()
     val newMember = SingleLiveEvent<Pair<Int, String>>()
-    val logoutSuccess = SingleLiveEvent<Int>()
     val showUpdateProfile = SingleLiveEvent<String>()
     fun checkIn(phoneNumber: String) = launch(loading, error) {
         val user = loginRepo.checkIn(phoneNumber)
@@ -146,7 +142,10 @@ class CheckInVM(
     }
 
     fun loginOwner(password: String) = launch(loading, error) {
-        loginRepoOwner(LoginOwnerForm(phone = userLocalSource.getSalonPhone(), password = password))
+        loginRepoOwner(
+            LoginOwnerForm(phone = userLocalSource.getSalonPhone(), password = password),
+            LoginRepo.LoginType.Owner
+        )
         loginOwnerSuccess.post(R.string.msg_login_success)
     }
 
@@ -162,21 +161,13 @@ class CheckInVM(
 }
 
 @Inject(ShareScope.Fragment)
-class LoginRepository(
+class LoginClientRepository(
     private val salonLocalSource: SalonLocalSource,
     private val userLocalSource: UserLocalSource,
     private val authenticateApi: AuthenticateClientApi,
     private val textFormatter: TextFormatter,
     private val appCache: AppCache
 ) {
-
-//    suspend operator fun invoke(form: LoginForm): UserClientDTO {
-//        form.phone = textFormatter.formatPhoneNumber(form.phone)
-//        form.pushToken = appCache.clientTokenPush
-//        val rs = authenticateApi.login(form).await()
-//        userLocalSource.saveUserClient(rs)
-//        return rs
-//    }
 
     suspend fun checkIn(phoneNumber: String): UserClientDTO {
         val loginForm = LoginForm()

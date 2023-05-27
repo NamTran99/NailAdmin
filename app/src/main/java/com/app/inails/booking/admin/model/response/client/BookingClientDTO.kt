@@ -7,7 +7,7 @@ data class BookingClientDTO(
     val canceled_at: Any?,
     val canceled_by: Any?,
     val created_at: String?,
-    val customer: UserDTO.Data?,
+    val customer: UserOwnerDTO.Data?,
     val customer_id: Int?,
     @SerializedName("customer_name")
     val customerName: String?,

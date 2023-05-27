@@ -23,14 +23,74 @@ import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
     val viewModel by viewModel<AccountVM>()
     val binding by viewBinding(FragmentAccountBinding::bind)
-    private  lateinit var  adapter: AccountMultyOptionAdapter
+    private lateinit var adapter: AccountMultyOptionAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar.state<MainTopBarState>().setTitle(R.string.title_account)
 
+        val ownerList = listOf(
+            AccountOption(R.string.title_change_password) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.ChangePassword
+                )
+            },
+            AccountOption(R.string.title_email_receive_feedback) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.EmailReceiveFeedBack
+                )
+            },
+            AccountOption(R.string.title_report) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.ReportSale
+                )
+            },
+            AccountOption(R.string.title_contact) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.ContactAccount
+                )
+            },
+            AccountOption(R.string.title_language) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.SelectLanguageAccount
+                )
+            },
+        )
+
+        val manicuristList = listOf(
+            AccountOption(R.string.title_edit_infor) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.EditInforMani
+                )
+            },
+            AccountOption(R.string.title_change_password) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.ChangePassword
+                )
+            },
+            AccountOption(R.string.title_contact) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.ContactAccount
+                )
+            },
+            AccountOption(R.string.title_language) {
+                Router.open(
+                    this@AccountFragment,
+                    Routing.SelectLanguageAccount
+                )
+            },
+        )
+
         with(binding) {
-            adapter = AccountMultyOptionAdapter(rvLayout).apply {
+            adapter = AccountMultyOptionAdapter(rvLayout, userLocalSource.getAppMode()).apply {
                 onClickLogOut = {
                     confirmDialog.show(
                         title = R.string.title_logout_owner,
@@ -44,13 +104,8 @@ class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
                     }
                 }
                 updateDetailSalon(viewModel.user)
-                updateOption(listOf(
-                    AccountOption(R.string.title_change_password) {   Router.open(this@AccountFragment, Routing.ChangePassword)},
-                    AccountOption(R.string.title_email_receive_feedback) {   Router.open(this@AccountFragment, Routing.EmailReceiveFeedBack)},
-                    AccountOption(R.string.title_report) {   Router.open(this@AccountFragment, Routing.ReportSale)},
-                    AccountOption(R.string.title_contact) {   Router.open(this@AccountFragment, Routing.ContactAccount)},
-                    AccountOption(R.string.title_language) {   Router.open(this@AccountFragment, Routing.SelectLanguageAccount)},
-                ))
+                updateDetailMani(viewModel.mani)
+                updateOption(if (userLocalSource.isOwnerMode()) ownerList else manicuristList)
             }
         }
 
@@ -64,6 +119,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account), TopBarOwner {
         adapter.updateDetailSalon(viewModel.user)
     }
 }
+
 class AccountVM(
     private val logoutRepo: LogoutRepo,
     private val userLocalSource: UserLocalSource,
@@ -72,6 +128,8 @@ class AccountVM(
     fun logout() = launch(loading, error) {
         logoutRepo.invoke()
     }
+
     val user = userLocalSource.getUserDto()
+    val mani  = userLocalSource.getManicuristUser()
 }
 

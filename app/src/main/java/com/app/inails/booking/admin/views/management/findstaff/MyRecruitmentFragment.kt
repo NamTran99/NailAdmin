@@ -76,7 +76,7 @@ class MyRecruitmentFragment :
             recruitmentAdsAdapter = RecruitmentAdsAdapter(rvRecruitment).apply {
                 onItemClick = { item ->
                     Router.run {
-                        redirectToDetailRecruitment(item.id)
+                        redirectToDetailRecruitment(item.id, false)
                     }
                 }
                 onClickMenuListener = { view, item ->

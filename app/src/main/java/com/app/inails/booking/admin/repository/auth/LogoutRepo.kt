@@ -23,7 +23,6 @@ class LogoutRepo(
             clearToken()
             NotificationsManager(context).cancelAll()
             NotificationsManagerClient(context).cancelAll()
-            logoutCustomer()
             authenticateApi.logout(appCache.deviceToken).await()
         }
     }

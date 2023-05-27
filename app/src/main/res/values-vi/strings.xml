@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="btn_login">Đăng nhập</string>
+    <string name="btn_login_owner">Đăng nhập với vai trò chủ tiệm</string>
+    <string name="btn_login_client">Đăng nhập với vai trò thợ nail</string>
     <string name="dont_have_account">Không có tài khoản?</string>
     <string name="sign_up_here"><u>Đăng ký</u></string>
     <string name="forgot_password">Quên mật khẩu ?</string>
@@ -187,6 +188,7 @@
     <string name="change_pass_success">Thay đổi mật khẩu thành công!</string>
     <string name="change_email_success">Thay đổi email thành công!</string>
     <string name="success">Hoàn thành!</string>
+    <string name="success_register_mani">Bạn đã đăng ký thành công!</string>
     <string name="time_and_date">Ngày giờ</string>
     <string name="you_want_to_say_something">Viết ghi chú của bạn</string>
     <string name="btn_update">Điều chỉnh</string>
@@ -483,6 +485,7 @@
     <string name="btn_call">Gọi điện</string>
     <string name="btn_sms">Nhắn tin</string>
     <string name="error_pls_select_gender">Vui lòng lựa chọn giới tính!</string>
+    <string name="error_pls_select_role">Vui lòng chọn vai trò để thiết lập lại mật khẩu!</string>
     <string name="enter_experience_optional">Nhập kinh nghiệm (không bắt buộc)</string>
     <string name="year">Năm</string>
     <string name="not_required">Không yêu cầu</string>
@@ -508,7 +511,8 @@
     <string name="nails_job">Tạo tin tuyển dụng để tiếp cận với người tìm việc dễ dàng hơn</string>
     <string name="nails_job_des_1">Tin tuyển dụng sau khi đăng sẽ được hiển thị với tất cả mọi người, bạn có thể chia sẻ tin hoặc ẩn tin nếu muốn</string>
     <string name="tittle_exit_update_recruitment">Thông tin tin tuyển dụng</string>
-    <string name="city_and_state_of_residence">Tiệm ở đâu, tiểu bang nào?</string>
+    <string name="city_and_state_of_residence_create">Thành phố và bang cư trú?</string>
+    <string name="city_and_state_of_residence">Thành phố và bang cư trú</string>
     <string name="ethnicity_customer">Khách thuộc sắc dân nào?</string>
     <string name="hint_enter_salary">Nhập số tiền</string>
     <string name="payroll_method">Cách tính lương</string>
@@ -545,8 +549,10 @@
     <string name="error_choose_payroll_method">Bạn nên chọn Cách tính lương</string>
     <string name="city_state_residence">Thành phố và bang cư trú</string>
     <string name="skillset">Kỹ năng</string>
+    <string name="skillset_create">Bạn có khả năng làm những dịch vụ nào? (Chọn hoặc thêm kỹ năng của bạn)</string>
+    <string name="success_update_mani">Bạn điều chỉnh thông tin tài khoản thành công!</string>
     <string name="willing_to_relocate">Có thể làm xuyên bang</string>
-    <string name="local_position">Làm nội bang</string>
+    <string name="local_position">Chỉ làm tại địa phương đang sống</string>
     <string name="error_skill_at_least_1">Bạn cần thêm ít nhất một kỹ năng</string>
     <string name="create_re_1">Bạn cần tìm thợ nam hay nữ?</string>
     <string name="staff_gender_requirements">Yêu cầu thợ thuộc giới tính</string>
@@ -556,5 +562,45 @@
     <string name="retry">Thử lại</string>
     <string name="noti_job_profile_not_available">Rất tiếc! Hồ sơ thợ này không còn tồn tại hoặc đã bị ẩn.</string>
     <string name="noti_please_login">Vui lòng đăng nhập để xem được nội dung này. Nếu bạn chưa có tài khoản hãy đăng kí ngay để sử dụng được nhiều dịch vụ miễn phí của chúng tôi. Các bước đăng kí rất đơn giản sẽ không mất nhiều thời gian của bạn.</string>
-
+    <string name="des_login_1">Bạn là chủ tiệm muốn đăng ký mở Salon?</string>
+    <string name="des_login_2">Bạn là thợ Nails muốn tìm việc?</string>
+    <string name="click_here_to_sign_up">Nhấn vào đây để đăng ký</string>
+    <string name="mn_my_cv">CV của tôi</string>
+    <string name="create_job_des1">Bạn đang muốn…</string>
+    <string name="create_job_des_2">1. Có một công việc nhanh chóng, thuận tiện</string>
+    <string name="create_job_des_3">2. Tìm một công việc phù hợp với năng lực</string>
+    <string name="create_job_des_4">3. Hồ sơ của bạn tiếp cấn đến nhiều Salon</string>
+    <string name="create_job_des_5">Hãy tạo ngay cho bạn một Hồ Sơ Tìm Việc với các thao tác đơn giản chỉ mất một vài phút để chúng tôi có thể giúp bạn có ngay một công việc phù hợp nhất!</string>
+    <string name="create_now">Tạo CV bây giờ</string>
+    <string name="display_my_cv">Hiển thị CV của tôi</string>
+    <string name="years_of_experience">Số năm kinh nghiệm</string>
+    <string name="about_me">Về tôi</string>
+    <string name="error_select_gender">Bạn nên chọn giới tính của bạn!</string>\
+    <string name="error_blank_working_place_type">Bạn nên chọn Làm tại địa phương hoặc Làm xuyên bang</string>
+    <string name="avatar">Ảnh đại diện</string>
+    <string name="des_2">Vui lòng tải lên một bức ảnh của bạn, những mẫu móng tay đẹp mà bạn đã thực hiện, các chứng chỉ hoặc bằng cấp của bạn</string>
+    <string name="des_5">Lời khuyên: Đăng càng nhiều ảnh sẽ giúp trang cá nhân của bạn nổi bật hơn và dễ dàng thu hút chủ tiệm.</string>
+    <string name="upload">Đăng tải</string>
+    <string name="name">Tên</string>
+    <string name="hint_enter_your_name">Điền tên của bạn</string>
+    <string name="label_phone_2">Số điện thoại liên lạc</string>
+    <string name="local_position_or_willing_to_relocate">Bạn có thể làm việc xuyên bang không?</string>
+    <string name="des_6">Ngoài các thông tin trên, vui lòng mô tả chi tiết hơn về bản thân tại đây. Điều này sẽ giúp chủ tiệm hiểu bạn hơn, từ đó tăng cơ hội nhận việc cho bạn.</string>
+    <string name="hint_enter_your_experience">Điền kinh nghiệm của bạn</string>
+    <string name="upload_my_cv">Đăng tải CV của tôi</string>
+    <string name="upload_my_cv_des_1">Sơ yếu lý lịch của bạn sẽ được truy cập công khai. Bạn có tùy chọn hiển thị, chia sẻ hoặc ẩn sơ yếu lý lịch của mình theo ý muốn</string>
+    <string name="error_blank_experience">Bạn nên điền kinh nghiệm!</string>
+    <string name="mn_update_cv">Đăng tải CV của tôi</string>
+    <string name="mn_create_cv">Tạo CV của tôi</string>
+    <string name="success_create_job_profile">Bạn đã tạo hồ sơ công việc thành công!</string>
+    <string name="success_update_job_profile">Bạn đã điều chỉnh hồ sơ công việc thành công!</string>
+    <string name="success_public_job">Hiển thị hồ sơ công việc của bạn thành công!</string>
+    <string name="success_unpublic_job">Ẩn hồ sơ công việc của bạn thành công!</string>
+    <string name="recruitment">Tin tuyển dụng</string>
+    <string name="manicurist_registration">Đăng ký thợ</string>
+    <string name="hint_enter_pass">Điền mật khẩu</string>
+    <string name="no_image_found">Màn hình này sẽ hiển thị hình ảnh cho thấy sự khác biệt về ngoại hình của khách hàng trước và sau khi sử dụng dịch vụ tại salon (nếu có).</string>
+    <string name="reset_pass_des_1">Chọn vai trò để thiết lập lại mật khẩu</string>
+    <string name="salon_owner">Chủ tiệm nail</string>
+    <string name="salon_manicurist">Thợ nail</string>
 </resources>

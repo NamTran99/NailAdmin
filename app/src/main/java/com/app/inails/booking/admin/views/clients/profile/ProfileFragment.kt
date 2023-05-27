@@ -3,7 +3,9 @@ package com.app.inails.booking.admin.views.clients.profile
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
+import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.map
+import android.support.core.livedata.post
 import android.support.core.view.viewBinding
 import android.support.di.Inject
 import android.support.di.ShareScope
@@ -16,6 +18,7 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentProfileBinding
 import com.app.inails.booking.admin.databinding.FragmentProfileClientBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
+import com.app.inails.booking.admin.datasource.remote.JobApi
 import com.app.inails.booking.admin.extention.lock
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.factory.client.ProfileClientFactory
@@ -60,8 +63,21 @@ class ProfileVM(profileDisplayRepo: ProfileDisplayRepository) : ViewModel(),
 @Inject(ShareScope.Fragment)
 class ProfileDisplayRepository(
     private val userLocalSource: UserLocalSource,
-    private val profileFactory: ProfileClientFactory
+    private val profileFactory: ProfileClientFactory,
+    private val jobApi: JobApi
 ) {
+
+    val detailUser = SingleLiveEvent<IUserClient?>()
+
+    suspend fun getProfileDetail() {
+        detailUser.post(
+            profileFactory.displayProfile(
+                userLocalSource.getManicuristUser()?:
+                jobApi.getDetailProfile(userLocalSource.getUserId()).awaitNullable()
+            )
+
+        )
+    }
 
     fun getProfileLive(): IUserClient? {
         return profileFactory.displayProfile(userLocalSource.getUserClientDto())

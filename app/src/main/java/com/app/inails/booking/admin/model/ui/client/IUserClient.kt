@@ -12,6 +12,7 @@ interface IUserClient {
     val address: String get() = ""
     val dob: String get() = ""
     val welcomeName: String get() = ""
+    val fullName: String get() = ""
 }
 
 interface IUserClientEdit : IUserClient {

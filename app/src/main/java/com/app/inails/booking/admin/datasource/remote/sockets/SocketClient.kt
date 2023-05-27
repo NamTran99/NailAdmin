@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.support.di.Inject
 import android.support.di.ShareScope
 import android.util.Log
-import androidx.viewbinding.BuildConfig
-import com.app.inails.booking.admin.app.AppConfig
 import io.socket.client.IO
 import io.socket.client.Socket
 import okhttp3.OkHttpClient
@@ -25,7 +23,7 @@ class SocketClient {
     private val TAG = SocketClient::class.java.simpleName
 
     var mSocket: Socket? = null
-    private var mServerSocket = if(BuildConfig.DEBUG) AppConfig.serverSocketLive else AppConfig.serverSocketLive
+    private var mServerSocket = com.app.inails.booking.admin.BuildConfig.socket
 
     init {
         setupSocket()
@@ -127,7 +125,7 @@ class SocketClient {
         mSocket?.off(Socket.EVENT_CONNECT_ERROR)
     }
 
-    fun connectIfNeed(){
+    fun connectIfNeed() {
         if (mSocket == null) {
             setupSocket()
             connectSocket()

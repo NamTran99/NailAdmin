@@ -3,12 +3,10 @@ package com.app.inails.booking.admin.datasource.remote.clients
 import android.support.di.InjectBy
 import android.support.di.Injectable
 import android.support.di.ShareScope
-import com.app.inails.booking.admin.datasource.remote.AuthenticateApi
 import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.helper.network.Async
 import com.app.inails.booking.admin.model.form.ChangePasswordForm
 import com.app.inails.booking.admin.model.response.ResetPasswordDTO
-import com.app.inails.booking.admin.model.response.UserDTO
 import com.app.inails.booking.admin.model.response.client.UserClientDTO
 import com.app.inails.booking.admin.model.response.client.UserOwnerDTO
 import com.app.inails.booking.admin.model.ui.client.LoginForm

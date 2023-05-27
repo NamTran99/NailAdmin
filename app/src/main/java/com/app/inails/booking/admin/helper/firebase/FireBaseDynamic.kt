@@ -1,14 +1,12 @@
 package com.app.inails.booking.admin.helper.firebase
 
 import android.net.Uri
-import android.util.Log
 import androidx.core.net.toUri
 import com.app.inails.booking.admin.helper.firebase.DynamicFireBase.androidPackageClient
 import com.app.inails.booking.admin.helper.firebase.DynamicFireBase.androidPackageOwner
 import com.app.inails.booking.admin.helper.firebase.DynamicFireBase.firebasePrefixDomain
 import com.app.inails.booking.admin.helper.firebase.DynamicFireBase.iosBundleIdClient
 import com.app.inails.booking.admin.helper.firebase.DynamicFireBase.iosBundleIdOwner
-import com.app.inails.booking.admin.helper.firebase.FirebaseType.job
 import com.app.inails.booking.admin.helper.firebase.FirebaseType.salon
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
@@ -40,38 +38,41 @@ fun generateSharingLink(
             // What is this link parameter? You will get to know when we will actually use this function.
             domainUriPrefix = firebasePrefixDomain
             val buildUri = domain.toUri().buildUpon()
+                .appendQueryParameter(
+                    "link",
+                    if (type == salon) "https://play.google.com/store/apps/details?id=com.app.inails.booking"
+                    else "https://play.google.com/store/apps/details?id=com.app.booking.inails.admin"
+                )
                 .appendQueryParameter("id", id)
-                .appendQueryParameter("type", type).build()
+                .appendQueryParameter("type", type)
+                .build()
 
             link = buildUri
-            Log.d("TAG", "generateSharingLink: $buildUri")
             // [domainUriPrefix] will be the domain name you added when setting up Dynamic Links at Firebase Console.
             // You can find it in the Dynamic Links dashboard.
             // Required
 
             val pkn = when (type) {
-                salon, job -> androidPackageClient
+                salon -> androidPackageClient
                 else -> androidPackageOwner
             }
 
             val bundleId = when (type) {
-                salon, job -> iosBundleIdClient
+                salon -> iosBundleIdClient
                 else -> iosBundleIdOwner
             }
             androidParameters(pkn) {
                 build()
             }
             setIosParameters(DynamicLink.IosParameters.Builder(bundleId).build())
-
-            val title = when(type){
+            val title = when (type) {
                 salon -> "123VietNails - Application for booking nail appointments online"
                 else -> "123VietNails - A platform that facilities job connections between nail technicians and nail salon proprietors"
             }
 
-            val builder = DynamicLink.SocialMetaTagParameters.Builder().apply{
-            Log.d("TAG", "generateSharingLink namtd8: $imageLink")
+            val builder = DynamicLink.SocialMetaTagParameters.Builder().apply {
                 setTitle(title)
-                imageUrl = imageLink?:"https://images2.imgbox.com/4a/38/Qd8qQwXB_o.png".toUri()
+                imageUrl = imageLink ?: "https://images2.imgbox.com/4a/38/Qd8qQwXB_o.png".toUri()
             }.build()
 
             setSocialMetaTagParameters(

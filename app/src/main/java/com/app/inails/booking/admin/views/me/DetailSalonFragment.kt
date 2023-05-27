@@ -14,6 +14,7 @@ import android.support.viewmodel.viewModel
 import android.view.View
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
+import com.app.inails.booking.admin.BuildConfig
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentProfileBinding
@@ -110,7 +111,7 @@ class DetailSalonFragment : BaseFragment(R.layout.fragment_profile), TopBarOwner
                         item.salonName,
                         item.address,
                         item.phoneNumber,
-                        item.des, it
+                        item.des, it, BuildConfig.versionCustom
                     )
                 )
             }

@@ -191,7 +191,6 @@
                         android:id="@+id/btAddAds2"
                         style="@style/AppTheme.Button"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/size_20"
                         android:layout_marginTop="@dimen/size_10"
                         android:layout_marginBottom="@dimen/size_20"

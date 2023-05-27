@@ -70,7 +70,7 @@ class SubmitFeedbackFragment : BaseFragment(R.layout.fragment_submit_feedback) {
             list.add(Uri.parse(""))
             mAdapter.submit(list)
 
-            val abc = appPermission.accessReadStorage {
+           appPermission.accessReadStorage {
                 //save sagdsajhdg
             }
 
