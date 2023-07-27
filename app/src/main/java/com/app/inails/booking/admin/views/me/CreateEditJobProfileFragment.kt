@@ -10,6 +10,7 @@ import android.support.core.livedata.combineNotNull
 import android.support.core.livedata.post
 import android.support.core.route.argument
 import android.support.core.route.nullableArguments
+import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
@@ -33,6 +34,7 @@ import com.app.inails.booking.admin.navigate.Router.Companion.open
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.job.JobRepository
 import com.app.inails.booking.admin.views.clients.profile.ProfileDisplayRepository
+import com.app.inails.booking.admin.views.management.findstaff.FindWorkingAreaActivity
 import com.app.inails.booking.admin.views.management.findstaff.adapter.MainSkillSetAdapter
 import com.app.inails.booking.admin.views.management.findstaff.adapter.MoreSkillSetAdapter
 import com.app.inails.booking.admin.views.me.adapters.UploadPhotoAdapter
@@ -69,6 +71,10 @@ class CreateEditJobProfileFragment : BaseFragment(R.layout.fragment_create_job_p
             }
         }
     val form get() = viewModel.form
+    private var stateFilterForm get() = viewModel.form.stateFilterForm
+        set(value){
+            viewModel.form.stateFilterForm = value
+        }
     val args by lazy { argument<Routing.CreateEditJobProfile>() }
 
     private val startForResult =
@@ -106,6 +112,14 @@ class CreateEditJobProfileFragment : BaseFragment(R.layout.fragment_create_job_p
                 viewModel.getDetailJobProfile()
             }else{
                 viewModel.getProfileDetail()
+            }
+
+            appEvent.findingWorkingArea.bind {
+                stateFilterForm = it
+                etWorking.setText(it.format)
+            }
+            etWorking.onClick{
+                open<FindWorkingAreaActivity>(stateFilterForm)
             }
 
             etPhone.inputTypePhoneUS()
@@ -178,8 +192,8 @@ class CreateEditJobProfileFragment : BaseFragment(R.layout.fragment_create_job_p
                 }
             }
 
-            spCity.configSpinner(true, arrayOf("City"))
-            spCity.isEnabled = false
+//            spCity.configSpinner(true, arrayOf("City"))
+//            spCity.isEnabled = false
 
             groupWorkingType.setOnCheckedChangeListener { group, checkedId ->
                 form.working_type = when (checkedId) {
@@ -245,6 +259,11 @@ class CreateEditJobProfileFragment : BaseFragment(R.layout.fragment_create_job_p
             with(viewModel) {
                 detailResult.bind {
                     it?.let {
+                        stateFilterForm.apply {
+                            stateSearch = it.state
+                            citySearch = it.city
+                            etWorking.setText(formatDisplay())
+                        }
                         form.city = it.city
                         form.state = it.state
                         pathServerImage.addAll(it.images)
@@ -261,39 +280,39 @@ class CreateEditJobProfileFragment : BaseFragment(R.layout.fragment_create_job_p
                     }
                 }
 
-                listStateResult.bind {
-                    val listItem = it.map { it.fullName }.toMutableList()
-                    listItem.add(0, getString(R.string.state))
-                    spState.configSpinner(true, listItem.toTypedArray()) { pos ->
-                        if (pos != 0) {
-                            form.state = it[pos - 1].name
-                            viewModel.getListCity(form.state)
-                        }
-                    }
-                }
+//                listStateResult.bind {
+//                    val listItem = it.map { it.fullName }.toMutableList()
+//                    listItem.add(0, getString(R.string.state))
+//                    spState.configSpinner(true, listItem.toTypedArray()) { pos ->
+//                        if (pos != 0) {
+//                            form.state = it[pos - 1].name
+//                            viewModel.getListCity(form.state)
+//                        }
+//                    }
+//                }
 
-                listCityResult.bind {
-                    spCity.isEnabled = true
-                    val listCity = it.map { it.name }.toMutableList()
-                    listCity.add(0, getString(R.string.city))
-                    spCity.configSpinner(true, listCity.toTypedArray()) { pos ->
-                        if (pos == 0) return@configSpinner
-                        form.city = listCity[pos]
-                    }
-                }
+//                listCityResult.bind {
+//                    spCity.isEnabled = true
+//                    val listCity = it.map { it.name }.toMutableList()
+//                    listCity.add(0, getString(R.string.city))
+//                    spCity.configSpinner(true, listCity.toTypedArray()) { pos ->
+//                        if (pos == 0) return@configSpinner
+//                        form.city = listCity[pos]
+//                    }
+//                }
 
                 listSkillResult.bind {
                     if (!args.isCreate) return@bind
                     mainSkillAdapter.submit(it)
                 }
 
-                updateState.bind {
-                    spState.setSelection(it)
-                }
-
-                updateCity.bind {
-                    spCity.setSelection(it)
-                }
+//                updateState.bind {
+//                    spState.setSelection(it)
+//                }
+//
+//                updateCity.bind {
+//                    spCity.setSelection(it)
+//                }
 
                 updateMainSkill.bind {
                     mainSkillAdapter.submit(it.first)

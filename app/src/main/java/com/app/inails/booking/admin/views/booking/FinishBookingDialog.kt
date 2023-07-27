@@ -5,7 +5,6 @@ import android.graphics.Rect
 import android.support.core.view.ViewScopeOwner
 import android.view.MotionEvent
 import android.widget.EditText
-import android.widget.Toast
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseDialog
 import com.app.inails.booking.admin.base.LinearSpacingItemDecoration
@@ -24,15 +23,22 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
     private lateinit var moreServiceAdapter: ServicePriceAdapter
     private lateinit var searchServiceAdapter: ServicePriceAdapter
     lateinit var currentApmInfor: IAppointment
+
+    var discount: Double
+        get() = currentApmInfor.discount
+    set(value){
+        binding.txtPriceDiscount.text = "-${value.formatPrice()}"
+    }
+
     var totalAmount: Double
         get() = currentApmInfor.totalAmount
         set(value) {
             binding.apply {
-                if(value <  0 ){
+                if (value < 0) {
                     tvDola.hide()
                     etAmount.hide()
                     tvFree.show()
-                }else{
+                } else {
                     tvFree.hide()
                     tvDola.show()
                     etAmount.show()
@@ -197,8 +203,10 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
 
     private fun updateTotalValue() {
         var value = totalAmount
+        var temp = discount
         if (listMoreService.isEmpty()) {
             totalAmount = value
+            discount = temp
             return
         }
         if ((currentApmInfor.hasVoucher && !currentApmInfor.showPercent) || !currentApmInfor.hasVoucher) {
@@ -207,15 +215,12 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
             }
         } else {
             listMoreService.forEach {
-                if (it.price > 0) {
-                    value += it.price * (100 - currentApmInfor.percent) / 100
-                } else {
-                    value -= it.price
-                }
+                temp += it.price* (currentApmInfor.percent)/100
+                value += it.price * (100 - currentApmInfor.percent) / 100
             }
-
         }
         totalAmount = value
+        discount = temp
     }
 
     fun updateServiceSearch(item: Pair<List<IService>, Boolean>) {
@@ -229,7 +234,7 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
         searchServiceAdapter.submit(item.first)
     }
 
-    private fun clearData(){
+    private fun clearData() {
         binding.apply {
             tvFree.hide()
             etAmount.show()
@@ -258,7 +263,7 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
             }
             txtDiscount.show(apm.showPercent)
             txtDiscount.text = apm.percentDisplay
-            txtPriceDiscount.text = apm.discount
+            txtPriceDiscount.text = apm.discountDisplay
             txtTotal.text = apm.totalPriceService
             etAmount.text = apm.totalAmountDisplay.toPriceValue()
             voucherLayout.show(apm.hasVoucher)
@@ -269,26 +274,12 @@ class FinishBookingDialog(context: Context) : BaseDialog(context) {
             }
             etNote.setText("")
             btSubmit.onClick {
-                val amount = etAmount.text.toString().toDoubleOrNull()
-                if (amount == null) {
-                    Toast.makeText(context, R.string.error_empty_amount, Toast.LENGTH_SHORT).show()
-                    return@onClick
-                }
-
-                if (amount == 0.0) {
-                    Toast.makeText(
-                        context,
-                        R.string.error_empty_amount_greater_than,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@onClick
-                }
+                val amount = etAmount.text.toString().toDoubleOrNull() ?: 0.0
                 function.invoke(amount, etNote.text.toString(), listMoreService)
             }
         }
         super.show()
     }
-
 }
 
 interface FinishBookingOwner : ViewScopeOwner {

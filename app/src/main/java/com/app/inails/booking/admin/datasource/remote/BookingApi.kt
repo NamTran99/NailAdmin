@@ -54,7 +54,6 @@ interface BookingApi : Injectable {
         @Field("num_per_page") itemsPerPage: Int = AppConst.perPage,
         @Field("page") page: Int = 1,
     ): ApiAsync<ArrayList<AppointmentDTO>>
-
     @GET("appointment/list-appointment-for-staff/{staffID}")
     fun listStaffBookingList(
         @Path("staffID") staffID: Int?,
@@ -87,7 +86,6 @@ interface BookingApi : Injectable {
         @PartMap buildMultipart: Map<String, @JvmSuppressWildcards RequestBody>,
         @Part beforeImages: Array<MultipartBody.Part?>,
         @Part afterImages: Array<MultipartBody.Part?>,
-
         ): ApiAsync<AppointmentUpdateDTO>
 
     @FormUrlEncoded

@@ -9,9 +9,7 @@ import com.app.inails.booking.admin.helper.network.ApiAsync
 import com.app.inails.booking.admin.model.response.SalonDTO
  
 import retrofit2.Retrofit
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * http://api.booking.kendemo.com:3005/api/v1/
@@ -29,6 +27,10 @@ interface SalonApi : Injectable {
     fun details(
         @Path("id") id: Long,
     ): ApiAsync<SalonDTO>
+
+    @POST("salon/update-partner")
+    @FormUrlEncoded
+    fun updatePartner(@Field("name") name: String): ApiAsync<Any>
 }
 
 class SalonApiImpl(private val retrofit: Retrofit) :

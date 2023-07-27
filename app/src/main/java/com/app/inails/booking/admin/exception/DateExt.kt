@@ -106,6 +106,7 @@ fun String.convert24hTo12hFormat(): String {
 }
 
 fun String.convert12hTo24hFormat(): String {
+    if(isEmpty()) return ""
     val  sdf = SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
     val dateObj = sdf.parse(this);
     return SimpleDateFormat("HH:mm", Locale.getDefault()).format(dateObj!!);

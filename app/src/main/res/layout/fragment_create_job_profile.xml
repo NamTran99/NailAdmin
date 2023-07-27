@@ -190,29 +190,15 @@
                 android:text="@string/city_and_state_of_residence_create"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <EditText
+                android:id="@+id/etWorking"
+                style="@style/AppTheme.EditText"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="@dimen/size_10"
-                android:background="@drawable/edit_text_default"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spState"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <View
-                    style="@style/AppTheme.Line.Vertical"
-                    android:layout_marginVertical="@dimen/size_5" />
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spCity"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                android:layout_marginTop="@dimen/size_15"
+                android:focusable="false"
+                android:inputType="text"
+                android:hint="@string/select_working_place"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:layout_width="wrap_content"

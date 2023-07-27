@@ -3,18 +3,16 @@ package com.app.inails.booking.admin.exception
 import android.app.Activity
 import android.support.core.extensions.block
 import android.support.core.route.RouteDispatcher
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.extention.cast
+import com.app.inails.booking.admin.extention.displayErrorAndFocus
 import com.app.inails.booking.admin.extention.showKeyboard
 import com.app.inails.booking.admin.views.widget.PasswordLayout
-import com.app.inails.booking.admin.views.widget.basic.CustomEditText
 import com.app.inails.booking.admin.views.widget.basic.IViewCustomerErrorHandler
-import com.google.android.youtube.player.internal.ab
 import java.net.UnknownHostException
 
 interface ErrorHandler {
@@ -44,7 +42,7 @@ class ErrorHandlerImpl : ErrorHandler {
                         (dispatcher as Activity).findViewById(error.viewId)
                     }
                     if(view is IViewCustomerErrorHandler){
-                        view.handlerError(error.res)
+                        view.handleError(error.res)
                     }
                 }
                 return
@@ -56,8 +54,10 @@ class ErrorHandlerImpl : ErrorHandler {
                     (dispatcher as Activity).findViewById(error.viewId)
                 }
                 view.run {
-                    this.error = activity.getString(error.res)
-                    showKeyboard()
+                    if(!view.isFocusable){
+                        activity.toast(error.res)
+                    }
+                    view.displayErrorAndFocus(error.res)
                 }
                 return
             }
@@ -77,7 +77,7 @@ class ErrorHandlerImpl : ErrorHandler {
                 activity.toast(error.resource)
             }
             is UnauthorizedException ->{
-                activity.errorDialog.show(R.string.error, error.message.toString()){
+                activity.errorDialog.show(R.string.error, R.string.unauthorized){
                     activity.logout()
                 }
             }
@@ -89,6 +89,5 @@ class ErrorHandlerImpl : ErrorHandler {
             else -> activity.errorDialog.show(error)
         }
     }
-
 }
 

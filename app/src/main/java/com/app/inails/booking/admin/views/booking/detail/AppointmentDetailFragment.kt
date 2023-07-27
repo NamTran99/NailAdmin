@@ -274,7 +274,7 @@ class AppointmentDetailFragment : BaseFragment(R.layout.fragment_appointment_det
 //            txtVoucherCode.text = item.voucherCode
 //            txtDiscount.show(item.showPercent)
 //            txtDiscount.text = item.percent
-            txtPriceDiscount.text = item.discount
+            txtPriceDiscount.text = item.discountDisplay
             if(item.totalAmount <= 0.0){
                 tvFree.show()
                 txtTotalAmount.hide()

@@ -1,6 +1,6 @@
 package com.app.inails.booking.admin.views.auth
 
-import android.os.Build.VERSION_CODES.O
+import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -10,9 +10,8 @@ import android.support.core.route.*
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
-import android.util.Log
+import android.text.TextUtils
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityLoginBinding
@@ -26,8 +25,9 @@ import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.repository.auth.LoginRepo
 import com.app.inails.booking.admin.utils.Utils
 import com.app.inails.booking.admin.views.main.MainActivity
-import kotlinx.coroutines.launch
+import com.jaredrummler.android.device.DeviceName
 import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 class OptionLogin(var isEnableBackToPre: Boolean = false) : BundleArgument

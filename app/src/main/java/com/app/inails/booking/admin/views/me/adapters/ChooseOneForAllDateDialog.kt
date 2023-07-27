@@ -16,7 +16,7 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.bumptech.glide.Glide.init
-import com.google.android.youtube.player.internal.s
+//import com.google.android.youtube.player.internal.s
 
 
 class ChooseOneForAllDateDialog(context: Context,

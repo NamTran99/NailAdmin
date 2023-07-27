@@ -7,7 +7,7 @@ import com.app.inails.booking.admin.extention.gone
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 
-class ResendOTPAdapter(
+class ResendOTPAdapter (
     private val binding: FragmentOtpVerifyBinding,
     private val onResendListener: () -> Unit
 ) : Observer<ResendState> {

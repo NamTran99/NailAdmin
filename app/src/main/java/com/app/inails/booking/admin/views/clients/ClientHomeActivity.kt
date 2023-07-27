@@ -122,12 +122,12 @@ class ClientHomeActivity : BaseActivity(R.layout.activity_client_home), TopBarOw
         }
         with(viewModel) {
             deletedCustomerAccount.bind {
-                notificationDialog.show(R.string.auth_msg_deleted_account) {
+                notificationDialog.show(R.string.unauthorized) {
                     viewModel.logout()
                 }
             }
             deletedSalonAccount.bind {
-                notificationDialog.show(R.string.auth_msg_deleted_account) {
+                notificationDialog.show(R.string.unauthorized) {
                     viewModel.logout()
                 }
             }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/size_10"
+    android:background="@drawable/bg_white_radius"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size_15"
+    android:paddingTop="@dimen/size_24"
+    android:paddingBottom="@dimen/size_16">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_28"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AppTheme.TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/change_owner_name" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/size_10"
+            android:layout_marginEnd="@dimen/size_12"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etOwnerName"
+        style="@style/AppTheme.EditText"
+        android:layout_marginBottom="@dimen/size_12"
+        android:drawableStart="@drawable/ic_person"
+        android:drawableTint="@color/black"
+        android:hint="@string/enter_owner_name"
+        android:imeOptions="actionDone"
+        android:inputType="textEmailAddress" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSave"
+        style="@style/AppTheme.ButtonDefault"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/button_blue_corner"
+        android:text="@string/btn_save" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

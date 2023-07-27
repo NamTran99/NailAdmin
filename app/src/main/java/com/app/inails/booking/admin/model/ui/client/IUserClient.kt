@@ -2,9 +2,11 @@ package com.app.inails.booking.admin.model.ui.client
 
 import android.os.Build
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.extention.isEmail
 import com.google.gson.annotations.SerializedName
+import com.jaredrummler.android.device.DeviceName
 
 interface IUserClient {
     val phone: String get() = ""
@@ -28,7 +30,7 @@ class LoginForm(
     @SerializedName("device_type")
     val deviceType: String = "android",
     @SerializedName("device_info")
-    val deviceInfo: String = Build.MANUFACTURER + "-" + Build.MODEL,
+    val deviceInfo: String = AppConfig.phoneInfo,
     @SerializedName("device_token")
     var pushToken: String = ""
 ) : IUserClient {
@@ -53,7 +55,7 @@ class RegisterForm(
     @SerializedName("device_type")
     val deviceType: String = "android",
     @SerializedName("device_info")
-    val deviceInfo: String = Build.MANUFACTURER + "-" + Build.MODEL,
+    val deviceInfo: String = AppConfig.phoneInfo,
     @SerializedName("birthday")
     override var dob: String = "",
     @SerializedName("device_token")

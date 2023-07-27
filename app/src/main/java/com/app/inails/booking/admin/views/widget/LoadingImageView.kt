@@ -11,7 +11,7 @@ import com.app.inails.booking.admin.extention.hide
 import com.app.inails.booking.admin.extention.loadAttrs
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
-import com.google.android.youtube.player.internal.i
+//import com.google.android.youtube.player.internal.i
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 

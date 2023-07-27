@@ -107,7 +107,7 @@ class RecruitmentFragment : BaseFragment(R.layout.fragment_my_recruitment_ads), 
                 Router.open(self, Routing.MyCv)
             }
 
-            recruitmentAdsAdapter = RecruitmentAdsAdapter(rvRecruitment).apply {
+            recruitmentAdsAdapter = RecruitmentAdsAdapter(rvRecruitment, userLocalSource.isOwnerMode()).apply {
                 onItemClick = { item ->
                     Router.run {
                         redirectToDetailRecruitment(item.id, false)

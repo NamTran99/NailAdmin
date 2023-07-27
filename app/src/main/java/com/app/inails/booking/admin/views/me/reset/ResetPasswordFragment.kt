@@ -10,6 +10,7 @@ import android.support.di.Inject
 import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
@@ -51,6 +52,7 @@ class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password), To
                     rbMani.id -> 3
                     else -> 2
                 }
+                Log.d("TAG", "onViewCreated: namtd8 ${viewModel.role}")
             }
         }
 
@@ -78,7 +80,7 @@ class ResetPasswordViewModel(
         if (role == -1){
             resourceError(R.string.error_pls_select_role)
         }
-        redirectToVerifyOTP.post(requestOTPRepo(phoneNumber))
+        redirectToVerifyOTP.post(requestOTPRepo(phoneNumber, role))
     }
 }
 
@@ -89,7 +91,7 @@ class RequestOTPRepo(
 ) {
 
     suspend operator fun invoke(phoneNumber: String, role: Int = 2) {
-        authenticateApi.requestOTP(textFormatter.formatPhoneNumber(phoneNumber)).await()
+        authenticateApi.requestOTP(textFormatter.formatPhoneNumber(phoneNumber), role.toString()).await()
     }
 
 }

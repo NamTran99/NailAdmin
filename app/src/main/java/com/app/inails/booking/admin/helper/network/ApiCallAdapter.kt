@@ -105,7 +105,7 @@ class DefaultApiErrorHandler : ApiCallErrorHandler {
         val errorCode = response.code()
 
         return when {
-            errorCode == 401 -> UnauthorizedException()
+            errorCode == 401 || errorCode == 403 -> UnauthorizedException()
             errorCode in 400..499 -> ApiRequestException(errorBody)
             errorCode >= 500 -> InternalServerException()
             else -> ParameterInvalidException(response.message())

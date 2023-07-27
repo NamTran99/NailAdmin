@@ -145,6 +145,8 @@ class BookingFactory(
                 get() = appointmentDTO.staff_name ?: "No request"
             override val statusDisplay: String
                 get() = appointmentDTO.status_name.safe()
+            override val discount: Double
+                get() = appointmentDTO.total_discount_format?.toDoubleOrNull().safe()
             override val resIconStatus: Int
                 get() = textFormatter.formatStatusAppointmentIcon(
                     appointmentDTO.status,
@@ -216,7 +218,7 @@ class BookingFactory(
                 get() = textFormatter.formatPrice(appointmentDTO.price).safe()
             override val totalAmount: Double
                 get() = appointmentDTO.price.safe()
-            override val discount: String
+            override val discountDisplay: String
                 get() = "-${appointmentDTO.total_discount_format.toPriceFormat()}"
             override val hasVoucher: Boolean
                 get() = appointmentDTO.voucher != null

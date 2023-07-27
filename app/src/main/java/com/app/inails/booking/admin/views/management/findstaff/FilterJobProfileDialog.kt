@@ -65,6 +65,7 @@ class FilterJobProfileDialog(context: Context) : BaseDialog(context) {
                 onResetClick.invoke()
                 etWorking.setText("")
                 jobFilter.resetFilter()
+                onSubmit.invoke(jobFilter)
             }
         }
     }

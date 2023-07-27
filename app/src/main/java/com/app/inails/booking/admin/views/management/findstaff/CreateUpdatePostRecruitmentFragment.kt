@@ -9,6 +9,7 @@ import android.support.core.livedata.SingleLiveEvent
 import android.support.core.livedata.combineNotNull
 import android.support.core.livedata.post
 import android.support.core.route.nullableArguments
+import android.support.core.route.open
 import android.support.core.view.viewBinding
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
@@ -71,6 +72,10 @@ class CreateUpdatePostRecruitmentFragment : BaseFragment(R.layout.fragment_creat
     private lateinit var customerSkinColorAdapter: CustomerSkinColorAdapter
 
     private val form: CreateUpdateRecruitmentForm get() = vm.recruitmentForm
+    private var stateFilterForm get() = vm.recruitmentForm.stateFilterForm
+       set(value){
+           vm.recruitmentForm.stateFilterForm = value
+       }
 
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -107,12 +112,17 @@ class CreateUpdatePostRecruitmentFragment : BaseFragment(R.layout.fragment_creat
 
         with(binding) {
 //            binding.etPrice.setInputSignedDecimal(10, 2)
+            appEvent.findingWorkingArea.bind {
+                stateFilterForm = it
+                etWorking.setText(it.format)
+            }
+            etWorking.onClick{
+                open<FindWorkingAreaActivity>(vm.recruitmentForm.stateFilterForm)
+            }
             etSalary.setInputSignedDecimal(6,2)
             etOwnerPhone.inputTypePhoneUS()
-            spCity.configSpinner(true, arrayOf(getString(R.string.city)))
-            spCity.isEnabled = false
-
-
+//            spCity.configSpinner(true, arrayOf(getString(R.string.city)))
+//            spCity.isEnabled = false
             customerSkinColorAdapter = CustomerSkinColorAdapter(rvSkincolor).apply {
                 onClickItem = {
                     form.customer_skin_color = it.id
@@ -323,39 +333,39 @@ class CreateUpdatePostRecruitmentFragment : BaseFragment(R.layout.fragment_creat
                     getDetailRecruitment(it.id)
                 }
 
-                updateState.bind {
-                    spState.setSelection(it)
-                }
-
-                updateCity.bind {
-                    spCity.setSelection(it)
-                }
+//                updateState.bind {
+//                    spState.setSelection(it)
+//                }
+//
+//                updateCity.bind {
+//                    spCity.setSelection(it)
+//                }
 
                 listSkillResult.bind {
                     if(args != null) return@bind
                     mainSkillAdapter.submit(it)
                 }
 
-                listStateResult.bind {
-                    val listItem = it.map { it.fullName }.toMutableList()
-                    listItem.add(0, getString(R.string.state))
-                    spState.configSpinner(true, listItem.toTypedArray()) { pos ->
-                        if (pos != 0) {
-                            form.state = it[pos - 1].name
-                            vm.getListCity(form.state)
-                        }
-                    }
-                }
+//                listStateResult.bind {
+//                    val listItem = it.map { it.fullName }.toMutableList()
+//                    listItem.add(0, getString(R.string.state))
+////                    spState.configSpinner(true, listItem.toTypedArray()) { pos ->
+////                        if (pos != 0) {
+////                            form.state = it[pos - 1].name
+////                            vm.getListCity(form.state)
+////                        }
+////                    }
+//                }
 
-                listCityResult.bind {
-                    spCity.isEnabled = true
-                    val listCity = it.map { it.name }.toMutableList()
-                    listCity.add(0, getString(R.string.city))
-                    spCity.configSpinner(true, listCity.toTypedArray()) { pos ->
-                        if (pos == 0) return@configSpinner
-                        form.city = listCity[pos]
-                    }
-                }
+//                listCityResult.bind {
+//                    spCity.isEnabled = true
+//                    val listCity = it.map { it.name }.toMutableList()
+//                    listCity.add(0, getString(R.string.city))
+//                    spCity.configSpinner(true, listCity.toTypedArray()) { pos ->
+//                        if (pos == 0) return@configSpinner
+//                        form.city = listCity[pos]
+//                    }
+//                }
 
                 updateMainSkill.bind {
                     etOwnerName.post {
@@ -378,6 +388,12 @@ class CreateUpdatePostRecruitmentFragment : BaseFragment(R.layout.fragment_creat
                 }
 
                 detailResult.bind {
+
+                    stateFilterForm.apply {
+                        stateSearch = it.salonState
+                        citySearch = it.salonCity
+                        etWorking.setText(formatDisplay())
+                    }
                     edtTitleAds.setText(it.title)
                     etOwnerName.setText(it.salonName)
                     etOwnerPhone.setText(it.contactPhone)
@@ -433,10 +449,7 @@ class CreateRecruitmentVM(
     private val recruitmentRepo: RecruitmentRepo,
     private val profileRepository: ProfileRepository
 ) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
-    init {
-        getListState()
-        getListSkillSet()
-    }
+
 
     val recruitmentForm = CreateUpdateRecruitmentForm()
 
@@ -445,12 +458,8 @@ class CreateRecruitmentVM(
     val success = SingleLiveEvent<Int>()
     val detailResult = recruitmentRepo.detailRecruitmentResult
     val listSkillResult = recruitmentRepo.listSkill
-    val listCityResult = recruitmentRepo.listCity
+//    val listCityResult = recruitmentRepo.listCity
     val salonDetail = profileRepository.result
-
-    fun getDetailSalon() = launch(loading, error) {
-        profileRepository()
-    }
 
     val updateMainSkill = combineNotNull(detailResult, listSkillResult) { detail, listMainSkill ->
         val listMoreSkill = mutableListOf<ISkill>()
@@ -468,13 +477,24 @@ class CreateRecruitmentVM(
         listMainSkill to listMoreSkill
     }
 
-    val updateState = combineNotNull(detailResult, listStateResult) { detail, listState ->
-        listState.map { it.name }.indexOf(detail?.salonState ?: "") + 1
+
+    init {
+        getListState()
+        getListSkillSet()
     }
 
-    val updateCity = combineNotNull(detailResult, listCityResult) { detaial, listCity ->
-        listCity.map { it.name }.indexOf(detaial?.salonCity ?: "") + 1
+    fun getDetailSalon() = launch(loading, error) {
+        profileRepository()
     }
+
+
+//    val updateState = combineNotNull(detailResult, listStateResult) { detail, listState ->
+//        listState.map { it.name }.indexOf(detail?.salonState ?: "") + 1
+//    }
+////
+//    val updateCity = combineNotNull(detailResult, listCityResult) { detaial, listCity ->
+//        listCity.map { it.name }.indexOf(detaial?.salonCity ?: "") + 1
+//    }
 
 
     fun createRecruitment() = launch(loading, error) {

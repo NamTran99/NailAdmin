@@ -32,7 +32,8 @@ class TimePickerWithIntervalDialog(context: Context) :
                 timePicker.setInitialSelectedTime("12:00 am")
             }
             btSetUp.onClick {
-                timePicker.getCurrentlySelectedTime().convert12hTo24hFormat().let{
+                val format12h =  timePicker.getCurrentlySelectedTime()
+                format12h.convert12hTo24hFormat().let{
                     onSubmitClick.invoke(
                         it, it.split(":")[0].toInt(), timeType
                     )
@@ -53,5 +54,5 @@ interface TimePickerWithIntervalDialogOwner : ViewScopeOwner {
 }
 
 enum class TimeType{
-    Start, End
+    Start, End, None
 }

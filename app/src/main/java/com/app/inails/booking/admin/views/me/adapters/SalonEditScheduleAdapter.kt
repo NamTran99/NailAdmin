@@ -9,7 +9,7 @@ import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.show
 import com.app.inails.booking.admin.model.ui.ISchedule
 import com.app.inails.booking.admin.views.widget.SimpleRecyclerAdapter
-import com.google.android.youtube.player.internal.i
+//import com.google.android.youtube.player.internal.i
 
 class SalonEditScheduleAdapter(view: RecyclerView, private val isTextWhite: Boolean = false) :
     SimpleRecyclerAdapter<ISchedule, ItemEditSalonScheduleBinding>(view) {

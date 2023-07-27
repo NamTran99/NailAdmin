@@ -21,7 +21,7 @@ data class UserOwnerDTO(
         val deviceType: String? = "",
         val email: String? = "",
         val id: Int? = 0,
-        val name: String? = "",
+        var name: String? = "",
         val phone: String? = "",
         var salon_id: Int?= 0,
         val state: String?,

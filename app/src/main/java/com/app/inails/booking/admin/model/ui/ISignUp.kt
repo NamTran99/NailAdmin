@@ -10,7 +10,7 @@ import com.app.inails.booking.admin.utils.TimeUtils
 
 
 data class SignUpForm constructor(
-    var zoneID: String = TimeUtils.getZoneID(), // not use for request
+    var zoneID: String = TimeUtils.getZoneID(), // not use for request vì lấy zone của máy
     var offsetDisplay: String = TimeUtils.getTimeZoneOffSet(), // not use for request
     var phone: String = "",
     var password: String = "",
@@ -19,7 +19,7 @@ data class SignUpForm constructor(
     var salon_phone: String = "",
     var salon_city: String = "",
     var salon_tz: String = "",
-    var salon_timezone: String = "UTC",
+    var salon_timezone: String = TimeUtils.getZoneID(),
     var salon_lat: Double = 0.0,
     var salon_lng: Double = 0.0,
     var salon_zipcode: String = "",
@@ -29,6 +29,7 @@ data class SignUpForm constructor(
     var salon_state: String = "",
     var salon_description: String = "",
 //    var input_option : Int = 0, // 0: mien phi, 1 tra phi
+    var fullTimeZoneDisplay2: String = "",
     var schedules: MutableList<ISchedule> = ISchedule.getDefaultList().toMutableList(),
     var images: MutableList<AppImage> = mutableListOf(),
     var paidMenuImages: MutableList<AppImage> = mutableListOf(),
@@ -38,8 +39,8 @@ data class SignUpForm constructor(
 ){
     fun getTimeZoneDisplay(context: Context, showFull: Boolean): String{
         return if(showFull){
-            context.getString(R.string.business_hour_format, zoneID, offsetDisplay)
-        }else "${zoneID} ${offsetDisplay}"
+            context.getString(R.string.business_hour_format, salon_timezone, offsetDisplay)
+        }else "${salon_timezone} ${offsetDisplay}"
     }
 
     fun validateStep1(){

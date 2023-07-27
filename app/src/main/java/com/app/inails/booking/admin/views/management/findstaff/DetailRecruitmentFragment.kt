@@ -182,7 +182,7 @@ class DetailRecruitmentFragment : BaseFragment(R.layout.fragment_detail_recruitm
             tvCustomerClass.text = item.customerSkinColorFormat
 //            tvExperience.text = item.experience_format_2
             tvAddress.text = item.salon?.address
-            tvOwnerName.text = item.salon?.ownerName
+//            tvOwnerName.text = item.salon?.ownerName
 //            tvOwnerEmail.text = item.salon?.ownerEmail
 //            tvOwnerPhone.text = item.salon?.ownerPhone
             btnCall.onClick {

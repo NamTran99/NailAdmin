@@ -50,7 +50,8 @@ interface IAppointment {
     val percentDisplay: String get() = "" //vd: %12
     val percent: Double get() = 0.0
     val showPercent : Boolean get() =false
-    val discount: String get() = ""
+    val discountDisplay: String get() = ""
+    val discount: Double get() = 0.0
     val totalAmountDisplay: String get() = "" // co theem $
     val totalAmount: Double get() =  0.0
     val voucherCode: String get() = ""

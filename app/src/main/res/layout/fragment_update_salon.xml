@@ -38,6 +38,21 @@
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/size_15"
+                android:text="@string/owner_name" />
+
+            <EditText
+                android:id="@+id/etOwnerName"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="@dimen/size_12"
+                android:autofillHints="name"
+                android:hint="@string/enter_owner_name" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_15"
                 android:textStyle="bold"
                 android:text="@string/phone_number" />
@@ -161,12 +176,12 @@
                 android:id="@+id/tvEditSchedule"
                 style="@style/AppTheme.TextView.Medium"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_10"
+                android:layout_height="16dp"
                 android:layout_gravity="end"
+                android:layout_marginTop="@dimen/size_10"
+                android:drawableTint="@color/colorPrimary"
                 android:text="@string/edit"
                 android:textColor="@color/colorPrimary"
-                android:drawableTint="@color/colorPrimary"
                 app:drawableStartCompat="@drawable/ic_edit_2" />
 
             <View

@@ -26,6 +26,7 @@ class AccountMultyOptionAdapter(view: RecyclerView, val appMode: UserLocalSource
     var detailMani: UserClientDTO?=null
     var listOption: List<AccountOption> = listOf()
     var onClickLogOut: (() -> Unit) = {}
+    var onClickChangeName: (() -> Unit) = {}
 
      fun updateDetailSalon(user: UserOwnerDTO?) {
          detailUser = user
@@ -88,12 +89,15 @@ class AccountMultyOptionAdapter(view: RecyclerView, val appMode: UserLocalSource
                 btnLogOut.onClick{
                     onClickLogOut.invoke()
                 }
+                btChangeName.onClick{
+                    onClickChangeName.invoke()
+                }
                 (user?.admin?.is_approve == 0).show(tvApproveAccount)
             }
         }
     }
 
-    internal inner class DetailManiVH(view: LayoutDetailManiBinding) : BaseViewHolder<LayoutDetailManiBinding>(view) {
+    internal inner class DetailManiVH(view: LayoutDetailManiBinding) : AccountMultyOptionAdapter.BaseViewHolder<LayoutDetailManiBinding>(view) {
         @SuppressLint("SetTextI18n")
         fun bind(user: UserClientDTO?) {
             val context = binding.root.context
@@ -107,7 +111,7 @@ class AccountMultyOptionAdapter(view: RecyclerView, val appMode: UserLocalSource
         }
     }
 
-    internal inner class OptionVM(view: LayoutAccountOptionBinding) :  BaseViewHolder<LayoutAccountOptionBinding>(view) {
+    internal inner class OptionVM(view: LayoutAccountOptionBinding) :  AccountMultyOptionAdapter.BaseViewHolder<LayoutAccountOptionBinding>(view) {
         fun bind(accountOption: AccountOption) {
             binding.apply {
                 tvName.text = mContext.getString(accountOption.title)

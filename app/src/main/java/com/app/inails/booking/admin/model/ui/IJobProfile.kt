@@ -7,6 +7,7 @@ import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.exception.viewErrorCustom
 import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.app.inails.booking.admin.model.response.AppImage
+import com.app.inails.booking.admin.views.management.findstaff.SearchCityStateForm
 import kotlinx.parcelize.Parcelize
 
 interface IJobProfile {
@@ -97,6 +98,7 @@ data class CreateUpdateJobForm(
     var skillMain: List<Int> = listOf(),
     var skillCustom: List<String> = listOf(),
     var skillDefaultLength: Int = 0,
+    var stateFilterForm: SearchCityStateForm = SearchCityStateForm()
 ) : Parcelable {
 
     fun validate() {
@@ -116,12 +118,12 @@ data class CreateUpdateJobForm(
             resourceError(R.string.error_select_gender)
         }
 
-        if(state.isBlank()){
-            resourceError(R.string.error_blank_state)
+        if(stateFilterForm.stateSearch.isBlank()){
+            viewError(R.id.etWorking,R.string.error_blank_state)
         }
 
-        if(city.isBlank()){
-            resourceError(R.string.error_blank_city)
+        if(stateFilterForm.citySearch.isBlank()){
+            viewError(R.id.etWorking,R.string.error_blank_city)
         }
 
         if(working_type == 0){

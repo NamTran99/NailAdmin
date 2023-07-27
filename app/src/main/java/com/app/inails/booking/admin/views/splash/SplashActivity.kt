@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -81,7 +82,7 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), ConfirmDialogOwne
 
         viewModel.apply {
             versionResult.bind {
-                if (!BuildConfig.VERSION_NAME.contains(it.version)) {
+                if (!BuildConfig.versionCustom.contains(it.version)) {
                     confirmDialog.show(
                         title = R.string.title_new_version_update,
                         message = getString(R.string.text_pls_new_version_update, it.version),

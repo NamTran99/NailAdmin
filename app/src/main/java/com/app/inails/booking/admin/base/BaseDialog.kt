@@ -24,7 +24,6 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.datasource.remote.AppEvent
 import com.app.inails.booking.admin.extention.setMargins
 import com.app.inails.booking.admin.extention.showKeyboard
-import com.google.android.youtube.player.internal.ac
 
 open class BaseDialog(context: Context) : Dialog(context) {
     var activityContext:Context = context

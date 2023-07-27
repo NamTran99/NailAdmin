@@ -109,6 +109,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
                             viewModel.salonForm.apply {
                                 allImageCount = allImage.size
                                 name = etSalonName.text.toString()
+                                owner_name = etOwnerName.text.toString()
                                 address = etAddress.text.toString()
                                 phone = etPhone.text.toString()
                                 images = allImage.toList()
@@ -268,6 +269,7 @@ class UpdateSalonFragment : BaseFragment(R.layout.fragment_update_salon), TopBar
     }
 
     private fun displays(item: ISalonDetail) = with(binding) {
+        etOwnerName.setText(item.ownerName)
         etSalonName.setText(item.salonName)
         etPhone.setText(item.phoneNumber)
         etAddress.setText(item.address)
@@ -370,11 +372,11 @@ class UpdateSalonViewModel(
     }
 
     fun updateSalon() = launch(loading, error) {
+        addVoucherRepo.deleteMultiVoucher(listVoucherDeleteID.toString())
+        updateSalonRepository(salonForm)
         voucherAdd.value?.forEach {
             addVoucherRepo(it)
         }
-        addVoucherRepo.deleteMultiVoucher(listVoucherDeleteID.toString())
-        updateSalonRepository(salonForm)
     }
 
     fun getTimeZone() = launch(loading, error) {
@@ -413,6 +415,7 @@ class UpdateSalonRepository(
                 RequestBodyBuilder()
                     .put("id", salonForm.id)
                     .put("name", salonForm.name)
+                    .put("owner_name", salonForm.owner_name)
                     .put("phone", textFormatter.formatPhoneNumber(salonForm.phone))
                     .put("state", salonForm.state)
                     .put("city", salonForm.city)

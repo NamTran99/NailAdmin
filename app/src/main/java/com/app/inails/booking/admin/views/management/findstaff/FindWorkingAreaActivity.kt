@@ -168,6 +168,12 @@ data class SearchCityStateForm(
         return citySearch
     }
 
+    fun formatDisplay(): String {
+        stateFormat = stateSearch
+        format = "$citySearch, $stateSearch"
+        return format
+    }
+
     fun getStateSearch(): FindWorkingAreaActivity.SearchState{
         return if(stateSearch.isBlank()){
             FindWorkingAreaActivity.SearchState.STATE

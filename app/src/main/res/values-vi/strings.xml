@@ -93,6 +93,9 @@
     <string name="update_success">Điều chỉnh thành công</string>
     <string name="tittle_exit_update_salon">Điều chỉnh thông tin Salon</string>
     <string name="btn_confirm">Xác nhận</string>
+    <string name="title_confirm_call">Xác nhận gọi</string>
+    <string name="msg_sure_call_phone">Bạn có muốn gọi cho số %s ?</string>
+    <string name="btn_confirm_call">Vâng, Tiếp tục</string>
     <string name="direct">Điều hướng</string>
     <string name="btn_order_history">Lịch sử làm việc</string>
     <string name="add_image">Thêm ảnh</string>
@@ -140,8 +143,6 @@
     <string name="error_not_enough_staff">Hãy chọn ít nhất 1 nhân viên</string>
     <string name="error_blank_date_time">Hãy chọn ngày giờ</string>
     <string name="error_empty_services">Hãy chọn dịch vụ</string>
-    <string name="error_empty_service_custom">Please enter the other service</string>
-    <string name="error_empty_total_duration_services">Please enter the total duration service</string>
     <string name="error_blank_email">Email không được để trống</string>
     <string name="error_blank_content">Nội dung không được để trống</string>
     <string name="message_logout_app">Bạn có thật sự muốn đăng xuất (logout) không?</string>
@@ -181,6 +182,7 @@
     <string name="error_blank_password_2">Hãy điền mật khẩu</string>
     <string name="error_blank_admin_name">Hãy điền tên chủ tiệm</string>
     <string name="error_blank_salon_name">Hãy điền tên salon</string>
+    <string name="error_blank_owner_name">Hãy điền tên chủ tiệm</string>
     <string name="error_blank_salon_address">Hãy điền địa chỉ salon</string>
     <string name="error_blank_salon_phone">Hãy điền số điện thoại salon</string>
     <string name="error_blank_admin_email">Hãy điền email của chủ tiệm</string>
@@ -248,7 +250,7 @@
     <string name="auth_otp_resend_in_remaining_s">Gửi lại mã code sau %s giây</string>
     <string name="auth_pw_have_reset">Mật khảu của bạn đã được thiết lập lại !</string>
     <string name="auth_new_pw">Mật khẩu mới của bạn là</string>
-    <string name="btn_to_login">Đăng nhâp tài khoản</string>
+    <string name="btn_to_login">Đăng nhập tài khoản</string>
     <string name="success_redirect_owner">Chuyển sang vai trò chủ tiệm thành công!</string>
     <string name="search_by_name_phone_email">Tìm kiếm theo tên, số điện thoại, email</string>
     <string name="search_by_booking_id">Tìm kiếm theo ID đơn đặt</string>
@@ -256,6 +258,7 @@
     <string name="message_end_time_greather_than_start_time_2">Thời gian kết thúc phải sau thời gian bắt đầu</string>
     <string name="normal">Bình thường</string>
     <string name="update_customer">Cập Nhật Khách Hàng</string>
+    <string name="auth_otp_sending">Đang gửi mã xác nhận</string>
     <string name="tittle_exit_update_customer">Cập Nhật Thông Tin Khách Hàng</string>
     <string name="message_delete_appointment_content">Khi bạn xóa đồng nghĩa với việc nó sẽ ẩn đối với bạn và bạn không thể xem lại. Những người khác (khách hàng) sẽ vẫn thấy đăng ký này. Bạn có chắc chắn muốn xóa?</string>
     <string name="btn_back">Quay lại</string>
@@ -290,6 +293,8 @@
     <string name="service">Tên Dịch Vụ</string>
     <string name="time">Thời Gian</string>
     <string name="reason">Lý Do</string>
+    <string name="reset">Thiết lập lại</string>
+    <string name="filter">Lọc</string>
     <string name="rating">Đánh Giá</string>
     <string name="view_detail">Xem Chi Tiết</string>
     <string name="view_detail_under_line"><u>Xem Chi Tiết</u></string>
@@ -380,7 +385,8 @@
     <string name="sign_up_support_2">Nếu bạn không có Business card (Danh thiếp) vui lòng để lại Số điện thoại hoặc Email để chúng tôi liên hệ bạn.</string>
     <string name="button_add_salon_photo">Thêm hình ảnh về salon của bạn</string>
     <string name="copy">Sao chép sang ngày khác</string>
-    <string name="enter_owner_name">Nhập vào tên</string>
+    <string name="enter_name">Nhập vào tên</string>
+    <string name="enter_owner_name">Nhập vào tên chủ tiệm</string>
     <string name="label_email_optional">Email (Không bắt buộc)</string>
     <string name="select_service_image">Nhấn để chọn ảnh dịch vụ</string>
     <string name="select_staff_image">Nhấn để chọn ảnh nhân viên</string>
@@ -394,7 +400,7 @@
     <string name="finish_apm">Thêm dịch vụ phát sinh ( Nếu có )</string>
     <string name="des_search_worker">Danh sách thợ tìm việc</string>
     <string name="text_title_job_time">Chọn thời gian làm việc</string>
-    <string name="my_recruitment_ads">Tin tuyển dụng\ncủa tôi</string>
+    <string name="my_recruitment_ads">Tin tuyển dụng\n thợ nail của tôi</string>
     <string name="part_time">Ngắn hạn\n(Part time)</string>
     <string name="full_time">Dài hạn\n(Full time)</string>
     <string name="textWeeks1">Tuần</string>
@@ -511,7 +517,7 @@
     <string name="nails_job">Tạo tin tuyển dụng để tiếp cận với người tìm việc dễ dàng hơn</string>
     <string name="nails_job_des_1">Tin tuyển dụng sau khi đăng sẽ được hiển thị với tất cả mọi người, bạn có thể chia sẻ tin hoặc ẩn tin nếu muốn</string>
     <string name="tittle_exit_update_recruitment">Thông tin tin tuyển dụng</string>
-    <string name="city_and_state_of_residence_create">Thành phố và bang cư trú?</string>
+    <string name="city_and_state_of_residence_create">Tiệm ở đâu, tiểu bang và thành phố nào</string>
     <string name="city_and_state_of_residence">Thành phố và bang cư trú</string>
     <string name="ethnicity_customer">Khách thuộc sắc dân nào?</string>
     <string name="hint_enter_salary">Nhập số tiền</string>
@@ -562,7 +568,7 @@
     <string name="retry">Thử lại</string>
     <string name="noti_job_profile_not_available">Rất tiếc! Hồ sơ thợ này không còn tồn tại hoặc đã bị ẩn.</string>
     <string name="noti_please_login">Vui lòng đăng nhập để xem được nội dung này. Nếu bạn chưa có tài khoản hãy đăng kí ngay để sử dụng được nhiều dịch vụ miễn phí của chúng tôi. Các bước đăng kí rất đơn giản sẽ không mất nhiều thời gian của bạn.</string>
-    <string name="des_login_1">Bạn là chủ tiệm muốn đăng ký mở Salon?</string>
+    <string name="des_login_1">Bạn là chủ tiệm muốn đăng ký cho Salon?</string>
     <string name="des_login_2">Bạn là thợ Nails muốn tìm việc?</string>
     <string name="click_here_to_sign_up">Nhấn vào đây để đăng ký</string>
     <string name="mn_my_cv">CV của tôi</string>
@@ -603,4 +609,9 @@
     <string name="reset_pass_des_1">Chọn vai trò để thiết lập lại mật khẩu</string>
     <string name="salon_owner">Chủ tiệm nail</string>
     <string name="salon_manicurist">Thợ nail</string>
+    <string name="auth_otp_loading">Đang xác minh mã OTP của bạn…</string>
+    <string name="unauthorized">Tài khoản đã bị tước quyền truy cập tài khoản. Xin hãy đăng nhập lại sau.</string>
+    <string name="owner_name">Tên chủ tiệm</string>
+    <string name="edit_name">Đổi Tên</string>
+    <string name="change_owner_name">Thay đổi Tên Chủ tiệm</string>
 </resources>

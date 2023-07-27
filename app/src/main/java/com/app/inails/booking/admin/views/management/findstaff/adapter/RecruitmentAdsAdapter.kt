@@ -7,17 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.ItemRecruitmentBinding
-import com.app.inails.booking.admin.extention.findIndex
-import com.app.inails.booking.admin.extention.getLoadingCircleDrawable
-import com.app.inails.booking.admin.extention.onClick
-import com.app.inails.booking.admin.extention.show
+import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.IAppointment
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.model.ui.IRecruitment
 import com.app.inails.booking.admin.views.widget.PageRecyclerAdapter
 import com.squareup.picasso.Picasso
 
-class RecruitmentAdsAdapter(view: RecyclerView) :
+class RecruitmentAdsAdapter(view: RecyclerView, val isOwnerMode: Boolean = true) :
     PageRecyclerAdapter<IRecruitment, ItemRecruitmentBinding>(view) {
     override fun onCreateBinding(parent: ViewGroup): ItemRecruitmentBinding {
         return parent.bindingOf(ItemRecruitmentBinding::inflate)
@@ -68,6 +65,7 @@ class RecruitmentAdsAdapter(view: RecyclerView) :
                     .placeholder(context.getLoadingCircleDrawable())
                     .into(imgBanner)
             }
+            btMenu.visible(isOwnerMode)
             btMenu.onClick{
                 onClickMenuListener?.invoke(it, item)
             }

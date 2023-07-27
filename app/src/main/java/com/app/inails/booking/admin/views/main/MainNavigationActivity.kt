@@ -8,6 +8,7 @@ import android.support.viewmodel.viewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.navigate.Router
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToLogin
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.views.booking.BookingFragment
 import com.app.inails.booking.admin.views.booking.create_appointment.ChooseStaffFragment
@@ -31,8 +32,8 @@ import com.app.inails.booking.admin.views.me.reset.OTPVerifyFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordFragment
 import com.app.inails.booking.admin.views.me.reset.ResetPasswordSuccessFragment
 import com.app.inails.booking.admin.views.me.signup.SignUp5StepFragment
-import com.app.inails.booking.admin.views.me.signup.SignUpManiAccountFragment
 import com.app.inails.booking.admin.views.me.signup.SignUpGeneralOptionFragment
+import com.app.inails.booking.admin.views.me.signup.SignUpManiAccountFragment
 import com.app.inails.booking.admin.views.me.signup.SignUpSupportFragment
 import com.app.inails.booking.admin.views.notification.NotificationFragment
 import com.app.inails.booking.admin.views.recruitment.RecruitmentFragment
@@ -121,11 +122,7 @@ class MainNavigationActivity : BaseActivity(R.layout.activity_main_navigation), 
 
 
     override fun logout() {
-        notificationDialog.show(R.string.auth_msg_deleted_account) {
-            Router.run {
-                redirectToLogin()
-                viewModel.logout()
-            }
-        }
+        redirectToLogin()
+        viewModel.logout()
     }
 }

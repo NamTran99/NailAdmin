@@ -49,7 +49,6 @@ class UserLocalSource(
 
     private var listState: List<IState>? by caching.reference(StateDTO::class.java.name)
 
-
     fun isExistListState(): Boolean {
         return !listState.isNullOrEmpty()
     }
@@ -115,6 +114,14 @@ class UserLocalSource(
         this.userOwner?.admin?.salon?.name = salonName
     }
 
+    fun changeOwnerName(name: String) {
+        this.userOwner?.admin?.name = name
+        this.userOwner= this.userOwner
+    }
+
+    fun getOwnerName() =
+        this.userOwner?.admin?.name ?: ""
+
     fun approveUser() {
         userOwner = userOwner?.apply {
             admin?.is_approve = 1
@@ -123,7 +130,7 @@ class UserLocalSource(
 
     fun saveManicuristAccount(manicuristDTO: UserClientDTO) {
         manicuristUser = manicuristDTO
-        appMode= AppMode.Manicurist
+        appMode = UserLocalSource.AppMode.Manicurist
         saveToken(manicuristDTO.token)
     }
 
@@ -140,7 +147,7 @@ class UserLocalSource(
 
     fun saveUserOwner(userOwner: UserOwnerDTO) {
         this.userOwner = userOwner
-        appMode= AppMode.Owner
+        appMode = UserLocalSource.AppMode.Owner
         saveToken(userOwner.token)
         shareIOScope.launch { allUserLive.post(getUserOwnerDto() to getUserClientDto()) }
     }
@@ -189,7 +196,7 @@ class UserLocalSource(
     //    fun setC
     // When log out
 
-    fun logOutClient(){
+    fun logOutClient() {
         this.userClient = null
         this.clearToken()
     }

@@ -21,7 +21,6 @@ import android.support.navigation.findNavigator
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.util.Log
-import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.DataConst.NotifyFireBaseCloudType.OWNER_ACCOUNT_APPROVE
@@ -37,6 +36,7 @@ import com.app.inails.booking.admin.model.firebase.FireBaseCloudMessage
 import com.app.inails.booking.admin.model.ui.NotificationIDForm
 import com.app.inails.booking.admin.navigate.Router
 import com.app.inails.booking.admin.navigate.Router.Companion.redirectToListRecruitment
+import com.app.inails.booking.admin.navigate.Router.Companion.redirectToLogin
 import com.app.inails.booking.admin.navigate.Routing
 import com.app.inails.booking.admin.notification.NotificationsManagerClient
 import com.app.inails.booking.admin.repository.auth.LogoutRepo
@@ -125,9 +125,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
         }, isShowNoti = userLocalSource.isOwnerMode())
         topBar.setState(mainTopBarState)
         with(binding) {
-            fabClientCheckIn.setText(if(userLocalSource.isOwnerMode()) R.string.customer_check_in else R.string.recruitment)
+            fabClientCheckIn.setText(if (userLocalSource.isOwnerMode()) R.string.customer_check_in else R.string.recruitment)
             fabClientCheckIn.onClick {
-                if(userLocalSource.isOwnerMode()){
+                if (userLocalSource.isOwnerMode()) {
                     if (userLocalSource.getUserDto()?.admin?.is_approve == 1) {
                         confirmDialog.show(
                             R.string.title_navigate_client_mode,
@@ -144,7 +144,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
                     } else {
                         notificationDialog.show(R.string.content_noty_salon_not_approve_check_in)
                     }
-                }else{
+                } else {
                     redirectToListRecruitment()
                 }
             }
@@ -185,9 +185,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             }
 
             //first navigate
-            if(userLocalSource.getAppMode() == UserLocalSource.AppMode.Owner){
+            if (userLocalSource.getAppMode() == UserLocalSource.AppMode.Owner) {
                 navigator.navigateTo(R.id.navHome)
-            }else  navigator.navigateTo(R.id.navMyCV)
+            } else navigator.navigateTo(R.id.navMyCV)
         }
 
         appEvent.notifyCloudMessage.bind { noti ->
@@ -213,7 +213,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
             mainTopBarState.setNotificationUnreadCount(it)
         }
         viewModel.deleteAccount.bind {
-            notificationDialog.show(R.string.auth_msg_deleted_account) {
+            notificationDialog.show(R.string.unauthorized) {
                 Router.run {
                     redirectToLogin()
                     viewModel.logout()
@@ -239,12 +239,8 @@ class MainActivity : BaseActivity(R.layout.activity_main), TopBarOwner,
     }
 
     override fun logout() {
-        notificationDialog.show(R.string.auth_msg_deleted_account) {
-            Router.run {
-                redirectToLogin()
-                viewModel.logout()
-            }
-        }
+        redirectToLogin()
+        viewModel.logout()
     }
 
     override fun onBackPressed() {

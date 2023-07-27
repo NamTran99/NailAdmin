@@ -4,16 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.EditText
-import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.databinding.CustomEditTextBinding
 import com.app.inails.booking.admin.extention.*
 
-
-interface IViewCustomerErrorHandler {
-    fun handlerError(@StringRes errorMessage: Int)
-}
 
 enum class InputType(val index: Int) {
     NUMBER(0),
@@ -43,7 +38,6 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) : IViewCustom
     private val binding by lazy {
         CustomEditTextBinding.inflate(LayoutInflater.from(context), this, true)
     }
-
 
     var inputType: InputType = InputType.NUMBER
         set(value) {
@@ -112,7 +106,7 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) : IViewCustom
         const val DEFAULT_STRING = ""
     }
 
-    override fun handlerError(errorMessage: Int) {
+    override fun handleError(errorMessage: Int) {
         binding.etContent.displayErrorAndFocus(errorMessage)
     }
 }

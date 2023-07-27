@@ -19,7 +19,6 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseActivity
 import com.app.inails.booking.admin.databinding.ActivityFindCustomerBinding
 import com.app.inails.booking.admin.exception.resourceError
-import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.model.ui.ICustomer
 import com.app.inails.booking.admin.views.booking.create_appointment.adapter.SelectCustomerAdapter
@@ -122,14 +121,14 @@ class FindCustomerVM(
         }
     }
 
-    private fun checkValidateCustomer(phone: String, name: String){
-        if(phone.trim().isEmpty()){
+    private fun checkValidateCustomer(phone: String, name: String) {
+        if (phone.trim().isEmpty()) {
             resourceError(R.string.error_blank_phone)
         }
-        if(phone.trim().convertPhoneToNormalFormat().length < 10){
-            resourceError( R.string.error_type_phone_not_enough)
+        if (phone.trim().convertPhoneToNormalFormat().length < 10) {
+            resourceError(R.string.error_type_phone_not_enough)
         }
-        if(name.isBlank()){
+        if (name.isBlank()) {
             resourceError(R.string.error_blank_name)
         }
     }

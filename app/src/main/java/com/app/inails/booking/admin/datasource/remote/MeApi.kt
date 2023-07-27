@@ -11,7 +11,6 @@ import com.app.inails.booking.admin.model.ui.SignUpForm
 import com.app.inails.booking.admin.model.ui.SignUpManicuristForm
 import com.app.inails.booking.admin.model.ui.UpdateUserPasswordForm
 import com.app.inails.booking.admin.model.ui.VoucherForm
-import com.app.inails.booking.admin.views.me.ContactDTO
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit

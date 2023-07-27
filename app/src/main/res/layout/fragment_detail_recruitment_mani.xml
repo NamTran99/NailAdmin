@@ -216,30 +216,30 @@
                             android:textColor="@color/colorPrimary"
                             tools:text="Nail Salon Vip" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size_10"
-                        android:orientation="horizontal">
+<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/size_10"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <TextView
-                            style="@style/AppTheme.TextViewResponsive"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/admin_name"
-                         />
+<!--                        <TextView-->
+<!--                            style="@style/AppTheme.TextViewResponsive"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/admin_name"-->
+<!--                         />-->
 
-                        <TextView
-                            android:id="@+id/tvOwnerName"
-                            style="@style/AppTheme.TextViewResponsive"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/size_10"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:textColor="@color/colorPrimary"
-                            tools:text="Nail Salon Vip" />
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvOwnerName"-->
+<!--                            style="@style/AppTheme.TextViewResponsive"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="@dimen/size_10"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:gravity="end"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            tools:text="Nail Salon Vip" />-->
+<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
 
 
                     <androidx.appcompat.widget.LinearLayoutCompat

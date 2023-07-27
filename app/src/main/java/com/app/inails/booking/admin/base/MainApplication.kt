@@ -18,7 +18,6 @@ import com.app.inails.booking.admin.helper.interceptor.LoggingInterceptor
 import com.app.inails.booking.admin.helper.interceptor.TokenInterceptor
 import com.bumptech.glide.Glide
 import com.google.android.libraries.places.api.Places
-import com.google.android.youtube.player.internal.u
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import okhttp3.Cache

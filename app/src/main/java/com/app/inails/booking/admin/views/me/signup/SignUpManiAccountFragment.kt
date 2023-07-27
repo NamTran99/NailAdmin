@@ -19,6 +19,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentSignUpAccountBinding
 import com.app.inails.booking.admin.datasource.local.AppCache
@@ -236,6 +237,7 @@ class SignUpRepo(
                     .put("salon_description", form.salon_description)
                     .put("device_token", appCache.deviceToken)
                     .put("device_type", "android")
+                    .put("device_info", AppConfig.phoneInfo)
                     .put("name", form.admin_name)
 //                    .put("input_option", form.input_option)
                     .put("lang", userLocalSource.getLanguageWithDefault())

@@ -46,6 +46,7 @@ class FilterRecruitmentProfileDialog(context: Context) : BaseDialog(context) {
                 resetOnclick.invoke()
                 etWorking.setText("")
                 jobFilter.resetFilter()
+                onSubmit.invoke(jobFilter)
             }
         }
     }

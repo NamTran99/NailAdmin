@@ -7,6 +7,7 @@ import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.exception.viewErrorCustom
 import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
 import com.app.inails.booking.admin.model.response.AppImage
+import com.app.inails.booking.admin.views.management.findstaff.SearchCityStateForm
 import kotlinx.parcelize.Parcelize
 
 interface IRecruitment {
@@ -118,6 +119,7 @@ data class CreateUpdateRecruitmentForm(
 //    var income_weekly: Double = 0.0,
     var salon_exists_time: Int = -1,
     var customer_skin_color: Int = -1, // 1 : white || 2 : black || 3 : xi || 4 : tong hop
+    var stateFilterForm: SearchCityStateForm = SearchCityStateForm()
 ) : Parcelable {
 
     fun validate() {
@@ -132,12 +134,12 @@ data class CreateUpdateRecruitmentForm(
             viewError(R.id.etOwnerPhone, R.string.error_type_phone_not_enough)
         }
 
-        if (state.isBlank()) {
-            resourceError(R.string.error_blank_state)
+        if (stateFilterForm.stateSearch.isBlank()) {
+            viewError(R.id.etWorking,R.string.error_blank_state)
         }
 
-        if (city.isBlank()) {
-            resourceError(R.string.error_blank_city)
+        if (stateFilterForm.citySearch.isBlank()) {
+            viewError(R.id.etWorking,R.string.error_blank_city)
         }
 
         if (salon_exists_time == -1 ){

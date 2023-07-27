@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/size_10"
                     android:background="@drawable/bg_border_edittext_2"
-                    android:hint="@string/enter_owner_name"
+                    android:hint="@string/enter_name"
                     android:maxLength="250"
                     android:maxLines="1"
                     android:nextFocusDown="@+id/edtContentAds"
@@ -59,9 +59,9 @@
                 <EditText
                     android:id="@+id/etOwnerPhone"
                     style="@style/AppTheme.EditText"
+                    android:layout_marginTop="@dimen/size_10"
                     android:autofillHints="phone"
                     android:hint="@string/hint_phone"
-                    android:layout_marginTop="@dimen/size_10"
                     android:inputType="phone"
                     android:maxLength="14" />
 
@@ -74,32 +74,15 @@
                     android:textSize="@dimen/text_size_14"
                     android:textStyle="bold" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <EditText
+                    android:id="@+id/etWorking"
+                    style="@style/AppTheme.EditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="@dimen/size_50"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:background="@drawable/edit_text_default"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/spState"
-                        android:layout_width="0dp"
-                        android:minHeight="@dimen/size_50"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <View
-                        style="@style/AppTheme.Line.Vertical"
-                        android:layout_marginVertical="@dimen/size_5" />
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/spCity"
-                        android:layout_width="0dp"
-                        android:minHeight="@dimen/size_50"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:layout_marginTop="@dimen/size_15"
+                    android:focusable="false"
+                    android:inputType="text"
+                    android:hint="@string/select_working_place"
+                    android:importantForAutofill="no" />
 
                 <TextView
                     style="@style/AppTheme.TextViewResponsive"
@@ -131,13 +114,13 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:itemCount="4"
-                    app:spanCount="2"
                     android:id="@+id/rvSkincolor"
-                    tools:listitem="@layout/item_ethnicity"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_ethnicity" />
 
                 <TextView
                     style="@style/AppTheme.TextViewResponsive"
@@ -168,136 +151,136 @@
                     android:singleLine="true"
                     android:textColor="@color/black" />
 
-<!--                <TextView-->
-<!--                    style="@style/AppTheme.TextViewResponsive"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/size_15"-->
-<!--                    android:text="@string/text_title_job_time"-->
-<!--                    android:textSize="@dimen/text_size_14"-->
-<!--                    android:textStyle="bold" />-->
+                <!--                <TextView-->
+                <!--                    style="@style/AppTheme.TextViewResponsive"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/size_15"-->
+                <!--                    android:text="@string/text_title_job_time"-->
+                <!--                    android:textSize="@dimen/text_size_14"-->
+                <!--                    android:textStyle="bold" />-->
 
-<!--                <RadioGroup-->
-<!--                    android:id="@+id/groupTimeJob"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="center"-->
-<!--                    android:layout_marginBottom="@dimen/size_5"-->
-<!--                    android:orientation="horizontal">-->
+                <!--                <RadioGroup-->
+                <!--                    android:id="@+id/groupTimeJob"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:layout_marginBottom="@dimen/size_5"-->
+                <!--                    android:orientation="horizontal">-->
 
-<!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--                        android:id="@+id/btnPartTime"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:text="@string/part_time"-->
-<!--                        android:paddingHorizontal="@dimen/size_10"-->
-<!--                        style="@style/RadioButtonApp" />-->
+                <!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
+                <!--                        android:id="@+id/btnPartTime"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:text="@string/part_time"-->
+                <!--                        android:paddingHorizontal="@dimen/size_10"-->
+                <!--                        style="@style/RadioButtonApp" />-->
 
-<!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--                        android:id="@+id/btnFullTime"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
-<!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
-<!--                        android:fontFamily="@font/montserrat_medium"-->
-<!--                        android:autoSizeTextType="uniform"-->
-<!--                        android:button="@drawable/bg_radio_button_find_staff"-->
-<!--                        android:gravity="center"-->
-<!--                        android:maxLines="2"-->
-<!--                        android:paddingHorizontal="@dimen/size_10"-->
-<!--                        android:text="@string/full_time"-->
-<!--                        android:textSize="@dimen/text_size_12" />-->
-<!--                </RadioGroup>-->
+                <!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
+                <!--                        android:id="@+id/btnFullTime"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
+                <!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
+                <!--                        android:fontFamily="@font/montserrat_medium"-->
+                <!--                        android:autoSizeTextType="uniform"-->
+                <!--                        android:button="@drawable/bg_radio_button_find_staff"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:maxLines="2"-->
+                <!--                        android:paddingHorizontal="@dimen/size_10"-->
+                <!--                        android:text="@string/full_time"-->
+                <!--                        android:textSize="@dimen/text_size_12" />-->
+                <!--                </RadioGroup>-->
 
-<!--                <com.app.inails.booking.admin.views.widget.basic.CustomEditText-->
-<!--                    android:id="@+id/etNumberOfWeek"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="@dimen/size_10"-->
-<!--                    android:hint="@string/text_input_week_amount"-->
-<!--                    android:visibility="gone"-->
-<!--                    app:custom_end_text="@string/textWeeks1"-->
-<!--                    app:input_type="number"-->
-<!--                    app:max_number_input="52" />-->
+                <!--                <com.app.inails.booking.admin.views.widget.basic.CustomEditText-->
+                <!--                    android:id="@+id/etNumberOfWeek"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginBottom="@dimen/size_10"-->
+                <!--                    android:hint="@string/text_input_week_amount"-->
+                <!--                    android:visibility="gone"-->
+                <!--                    app:custom_end_text="@string/textWeeks1"-->
+                <!--                    app:input_type="number"-->
+                <!--                    app:max_number_input="52" />-->
 
-<!--                <TextView-->
-<!--                    style="@style/AppTheme.TextViewResponsive"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/choose_position"-->
-<!--                    android:textSize="@dimen/text_size_14"-->
-<!--                    android:textStyle="bold" />-->
+                <!--                <TextView-->
+                <!--                    style="@style/AppTheme.TextViewResponsive"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/choose_position"-->
+                <!--                    android:textSize="@dimen/text_size_14"-->
+                <!--                    android:textStyle="bold" />-->
 
-<!--                <RadioGroup-->
-<!--                    android:id="@+id/groupPosition"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="center"-->
-<!--                    android:layout_marginTop="@dimen/size_5"-->
-<!--                    android:orientation="horizontal">-->
+                <!--                <RadioGroup-->
+                <!--                    android:id="@+id/groupPosition"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:layout_marginTop="@dimen/size_5"-->
+                <!--                    android:orientation="horizontal">-->
 
-<!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--                        android:id="@+id/btManager"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
-<!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
-<!--                        android:fontFamily="@font/montserrat_medium"-->
-<!--                        android:autoSizeTextType="uniform"-->
-<!--                        android:button="@drawable/bg_radio_button_find_staff"-->
-<!--                        android:paddingHorizontal="@dimen/size_10"-->
-<!--                        android:text="@string/manager"-->
-<!--                        android:textSize="@dimen/text_size_12" />-->
+                <!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
+                <!--                        android:id="@+id/btManager"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
+                <!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
+                <!--                        android:fontFamily="@font/montserrat_medium"-->
+                <!--                        android:autoSizeTextType="uniform"-->
+                <!--                        android:button="@drawable/bg_radio_button_find_staff"-->
+                <!--                        android:paddingHorizontal="@dimen/size_10"-->
+                <!--                        android:text="@string/manager"-->
+                <!--                        android:textSize="@dimen/text_size_12" />-->
 
-<!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--                        android:id="@+id/btMainWorker"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
-<!--                        android:fontFamily="@font/montserrat_medium"-->
-<!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
-<!--                        android:autoSizeTextType="uniform"-->
-<!--                        android:button="@drawable/bg_radio_button_find_staff"-->
-<!--                        android:paddingHorizontal="@dimen/size_10"-->
-<!--                        android:text="@string/main_manicurist"-->
-<!--                        android:textSize="@dimen/text_size_12" />-->
+                <!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
+                <!--                        android:id="@+id/btMainWorker"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
+                <!--                        android:fontFamily="@font/montserrat_medium"-->
+                <!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
+                <!--                        android:autoSizeTextType="uniform"-->
+                <!--                        android:button="@drawable/bg_radio_button_find_staff"-->
+                <!--                        android:paddingHorizontal="@dimen/size_10"-->
+                <!--                        android:text="@string/main_manicurist"-->
+                <!--                        android:textSize="@dimen/text_size_12" />-->
 
-<!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--                        android:id="@+id/btAssistant"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
-<!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
-<!--                        android:fontFamily="@font/montserrat_medium"-->
-<!--                        android:autoSizeTextType="uniform"-->
-<!--                        android:button="@drawable/bg_radio_button_find_staff"-->
-<!--                        android:gravity="center"-->
-<!--                        android:lines="2"-->
-<!--                        android:paddingHorizontal="@dimen/size_10"-->
-<!--                        android:text="@string/assistant_manicurist"-->
-<!--                        android:textSize="@dimen/text_size_12" />-->
+                <!--                    <androidx.appcompat.widget.AppCompatRadioButton-->
+                <!--                        android:id="@+id/btAssistant"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:autoSizeMaxTextSize="@dimen/text_size_12"-->
+                <!--                        android:autoSizeMinTextSize="@dimen/text_size_8"-->
+                <!--                        android:fontFamily="@font/montserrat_medium"-->
+                <!--                        android:autoSizeTextType="uniform"-->
+                <!--                        android:button="@drawable/bg_radio_button_find_staff"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:lines="2"-->
+                <!--                        android:paddingHorizontal="@dimen/size_10"-->
+                <!--                        android:text="@string/assistant_manicurist"-->
+                <!--                        android:textSize="@dimen/text_size_12" />-->
 
-<!--                </RadioGroup>-->
+                <!--                </RadioGroup>-->
 
-<!--                <EditText-->
-<!--                    android:id="@+id/etOtherPos"-->
-<!--                    style="@style/AppTheme.EditText"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:background="@drawable/bg_border_edittext_2"-->
-<!--                    android:hint="@string/other_positions"-->
-<!--                    android:maxLength="250"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:minHeight="48dp"-->
-<!--                    android:nextFocusDown="@+id/edtContentAds"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:textColor="@color/black" />-->
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etOtherPos"-->
+                <!--                    style="@style/AppTheme.EditText"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:background="@drawable/bg_border_edittext_2"-->
+                <!--                    android:hint="@string/other_positions"-->
+                <!--                    android:maxLength="250"-->
+                <!--                    android:maxLines="1"-->
+                <!--                    android:minHeight="48dp"-->
+                <!--                    android:nextFocusDown="@+id/edtContentAds"-->
+                <!--                    android:singleLine="true"-->
+                <!--                    android:textColor="@color/black" />-->
 
 
                 <TextView
@@ -316,8 +299,7 @@
                     android:background="@drawable/bg_view_stroke"
                     android:gravity="center"
                     android:minHeight="@dimen/size_50"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
 
                     <EditText
@@ -365,8 +347,8 @@
                     android:id="@+id/groupPayrollMethod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/size_5"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -377,9 +359,9 @@
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingHorizontal="@dimen/size_10"
                         android:text="@string/full_salary"
                         android:textSize="@dimen/text_size_12" />
@@ -391,10 +373,10 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingHorizontal="@dimen/size_10"
                         android:text="@string/split46"
                         android:textSize="@dimen/text_size_12" />
@@ -406,9 +388,9 @@
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:gravity="center"
                         android:lines="2"
                         android:paddingHorizontal="@dimen/size_10"
@@ -417,20 +399,20 @@
 
                 </RadioGroup>
 
-<!--                <EditText-->
-<!--                    android:id="@+id/etPayRollPrice"-->
-<!--                    style="@style/AppTheme.EditText"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:background="@drawable/bg_border_edittext_2"-->
-<!--                    android:hint="@string/hint_enter_salary"-->
-<!--                    android:maxLength="10"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:visibility="gone"-->
-<!--                    android:inputType="numberDecimal"-->
-<!--                    android:minHeight="48dp"-->
-<!--                    android:nextFocusDown="@+id/edtContentAds"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:textColor="@color/black" />-->
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etPayRollPrice"-->
+                <!--                    style="@style/AppTheme.EditText"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:background="@drawable/bg_border_edittext_2"-->
+                <!--                    android:hint="@string/hint_enter_salary"-->
+                <!--                    android:maxLength="10"-->
+                <!--                    android:maxLines="1"-->
+                <!--                    android:visibility="gone"-->
+                <!--                    android:inputType="numberDecimal"-->
+                <!--                    android:minHeight="48dp"-->
+                <!--                    android:nextFocusDown="@+id/edtContentAds"-->
+                <!--                    android:singleLine="true"-->
+                <!--                    android:textColor="@color/black" />-->
 
                 <TextView
                     style="@style/AppTheme.TextViewResponsive"
@@ -445,8 +427,8 @@
                     android:id="@+id/groupShuttle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/size_5"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -457,9 +439,9 @@
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingHorizontal="@dimen/size_10"
                         android:text="@string/yes"
                         android:textSize="@dimen/text_size_12" />
@@ -471,10 +453,10 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingHorizontal="@dimen/size_10"
                         android:text="@string/no"
                         android:textSize="@dimen/text_size_12" />
@@ -494,8 +476,8 @@
                     android:id="@+id/groupRelocate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/size_5"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -506,9 +488,9 @@
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingHorizontal="@dimen/size_10"
                         android:text="@string/yes"
                         android:textSize="@dimen/text_size_12" />
@@ -520,10 +502,10 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="@dimen/text_size_12"
-                        android:fontFamily="@font/montserrat_medium"
                         android:autoSizeMinTextSize="@dimen/text_size_8"
                         android:autoSizeTextType="uniform"
                         android:button="@drawable/bg_radio_button_find_staff"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingHorizontal="@dimen/size_10"
                         android:text="@string/no"
                         android:textSize="@dimen/text_size_12" />
@@ -531,30 +513,30 @@
                 </RadioGroup>
             </LinearLayout>
 
-<!--            <TextView-->
-<!--                style="@style/AppTheme.TextViewResponsive"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="@dimen/size_15"-->
-<!--                android:text="@string/enter_experience_optional"-->
-<!--                android:textSize="@dimen/text_size_14"-->
-<!--                android:textStyle="bold" />-->
+            <!--            <TextView-->
+            <!--                style="@style/AppTheme.TextViewResponsive"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/size_15"-->
+            <!--                android:text="@string/enter_experience_optional"-->
+            <!--                android:textSize="@dimen/text_size_14"-->
+            <!--                android:textStyle="bold" />-->
 
-<!--            <com.app.inails.booking.admin.views.widget.basic.CustomEditText-->
-<!--                android:id="@+id/etExperience"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="@dimen/size_10"-->
-<!--                android:background="@drawable/bg_border_edittext_2"-->
-<!--                android:hint="@string/hint_experience"-->
-<!--                android:maxLength="250"-->
-<!--                android:maxLines="1"-->
-<!--                android:nextFocusDown="@+id/edtContentAds"-->
-<!--                android:singleLine="true"-->
-<!--                android:textColor="@color/black"-->
-<!--                app:custom_end_text="@string/year"-->
-<!--                app:input_type="decimal"-->
-<!--                app:max_number_input="99" />-->
+            <!--            <com.app.inails.booking.admin.views.widget.basic.CustomEditText-->
+            <!--                android:id="@+id/etExperience"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/size_10"-->
+            <!--                android:background="@drawable/bg_border_edittext_2"-->
+            <!--                android:hint="@string/hint_experience"-->
+            <!--                android:maxLength="250"-->
+            <!--                android:maxLines="1"-->
+            <!--                android:nextFocusDown="@+id/edtContentAds"-->
+            <!--                android:singleLine="true"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                app:custom_end_text="@string/year"-->
+            <!--                app:input_type="decimal"-->
+            <!--                app:max_number_input="99" />-->
 
             <TextView
                 style="@style/AppTheme.TextViewResponsive"
@@ -569,8 +551,8 @@
                 android:id="@+id/groupGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/size_5"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
@@ -581,9 +563,9 @@
                     android:layout_weight="1"
                     android:autoSizeMaxTextSize="@dimen/text_size_12"
                     android:autoSizeMinTextSize="@dimen/text_size_8"
-                    android:fontFamily="@font/montserrat_medium"
                     android:autoSizeTextType="uniform"
                     android:button="@drawable/bg_radio_button_find_staff"
+                    android:fontFamily="@font/montserrat_medium"
                     android:paddingHorizontal="@dimen/size_10"
                     android:text="@string/gender_male"
                     android:textSize="@dimen/text_size_12" />
@@ -595,10 +577,10 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:autoSizeMaxTextSize="@dimen/text_size_12"
-                    android:fontFamily="@font/montserrat_medium"
                     android:autoSizeMinTextSize="@dimen/text_size_8"
                     android:autoSizeTextType="uniform"
                     android:button="@drawable/bg_radio_button_find_staff"
+                    android:fontFamily="@font/montserrat_medium"
                     android:paddingHorizontal="@dimen/size_10"
                     android:text="@string/gender_female"
                     android:textSize="@dimen/text_size_12" />
@@ -610,10 +592,10 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:autoSizeMaxTextSize="@dimen/text_size_12"
-                    android:fontFamily="@font/montserrat_medium"
                     android:autoSizeMinTextSize="@dimen/text_size_8"
                     android:autoSizeTextType="uniform"
                     android:button="@drawable/bg_radio_button_find_staff"
+                    android:fontFamily="@font/montserrat_medium"
                     android:paddingHorizontal="@dimen/size_10"
                     android:text="@string/gender_all"
                     android:textSize="@dimen/text_size_12" />
@@ -740,12 +722,12 @@
                 android:text="@string/btn_submit" />
 
             <TextView
+                style="@style/AppTheme.TextViewResponsive.Hint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/nails_job_des_1"
                 android:layout_marginTop="@dimen/size_5"
-                style="@style/AppTheme.TextViewResponsive.Hint"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="@string/nails_job_des_1" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>

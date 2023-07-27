@@ -185,6 +185,8 @@ class BusinessHourView(context: Context, attributeSet: AttributeSet) :
             btnReset.onClick {
                 tvTotime.text = context.getString(R.string.label_select_time)
                 tvFromTime.text = context.getString(R.string.label_select_time)
+                mEndTime =null
+                mStartTime = null
 
                 isOpen = false
                 onTimeChange?.invoke(data)

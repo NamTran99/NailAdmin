@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_radius"
@@ -10,29 +9,49 @@
     android:paddingTop="@dimen/size_24"
     android:paddingBottom="@dimen/size_15">
 
-    <TextView
-        android:id="@+id/tvAccountName"
-        style="@style/AppTheme.TextViewResponsive"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_14"
-        tools:text="Welcome, Hoang anh" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvAccountName"
+            style="@style/AppTheme.TextViewResponsive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_14"
+            tools:text="Welcome, Hoang anhdasds" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btChangeName"
+            style="@style/AppTheme.ButtonDefault.Responsive"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_30"
+            android:layout_marginStart="@dimen/size_10"
+            android:background="@drawable/button_share_1"
+            android:text="@string/edit_name"
+            android:textAllCaps="false"
+            android:textStyle="italic"
+            android:textColor="@color/black" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
+        android:id="@+id/tvApproveAccount"
         style="@style/AppTheme.TextViewResponsive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvApproveAccount"
+        android:layout_marginTop="@dimen/size_5"
         android:text="@string/your_salon_is_waiting_for_approval"
-        android:textStyle="italic"
-        android:visibility="gone"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_12" />
+        android:textSize="@dimen/text_size_12"
+        android:textStyle="italic"
+        android:visibility="gone" />
 
     <View
         style="@style/AppTheme.Line.Horizontal"
         android:layout_marginTop="@dimen/size_10" />
-
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -89,7 +108,7 @@
         android:id="@+id/btnLogOut"
         style="@style/AppTheme.ButtonDefault.Responsive"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_30"
+        android:layout_height="@dimen/size_35"
         android:layout_marginTop="@dimen/size_15"
         android:background="@drawable/button_pink_corner"
         android:text="@string/logout" />

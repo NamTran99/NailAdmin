@@ -1,5 +1,6 @@
 package com.app.inails.booking.admin.views.booking.create_appointment
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.support.core.event.LiveDataStatusOwner
 import android.support.core.event.WindowStatusOwner
@@ -20,6 +21,8 @@ import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentCreateAppointmentBinding
 import com.app.inails.booking.admin.datasource.local.UserLocalSource
 import com.app.inails.booking.admin.datasource.remote.BookingApi
+import com.app.inails.booking.admin.exception.convert12hTo24hFormat
+import com.app.inails.booking.admin.exception.convert24hTo12hFormat
 import com.app.inails.booking.admin.extention.*
 import com.app.inails.booking.admin.factory.BookingFactory
 import com.app.inails.booking.admin.formatter.TextFormatter
@@ -33,18 +36,19 @@ import com.app.inails.booking.admin.repository.booking.AppointmentDetailReposito
 import com.app.inails.booking.admin.views.booking.create_appointment.adapter.SelectServiceAdapter
 import com.app.inails.booking.admin.views.dialog.picker.DatePickerDialog
 import com.app.inails.booking.admin.views.dialog.picker.TimePickerDialog
+import com.app.inails.booking.admin.views.dialog.picker.TimePickerWithIntervalDialogOwner
+import com.app.inails.booking.admin.views.dialog.picker.TimeType
 import com.app.inails.booking.admin.views.widget.setEnable
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
 import com.app.inails.booking.admin.views.widget.topbar.TopBarOwner
 
 class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_appointment),
-    TopBarOwner {
+    TopBarOwner, TimePickerWithIntervalDialogOwner {
     private val binding by viewBinding(FragmentCreateAppointmentBinding::bind)
     private val viewModel by viewModel<CreateAppointmentViewModel>()
     private val arg by lazy { nullableArguments<Routing.CreateAppointment>() }
     private lateinit var mServiceAdapter: SelectServiceAdapter
     private val mDatePickerDialog by lazy { DatePickerDialog(appActivity) }
-    private val mTimePickerDialog by lazy { TimePickerDialog(appActivity) }
     private var mDateSelected = ""
     private var mTimeSelected = ""
     private var mDateTagSelected = ""
@@ -82,7 +86,12 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                 }
             }
             mDatePickerDialog.setupClickWithView(tvSelectDate, true)
-            mTimePickerDialog.setupClickWithView(tvSelectTime)
+            tvSelectTime.onClick{
+                timePickerDialog.show(tvSelectTime.text.toString(), TimeType.None)
+            }
+            timePickerDialog.onSubmitClick= {time,_,_ ->
+                tvSelectTime.text = time.convert24hTo12hFormat()
+            }
             tvChooseStaff.setOnClickListener {
                 Router.run { redirectToChooseStaff() }
             }
@@ -105,9 +114,9 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
                         mServiceAdapter.selectedItems.toString()
                     } else
                         ""
-                    dateAppointment = if (tvSelectTime.text.toString()
+                    dateAppointment = if (tvSelectTime.text.toString().convert12hTo24hFormat()
                             .isEmpty()
-                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text}".toServerUTC()
+                    ) "" else "${tvSelectDate.tag} ${tvSelectTime.text.toString().convert12hTo24hFormat()}".toServerUTC()
                 }
                 if (arg?.id != null)
                     viewModel.update()
@@ -161,7 +170,7 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
             binding.tvSelectDate.text = mDateSelected
             binding.tvSelectDate.tag = mDateTagSelected
         }
-        if (mTimeSelected.isNotEmpty()) binding.tvSelectTime.text = mTimeSelected
+        if (mTimeSelected.isNotEmpty()) binding.tvSelectTime.text = mTimeSelected.convert24hTo12hFormat()
 
         binding.spMinute.setSelection(mMinute)
         binding.spHour.setSelection(mHour)
@@ -178,7 +187,7 @@ class CreateUpdateAppointmentFragment : BaseFragment(R.layout.fragment_create_ap
             }
             tvSelectDate.text = apm.dateSelected
             tvSelectDate.tag = apm.dateTag
-            tvSelectTime.text = apm.timeSelected
+            tvSelectTime.text = apm.timeSelected.convert24hTo12hFormat()
 
             val minute = apm.workTime % 60 / 10
             val hour = apm.workTime / 60

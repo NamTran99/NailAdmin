@@ -2,86 +2,83 @@ package com.app.inails.booking.admin.views.youtube
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.provider.Settings
 import android.support.core.route.BundleArgument
 import android.support.core.route.argument
-import android.util.Log
-import android.view.WindowManager
-import android.widget.Toast
-import com.google.android.youtube.player.YouTubeBaseActivity
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerView
+import androidx.activity.OnBackPressedCallback
+import androidx.annotation.NonNull
+import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.base.BaseActivity
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
 class YoutubeActivityArgs(
     val path: String
-): BundleArgument
+) : BundleArgument
 
-class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener{
+class YoutubeActivity : BaseActivity(R.layout.activity_youtube), YouTubePlayerListener {
     lateinit var youtubePlayerView: YouTubePlayerView
     private val args by lazy { argument<YoutubeActivityArgs>() }
-    private var mAutoRotation = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mAutoRotation = Settings.System.getInt(
-            contentResolver,
-            Settings.System.ACCELEROMETER_ROTATION, 0) == 1;
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(com.app.inails.booking.admin.R.layout.activity_youtube)
-        youtubePlayerView = findViewById(com.app.inails.booking.admin.R.id.youtubePlayer)
-        youtubePlayerView.initialize(getString(com.app.inails.booking.admin.R.string.google_maps_key), this)
+        setContentView(R.layout.activity_youtube)
+        youtubePlayerView = findViewById(R.id.youtubePlayer)
+        lifecycle.addObserver(youtubePlayerView)
+        val frameOption = IFramePlayerOptions.Builder()
+        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
+                val videoId = args.path
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+        })
+        // set false when use IFramePlayerOptions
+        youtubePlayerView.enableAutomaticInitialization = false
+        youtubePlayerView.initialize(this)
     }
 
-    override fun onInitializationSuccess(provider: YouTubePlayer.Provider?, youTubePlayer: YouTubePlayer,
-                                         wasRestored: Boolean) {
-//        youTubePlayer?.setPlayerStateChangeListener(playerStateChangeListener)
-//        youTubePlayer?.setPlaybackEventListener(playbackEventListener)
 
-        if (mAutoRotation) {
-            youTubePlayer.addFullscreenControlFlag(
-                YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION
-                        or YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI
-                        or YouTubePlayer.FULLSCREEN_FLAG_ALWAYS_FULLSCREEN_IN_LANDSCAPE
-                        or YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT
-            )
-        } else {
-            youTubePlayer.addFullscreenControlFlag(
-                (YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION
-                        or YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI
-                        or YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT)
-            )
-        }
-        youTubePlayer.setFullscreen(true)
-        youTubePlayer.setShowFullscreenButton(true)
-        if (!wasRestored) {
-            youTubePlayer.loadVideo(args.path)
-        }
+    override fun onApiChange(youTubePlayer: YouTubePlayer) {
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        Log.d("TAG", "onConfigurationChanged: NamTD8: change")
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+    override fun onCurrentSecond(youTubePlayer: YouTubePlayer, second: Float) {
     }
 
-    override fun onInitializationFailure(provider: YouTubePlayer.Provider?,
-                                         youTubeInitializationResult: YouTubeInitializationResult?) {
-        val REQUEST_CODE = 0
-
-        if (youTubeInitializationResult?.isUserRecoverableError == true) {
-            youTubeInitializationResult.getErrorDialog(this, REQUEST_CODE).show()
-        } else {
-            val errorMessage = "There was an error initializing the YoutubePlayer ($youTubeInitializationResult)"
-            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-        }
+    override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
     }
+
+    override fun onPlaybackQualityChange(
+        youTubePlayer: YouTubePlayer,
+        playbackQuality: PlayerConstants.PlaybackQuality
+    ) {
+    }
+
+    override fun onPlaybackRateChange(
+        youTubePlayer: YouTubePlayer,
+        playbackRate: PlayerConstants.PlaybackRate
+    ) {
+    }
+
+    override fun onReady(youTubePlayer: YouTubePlayer) {
+    }
+
+    override fun onStateChange(youTubePlayer: YouTubePlayer, state: PlayerConstants.PlayerState) {
+    }
+
+    override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {
+    }
+
+    override fun onVideoId(youTubePlayer: YouTubePlayer, videoId: String) {
+    }
+
+    override fun onVideoLoadedFraction(youTubePlayer: YouTubePlayer, loadedFraction: Float) {
+    }
+
+
 }

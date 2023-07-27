@@ -22,6 +22,7 @@
     <string name="error_blank_admin_name">Please enter owner name</string>
     <string name="error_blank_admin_email">Please enter owner email</string>
     <string name="error_blank_salon_name">Please enter salon\'s name</string>
+    <string name="error_blank_owner_name">Please enter owner\'s name</string>
     <string name="error_blank_salon_address">Please enter salon\'s address</string>
     <string name="error_blank_salon_phone">Please enter salon\'s phone number</string>
     <string name="error_blank_salon_description">Please enter salon\'s introduction</string>
@@ -47,8 +48,6 @@
     <string name="error_not_enough_staff">Please select at least one staff</string>
     <string name="error_blank_date_time">Please select date and time</string>
     <string name="error_empty_services">Please select the service</string>
-    <string name="error_empty_service_custom">Please enter the other service</string>
-    <string name="error_empty_total_duration_services">Please enter the total duration service</string>
     <string name="error_blank_email">Email should not be blank</string>
     <string name="error_blank_content">Content should not be blank</string>
     <string name="message_logout_app">Are you sure you want to logout?</string>
@@ -194,7 +193,8 @@
     <string name="local_time">Local time</string>
     <string name="salon_name">Salon name</string>
     <string name="enter_salon_name">Enter salon name</string>
-    <string name="enter_owner_name">Enter your name</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_owner_name">Enter owner name</string>
     <string name="enter_salon_phone_number">Enter salon phone number</string>
     <string name="address">Address</string>
     <string name="enter_salon_address">Enter salon address</string>
@@ -461,6 +461,7 @@
     <string name="change_email_success">Email changed successfully!</string>
     <string name="success">Success!</string>
     <string name="success_register_mani">You have registered successfully!</string>
+    <string name="success_change_owner_name">You have changed Owner Name successfully!</string>
     <string name="no_information">No Information</string>
     <string name="no_information_en">No Information</string>
     <string name="update_customer_success">Update customer information success</string>
@@ -583,7 +584,7 @@
     <string name="des_1">Automatically redirect to customer login page in</string>
     <string name="des_search_worker">List of job seekers</string>
     <string name="finish_apm">Additional services ( if any )</string>
-    <string name="my_recruitment_ads">My recruitment ads</string>
+    <string name="my_recruitment_ads">My nail staff recruitment</string>
     <string name="text_title_job_time">Choose working time</string>
     <string name="part_time">Part time</string>
     <string name="full_time">Full time</string>
@@ -734,7 +735,7 @@
     <string name="so">so</string>
     <string name="nails_job">Create your recruitment to access job seekers immediately</string>
     <string name="nails_job_des_1">The recruitment will be visible to everyone after posting, you can share it or hide it if you want</string>
-    <string name="city_and_state_of_residence_create">City and State of Residence?</string>
+    <string name="city_and_state_of_residence_create">Where is the salon, what state and city?</string>
     <string name="city_and_state_of_residence">City and State of Residence</string>
     <string name="ethnicity_customer">Which ethnicity are the customers?</string>
     <string name="hint_enter_salary">Enter price</string>
@@ -821,6 +822,10 @@
     <string name="reset_pass_des_1">Choose role to reset password</string>
     <string name="salon_owner">Salon owner</string>
     <string name="salon_manicurist">Salon manicurist</string>
+    <string name="unauthorized">Access to the account has been revoked. Please attempt to log in later.</string>
+    <string name="owner_name">Owner name</string>
+    <string name="edit_name">Edit Name</string>
+    <string name="change_owner_name">Edit Owner Name</string>
 </resources>
 
 

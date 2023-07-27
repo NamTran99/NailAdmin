@@ -1,7 +1,9 @@
 package com.app.inails.booking.admin.model.ui
 
+import android.os.Build
 import android.os.Parcelable
 import com.app.inails.booking.admin.R
+import com.app.inails.booking.admin.app.AppConfig
 import com.app.inails.booking.admin.exception.viewError
 import com.app.inails.booking.admin.exception.viewPassInputError
 import com.app.inails.booking.admin.extention.convertPhoneToNormalFormat
@@ -48,6 +50,9 @@ class LoginOwnerForm(
     var deviceToken: String = "",
     @SerializedName("device_type")
     val deviceType: String = "android",
+    @SerializedName("device_info")
+    val deviceInfo: String = AppConfig.phoneInfo,
+
     var lang: String = "en"
 ) : Parcelable {
 

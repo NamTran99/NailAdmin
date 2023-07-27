@@ -80,12 +80,14 @@ class ISchedule(
     var endTimeFormat: String? = null,  // format 12H with AM/PM
     var startTime: String? = null,      // format 24H
     var endTime: String? = null,        // format 24H
-    var timeFormat: String? = null,
+    var startTimeUTC: String? = null,      // format 24H
+    var endTimeUTC: String? = null,        // format 24H
+    var timeFormat: String? = null,// format 24H
     override var isSelector: Boolean = false,
     var isOpenDay : Boolean = false
 ) : Serializable, ISelector {
     override fun toString(): String {
-        return "{\"day\":$day,\"start_time\":\"$startTime\",\"end_time\":\"$endTime\"}".replace(
+        return "{\"day\":$day,\"start_time\":\"$startTimeUTC\",\"end_time\":\"$endTimeUTC\"}".replace(
             "\"null\"",
             "null"
         )
@@ -190,6 +192,7 @@ class SalonForm(
     var offsetDisplay: String = "",
     var lat: Double = 0.0,
     var long: Double = 0.0,
+    var owner_name: String = "",
     var images: List<AppImage> = listOf(),
     val deleteImage: MutableList<Int> = mutableListOf(),
     var schedules: List<ScheduleForm> = listOf()
@@ -206,6 +209,12 @@ class SalonForm(
             viewError(
                 R.id.etSalonName,
                 R.string.error_blank_salon_name
+            )
+        }
+        if (owner_name.isBlank()) {
+            viewError(
+                R.id.etOwnerName,
+                R.string.error_blank_owner_name
             )
         }
         if(phone.trim().isEmpty()){

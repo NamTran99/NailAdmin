@@ -10,12 +10,14 @@ import android.support.di.ShareScope
 import android.support.viewmodel.launch
 import android.support.viewmodel.viewModel
 import android.view.View
+import androidx.annotation.Keep
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentContactBinding
 import com.app.inails.booking.admin.datasource.remote.MeApi
+import com.app.inails.booking.admin.model.response.ContactDTO
 
 import com.app.inails.booking.admin.views.dialog.ConfirmDialogOwner
 import com.app.inails.booking.admin.views.widget.topbar.SimpleTopBarState
@@ -36,9 +38,8 @@ class ContactFragment : BaseFragment(R.layout.fragment_contact), ConfirmDialogOw
         )
 
         viewModel.apply {
-            getContactData()
             binding.apply {
-                successValue.bind{
+                successValue.bind {
                     tvEmail.text = it.email
                     tvFanpage.text = it.fanpage
                     tvPhone.text = it.hotline
@@ -46,30 +47,29 @@ class ContactFragment : BaseFragment(R.layout.fragment_contact), ConfirmDialogOw
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getContactData()
+    }
 }
 
 class ContactVM(
     val contactRepo: ContactRepo
-): ViewModel(), WindowStatusOwner by LiveDataStatusOwner(){
+) : ViewModel(), WindowStatusOwner by LiveDataStatusOwner() {
     val successValue = contactRepo.result
 
-    fun getContactData()=launch(loading, error){
+    fun getContactData() = launch(loading, error) {
         contactRepo.getDefaultValue()
     }
 }
 
-data class ContactDTO(
-    var email: String = "",
-    var hotline: String = "",
-    var fanpage: String = ""
-)
-
 @Inject(ShareScope.Fragment)
-class ContactRepo(   private val meApi: MeApi){
+class ContactRepo(private val meApi: MeApi) {
     val result = MutableLiveData<ContactDTO>()
-    suspend fun getDefaultValue(){
-            result.post(
-                meApi.getValueServiceDefault().await()
-            )
+    suspend fun getDefaultValue() {
+        result.post(
+            meApi.getValueServiceDefault().await()
+        )
     }
 }

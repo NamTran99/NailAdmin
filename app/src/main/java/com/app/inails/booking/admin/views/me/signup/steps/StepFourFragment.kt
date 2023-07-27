@@ -14,6 +14,7 @@ import com.app.inails.booking.admin.R
 import com.app.inails.booking.admin.base.BaseFragment
 import com.app.inails.booking.admin.databinding.FragmentSignUpAccountBinding
 import com.app.inails.booking.admin.databinding.FragmentStepFourBinding
+import com.app.inails.booking.admin.extention.convertTime
 import com.app.inails.booking.admin.extention.onClick
 import com.app.inails.booking.admin.extention.toTimeDisplay
 import com.app.inails.booking.admin.model.ui.ISchedule
@@ -106,6 +107,10 @@ class StepFourFragment : BaseFragment(R.layout.fragment_step_four), TopBarOwner,
             }
         }
         binding.btnContinue.onClick {
+            adapter.items.forEach{
+                it.startTimeUTC = it.startTime.convertTime(fromZoneID =viewModel.salonForm.salon_timezone)
+                it.endTimeUTC = it.endTime.convertTime(fromZoneID = viewModel.salonForm.salon_timezone)
+            }
             val schedule = adapter.items?.find {
                 (it.startTime != null && it.endTime == null) ||
                         (it.endTime != null && it.startTime == null)
@@ -124,7 +129,5 @@ class StepFourFragment : BaseFragment(R.layout.fragment_step_four), TopBarOwner,
             signUpForm.schedules = adapter.items!!
             viewModel.nextStep.forceRefresh()
         }
-
-
     }
 }
